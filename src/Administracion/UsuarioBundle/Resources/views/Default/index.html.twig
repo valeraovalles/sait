@@ -11,21 +11,9 @@
     {{ parent() }}
 
 
-    {% set datos  %} 
-        {% if app.user %}
-
-        USUARIO: {{ app.user.username | upper }} |
-        NOMBRE: {{ usuario.primerNombre | upper }} |
-        APELLIDO: {{ usuario.primerApellido | upper }} |
-        CEDULA: {{ usuario.cedula | upper }} |
-        SUELDO: {{ datos.sueldo | upper }}
-
-        {% endif %}
-    {% endset %}
+    {% set datos  %} {% if app.user %} USUARIO: {{ app.user.username | upper }} | NOMBRE: {{ usuario.primerNombre | upper }} | APELLIDO: {{ usuario.primerApellido | upper }} | CEDULA: {{ usuario.cedula | upper }} | SUELDO: {{ datos.sueldo | upper }}{% endif %}{% endset %}
     
-
-    
-    <div class="titulo"><a id="info" style="cursor:pointer;">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }}</a></div>
+    <div class="titulo"><span id="info" style="cursor:pointer;" data-content={{ datos|json_encode|raw }} title="USUARIO">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }}</span></div>
 
     <br>
     <div class="jquery" align="left">
@@ -61,6 +49,7 @@
         <input type="hidden" value="#v4l3r4*.." value="<?php echo $_SESSION['clave'];?>" id="signin_password" name="signin[password]">
     </form>
     
+    <script>$('#info').popover();</script>
 
 {% endblock %}
 

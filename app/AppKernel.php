@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Administracion\UsuarioBundle\UsuarioBundle(),
             new Frontend\VideotecaBundle\VideotecaBundle(),
             new Frontend\DistribucionBundle\DistribucionBundle(),
+            new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -4,25 +4,16 @@
         <title>{% block title %}Telesur{% endblock %}</title>
         {% block javascripts %}
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="{{ asset('js/gips.js') }}"></script>
             <script src="{{ asset('js/datatable.js') }}"></script>
             <script src="{{ asset('js/general.js') }}"></script>
-
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('input#purple').gips({ 'theme': 'purple', autoHide: true, text: 'This is purple tooltip, auto hide after pausess time elapses.' });
-                    $('input#green').gips({ 'theme': 'green', placement: 'left' });
-                    $('input#yellow').gips({ 'theme': 'yellow', autoHide: true, placement: 'right' });
-                    $('#red').gips({ 'theme': 'red', placement: 'bottom' });
-                });
-            </script>
-    
+            <script src="{{ asset('libs/twitter-bootstrap/docs/assets/js/bootstrap.js') }}"></script>
         {% endblock %}
+
         {% block stylesheets %}
             <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('css/gips.css') }}" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('libs/menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
             <link href="{{ asset('css/datatable.css') }}" rel="stylesheet" type="text/css"/>
+            <link rel="stylesheet" href="{{ asset('libs/twitter-bootstrap/docs/assets/css/bootstrap.css') }}">
         {% endblock %}
     </head>
 

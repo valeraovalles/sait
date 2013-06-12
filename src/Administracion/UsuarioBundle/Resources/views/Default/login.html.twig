@@ -18,16 +18,16 @@
 
 
 
-    <form class="form-login" action="{{ path('usuario_login_check') }}" method="post">
+    <form action="{{ path('usuario_login_check') }}" method="post">
 
-        <table class="table-login" cellspacing=1>
+        <table id="table-login">
             <tr>
                 <td colspan=2 align=center class="titulo-form">INGRESAR DATOS</td>
             </tr>
 
             <tr>
                 <th>Usuario:</th>
-                <td><input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Ingrese usuario..." ></td>
+                <td><input type="text" id="username" name="_username" value="{{ last_username }}"   placeholder="Ingrese usuario..." data-placement="right" data-content="Puede ingresar el mismo usuario y clave de su correo Zimbra. Ante cualquier inconveniente comunicarse con la extensión 264/339." title="USUARIO"></td>
             </tr>
 
             <tr>
@@ -36,25 +36,14 @@
             </tr>
 
             <tr>
-                <td colspan=2 align=center><button type="submit" class="btn">Ingresar</button></td>
+                <td colspan=2 align=center><button class="btn" type="submit">Ingresar</button></td>
             </tr>
         </table>
 
         <div style="margin-top:10px;"><a href="#" class="recordar">Recordar contraseña</a></div>
     </form>
 
-
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            $('.table-login').gips({ 'theme': 'red', placement: 'right',text:'SI tienes problemas para ingresar envíanos un correo a aplicaciones@telesurtv.net con tu nombre, numero de cédula y extensión', autoHide: true, pause: 10000 });
-
-            $('.table-login').gips({ 'theme': 'red', placement: 'right',text:'Debe ingresar con el mismo usuario y clave de su correo Zimbra.', autoHide: true, pause: 5000 });
-
-        });
-
-    </script>
-
     <br><br>
+
+    <script>$('#username').popover();</script>
 {% endblock %}
