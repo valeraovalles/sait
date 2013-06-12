@@ -1,0 +1,72 @@
+{% extends '::distribucion.html.twig' %}
+ 
+{% block title %}Distribucion - Telesur{% endblock %}
+
+
+{% block titulobanner %}
+    REPORTES
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">INGRESE LOS PARÁMETROS</div>
+
+    <form name="form1" class="formNewEditOperador" novalidate action="{{ path('reporte_informativo') }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+
+        <fieldset>
+            <legend id="a"><div class="divisor">DATOS DE OPERADOR</div></legend>
+
+            <div id="operador">	
+
+                <div class="form-contenedor">
+                    {{ form_errors(form.pais) }}
+                    <div class="labels">Pais:</div>
+                    <div class="widgets">{{ form_widget(form.pais) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(form.nombre) }}
+                    <div class="labels">Operador:</div>
+                    <div class="widgets">{{ form_widget(form.nombre) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(form.tipooperador) }}
+                    <div class="labels">Tipo operador:</div>
+                    <div class="widgets">{{ form_widget(form.tipooperador) }}</div>
+                </div>
+  
+
+                
+                <div class="form-contenedor">
+                    {{ form_errors(form.zona) }}
+                    <div class="labels">Zona:</div>
+                    <div class="widgets">{{ form_widget(form.zona) }}</div>
+                </div>
+            
+     		</div>
+     	</fieldset>
+        <p>
+            <button type="submit">Create</button>
+        </p>
+
+
+    </form>
+
+
+    <a href="{{ path('operador') }}">VOLVER</a>
+
+    <br><br>
+    
+
+
+    <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
+
+{% endblock %}
+
+
+    

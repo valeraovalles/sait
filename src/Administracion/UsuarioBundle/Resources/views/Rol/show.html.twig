@@ -1,0 +1,55 @@
+{% extends '::administracion.html.twig' %}
+{% block title %}Inicio - Telesur{% endblock %}
+
+{% block body %}
+{{ parent() }}
+<div class="titulo">ROL</div>
+
+{% if app.session.hasFlash('notice') %}
+    <div class="flash-notice">
+        {{ app.session.flash('notice') }}
+    </div>
+{% endif %}
+<br>
+
+<table class="form-show">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Rol</th>
+            <td>{{ entity.rol }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+
+<table class="accion">
+    <tr>
+        <td>
+        <a href="{{ path('rol') }}">
+            Volver
+        </a>
+        </td>
+
+        <td>
+        <a href="{{ path('rol_edit', { 'id': entity.id }) }}">
+            Editar
+        </a>
+        </td>
+
+        <td>
+        <form action="{{ path('rol_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('Seguro que desea eliminar')">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Borrar</button>
+        </form>
+        </td>
+    </tr>
+</table>
+
+<br>
+{% endblock %}
+

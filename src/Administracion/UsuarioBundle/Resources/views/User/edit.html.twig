@@ -1,0 +1,93 @@
+{% extends '::administracion.html.twig' %}
+{% block title %}Inicio - Telesur{% endblock %}
+
+{% block body %}
+{{ parent() }}
+<div class="titulo">EDITAR USUARIO</div>
+
+<form novalidate class="formulario" action="{{ path('user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+
+    {{ form_widget(edit_form._token) }}
+    {{ form_widget(edit_form_perfil._token) }}
+ 
+<div class="form-contenedor">
+    {{ form_errors(edit_form.username) }}
+    <div class="labels">Username:</div>
+    <div class="widgets">{{ form_widget(edit_form.username) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(edit_form.password) }}
+    <div class="labels">password:</div>
+    <div class="widgets">{{ form_widget(edit_form.password) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(edit_form.isActive) }}
+    <div class="labels">Activo:</div>
+    <div class="widgets">{{ form_widget(edit_form.isActive) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(edit_form_perfil.primerNombre) }}
+    <div class="labels">Nombre 1:</div>
+    <div class="widgets">{{ form_widget(edit_form_perfil.primerNombre) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(edit_form_perfil.segundoNombre) }}
+    <div class="labels">Nombre 2:</div>
+    <div class="widgets">{{ form_widget(edit_form_perfil.segundoNombre) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(edit_form_perfil.primerApellido) }}
+    <div class="labels">Apellido 1:</div>
+    <div class="widgets">{{ form_widget(edit_form_perfil.primerApellido) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(edit_form_perfil.segundoApellido) }}
+    <div class="labels">Apellido 2:</div>
+    <div class="widgets">{{ form_widget(edit_form_perfil.segundoApellido) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(edit_form_perfil.cedula) }}
+    <div class="labels">Cedula:</div>
+    <div class="widgets">{{ form_widget(edit_form_perfil.cedula) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(edit_form.rol) }}
+    <div class="labels">Rol:</div>
+    <div class="widgets">{{ form_widget(edit_form.rol) }}</div>
+</div>
+
+<br>
+
+<button type="submit">Editar</button>
+
+</form>
+
+<br><br>
+
+<table class="accion">
+    <tr>
+        <td>
+        <a href="{{ path('rol') }}">
+            Volver
+        </a>
+        </td>
+        <td>
+        <form action="{{ path('rol_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('Seguro que desea eliminar')">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Borrar</button>
+        </form>
+        </td>
+    </tr>
+</table>
+
+<br>
+
+{% endblock %}

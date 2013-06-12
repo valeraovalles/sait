@@ -1,0 +1,90 @@
+{% extends '::distribucion.html.twig' %}
+{% block title %}Inicio - Telesur{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDaX5WySgrnP70Br7a83wkzFJb7d6onGis&sensor=true&language=es">
+    </script>
+
+ 	<script type="text/javascript">
+      function initialize() {
+
+        var myLatlng = new google.maps.LatLng(19.311143,-3.515625);
+        var mapOptions = {
+          zoom: 2,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+        }
+
+                var mapOptions2 = {
+          zoom: 2,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+        }
+
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        {% for pais in paises %}
+            
+            {% set datos %}
+                <table cellpadding=5px cellspacing=1 class="infomapa"><tr><th colspan=3>País: {{ pais.pais }}</th></tr><tr><th>Operador</th><th>Cantidad</th><th>Abonados</th></tr>
+                    {% for operador in operadores %}
+                        {% if pais.pais in operador.pais %}
+                            <tr>
+                               <td><a href='{{ path("operador_list",{'idpais': pais.id,'idtipooperador': operador.id}) }}'>{{ operador.operador }}</a></td>
+                               <td>{{ operador.cantidad }}</td>
+                               <td>{{ operador.totalabonados }}</td>
+                            </tr>
+                        {% endif %}                    
+                    {% endfor %}
+                </table>
+            {% endset %}
+
+            var contentString{{loop.index}} = '{{datos|escape('js')}}';
+
+            var infowindow{{loop.index}} = new google.maps.InfoWindow({content: contentString{{loop.index}}});
+
+            var image = 'http://www.telesurtv.net/favicon.ico';
+
+            var marker{{loop.index}} = new google.maps.Marker({position: new google.maps.LatLng({{ pais.latitud }}, {{pais.longitud}}),title:"{{ pais.pais }}", icon:image});
+
+            google.maps.event.addListener(marker{{loop.index}},'click', function() {infowindow{{loop.index}}.open(map,marker{{loop.index}});});
+            marker{{loop.index}}.setMap(map);
+
+            
+        {% endfor %}
+
+
+        }
+
+  </script>
+{% endblock %}
+
+{% block titulobanner %}
+    PÁGINA PRINCIPAL DISTRIBUCIÓN
+{% endblock %}
+
+    
+{% block body %}
+    {{ parent() }}
+
+    <div class="titulo">BIENVENIDO AL SISTEMA DE DISTRIBUCIÓN</div>
+    <div id="map_canvas" style="width:900px; height:400px"></div>
+
+
+
+
+
+
+
+<script>
+  $(document).ready(function() {
+    initialize()
+  });
+</script>
+
+<br><br>
+
+
+{% endblock %}

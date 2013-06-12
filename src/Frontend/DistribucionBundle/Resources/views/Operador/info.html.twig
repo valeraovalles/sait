@@ -1,0 +1,36 @@
+{% extends '::distribucion.html.twig' %}
+
+{% block title %}Distribución{% endblock %}
+
+{% block titulobanner %}
+    DISTRIBUCIÓN - TOTALIZACIÓN
+{% endblock %}
+
+{% block body %}
+  {{ parent() }}
+
+  <div class="titulo">TOTALIZACIÓN POR PAÍSES</div>
+
+    <table class="records_list" cellpadding=5px cellspacing=1 class="infooperador">
+        <tr>
+          <th>País</th>
+          {% for top in tipooperador %}
+            <th>{{ top.operador|title }}</th>
+           {% endfor %}
+         </tr>
+
+
+        {% for key, dato in datos %}
+          <tr {% if loop.index is odd %}style="background-color: #e9f5fe;"{% endif %}>
+            <td><a href="">{{ key }}</a></td>
+            {% for i in range(1, cantidadtipooperador) %}
+              <td>{{dato[i]['cantidad']}} | {{dato[i]['totalabonados']}}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+    </table>
+    <br>
+
+  <a href="{{ path('operador') }}">Volver</a>
+  <br><br>
+{% endblock %}

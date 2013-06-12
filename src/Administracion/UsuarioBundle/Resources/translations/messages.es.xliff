@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Bad credentials</source>
+                <target>Datos inválidos</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Your session has timed out, or you have disabled cookies.</source>
+                <target>Su sessión a expirado o tienes deshabilitadas las cookies</target>
+            </trans-unit>
+           
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,38 @@
+{% extends '::distribucion.html.twig' %}
+ 
+{% block title %}Distribucion{% endblock %}
+
+
+{% block titulobanner %}
+    OBJETO DE COMODATO- NUEVO
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">CREAR OBJETO DE COMODATO</div>
+    <form novalidate class="formNewEditOperador" action="{{ path('objetocomodato_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+
+        <fieldset>
+            <legend id="a"><div class="divisor">DATOS DE OBJETO DE COMODATO</div></legend>
+
+            <div class="form-contenedor">
+                {{ form_errors(form.objeto) }}
+                <div class="labels">Objeto:</div>
+                <div class="widgets">{{ form_widget(form.objeto) }}</div>
+            </div>
+
+        </fieldset>
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+
+
+    <a href="{{ path('objetocomodato') }}">
+        Volver a la lista
+    </a>
+    <br><br>
+{% endblock %}

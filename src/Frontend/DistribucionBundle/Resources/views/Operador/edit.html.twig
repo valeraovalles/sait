@@ -1,0 +1,251 @@
+{% extends '::distribucion.html.twig' %}
+
+{% block title %}Distribución{% endblock %}
+
+{% block titulobanner %}
+    DISTRIBUCIÓN - EDITAR OPERADOR
+{% endblock %}
+
+
+
+{% block body %}
+    {{ parent() }}
+
+    <div class="titulo">EDITAR OPERADOR {{ entity.nombre | upper}}</div>
+
+    {% if app.session.started %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Greenflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form novalidate class="formNewEditOperador" action="{{ path('operador_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+        {{ form_widget(edit_form._token) }}
+
+
+        <fieldset>
+            <legend id="a"><div class="divisor">EDITAR DATOS DE OPERADOR</div></legend>
+
+            <div id="operador">
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.nombre) }}
+                    <div class="labels">Operador:</div>
+                    <div class="widgets">{{ form_widget(edit_form.nombre) }}</div>
+                </div>
+
+  
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.pais) }}
+                    <div class="labels">Pais:</div>
+                    <div class="widgets">{{ form_widget(edit_form.pais) }}</div>
+                </div>
+                
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.estado) }}
+                    <div class="labels">Estado:</div>
+                    <div id="estado">
+                        <div class="widgets">{{ form_widget(edit_form.estado) }}</div>
+                    </div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.cobertura) }}
+                    <div class="labels">Cobertura:</div>
+                    <div class="widgets">{{ form_widget(edit_form.cobertura) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.zona) }}
+                    <div class="labels">Zona:</div>
+                    <div class="widgets">{{ form_widget(edit_form.zona) }}</div>
+                </div>
+                    
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.numeroabonados) }}
+                    <div class="labels">Nro. Abonados:</div>
+                    <div class="widgets">{{ form_widget(edit_form.numeroabonados) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.direccion) }}
+                    <div class="labels">Direccion:</div>
+                    <div class="widgets">{{ form_widget(edit_form.direccion) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.observacion) }}
+                    <div class="labels">Observacion:</div>
+                    <div class="widgets">{{ form_widget(edit_form.observacion) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.estatus) }}
+                    <div class="labels">Estatus:</div>
+                    <div class="widgets">{{ form_widget(edit_form.estatus) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.tipooperador) }}
+                    <div class="labels">Tipo operador:</div>
+                    <div class="widgets">{{ form_widget(edit_form.tipooperador) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.paquete) }}
+                    <div class="labels">Paquete:</div>
+                    <div class="widgets">{{ form_widget(edit_form.paquete) }}</div>
+                </div>
+
+                 <div class="form-contenedor">
+                    {{ form_errors(edit_form.urlweb) }}
+                    <div class="labels">Url Web:</div>
+                    <div class="widgets">{{ form_widget(edit_form.urlweb) }}</div>
+                </div>
+
+                 <div class="form-contenedor">
+                    {{ form_errors(edit_form.urlfacebook) }}
+                    <div class="labels"><img width="25px" src="{{ asset('images/facebook.png') }}"></div>
+                    <div class="widgets">{{ form_widget(edit_form.urlfacebook) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.urltwitter) }}
+                    <div class="labels"><img width="22px" src="{{ asset('images/twitter.png') }}"></div>
+                    <div class="widgets">{{ form_widget(edit_form.urltwitter) }}</div>
+                </div>
+            </div> 
+        </fieldset>
+        
+        <br><br>
+        
+        <fieldset>
+            <legend id="b"><div class="divisor">EDITAR DATOS DE COMODATO</div></legend>
+            <div id="comodato">
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.comodato.fechainicioacuerdo) }}
+                    <div class="labels">Fecha Inicio:</div>
+                    <div class="widgets">{{ form_widget(edit_form.comodato.fechainicioacuerdo) }}</div>
+                </div>
+
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.comodato.fechafinacuerdo) }}
+                    <div class="labels">Fecha Fin:</div>
+                    <div class="widgets">{{ form_widget(edit_form.comodato.fechafinacuerdo) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.comodato.dialUrl) }}
+                    <div class="labels">Dial|Url (1):</div>
+                    <div class="widgets">{{ form_widget(edit_form.comodato.dialUrl) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.comodato.dialUrl2) }}
+                    <div class="labels">Dial|Url (2):</div>
+                    <div class="widgets">{{ form_widget(edit_form.comodato.dialUrl2) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.comodato.observacion) }}
+                    <div class="labels">Observacion:</div>
+                    <div class="widgets">{{ form_widget(edit_form.comodato.observacion) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.comodato.objetocomodato) }}
+                    <div class="labels">Objeto Comodato:</div>
+                    <div class="widgets">{{ form_widget(edit_form.comodato.objetocomodato) }}</div>
+                </div>
+            </div>
+        </fieldset>
+
+        <br>        
+
+        <fieldset>
+            <legend id="c"><div class="divisor">DATOS DE REPRESENTANTE</div> </legend>
+            <div id="representante">
+
+            <div class="form-show_edit">
+
+            {% set cont = 0 %}
+            {% set largo = representante | length %}
+            {% for re in representante %}
+
+                <div class="divisor_representante"><a onclick="return confirm('No olvide guardar los datos del formulario principal o los datos se perderán, ¿desea continuar?')" href="{{ path('representante_edit', { 'id': re.id }) }}">EDITAR REPRESENTANTE {{ cont+1 }}</a></div>
+                <div class="contenedor">
+                    <div class="label">Nombres:</div>
+                    <div class="dato">{{ re.nombres }}</div>
+                </div>
+
+                <div class="contenedor">
+                    <div class="label">Apellidos:</div>
+                    <div class="dato">{{ re.apellidos }}</div>
+                </div>
+
+                <div class="contenedor">
+                    <div class="label">Cargo:</div>
+                    <div class="dato">{{ re.cargo }}</div>
+                </div>
+
+                <div class="contenedor">
+                    <div class="label">correo:</div>
+                    <div class="dato">{{ re.correo }}</div>
+                </div>
+
+                <div class="contenedor">
+                    <div class="label">Telefono 1:</div>
+                    <div class="dato">{{ re.telefono1 }}</div>
+                </div>
+
+                {% if re.telefono2!='' %}
+                    <div class="contenedor">
+                        <div class="label">Telefono 2:</div>
+                        <div class="dato">{{ re.telefono2 }}</div>
+                    </div>
+                {% endif %}
+
+                {% if re.fax!='' %}
+                    <div class="contenedor">
+                        <div class="label">Fax:</div>
+                        <div class="dato">{{ re.fax }}</div>
+                    </div>
+                {% endif %}
+
+                {% if re.observacion!='' %}
+                    <div class="contenedor">
+                        <div class="label">Observacion:</div>
+                        <div class="dato">{{ re.observacion }}</div>
+                    </div>
+                {% endif %}
+
+                {% set cont=cont+1 %}
+
+               
+            {% endfor %}
+            </div>
+        </div>
+        </fieldset>
+        <br>
+        <button type="submit">Editar</button>
+
+    </form>
+
+    <br>
+
+    <form action="{{ path('operador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar el operador y sus representantes?')">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button type="submit">Borrar</button>
+        <a href="{{ path('operador') }}">Volver</a>
+        <a href="{{ path('operador_show', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/busca.png')}}"></a>
+    </form>
+
+    <br>
+
+    <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
+{% endblock %}

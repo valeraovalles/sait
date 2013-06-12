@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  GUID:  sqlite-manager@sqlite-manager.googlecode.com
+  Homepage:  http://sqlite-manager.googlecode.com
+
+  Generation Time: Mon, 11 Apr 2011 16:15:16 GMT
+  SQLite version: 3.7.4
+-->
+
+<listado>
+  <productos>
+    <id type="1">1</id>
+    <tipoproducto_id type="1">CELL PHONE</tipoproducto_id>
+    <modelo type="3">GALAXY SPICA</modelo>
+    <costo type="2">1500</costo>
+  </productos>
+  <productos>
+    <id type="1">2</id>
+    <tipoproducto_id type="1">CELL PHONE</tipoproducto_id>
+    <modelo type="3">HTC MAGIC</modelo>
+    <costo type="2">1300</costo>
+  </productos>
+  <productos>
+    <id type="1">3</id>
+    <tipoproducto_id type="1">CELL PHONE</tipoproducto_id>
+    <modelo type="3">GOOGLE NEXUS ONE</modelo>
+    <costo type="2">5400</costo>
+  </productos>
+  <productos>
+    <id type="1">4</id>
+     <tipoproducto_id type="1">LAPTOP</tipoproducto_id>
+    <modelo type="3">LENOVO T61</modelo>
+    <costo type="2">2500</costo>
+  </productos>
+  <productos>
+    <id type="1">5</id>
+     <tipoproducto_id type="1">LAPTOP</tipoproducto_id>
+    <modelo type="3">ALIENWARE</modelo>
+    <costo type="2">15000</costo>
+  </productos>
+  <productos>
+    <id type="1">6</id>
+     <tipoproducto_id type="1">LAPTOP</tipoproducto_id>
+    <modelo type="3">HP</modelo>
+    <costo type="2">5000</costo>
+  </productos>
+  <productos>
+    <id type="1">7</id>
+     <tipoproducto_id type="1">LAPTOP</tipoproducto_id>
+    <modelo type="3">VIT</modelo>
+    <costo type="2">4800</costo>
+  </productos>
+  <productos>
+    <id type="1">8</id>
+     <tipoproducto_id type="1">MONITOR</tipoproducto_id>
+    <modelo type="3">PANASONIC</modelo>
+    <costo type="2">4800</costo>
+  </productos>
+  <productos>
+    <id type="1">9</id>
+     <tipoproducto_id type="1">MONITOR</tipoproducto_id>
+    <modelo type="3">SAMSUNG</modelo>
+    <costo type="2">1800</costo>
+  </productos>
+  <productos>
+    <id type="1">10</id>
+     <tipoproducto_id type="1">MONITOR</tipoproducto_id>
+    <modelo type="3">HP</modelo>
+    <costo type="2">2200</costo>
+  </productos>
+  <productos>
+    <id type="1">11</id>
+     <tipoproducto_id type="1">KEYBOARD</tipoproducto_id>
+    <modelo type="3">HP</modelo>
+    <costo type="2">200</costo>
+  </productos>
+  <productos>
+    <id type="1">12</id>
+     <tipoproducto_id type="1">KEYBOARD</tipoproducto_id>
+    <modelo type="3">LENOVO</modelo>
+    <costo type="2">200</costo>
+  </productos>
+  <productos>
+    <id type="1">13</id>
+     <tipoproducto_id type="1">KEYBOARD</tipoproducto_id>
+    <modelo type="3">VIT</modelo>
+    <costo type="2">200</costo>
+  </productos>
+  <productos>
+    <id type="1">14</id>
+     <tipoproducto_id type="1">MOUSE</tipoproducto_id>
+    <modelo type="3">INALAMBRICO</modelo>
+    <costo type="2">200</costo>
+  </productos>
+  <productos>
+    <id type="1">15</id>
+     <tipoproducto_id type="1">MOUSE</tipoproducto_id>
+    <modelo type="3">456DS</modelo>
+    <costo type="2">200</costo>
+  </productos>
+  <productos>
+    <id type="1">16</id>
+     <tipoproducto_id type="1">MOUSE</tipoproducto_id>
+    <modelo type="3">DHGW</modelo>
+    <costo type="2">60</costo>
+  </productos>
+  <productos>
+    <id type="1">17</id>
+     <tipoproducto_id type="1">MOUSE</tipoproducto_id>
+    <modelo type="3">54DWE</modelo>
+    <costo type="2">60</costo>
+  </productos>
+  <productos>
+    <id type="1">18</id>
+     <tipoproducto_id type="1">CPU</tipoproducto_id>
+    <modelo type="3">INTEL</modelo>
+    <costo type="2">600</costo>
+  </productos>
+  <productos>
+    <id type="1">19</id>
+     <tipoproducto_id type="1">CPU</tipoproducto_id>
+    <modelo type="3">AMD</modelo>
+    <costo type="2">650</costo>
+  </productos>
+  <productos>
+    <id type="1">20</id>
+     <tipoproducto_id type="1">CPU</tipoproducto_id>
+    <modelo type="3">MOTOROLA</modelo>
+    <costo type="2">450</costo>
+  </productos>
+</listado>

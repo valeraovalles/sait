@@ -1,0 +1,40 @@
+{% extends '::distribucion.html.twig' %}
+ 
+{% block title %}Distribucion{% endblock %}
+
+
+{% block titulobanner %}
+    PAQUETES - NUEVO
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">CREAR PAQUETES</div>
+
+    <form novalidate class="formNewEditOperador" action="{{ path('paquete_create') }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+
+        <fieldset>
+            <legend id="a"><div class="divisor">CREAR PAQUETE</div></legend>
+
+            <div class="form-contenedor">
+                {{ form_errors(form.paquete) }}
+                <div class="labels">Paquete:</div>
+                <div class="widgets">{{ form_widget(form.paquete) }}</div>
+            </div>
+        </fieldset>
+
+        <p>
+            <button type="submit">Crear</button> |
+
+            <a href="{{ path('paquete') }}">
+                Volver a la lista
+            </a>
+        </p>
+    </form>
+
+
+{% endblock %}

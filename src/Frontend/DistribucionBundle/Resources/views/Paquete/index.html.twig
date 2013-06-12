@@ -1,0 +1,56 @@
+{% extends '::distribucion.html.twig' %}
+{% block title %}Distribución{% endblock %}
+
+{% block titulobanner %}
+    PAQUETES - LISTA
+{% endblock %}
+
+    
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">LISTA DE PAQUETES</div>
+
+    {% if app.session.started %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Greenflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('alert') %}
+            <div class="Redflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+    {% endif %}
+
+    <table class="records_list" cellpaddin=0 cellspacing=0>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Paquete</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr {% if loop.index is odd %}style="background-color: #e9f5fe;"{% endif %}>
+                <td><a href="{{ path('paquete_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.paquete }}</td>
+                <td>
+                    <a href="{{ path('paquete_show', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/busca.png')}}"></a>
+         
+                    <a href="{{ path('paquete_edit', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/edit.png')}}"></a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{{ path('paquete_new') }}">Nuevo</a>
+
+    <br><br>
+    {% endblock %}

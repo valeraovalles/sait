@@ -1,0 +1,82 @@
+
+{% extends '::administracion.html.twig' %}
+{% block title %}Inicio - Telesur{% endblock %}
+
+
+{% block titulobanner %}
+    ADMINISTRACIÓN DE USUARIOS
+{% endblock %}
+
+
+{% block body %}
+{{ parent() }}
+
+<div class="titulo">CREACIÓN DE USUARIO</div>
+<form novalidate action="{{ path('user_create') }}" method="post" {{ form_enctype(form) }} {{ form_enctype(form_perfil) }}>
+
+{{ form_widget(form._token) }}
+{{ form_widget(form_perfil._token) }}
+ 
+<div class="form-contenedor">
+    {{ form_errors(form.username) }}
+    <div class="labels">Username:</div>
+    <div class="widgets">{{ form_widget(form.username) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(form.password) }}
+    <div class="labels">password:</div>
+    <div class="widgets">{{ form_widget(form.password) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(form.isActive) }}
+    <div class="labels">Activo:</div>
+    <div class="widgets">{{ form_widget(form.isActive) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(form_perfil.primerNombre) }}
+    <div class="labels">Nombre 1:</div>
+    <div class="widgets">{{ form_widget(form_perfil.primerNombre) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(form_perfil.segundoNombre) }}
+    <div class="labels">Nombre 2:</div>
+    <div class="widgets">{{ form_widget(form_perfil.segundoNombre) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(form_perfil.primerApellido) }}
+    <div class="labels">Apellido 1:</div>
+    <div class="widgets">{{ form_widget(form_perfil.primerApellido) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(form_perfil.segundoApellido) }}
+    <div class="labels">Apellido 2:</div>
+    <div class="widgets">{{ form_widget(form_perfil.segundoApellido) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(form_perfil.cedula) }}
+    <div class="labels">Cedula:</div>
+    <div class="widgets">{{ form_widget(form_perfil.cedula) }}</div>
+</div>
+
+<div class="form-contenedor">
+    {{ form_errors(form.rol) }}
+    <div class="labels">Rol:</div>
+    <div class="widgets">{{ form_widget(form.rol) }}</div>
+</div>
+
+<br>
+
+    <button type="submit">Create</button>
+    <a href="{{ path('user') }}">Volver</a>
+</form>
+
+<br>
+
+{% endblock %}

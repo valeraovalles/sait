@@ -1,0 +1,62 @@
+{% extends '::distribucion.html.twig' %}
+
+{% block title %}DISTRIBUCIÓN{% endblock %}
+
+{% block titulobanner %}
+    PAQUETES - CONSULTA
+{% endblock %}
+
+{% block body %}
+
+{{ parent() }}
+
+    <div class="titulo">CONSULTA PAQUETES</div>
+
+    {% if app.session.started %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Greenflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="form-show">
+
+        <div class="contenedor">
+            <div class="label">Id:</div>
+            <div class="dato">{{ entity.id }}</div>
+        </div>
+
+        <div class="contenedor">
+            <div class="label">Paquete:</div>
+            <div class="dato">{{ entity.paquete }}</div>
+        </div>
+
+        <div class="contenedor">
+                <div class="label">Última Modificación:</div>
+                <div class="dato">{{ entity.user.primernombre | title
+ }} {{ entity.user.primerapellido | title
+ }}</div>
+        </div>
+    </div>
+
+    <br>
+
+    <a href="{{ path('paquete') }}">
+        Volver a la lista
+    </a>
+    |
+    <a href="{{ path('paquete_edit', { 'id': entity.id }) }}">
+        Editar
+    </a>
+
+    <br><br>
+
+    <form action="{{ path('paquete_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button type="submit">Delete</button>
+    </form>
+
+    <br>
+{% endblock %}

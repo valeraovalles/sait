@@ -1,0 +1,200 @@
+distribucion_homepage:
+    pattern:  /inicio
+    defaults: { _controller: DistribucionBundle:Default:index }
+
+pais_estado_ciudad:
+    pattern:  /paisestadociudad/{id}
+    defaults: { _controller: "DistribucionBundle:Operador:paisestadociudad" }  
+
+xx:
+    pattern: /xx
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'DistribucionBundle:Default/includes:maps.html.twig'
+
+infooperadores:
+    pattern:  /operador/info
+    defaults: { _controller: "DistribucionBundle:Operador:info" }
+
+#REPORTES
+
+reporte_informativo:
+    pattern:  /reporte/informativo
+    defaults: { _controller: "DistribucionBundle:Reporte:reporteinformativo" }
+
+# OPERADOR
+operador:
+    pattern:  /operador/lista
+    defaults: { _controller: "DistribucionBundle:Operador:index" }
+
+operador_list:
+    pattern:  /operador/{idpais}/{idtipooperador}/lista
+    defaults: { _controller: "DistribucionBundle:Operador:lista" }
+
+operador_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "DistribucionBundle:Operador:show" }
+
+operador_new:
+    pattern:  /operador/new
+    defaults: { _controller: "DistribucionBundle:Operador:new" }
+
+operador_create:
+    pattern:  /create
+    defaults: { _controller: "DistribucionBundle:Operador:create" }
+    requirements: { _method: post }
+
+operador_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "DistribucionBundle:Operador:edit" }
+
+operador_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "DistribucionBundle:Operador:update" }
+    requirements: { _method: post|put }
+
+operador_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "DistribucionBundle:Operador:delete" }
+    requirements: { _method: post|delete }
+
+#REPRESENTANTE
+
+representante:
+    pattern:  /representante/lista
+    defaults: { _controller: "DistribucionBundle:Representante:index" }
+
+representante_show:
+    pattern:  /representante/{id}/show
+    defaults: { _controller: "DistribucionBundle:Representante:show" }
+
+
+#representante_new:
+#    pattern:  /representante/new
+#    defaults: { _controller: "DistribucionBundle:Representante:new" }
+
+representante_new_add:
+    pattern:  /representante/{id}/newAdd
+    defaults: { _controller: "DistribucionBundle:Representante:newAdd" }
+
+representante_create:
+    pattern:  /representante/create
+    defaults: { _controller: "DistribucionBundle:Representante:create" }
+    requirements: { _method: post }
+
+representante_create_add:
+    pattern:  /representante/{id}/createAdd
+    defaults: { _controller: "DistribucionBundle:Representante:createAdd" }
+    requirements: { _method: post }
+
+representante_edit:
+    pattern:  /representante/{id}/edit
+    defaults: { _controller: "DistribucionBundle:Representante:edit" }
+
+representante_update:
+    pattern:  /representante/{id}/update
+    defaults: { _controller: "DistribucionBundle:Representante:update" }
+    requirements: { _method: post|put }
+
+representante_delete:
+    pattern:  /representante/{id}/delete
+    defaults: { _controller: "DistribucionBundle:Representante:delete" }
+    requirements: { _method: post|delete }
+
+#TIPO OPERADOR
+
+tipooperador:
+    pattern:  /tipooperador/lista
+    defaults: { _controller: "DistribucionBundle:Tipooperador:index" }
+
+tipooperador_show:
+    pattern:  /tipooperador/{id}/show
+    defaults: { _controller: "DistribucionBundle:Tipooperador:show" }
+
+tipooperador_new:
+    pattern:  /tipooperador/new
+    defaults: { _controller: "DistribucionBundle:Tipooperador:new" }
+
+tipooperador_create:
+    pattern:  /tipooperador/create
+    defaults: { _controller: "DistribucionBundle:Tipooperador:create" }
+    requirements: { _method: post }
+
+tipooperador_edit:
+    pattern:  /tipooperador/{id}/edit
+    defaults: { _controller: "DistribucionBundle:Tipooperador:edit" }
+
+tipooperador_update:
+    pattern:  /tipooperador/{id}/update
+    defaults: { _controller: "DistribucionBundle:Tipooperador:update" }
+    requirements: { _method: post|put }
+
+tipooperador_delete:
+    pattern:  /tipooperador/{id}/delete
+    defaults: { _controller: "DistribucionBundle:Tipooperador:delete" }
+    requirements: { _method: post|delete }
+
+#OBJETO CONVENIO
+
+objetocomodato:
+    pattern:  /objetocomodato/lista
+    defaults: { _controller: "DistribucionBundle:Objetocomodato:index" }
+
+objetocomodato_show:
+    pattern:  /objetocomodato/{id}/show
+    defaults: { _controller: "DistribucionBundle:Objetocomodato:show" }
+
+objetocomodato_new:
+    pattern:  /objetocomodato/new
+    defaults: { _controller: "DistribucionBundle:Objetocomodato:new" }
+
+objetocomodato_create:
+    pattern:  /objetocomodato/create
+    defaults: { _controller: "DistribucionBundle:Objetocomodato:create" }
+    requirements: { _method: post }
+
+objetocomodato_edit:
+    pattern:  /objetocomodato/{id}/edit
+    defaults: { _controller: "DistribucionBundle:Objetocomodato:edit" }
+
+objetocomodato_update:
+    pattern:  /objetocomodato/{id}/update
+    defaults: { _controller: "DistribucionBundle:Objetocomodato:update" }
+    requirements: { _method: post|put }
+
+objetocomodato_delete:
+    pattern:  /objetocomodato/{id}/delete
+    defaults: { _controller: "DistribucionBundle:Objetocomodato:delete" }
+    requirements: { _method: post|delete }
+
+
+paquete:
+    pattern:  /paquete
+    defaults: { _controller: "DistribucionBundle:Paquete:index" }
+
+paquete_show:
+    pattern:  /paquete/{id}/show
+    defaults: { _controller: "DistribucionBundle:Paquete:show" }
+
+paquete_new:
+    pattern:  /paquete/new
+    defaults: { _controller: "DistribucionBundle:Paquete:new" }
+
+paquete_create:
+    pattern:  /paquete/create
+    defaults: { _controller: "DistribucionBundle:Paquete:create" }
+    requirements: { _method: post }
+
+paquete_edit:
+    pattern:  /paquete/{id}/edit
+    defaults: { _controller: "DistribucionBundle:Paquete:edit" }
+
+paquete_update:
+    pattern:  /paquete/{id}/update
+    defaults: { _controller: "DistribucionBundle:Paquete:update" }
+    requirements: { _method: post|put }
+
+paquete_delete:
+    pattern:  /paquete/{id}/delete
+    defaults: { _controller: "DistribucionBundle:Paquete:delete" }
+    requirements: { _method: post|delete }

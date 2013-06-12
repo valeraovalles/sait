@@ -1,0 +1,15 @@
+distribucion:
+    resource: "@DistribucionBundle/Resources/config/routing.yml"
+    prefix:   /distribucion
+
+videoteca:
+    resource: "@VideotecaBundle/Resources/config/routing.yml"
+    prefix:   /videoteca
+
+usuario:
+    resource: "@UsuarioBundle/Resources/config/routing.yml"
+    prefix:   /usuario
+
+login:
+    pattern:  /
+    defaults: { _controller: UsuarioBundle:Default:index }

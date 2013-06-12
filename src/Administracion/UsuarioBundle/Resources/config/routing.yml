@@ -1,0 +1,122 @@
+usuario_homepage:
+    pattern:  /inicio
+    defaults: { _controller: UsuarioBundle:Default:index }
+
+usuario_login:
+    pattern: /login
+    defaults: { _controller: UsuarioBundle:Default:login }
+    
+usuario_login_check:
+    pattern: /login_check
+    defaults: { _controller: UsuarioBundle:Default:loginCheck }
+    
+usuario_logout:
+    pattern: /logout
+
+contacto:
+    pattern: /contacto
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'UsuarioBundle:Default:contacto.html.twig'
+
+sincronizacion:
+    pattern: /sincronizacion
+    defaults: { _controller: UsuarioBundle:Default:sincronizacion }
+    
+#USUARIOS
+
+user:
+    pattern:  /lista
+    defaults: { _controller: "UsuarioBundle:User:index" }
+
+user_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "UsuarioBundle:User:show" }
+
+user_new:
+    pattern:  /new
+    defaults: { _controller: "UsuarioBundle:User:new" }
+
+user_create:
+    pattern:  /create
+    defaults: { _controller: "UsuarioBundle:User:create" }
+    requirements: { _method: post }
+
+user_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "UsuarioBundle:User:edit" }
+
+user_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "UsuarioBundle:User:update" }
+    requirements: { _method: post }
+
+user_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "UsuarioBundle:User:delete" }
+    requirements: { _method: post }
+
+#ROL
+
+rol:
+    pattern:  /rol/lista
+    defaults: { _controller: "UsuarioBundle:Rol:index" }
+
+rol_show:
+    pattern:  /rol/{id}/show
+    defaults: { _controller: "UsuarioBundle:Rol:show" }
+
+rol_new:
+    pattern:  /rol/new
+    defaults: { _controller: "UsuarioBundle:Rol:new" }
+
+rol_create:
+    pattern:  /rol/create
+    defaults: { _controller: "UsuarioBundle:Rol:create" }
+    requirements: { _method: post }
+
+rol_edit:
+    pattern:  /rol/{id}/edit
+    defaults: { _controller: "UsuarioBundle:Rol:edit" }
+
+rol_update:
+    pattern:  /rol/{id}/update
+    defaults: { _controller: "UsuarioBundle:Rol:update" }
+    requirements: { _method: post }
+
+rol_delete:
+    pattern:  /rol/{id}/delete
+    defaults: { _controller: "UsuarioBundle:Rol:delete" }
+    requirements: { _method: post }
+
+#PERFIL
+perfil:
+    pattern:  /perfil/perfil/lista
+    defaults: { _controller: "UsuarioBundle:Perfil:index" }
+
+perfil_show:
+    pattern:  /perfil/{id}/show
+    defaults: { _controller: "UsuarioBundle:Perfil:show" }
+
+perfil_new:
+    pattern:  /perfil/new
+    defaults: { _controller: "UsuarioBundle:Perfil:new" }
+
+perfil_create:
+    pattern:  /perfil/create
+    defaults: { _controller: "UsuarioBundle:Perfil:create" }
+    requirements: { _method: post }
+
+perfil_edit:
+    pattern:  /perfil/{id}/edit
+    defaults: { _controller: "UsuarioBundle:Perfil:edit" }
+
+perfil_update:
+    pattern:  /perfil/{id}/update
+    defaults: { _controller: "UsuarioBundle:Perfil:update" }
+    requirements: { _method: post }
+
+perfil_delete:
+    pattern:  /perfil/{id}/delete
+    defaults: { _controller: "UsuarioBundle:Perfil:delete" }
+    requirements: { _method: post }

@@ -1,0 +1,308 @@
+/* 
+    Document   : general
+    Created on : 18/01/2013, 04:39:14 PM
+    Author     : jhoan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body{
+    background-color:   #efefef;
+    margin-top:         0;
+    font-family:        Verdana;
+    font-size:          12px;
+    font-family:        VERDANA;
+    /*color:              #010341;*/
+    color:              black;
+
+}
+
+#contenedor{
+    background-color:   white;
+    width:              900px;
+
+}
+
+#banner{
+    width:              900px;
+    height:             128px;
+}
+
+.titulo{
+    text-align:         center;
+    font-weight:        bold;
+    padding-right:      20px;
+    padding-top:        35px;
+    font-size:          20px;
+    margin-bottom:      20px;
+}
+
+
+label{
+    font-weight: bold;
+}
+
+.pie{
+    background-color:   #082683;
+    font-size:          10px;
+    padding:            3px;
+    color:              white;
+    font-weight:        bold;
+}
+
+.alert{
+    margin:             5px 0 5px 0;
+    background-color:   #fef780;
+    color:              red;
+}
+
+
+
+input[type='text']{
+    width:              180px;
+}
+
+input[type='password']{
+    width:              180px;
+}
+
+.titulo-banner{
+    font-style:         italic;
+    color:              #fffbeb;
+    margin-top:         -35px;
+    text-align:         left;
+    padding-left:       187px;
+    font-weight:        bold;
+}
+
+a{
+    color: #010341;
+    text-decoration: none;
+}
+
+a:hover{
+    color: blue;
+    text-decoration: underline;
+}
+
+/* LISTADO DE APLICACIONES */
+    .listado_aplicaciones{
+        float:                              left;
+        width:                              200px;
+        height:                             130px;
+        text-align:                         center;
+        margin-left:                        73px;
+    }
+
+    .listado_aplicaciones:hover{
+        float:                              left;
+        width:                              200px;
+        height:                             130px;
+        text-align:                         center;
+        margin-left:                        73px;
+        background-color:                   #F4F7FC;
+    }
+
+    .listado_aplicaciones:hover img{
+        height:                             90px;
+    }
+
+    .listado_aplicaciones img{
+        height:                             75px;
+    }
+
+    .listado_aplicaciones a{
+        color:                              #154E8A;
+        font-size:                          16px;
+    }
+/* FIN LISTADO DE APLICACIONES */
+
+/* FORMULARIOS NEW */
+    .form-contenedor .labels{
+        float: left;
+        height: auto;
+        width: 40%;
+        text-align: right;
+        padding-right: 10px;
+        font-weight: bold;
+    }
+
+    .form-contenedor{
+        margin-bottom: 5px;
+    }
+
+    .form-contenedor .widgets{
+        height: auto;
+        text-align: left;
+    }
+
+    .form-contenedor ul{
+        text-align: center;   
+        color: red;
+        font-weight: bold;
+    }
+/* FIN FORMULARIOS NEW */
+
+/* FORMULARIOS SHOW */
+
+.form-show{
+    border: 1px solid #0fa1e0 ;
+    width: 500px;
+}
+
+.form-show .contenedor{
+    width: 500px;
+    background-color: #e9f5fe ;
+}
+
+.form-show .label{
+        float: left;
+        width: 40%;
+        text-align: right;
+        padding-right: 10px;
+        font-weight: bold;
+        padding-bottom: 10px;
+}
+
+
+.form-show .dato{
+        height: auto;
+        text-align: justify;
+        padding-bottom: 10px;
+        overflow: hidden;
+
+
+}
+/* FIN FORMULARIOS SHOW */
+
+li{
+    list-style: none;
+}
+
+.cienpx{
+    width: 100px;
+}
+
+.dospx{
+    width: 200px
+}
+
+.trespx{
+    width: 300px
+}
+
+.cuatropx{
+    width: 400px
+}
+
+.cincopx{
+    width: 500px
+}
+
+.seispx{
+    width: 600px
+}
+
+.sietepx{
+    width: 700px
+}
+
+.ochopx{
+    width: 800px
+}
+
+.nuevepx{
+    width: 900px
+}
+
+img{
+
+    border: 0;
+}
+
+input[type="text"]
+{
+    width: 220px;
+    /* Sólo afecto a los campos de texto */
+}
+
+select
+{
+    width: 220px;
+    /* Sólo afecto a los campos de texto */
+}
+
+textarea
+{
+    width: 220px;
+    /* Sólo afecto a los campos de texto */
+}
+
+input[type="number"]
+{
+    width: 150px;
+    /* Sólo afecto a los campos de texto */
+}
+
+input[type="date"]
+{
+    width: 220px;
+    /* Sólo afecto a los campos de texto */
+}
+
+input[type="email"]
+{
+    width: 220px;
+    /* Sólo afecto a los campos de texto */
+}
+
+select option[selected="selected"]
+{
+    background-color: #0fa1e0;
+    /* Sólo afecto a los campos de texto */
+}
+
+select[multiple]
+{
+    height: 120px;
+    /* Sólo afecto a los campos de texto */
+}
+
+   
+.divisor{
+    
+    margin-top:10px;
+    margin-bottom:10px;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 14px;
+    cursor: pointer;
+
+}
+
+.records_list{
+    width: 800px;
+    font-size: 12px;
+}
+
+.records_list th{
+    text-align: left;
+    background-color: #0fa1e0; 
+}
+
+.records_list td{
+    text-align: left;
+    border:1px solid #0fa1e0;
+}
+
+.Redflash-notice{
+    color:red;
+    background-color: #fffbeb;
+    margin-bottom: 5px;
+}
+
+.Greenflash-notice{
+    color: green;
+    background-color: #fffbeb;
+    margin-bottom: 5px;
+}

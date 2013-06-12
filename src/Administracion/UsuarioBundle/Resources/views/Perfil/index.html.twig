@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+{% block title %}Inicio - Telesur{% endblock %}
+
+{% block body %}
+<h1>Perfil list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Primernombre</th>
+            <th>Segundonombre</th>
+            <th>Primerapellido</th>
+            <th>Segundoapellido</th>
+            <th>Cedula</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('perfil_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.primerNombre }}</td>
+            <td>{{ entity.segundoNombre }}</td>
+            <td>{{ entity.primerApellido }}</td>
+            <td>{{ entity.segundoApellido }}</td>
+            <td>{{ entity.cedula }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('perfil_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('perfil_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('perfil_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+{% endblock %}

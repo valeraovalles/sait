@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="productos" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="HEADER_REPORT" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["LISTADO DE PRODUCTOS _MODO_DISEÑO"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="URL_IMG" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select
+pro.id,tpp.nombre as "tipoproducto",
+pro.modelo,
+pro.costo
+from productos pro
+left outer join tipoproducto tpp on tpp.id=pro.tipoproducto_id]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="tipoproducto" class="java.lang.String"/>
+	<field name="modelo" class="java.lang.String"/>
+	<field name="costo" class="java.lang.Double"/>
+	<variable name="CANTIDAD_TIPOPRODUCTO" class="java.lang.Integer" resetType="Group" resetGroup="tipoproducto" calculation="Count">
+		<variableExpression><![CDATA[$F{costo}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_COSTO" class="java.lang.Double" resetType="Group" resetGroup="tipoproducto" calculation="Sum">
+		<variableExpression><![CDATA[$F{costo}]]></variableExpression>
+	</variable>
+	<filterExpression><![CDATA["/db.sqlite/prductos"]]></filterExpression>
+	<group name="tipoproducto">
+		<groupExpression><![CDATA[$F{tipoproducto}]]></groupExpression>
+		<groupFooter>
+			<band height="29">
+				<textField pattern="#,##0;-#,##0">
+					<reportElement x="135" y="0" width="79" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{CANTIDAD_TIPOPRODUCTO}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="-1" y="0" width="136" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[CANTIDAD DE PRODUCTOS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="385" y="0" width="79" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL COSTO]]></text>
+				</staticText>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="464" y="0" width="108" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{TOTAL_COSTO}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="4" y="25" width="568" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="68" splitType="Stretch">
+			<textField>
+				<reportElement x="221" y="0" width="351" height="55"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{HEADER_REPORT}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="221" height="55"/>
+				<imageExpression><![CDATA[$P{URL_IMG}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="55" width="572" height="1"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="48" height="20"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUMERO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="48" y="0" width="173" height="20"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="221" y="0" width="190" height="20"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODELO O DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="0" width="161" height="20"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[COSTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="3" width="47" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="3" width="173" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tipoproducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="221" y="3" width="190" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="411" y="3" width="161" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{costo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="569">
+			<pieChart>
+				<chart>
+					<reportElement x="4" y="23" width="556" height="257"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{tipoproducto}]]></keyExpression>
+					<valueExpression><![CDATA[($V{CANTIDAD_TIPOPRODUCTO} * $V{PAGE_COUNT}) / 100]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF"/>
+				</piePlot>
+			</pieChart>
+			<staticText>
+				<reportElement x="4" y="3" width="556" height="20"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PORCENTAJE DE VENTAS POR GRUPO DE PRODUCTOS]]></text>
+			</staticText>
+			<barChart>
+				<chart>
+					<reportElement x="4" y="312" width="556" height="244"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["COSTO DE LOS PRODUCTOS"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{tipoproducto}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{costo}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF"/>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="4" y="292" width="556" height="20"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COSTOS POR GRUPOS DE PRODUCTO]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="2" y="556" width="230" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

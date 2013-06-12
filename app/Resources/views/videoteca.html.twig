@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+
+	<link href="{{ asset('menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
+	
+{% endblock %}
+
+
+{% block menu %}
+    {% include 'VideotecaBundle:Default:includes/menu-videoteca.html.twig' %}
+{% endblock %}

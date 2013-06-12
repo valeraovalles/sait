@@ -1,0 +1,44 @@
+{% extends '::distribucion.html.twig' %}
+ 
+{% block title %}Distribucion{% endblock %}
+
+
+{% block titulobanner %}
+    TIPO DE OPERADOR - NUEVO
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">CREAR OPERADOR</div>
+
+    <form novalidate class="formNewEditOperador"  action="{{ path('tipooperador_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+
+        <fieldset>
+        <legend id="a"><div class="divisor">DATOS DE OPERADOR</div></legend>
+
+        <div class="form-contenedor">
+            {{ form_errors(form.operador) }}
+            <div class="labels">Tipo:</div>
+            <div class="widgets">{{ form_widget(form.operador) }}</div>
+        </div>
+
+        <div class="form-contenedor">
+            {{ form_errors(form.codigo) }}
+            <div class="labels">Código:</div>
+            <div class="widgets">{{ form_widget(form.codigo) }}</div>
+        </div>
+        </fieldset>
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+
+    <a href="{{ path('tipooperador') }}">
+        Volver a la lista
+    </a>
+
+    <br><br>
+{% endblock %}

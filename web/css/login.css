@@ -1,0 +1,84 @@
+/* 
+    Document   : login
+    Created on : 22/01/2013, 05:32:20 PM
+    Author     : jhoan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body{
+    background-color:   #efefef;
+    margin-top:         0;
+    font-family:        Verdana;
+    font-size:          12px;
+}
+
+#contenedor{
+    background-color:   white;
+    width:              900px;
+}
+
+#banner{
+    width:              900px;
+    height:             128px;
+}
+
+.titulo{
+    text-align:         center;
+    font-weight:        bold;
+    padding-right:      20px;
+    padding-top:        35px;
+    font-size:          20px;
+    margin-bottom:      20px;
+}
+
+.pie{
+    background-color:   #082683;
+    font-size:          10px;
+    padding:            3px;
+    color:              white;
+    font-weight:        bold;
+}
+
+.alert{
+    margin:             5px 0 5px 0;
+    background-color:   #fef780;
+    color:              red;
+}
+
+.titulo-banner{
+    font-style:         italic;
+    color:              #fffbeb;
+    margin-top:         -35px;
+    text-align:         left;
+    padding-left:       187px;
+    font-weight:        bold;
+}
+
+.table-login{
+    background-color:   #010341;
+    font-size:          12px;
+}
+
+.table-login tr{
+    background-color:   white;
+}
+
+.table-login td{
+    padding:            4px;
+}
+
+.table-login th{
+    width:              40%;
+    padding:            4px;
+    background-color:   #e9f5fe;
+    text-align: right;
+}
+
+
+.table-login .titulo-form{
+    text-align:         center;
+    font-weight:        bold;
+    background-color:   #e9f5fe;
+}
+

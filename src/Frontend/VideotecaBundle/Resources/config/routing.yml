@@ -1,0 +1,3 @@
+videoteca_homepage:
+    pattern:  /inicio
+    defaults: { _controller: VideotecaBundle:Default:index }

@@ -1,0 +1,32 @@
+{% extends '::administracion.html.twig' %}
+
+{% block title %}Inicio - Telesur{% endblock %}
+
+{% block titulobanner %}
+    ADMINISTRACIÓN DE ROLES
+{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+
+	<div class="titulo">CREAR ROL</div>
+
+	<form novalidate action="{{ path('rol_create') }}" method="post" {{ form_enctype(form) }}>
+
+		{{ form_widget(form._token) }}
+
+		<div class="form-contenedor">
+		    {{ form_errors(form.rol) }}
+		    <div class="labels">Rol:</div>
+		    <div class="widgets">{{ form_widget(form.rol) }}</div>
+		</div>
+
+		<br><br>
+
+	        <button type="submit">Create</button>
+	    	<button><a href="{{ path('rol') }}">Volver</a></button>
+	</form>
+
+	<br>
+
+{% endblock %}

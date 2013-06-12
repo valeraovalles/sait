@@ -1,0 +1,60 @@
+{% extends '::login.html.twig' %}
+
+{% block title %}FORMULARIO DE ACCESO{% endblock %}
+
+{% block titulobanner %}
+    FORMULARIO DE ACCESO
+{% endblock %}
+
+{% block body %}
+
+    <div class="titulo">FORMULARIO DE ACCESO</div>
+
+    {% block mensaje %}
+        {% if error %}
+            <div class="alert" style="text-align: center;"><strong>Alerta!</strong> {{ error.message|trans() }}</div>
+        {% endif %}
+    {% endblock %}
+
+
+
+    <form class="form-login" action="{{ path('usuario_login_check') }}" method="post">
+
+        <table class="table-login" cellspacing=1>
+            <tr>
+                <td colspan=2 align=center class="titulo-form">INGRESAR DATOS</td>
+            </tr>
+
+            <tr>
+                <th>Usuario:</th>
+                <td><input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Ingrese usuario..." ></td>
+            </tr>
+
+            <tr>
+                <th>Clave:</th>
+                <td><input type="password" id="password" name="_password" placeholder="Ingrese clave..."></td>
+            </tr>
+
+            <tr>
+                <td colspan=2 align=center><button type="submit" class="btn">Ingresar</button></td>
+            </tr>
+        </table>
+
+        <div style="margin-top:10px;"><a href="#" class="recordar">Recordar contraseña</a></div>
+    </form>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('.table-login').gips({ 'theme': 'red', placement: 'right',text:'SI tienes problemas para ingresar envíanos un correo a aplicaciones@telesurtv.net con tu nombre, numero de cédula y extensión', autoHide: true, pause: 10000 });
+
+            $('.table-login').gips({ 'theme': 'red', placement: 'right',text:'Debe ingresar con el mismo usuario y clave de su correo Zimbra.', autoHide: true, pause: 5000 });
+
+        });
+
+    </script>
+
+    <br><br>
+{% endblock %}

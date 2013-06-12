@@ -1,0 +1,49 @@
+{% extends '::distribucion.html.twig' %}
+
+{% block title %}Distribución{% endblock %}
+
+{% block titulobanner %}
+    DISTRIBUCIÓN - EDITAR TIPO OPERADOR
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <div class="titulo">EDITAR TIPO OPERADOR {{ entity.operador | upper}}</div>
+
+    <form novalidate class="formNewEditOperador" action="{{ path('tipooperador_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+
+        {{ form_widget(edit_form._token) }}
+        <fieldset>
+            <legend id="a"><div class="divisor">EDITAR DATOS DE TIPO OPERADOR</div></legend>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.operador) }}
+                    <div class="labels">Tipo:</div>
+                    <div class="widgets">{{ form_widget(edit_form.operador) }}</div>
+                </div>
+
+  
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.codigo) }}
+                    <div class="labels">Código:</div>
+                    <div class="widgets">{{ form_widget(edit_form.codigo) }}</div>
+                </div>
+        </fieldset>
+        <p>
+            <button type="submit">Editar</button> |
+
+            <a href="{{ path('tipooperador') }}">
+                Volver a la lista
+            </a>
+        </p>
+    </form>
+
+    <form action="{{ path('tipooperador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button type="submit">Borrar</button>
+    </form>
+
+<br><br>
+{% endblock %}

@@ -1,0 +1,24 @@
+Overview
+--------
+Esta libreria permite gestionar la generacion de reportes disañados con iReport a traves
+de PHP/JAVA Bridge
+
+
+Installation 
+------------
+
+* Instalar un servidor de aplicaciones JEE o contenedor de servlets como por ejemplo:
+  Apache Geronimo, Tomcat, Glassfish, ...
+
+* Copiar la aplicacion war (PHPJRU.war) en la raiz del servidor de aplicaciones 
+
+ Ejemplo de Tomcat en Unix:
+  
+    cp PHPJRU.war $CATALINA_HOME/webapps/
+
+* Luego incluir php-jru en su aplicacion, ejemplo: 
+
+ <?php
+      require_once("/PHP-JRU/PHP-JRU.php");
+      ...
+ ?>

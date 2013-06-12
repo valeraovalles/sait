@@ -1,0 +1,67 @@
+{% extends '::administracion.html.twig' %}
+
+{% block title %}Inicio - Telesur{% endblock %}
+
+{% block titulobanner %}
+    LISTADO DE APLICACIONES
+{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+
+
+    {% set datos  %} 
+        {% if app.user %}
+
+        USUARIO: {{ app.user.username | upper }} |
+        NOMBRE: {{ usuario.primerNombre | upper }} |
+        APELLIDO: {{ usuario.primerApellido | upper }} |
+        CEDULA: {{ usuario.cedula | upper }} |
+        SUELDO: {{ datos.sueldo | upper }}
+
+        {% endif %}
+    {% endset %}
+    
+
+    
+    <div class="titulo"><a id="info" style="cursor:pointer;">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }}</a></div>
+
+    <br>
+    <div class="jquery" align="left">
+
+            <div class="listado_aplicaciones">
+                <a href="{{ path('distribucion_homepage')}}" onclick="document.form.submit()">DISTRIBUCIÓN<br><img id="neto" src="{{ asset("images/apps/mapamundi.jpg") }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover"></a><br>
+            </div>
+   </div>
+
+    <br>
+
+    <div style="clear:both;float:none;"></div>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function (){
+
+                $(".jquery").hide(1);
+
+                $(".jquery").fadeIn(3000);
+
+        });
+
+        $(document).ready(function () {
+            $('#info').gips({ 'theme': 'red', placement: 'right',text:{{ datos|json_encode|raw }}, autoHide: true });
+        });
+
+    </script>
+
+    <form name="form" action="/Telesur/web/index.php/login" method="post">
+        <input type="hidden" value="jvalera" value="<?php echo $idu;?>" id="signin_username" name="signin[username]">
+        <input type="hidden" value="#v4l3r4*.." value="<?php echo $_SESSION['clave'];?>" id="signin_password" name="signin[password]">
+    </form>
+    
+
+{% endblock %}
+
+         

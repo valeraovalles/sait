@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}Telesur{% endblock %}</title>
+        {% block javascripts %}
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="{{ asset('js/gips.js') }}"></script>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('input#purple').gips({ 'theme': 'purple', autoHide: true, text: 'This is purple tooltip, auto hide after pausess time elapses.' });
+                    $('input#green').gips({ 'theme': 'green', placement: 'left' });
+                    $('input#yellow').gips({ 'theme': 'yellow', autoHide: true, placement: 'right' });
+                    $('#red').gips({ 'theme': 'red', placement: 'bottom' });
+                });
+            </script>
+    
+        {% endblock %}
+        {% block stylesheets %}
+            <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('css/gips.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+    </head>
+
+    <body>
+        <div align='center'>
+            <div id='banner'><img src="{{ asset('images/banner.jpg') }}">
+            <div class="titulo-banner">UBICACIÓN ACTUAL: {% block titulobanner %} {% endblock %}</div>
+            <div id="contenedor">
+                {% block body %}
+                    <div class="menu">{% block menu %}{% endblock %}</div>
+                    {% block mensaje %}  {% endblock %}
+                {% endblock %}
+
+                <footer>
+                    <div class="pie">
+                        La Nueva Televisión del Sur C.A. (TVSUR) TeleSUR © | Todo el contenido de esta página es exclusivo para el uso interno del canal. RIF. G-20004500-0 
+                    </div>
+                </footer>
+            </div>
+        </div>
+            <script>$('#usuario').popover();</script>             
+    </body>
+</html>

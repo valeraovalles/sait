@@ -1,0 +1,44 @@
+{% extends '::administracion.html.twig' %}
+
+{% block title %}Inicio - Telesur{% endblock %}
+
+{% block titulobanner %}
+    ADMINISTRACIÓN DE ROLES
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <div class="titulo">LISTA DE ROLES</div>
+
+    <table style="width: 400px;"  class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Rol</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('rol_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.rol }}</td>
+                <td>
+
+                    <a href="{{ path('rol_show', { 'id': entity.id }) }}">Ver</a>
+                    <a href="{{ path('rol_edit', { 'id': entity.id }) }}">Editar</a>
+            
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+
+    <button><a href="{{ path('rol_new') }}">Nuevo</a></button>
+
+    <br><br>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends '::distribucion.html.twig' %}
+{% block title %}Distribución - Lista{% endblock %}
+
+{% block titulobanner %}
+    DISTRIBUCIÓN - REPRESENTANTES
+{% endblock %}
+
+    
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">LISTA DE REPRESENTANTES</div>
+
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tabla_lista">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Correo</th>
+                <th>Operador</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in datos %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.nombres }}</td>
+                <td>{{ entity.apellidos }}</td>
+                <td>{{ entity.correo }}</td>
+                <td>{{ entity.operador.nombre }}</td>
+                <td>
+                    <a href="{{ path('representante_show', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/busca.png')}}"></a>
+
+                    <a href="{{ path('representante_edit', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/edit.png')}}"></a>
+                </td>
+            </tr>
+
+
+            {% else %}
+
+                <tr><td colspan="6" style="text-align:center">NO EXISTEN DATOS PARA MOSTRAR</td></tr>
+                
+        {% endfor %}
+        </tbody>
+    </table>
+    <br><br><br><br>
+    {% endblock %}

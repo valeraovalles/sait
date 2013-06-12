@@ -1,0 +1,47 @@
+<?php
+
+namespace Frontend\DistribucionBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Tipooperador
+ *
+ * @ORM\Table(name="tipooperador")
+ * @ORM\Entity
+ */
+class Tipooperador
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="tipooperador_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="operador", type="string", length=100, nullable=false)
+     */
+    private $operador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo", type="string", length=10, nullable=false)
+     */
+    private $codigo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id", type="integer", nullable=false)
+     */
+    private $userId;
+
+
+}

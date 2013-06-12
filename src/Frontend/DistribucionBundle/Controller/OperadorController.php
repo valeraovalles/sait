@@ -1,0 +1,371 @@
+<?php
+
+namespace Frontend\DistribucionBundle\Controller;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Frontend\DistribucionBundle\Entity\Operador;
+use Frontend\DistribucionBundle\Form\OperadorType;
+
+use Frontend\DistribucionBundle\Entity\Representante;
+use Frontend\DistribucionBundle\Form\RepresentanteType;
+
+use Administracion\UsuarioBundle\Entity\Perfil;
+
+use Symfony\Component\Security\Core\SecurityContext;
+
+use Frontend\DistribucionBundle\Resources\Misclases\JasperReport;
+/**
+ * Operador controller.
+ *
+ */
+class OperadorController extends Controller
+{
+    /**
+     * Lists all Operador entities.
+     *
+     */
+
+    public function infoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em = $this->getDoctrine()->getManager();
+        $dql = "select distinct p.id, p.pais, p.latitud, p.longitud from DistribucionBundle:Operador o join o.pais p order by p.pais ASC";
+        $consulta = $em->createQuery($dql);
+        $paises = $consulta->getResult();
+
+        $dql = "
+            select top.id as idtipo, count (top.operador) as cantidad, top.operador, sum(o.numeroabonados) as totalabonados, p.pais
+            from DistribucionBundle:Operador o join o.pais p join o.tipooperador top
+            where o.tipooperador=top.id and o.pais=p.id
+            group by top.operador, p.pais, top.id
+            order by p.pais ASC
+        ";
+        $consulta = $em->createQuery($dql);
+        $operadores = $consulta->getResult();       
+
+        $tipooperador = $em->getRepository('DistribucionBundle:Tipooperador')->findAll();
+
+        $canttipop=0;
+        foreach ($tipooperador as $top) {
+            $canttipop++;
+        }
+
+        foreach ($paises as $pais) {
+            
+            foreach ($operadores as $operador) {
+
+                if($pais['pais']==$operador['pais']){
+                    $cont=1;
+                    foreach ($tipooperador as $top) {
+                        if ($top->getOperador()==$operador['operador'])
+                            $datos[$pais['pais']][$cont]= array('operador'=>$operador['operador'],'totalabonados'=>$operador['totalabonados'],'cantidad'=>$operador['cantidad']); 
+
+                        $cont++;
+                    }
+                }        
+            }
+
+            for($i=1;$i<$canttipop+1;$i++){
+                if(!isset($datos[$pais['pais']][$i]))
+                    $datos[$pais['pais']][$i]=array('operador'=>'0','totalabonados'=>'0','cantidad'=>'0');
+            }
+        }
+
+        return $this->render('DistribucionBundle:Operador:info.html.twig',array('datos'=>$datos,'tipooperador'=>$tipooperador,'cantidadtipooperador'=>$canttipop));
+    }
+
+
+
+    public function paisestadociudadAction($id)
+    {
+            $entity = new Operador();
+            $form   = $this->createForm(new OperadorType($id), $entity);
+        
+            return $this->render('DistribucionBundle:Operador:paisestadociudad.html.twig',array('form'=>$form->createView()));
+    }
+    
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $dql   = "SELECT o FROM DistribucionBundle:Operador o JOIN o.pais p JOIN o.tipooperador t order by o.id DESC
+";
+        $query = $em->createQuery($dql);
+        $datos=$query->getResult();
+
+        return $this->render('DistribucionBundle:Operador:index.html.twig', array(
+            'datos' => $datos,
+        ));
+    }
+
+    public function listaAction($idpais, $idtipooperador)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $dql   = "
+        SELECT o FROM DistribucionBundle:Operador o JOIN o.pais p JOIN o.tipooperador t 
+        where p.id= :idpais and t.id= :idtipooperador
+        order by o.id DESC
+        ";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idpais', $idpais);
+        $query->setParameter('idtipooperador', $idtipooperador);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+        $query,
+        $this->get('request')->query->get('page', 1)/*page number*/,
+        10/*limit per page*/
+        );
+
+
+        $pais = $em->getRepository('DistribucionBundle:Pais')->find($idpais);
+        $top = $em->getRepository('DistribucionBundle:Tipooperador')->find($idtipooperador);
+        return $this->render('DistribucionBundle:Operador:lista.html.twig', array(
+            'pagination' => $pagination,
+            'pais' => $pais,
+            'top' => $top
+        ));
+    }
+
+    /**
+     * Creates a new Operador entity.
+     *
+     */
+    public function createAction(Request $request)
+    {
+        $datos=$request->request->all();
+        $datos=$datos['frontend_distribucionbundle_operadortype'];
+
+        if(!isset($datos['pais'])){
+            $id=0;
+        } else $id=$datos['pais'];
+        
+        $entity  = new Operador();
+        $form = $this->createForm(new OperadorType($id), $entity);
+        $form->bind($request);
+
+        $entity2 = new Representante();
+        $form2   = $this->createForm(new RepresentanteType(), $entity2);
+        $form2->bind($request);
+        
+        if ($form->isValid() && $form2->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $dql = "select a.codigo from DistribucionBundle:Comodato a order by a.id DESC";
+            $query = $em->createQuery($dql)->SetMaxResults (1);
+            $ultimocomodato = $query->getResult();
+
+            if(!empty($ultimocomodato)){
+                $mes=substr($ultimocomodato[0]['codigo'],8,2);
+                $cont=substr($ultimocomodato[0]['codigo'],12,2);
+
+                if($mes==date("m")){
+                    $cont=$cont+1;
+                } else $cont=1;
+            } else $cont=1;
+
+            if(strlen($cont) < 2) $cont="0".$cont;
+            $codigo=$entity->getTipooperador($datos['tipooperador'])->getCodigo().substr($entity->getPais($datos['pais']),0,3).date("dmy").$cont;
+
+            $em = $this->getDoctrine()->getManager();
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            $entity->setUser($perfil);
+            $entity->getComodato()->setUser($perfil);
+            $entity2->setUser($perfil);
+
+            $entity->getComodato()->setCodigo(strtoupper($codigo));
+            $entity2->setOperador($entity);
+            $em->persist($entity);
+            $em->persist($entity2);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('operador_show', array('id' => $entity->getId())));
+        }
+
+        return $this->render('DistribucionBundle:Operador:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'entity2' => $entity2,
+            'form2'   => $form2->createView(),
+        ));
+    }
+
+    /**
+     * Displays a form to create a new Operador entity.
+     *
+     */
+    public function newAction(Request $request)
+    {
+        $entity = new Operador();
+        $form   = $this->createForm(new OperadorType(0), $entity);
+
+        $entity2 = new Representante();
+        $form2   = $this->createForm(new RepresentanteType(), $entity2);
+        return $this->render('DistribucionBundle:Operador:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'entity2' => $entity2,
+            'form2'   => $form2->createView(),
+        ));
+    }
+
+    /**
+     * Finds and displays a Operador entity.
+     *
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('DistribucionBundle:Operador')->find($id);
+        $representante = $em->getRepository('DistribucionBundle:Representante')->RepresentanteOperador($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Operador entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return $this->render('DistribucionBundle:Operador:show.html.twig', array(
+            'entity'      => $entity,
+            'representante' => $representante,
+            'delete_form' => $deleteForm->createView(),        ));
+    }
+
+    /**
+     * Displays a form to edit an existing Operador entity.
+     *
+     */
+    public function editAction($id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('DistribucionBundle:Operador')->find($id);
+     
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Operador entity.');
+        }
+
+        $editForm = $this->createForm(new OperadorType($entity->getPais()->getId()), $entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        $representante = $em->getRepository('DistribucionBundle:Representante')->RepresentanteOperador($id);
+
+
+        return $this->render('DistribucionBundle:Operador:edit.html.twig', array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+            'representante' => $representante,
+        ));
+    }
+
+    /**
+     * Edits an existing Operador entity.
+     *
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('DistribucionBundle:Operador')->find($id);
+        $representante = $em->getRepository('DistribucionBundle:Representante')->RepresentanteOperador($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Operador entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createForm(new OperadorType($entity->getPais()->getId()), $entity);
+        $editForm->bind($request);
+
+        if ($editForm->isValid()) {
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+
+            $entity->setUser($perfil);
+            $entity->getComodato()->setUser($perfil);
+            $em->persist($entity);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('notice', 'Actualización exitosa!');
+            return $this->redirect($this->generateUrl('operador_edit', array('id' => $id)));
+        }
+
+        return $this->render('DistribucionBundle:Operador:edit.html.twig', array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+            'representante' => $representante
+        ));
+    }
+
+    /**
+     * Deletes a Operador entity.
+     *
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $form = $this->createDeleteForm($id);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+
+            //antes de eliminar representante actualizo el id del usuario
+            $consulta = $em->createQuery('update DistribucionBundle:Representante r set r.user= :idusuario
+                              WHERE r.operador = :idoperador');
+            $consulta->setParameter('idoperador', $id);
+            $consulta->setParameter('idusuario', $idusuario);
+            $consulta->execute();
+
+            //elimino primero los representantes
+            $consulta = $em->createQuery('DELETE DistribucionBundle:Representante r 
+                                          WHERE r.operador = :idoperador');
+            $consulta->setParameter('idoperador', $id);
+            $consulta->execute();
+
+            $entity = $em->getRepository('DistribucionBundle:Operador')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Operador entity.');
+            }
+
+            //guardo el id del usuario antes de eliminar
+            
+            $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            $entity->setUser($perfil);
+            $entity->getComodato()->setUser($perfil);
+            $em->persist($entity);
+            $em->flush();
+
+            $em->remove($entity);
+            $em->flush();
+        }
+
+        $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado el operador '.$entity->getNombre().' y sus representantes.');
+        return $this->redirect($this->generateUrl('operador'));
+    }
+
+    /**
+     * Creates a form to delete a Operador entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder(array('id' => $id))
+            ->add('id', 'hidden')
+            ->getForm()
+        ;
+    }
+}
