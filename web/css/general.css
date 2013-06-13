@@ -9,11 +9,12 @@
 body{
     background-color:   #efefef;
     margin-top:         0;
-    font-family:        Verdana;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size:          12px;
     font-family:        VERDANA;
     /*color:              #010341;*/
     color:              black;
+      line-height: 20px;
 
 }
 
@@ -44,7 +45,7 @@ label{
 
 .pie{
     background-color:   #082683;
-    font-size:          12px;
+    font-size:          10px;
     padding:            3px;
     color:              white;
     font-weight:        bold;
@@ -153,9 +154,11 @@ a:hover{
 .form-show .contenedor{
     width: 500px;
     background-color: #e9f5fe ;
+    padding-bottom: 5px;
+
 }
 
-.form-show .label{
+.form-show .labelshow{
         float: left;
         width: 40%;
         text-align: right;
@@ -304,5 +307,10 @@ select[multiple]
 .Greenflash-notice{
     color: green;
     background-color: #fffbeb;
+    margin-bottom: 5px;
+}
+
+.help-inline{
+    color:red;
     margin-bottom: 5px;
 }

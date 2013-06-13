@@ -18,17 +18,17 @@
          <fieldset>
             <legend id="a"><div class="divisor">EDITAR OBJETO DE COMODATO</div></legend>
                 <div class="form-contenedor">
-                    {{ form_errors(edit_form.objeto) }}
+                    <div>{{ form_errors(edit_form.objeto) }}</div>
                     <div class="labels">Objeto:</div>
                     <div class="widgets">{{ form_widget(edit_form.objeto) }}</div>
                 </div>
         </fieldset>
+        <br>
         <p>
-        <p>
-            <button type="submit">Editar</button> |
+            <button class="btn" type="submit">Editar</button> |
 
-            <a href="{{ path('objetocomodato') }}">
-                Volver a la lista
+            <a class="btn" href="{{ path('objetocomodato') }}">
+                Ir a la lista
             </a>
         </p>
     </form>
@@ -36,8 +36,7 @@
     <form action="{{ path('objetocomodato_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit">Borrar</button>
+        <button class="btn btn-danger" type="submit">Borrar</button>
     </form>
 
-    <br>
 {% endblock %}

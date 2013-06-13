@@ -15,60 +15,60 @@
 
     <div class="form-show">
         <div class="contenedor">
-            <div class="label">Nombres:</div>
+            <div class="labelshow">Nombres:</div>
             <div class="dato">{{ entity.nombres }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="label">Apellidos:</div>
+            <div class="labelshow">Apellidos:</div>
             <div class="dato">{{ entity.apellidos }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="label">Cargo:</div>
+            <div class="labelshow">Cargo:</div>
             <div class="dato">{{ entity.cargo }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="label">correo:</div>
+            <div class="labelshow">correo:</div>
             <div class="dato">{{ entity.correo }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="label">Telefono 1:</div>
+            <div class="labelshow">Telefono 1:</div>
             <div class="dato">{{ entity.telefono1 }}</div>
         </div>
 
         {% if entity.telefono2!='' %}
             <div class="contenedor">
-                <div class="label">Telefono 2:</div>
+                <div class="labelshow">Telefono 2:</div>
                 <div class="dato">{{ entity.telefono2 }}</div>
             </div>
         {% endif %}
 
         {% if entity.fax!='' %}
             <div class="contenedor">
-                <div class="label">Fax:</div>
+                <div class="labelshow">Fax:</div>
                 <div class="dato">{{ entity.fax }}</div>
             </div>
         {% endif %}
 
         {% if entity.observacion!='' %}
             <div class="contenedor">
-                <div class="label">Observacion:</div>
+                <div class="labelshow">Observacion:</div>
                 <div class="dato">{{ entity.observacion }}</div>
             </div>
         {% endif %}
     </div>
 
 <br>
-    <a href="{{ path('representante') }}">Volver</a> &nbsp;
-    <a href="{{ path('representante_edit', { 'id': entity.id }) }}">Editar</a>
+    <a class="btn" href="{{ path('representante') }}">Ir a lista</a> | 
+    <a class="btn" href="{{ path('representante_edit', { 'id': entity.id }) }}">Ir a editar</a>
 <br><br>
     <form action="{{ path('representante_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit">Delete</button>
+        <button class="btn btn-danger" type="submit">Borrar</button>
     </form>
-<br>
+
 {% endblock %}

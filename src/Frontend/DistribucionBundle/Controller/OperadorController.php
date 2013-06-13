@@ -113,19 +113,13 @@ class OperadorController extends Controller
         $query = $em->createQuery($dql);
         $query->setParameter('idpais', $idpais);
         $query->setParameter('idtipooperador', $idtipooperador);
-
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-        $query,
-        $this->get('request')->query->get('page', 1)/*page number*/,
-        10/*limit per page*/
-        );
+        $operadores = $query->getResult(); 
 
 
         $pais = $em->getRepository('DistribucionBundle:Pais')->find($idpais);
         $top = $em->getRepository('DistribucionBundle:Tipooperador')->find($idtipooperador);
         return $this->render('DistribucionBundle:Operador:lista.html.twig', array(
-            'pagination' => $pagination,
+            'operador' => $operadores,
             'pais' => $pais,
             'top' => $top
         ));
@@ -140,10 +134,10 @@ class OperadorController extends Controller
         $datos=$request->request->all();
         $datos=$datos['frontend_distribucionbundle_operadortype'];
 
-        if(!isset($datos['pais'])){
+        if($datos['pais']==''){
             $id=0;
         } else $id=$datos['pais'];
-        
+
         $entity  = new Operador();
         $form = $this->createForm(new OperadorType($id), $entity);
         $form->bind($request);

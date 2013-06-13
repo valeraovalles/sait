@@ -20,28 +20,27 @@
 
         <fieldset>
             <legend id="a"><div class="divisor">DATOS DE OPERADOR</div></legend>
-
             <div id="operador">
                 <div class="form-contenedor">
-                    {{ form_errors(form.nombre) }}
+                    <div>{{ form_errors(form.nombre) }}</div>
                     <div class="labels">Operador:</div>
                     <div class="widgets">{{ form_widget(form.nombre) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.tipooperador) }}
+                    <div class="text-warning">{{ form_errors(form.tipooperador) }}</div>
                     <div class="labels">Tipo operador:</div>
                     <div class="widgets">{{ form_widget(form.tipooperador) }}</div>
                 </div>
   
                 <div class="form-contenedor">
-                    {{ form_errors(form.pais) }}
+                    <div class="text-warning">{{ form_errors(form.pais) }}</div>
                     <div class="labels">Pais:</div>
                     <div class="widgets">{{ form_widget(form.pais) }}</div>
                 </div>
                 
                 <div class="form-contenedor">
-                    {{ form_errors(form.estado) }}
+                    <div class="text-warning">{{ form_errors(form.estado) }}</div>
                     <div class="labels">Estado:</div>
                     <div id="estado">
                         <div class="widgets">{{ form_widget(form.estado) }}</div>
@@ -49,179 +48,179 @@
                 </div>
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.cobertura) }}
+                    <div class="text-warning">{{ form_errors(form.cobertura) }}</div>
                     <div class="labels">Cobertura:</div>
                     <div class="widgets">{{ form_widget(form.cobertura) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.zona) }}
+                    <div class="text-warning">{{ form_errors(form.zona) }}</div>
                     <div class="labels">Zona:</div>
                     <div class="widgets">{{ form_widget(form.zona) }}</div>
                 </div>
                     
                 <div class="form-contenedor">
-                    {{ form_errors(form.numeroabonados) }}
+                    <div class="text-warning">{{ form_errors(form.numeroabonados) }}</div>
                     <div class="labels">Nro. Abonados:</div>
                     <div class="widgets">{{ form_widget(form.numeroabonados) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.direccion) }}
+                    <div class="text-warning">{{ form_errors(form.direccion) }}</div>
                     <div class="labels">Direccion:</div>
                     <div class="widgets">{{ form_widget(form.direccion) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.observacion) }}
+                    <div class="text-warning">{{ form_errors(form.observacion) }}</div>
                     <div class="labels">Observacion:</div>
                     <div class="widgets">{{ form_widget(form.observacion) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.estatus) }}
+                    <div class="text-warning">{{ form_errors(form.estatus) }}</div>
                     <div class="labels">Estatus:</div>
                     <div class="widgets">{{ form_widget(form.estatus, { 'attr': {'checked': 'checked'} }) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.paquete) }}
+                    <div class="text-warning">{{ form_errors(form.paquete) }}</div>
                     <div class="labels">Paquete:</div>
                     <div class="widgets">{{ form_widget(form.paquete) }}</div>
                 </div>
 
                  <div class="form-contenedor">
-                    {{ form_errors(form.urlweb) }}
+                    <div class="text-warning">{{ form_errors(form.urlweb) }}</div>
                     <div class="labels">Url Web:</div>
                     <div class="widgets">{{ form_widget(form.urlweb) }}</div>
                 </div>
 
                  <div class="form-contenedor">
-                    {{ form_errors(form.urlfacebook) }}
+                    <div class="text-warning">{{ form_errors(form.urlfacebook) }}</div>
                     <div class="labels"><img width="25px" src="{{ asset('images/facebook.png') }}"></div>
                     <div class="widgets">{{ form_widget(form.urlfacebook) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.urltwitter) }}
+                    <div class="text-warning">{{ form_errors(form.urltwitter) }}</div>
                     <div class="labels"><img width="22px" src="{{ asset('images/twitter.png') }}"></div>
                     <div class="widgets">{{ form_widget(form.urltwitter) }}</div>
                 </div>
             </div> 
         </fieldset>
         
-        <br><br>
+        <br>
         
         <fieldset>
             <legend id="b"><div class="divisor">DATOS DE COMODATO</div></legend>
             <div id="comodato">
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.comodato.fechainicioacuerdo) }}
+                    <div>{{ form_errors(form.comodato.fechainicioacuerdo) }}</div>
                     <div class="labels">Fecha Inicio:</div>
                     <div class="widgets">{{ form_widget(form.comodato.fechainicioacuerdo) }}</div>
                 </div>
 
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.comodato.fechafinacuerdo) }}
+                    <div>{{ form_errors(form.comodato.fechafinacuerdo) }}</div>
                     <div class="labels">Fecha Fin:</div>
                     <div class="widgets">{{ form_widget(form.comodato.fechafinacuerdo) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.comodato.dialUrl) }}
+                    <div>{{ form_errors(form.comodato.dialUrl) }}</div>
                     <div class="labels">Dial|Url (1):</div>
                     <div class="widgets">{{ form_widget(form.comodato.dialUrl) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.comodato.dialUrl2) }}
+                    <div>{{ form_errors(form.comodato.dialUrl2) }}</div>
                     <div class="labels">Dial|Url (2):</div>
                     <div class="widgets">{{ form_widget(form.comodato.dialUrl2) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.comodato.observacion) }}
+                    <div>{{ form_errors(form.comodato.observacion) }}</div>
                     <div class="labels">Observacion:</div>
                     <div class="widgets">{{ form_widget(form.comodato.observacion) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    {{ form_errors(form.comodato.objetocomodato) }}
+                    <div>{{ form_errors(form.comodato.objetocomodato) }}</div>
                     <div class="labels">Objeto Comodato:</div>
                     <div class="widgets">{{ form_widget(form.comodato.objetocomodato) }}</div>
                 </div>
             </div>
         </fieldset>
         
-        <br><br>
+        <br>
         
         <fieldset>
             <legend id="c"><div class="divisor">DATOS DE REPRESENTANTE</div> </legend>
             <div id="representante">
                 <div class="form-contenedor">
-                    {{ form_errors(form2.nombres) }}
+                    <div>{{ form_errors(form2.nombres) }}</div>
                     <div class="labels">Nombres:</div>
                     <div class="widgets">{{ form_widget(form2.nombres) }}</div>
                 </div>  
 
                 <div class="form-contenedor">
-                    {{ form_errors(form2.apellidos) }}
+                    <div>{{ form_errors(form2.apellidos) }}</div>
                     <div class="labels">Apellidos:</div>
                     <div class="widgets">{{ form_widget(form2.apellidos) }}</div>
                 </div>  
 
                 <div class="form-contenedor">
-                    {{ form_errors(form2.cargo) }}
+                    <div>{{ form_errors(form2.cargo) }}</div>
                     <div class="labels">Cargo:</div>
                     <div class="widgets">{{ form_widget(form2.cargo) }}</div>
                 </div> 
 
                 <div class="form-contenedor">
-                    {{ form_errors(form2.correo) }}
+                    <div>{{ form_errors(form2.correo) }}</div>
                     <div class="labels">Correo:</div>
                     <div class="widgets">{{ form_widget(form2.correo) }}</div>
                 </div> 
 
                 <div class="form-contenedor">
-                    {{ form_errors(form2.telefono1) }}
+                    <div>{{ form_errors(form2.telefono1) }}</div>
                     <div class="labels">Telefono1:</div>
                     <div class="widgets">{{ form_widget(form2.telefono1) }}</div>
                 </div> 
 
                 <div class="form-contenedor">
-                    {{ form_errors(form2.telefono2) }}
+                    <div>{{ form_errors(form2.telefono2) }}</div>
                     <div class="labels">Telefono2:</div>
                     <div class="widgets">{{ form_widget(form2.telefono2) }}</div>
                 </div> 
 
                 <div class="form-contenedor">
-                    {{ form_errors(form2.fax) }}
+                    <div>{{ form_errors(form2.fax) }}</div>
                     <div class="labels">Fax:</div>
                     <div class="widgets">{{ form_widget(form2.fax) }}</div>
                 </div> 
 
                 <div class="form-contenedor">
-                    {{ form_errors(form2.observacion) }}
+                    <div>{{ form_errors(form2.observacion) }}</div>
                     <div class="labels">Observacion:</div>
                     <div class="widgets">{{ form_widget(form2.observacion) }}</div>
                 </div> 
             </div>
         </fieldset>
-        {# { form_widget(form) } #}
-        {# { form_widget(form_rep) } #}
-        <p>
-            <button type="submit">Create</button>
-        </p>
+
+
+        <br>
+       <button class="btn" type="submit">Crear</button> |
+        <a class="btn" href="{{ path('operador') }}">Volver</a>
+
+    
 
 
     </form>
 
 
-    <a href="{{ path('operador') }}">VOLVER</a>
 
-    <br><br>
     
 
 

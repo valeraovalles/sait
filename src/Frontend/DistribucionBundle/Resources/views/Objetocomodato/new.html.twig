@@ -19,20 +19,19 @@
             <legend id="a"><div class="divisor">DATOS DE OBJETO DE COMODATO</div></legend>
 
             <div class="form-contenedor">
-                {{ form_errors(form.objeto) }}
+                <div>{{ form_errors(form.objeto) }}</div>
                 <div class="labels">Objeto:</div>
                 <div class="widgets">{{ form_widget(form.objeto) }}</div>
             </div>
 
         </fieldset>
-        <p>
-            <button type="submit">Create</button>
-        </p>
+        <br>
+        <button class="btn" type="submit">Crear</button> | 
+
+        <a class="btn" href="{{ path('objetocomodato') }}">
+            Ir a la lista
+        </a>
+
     </form>
 
-
-    <a href="{{ path('objetocomodato') }}">
-        Volver a la lista
-    </a>
-    <br><br>
 {% endblock %}

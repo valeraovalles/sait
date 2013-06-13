@@ -17,17 +17,17 @@
     <div id="operador">
     <div class="form-show">
         <div class="contenedor">
-            <div class="label">Nombre:</div>
+            <div class="labelshow">Nombre:</div>
             <div class="dato">{{ entity.nombre }}</div>
         </div>
 
         <div class="contenedor">
-                <div class="label">Pais:</div>
+                <div class="labelshow">Pais:</div>
                 <div class="dato">{{ entity.pais.pais }}</div>
         </div>
 
         <div class="contenedor">
-                <div class="label">Estado:</div>
+                <div class="labelshow">Estado:</div>
                 <div class="dato">
                     {% set cont = 0 %}
                     {% set largo = entity.estado | length %}
@@ -39,65 +39,65 @@
         </div>
 
         <div class="contenedor">
-                <div class="label">Cobertura:</div>
+                <div class="labelshow">Cobertura:</div>
                 <div class="dato">{{ entity.cobertura }}</div>
         </div>
 
         <div class="contenedor">
-                <div class="label">Zona:</div>
+                <div class="labelshow">Zona:</div>
                 <div class="dato">{{ entity.zona }}</div>
         </div>
 
         <div class="contenedor">
-                <div class="label">Nro abonados:</div>
+                <div class="labelshow">Nro abonados:</div>
                 <div class="dato">{{ entity.numeroabonados }}</div>
         </div>
 
         <div class="contenedor">
-                <div class="label">Direccion:</div>
+                <div class="labelshow">Direccion:</div>
                 <div class="dato">{{ entity.direccion }}</div>
         </div>
 
         {% if entity.observacion!='' %}
             <div class="contenedor">
-                    <div class="label">Observacion:</div>
+                    <div class="labelshow">Observacion:</div>
                     <div class="dato">{{ entity.observacion }}</div>
             </div>
         {% endif %}
 
         <div class="contenedor">
-                <div class="label">Tipo Operador:</div>
+                <div class="labelshow">Tipo Operador:</div>
                 <div class="dato">{{ entity.tipooperador }}</div>
         </div>
 
         <div class="contenedor">
-                <div class="label">Paquete:</div>
+                <div class="labelshow">Paquete:</div>
                 <div class="dato">{{ entity.paquete.paquete }}</div>
         </div>
 
         {% if entity.urlweb!='' %}
             <div class="contenedor">
-                    <div class="label">Url Web:</div>
+                    <div class="labelshow">Url Web:</div>
                     <div class="dato">{{ entity.urlweb }}</div>
             </div>
         {% endif %}
 
         {% if entity.urlfacebook!='' %}
             <div class="contenedor">
-                    <div class="label">Url Facebook:</div>
+                    <div class="labelshow">Url Facebook:</div>
                     <div class="dato">{{ entity.urlfacebook }}</div>
             </div>
         {% endif %}
 
         {% if entity.urltwitter!='' %}
             <div class="contenedor">
-                    <div class="label">Url Twitter:</div>
+                    <div class="labelshow">Url Twitter:</div>
                     <div class="dato">{{ entity.urltwitter }}</div>
             </div>
         {% endif %}
 
             <div class="contenedor">
-                <div class="label">Última Modificación:</div>
+                <div class="labelshow">Última Modificación:</div>
                 <div class="dato">{{ entity.user.primernombre | title }} {{ entity.user.primerapellido | title }}</div>
             </div>
 
@@ -108,28 +108,28 @@
     <div id="comodato">
     <div class="form-show">
         <div class="contenedor">
-            <div class="label">Código:</div>
+            <div class="labelshow">Código:</div>
             <div class="dato">{{ entity.comodato.codigo }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="label">Fecha Inicio:</div>
+            <div class="labelshow">Fecha Inicio:</div>
             <div class="dato">{{ entity.comodato.fechainicioacuerdo|date("m/d/Y") }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="label">Fecha Fin:</div>
+            <div class="labelshow">Fecha Fin:</div>
             <div class="dato">{{ entity.comodato.fechafinacuerdo|date("m/d/Y") }}</div>
         </div>
 
         <div class="contenedor">
-                <div class="label">Dial|Url 1:</div>
+                <div class="labelshow">Dial|Url 1:</div>
                 <div class="dato">{{ entity.comodato.dialurl }}</div>
         </div>
 
         {% if entity.comodato.dialurl2!='' %}
             <div class="contenedor">
-                    <div class="label">Dial|Url 2:</div>
+                    <div class="labelshow">Dial|Url 2:</div>
                     <div class="dato">{{ entity.comodato.dialurl2 }}</div>
             </div>
         {% endif %}
@@ -137,13 +137,13 @@
 
         {% if entity.comodato.observacion!='' %}
             <div class="contenedor">
-                    <div class="label">Observacion:</div>
+                    <div class="labelshow">Observacion:</div>
                     <div class="dato">{{ entity.comodato.observacion }}</div>
             </div>
         {% endif %}
 
         <div class="contenedor">
-            <div class="label">Objetos de Comodato:</div>
+            <div class="labelshow">Objetos de Comodato:</div>
                 <div class="dato">
                     {% set cont = 0 %}
                     {% set largo = entity.comodato.objetocomodato | length %}
@@ -171,47 +171,47 @@
 #e9f5fe; padding-bottom:5px;font-weight:bold;">REPRESENTANTE {{ cont+1 }}</div>
 
         <div class="contenedor">
-            <div class="label">Nombres:</div>
+            <div class="labelshow">Nombres:</div>
             <div class="dato">{{ re.nombres }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="label">Apellidos:</div>
+            <div class="labelshow">Apellidos:</div>
             <div class="dato">{{ re.apellidos }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="label">Cargo:</div>
+            <div class="labelshow">Cargo:</div>
             <div class="dato">{{ re.cargo }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="label">correo:</div>
+            <div class="labelshow">correo:</div>
             <div class="dato">{{ re.correo }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="label">Telefono 1:</div>
+            <div class="labelshow">Telefono 1:</div>
             <div class="dato">{{ re.telefono1 }}</div>
         </div>
 
         {% if re.telefono2!='' %}
             <div class="contenedor">
-                <div class="label">Telefono 2:</div>
+                <div class="labelshow">Telefono 2:</div>
                 <div class="dato">{{ re.telefono2 }}</div>
             </div>
         {% endif %}
 
         {% if re.fax!='' %}
             <div class="contenedor">
-                <div class="label">Fax:</div>
+                <div class="labelshow">Fax:</div>
                 <div class="dato">{{ re.fax }}</div>
             </div>
         {% endif %}
 
         {% if re.observacion!='' %}
             <div class="contenedor">
-                <div class="label">Observacion:</div>
+                <div class="labelshow">Observacion:</div>
                 <div class="dato">{{ re.observacion }}</div>
             </div>
         {% endif %}
@@ -225,17 +225,16 @@
 
 
 <br>
-<a href="{{ path('operador') }}">Lista</a> |
-<a href="{{ path('operador_edit', { 'id': entity.id }) }}">Editar</a> |
-<a href="{{ path('operador_list', {'idpais': entity.pais.id,'idtipooperador': entity.tipooperador.id}) }}">Filtro</a> |
-<a href="{{ path('operador_new', { 'id': entity.id }) }}">Nuevo</a>
+<a class="btn" href="{{ path('operador') }}">Ir a lista</a> |
+<a class="btn" href="{{ path('operador_edit', { 'id': entity.id }) }}">Ir a editar</a> |
+<a class="btn" href="{{ path('operador_new', { 'id': entity.id }) }}">Ir a nuevo</a>
 <br><br>
 <form action="{{ path('operador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar el operador y sus representantes?')">
     <input type="hidden" name="_method" value="DELETE" />
     {{ form_widget(delete_form) }}
-    <button type="submit">Borrar</button>
+    <button class="btn btn-danger" type="submit">Borrar</button>
 </form>
-<br><br>
+
 <script>
 
     jQuery("#a").click(function  (){

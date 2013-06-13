@@ -17,17 +17,18 @@
         <fieldset>
             <legend id="a"><div class="divisor">EDITAR DATOS DE PAQUETE</div></legend>
                 <div class="form-contenedor">
-                    {{ form_errors(edit_form.paquete) }}
+                    <div>{{ form_errors(edit_form.paquete) }}</div>
                     <div class="labels">Paquete:</div>
                     <div class="widgets">{{ form_widget(edit_form.paquete) }}</div>
                 </div>
 
         </fieldset>
+        <br>
         <p>
-            <button type="submit">Editar</button> |
+            <button class="btn" type="submit">Editar</button> |
 
-            <a href="{{ path('paquete') }}">
-                Volver a la lista
+            <a class="btn" href="{{ path('paquete') }}">
+                Ir a lista
             </a>
         </p>
     </form>
@@ -35,7 +36,7 @@
     <form action="{{ path('paquete_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit">Borrar</button>
+        <button class="btn btn-danger" type="submit">Borrar</button>
     </form>
-    <br>
+
 {% endblock %}

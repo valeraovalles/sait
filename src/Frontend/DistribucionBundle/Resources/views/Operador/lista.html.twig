@@ -19,23 +19,23 @@
     {% endif %}
 
 
-    <table class="records_list" cellpaddin=0 cellspacing=0>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
             <tr>
 
-                <th>{{ knp_pagination_sortable(pagination, 'Id', 'o.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Nombre', 'o.nombre') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'País', 'p.pais') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Tipo operador', 't.operador') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Estatus', 'o.estatus') }}</th>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>País</th>
+                <th>Tipo operador</th>
+                <th>Estatus</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for entity in pagination %}
+        {% for entity in operador %}
 
                <tr {% if loop.index is odd %}style="background-color: #e9f5fe;"{% endif %}>
-                <td><a href="{{ path('operador_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.id }}</td>
                 <td>{{ entity.nombre }}</td>
                 <td>{{ entity.pais.pais }}</td>
                 <td>{{ entity.tipooperador.operador }}</td>
@@ -56,13 +56,9 @@
         </tbody>
     </table>
 
-    {# display navigation #}
-    <div class="navigation">
-        {{ knp_pagination_render(pagination)|raw }}
-    </div>
-
+<br><br>
 <br>
-    <a href="{{ path('distribucion_homepage') }}">Volver al Mapa</a>
+    <a class="btn" href="{{ path('distribucion_homepage') }}">Volver al Mapa</a>
 <br><br>
 
     

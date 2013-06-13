@@ -221,14 +221,6 @@ textarea {
   }
 }
 
-body {
-  margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-  color: #333333;
-  background-color: #ffffff;
-}
 
 a {
   color: #0088cc;
@@ -1034,6 +1026,7 @@ fieldset {
   border: 0;
 }
 
+/*
 legend {
   display: block;
   width: 100%;
@@ -1045,7 +1038,7 @@ legend {
   border: 0;
   border-bottom: 1px solid #e5e5e5;
 }
-
+*/
 legend small {
   font-size: 15px;
   color: #999999;
@@ -1648,7 +1641,8 @@ select:focus:invalid:focus {
 
 .help-block,
 .help-inline {
-  color: #595959;
+  color: red;
+
 }
 
 .help-block {

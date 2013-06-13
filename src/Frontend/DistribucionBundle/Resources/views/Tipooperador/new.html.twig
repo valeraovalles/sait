@@ -20,25 +20,24 @@
         <legend id="a"><div class="divisor">DATOS DE OPERADOR</div></legend>
 
         <div class="form-contenedor">
-            {{ form_errors(form.operador) }}
+            <div>{{ form_errors(form.operador) }}</div>
             <div class="labels">Tipo:</div>
             <div class="widgets">{{ form_widget(form.operador) }}</div>
         </div>
 
         <div class="form-contenedor">
-            {{ form_errors(form.codigo) }}
+            <div>{{ form_errors(form.codigo) }}</div>
             <div class="labels">Código:</div>
             <div class="widgets">{{ form_widget(form.codigo) }}</div>
         </div>
         </fieldset>
-        <p>
-            <button type="submit">Create</button>
-        </p>
+        <br>
+        <button class="btn" type="submit">Crear</button> | 
+        <a class="btn" href="{{ path('tipooperador') }}">Ir a lista</a>
+
     </form>
 
-    <a href="{{ path('tipooperador') }}">
-        Volver a la lista
-    </a>
+    
 
     <br><br>
 {% endblock %}

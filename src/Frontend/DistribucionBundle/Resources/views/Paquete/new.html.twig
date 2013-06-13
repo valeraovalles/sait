@@ -21,17 +21,18 @@
             <legend id="a"><div class="divisor">CREAR PAQUETE</div></legend>
 
             <div class="form-contenedor">
-                {{ form_errors(form.paquete) }}
+                <div>{{ form_errors(form.paquete) }}</div>
                 <div class="labels">Paquete:</div>
                 <div class="widgets">{{ form_widget(form.paquete) }}</div>
             </div>
         </fieldset>
 
+        <br>
         <p>
-            <button type="submit">Crear</button> |
+            <button class="btn" type="submit">Crear</button> |
 
-            <a href="{{ path('paquete') }}">
-                Volver a la lista
+            <a class="btn" href="{{ path('paquete') }}">
+                Ir a lista
             </a>
         </p>
     </form>

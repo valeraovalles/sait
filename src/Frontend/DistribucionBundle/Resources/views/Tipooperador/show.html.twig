@@ -23,22 +23,22 @@
     <div class="form-show">
 
         <div class="contenedor">
-            <div class="label">Id:</div>
+            <div class="labelshow">Id:</div>
             <div class="dato">{{ entity.id }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="label">Tipo:</div>
+            <div class="labelshow">Tipo:</div>
             <div class="dato">{{ entity.operador }}</div>
         </div>
 
         <div class="contenedor">
-                <div class="label">Código:</div>
+                <div class="labelshow">Código:</div>
                 <div class="dato">{{ entity.codigo }}</div>
         </div>
 
         <div class="contenedor">
-                <div class="label">Última Modificación:</div>
+                <div class="labelshow">Última Modificación:</div>
                 <div class="dato">{{ entity.user.primernombre | title
  }} {{ entity.user.primerapellido | title
  }}</div>
@@ -48,18 +48,18 @@
 
     <br>
 
-    <a href="{{ path('tipooperador') }}">
-        Volver a la lista
+    <a class="btn" href="{{ path('tipooperador') }}">
+        Ir a lista
     </a>
     |
-    <a href="{{ path('tipooperador_edit', { 'id': entity.id }) }}">
-        Editar
+    <a class="btn" href="{{ path('tipooperador_edit', { 'id': entity.id }) }}">
+        Ir a editar
     </a>
     <br><br>
     <form action="{{ path('tipooperador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit">Borrar</button>
+        <button class="btn btn-danger" type="submit">Borrar</button>
     </form>
 
     <br><br>

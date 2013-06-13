@@ -25,9 +25,7 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
-    form:
-        resources:
-            - "AcmeBundle:Form:form_div_layout.html.twig"
+
 
 # Assetic Configuration
 assetic:

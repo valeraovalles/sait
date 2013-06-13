@@ -18,32 +18,29 @@
         <fieldset>
             <legend id="a"><div class="divisor">EDITAR DATOS DE TIPO OPERADOR</div></legend>
                 <div class="form-contenedor">
-                    {{ form_errors(edit_form.operador) }}
+                    <div>{{ form_errors(edit_form.operador) }}</div>
                     <div class="labels">Tipo:</div>
                     <div class="widgets">{{ form_widget(edit_form.operador) }}</div>
                 </div>
 
   
                 <div class="form-contenedor">
-                    {{ form_errors(edit_form.codigo) }}
+                    <div>{{ form_errors(edit_form.codigo) }}</div>
                     <div class="labels">Código:</div>
                     <div class="widgets">{{ form_widget(edit_form.codigo) }}</div>
                 </div>
         </fieldset>
-        <p>
-            <button type="submit">Editar</button> |
+        <br>
+            <button class="btn" type="submit">Editar</button> |
 
-            <a href="{{ path('tipooperador') }}">
-                Volver a la lista
-            </a>
-        </p>
+            <a class="btn" href="{{ path('tipooperador') }}">Ir a lista</a>
     </form>
 
     <form action="{{ path('tipooperador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit">Borrar</button>
+        <button class="btn btn-danger" type="submit">Borrar</button>
     </form>
 
-<br><br>
+
 {% endblock %}
