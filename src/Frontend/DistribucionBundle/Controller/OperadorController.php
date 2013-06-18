@@ -29,6 +29,8 @@ class OperadorController extends Controller
 
     public function infoAction()
     {
+        header('Content-Type: text/html; charset=UTF-8');
+
         $em = $this->getDoctrine()->getManager();
 
         $em = $this->getDoctrine()->getManager();
@@ -73,6 +75,11 @@ class OperadorController extends Controller
                     $datos[$pais['pais']][$i]=array('operador'=>'0','totalabonados'=>'0','cantidad'=>'0');
             }
         }
+
+        /*header('Content-type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment; filename=nombre_del_archivo.xls");
+        header("Pragma: no-cache");
+        header("Expires: 0");*/
 
         return $this->render('DistribucionBundle:Operador:info.html.twig',array('datos'=>$datos,'tipooperador'=>$tipooperador,'cantidadtipooperador'=>$canttipop));
     }

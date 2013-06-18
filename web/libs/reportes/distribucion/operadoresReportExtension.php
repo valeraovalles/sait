@@ -52,7 +52,7 @@ BETWEEN $P{idoperadordesde} AND $P{idoperadorhasta}';
 			'pgsql',		//tipo de conexion
 			'localhost',	//host
 			'5432',				// puerto (en blaco toma el puerto por defecto)
-			'telesur', 			//base de datos
+			'sait', 			//base de datos
 			'postgres',				//usuario
 			'postgres'				//password
 		);

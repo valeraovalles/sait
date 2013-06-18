@@ -195,7 +195,7 @@ class ReportManager
 
 		$sqlSentence = $extension->getSqlSentence();
 					
-		$outfilename = $_SERVER['DOCUMENT_ROOT']."/sait/web/reportes/ejecutables/".$reportName;
+		$outfilename = $_SERVER['DOCUMENT_ROOT']."/sait/web/libs/reportes/ejecutables/".$reportName;
 
 		if($extension->beforeRun() === false )
 			return false;		
