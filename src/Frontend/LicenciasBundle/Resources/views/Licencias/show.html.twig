@@ -1,0 +1,52 @@
+{% extends '::licencias.html.twig' %}
+{% block title %}Licencia - Detalles{% endblock %}
+
+{% block titulobanner %}
+    LICENCIAS
+{% endblock %}
+
+    
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">DETALLES DE LA LICENCIA</div>
+    <div class="form-show">
+        <div class="contenedor">
+            <div class="label">Nombre:</div>
+            <div class="dato">{{ entity.nombre }}</div>
+        </div>
+        <div class="contenedor">
+            <div class="label">Fecha de Compra:</div>
+            <div class="dato">{{ entity.fechaCompra|date('Y-m-d H:i:s') }}</div>
+        </div>
+        <div class="contenedor">
+            <div class="label">Fecha de Vencimiento</div>
+            <div class="dato">{{ entity.fechaVencimiento|date('Y-m-d H:i:s') }}</div>
+        </div>
+        <div class="contenedor">
+            <div class="label">Descripcion</div>
+            <div class="dato">{{ entity.descripcion }}</div>
+        </div>
+        <div class="contenedor">
+            <div class="label">Bandera de Correo</div>
+            <div class="dato">{{ entity.banderaCorreo }}</div>
+        </div>       
+        <div class="contenedor">
+            <div class="label">Tipo de Licencia</div>
+            <div class="dato">{{ entity.tipo }}</div>
+        </div>
+        <div class="contenedor">
+            <div class="label">Codigo:</div>
+            <div class="dato">{{ entity.codigo }}</div>
+        </div>
+        <div class="contenedor">
+            <div class="label">Id de la Dependencia</div>
+            <div class="dato">{{ entity.idDependencia }}</div>
+        </div>
+    </div>
+
+    <br>
+        <a href="{{ path( retorno ) }}">Volver al Listado</a> &nbsp;
+        <a href="{{ path('licencias_edit', { 'id': entity.id, 'retorno': retorno }) }}">Editar</a>
+    <br><br>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends '::licencias.html.twig' %}
+{% block title %}Licencia - Nueva{% endblock %}
+
+{% block titulobanner %}
+    LICENCIAS
+{% endblock %}
+
+    
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">NUEVA LICENCIA</div>
+
+    <form action="{{ path('licencias_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+
+            <div class="form-contenedor">
+                {{ form_errors(form.perfil) }}
+                <div class="labels">Usuario:</div>
+                <div class="widgets">{{ form_widget(form.perfil) }}</div>
+            </div>
+            <div class="form-contenedor">
+                {{ form_errors(form.nombre) }}
+                <div class="labels">Nombre:</div>
+                <div class="widgets">{{ form_widget(form.nombre) }}</div>
+            </div>
+            <div class="form-contenedor">
+                {{ form_errors(form.fechaCompra) }}
+                <div class="labels">Fecha de Compra:</div>
+                <div class="widgets">{{ form_widget(form.fechaCompra) }}</div>
+            </div>
+            <div class="form-contenedor">
+                {{ form_errors(form.fechaVencimiento) }}
+                <div class="labels">Fecha de Vencimiento:</div>
+                <div class="widgets">{{ form_widget(form.fechaVencimiento) }}</div>
+            </div>
+            <div class="form-contenedor">
+                {{ form_errors(form.banderaCorreo) }}
+                <div class="labels">Bandera de Correo:</div>
+                <div class="widgets">{{ form_widget(form.banderaCorreo) }}</div>
+            </div>
+            <div class="form-contenedor">
+                {{ form_errors(form.descripcion) }}
+                <div class="labels">Descripcion:</div>
+                <div class="widgets">{{ form_widget(form.descripcion) }}</div>
+            </div>
+            <div class="form-contenedor">
+                {{ form_errors(form.tipo) }}
+                <div class="labels">Tipo de Licencia:</div>
+                <div class="widgets">{{ form_widget(form.tipo) }}</div>
+            </div>
+            <div class="form-contenedor">
+                {{ form_errors(form.codigo) }}
+                <div class="labels">Codigo:</div>
+                <div class="widgets">{{ form_widget(form.codigo) }}</div>
+            </div>
+            <div class="form-contenedor">
+                {{ form_errors(form.idDependencia) }}
+                <div class="labels">Dependencia:</div>
+                <div class="widgets">{{ form_widget(form.idDependencia) }}</div>
+            </div>
+        <p>
+            <button type="submit">Crear</button>
+        </p>
+    </form>
+{% endblock %}

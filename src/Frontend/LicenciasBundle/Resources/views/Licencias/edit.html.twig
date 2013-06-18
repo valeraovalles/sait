@@ -1,0 +1,72 @@
+{% extends '::licencias.html.twig' %}
+{% block title %}Licencia - Editar{% endblock %}
+
+{% block titulobanner %}
+    LICENCIAS
+{% endblock %}
+
+    
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">EDITAR LICENCIA</div>
+    
+    <form action="{{ path('licencias_update', { 'id': entity.id,'retorno':retorno }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+        <div class="form-contenedor">
+            {{ form_errors(edit_form.perfil) }}
+            <div class="labels">Usuario:</div>
+            <div class="widgets">{{ form_widget(edit_form.perfil) }}</div>
+        </div>
+        <div class="form-contenedor">
+            {{ form_errors(edit_form.nombre) }}
+            <div class="labels">Nombre:</div>
+            <div class="widgets">{{ form_widget(edit_form.nombre) }}</div>
+        </div>
+        <div class="form-contenedor">
+            {{ form_errors(edit_form.fechaCompra) }}
+            <div class="labels">Fecha de Compra:</div>
+            <div class="widgets">{{ form_widget(edit_form.fechaCompra) }}</div>
+        </div>
+        <div class="form-contenedor">
+            {{ form_errors(edit_form.fechaVencimiento) }}
+            <div class="labels">Fecha de Vencimiento:</div>
+            <div class="widgets">{{ form_widget(edit_form.fechaVencimiento) }}</div>
+        </div>
+        <div class="form-contenedor">
+            {{ form_errors(edit_form.banderaCorreo) }}
+            <div class="labels">Bandera de Correo:</div>
+            <div class="widgets">{{ form_widget(edit_form.banderaCorreo) }}</div>
+        </div>
+        <div class="form-contenedor">
+            {{ form_errors(edit_form.descripcion) }}
+            <div class="labels">Descripcion:</div>
+            <div class="widgets">{{ form_widget(edit_form.descripcion) }}</div>
+        </div>
+        <div class="form-contenedor">
+            {{ form_errors(edit_form.tipo) }}
+            <div class="labels">Tipo de Licencia:</div>
+            <div class="widgets">{{ form_widget(edit_form.tipo) }}</div>
+        </div>
+        <div class="form-contenedor">
+            {{ form_errors(edit_form.codigo) }}
+            <div class="labels">Codigo:</div>
+            <div class="widgets">{{ form_widget(edit_form.codigo) }}</div>
+        </div>
+        <div class="form-contenedor">
+            {{ form_errors(edit_form.idDependencia) }}
+            <div class="labels">Dependencia:</div>
+            <div class="widgets">{{ form_widget(edit_form.idDependencia) }}</div>
+        </div>
+        <form action="{{ path('licencias_update', { 'id': entity.id,'retorno':retorno }) }}" method="post" {{ form_enctype(edit_form) }}>
+            <input type="hidden" name="_method" value="PUT" />
+            {{ form_widget(edit_form) }}
+            <p>
+                <button type="submit">Editar</button>
+            </p>
+        </form>
+        <p>
+            <a href="{{ path( retorno ) }}">Volver al Listado</a>
+        </p>
+    </form>
+
+{% endblock %}

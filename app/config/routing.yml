@@ -1,3 +1,7 @@
+licencias:
+    resource: "@LicenciasBundle/Resources/config/routing.yml"
+    prefix:   /licencias
+    
 distribucion:
     resource: "@DistribucionBundle/Resources/config/routing.yml"
     prefix:   /distribucion

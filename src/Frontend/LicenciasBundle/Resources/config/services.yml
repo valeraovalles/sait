@@ -1,0 +1,7 @@
+parameters:
+#    licencias.example.class: Frontend\LicenciasBundle\Example
+
+services:
+#    licencias.example:
+#        class: %licencias.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

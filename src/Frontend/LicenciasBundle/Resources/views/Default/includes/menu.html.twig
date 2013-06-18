@@ -1,0 +1,19 @@
+<div id='cssmenu'>
+   <ul>
+      <li class='active'><a href='{{ path('licencias_homepage') }}'><span>INICIO</span></a></li>
+   
+      <li class='has-sub'><a href='#'><span>LISTADO DE LICENCIAS</span></a>
+         <ul>
+            <li><a href='{{ path('licencias_vencidas') }}'><span>LICENCIAS VENCIDAS</span></a></li>
+            <li><a href='{{ path('licencias_por_vencer') }}'><span>LICENCIAS POR VENCER</span></a></li>
+         </ul>
+      </li>
+   {#   {% if is_granted(’ROLE_ADMIN’) %}
+   #}      <li class='has-sub'><a href='{{ path('licencias_new') }}'><span>NUEVA LICENCIA</span></a></li>
+   {#   {% endif %}      
+   #}   
+      <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
+      <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
+ </ul>
+</div>
+

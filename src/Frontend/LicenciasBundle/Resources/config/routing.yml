@@ -1,0 +1,50 @@
+#Pagina Principal
+licencias_homepage:
+    pattern:  /principal
+    defaults: { _controller: "LicenciasBundle:Licencias:index" }
+
+#Detalles de Licencia
+licencias_show:
+    pattern:  /reportes/{id}/{retorno}/show
+    defaults: { _controller: "LicenciasBundle:Licencias:show" }
+
+#Nueva Licencia
+licencias_new:
+    pattern:  /modif/new
+    defaults: { _controller: "LicenciasBundle:Licencias:new" }
+
+licencias_create:
+    pattern:  /modif/create
+    defaults: { _controller: "LicenciasBundle:Licencias:create" }
+    requirements: { _method: post }
+
+#Editar la Licencia
+licencias_edit:
+    pattern:  /modif/{id}/{retorno}/edit
+    defaults: { _controller: "LicenciasBundle:Licencias:edit" }
+
+licencias_update:
+    pattern:  /modif/{id}/{retorno}/update
+    defaults: { _controller: "LicenciasBundle:Licencias:update" }
+    requirements: { _method: post|put }
+
+#Eliminar Licencia
+licencias_delete:
+    pattern:  /modif/{id}/{retorno}/delete
+    defaults: { _controller: "LicenciasBundle:Licencias:delete" }
+
+  
+#Licencias Vencidas 
+licencias_vencidas:
+    pattern: /reportes/vencidas
+    defaults: { _controller: LicenciasBundle:Licencias:vencidas}
+
+#Licencias Por Vencer
+licencias_por_vencer:
+    pattern: /reportes/por/vencer
+    defaults: { _controller: LicenciasBundle:Licencias:porvencer}
+
+#REPORTES
+reporte_pdf:
+    pattern: /reportes/pdf
+    defaults: { _controller:LicenciasBundle:Licencias:vencidas}

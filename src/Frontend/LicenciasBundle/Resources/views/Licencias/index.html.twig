@@ -1,0 +1,49 @@
+{% extends '::licencias.html.twig' %}
+
+{% block title %}Licencias - Lista{% endblock %}
+
+{% block titulobanner %}
+    LICENCIAS
+{% endblock %}
+ 
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">LISTA DE LICENCIAS</div>
+
+
+
+
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha de Compra</th>
+                <th>Fecha de Vencimiento</th>
+                <th>Codigo</th>
+                <th>Acciones</th>
+            </tr> 
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.nombre }}</td>
+                    <td>{% if entity.fechaCompra %}{{ entity.fechaCompra|date('Y-m-d') }}{% endif %}</td>
+                    <td>{% if entity.fechaVencimiento %}{{ entity.fechaVencimiento|date('Y-m-d') }}{% endif %}</td>
+                    <td>{{ entity.codigo }}</td>
+                    <td>
+                           <a href="{{ path('licencias_show', { 'id': entity.id, 'retorno' : retorno }) }}"><img width="15px" src="{{ asset('images/lupa.png')}}"></a>
+                        
+                            <a href="{{ path('licencias_edit', { 'id': entity.id, 'retorno':retorno }) }}"><img width="15px" src="{{ asset('images/edit.png')}}"></a>
+                            
+                            <a href="{{ path('licencias_delete', { 'id': entity.id, 'retorno':retorno }) }}"><img width="15px" src="{{ asset('images/mal.jpeg')}}"></a>
+                          
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+        <a href="{{ path('reporte_pdf') }}"><img width="40px" src="{{ asset('images/pdf.gif')}}"></a> &nbsp;
+        <a href="{{ path('reporte_pdf') }}"><img width="40px" src="{{ asset('images/excel.png')}}"></a> &nbsp;
+    <br><br>
+{% endblock %}
