@@ -14,11 +14,6 @@
         {{ form_widget(form._token) }}
 
             <div class="form-contenedor">
-                {{ form_errors(form.perfil) }}
-                <div class="labels">Usuario:</div>
-                <div class="widgets">{{ form_widget(form.perfil) }}</div>
-            </div>
-            <div class="form-contenedor">
                 {{ form_errors(form.nombre) }}
                 <div class="labels">Nombre:</div>
                 <div class="widgets">{{ form_widget(form.nombre) }}</div>
@@ -32,11 +27,6 @@
                 {{ form_errors(form.fechaVencimiento) }}
                 <div class="labels">Fecha de Vencimiento:</div>
                 <div class="widgets">{{ form_widget(form.fechaVencimiento) }}</div>
-            </div>
-            <div class="form-contenedor">
-                {{ form_errors(form.banderaCorreo) }}
-                <div class="labels">Bandera de Correo:</div>
-                <div class="widgets">{{ form_widget(form.banderaCorreo) }}</div>
             </div>
             <div class="form-contenedor">
                 {{ form_errors(form.descripcion) }}
@@ -53,11 +43,10 @@
                 <div class="labels">Codigo:</div>
                 <div class="widgets">{{ form_widget(form.codigo) }}</div>
             </div>
-            <div class="form-contenedor">
-                {{ form_errors(form.idDependencia) }}
-                <div class="labels">Dependencia:</div>
-                <div class="widgets">{{ form_widget(form.idDependencia) }}</div>
-            </div>
+        {#    <input type="hidden" name="form.banderaCorreo" value={{ banderaCorreo }}>
+            <input type="hidden" name="form.idDependencia" value={{ idDependencia }}>
+            <input type="hidden" name="form.usuario" value={{ usuario }}>
+        #}
         <p>
             <button type="submit">Crear</button>
         </p>

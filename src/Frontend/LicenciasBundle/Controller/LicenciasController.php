@@ -22,15 +22,16 @@ class LicenciasController extends Controller
     {
         $retorno= 'licencias_homepage';
         $em = $this->getDoctrine()->getManager();
-        $dql = 'select l.id, l.nombre, l.codigo, l.fechaCompra, l.fechaVencimiento, l.descripcion from LicenciasBundle:Licencias l 
+        $dql = 'select l.id, l.nombre, l.codigo, l.tipo, l.fechaCompra, l.fechaVencimiento, l.descripcion from LicenciasBundle:Licencias l 
                 order by l.id ASC ';
         $consulta = $em->createQuery($dql);
         $entities = $consulta->getResult();
-
-
+        $hoy = date("Y-m-d", time());
+        
         return $this->render('LicenciasBundle:Licencias:index.html.twig', array(
             'entities' => $entities,
-            'retorno' => $retorno
+            'retorno' => $retorno,
+            'hoy' => $hoy
         ));
     }
     /**
@@ -53,7 +54,6 @@ class LicenciasController extends Controller
                                                                                'retorno'=>$retorno
                                                                              )));
         }
-
         return $this->render('LicenciasBundle:Licencias:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -66,6 +66,27 @@ class LicenciasController extends Controller
      */
     public function newAction()
     {
+        $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
+
+        $em = $this->getDoctrine()->getManager();
+    
+        $nombre_usuario = $em->getRepository('UsuarioBundle:User')->find($IdUsuario);
+
+        $entities=array();
+        $dql = 'select d.nombre from UsuarioBundle:Depend d 
+                where d.id = :iduser';
+        $consulta = $em->createQuery($dql)->setParameter('iduser', $IdUsuario);
+        $entities = $consulta->getResult();
+        foreach ($entities as $value) {
+        echo $value;
+        }
+        $bandera_correo=1;
+        
+
+
+        $depend=$em->getRepository('UsuarioBundle:Depend')->find($IdUsuario);
+        echo $depend;
+
         $entity = new Licencias();
         $form   = $this->createForm(new LicenciasType(), $entity);
 

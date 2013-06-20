@@ -12,7 +12,7 @@ class LicenciasType extends AbstractType
     {
         $builder
            // ->add('id')
-            ->add('perfil')
+           ->add('usuario')
             ->add('nombre')
             ->add('fechaCompra','date',array(
                     'widget' => 'single_text',
