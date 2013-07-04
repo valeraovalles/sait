@@ -1,0 +1,78 @@
+<?php
+
+namespace Frontend\VisitasBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Visita
+ *
+ * @ORM\Table(name="visita")
+ * @ORM\Entity
+ */
+class Visita
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="visita_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechaentrada", type="date", nullable=false)
+     */
+    private $fechaentrada;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="horaentrada", type="time", nullable=false)
+     */
+    private $horaentrada;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechasalida", type="date", nullable=false)
+     */
+    private $fechasalida;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="horasalida", type="time", nullable=false)
+     */
+    private $horasalida;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contacto", type="string", nullable=false)
+     */
+    private $contacto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="observaciones", type="string", nullable=false)
+     */
+    private $observaciones;
+
+    /**
+     * @var \Usuario
+     *
+     * @ORM\ManyToOne(targetEntity="Usuario")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     * })
+     */
+    private $usuario;
+
+
+}

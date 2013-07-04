@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Visita creation</h1>
+
+    <form action="{{ path('visita_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('visita') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
+
+
+<script> 
+function abrir(url) { 
+open(url,'','top=300,left=300,width=300,height=300') ; 
+} 
+</script> 
+
+
+<a href="javascript:abrir('/control/sait/web/libs/photobooth/index.html')">TOMAR FOTO</a> 

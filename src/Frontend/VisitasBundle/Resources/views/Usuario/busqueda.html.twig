@@ -1,0 +1,43 @@
+{% extends '::base.html.twig' %}
+ 
+{% block title %}Control Visitas{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">Buscar Usuario</div>
+
+    <form novalidate action="{{ path('usuario_busqueda') }}" method="post" 
+    {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+
+
+            <div id="operador">
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.cedula) }}</div>
+                    <div class="labels">Cedula:</div>
+                    <div class="widgets">{{ form_widget(form.cedula) }}</div>
+                </div>
+            </div> 
+
+<div class="widgets">{{ form_widget(form.nombres) }}</div>
+
+<div class="widgets">{{ form_widget(form.apellidos) }}</div>
+
+
+       
+       <button class="btn" type="submit">Busqueda</button> 
+    </form>
+
+
+ <br><br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br>
+    
+
+
+    <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
+
+{% endblock %}
+
+
+    

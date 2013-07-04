@@ -1,0 +1,109 @@
+frontend_visitas_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: FrontendVisitasBundle:Default:index }
+
+
+visita:
+    pattern:  /
+    defaults: { _controller: "FrontendVisitasBundle:Visita:index" }
+
+visita_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "FrontendVisitasBundle:Visita:show" }
+
+visita_new:
+    pattern:  /new
+    defaults: { _controller: "FrontendVisitasBundle:Visita:new" }
+
+visita_create:
+    pattern:  /create
+    defaults: { _controller: "FrontendVisitasBundle:Visita:create" }
+    requirements: { _method: post }
+
+visita_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "FrontendVisitasBundle:Visita:edit" }
+
+visita_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "FrontendVisitasBundle:Visita:update" }
+    requirements: { _method: post|put }
+
+visita_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "FrontendVisitasBundle:Visita:delete" }
+    requirements: { _method: post|delete }
+
+
+
+
+
+
+usuario:
+    pattern:  /usuario
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:index" }
+
+usuario_show:
+    pattern:  /{id}/showusuario
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:show" }
+
+usuario_new:
+    pattern:  /newusuario
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:new" }
+
+usuario_create:
+    pattern:  /createusuario
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:create" }
+    requirements: { _method: post }
+
+usuario_edit:
+    pattern:  /{id}/editusuario
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:edit" }
+
+usuario_update:
+    pattern:  /{id}/updateusuario
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:update" }
+    requirements: { _method: post|put }
+
+usuario_delete:
+    pattern:  /{id}/deleteusuario
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:delete" }
+    requirements: { _method: post|delete }
+
+
+usuario_busqueda:
+    pattern:  /busqueda
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:busqueda" }
+
+
+usuario_encontrado:
+    pattern:  /encontrado
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:encontrado" }
+
+
+
+
+
+
+
+
+
+cedula_cons:
+    pattern:  /buscar
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:buscar",  id:1 }
+
+
+
+
+cedula_consulta:
+    pattern:  /consulta
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:buscar",  cedula:0 }
+
+
+cedula_cons:
+    pattern:  /prueba
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:buscar" }
+
+
+
+

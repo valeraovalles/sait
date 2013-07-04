@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Listado de Visitantes</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fechaentrada</th>
+                <th>Horaentrada</th>
+                <th>Fechasalida</th>
+                <th>Horasalida</th>
+                <th>Contacto</th>
+                <th>Observaciones</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('visita_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.fechaentrada %}{{ entity.fechaentrada|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.horaentrada }}</td>
+                <td>{% if entity.fechasalida %}{{ entity.fechasalida|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.horasalida }}</td>
+                <td>{{ entity.contacto }}</td>
+                <td>{{ entity.observaciones }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('visita_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('visita_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+        <ul>
+        <li>
+            <a class="btn" href="{{ path('visita_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

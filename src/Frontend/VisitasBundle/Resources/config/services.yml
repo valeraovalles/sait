@@ -1,0 +1,7 @@
+parameters:
+#    frontend_visitas.example.class: Frontend\VisitasBundle\Example
+
+services:
+#    frontend_visitas.example:
+#        class: %frontend_visitas.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

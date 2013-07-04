@@ -1,0 +1,112 @@
+{% extends '::base.html.twig' %}
+ 
+{% block title %}Control Visitas{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">Registrar Usuario</div>
+
+
+
+    <form novalidate action="{{ path('usuario_busqueda') }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+        {{ form_widget(form2._token) }}
+
+
+            <div id="operador">
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.cedula) }}</div>
+                    <div class="labels">Cedula:</div>
+                    <div class="widgets">{{ form_widget(form.cedula) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.nombres) }}</div>
+                    <div class="labels">Nombres:</div>
+                    <div class="widgets">{{ form_widget(form.nombres) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.apellidos) }}</div>
+                    <div class="labels">Apellidos:</div>
+                    <div class="widgets">{{ form_widget(form.apellidos) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form2.fechaentrada) }}</div>
+                    <div class="labels">Fecha Entrada:</div>
+                    <div class="widgets">{{ form_widget(form2.fechaentrada) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form2.horaentrada) }}</div>
+                    <div class="labels">Hora Entrada:</div>
+                    <div class="widgets">{{ form_widget(form2.horaentrada) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form2.contacto) }}</div>
+                    <div class="labels">Contacto:</div>
+                    <div class="widgets">{{ form_widget(form2.contacto) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form2.observaciones) }}</div>
+                    <div class="labels">Observaciones:</div>
+                    <div class="widgets">{{ form_widget(form2.observaciones) }}</div>
+                </div>
+
+            </div> 
+
+
+
+
+
+
+
+
+            <div class="widgets">{{ form_widget(form.nombres) }}</div>
+                    <br>
+                    <br>
+
+
+
+
+            {% block camara %}
+            <script> 
+            function abrir(url) { 
+            open(url,'','top=300,left=300,width=300,height=300') ; 
+            } 
+            </script> 
+
+              <a class="btn btn-info" href="javascript:abrir('/Nuevo/sait/web/libs/photobooth/index.html')">
+              <i class="icon-user icon-camera"></i> FOTO </a><br><br>
+
+            <br>
+            <br>
+
+            {% endblock %}
+
+
+
+
+
+
+
+       <button class="btn" type="submit">Registrar</button> 
+        <a class="btn" href="{{ path('operador') }}">Volver</a>
+
+    </form>
+
+
+
+
+
+
+    <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
+{% endblock %}
+
+
+    
