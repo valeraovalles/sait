@@ -53,7 +53,7 @@ class Licencias
     /**
      * @var integer
      *
-     * @ORM\Column(name="bandera_correo", type="integer", nullable=false)
+     * @ORM\Column(name="bandera_correo", type="integer", nullable=true)
      */
     private $banderaCorreo;
 
@@ -79,14 +79,14 @@ class Licencias
     private $idDependencia;
 
     /**
-     * @var \Usuarios.user
+     * @var \Usuarios.perfil
      *
-     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\Perfil")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuario", referencedColumnName="username")
+     *   @ORM\JoinColumn(name="perfil_id", referencedColumnName="id")
      * })
      */
-    private $usuario;
+    private $perfil;
 
 
 
@@ -285,29 +285,29 @@ class Licencias
     }
 
     /**
-     * Set usuario
+     * Set perfil
      *
-     * @param \Administracion\UsuarioBundle\Entity\User $usuario
+     * @param \Administracion\UsuarioBundle\Entity\Perfil $perfil
      * @return Licencias
      */
-    public function setUsuario(\Administracion\UsuarioBundle\Entity\User $usuario = null)
+    public function setPerfil(\Administracion\UsuarioBundle\Entity\Perfil $perfil = null)
     {
-        $this->usuario = $usuario;
+        $this->perfil = $perfil;
     
         return $this;
     }
 
     /**
-     * Get usuario
+     * Get perfil
      *
-     * @return \Administracion\UsuarioBundle\Entity\User 
+     * @return \Administracion\UsuarioBundle\Entity\Perfil 
      */
-    public function getUsuario()
+    public function getPerfil()
     {
-        return $this->usuario;
+        return $this->perfil;
     }
     public function __toString()
     {
-        return $this->getuserName();
+        return $this->getNombre();
     }
 }
