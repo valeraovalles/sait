@@ -13,7 +13,7 @@
     
     <div class="titulo">INGRESE LOS PARÁMETROS</div>
 
-    <form name="form1" class="formNewEditOperador" novalidate action="{{ path('reporte_informativo') }}" method="post" {{ form_enctype(form) }}>
+    <form class="formNewEditOperador" novalidate action="{{ path('generar_reporte_informativo') }}" method="post" {{ form_enctype(form) }}>
 
         {{ form_widget(form._token) }}
 
@@ -27,7 +27,7 @@
                 </div>
 
                 <div id="tipooperador"></div>
-                <div id="operador"></div>
+                
      	</fieldset>
 
         <br>

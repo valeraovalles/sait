@@ -20,19 +20,6 @@ class ReporteController extends Controller
   
     public function reporteinformativoAction(Request $request)
     {
-        /*
-        $parametros=array('idoperadordesde'=>1, 'idoperadorhasta'=>1734);
-        $parametros = serialize($parametros); 
-        $parametros = urlencode($parametros); 
-
-        $carpeta='distribucion';
-
-        return $this->redirect("/sait/web/libs/reportes/php-jru/reporte.php?nombrereporte=operadores&extension=pdf&parametros=".$parametros."&carpeta=".$carpeta);
-
-*/
-
-
-
     	$entity = new Operador();
         $form   = $this->createForm(new OperadorType(0), $entity);
 
@@ -52,6 +39,24 @@ class ReporteController extends Controller
         ->getForm();
 
         return $this->render('DistribucionBundle:Reportes:informativo.html.twig', array('form'   => $form->createView()));
+
+    }
+
+    public function generarreporteinformativoAction(Request $request)
+    {
+        $datos=$request->request->all();
+        $datos=$datos['form'];
+
+
+        $parametros=array('idoperadordesde'=>$datos['operador'], 'idoperadorhasta'=>$datos['operador']);
+        $parametros = serialize($parametros); 
+        $parametros = urlencode($parametros); 
+
+        $carpeta='distribucion';
+
+        return $this->redirect("/sait/web/libs/reportes/php-jru/reporte.php?nombrereporte=operadores&extension=pdf&parametros=".$parametros."&carpeta=".$carpeta);
+
+
 
     }
 

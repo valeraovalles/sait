@@ -2,14 +2,16 @@ distribucion_homepage:
     pattern:  /inicio
     defaults: { _controller: DistribucionBundle:Default:index }
 
+ajax:
+    pattern:  /ajax/{datos}/{mostrar}
+    defaults: { _controller: "DistribucionBundle:Ajax:formulario" }  
+
+
+
 pais_estado_ciudad:
     pattern:  /paisestadociudad/{id}/{mostrar}
     defaults: { _controller: "DistribucionBundle:Operador:paisestadociudad" }  
 
-
-ajax:
-    pattern:  /ajax/{datos}/{mostrar}
-    defaults: { _controller: "DistribucionBundle:Default:ajax" }  
 
 xx:
     pattern: /xx
@@ -22,10 +24,13 @@ infooperadores:
     defaults: { _controller: "DistribucionBundle:Operador:info" }
 
 #REPORTES
-
 reporte_informativo:
     pattern:  /reporte/informativo
     defaults: { _controller: "DistribucionBundle:Reporte:reporteinformativo" }
+
+generar_reporte_informativo:
+    pattern:  /reporte/informativo/generar
+    defaults: { _controller: "DistribucionBundle:Reporte:generarreporteinformativo" }
 
 # OPERADOR
 operador:
@@ -64,7 +69,6 @@ operador_delete:
     requirements: { _method: post|delete }
 
 #REPRESENTANTE
-
 representante:
     pattern:  /representante/lista
     defaults: { _controller: "DistribucionBundle:Representante:index" }
@@ -72,7 +76,6 @@ representante:
 representante_show:
     pattern:  /representante/{id}/show
     defaults: { _controller: "DistribucionBundle:Representante:show" }
-
 
 #representante_new:
 #    pattern:  /representante/new
@@ -107,7 +110,6 @@ representante_delete:
     requirements: { _method: post|delete }
 
 #TIPO OPERADOR
-
 tipooperador:
     pattern:  /tipooperador/lista
     defaults: { _controller: "DistribucionBundle:Tipooperador:index" }
@@ -140,7 +142,6 @@ tipooperador_delete:
     requirements: { _method: post|delete }
 
 #OBJETO CONVENIO
-
 objetocomodato:
     pattern:  /objetocomodato/lista
     defaults: { _controller: "DistribucionBundle:Objetocomodato:index" }
@@ -172,7 +173,7 @@ objetocomodato_delete:
     defaults: { _controller: "DistribucionBundle:Objetocomodato:delete" }
     requirements: { _method: post|delete }
 
-
+#PAQUETE
 paquete:
     pattern:  /paquete
     defaults: { _controller: "DistribucionBundle:Paquete:index" }
@@ -206,7 +207,6 @@ paquete_delete:
 
 
 # ZONAS 
-
 zona:
     pattern:  /zona
     defaults: { _controller: "DistribucionBundle:Zona:index" }

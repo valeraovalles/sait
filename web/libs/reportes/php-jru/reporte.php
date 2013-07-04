@@ -9,6 +9,14 @@
 		else if($_GET['extension']=='odt'){$formato=PJRU_OPEN_DOCUMENT; $Content='application/vnd.oasis.opendocument.text';}
 		else if($_GET['extension']=='rtf'){$formato=PJRU_RICH_TEXT; $Content='application/rtf';}
 		$result = $reportManager->RunToFile($_GET['nombrereporte'],$formato,$_GET['nombrereporte'],$_GET['parametros']);	
-		header("location: /sait/web/libs/reportes/ejecutables/".$_GET['nombrereporte'].".".$_GET['extension']);
+		
+		$file = "/sait/web/libs/reportes/ejecutables/".$_GET['nombrereporte'].".".$_GET['extension'];
+		header("Content-disposition: attachment; filename=$file");
+		header("Content-type: application/octet-stream");
+		readfile($file);
+
+
+		//header("location: /sait/web/libs/reportes/ejecutables/".$_GET['nombrereporte'].".".$_GET['extension']);
+
 
 ?>
