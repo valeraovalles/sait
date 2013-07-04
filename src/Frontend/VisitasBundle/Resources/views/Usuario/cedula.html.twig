@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+
+
+
+
+
+{#  {% extends '::distribucion.html.twig' %}  #}
+
+
+
+{% block body %}
+    {{ parent() }}
+
+
+
+
+
+  
+    <form novalidate class="formNewEditOperador" action="{{ path('cedula_consulta') }}" method="post" {{ form_enctype(form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+        {{ form_widget(form._token) }}
+
+
+        <fieldset>
+            <legend id="b"><div class="divisor">EDITAR DATOS DE COMODATO</div></legend>
+            <div id="usuario">
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.usuario.cedula) }}</div>
+                    <div class="labels">Cedula:</div>
+                    <div class="widgets">{{ form_widget(form.usuario.cedula) }}</div>
+                </div>
+        </fieldset>
+
+        <br> <br>
+        <button class="btn" type="submit">Buscar</button>
+    </form>
+
+    <br>
+
+{% endblock %}
