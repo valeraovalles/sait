@@ -21,8 +21,6 @@ class ComodatoType extends AbstractType
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd',
                 ))
-            ->add('dialUrl')
-            ->add('dialUrl2')
             ->add('observacion','textarea')
             ->add('objetocomodato')
             ->add('user')

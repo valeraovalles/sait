@@ -38,7 +38,7 @@ class OperadorType extends AbstractType
                     ->setParameter('id', $idPais)
                 ;},
                 ))
-            ->add('zona','textarea')
+            ->add('zona', null,array( 'empty_value' => 'Seleccione...'))
             ->add('cobertura','textarea')
             //->add('ciudad')
             ->add('comodato', new ComodatoType())
@@ -49,6 +49,8 @@ class OperadorType extends AbstractType
             //->add('representante', new RepresentanteType(),array('data_class' => null))
             //->add('representante')
             ->add('user')
+            ->add('dialUrl')
+            ->add('dialUrl2')
             
         ;
     }

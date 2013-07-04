@@ -1,0 +1,43 @@
+{% extends '::distribucion.html.twig' %}
+
+{% block title %}Distribución{% endblock %}
+
+{% block titulobanner %}
+    DISTRIBUCIÓN - EDITAR ZONA
+{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+
+    <div class="titulo">EDITAR ZONA {{ entity.zona | upper}}</div>
+
+    <form novalidate class="formNewEditOperador"  action="{{ path('zona_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+
+
+        {{ form_widget(edit_form._token) }}
+        <fieldset>
+            <legend id="a"><div class="divisor">EDITAR DATOS DE ZONA</div></legend>
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.zona) }}</div>
+                    <div class="labels">Zona:</div>
+                    <div class="widgets">{{ form_widget(edit_form.zona) }}</div>
+                </div>
+        </fieldset>
+        
+        <br>
+        <button class="btn" type="submit">Editar</button> | 
+
+        <a class="btn"  href="{{ path('zona') }}">
+            Ir a la lista
+        </a>
+    </form>
+
+    <form action="{{ path('zona_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button class="btn-danger"  type="submit">Borrar</button>
+    </form>
+
+{% endblock %}

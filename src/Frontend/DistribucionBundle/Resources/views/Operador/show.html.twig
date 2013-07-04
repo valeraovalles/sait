@@ -54,6 +54,18 @@
         </div>
 
         <div class="contenedor">
+                <div class="labelshow">Dial|Url 1:</div>
+                <div class="dato">{{ entity.dialurl }}</div>
+        </div>
+
+        {% if entity.dialurl2!='' %}
+            <div class="contenedor">
+                    <div class="labelshow">Dial|Url 2:</div>
+                    <div class="dato">{{ entity.dialurl2 }}</div>
+            </div>
+        {% endif %}
+
+        <div class="contenedor">
                 <div class="labelshow">Direccion:</div>
                 <div class="dato">{{ entity.direccion }}</div>
         </div>
@@ -121,19 +133,6 @@
             <div class="labelshow">Fecha Fin:</div>
             <div class="dato">{{ entity.comodato.fechafinacuerdo|date("m/d/Y") }}</div>
         </div>
-
-        <div class="contenedor">
-                <div class="labelshow">Dial|Url 1:</div>
-                <div class="dato">{{ entity.comodato.dialurl }}</div>
-        </div>
-
-        {% if entity.comodato.dialurl2!='' %}
-            <div class="contenedor">
-                    <div class="labelshow">Dial|Url 2:</div>
-                    <div class="dato">{{ entity.comodato.dialurl2 }}</div>
-            </div>
-        {% endif %}
-
 
         {% if entity.comodato.observacion!='' %}
             <div class="contenedor">

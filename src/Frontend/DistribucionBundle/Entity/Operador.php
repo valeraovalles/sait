@@ -41,6 +41,21 @@ class Operador
     private $numeroabonados;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="dialUrl", type="string", length=100, nullable=true)
+     * @Assert\NotBlank()
+     */
+    private $dialUrl;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="dialUrl2", type="string", length=100, nullable=true)
+     */
+    private $dialUrl2;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="direccion", type="string", length=500, nullable=false)
@@ -138,9 +153,12 @@ class Operador
     private $cobertura;
 
     /**
-     * @var string
+     * @var \Pais
      *
-     * @ORM\Column(name="zona", type="string", length=200, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Zona")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="zona_id", referencedColumnName="id")
+     * })
      * @Assert\NotBlank()
      */
     private $zona;
@@ -256,6 +274,52 @@ class Operador
         return $this->numeroabonados;
     }
 
+    /**
+     * Set dial
+     *
+     * @param integer $dial
+     * @return Comodato
+     */
+    public function setDialUrl($dialUrl)
+    {
+        $this->dialUrl = $dialUrl;
+    
+        return $this;
+    }
+
+    /**
+     * Get dial
+     *
+     * @return integer 
+     */
+    public function getDialUrl()
+    {
+        return $this->dialUrl;
+    }
+
+   /**
+     * Set dial
+     *
+     * @param integer $dial
+     * @return Comodato
+     */
+    public function setDialUrl2($dialUrl2)
+    {
+        $this->dialUrl2 = $dialUrl2;
+    
+        return $this;
+    }
+
+    /**
+     * Get dial
+     *
+     * @return integer 
+     */
+    public function getDialUrl2()
+    {
+        return $this->dialUrl2;
+    }
+    
     /**
      * Set direccion
      *

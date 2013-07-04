@@ -20,51 +20,36 @@
         <fieldset>
             <legend id="a"><div class="divisor">DATOS DE OPERADOR</div></legend>
 
-            <div id="operador">	
-
                 <div class="form-contenedor">
                     {{ form_errors(form.pais) }}
                     <div class="labels">Pais:</div>
                     <div class="widgets">{{ form_widget(form.pais) }}</div>
                 </div>
 
-                <div class="form-contenedor">
-                    {{ form_errors(form.nombre) }}
-                    <div class="labels">Operador:</div>
-                    <div class="widgets">{{ form_widget(form.nombre) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    {{ form_errors(form.tipooperador) }}
-                    <div class="labels">Tipo operador:</div>
-                    <div class="widgets">{{ form_widget(form.tipooperador) }}</div>
-                </div>
-  
-
-                
-                <div class="form-contenedor">
-                    {{ form_errors(form.zona) }}
-                    <div class="labels">Zona:</div>
-                    <div class="widgets">{{ form_widget(form.zona) }}</div>
-                </div>
-            
-     		</div>
+                <div id="tipooperador"></div>
+                <div id="operador"></div>
      	</fieldset>
-        <p>
-            <button type="submit">Create</button>
-        </p>
+
+        <br>
+        <button class="btn" type="submit">Generar</button> | 
+
+        <a class="btn" href="{{ path('distribucion_homepage') }}">Ir al inicio</a>
+
 
 
     </form>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_pais').change(function(){
+                $('#tipooperador').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_pais").val()+'/tipooperador');
+            });
 
-    <a href="{{ path('operador') }}">VOLVER</a>
-
-    <br><br>
-    
-
-
-    <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
+            $('#form_tipooperador').change(function(){
+                $('#operador').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_pais").val()+'-'+$("#form_tipooperador").val()+'/operador');
+            });
+        });
+    </script>
 
 {% endblock %}
 

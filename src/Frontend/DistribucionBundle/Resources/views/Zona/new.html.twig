@@ -1,0 +1,40 @@
+{% extends '::distribucion.html.twig' %}
+ 
+{% block title %}Distribucion{% endblock %}
+
+
+{% block titulobanner %}
+    TIPO DE OPERADOR - NUEVO
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">CREAR ZONA</div>
+
+    <form novalidate class="formNewEditOperador" action="{{ path('zona_create') }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+
+        <fieldset>
+        <legend id="a"><div class="divisor">DATOS DE LA ZONA</div></legend>
+
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.zona) }}</div>
+            <div class="labels">Zona:</div>
+            <div class="widgets">{{ form_widget(form.zona) }}</div>
+        </div>
+        </fieldset>
+
+<br>
+        <button class="btn" type="submit">Crear</button> | 
+
+        <a class="btn" href="{{ path('zona') }}">
+                Ir a la lista
+        </a>
+    </form>
+
+
+
+{% endblock %}

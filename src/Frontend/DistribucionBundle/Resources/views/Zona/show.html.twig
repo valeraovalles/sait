@@ -1,0 +1,45 @@
+{% extends '::distribucion.html.twig' %}
+
+{% block title %}DISTRIBUCIÓN{% endblock %}
+
+{% block titulobanner %}
+    TIPO DE OPERADOR - CONSULTA
+{% endblock %}
+
+{% block body %}
+
+{{ parent() }}
+
+    <div class="titulo">CONSULTA DE ZONA</div>
+
+    <div class="form-show">
+
+        <div class="contenedor">
+            <div class="labelshow">Id:</div>
+            <div class="dato">{{ entity.id }}</div>
+        </div>
+
+        <div class="contenedor">
+            <div class="labelshow">Zona:</div>
+            <div class="dato">{{ entity.zona }}</div>
+        </div>
+
+    </div>
+
+        <br>
+        <a class="btn" href="{{ path('zona') }}">
+            Ir a la lista
+        </a> | 
+
+        <a class="btn" href="{{ path('zona_edit', { 'id': entity.id }) }}">
+            Ir a Editar
+        </a>
+        <br><br>
+        <form action="{{ path('zona_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button class="btn-danger" type="submit">Borrar</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

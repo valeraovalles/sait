@@ -59,6 +59,13 @@ class Pais
     private $longitud;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo", type="string", length=10, nullable=true)
+     */
+    private $codigo;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -183,7 +190,30 @@ class Pais
         return $this->referencia;
     }
 
-        public function __toString()
+    /**
+     * Set codigo
+     *
+     * @param string $codigo
+     * @return Codigo
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+    
+        return $this;
+    }
+
+    /**
+     * Get codigo
+     *
+     * @return string 
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
+    }
+
+    public function __toString()
     {
         return $this->getPais();
     }

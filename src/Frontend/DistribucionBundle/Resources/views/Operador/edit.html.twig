@@ -70,6 +70,18 @@
                 </div>
 
                 <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.dialUrl) }}</div>
+                    <div class="labels">Dial|Url (1):</div>
+                    <div class="widgets">{{ form_widget(edit_form.dialUrl) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.dialUrl2) }}</div>
+                    <div class="labels">Dial|Url (2):</div>
+                    <div class="widgets">{{ form_widget(edit_form.dialUrl2) }}</div>
+                </div>
+
+                <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.direccion) }}</div>
                     <div class="labels">Direccion:</div>
                     <div class="widgets">{{ form_widget(edit_form.direccion) }}</div>
@@ -83,7 +95,7 @@
 
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.estatus) }}</div>
-                    <div class="labels">Estatus:</div>
+                    <div class="labels">Activo:</div>
                     <div class="widgets">{{ form_widget(edit_form.estatus) }}</div>
                 </div>
 
@@ -136,18 +148,6 @@
                     <div>{{ form_errors(edit_form.comodato.fechafinacuerdo) }}</div>
                     <div class="labels">Fecha Fin:</div>
                     <div class="widgets">{{ form_widget(edit_form.comodato.fechafinacuerdo) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.comodato.dialUrl) }}</div>
-                    <div class="labels">Dial|Url (1):</div>
-                    <div class="widgets">{{ form_widget(edit_form.comodato.dialUrl) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.comodato.dialUrl2) }}</div>
-                    <div class="labels">Dial|Url (2):</div>
-                    <div class="widgets">{{ form_widget(edit_form.comodato.dialUrl2) }}</div>
                 </div>
 
                 <div class="form-contenedor">

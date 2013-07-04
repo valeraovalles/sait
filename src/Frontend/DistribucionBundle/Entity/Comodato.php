@@ -43,26 +43,10 @@ class Comodato
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechafinacuerdo", type="date", nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="fechafinacuerdo", type="date", nullable=true)
      * @Assert\Date()
      */
     private $fechafinacuerdo;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="dialUrl", type="string", length=100, nullable=true)
-     * @Assert\NotBlank()
-     */
-    private $dialUrl;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="dialUrl2", type="string", length=100, nullable=true)
-     */
-    private $dialUrl2;
 
     /**
      * @var string
@@ -83,7 +67,6 @@ class Comodato
      *     @ORM\JoinColumn(name="objetocomodato_id", referencedColumnName="id")
      *   }
      * )
-     * @Assert\Count(min="1",minMessage="Debe seleccionar al menos un Objeto.")
      * 
      * 
      */
@@ -187,51 +170,7 @@ class Comodato
         return $this->fechafinacuerdo;
     }
 
-    /**
-     * Set dial
-     *
-     * @param integer $dial
-     * @return Comodato
-     */
-    public function setDialUrl($dialUrl)
-    {
-        $this->dialUrl = $dialUrl;
-    
-        return $this;
-    }
 
-    /**
-     * Get dial
-     *
-     * @return integer 
-     */
-    public function getDialUrl()
-    {
-        return $this->dialUrl;
-    }
-
-   /**
-     * Set dial
-     *
-     * @param integer $dial
-     * @return Comodato
-     */
-    public function setDialUrl2($dialUrl2)
-    {
-        $this->dialUrl2 = $dialUrl2;
-    
-        return $this;
-    }
-
-    /**
-     * Get dial
-     *
-     * @return integer 
-     */
-    public function getDialUrl2()
-    {
-        return $this->dialUrl2;
-    }
     /**
      * Set observacion
      *

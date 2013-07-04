@@ -3,8 +3,13 @@ distribucion_homepage:
     defaults: { _controller: DistribucionBundle:Default:index }
 
 pais_estado_ciudad:
-    pattern:  /paisestadociudad/{id}
+    pattern:  /paisestadociudad/{id}/{mostrar}
     defaults: { _controller: "DistribucionBundle:Operador:paisestadociudad" }  
+
+
+ajax:
+    pattern:  /ajax/{datos}/{mostrar}
+    defaults: { _controller: "DistribucionBundle:Default:ajax" }  
 
 xx:
     pattern: /xx
@@ -197,4 +202,38 @@ paquete_update:
 paquete_delete:
     pattern:  /paquete/{id}/delete
     defaults: { _controller: "DistribucionBundle:Paquete:delete" }
+    requirements: { _method: post|delete }
+
+
+# ZONAS 
+
+zona:
+    pattern:  /zona
+    defaults: { _controller: "DistribucionBundle:Zona:index" }
+
+zona_show:
+    pattern:  /zona/{id}/show
+    defaults: { _controller: "DistribucionBundle:Zona:show" }
+
+zona_new:
+    pattern:  /zona/new
+    defaults: { _controller: "DistribucionBundle:Zona:new" }
+
+zona_create:
+    pattern:  /zona/create
+    defaults: { _controller: "DistribucionBundle:Zona:create" }
+    requirements: { _method: post }
+
+zona_edit:
+    pattern:  /zona/{id}/edit
+    defaults: { _controller: "DistribucionBundle:Zona:edit" }
+
+zona_update:
+    pattern:  /zona/{id}/update
+    defaults: { _controller: "DistribucionBundle:Zona:update" }
+    requirements: { _method: post|put }
+
+zona_delete:
+    pattern:  /zona/{id}/delete
+    defaults: { _controller: "DistribucionBundle:Zona:delete" }
     requirements: { _method: post|delete }

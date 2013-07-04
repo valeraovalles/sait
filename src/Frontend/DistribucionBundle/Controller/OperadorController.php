@@ -33,7 +33,6 @@ class OperadorController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $em = $this->getDoctrine()->getManager();
         $dql = "select distinct p.id, p.pais, p.latitud, p.longitud from DistribucionBundle:Operador o join o.pais p order by p.pais ASC";
         $consulta = $em->createQuery($dql);
         $paises = $consulta->getResult();
@@ -86,12 +85,14 @@ class OperadorController extends Controller
 
 
 
-    public function paisestadociudadAction($id)
+    public function paisestadociudadAction($id,$mostrar)
     {
             $entity = new Operador();
             $form   = $this->createForm(new OperadorType($id), $entity);
         
-            return $this->render('DistribucionBundle:Operador:paisestadociudad.html.twig',array('form'=>$form->createView()));
+            $em = $this->getDoctrine()->getManager();
+            $pais = $em->getRepository('DistribucionBundle:Pais')->find($id);
+            return $this->render('DistribucionBundle:Operador:paisestadociudad.html.twig',array('form'=>$form->createView(),'pais'=>$pais,'mostrar'=>$mostrar));
     }
     
     public function indexAction()
@@ -141,9 +142,11 @@ class OperadorController extends Controller
         $datos=$request->request->all();
         $datos=$datos['frontend_distribucionbundle_operadortype'];
 
-        if($datos['pais']==''){
+        if(!isset($datos['pais'])){
             $id=0;
         } else $id=$datos['pais'];
+
+
 
         $entity  = new Operador();
         $form = $this->createForm(new OperadorType($id), $entity);

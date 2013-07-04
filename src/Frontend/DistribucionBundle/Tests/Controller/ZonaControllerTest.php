@@ -1,10 +1,10 @@
 <?php
 
-namespace Frontend\LicenciasBundle\Tests\Controller;
+namespace Frontend\DistribucionBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class LicenciasControllerTest extends WebTestCase
+class ZonaControllerTest extends WebTestCase
 {
     /*
     public function testCompleteScenario()
@@ -13,13 +13,13 @@ class LicenciasControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/licencias/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /licencias/");
+        $crawler = $client->request('GET', '/zona/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /zona/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'frontend_licenciasbundle_licenciastype[field_name]'  => 'Test',
+            'frontend_distribucionbundle_zonatype[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class LicenciasControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'frontend_licenciasbundle_licenciastype[field_name]'  => 'Foo',
+            'frontend_distribucionbundle_zonatype[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

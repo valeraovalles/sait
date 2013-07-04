@@ -172,7 +172,7 @@ class ObjetocomodatoController extends Controller
                 throw $this->createNotFoundException('Unable to find Objetocomodato entity.');
             }
 
-        //valido que no esté asociado a un operados
+        //valido que no esté asociado a un operador
         $dql = "select c from DistribucionBundle:Comodato c join c.objetocomodato o where o.id= :idobjetocomodato";
         $consulta = $em->createQuery($dql);
         $consulta->setParameter('idobjetocomodato', $id);
