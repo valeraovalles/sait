@@ -1,16 +1,11 @@
-{% extends '::distribucion.html.twig' %}
+{% extends '::reporte.html.twig' %}
  
 {% block title %}Distribución{% endblock %}
 
 
-{% block titulobanner %}
-    REPORTE GENERAL
-{% endblock %}
-
-
 {% block body -%}
-    {{ parent() }}
-    
-    <div class="titulo">CREAR REPORTE GENERAL</div>
+
+{{ mpdf.WriteHTML("hola") }}
+{{ mpdf.Output() }}
 
 {% endblock %}

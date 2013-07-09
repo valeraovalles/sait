@@ -10,6 +10,8 @@ use Frontend\DistribucionBundle\Form\OperadorType;
 
 use Doctrine\ORM\EntityRepository;
 
+use Frontend\DistribucionBundle\Resources\misclases\htmlreporte;
+
 /**
  * Reporte controller.
  *
@@ -20,6 +22,8 @@ class ReporteController extends Controller
   
     public function reporteinformativoAction(Request $request)
     {
+
+
     	$entity = new Operador();
         $form   = $this->createForm(new OperadorType(0), $entity);
 
@@ -42,21 +46,53 @@ class ReporteController extends Controller
 
     }
 
-    public function generarreporteinformativoAction(Request $request)
+    public function generarreporteAction(Request $request, $tipo, $formato)
     {
+        //RECIBO LOS DATOS DEL FORMULARIO
         $datos=$request->request->all();
         $datos=$datos['form'];
 
+        //INSTANCIO LA CLASE PARA GENERAR EL HTML DEL REPORTE
+        $em = $this->getDoctrine()->getManager();
+        $html=new htmlreporte;
+        $html=$html->$tipo($em, $datos);
 
-        $parametros=array('idoperadordesde'=>$datos['operador'], 'idoperadorhasta'=>$datos['operador']);
+
+        if($datos['formato']=='xls'){
+
+            header("Content-type: application/octet-stream");
+            //indicamos al navegador que se está devolviendo un archivo
+            header("Content-Disposition: attachment; filename=informativo.xls");
+            //con esto evitamos que el navegador lo grabe en su caché
+            header("Pragma: no-cache");
+            header("Expires: 0");
+            //damos salida a la tabla
+            echo $html;
+            die;
+        }
+
+        else if($datos['formato']=='pdf'){
+
+                //GENERO EL PDF
+                include("libs/MPDF/mpdf.php");
+                $mpdf=new \mPDF(); 
+                $mpdf->WriteHTML($html);
+                $mpdf->Output("reporte".".pdf","D");
+                exit;
+        }
+
+        /*
+
+        $parametros=array('idoperadordesde'=>(int)$datos['operador'], 'idoperadorhasta'=>(int)$datos['operador']);
         $parametros = serialize($parametros); 
         $parametros = urlencode($parametros); 
-
         $carpeta='distribucion';
 
-        return $this->redirect("/sait/web/libs/reportes/php-jru/reporte.php?nombrereporte=operadores&extension=pdf&parametros=".$parametros."&carpeta=".$carpeta);
+        return $this->redirect("/sait/web/libs/reportes/php-jru/reporte.php?nombrereporte=operadores&extension=xls&parametros=".$parametros."&carpeta=".$carpeta);
 
 
+        $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado el operador '.$entity->getNombre().' y sus representantes.');
+        return $this->redirect($this->generateUrl('operador'));*/
 
     }
 

@@ -13,6 +13,7 @@ class AjaxController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+
         if($mostrar=='operador'){
 
             $datos=explode("-", $datos);
@@ -77,8 +78,32 @@ class AjaxController extends Controller
            
                     ))
                 ->getForm();
-            }
+        }
 
-            return $this->render('DistribucionBundle:Ajax:ajax.html.twig',array('form'=>$form->createView(),'mostrar'=>$mostrar,'mostrar'=>$mostrar));
+        else if($mostrar=='formato'){
+
+            $array=array('s'=>'seleccionar','xls'=>'Excel','pdf'=>'Pdf');
+            // create a task and give it some dummy data for this example
+            $form = $this->createFormBuilder()
+                    ->add('formato', 'choice', array(
+                        'choices'   => $array,
+           
+                    ))
+                ->getForm();
+        }
+
+        else if($mostrar=='botones'){
+
+            $array=array('s'=>'seleccionar','xls'=>'Excel','pdf'=>'Pdf');
+            // create a task and give it some dummy data for this example
+            $form = $this->createFormBuilder()
+                    ->add('formato', 'choice', array(
+                        'choices'   => $array,
+           
+                    ))
+                ->getForm();
+        }
+
+        return $this->render('DistribucionBundle:Ajax:ajax.html.twig',array('form'=>$form->createView(),'mostrar'=>$mostrar,'mostrar'=>$mostrar));
     }
 }

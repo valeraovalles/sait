@@ -28,9 +28,9 @@ reporte_informativo:
     pattern:  /reporte/informativo
     defaults: { _controller: "DistribucionBundle:Reporte:reporteinformativo" }
 
-generar_reporte_informativo:
-    pattern:  /reporte/informativo/generar
-    defaults: { _controller: "DistribucionBundle:Reporte:generarreporteinformativo" }
+generar_reporte:
+    pattern:  /reporte/generar/{tipo}/{formato}
+    defaults: { _controller: "DistribucionBundle:Reporte:generarreporte" }
 
 # OPERADOR
 operador:

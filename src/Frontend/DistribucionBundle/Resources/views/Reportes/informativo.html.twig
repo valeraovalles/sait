@@ -13,12 +13,9 @@
     
     <div class="titulo">INGRESE LOS PARÁMETROS</div>
 
-    <form class="formNewEditOperador" novalidate action="{{ path('generar_reporte_informativo') }}" method="post" {{ form_enctype(form) }}>
+    <form class="formNewEditOperador" novalidate action="{{ path('generar_reporte', { 'tipo': 'informativo','formato': 'xls'}) }}" method="post" {{ form_enctype(form) }}>
 
         {{ form_widget(form._token) }}
-
-        <fieldset>
-            <legend id="a"><div class="divisor">DATOS DE OPERADOR</div></legend>
 
                 <div class="form-contenedor">
                     {{ form_errors(form.pais) }}
@@ -27,15 +24,9 @@
                 </div>
 
                 <div id="tipooperador"></div>
-                
-     	</fieldset>
-
-        <br>
-        <button class="btn" type="submit">Generar</button> | 
-
-        <a class="btn" href="{{ path('distribucion_homepage') }}">Ir al inicio</a>
 
 
+        
 
     </form>
 
@@ -45,9 +36,6 @@
                 $('#tipooperador').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_pais").val()+'/tipooperador');
             });
 
-            $('#form_tipooperador').change(function(){
-                $('#operador').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_pais").val()+'-'+$("#form_tipooperador").val()+'/operador');
-            });
         });
     </script>
 

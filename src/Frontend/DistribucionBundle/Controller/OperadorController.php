@@ -15,7 +15,6 @@ use Administracion\UsuarioBundle\Entity\Perfil;
 
 use Symfony\Component\Security\Core\SecurityContext;
 
-use Frontend\DistribucionBundle\Resources\Misclases\JasperReport;
 /**
  * Operador controller.
  *

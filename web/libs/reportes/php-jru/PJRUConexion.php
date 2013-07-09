@@ -12,7 +12,7 @@ final class PJRUConexion
 	
 	const PORT	= '5432';
 	
-	const DATABASE	= 'productos';
+	const DATABASE	= 'sait';
 		
 	const USER	= 'postgres';
 	

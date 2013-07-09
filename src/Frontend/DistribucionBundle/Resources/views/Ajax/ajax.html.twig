@@ -11,14 +11,38 @@
         <div class="labels">Operador:</div>
         <div class="widgets">{{ form_widget(form.operador) }}</div>
     </div>
+    <div id="formato"></div>
 
+{% endif %}
 
+{% if mostrar=='formato' %}
+    <div class="form-contenedor">
+        <div class="labels">Formato:</div>
+        <div class="widgets">{{ form_widget(form.formato) }}</div>
+    </div>
+    <div id="botones"></div>
+{% endif %}
+
+{% if mostrar=='botones' %}
+        <br>
+        <button class="btn" type="submit">Generar</button> | 
+
+        <a class="btn" href="{{ path('distribucion_homepage') }}">Ir al inicio</a>
 {% endif %}
 
 <script type="text/javascript">
     $(document).ready(function () {
         $('#form_tipooperador').change(function(){
             $('#operador').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_pais").val()+'-'+$("#form_tipooperador").val()+'/operador');
+        });
+
+        $('#form_operador').change(function(){
+            $('#formato').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_operador").val()+'/formato');
+        });
+
+
+        $('#form_formato').change(function(){
+            $('#botones').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_formato").val()+'/botones');
         });
     });
 </script>

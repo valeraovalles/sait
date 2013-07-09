@@ -10,10 +10,14 @@
 		else if($_GET['extension']=='rtf'){$formato=PJRU_RICH_TEXT; $Content='application/rtf';}
 		$result = $reportManager->RunToFile($_GET['nombrereporte'],$formato,$_GET['nombrereporte'],$_GET['parametros']);	
 		
-		$file = "/sait/web/libs/reportes/ejecutables/".$_GET['nombrereporte'].".".$_GET['extension'];
-		header("Content-disposition: attachment; filename=$file");
+		$ruta=$_SERVER['DOCUMENT_ROOT']."/sait/web/libs/reportes/ejecutables/";
+		$archivo = $_GET['nombrereporte'].".".$_GET['extension'];
+
+		$ra = $ruta.$archivo;
+		header("Content-disposition: attachment; filename=$archivo");
 		header("Content-type: application/octet-stream");
-		readfile($file);
+		readfile($ra);
+
 
 
 		//header("location: /sait/web/libs/reportes/ejecutables/".$_GET['nombrereporte'].".".$_GET['extension']);
