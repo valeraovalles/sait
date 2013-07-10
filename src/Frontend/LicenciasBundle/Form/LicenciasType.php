@@ -26,7 +26,6 @@ class LicenciasType extends AbstractType
             ->add('descripcion')
             ->add('tipo')
             ->add('codigo')
-            ->add('idDependencia')
         ;
     }
 

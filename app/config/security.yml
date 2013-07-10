@@ -11,8 +11,9 @@ security:
             logout:
                 path: usuario_logout
                 target: /usuario/login
+
+
             
-      
     providers:
         usuarios:
             entity: { class: Administracion\UsuarioBundle\Entity\User, property: username }
@@ -22,7 +23,7 @@ security:
         #Symfony\Component\Security\Core\User\User: plaintext
 
     access_control:
-         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         #- { path: ^/distribucion, roles: ROLE_DISTRIBUCION }
-
-
+        - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/distribucion, roles: ROLE_DISTRIBUCION }
+        - { path:  ^/licencias/reportes, roles:[ROLE_LICENCIAS , ROLE_LICADMIN] }
+        - { path: ^/licencias/modif, roles:ROLE_LICADMIN }

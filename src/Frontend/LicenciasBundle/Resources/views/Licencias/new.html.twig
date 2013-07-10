@@ -9,7 +9,7 @@
 {% block body -%}
     {{ parent() }}
     <div class="titulo">NUEVA LICENCIA</div>
-
+    <div class="form-show"><br>
     <form action="{{ path('licencias_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
 
@@ -43,12 +43,9 @@
                 <div class="labels">Codigo:</div>
                 <div class="widgets">{{ form_widget(form.codigo) }}</div>
             </div>
-        {#    <input type="hidden" name="form.banderaCorreo" value={{ banderaCorreo }}>
-            <input type="hidden" name="form.idDependencia" value={{ idDependencia }}>
-            <input type="hidden" name="form.usuario" value={{ usuario }}>
-        #}
         <p>
-            <button type="submit">Crear</button>
+            <button class="btn" type="submit">Crear</button>
         </p>
     </form>
+</div><br><br>
 {% endblock %}

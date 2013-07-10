@@ -1,14 +1,14 @@
-#Pagina Principal
+#Pagina Principal de Licencias
 licencias_homepage:
-    pattern:  /principal
+    pattern:  reportes/principal
     defaults: { _controller: "LicenciasBundle:Licencias:index" }
 
-#Detalles de Licencia
+#Ver detalles de las Licencias
 licencias_show:
     pattern:  /reportes/{id}/{retorno}/show
     defaults: { _controller: "LicenciasBundle:Licencias:show" }
 
-#Nueva Licencia
+#Crear Licencias
 licencias_new:
     pattern:  /modif/new
     defaults: { _controller: "LicenciasBundle:Licencias:new" }
@@ -18,7 +18,7 @@ licencias_create:
     defaults: { _controller: "LicenciasBundle:Licencias:create" }
     requirements: { _method: post }
 
-#Editar la Licencia
+#Editar las Licencias
 licencias_edit:
     pattern:  /modif/{id}/{retorno}/edit
     defaults: { _controller: "LicenciasBundle:Licencias:edit" }
@@ -28,12 +28,11 @@ licencias_update:
     defaults: { _controller: "LicenciasBundle:Licencias:update" }
     requirements: { _method: post|put }
 
-#Eliminar Licencia
+#Eliminar Licencias
 licencias_delete:
     pattern:  /modif/{id}/{retorno}/delete
     defaults: { _controller: "LicenciasBundle:Licencias:delete" }
 
-  
 #Licencias Vencidas 
 licencias_vencidas:
     pattern: /reportes/vencidas
@@ -48,3 +47,8 @@ licencias_por_vencer:
 reporte_pdf:
     pattern: /reportes/pdf
     defaults: { _controller:LicenciasBundle:Licencias:vencidas}
+
+#CORREO
+correo:
+    pattern: /envio/correo
+    defaults: { _controller:LicenciasBundle:Correo:envio}

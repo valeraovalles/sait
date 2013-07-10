@@ -22,16 +22,24 @@ class LicenciasController extends Controller
     {
         $retorno= 'licencias_homepage';
         $em = $this->getDoctrine()->getManager();
+
         $dql = 'select l.id, l.nombre, l.codigo, l.tipo, l.fechaCompra, l.fechaVencimiento, l.descripcion from LicenciasBundle:Licencias l 
                 order by l.id ASC ';
         $consulta = $em->createQuery($dql);
         $entities = $consulta->getResult();
         $hoy = date("Y-m-d", time());
-        
+        $mes = date('Y-m-d', strtotime('+8 week'));
+        $rol=0;
+        if($this->get('security.context')->isGranted('ROLE_LICADMIN'))
+        {
+            $rol = 1;
+        }
         return $this->render('LicenciasBundle:Licencias:index.html.twig', array(
             'entities' => $entities,
             'retorno' => $retorno,
-            'hoy' => $hoy
+            'rol' => $rol,
+            'hoy' => $hoy,
+            'mes' => $mes
         ));
     }
     /**
@@ -44,12 +52,20 @@ class LicenciasController extends Controller
         $form = $this->createForm(new LicenciasType(), $entity);
         $form->bind($request);
 
-        if ($form->isValid()) 
-        {
+        if ($form->isValid()) {
             $retorno='licencias_homepage';
             $em = $this->getDoctrine()->getManager();
+
+            $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $nombre_usuario = $em->getRepository('UsuarioBundle:User')->find($IdUsuario);
+            $bandera_correo = 2;
+
+            $entity->setBanderaCorreo($bandera_correo);
+            $entity->setUsuario($nombre_usuario);
+
             $em->persist($entity);
             $em->flush();
+
             return $this->redirect($this->generateUrl('licencias_show', array('id' => $entity->getId(), 
                                                                                'retorno'=>$retorno
                                                                              )));
@@ -66,33 +82,19 @@ class LicenciasController extends Controller
      */
     public function newAction()
     {
-        $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
-
-        $em = $this->getDoctrine()->getManager();
-    
-        $nombre_usuario = $em->getRepository('UsuarioBundle:User')->find($IdUsuario);
-
-        $entities=array();
-        $dql = 'select d.nombre from UsuarioBundle:Depend d 
-                where d.id = :iduser';
-        $consulta = $em->createQuery($dql)->setParameter('iduser', $IdUsuario);
-        $entities = $consulta->getResult();
-        foreach ($entities as $value) {
-        echo $value;
-        }
-        $bandera_correo=1;
-        
-
-
-        $depend=$em->getRepository('UsuarioBundle:Depend')->find($IdUsuario);
-        echo $depend;
-
         $entity = new Licencias();
         $form   = $this->createForm(new LicenciasType(), $entity);
+        
+        $rol=0;
+        if($this->get('security.context')->isGranted('ROLE_LICADMIN'))
+        {
+            $rol = 1;
+        }
 
         return $this->render('LicenciasBundle:Licencias:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'rol' => $rol,
         ));
     }
 
@@ -100,7 +102,7 @@ class LicenciasController extends Controller
      * Finds and displays a Licencias entity.
      *
      */
-     public function showAction($id,$retorno)
+    public function showAction($id,$retorno)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -111,11 +113,19 @@ class LicenciasController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
+        
+        $rol=0;
+        if($this->get('security.context')->isGranted('ROLE_LICADMIN'))
+        {
+            $rol = 1;
+        }
 
         return $this->render('LicenciasBundle:Licencias:show.html.twig', array(
             'entity'      => $entity,
             'retorno'     => $retorno,
-            'delete_form' => $deleteForm->createView(),        ));
+            'rol' => $rol,
+            'delete_form' => $deleteForm->createView(),        
+            ));
     }
 
     /**
@@ -132,12 +142,18 @@ class LicenciasController extends Controller
             throw $this->createNotFoundException('Unable to find Licencias entity.');
         }
 
+        $rol=0;
+        if($this->get('security.context')->isGranted('ROLE_LICADMIN'))
+        {
+            $rol = 1;
+        }
         $editForm = $this->createForm(new LicenciasType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('LicenciasBundle:Licencias:edit.html.twig', array(
             'entity'      => $entity,
             'retorno'     => $retorno,
+            'rol'         => $rol,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -147,11 +163,17 @@ class LicenciasController extends Controller
      * Edits an existing Licencias entity.
      *
      */
-     public function updateAction(Request $request, $id, $retorno)
+    public function updateAction(Request $request, $id, $retorno)
     {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('LicenciasBundle:Licencias')->find($id);
+
+        $rol=0;
+        if($this->get('security.context')->isGranted('ROLE_LICADMIN'))
+        {
+            $rol = 1;
+        }
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Licencias entity.');
@@ -161,24 +183,22 @@ class LicenciasController extends Controller
         $editForm = $this->createForm(new LicenciasType(), $entity);
         $editForm->bind($request);
 
-        if ($editForm->isValid()) 
-        {
+            $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
+          $nombre_usuario = $em->getRepository('UsuarioBundle:User')->find($IdUsuario);
+          $bandera_correo = 2;
+
+          $entity->setBanderaCorreo($bandera_correo);
+          $entity->setUsuario($nombre_usuario);
+        
             $em->persist($entity);
             $em->flush();
-            return $this->redirect($this->generateUrl('licencias_edit', 
-                  array(
-                                          'id' => $id,
-                                           'retorno'=>$retorno
-                        )));
-        }
-        return $this->render('LicenciasBundle:Licencias:edit.html.twig', array(
-            'entity'      => $entity,
-            'retorno'     => $retorno,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
 
+            return $this->redirect($this->generateUrl('licencias_edit', array(
+                                'id' => $id, 
+                                'rol' =>$rol, 
+                                'retorno' => $retorno
+                                )));
+    }
     /**
      * Deletes a Licencias entity.
      *
@@ -201,16 +221,14 @@ class LicenciasController extends Controller
            return $this->redirect($this->generateUrl('licencias_homepage', array('entities' => $entities, 
                                                                                'retorno'=>$retorno
                                                                              )));
-        
     }
-
 
     /**
      * Creates a form to delete a Licencias entity by id.
      *
      * @param mixed $id The entity id
      *
-     * @return Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm($id)
     {
@@ -219,7 +237,6 @@ class LicenciasController extends Controller
             ->getForm()
         ;
     }
-
     public function vencidasAction()
     {   
         $retorno= 'licencias_vencidas';
@@ -230,10 +247,17 @@ class LicenciasController extends Controller
         $consulta = $em->createQuery($dql)->setParameter('hoy', $hoy);
         $entities = $consulta->getResult();
 
+        $rol=0;
+        if($this->get('security.context')->isGranted('ROLE_LICADMIN'))
+        {
+            $rol = 1;
+        }
+
         return $this->render('LicenciasBundle:Licencias:vencidas.html.twig',
                                 array(
                                           'entities' => $entities,
-                                           'retorno'=>$retorno
+                                           'retorno'=>$retorno,
+                                           'rol' => $rol
                                      )
                             );
     }
@@ -253,13 +277,17 @@ class LicenciasController extends Controller
                                                                  )
                                                          );
         $entities = $consulta->getResult();
+        $rol=0;
+        if($this->get('security.context')->isGranted('ROLE_LICADMIN'))
+        {
+            $rol = 1;
+        }
         return $this->render('LicenciasBundle:Licencias:porvencer.html.twig',
                                 array(
                                           'entities' => $entities,
-        //                                'pagination' =>$pagination
-                                           'retorno'=>$retorno
+                                           'retorno'=>$retorno,
+                                           'rol'=>$rol
                                      )
                             );
     }
-
 }

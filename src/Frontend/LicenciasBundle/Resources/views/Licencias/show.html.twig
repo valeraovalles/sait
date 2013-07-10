@@ -44,8 +44,12 @@
     </div>
 
     <br>
-        <a class="btn" href="{{ path( retorno ) }}">Volver al Listado</a> &nbsp;
+        <a class="btn" href="{{ path( retorno ) }}">Listado</a> &nbsp;
+        {% if rol == 1 %}   
         <a class="btn" href="{{ path('licencias_edit', { 'id': entity.id, 'retorno': retorno }) }}">Editar</a>
-    <br><br>
-
+          <br><br>
+        <a class="btn btn-danger" href="{{ path('licencias_delete', { 'id': entity.id, 'retorno':retorno }) }}">Eliminar</a> &nbsp;
+        {% endif %}
+        <br><br>
+      
 {% endblock %}

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Licencias
  *
- * @ORM\Table(name="licencias.licencias")
+ * @ORM\Table(name="licencias.licencias_nueva")
  * @ORM\Entity
  */
 class Licencias
@@ -71,19 +71,13 @@ class Licencias
      */
     private $codigo;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_dependencia", type="integer", nullable=false)
-     */
-    private $idDependencia;
 
     /**
      * @var \Usuarios.user
      *
      * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuario", referencedColumnName="username")
+     *   @ORM\JoinColumn(name="usuario", referencedColumnName="id")
      * })
      */
     private $usuario;
@@ -261,28 +255,7 @@ class Licencias
         return $this->codigo;
     }
 
-    /**
-     * Set idDependencia
-     *
-     * @param integer $idDependencia
-     * @return Licencias
-     */
-    public function setIdDependencia($idDependencia)
-    {
-        $this->idDependencia = $idDependencia;
     
-        return $this;
-    }
-
-    /**
-     * Get idDependencia
-     *
-     * @return integer 
-     */
-    public function getIdDependencia()
-    {
-        return $this->idDependencia;
-    }
 
     /**
      * Set usuario
@@ -306,8 +279,5 @@ class Licencias
     {
         return $this->usuario;
     }
-    public function __toString()
-    {
-        return $this->getuserName();
-    }
+
 }
