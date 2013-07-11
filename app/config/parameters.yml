@@ -7,8 +7,8 @@ parameters:
     database_user: postgres
     database_password: postgres
     mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    mailer_host: correo.telesurtv.net
+    mailer_user: lpadilla
+    mailer_password: contraseña
     locale: es
     secret: d1a9e66c51b73a5e43f27bbf07907f97

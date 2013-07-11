@@ -10,7 +10,7 @@
     {{ parent() }}
     <div class="titulo">NUEVA LICENCIA</div>
     <div class="form-show"><br>
-    <form action="{{ path('licencias_create') }}" method="post" {{ form_enctype(form) }}>
+    <form novalidate action="{{ path('licencias_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
 
             <div class="form-contenedor">

@@ -39,8 +39,8 @@ visita_delete:
 
 
 
-usuario:
-    pattern:  /usuario
+control_visitas_usuario:
+    pattern:  /usuario/control
     defaults: { _controller: "FrontendVisitasBundle:Usuario:index" }
 
 usuario_show:

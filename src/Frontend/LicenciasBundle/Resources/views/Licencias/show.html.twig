@@ -35,7 +35,11 @@
         </div>       
         <div class="contenedor">
             <div class="labelshow">Tipo de Licencia</div>
-            <div class="dato">{{ entity.tipo }}</div>
+            {% if entity.tipo == 'l'%}
+                <div class="dato">LICENCIA</div>
+            {% elseif entity.tipo == 's' %}
+                <div class="dato">SERVICIO</div>
+            {% endif %}
         </div>
         <div class="contenedor">
             <div class="labelshow">Codigo:</div>

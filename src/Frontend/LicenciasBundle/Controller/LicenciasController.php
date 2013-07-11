@@ -52,6 +52,12 @@ class LicenciasController extends Controller
         $form = $this->createForm(new LicenciasType(), $entity);
         $form->bind($request);
 
+        $rol=0;
+            if($this->get('security.context')->isGranted('ROLE_LICADMIN'))
+            {
+                $rol = 1;
+            }
+
         if ($form->isValid()) {
             $retorno='licencias_homepage';
             $em = $this->getDoctrine()->getManager();
@@ -67,12 +73,14 @@ class LicenciasController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('licencias_show', array('id' => $entity->getId(), 
-                                                                               'retorno'=>$retorno
+                                                                               'retorno'=>$retorno,
+                                                                               'rol' => $rol
                                                                              )));
         }
         return $this->render('LicenciasBundle:Licencias:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'rol' => $rol
         ));
     }
 
