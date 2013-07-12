@@ -9,7 +9,7 @@
 
 
 
-    <form novalidate action="{{ path('usuario_busqueda') }}" method="post" {{ form_enctype(form) }}>
+    <form novalidate action="{{ path('usuario_busqueda_control') }}" method="post" {{ form_enctype(form) }}>
 
         {{ form_widget(form._token) }}
         {{ form_widget(form2._token) }}
@@ -60,51 +60,27 @@
 
             </div> 
 
-
-
-
-
-
-
-
             <div class="widgets">{{ form_widget(form.nombres) }}</div>
-                    <br>
-                    <br>
+                    <br><br>
 
 
 
 
-            {% block camara %}
-            <script> 
-            function abrir(url) { 
-            open(url,'','top=300,left=300,width=300,height=300') ; 
-            } 
-            </script> 
-
-              <a class="btn btn-info" href="javascript:abrir('/Nuevo/sait/web/libs/photobooth/index.html')">
-              <i class="icon-user icon-camera"></i> FOTO </a><br><br>
-
-            <br>
-            <br>
-
-            {% endblock %}
-
-
-
-
-
-
+        {% block camara %}
+        <script> 
+        function abrir(url) { 
+        open(url,'','top=300,left=300,width=300,height=300') ; 
+        } 
+        </script> 
+          <a class="btn btn-info" href="javascript:abrir(' /sait/web/libs/photobooth/index.html')">
+          <i class="icon-user icon-camera"></i> FOTO </a><br><br>
+        <br><br>
+        {% endblock %}
 
        <button class="btn" type="submit">Registrar</button> 
-        <a class="btn" href="{{ path('operador') }}">Volver</a>
+       <a class="btn" href="{{ path('operador') }}">Volver</a>
 
     </form>
-
-
-
-
-
-
     <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
 {% endblock %}
 

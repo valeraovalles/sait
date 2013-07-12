@@ -1,35 +1,30 @@
-frontend_visitas_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: FrontendVisitasBundle:Default:index }
-
-
-visita:
+visita_control:
     pattern:  /
     defaults: { _controller: "FrontendVisitasBundle:Visita:index" }
 
-visita_show:
+visita_show_control:
     pattern:  /{id}/show
     defaults: { _controller: "FrontendVisitasBundle:Visita:show" }
 
-visita_new:
+visita_new_control:
     pattern:  /new
     defaults: { _controller: "FrontendVisitasBundle:Visita:new" }
 
-visita_create:
+visita_create_control:
     pattern:  /create
     defaults: { _controller: "FrontendVisitasBundle:Visita:create" }
     requirements: { _method: post }
 
-visita_edit:
+visita_edit_control:
     pattern:  /{id}/edit
     defaults: { _controller: "FrontendVisitasBundle:Visita:edit" }
 
-visita_update:
+visita_update_control:
     pattern:  /{id}/update
     defaults: { _controller: "FrontendVisitasBundle:Visita:update" }
     requirements: { _method: post|put }
 
-visita_delete:
+visita_delete_control:
     pattern:  /{id}/delete
     defaults: { _controller: "FrontendVisitasBundle:Visita:delete" }
     requirements: { _method: post|delete }
@@ -40,69 +35,48 @@ visita_delete:
 
 
 control_visitas_usuario:
-    pattern:  /usuario/control
+    pattern:  /listado
     defaults: { _controller: "FrontendVisitasBundle:Usuario:index" }
 
-usuario_show:
+usuario_show_control:
     pattern:  /{id}/showusuario
     defaults: { _controller: "FrontendVisitasBundle:Usuario:show" }
 
-usuario_new:
+usuario_new_control:
     pattern:  /newusuario
     defaults: { _controller: "FrontendVisitasBundle:Usuario:new" }
 
-usuario_create:
+usuario_create_control:
     pattern:  /createusuario
     defaults: { _controller: "FrontendVisitasBundle:Usuario:create" }
     requirements: { _method: post }
 
-usuario_edit:
+usuario_edit_control:
     pattern:  /{id}/editusuario
     defaults: { _controller: "FrontendVisitasBundle:Usuario:edit" }
 
-usuario_update:
+usuario_update_control:
     pattern:  /{id}/updateusuario
     defaults: { _controller: "FrontendVisitasBundle:Usuario:update" }
     requirements: { _method: post|put }
 
-usuario_delete:
+usuario_delete_control:
     pattern:  /{id}/deleteusuario
     defaults: { _controller: "FrontendVisitasBundle:Usuario:delete" }
     requirements: { _method: post|delete }
 
 
-usuario_busqueda:
+usuario_busqueda_control:
     pattern:  /busqueda
     defaults: { _controller: "FrontendVisitasBundle:Usuario:busqueda" }
 
 
-usuario_encontrado:
+usuario_encontrado_control:
     pattern:  /encontrado
     defaults: { _controller: "FrontendVisitasBundle:Usuario:encontrado" }
 
 
 
-
-
-
-
-
-
-cedula_cons:
-    pattern:  /buscar
-    defaults: { _controller: "FrontendVisitasBundle:Usuario:buscar",  id:1 }
-
-
-
-
-cedula_consulta:
-    pattern:  /consulta
-    defaults: { _controller: "FrontendVisitasBundle:Usuario:buscar",  cedula:0 }
-
-
-cedula_cons:
-    pattern:  /prueba
-    defaults: { _controller: "FrontendVisitasBundle:Usuario:buscar" }
 
 
 

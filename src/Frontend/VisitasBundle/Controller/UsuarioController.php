@@ -141,7 +141,7 @@ class UsuarioController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('usuario_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('usuario_edit_control', array('id' => $id)));
         }
 
         return $this->render('FrontendVisitasBundle:Usuario:edit.html.twig', array(
@@ -235,6 +235,8 @@ class UsuarioController extends Controller
 
 
 
+
+
     public function busquedaAction(Request $request)
     {
 
@@ -255,10 +257,9 @@ class UsuarioController extends Controller
             $query->setParameter('cedula', $cedula);
             $usuario = $query->getResult(); 
 
-          
 
-            if ($usuario){
-echo "primera parte";
+    if ($usuario){
+    echo "primera parte";
              $form   = $this->createForm(new UsuarioType(), $usuario[0]);
 
              return $this->render('FrontendVisitasBundle:Usuario:show.html.twig', array(
@@ -270,7 +271,7 @@ echo "primera parte";
 
             else{
 
-                echo "segunda parte";
+    echo "segunda parte";
             $entity = new Usuario();
             $form   = $this->createForm(new UsuarioType(), $entity);
 
@@ -305,6 +306,12 @@ echo "primera parte";
 
 
     }
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,16 @@
+<div id='cssmenu'>
+   <ul>
+      <li class='active'><a href='{{ path('control_visitas_usuario') }}'><span>INICIO</span></a></li>
+   
+      <li class='has-sub'><a href='#'><span>ACCIONES</span></a>
+         <ul>
+            <li><a href='{{ path('usuario_busqueda_control') }}'><span>REGISTRAR USUARIO</span></a></li>
+            <li><a href='{{ path('licencias_por_vencer') }}'><span>OTRA</span></a></li>
+         </ul>
+      </li>
+      
+      <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
+      <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
+ </ul>
+</div>
+

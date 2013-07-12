@@ -25,18 +25,9 @@
     </table>
 
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('usuario') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('usuario_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-
+    <li><br>
+        <a class="btn" href="{{ path('control_visitas_usuario') }}">Regresar</a>
+        <a class="btn" href="{{ path('usuario_edit_control', { 'id': entity.id }) }}">Editar</a>
     </li>
 </ul>
 {% endblock %}

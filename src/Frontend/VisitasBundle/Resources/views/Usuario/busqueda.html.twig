@@ -7,7 +7,7 @@
     
     <div class="titulo">Buscar Usuario</div>
 
-    <form novalidate action="{{ path('usuario_busqueda') }}" method="post" 
+    <form novalidate action="{{ path('usuario_busqueda_control') }}" method="post" 
     {{ form_enctype(form) }}>
 
         {{ form_widget(form._token) }}
@@ -21,12 +21,7 @@
                 </div>
             </div> 
 
-<div class="widgets">{{ form_widget(form.nombres) }}</div>
 
-<div class="widgets">{{ form_widget(form.apellidos) }}</div>
-
-
-       
        <button class="btn" type="submit">Busqueda</button> 
     </form>
 

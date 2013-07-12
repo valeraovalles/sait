@@ -1,9 +1,24 @@
 {% extends '::base.html.twig' %}
 
+
+
+
+
+
+
+
 {% block body -%}
-    <h1>Usuario list</h1>
+
+{% block menu %}
+{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
+{% endblock %}
 
 
+
+
+
+<br>
+    <h1>Listado de visitantes</h1>
 
 <script>
 
@@ -29,41 +44,25 @@ $(document).ready( function () {
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('usuario_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('usuario_show_control', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.nombres }}</td>
                 <td>{{ entity.apellidos }}</td>
                 <td>{{ entity.cedula }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('usuario_show', { 'id': entity.id }) }}"><i class="icon-user icon-eye-open"></i></a>
-                    </li>
-                    <li>
-                        <a href="{{ path('usuario_edit', { 'id': entity.id }) }}"><i class="icon-user icon-edit"></i></a>
-                    </li>
-                    <li>
-                        <a href="{{ path('usuario_delete', { 'id': entity.id }) }}"><i class="icon-user icon-remove"></i></a>
+                        <a href="{{ path('usuario_show_control', { 'id': entity.id }) }}"><i class="icon-user icon-eye-open"></i></a>
+
+                        <a href="{{ path('usuario_edit_control', { 'id': entity.id }) }}"><i class="icon-user icon-edit"></i></a>
                     </li>
                 </ul>
                 </td>
-
-
-
-
-
-
-
-
 
 
             </tr>
         {% endfor %}
         </tbody>
     </table>                   
-
-        <ul>
-       <!-- <li> <a href="{{ path('usuario_new') }}"> Create a new entry </a> </li> -->
-    </ul>
     <br><br>
 
     {% endblock %}
