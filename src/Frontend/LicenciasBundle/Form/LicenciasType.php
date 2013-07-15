@@ -24,9 +24,17 @@ class LicenciasType extends AbstractType
                 ))
             ->add('banderaCorreo')
             ->add('descripcion')
-            ->add('tipo')
+            ->add('tipo','choice', array(
+                                            'expanded'=>false, 
+                                            'multiple'=>false,
+                                            'empty_value' => 'Seleccione...',
+                                            'choices' => array(
+                                                                    "l" =>"Licencia", 
+                                                                    "s" =>"Servicio"
+                                                                  )
+                                        )
+                )
             ->add('codigo')
-            ->add('idDependencia')
         ;
     }
 

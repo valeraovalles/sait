@@ -3,11 +3,12 @@
 namespace Frontend\LicenciasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Licencias
  *
- * @ORM\Table(name="licencias.licencias")
+ * @ORM\Table(name="licencias.licencias_nueva")
  * @ORM\Entity
  */
 class Licencias
@@ -26,6 +27,7 @@ class Licencias
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=250, nullable=false)
+     * @Assert\NotBlank()
      */
     private $nombre;
 
@@ -33,6 +35,7 @@ class Licencias
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_compra", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaCompra;
 
@@ -40,6 +43,7 @@ class Licencias
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_vencimiento", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaVencimiento;
 
@@ -47,6 +51,7 @@ class Licencias
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=500, nullable=false)
+     * @Assert\NotBlank()
      */
     private $descripcion;
 
@@ -60,7 +65,8 @@ class Licencias
     /**
      * @var string
      *
-     * @ORM\Column(name="tipo", type="string", length=1, nullable=false)
+     * @ORM\Column(name="tipo", type="string", length=50, nullable=false)
+     * @Assert\NotBlank()
      */
     private $tipo;
 
@@ -68,22 +74,17 @@ class Licencias
      * @var string
      *
      * @ORM\Column(name="codigo", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
      */
     private $codigo;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_dependencia", type="integer", nullable=false)
-     */
-    private $idDependencia;
 
     /**
      * @var \Usuarios.user
      *
      * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuario", referencedColumnName="username")
+     *   @ORM\JoinColumn(name="usuario", referencedColumnName="id")
      * })
      */
     private $usuario;
@@ -261,28 +262,7 @@ class Licencias
         return $this->codigo;
     }
 
-    /**
-     * Set idDependencia
-     *
-     * @param integer $idDependencia
-     * @return Licencias
-     */
-    public function setIdDependencia($idDependencia)
-    {
-        $this->idDependencia = $idDependencia;
     
-        return $this;
-    }
-
-    /**
-     * Get idDependencia
-     *
-     * @return integer 
-     */
-    public function getIdDependencia()
-    {
-        return $this->idDependencia;
-    }
 
     /**
      * Set usuario
@@ -306,8 +286,5 @@ class Licencias
     {
         return $this->usuario;
     }
-    public function __toString()
-    {
-        return $this->getuserName();
-    }
+
 }

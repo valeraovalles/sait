@@ -24,11 +24,11 @@
             <div class="listado_aplicaciones">
               <a href="{{ path('licencias_homepage')}}" onclick="document.form.submit()">LICENCIAS<br><img id="licencias" src="{{ asset("images/licencias/candado.png") }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover"></a>
             </div>
-            <div class="listado_aplicaciones">
+           {# <div class="listado_aplicaciones">
               <a href="http://10.10.0.152/egroupware/login.php?phpgw_forward=%2Findex.php" onclick="document.form.submit()">PROYECTOS<br><img id="licencias" src="{{ asset("images/logo.png") }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover"></a>
-            </div>
+            </div> #}
             <div class="listado_aplicaciones">
-              <a href="{{ path('visita')}}" onclick="document.form.submit()">VISITAS<br><img id="licencias" src="{{ asset("images/User_male.png") }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover"></a>
+              <a href="{{ path('control_visitas_usuario')}}" onclick="document.form.submit()">VISITAS<br><img id="licencias" src="{{ asset("images/User_male.png") }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover"></a>
             </div>
    </div>
 

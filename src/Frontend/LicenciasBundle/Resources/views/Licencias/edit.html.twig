@@ -48,14 +48,18 @@
             <input type="hidden" name="_method" value="PUT" />
     
             <p>
-                <button type="submit">Editar</button>
+                <button type="submit" class="btn">Editar</button>
+                <a class="btn btn-danger" href="{{ path('licencias_delete', { 'id': entity.id, 'retorno':retorno }) }}">Eliminar</a> &nbsp;
             </p>
         </form>
     </form>
     </div><br>
     <p>
-            <a class="btn" href="{{ path( retorno ) }}">Volver al Listado</a>
-        </p>
- <br><br><br>
+        <a class="btn" href="{{ path( retorno ) }}">Listado</a>
+        
+    </p>
+ <br><br>
+
+        
 
 {% endblock %}

@@ -13,7 +13,7 @@ class UsuarioType extends AbstractType
         $builder
             ->add('nombres')
             ->add('apellidos')
-            ->add('cedula')
+            ->add('cedula', 'text')
         ;
     }
 
