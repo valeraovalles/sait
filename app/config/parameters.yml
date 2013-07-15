@@ -4,8 +4,8 @@ parameters:
     database_host: 127.0.0.1
     database_port: null
     database_name: sait
-    database_user: jeff
-    database_password: 123456
+    database_user: postgres
+    database_password: postgres
     mailer_transport: smtp
     mailer_host: correo.telesurtv.net
     mailer_user: lpadilla

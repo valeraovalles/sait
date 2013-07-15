@@ -22,15 +22,15 @@
 
         {% for key, dato in datos %}
           <tr {% if loop.index is odd %}style="background-color: #e9f5fe;"{% endif %}>
-            <td><a href="">{{ key }}</a></td>
+            <td>{{ key }}</td>
             {% for i in range(1, cantidadtipooperador) %}
-              <td>{{dato[i]['cantidad']}} | {{dato[i]['totalabonados']}}</td>
+              <td><a href="{{ path('operador_list',{'idpais': dato[i]['idpais'],'idtipooperador': dato[i]['idtipooperador']}) }}">{{dato[i]['cantidad']}} | {{dato[i]['totalabonados']}}</a></td>
             {% endfor %}
           </tr>
         {% endfor %}
     </table>
     <br>
 
-  <a href="{{ path('operador') }}">Volver</a>
+  <a class="btn" href="{{ path('operador') }}">Ir a lista de operadores</a>
   <br><br>
 {% endblock %}

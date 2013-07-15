@@ -3,19 +3,24 @@ body{
 	font-family: Verdana;
 }
 
-table th{
+.table th{
 	background-color: #e9f5fe;
 	padding: 5px;
 }
 
 
-table tr{
+.table tr{
 	background-color: white;
 }
 
 
-table{
+.table{
+	width: 100%;
 	margin-bottom: 20px;
 	background-color: #0fa1e0;
+	margin-bottom: 10px;
 }
 
+.titulo{
+
+}
