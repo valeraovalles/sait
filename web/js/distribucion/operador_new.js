@@ -7,6 +7,34 @@ $(document).ready(function () {
 
     });
 
+   //AJAX DE CAMPOS QUE CAMBIAN DEPENDIENDO DEL TIPO DE OPERADOR
+   $("#frontend_distribucionbundle_operadortype_tipooperador").change(function(evento){
+      evento.preventDefault();
+
+        if($("#frontend_distribucionbundle_operadortype_tipooperador").val()=='4'){
+            $("#usuario").html("Canal");
+            $("#ubicacion1").html("Potenciales televidentes1");
+            $("#ubicacion2").html("Potenciales televidentes2");
+        }
+        else if($("#frontend_distribucionbundle_operadortype_tipooperador").val()=='5'){
+            $("#usuario").html("Suscriptores");
+            $("#ubicacion1").html("dial1");
+            $("#ubicacion2").html("dial2");
+        }
+
+        else if($("#frontend_distribucionbundle_operadortype_tipooperador").val()=='3'){
+            $("#usuario").html("Abonados");
+            $("#ubicacion1").html("dial1");
+            $("#ubicacion2").html("dial2");
+        }
+
+        else if($("#frontend_distribucionbundle_operadortype_tipooperador").val()=='8'){
+            $("#usuario").html("Abonados");
+            $("#ubicacion1").html("dial1");
+            $("#ubicacion2").html("dial2");
+        }
+   });
+
 });
 
 // efecto de escondido de el formulario

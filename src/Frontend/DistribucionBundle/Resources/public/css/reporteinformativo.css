@@ -1,0 +1,21 @@
+body{
+	
+	font-family: Verdana;
+}
+
+table th{
+	background-color: #e9f5fe;
+	padding: 5px;
+}
+
+
+table tr{
+	background-color: white;
+}
+
+
+table{
+	margin-bottom: 20px;
+	background-color: #0fa1e0;
+}
+

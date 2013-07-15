@@ -56,8 +56,10 @@ class ReporteController extends Controller
         $em = $this->getDoctrine()->getManager();
         $html=new htmlreporte;
         $html=$html->$tipo($em, $datos);
-
-
+/*
+echo '<link href="/sait/web/bundles/distribucion/css/reporteinformativo.css" rel="stylesheet" type="text/css" />';
+echo $html;
+die;*/
         if($datos['formato']=='xls'){
 
             header("Content-type: application/octet-stream");
@@ -76,6 +78,9 @@ class ReporteController extends Controller
                 //GENERO EL PDF
                 include("libs/MPDF/mpdf.php");
                 $mpdf=new \mPDF(); 
+                $stylesheet = file_get_contents('bundles/distribucion/css/reporteinformativo.css');
+                $mpdf->WriteHTML($stylesheet,1);    // The parameter 1 tells that this is css/style only and no body/html/text
+         
                 $mpdf->WriteHTML($html);
                 $mpdf->Output("reporte".".pdf","D");
                 exit;

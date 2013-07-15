@@ -20,7 +20,7 @@ class OperadorRepository extends EntityRepository
 
     	$em = $this->getEntityManager();
         $dql   = "
-        SELECT o FROM DistribucionBundle:Operador o JOIN o.pais p JOIN o.tipooperador t 
+        SELECT o FROM DistribucionBundle:Operador o JOIN o.pais p JOIN o.tipooperador t
         where p.id= :idpais and t.id= :idtipooperador
         order by o.nombre ASC
         ";

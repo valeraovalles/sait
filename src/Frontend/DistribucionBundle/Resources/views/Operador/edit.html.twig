@@ -36,6 +36,11 @@
                     <div class="widgets">{{ form_widget(edit_form.nombre) }}</div>
                 </div>
 
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.tipooperador) }}</div>
+                    <div class="labels">Tipo operador:</div>
+                    <div class="widgets">{{ form_widget(edit_form.tipooperador) }}</div>
+                </div>
   
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.pais) }}</div>
@@ -65,19 +70,19 @@
                     
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.numeroabonados) }}</div>
-                    <div class="labels">Nro. Abonados:</div>
+                    <div class="labels" id="usuario">Nro. Abonados:</div>
                     <div class="widgets">{{ form_widget(edit_form.numeroabonados) }}</div>
                 </div>
 
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.dialUrl) }}</div>
-                    <div class="labels">Dial|Url (1):</div>
+                    <div class="labels" id="ubicacion1">Dial1:</div>
                     <div class="widgets">{{ form_widget(edit_form.dialUrl) }}</div>
                 </div>
 
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.dialUrl2) }}</div>
-                    <div class="labels">Dial|Url (2):</div>
+                    <div class="labels" id="ubicacion2">Dial2:</div>
                     <div class="widgets">{{ form_widget(edit_form.dialUrl2) }}</div>
                 </div>
 
@@ -97,12 +102,6 @@
                     <div>{{ form_errors(edit_form.estatus) }}</div>
                     <div class="labels">Activo:</div>
                     <div class="widgets">{{ form_widget(edit_form.estatus) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.tipooperador) }}</div>
-                    <div class="labels">Tipo operador:</div>
-                    <div class="widgets">{{ form_widget(edit_form.tipooperador) }}</div>
                 </div>
 
                 <div class="form-contenedor">
@@ -246,4 +245,5 @@
     <br>
 
     <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
+
 {% endblock %}
