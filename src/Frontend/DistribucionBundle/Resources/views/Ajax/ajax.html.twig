@@ -12,7 +12,6 @@
         <div class="widgets">{{ form_widget(form.operador) }}</div>
     </div>
     <div id="formato"></div>
-
 {% endif %}
 
 {% if mostrar=='formato' %}
@@ -39,7 +38,6 @@
         $('#form_operador').change(function(){
             $('#formato').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_operador").val()+'/formato');
         });
-
 
         $('#form_formato').change(function(){
             $('#botones').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_formato").val()+'/botones');

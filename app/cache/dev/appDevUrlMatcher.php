@@ -344,9 +344,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\DefaultController::indexAction',  '_route' => 'distribucion_homepage',);
             }
 
-            // ajax
-            if (0 === strpos($pathinfo, '/distribucion/ajax') && preg_match('#^/distribucion/ajax/(?P<datos>[^/]++)/(?P<mostrar>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ajax')), array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\AjaxController::formularioAction',));
+            if (0 === strpos($pathinfo, '/distribucion/ajax')) {
+                // ajax
+                if (preg_match('#^/distribucion/ajax/(?P<datos>[^/]++)/(?P<mostrar>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'ajax')), array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\AjaxController::formularioAction',));
+                }
+
+                // ajax_top
+                if (0 === strpos($pathinfo, '/distribucion/ajax_top') && preg_match('#^/distribucion/ajax_top/(?P<datos>[^/]++)/(?P<mostrar>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'ajax_top')), array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\AjaxController::topAction',));
+                }
+
             }
 
             // pais_estado_ciudad
@@ -378,6 +386,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             if (0 === strpos($pathinfo, '/distribucion/operador')) {
+                // operador_top
+                if ($pathinfo === '/distribucion/operador/top') {
+                    return array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\OperadorController::topAction',  '_route' => 'operador_top',);
+                }
+
                 // operador
                 if ($pathinfo === '/distribucion/operador/lista') {
                     return array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\OperadorController::indexAction',  '_route' => 'operador',);

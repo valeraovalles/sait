@@ -199,7 +199,7 @@ class UserController extends Controller
             $em->persist($entity_perfil);
             $em->flush();
 
-            $this->get('session')->setFlash('notice', 'Actualizado.');
+            $this->get('session')->getFlashBag()->add('notice', 'Actualizado.');
 
             return $this->redirect($this->generateUrl('user_show', array('id' => $entity->getId())));
         }

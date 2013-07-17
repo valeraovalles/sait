@@ -15,48 +15,61 @@ class OperadorRepository extends EntityRepository
         return $consulta->getOneOrNullResult();
     }
 
-    public function Operadores()
+    //DEVUELVE TODOS LOS OPERADORES Y REPRESENTANTES
+    public function Operadores($idpais)
     {
         $em = $this->getEntityManager();
         $dql   = "
         SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
-        order by o.nombre ASC
+        where o.pais= :idpais order by o.nombre ASC
         ";
         $query = $em->createQuery($dql);
+        $query->setParameter('idpais', $idpais);
         return  $query->getResult(); 
     }
 
 
-     public function OperadorPorIdTipooperador($idpais, $idtipooperador)
+     public function OperadorPorIdto($idpais, $idtipooperador)
     {
-    	$em = $this->getEntityManager();
+        $em = $this->getEntityManager();
         $dql   = "
-        SELECT o FROM DistribucionBundle:Operador o JOIN o.pais p JOIN o.tipooperador t
-        where p.id= :idpais and t.id= :idtipooperador
-        order by o.nombre ASC
+        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
+        where o.pais= :idpais and o.tipooperador= :idtipooperador order by o.nombre ASC
         ";
         $query = $em->createQuery($dql);
         $query->setParameter('idpais', $idpais);
         $query->setParameter('idtipooperador', $idtipooperador);
-     	return  $query->getResult(); 
+        return  $query->getResult(); 
     }
 
-
-
-     public function OperadorPorIdTipooperadorOperador($idpais, $idtipooperador, $idoperador)
+     public function OperadorPorIdo($idpais, $idoperador)
     {
         $em = $this->getEntityManager();
         $dql   = "
-        SELECT o FROM DistribucionBundle:Operador o JOIN o.pais p JOIN o.tipooperador t 
-        where p.id= :idpais and t.id= :idtipooperador and o.id= :idoperador
-        order by o.nombre ASC
+        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
+        where o.pais= :idpais and o.operador= :idoperador order by o.nombre ASC
+        ";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idpais', $idpais);
+        $query->setParameter('idoperador', $idoperador);
+        return  $query->getResult(); 
+    }
+
+
+     public function OperadorPorIdtoPorIdo($idpais, $idtipooperador, $idoperador)
+    {
+
+        $em = $this->getEntityManager();
+        $dql   = "
+        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
+        where o.pais= :idpais and o.tipooperador= :idtipooperador and o.id= :idoperador order by o.nombre ASC
         ";
         $query = $em->createQuery($dql);
         $query->setParameter('idpais', $idpais);
         $query->setParameter('idtipooperador', $idtipooperador);
         $query->setParameter('idoperador', $idoperador);
-        $operadores = $query->getResult();
-     	return  $query->getResult(); 
+        return  $query->getResult(); 
+   
     }
 
      public function RepresentanteOperador($idoperador)

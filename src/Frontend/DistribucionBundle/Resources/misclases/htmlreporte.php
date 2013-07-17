@@ -11,31 +11,38 @@ class htmlreporte
 
     	//FILTRO POR TODOS LOS OPERADORES
 		if($datos['operador']=='t' && $datos['tipooperador']=='t'){
-			$operador=$em->getRepository('DistribucionBundle:Operador')->Operadores();
-			$titulo="TODOS LOS OPERADORES";
+			$operador=$em->getRepository('DistribucionBundle:Operador')->Operadores($datos['pais']);
+			$titulo="OPERADOR :TODOS - TIPO DE OPERADOR: TODOS - PAÍS: ".strtoupper($operador[0]->getOperador()->getPais());
 		}
 		
 
     	//FILTRO POR UN TIPO DE OPERADOR CON TODOS LOS OPERADORES
 		else if($datos['operador']=='t' && $datos['tipooperador']!='t'){
-			$operador=$em->getRepository('DistribucionBundle:Operador')->OperadorPorIdTipooperador(
+			$operador=$em->getRepository('DistribucionBundle:Operador')->OperadorPorIdto(
 																	 $datos['pais'],$datos['tipooperador']);
+			$titulo="OPERADOR: TODOS - TIPO DE OPERADOR: ".strtoupper($operador[0]->getOperador()->getTipooperador())." - PAÍS: ".strtoupper($operador[0]->getOperador()->getPais());
 		}
 		
-		else
-			$operador=$em->getRepository('DistribucionBundle:Operador')->OperadorPorIdTipooperadorOperador(
+		else if($datos['operador']!='t' && $datos['tipooperador']!='t'){
+			$operador=$em->getRepository('DistribucionBundle:Operador')->OperadorPorIdtoPorIdo(
 																	 $datos['pais'],$datos['tipooperador'],$datos['operador']);
+			$titulo="OPERADOR: ".strtoupper($operador[0]->getOperador()->getNombre())." - TIPO DE OPERADOR: ".strtoupper($operador[0]->getOperador()->getTipooperador())." - PAÍS: ".strtoupper($operador[0]->getOperador()->getPais());
+		}
 
-			/*$representante=$em->getRepository('DistribucionBundle:Operador')->RepresentanteOperador(
-																	 $datos['operador']);*/
-
+    	//FILTRO POR TODOS LOS TIPOS DE OPERADOR Y SELECCIONO UN OPERADOR
+		else if($datos['operador']!='t' && $datos['tipooperador']=='t'){
+			$operador=$em->getRepository('DistribucionBundle:Operador')->OperadorPorIdo(
+																	 $datos['pais'],$datos['operador']);
+			$titulo="OPERADOR: ".strtoupper($operador[0]->getOperador()->getNombre())." - TIPO DE OPERADOR: TODOS - PAÍS: ".strtoupper($operador[0]->getOperador()->getPais());
+		}
+		
 
 		$html ="<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />";
 		$html .="
 				<table>
 					<tr>
 						<td class='imagen'><img src='/sait/web/images/logo.png' height='150px'></td>
-						<td class='titulo' valing='middle'>REPORTE INFORMATIVO DE ".$titulo."</td>
+						<td class='titulo' align='center' valing='middle' colspan='8'>REPORTE INFORMATIVO<br>".$titulo."</td>
 					</tr>
 				</table>
 

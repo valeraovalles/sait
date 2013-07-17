@@ -15,6 +15,8 @@ use Administracion\UsuarioBundle\Entity\Perfil;
 
 use Symfony\Component\Security\Core\SecurityContext;
 
+use Doctrine\ORM\EntityRepository;
+
 /**
  * Operador controller.
  *
@@ -65,6 +67,7 @@ class OperadorController extends Controller
                             $datos[$pais['pais']][$cont]= array('operador'=>$operador['operador'],'totalabonados'=>$operador['totalabonados'],'cantidad'=>$operador['cantidad'],'idtipooperador'=>$operador['idtipo'],'idpais'=>$operador['idpais']); 
 
                         $cont++;
+                        
                     }
                 }        
             }
@@ -376,5 +379,31 @@ class OperadorController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    public function topAction(Request $request)
+    {
+
+        $entity = new Operador();
+        $form   = $this->createForm(new OperadorType(0), $entity);
+
+
+        // create a task and give it some dummy data for this example
+        $form = $this->createFormBuilder()
+            ->add('pais', 'entity', array(
+                    'class' => 'DistribucionBundle:Pais',
+                    'property' => 'pais',
+                    'empty_value' => 'Seleccione...',
+                    'query_builder' => function(EntityRepository $er) {
+                            return $er->createQueryBuilder('u')
+                            ->orderBy('u.pais', 'ASC')
+                            ;
+                    },
+                ))
+        ->getForm();
+
+        return $this->render('DistribucionBundle:Operador:top.html.twig', array('form'   => $form->createView()));
+
+
     }
 }

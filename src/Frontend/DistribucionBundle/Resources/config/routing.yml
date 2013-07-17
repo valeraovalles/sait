@@ -2,9 +2,14 @@ distribucion_homepage:
     pattern:  /inicio
     defaults: { _controller: DistribucionBundle:Default:index }
 
+#AJAX
 ajax:
     pattern:  /ajax/{datos}/{mostrar}
     defaults: { _controller: "DistribucionBundle:Ajax:formulario" }  
+
+ajax_top:
+    pattern:  /ajax_top/{datos}/{mostrar}
+    defaults: { _controller: "DistribucionBundle:Ajax:top" }  
 
 pais_estado_ciudad:
     pattern:  /paisestadociudad/{id}/{mostrar}
@@ -30,6 +35,10 @@ generar_reporte:
     defaults: { _controller: "DistribucionBundle:Reporte:generarreporte" }
 
 # OPERADOR
+operador_top:
+    pattern:  /operador/top
+    defaults: { _controller: "DistribucionBundle:Operador:top" }
+
 operador:
     pattern:  /operador/lista
     defaults: { _controller: "DistribucionBundle:Operador:index" }

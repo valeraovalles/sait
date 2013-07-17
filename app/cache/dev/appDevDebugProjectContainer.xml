@@ -2219,7 +2219,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>51e41064ad5f3</argument>
+            <argument>51e6c0609e7f9</argument>
           </service>
         </argument>
       </argument>
@@ -2321,17 +2321,6 @@
                   </argument>
                   <argument type="collection">
                     <argument>IS_AUTHENTICATED_ANONYMOUSLY</argument>
-                  </argument>
-                  <argument>null</argument>
-                </call>
-                <call method="add">
-                  <argument type="service">
-                    <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
-                      <argument>^/distribucion</argument>
-                    </service>
-                  </argument>
-                  <argument type="collection">
-                    <argument>ROLE_DISTRIBUCION</argument>
                   </argument>
                   <argument>null</argument>
                 </call>
@@ -2484,7 +2473,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>51e41064ad5f3</argument>
+            <argument>51e6c0609e7f9</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -2503,17 +2492,6 @@
                   </argument>
                   <argument type="collection">
                     <argument>IS_AUTHENTICATED_ANONYMOUSLY</argument>
-                  </argument>
-                  <argument>null</argument>
-                </call>
-                <call method="add">
-                  <argument type="service">
-                    <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
-                      <argument>^/distribucion</argument>
-                    </service>
-                  </argument>
-                  <argument type="collection">
-                    <argument>ROLE_DISTRIBUCION</argument>
                   </argument>
                   <argument>null</argument>
                 </call>
