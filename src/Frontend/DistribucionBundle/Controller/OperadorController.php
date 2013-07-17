@@ -37,14 +37,15 @@ class OperadorController extends Controller
         $paises = $consulta->getResult();
 
         $dql = "
-            select top.id as idtipo, count (top.operador) as cantidad, top.operador, sum(o.numeroabonados) as totalabonados, p.pais
+            select top.id as idtipo, count (top.operador) as cantidad, top.operador, sum(o.numeroabonados) as totalabonados, p.pais, p.id as idpais
             from DistribucionBundle:Operador o join o.pais p join o.tipooperador top
             where o.tipooperador=top.id and o.pais=p.id
-            group by top.operador, p.pais, top.id
+            group by top.operador, p.pais, top.id, p.id
             order by p.pais ASC
         ";
         $consulta = $em->createQuery($dql);
         $operadores = $consulta->getResult();       
+
 
         $tipooperador = $em->getRepository('DistribucionBundle:Tipooperador')->findAll();
 
@@ -61,7 +62,7 @@ class OperadorController extends Controller
                     $cont=1;
                     foreach ($tipooperador as $top) {
                         if ($top->getOperador()==$operador['operador'])
-                            $datos[$pais['pais']][$cont]= array('operador'=>$operador['operador'],'totalabonados'=>$operador['totalabonados'],'cantidad'=>$operador['cantidad']); 
+                            $datos[$pais['pais']][$cont]= array('operador'=>$operador['operador'],'totalabonados'=>$operador['totalabonados'],'cantidad'=>$operador['cantidad'],'idtipooperador'=>$operador['idtipo'],'idpais'=>$operador['idpais']); 
 
                         $cont++;
                     }
@@ -70,9 +71,11 @@ class OperadorController extends Controller
 
             for($i=1;$i<$canttipop+1;$i++){
                 if(!isset($datos[$pais['pais']][$i]))
-                    $datos[$pais['pais']][$i]=array('operador'=>'0','totalabonados'=>'0','cantidad'=>'0');
+                    $datos[$pais['pais']][$i]=array('operador'=>'0','totalabonados'=>'0','cantidad'=>'0','idpais'=>'0','idtipooperador'=>'0');
             }
         }
+
+
 
         /*header('Content-type: application/vnd.ms-excel');
         header("Content-Disposition: attachment; filename=nombre_del_archivo.xls");
@@ -110,6 +113,9 @@ class OperadorController extends Controller
 
     public function listaAction($idpais, $idtipooperador)
     {
+        if($idpais==0 && $idtipooperador==0)
+             return $this->redirect($this->generateUrl('infooperadores'));
+
         $em = $this->getDoctrine()->getManager();
 
         $dql   = "

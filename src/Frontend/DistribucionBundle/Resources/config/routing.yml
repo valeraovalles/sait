@@ -6,12 +6,9 @@ ajax:
     pattern:  /ajax/{datos}/{mostrar}
     defaults: { _controller: "DistribucionBundle:Ajax:formulario" }  
 
-
-
 pais_estado_ciudad:
     pattern:  /paisestadociudad/{id}/{mostrar}
     defaults: { _controller: "DistribucionBundle:Operador:paisestadociudad" }  
-
 
 xx:
     pattern: /xx

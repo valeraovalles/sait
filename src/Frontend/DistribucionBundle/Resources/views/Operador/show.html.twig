@@ -22,6 +22,11 @@
         </div>
 
         <div class="contenedor">
+                <div class="labelshow">Tipo Operador:</div>
+                <div class="dato">{{ entity.tipooperador }}</div>
+        </div>
+
+        <div class="contenedor">
                 <div class="labelshow">Pais:</div>
                 <div class="dato">{{ entity.pais.pais }}</div>
         </div>
@@ -49,18 +54,38 @@
         </div>
 
         <div class="contenedor">
-                <div class="labelshow">Nro abonados:</div>
+                <div class="labelshow">
+                    {% if entity.tipooperador.id == 4 %}
+                        Potenciales televidentes:
+                    {% elseif entity.tipooperador.id == 5 %}
+                        Suscriptores:
+                    {% else %}
+                        Abonados:
+                    {% endif %}
+                </div>
                 <div class="dato">{{ entity.numeroabonados }}</div>
         </div>
 
         <div class="contenedor">
-                <div class="labelshow">Dial|Url 1:</div>
+                <div class="labelshow">
+                    {% if entity.tipooperador.id == 4 %}
+                        Canal1:
+                    {% else %}
+                        Dial1:
+                    {% endif %}
+                </div>
                 <div class="dato">{{ entity.dialurl }}</div>
         </div>
 
         {% if entity.dialurl2!='' %}
             <div class="contenedor">
-                    <div class="labelshow">Dial|Url 2:</div>
+                <div class="labelshow">
+                    {% if entity.tipooperador.id == 4 %}
+                        Canal2:
+                    {% else %}
+                        Dial2:
+                    {% endif %}
+                </div>
                     <div class="dato">{{ entity.dialurl2 }}</div>
             </div>
         {% endif %}
@@ -76,11 +101,6 @@
                     <div class="dato">{{ entity.observacion }}</div>
             </div>
         {% endif %}
-
-        <div class="contenedor">
-                <div class="labelshow">Tipo Operador:</div>
-                <div class="dato">{{ entity.tipooperador }}</div>
-        </div>
 
         <div class="contenedor">
                 <div class="labelshow">Paquete:</div>

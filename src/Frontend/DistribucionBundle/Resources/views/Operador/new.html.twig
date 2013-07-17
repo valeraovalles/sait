@@ -61,19 +61,19 @@
                     
                 <div class="form-contenedor">
                     <div class="text-warning">{{ form_errors(form.numeroabonados) }}</div>
-                    <div class="labels">Nro. Abonados:</div>
+                    <div class="labels" id="usuario">Nro. Abonados:</div>
                     <div class="widgets">{{ form_widget(form.numeroabonados) }}</div>
                 </div>
 
                 <div class="form-contenedor">
                     <div>{{ form_errors(form.dialUrl) }}</div>
-                    <div class="labels">Dial|Url (1):</div>
+                    <div class="labels" id="ubicacion1">Dial1:</div>
                     <div class="widgets">{{ form_widget(form.dialUrl) }}</div>
                 </div>
 
                 <div class="form-contenedor">
                     <div>{{ form_errors(form.dialUrl2) }}</div>
-                    <div class="labels">Dial|Url (2):</div>
+                    <div class="labels" id="ubicacion2">Dial2:</div>
                     <div class="widgets">{{ form_widget(form.dialUrl2) }}</div>
                 </div>
 

@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 
 class OperadorRepository extends EntityRepository
 {
-     public function buscarEstado($id)
+    public function buscarEstado($id)
     {
         $em = $this->getEntityManager();
         $consulta = $em->createQuery('SELECT u FROM UsuarioBundle:User u WHERE
@@ -15,22 +15,33 @@ class OperadorRepository extends EntityRepository
         return $consulta->getOneOrNullResult();
     }
 
+    public function Operadores()
+    {
+        $em = $this->getEntityManager();
+        $dql   = "
+        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
+        order by o.nombre ASC
+        ";
+        $query = $em->createQuery($dql);
+        return  $query->getResult(); 
+    }
+
+
      public function OperadorPorIdTipooperador($idpais, $idtipooperador)
     {
-
     	$em = $this->getEntityManager();
         $dql   = "
-        SELECT o FROM DistribucionBundle:Operador o JOIN o.pais p JOIN o.tipooperador t 
+        SELECT o FROM DistribucionBundle:Operador o JOIN o.pais p JOIN o.tipooperador t
         where p.id= :idpais and t.id= :idtipooperador
         order by o.nombre ASC
         ";
         $query = $em->createQuery($dql);
         $query->setParameter('idpais', $idpais);
         $query->setParameter('idtipooperador', $idtipooperador);
-        die;
      	return  $query->getResult(); 
-
     }
+
+
 
      public function OperadorPorIdTipooperadorOperador($idpais, $idtipooperador, $idoperador)
     {
