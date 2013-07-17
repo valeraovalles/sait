@@ -1,7 +1,13 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Usuario edit</h1>
+
+{% block menu %}
+{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
+{% endblock %}
+
+
+    <h1>Editar Datos</h1>
 
     <form action="{{ path('usuario_update_control', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />

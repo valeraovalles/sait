@@ -1,15 +1,21 @@
 {% extends '::base.html.twig' %}
  
 {% block title %}Control Visitas{% endblock %}
+{% block menu %}
+{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
+{% endblock %}
+
 
 {% block body -%}
     {{ parent() }}
+
+
     
     <div class="titulo">Registrar Usuario</div>
 
 
 
-    <form novalidate action="{{ path('usuario_busqueda_control') }}" method="post" {{ form_enctype(form) }}>
+    <form novalidate action="{{ path('registranuevavisita') }}" method="post" {{ form_enctype(form) }}>
 
         {{ form_widget(form._token) }}
         {{ form_widget(form2._token) }}
@@ -52,6 +58,7 @@
                     <div class="widgets">{{ form_widget(form2.contacto) }}</div>
                 </div>
 
+
                 <div class="form-contenedor">
                     <div>{{ form_errors(form2.observaciones) }}</div>
                     <div class="labels">Observaciones:</div>
@@ -64,7 +71,8 @@
                     <br><br>
 
 
-
+       <button class="btn" type="submit">Registrar</button> 
+    </form>
 
         {% block camara %}
         <script> 
@@ -77,10 +85,11 @@
         <br><br>
         {% endblock %}
 
-       <button class="btn" type="submit">Registrar</button> 
-       <a class="btn" href="{{ path('operador') }}">Volver</a>
 
-    </form>
+
+
+
+
     <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
 {% endblock %}
 

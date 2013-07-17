@@ -189,54 +189,10 @@ class UsuarioController extends Controller
         ;
     }
 
-
-
-
-
-    public function busqueAction()
-    {
-        $entity = new Usuario();
-        $form   = $this->createForm(new UsuarioType(), $entity);
-
-        return $this->render('FrontendVisitasBundle:Usuario:busqueda.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-
-    }
-
-    public function encontradoAction()
-    {
-        $entity = new Usuario();
-        $form   = $this->createForm(new UsuarioType(0), $entity);
-
-        $entity2 = new Visita();
-        $form2   = $this->createForm(new VisitaType(), $entity2);
-
-        return $this->render('FrontendVisitasBundle:Usuario:encontrado.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            'entity2' => $entity2,
-            'form2'   => $form2->createView(),
-        ));
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * Determina si un usuario existe en la BD
+     *
+     */
     public function busquedaAction(Request $request)
     {
 
@@ -244,52 +200,36 @@ class UsuarioController extends Controller
         $cedula=0;
     if ($request->getMethod()=='POST') 
     {
+        $datos=$request->request->all();
+        $datos=$datos['frontend_visitasbundle_usuariotype'];
+        $cedula = $datos['cedula']; 
 
-            $datos=$request->request->all();
-            $datos=$datos['frontend_visitasbundle_usuariotype'];
-            $cedula = $datos['cedula']; 
 
+        $em = $this->getDoctrine()->getManager();
 
-            $em = $this->getDoctrine()->getManager();
-
-            $dql   = "SELECT u FROM FrontendVisitasBundle:Usuario u where u.cedula= :cedula";
-            $query = $em->createQuery($dql);
-            $query->setParameter('cedula', $cedula);
-            $usuario = $query->getResult(); 
+        $dql   = "SELECT u FROM FrontendVisitasBundle:Usuario u where u.cedula= :cedula";
+        $query = $em->createQuery($dql);
+        $query->setParameter('cedula', $cedula);
+        $usuario = $query->getResult(); 
 
 
     if ($usuario){
-    echo "primera parte";
-             $form   = $this->createForm(new UsuarioType(), $usuario[0]);
+         $form   = $this->createForm(new UsuarioType(), $usuario[0]);
 
-             return $this->render('FrontendVisitasBundle:Usuario:show.html.twig', array(
-                    'entity' => $usuario[0],
-                    'form'   => $form->createView(),
-                ));
-
-            }
-
-            else{
-
-    echo "segunda parte";
-            $entity = new Usuario();
-            $form   = $this->createForm(new UsuarioType(), $entity);
-
-            $entity2 = new Visita();
-            $form2   = $this->createForm(new VisitaType(), $entity2);
-
-            return $this->render('FrontendVisitasBundle:Usuario:encontrado.html.twig', array(
-                'entity' => $entity,
+         return $this->render('FrontendVisitasBundle:Usuario:show.html.twig', array(
+                'entity' => $usuario[0],
                 'form'   => $form->createView(),
-                'entity2' => $entity2,
-                'form2'   => $form2->createView(),
             ));
-            }
-          
 
     }
 
+    else{
+        return $this->redirect($this->generateUrl('usuario_registrar_control'));
 
+    }
+          
+
+    }
 
         $entity = new Usuario();
         $form   = $this->createForm(new UsuarioType(), $entity);
@@ -299,41 +239,65 @@ class UsuarioController extends Controller
             'form'   => $form->createView(),
         ));
         
+    }
 
+    /**
+     * Registra un usuario dentro de la entidad Usuario y lo asocia a la entidad Visita
+     *
+     */
+    public function registrarAction(Request $request){
+
+        $entity = new Usuario();
+        $form   = $this->createForm(new UsuarioType(), $entity);
+        $entity2 = new Visita();
+        $form2   = $this->createForm(new VisitaType(), $entity2);
+
+
+        return $this->render('FrontendVisitasBundle:Usuario:encontrado.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'entity2' => $entity2,
+            'form2'   => $form2->createView(),
+        ));
+
+    }
+
+
+
+    public function registranuevavisitaAction(Request $request){
+
+        $entity = new Usuario();
+        $form   = $this->createForm(new UsuarioType(), $entity);
+        $form->bind($request);
+        $entity2 = new Visita();
+        $form2   = $this->createForm(new VisitaType(), $entity2);
+        $form2->bind($request);
+
+
+        if ($form->isValid() && $form2->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($entity);
+            $entity2->setUsuario($entity);
+            $em->persist($entity2);
+            $em->flush();
+ 
+            return $this->redirect($this->generateUrl('control_visitas_usuario'));
+        }
+
+        return $this->render('FrontendVisitasBundle:Usuario:encontrado.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'entity2' => $entity2,
+            'form2'   => $form2->createView(),
+        ));
 
 
 
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
