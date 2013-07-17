@@ -11,6 +11,7 @@ class __TwigTemplate_9443d0059c8929c2ea042c1a5d8dbaf3 extends Twig_Template
 
         $this->blocks = array(
             'title' => array($this, 'block_title'),
+            'menu' => array($this, 'block_menu'),
             'body' => array($this, 'block_body'),
         );
     }
@@ -31,27 +32,36 @@ class __TwigTemplate_9443d0059c8929c2ea042c1a5d8dbaf3 extends Twig_Template
         echo "Control Visitas";
     }
 
-    // line 5
+    // line 4
+    public function block_menu($context, array $blocks = array())
+    {
+        // line 5
+        $this->env->loadTemplate("FrontendVisitasBundle:Default:menu.html.twig")->display($context);
+    }
+
+    // line 7
     public function block_body($context, array $blocks = array())
     {
-        // line 6
+        // line 8
         $this->displayParentBlock("body", $context, $blocks);
         echo "
+
+
     
     <div class=\"titulo\">Buscar Usuario</div>
 
     <form novalidate action=\"";
-        // line 10
+        // line 14
         echo $this->env->getExtension('routing')->getPath("usuario_busqueda_control");
         echo "\" method=\"post\" 
     ";
-        // line 11
+        // line 15
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "form"), 'enctype');
 ;
         echo ">
 
         ";
-        // line 13
+        // line 17
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "_token"), 'widget');
         echo "
 
@@ -59,12 +69,12 @@ class __TwigTemplate_9443d0059c8929c2ea042c1a5d8dbaf3 extends Twig_Template
             <div id=\"operador\">
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 18
+        // line 22
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "cedula"), 'errors');
         echo "</div>
                     <div class=\"labels\">Cedula:</div>
                     <div class=\"widgets\">";
-        // line 20
+        // line 24
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "cedula"), 'widget');
         echo "</div>
                 </div>
@@ -80,7 +90,7 @@ class __TwigTemplate_9443d0059c8929c2ea042c1a5d8dbaf3 extends Twig_Template
 
 
     <script src=\"";
-        // line 33
+        // line 37
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/distribucion/operador_new.js"), "html", null, true);
         echo "\"></script>
 
@@ -99,6 +109,6 @@ class __TwigTemplate_9443d0059c8929c2ea042c1a5d8dbaf3 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  84 => 33,  68 => 20,  63 => 18,  55 => 13,  49 => 11,  45 => 10,  38 => 6,  35 => 5,  29 => 3,);
+        return array (  94 => 37,  78 => 24,  73 => 22,  65 => 17,  59 => 15,  55 => 14,  46 => 8,  43 => 7,  39 => 5,  36 => 4,  30 => 3,);
     }
 }

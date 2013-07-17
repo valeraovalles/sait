@@ -331,9 +331,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Frontend\\VisitasBundle\\Controller\\UsuarioController::busquedaAction',  '_route' => 'usuario_busqueda_control',);
             }
 
-            // usuario_encontrado_control
-            if ($pathinfo === '/visitas/encontrado') {
-                return array (  '_controller' => 'Frontend\\VisitasBundle\\Controller\\UsuarioController::encontradoAction',  '_route' => 'usuario_encontrado_control',);
+            if (0 === strpos($pathinfo, '/visitas/registra')) {
+                // usuario_registrar_control
+                if ($pathinfo === '/visitas/registrar') {
+                    return array (  '_controller' => 'Frontend\\VisitasBundle\\Controller\\UsuarioController::registrarAction',  '_route' => 'usuario_registrar_control',);
+                }
+
+                // registranuevavisita
+                if ($pathinfo === '/visitas/registranuevavisita') {
+                    return array (  '_controller' => 'Frontend\\VisitasBundle\\Controller\\UsuarioController::registranuevavisitaAction',  '_route' => 'registranuevavisita',);
+                }
+
             }
 
         }

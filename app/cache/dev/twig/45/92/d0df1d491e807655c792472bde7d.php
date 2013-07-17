@@ -11,6 +11,7 @@ class __TwigTemplate_4592d0df1d491e807655c792472bde7d extends Twig_Template
 
         $this->blocks = array(
             'title' => array($this, 'block_title'),
+            'menu' => array($this, 'block_menu'),
             'body' => array($this, 'block_body'),
             'camara' => array($this, 'block_camara'),
         );
@@ -32,31 +33,40 @@ class __TwigTemplate_4592d0df1d491e807655c792472bde7d extends Twig_Template
         echo "Control Visitas";
     }
 
-    // line 5
+    // line 4
+    public function block_menu($context, array $blocks = array())
+    {
+        // line 5
+        $this->env->loadTemplate("FrontendVisitasBundle:Default:menu.html.twig")->display($context);
+    }
+
+    // line 9
     public function block_body($context, array $blocks = array())
     {
-        // line 6
+        // line 10
         $this->displayParentBlock("body", $context, $blocks);
         echo "
+
+
     
     <div class=\"titulo\">Registrar Usuario</div>
 
 
 
     <form novalidate action=\"";
-        // line 12
-        echo $this->env->getExtension('routing')->getPath("usuario_busqueda_control");
+        // line 18
+        echo $this->env->getExtension('routing')->getPath("registranuevavisita");
         echo "\" method=\"post\" ";
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "form"), 'enctype');
 ;
         echo ">
 
         ";
-        // line 14
+        // line 20
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "_token"), 'widget');
         echo "
         ";
-        // line 15
+        // line 21
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "_token"), 'widget');
         echo "
 
@@ -64,84 +74,85 @@ class __TwigTemplate_4592d0df1d491e807655c792472bde7d extends Twig_Template
             <div id=\"operador\">
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 20
+        // line 26
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "cedula"), 'errors');
         echo "</div>
                     <div class=\"labels\">Cedula:</div>
                     <div class=\"widgets\">";
-        // line 22
+        // line 28
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "cedula"), 'widget');
         echo "</div>
                 </div>
 
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 26
+        // line 32
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "nombres"), 'errors');
         echo "</div>
                     <div class=\"labels\">Nombres:</div>
                     <div class=\"widgets\">";
-        // line 28
+        // line 34
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "nombres"), 'widget');
         echo "</div>
                 </div>
 
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 32
+        // line 38
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "apellidos"), 'errors');
         echo "</div>
                     <div class=\"labels\">Apellidos:</div>
                     <div class=\"widgets\">";
-        // line 34
+        // line 40
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "apellidos"), 'widget');
         echo "</div>
                 </div>
 
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 38
+        // line 44
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "fechaentrada"), 'errors');
         echo "</div>
                     <div class=\"labels\">Fecha Entrada:</div>
                     <div class=\"widgets\">";
-        // line 40
+        // line 46
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "fechaentrada"), 'widget');
         echo "</div>
                 </div>
 
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 44
+        // line 50
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "horaentrada"), 'errors');
         echo "</div>
                     <div class=\"labels\">Hora Entrada:</div>
                     <div class=\"widgets\">";
-        // line 46
+        // line 52
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "horaentrada"), 'widget');
         echo "</div>
                 </div>
 
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 50
+        // line 56
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "contacto"), 'errors');
         echo "</div>
                     <div class=\"labels\">Contacto:</div>
                     <div class=\"widgets\">";
-        // line 52
+        // line 58
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "contacto"), 'widget');
         echo "</div>
                 </div>
 
+
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 56
+        // line 63
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "observaciones"), 'errors');
         echo "</div>
                     <div class=\"labels\">Observaciones:</div>
                     <div class=\"widgets\">";
-        // line 58
+        // line 65
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "observaciones"), 'widget');
         echo "</div>
                 </div>
@@ -149,37 +160,36 @@ class __TwigTemplate_4592d0df1d491e807655c792472bde7d extends Twig_Template
             </div> 
 
             <div class=\"widgets\">";
-        // line 63
+        // line 70
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "nombres"), 'widget');
         echo "</div>
                     <br><br>
 
 
-
+       <button class=\"btn\" type=\"submit\">Registrar</button> 
+    </form>
 
         ";
-        // line 69
+        // line 77
         $this->displayBlock('camara', $context, $blocks);
-        // line 79
+        // line 87
         echo "
-       <button class=\"btn\" type=\"submit\">Registrar</button> 
-       <a class=\"btn\" href=\"";
-        // line 81
-        echo $this->env->getExtension('routing')->getPath("operador");
-        echo "\">Volver</a>
 
-    </form>
+
+
+
+
     <script src=\"";
-        // line 84
+        // line 93
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/distribucion/operador_new.js"), "html", null, true);
         echo "\"></script>
 ";
     }
 
-    // line 69
+    // line 77
     public function block_camara($context, array $blocks = array())
     {
-        // line 70
+        // line 78
         echo "        <script> 
         function abrir(url) { 
         open(url,'','top=300,left=300,width=300,height=300') ; 
@@ -203,6 +213,6 @@ class __TwigTemplate_4592d0df1d491e807655c792472bde7d extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  183 => 70,  180 => 69,  174 => 84,  168 => 81,  164 => 79,  162 => 69,  153 => 63,  145 => 58,  140 => 56,  133 => 52,  128 => 50,  121 => 46,  116 => 44,  109 => 40,  104 => 38,  97 => 34,  92 => 32,  85 => 28,  80 => 26,  73 => 22,  68 => 20,  60 => 15,  56 => 14,  48 => 12,  39 => 6,  36 => 5,  30 => 3,);
+        return array (  193 => 78,  190 => 77,  184 => 93,  176 => 87,  174 => 77,  164 => 70,  156 => 65,  151 => 63,  143 => 58,  138 => 56,  131 => 52,  126 => 50,  119 => 46,  114 => 44,  107 => 40,  102 => 38,  95 => 34,  90 => 32,  83 => 28,  78 => 26,  70 => 21,  66 => 20,  58 => 18,  47 => 10,  44 => 9,  40 => 5,  37 => 4,  31 => 3,);
     }
 }

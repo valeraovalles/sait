@@ -11,6 +11,7 @@ class __TwigTemplate_850377fccc1f75761b5496dc65ecf8ff extends Twig_Template
 
         $this->blocks = array(
             'body' => array($this, 'block_body'),
+            'menu' => array($this, 'block_menu'),
         );
     }
 
@@ -27,11 +28,15 @@ class __TwigTemplate_850377fccc1f75761b5496dc65ecf8ff extends Twig_Template
     // line 3
     public function block_body($context, array $blocks = array())
     {
-        // line 4
-        echo "<h1>Usuario edit</h1>
+        // line 5
+        $this->displayBlock('menu', $context, $blocks);
+        // line 8
+        echo "
+
+    <h1>Editar Datos</h1>
 
     <form action=\"";
-        // line 6
+        // line 12
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("usuario_update_control", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\" method=\"post\" ";
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "edit_form"), 'enctype');
@@ -39,7 +44,7 @@ class __TwigTemplate_850377fccc1f75761b5496dc65ecf8ff extends Twig_Template
         echo ">
         <input type=\"hidden\" name=\"_method\" value=\"PUT\" />
         ";
-        // line 8
+        // line 14
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "edit_form"), 'widget');
         echo "
         <p>
@@ -50,13 +55,20 @@ class __TwigTemplate_850377fccc1f75761b5496dc65ecf8ff extends Twig_Template
         <ul class=\"record_actions\">
     <li>
         <a class=\"btn\" href=\"";
-        // line 16
+        // line 22
         echo $this->env->getExtension('routing')->getPath("control_visitas_usuario");
         echo "\">Regresar</a>
         </form>
     </li>
 </ul>
 ";
+    }
+
+    // line 5
+    public function block_menu($context, array $blocks = array())
+    {
+        // line 6
+        $this->env->loadTemplate("FrontendVisitasBundle:Default:menu.html.twig")->display($context);
     }
 
     public function getTemplateName()
@@ -71,6 +83,6 @@ class __TwigTemplate_850377fccc1f75761b5496dc65ecf8ff extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  54 => 16,  43 => 8,  35 => 6,  31 => 4,  28 => 3,);
+        return array (  71 => 6,  68 => 5,  59 => 22,  48 => 14,  40 => 12,  34 => 8,  32 => 5,  29 => 3,);
     }
 }

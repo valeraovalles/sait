@@ -25,16 +25,13 @@ class __TwigTemplate_627046f18051a2dfdb7650709f896c95 extends Twig_Template
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 10
+    // line 3
     public function block_body($context, array $blocks = array())
     {
-        // line 12
+        // line 5
         $this->displayBlock('menu', $context, $blocks);
-        // line 15
+        // line 8
         echo "
-
-
-
 
 <br>
     <h1>Listado de visitantes</h1>
@@ -57,45 +54,45 @@ class __TwigTemplate_627046f18051a2dfdb7650709f896c95 extends Twig_Template
                 <th>Nombres</th>
                 <th>Apellidos</th>
                 <th>Cedula</th>
-                <th>Actions</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         ";
-        // line 45
+        // line 35
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "entities"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 46
+            // line 36
             echo "            <tr>
                 <td><a href=\"";
-            // line 47
+            // line 37
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("usuario_show_control", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "</a></td>
                 <td>";
-            // line 48
+            // line 38
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "nombres"), "html", null, true);
             echo "</td>
                 <td>";
-            // line 49
+            // line 39
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "apellidos"), "html", null, true);
             echo "</td>
                 <td>";
-            // line 50
+            // line 40
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "cedula"), "html", null, true);
             echo "</td>
                 <td>
                 <ul>
                     <li>
                         <a href=\"";
-            // line 54
+            // line 44
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("usuario_show_control", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\"><i class=\"icon-user icon-eye-open\"></i></a>
 
                         <a href=\"";
-            // line 56
+            // line 46
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("usuario_edit_control", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\"><i class=\"icon-user icon-edit\"></i></a>
                     </li>
@@ -109,7 +106,7 @@ class __TwigTemplate_627046f18051a2dfdb7650709f896c95 extends Twig_Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 64
+        // line 54
         echo "        </tbody>
     </table>                   
     <br><br>
@@ -117,10 +114,10 @@ class __TwigTemplate_627046f18051a2dfdb7650709f896c95 extends Twig_Template
     ";
     }
 
-    // line 12
+    // line 5
     public function block_menu($context, array $blocks = array())
     {
-        // line 13
+        // line 6
         $this->env->loadTemplate("FrontendVisitasBundle:Default:menu.html.twig")->display($context);
     }
 
@@ -136,6 +133,6 @@ class __TwigTemplate_627046f18051a2dfdb7650709f896c95 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  124 => 13,  121 => 12,  113 => 64,  99 => 56,  94 => 54,  87 => 50,  83 => 49,  79 => 48,  73 => 47,  70 => 46,  66 => 45,  34 => 15,  32 => 12,  29 => 10,);
+        return array (  121 => 6,  118 => 5,  110 => 54,  96 => 46,  91 => 44,  84 => 40,  80 => 39,  76 => 38,  70 => 37,  67 => 36,  63 => 35,  34 => 8,  32 => 5,  29 => 3,);
     }
 }

@@ -19,7 +19,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('visita_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('visita_show_control', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{% if entity.fechaentrada %}{{ entity.fechaentrada|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.horaentrada }}</td>
                 <td>{% if entity.fechasalida %}{{ entity.fechasalida|date('Y-m-d H:i:s') }}{% endif %}</td>
@@ -29,10 +29,10 @@
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('visita_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('visita_show_control', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('visita_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('visita_edit_control', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -43,7 +43,7 @@
     <br>
         <ul>
         <li>
-            <a class="btn" href="{{ path('visita_new') }}">
+            <a class="btn" href="{{ path('visita_new_control') }}">
                 Create a new entry
             </a>
         </li>

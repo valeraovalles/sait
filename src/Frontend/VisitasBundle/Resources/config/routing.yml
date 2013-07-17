@@ -65,18 +65,18 @@ usuario_delete_control:
     defaults: { _controller: "FrontendVisitasBundle:Usuario:delete" }
     requirements: { _method: post|delete }
 
-
 usuario_busqueda_control:
     pattern:  /busqueda
     defaults: { _controller: "FrontendVisitasBundle:Usuario:busqueda" }
 
-
-usuario_encontrado_control:
-    pattern:  /encontrado
-    defaults: { _controller: "FrontendVisitasBundle:Usuario:encontrado" }
-
+usuario_registrar_control:
+    pattern:  /registrar
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:registrar" }
 
 
+registranuevavisita:
+    pattern: /registranuevavisita
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:registranuevavisita"}
 
 
 

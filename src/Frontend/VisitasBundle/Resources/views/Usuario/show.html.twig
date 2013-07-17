@@ -1,7 +1,12 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Usuario</h1>
+
+{% block menu %}
+{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
+{% endblock %}
+
+    <h1>Datos del Usuario</h1>
 
     <table class="record_properties">
         <tbody>

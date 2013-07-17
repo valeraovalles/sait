@@ -1,6 +1,12 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+
+{% block menu %}
+{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
+{% endblock %}
+
+
     <h1>Usuario creation</h1>
 
     <form action="{{ path('usuario_create_control') }}" method="post" {{ form_enctype(form) }}>

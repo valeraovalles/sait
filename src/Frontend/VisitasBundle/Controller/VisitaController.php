@@ -49,7 +49,7 @@ class VisitaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('visita_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('visita_show_control', array('id' => $entity->getId())));
         }
 
         return $this->render('FrontendVisitasBundle:Visita:new.html.twig', array(
@@ -140,7 +140,7 @@ class VisitaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('visita_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('visita_edit_control', array('id' => $id)));
         }
 
         return $this->render('FrontendVisitasBundle:Visita:edit.html.twig', array(
@@ -170,7 +170,7 @@ class VisitaController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('visita'));
+        return $this->redirect($this->generateUrl('visita_control'));
     }
 
     /**

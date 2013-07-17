@@ -41,14 +41,14 @@ class Visita
      * @var \DateTime
      * @Assert\Time()
      *
-     * @ORM\Column(name="fechasalida", type="date", nullable=false)
+     * @ORM\Column(name="fechasalida", type="date", nullable=true)
      */
     private $fechasalida;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="horasalida", type="time", nullable=false)
+     * @ORM\Column(name="horasalida", type="time", nullable=true)
      */
     private $horasalida;
 
@@ -62,7 +62,7 @@ class Visita
     /**
      * @var string
      * @Assert\NotBlank()
-     * @ORM\Column(name="observaciones", type="string", nullable=false)
+     * @ORM\Column(name="observaciones", type="string", nullable=true)
      */
     private $observaciones;
 
