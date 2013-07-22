@@ -164,13 +164,18 @@
         <div class="contenedor">
             <div class="labelshow">Objetos de Comodato:</div>
                 <div class="dato">
+
                     {% set cont = 0 %}
                     {% set largo = entity.comodato.objetocomodato | length %}
+                    {% if largo==0 %}
+                    Ninguno
+                    {% else %}
                     {% for co in entity.comodato.objetocomodato %} 
                         {% set cont=cont+1 %}
                         {{ co.objeto }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
                     {% endfor %}
-            </div>
+                    {% endif %}
+              </div>
         </div>
     </div>
     </div>

@@ -97,6 +97,7 @@ class OperadorController extends Controller
         
             $em = $this->getDoctrine()->getManager();
             $pais = $em->getRepository('DistribucionBundle:Pais')->find($id);
+
             return $this->render('DistribucionBundle:Operador:paisestadociudad.html.twig',array('form'=>$form->createView(),'pais'=>$pais,'mostrar'=>$mostrar));
     }
     

@@ -57,9 +57,9 @@ class ReporteController extends Controller
         $html=new htmlreporte;
         $html=$html->$tipo($em, $datos);
         $html=$html;
-echo '<link href="/sait/web/bundles/distribucion/css/reporteinformativo.css" rel="stylesheet" type="text/css" />';
+/*echo '<link href="/sait/web/bundles/distribucion/css/reporteinformativo.css" rel="stylesheet" type="text/css" />';
 echo $html;
-die;
+die;*/
         if($datos['formato']=='xls'){
 
             header("Content-type: application/octet-stream");
