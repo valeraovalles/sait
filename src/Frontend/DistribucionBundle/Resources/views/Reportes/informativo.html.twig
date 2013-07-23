@@ -13,6 +13,14 @@
     
     <div class="titulo">INGRESE LOS PARÁMETROS</div>
 
+    {% if app.session.started %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Redflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
     <form class="formNewEditOperador" novalidate action="{{ path('generar_reporte', { 'tipo': 'informativo','formato': 'xls'}) }}" method="post" {{ form_enctype(form) }}>
 
         {{ form_widget(form._token) }}

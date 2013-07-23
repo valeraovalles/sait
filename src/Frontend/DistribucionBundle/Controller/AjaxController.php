@@ -130,6 +130,25 @@ class AjaxController extends Controller
                 ->getForm();
         }
 
+
+        else if($mostrar=='fechadesde'){
+
+            $form = $this->createFormBuilder()
+            ->add('fechadesde', 'date', array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+            ))->getForm();
+        }
+
+        else if($mostrar=='fechahasta'){
+
+            $form = $this->createFormBuilder()
+            ->add('fechahasta', 'date', array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+            ))->getForm();
+        }
+
         else if($mostrar=='formato'){
 
             $array=array('s'=>'seleccionar','xls'=>'Excel','pdf'=>'Pdf');

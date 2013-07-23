@@ -10,7 +10,7 @@
 
 {{ parent() }}
 
-<div class="titulo">EL OPERADOR ({{ entity.nombre | upper }}) ESTÁ ({% if entity.estatus==1 %}ACTIVO{% else %}INACTIVO{% endif %})</div>
+<div class="titulo">EL OPERADOR ({{ entity.nombre | upper }}) ESTÁ {% if entity.estatus==1 %}(ACTIVO){% else %}<br><br><div class='Redflash-notice'>INACTIVO</div>{% endif %}</div>
 
 
     <div id="a"><div class="divisor">DATOS DE OPERADOR</div></div>
@@ -256,7 +256,7 @@
 <form action="{{ path('operador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar el operador y sus representantes?')">
     <input type="hidden" name="_method" value="DELETE" />
     {{ form_widget(delete_form) }}
-    <button class="btn btn-danger" type="submit">Borrar</button>
+    <button class="btn btn-danger" type="submit">Desactivar</button>
 </form>
 
 <script>

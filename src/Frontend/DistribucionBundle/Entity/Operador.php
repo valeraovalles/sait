@@ -209,6 +209,19 @@ class Operador
     private $urltwitter;
     
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecharegistro", type="datetime", nullable=true)
+     */
+    private $fecharegistro;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechamodificacion", type="datetime", nullable=true)
+     */
+    private $fechamodificacion;
+    /**
      * Constructor
      */
     public function __construct()
@@ -684,7 +697,52 @@ class Operador
         return $this->urltwitter;
     }
 
+    /**
+     * Set fecharegistro
+     *
+     * @param \DateTime $fecharegistro
+     * @return Comodato
+     */
+    public function setFecharegistro($fecharegistro)
+    {
+        $this->fecharegistro = $fecharegistro;
+    
+        return $this;
+    }
 
+    /**
+     * Get fecharegistro
+     *
+     * @return \DateTime 
+     */
+    public function getFecharegistro()
+    {
+        return $this->fecharegistro;
+    }
+
+    /**
+     * Set fechamodificacion
+     *
+     * @param \DateTime $fechamodificacion
+     * @return Comodato
+     */
+    public function setFechamodificacion($fechamodificacion)
+    {
+        $this->fechamodificacion = $fechamodificacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get fechamodificacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechamodificacion()
+    {
+        return $this->fechamodificacion;
+    }
+    
     public function __toString()
     {
         return $this->getNombre();
