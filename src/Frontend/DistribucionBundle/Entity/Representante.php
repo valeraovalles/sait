@@ -112,6 +112,13 @@ class Representante
     private $user;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechamodificacion", type="datetime", nullable=true)
+     */
+    private $fechamodificacion;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -357,6 +364,29 @@ class Representante
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set fechamodificacion
+     *
+     * @param \DateTime $fechamodificacion
+     * @return Comodato
+     */
+    public function setFechamodificacion($fechamodificacion)
+    {
+        $this->fechamodificacion = $fechamodificacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get fechamodificacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechamodificacion()
+    {
+        return $this->fechamodificacion;
     }
     
     public function __toString()

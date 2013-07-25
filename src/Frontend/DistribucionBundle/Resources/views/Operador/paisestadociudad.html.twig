@@ -1,14 +1,6 @@
 {% if mostrar=='estado' %}
 	<div class="widgets">{{ form_widget(form.estado) }}</div>
-{% endif %}
-
-{% if mostrar=='codigo' %}
-	<script>
-        $("#frontend_distribucionbundle_representantetype_telefono1").val({{ pais.codigo | e ('js') }});
+		<script>
+        $("#frontend_distribucionbundle_representantetype_telefono1").val({{ pais.codigo }});
 	</script>	
-{% endif %}
-
-
-{% if mostrar=='xxx' %}
-	<div>{{ pais.codigo }}</div>
 {% endif %}

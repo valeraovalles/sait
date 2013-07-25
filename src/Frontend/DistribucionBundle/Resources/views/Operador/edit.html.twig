@@ -11,7 +11,7 @@
 {% block body %}
     {{ parent() }}
 
-    <div class="titulo">EDITAR OPERADOR {{ entity.nombre | upper}}</div>
+    <div class="titulo">EDITAR OPERADOR {{ entity.nombre | upper}} {% if entity.estatus==1 %}(ACTIVO){% else %}<br><br><div class='Redflash-notice'>INACTIVO</div>{% endif %}</div>
 
     {% if app.session.started %}
         {% for flashMessage in app.session.flashbag.get('notice') %}
@@ -237,7 +237,7 @@
     <form action="{{ path('operador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar el operador y sus representantes?')">
         <input class="btn" type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button class="btn btn-danger" type="submit">Borrar</button> | 
+        <button class="btn btn-danger" type="submit">Desactivar</button> | 
         <a class="btn" href="{{ path('operador') }}">Ir a lista</a> | 
         <a class="btn" href="{{ path('operador_show', { 'id': entity.id }) }}">Ir a consultar</a>
     </form>

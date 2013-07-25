@@ -15,48 +15,69 @@ class OperadorRepository extends EntityRepository
         return $consulta->getOneOrNullResult();
     }
 
-    public function Operadores()
+    //DEVUELVE TODOS LOS OPERADORES Y REPRESENTANTES
+    public function Operadores($idpais,$fechadesde,$fechahasta)
     {
         $em = $this->getEntityManager();
         $dql   = "
         SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
-        order by o.nombre ASC
+        where o.pais= :idpais and o.fecharegistro>= :fechadesde and o.fecharegistro<= :fechahasta order by o.nombre ASC
         ";
         $query = $em->createQuery($dql);
+        $query->setParameter('idpais', $idpais);
+        $query->setParameter('fechadesde', $fechadesde);
+        $query->setParameter('fechahasta', $fechahasta);
         return  $query->getResult(); 
     }
 
 
-     public function OperadorPorIdTipooperador($idpais, $idtipooperador)
+     public function OperadorPorIdto($idpais, $idtipooperador,$fechadesde,$fechahasta)
     {
-    	$em = $this->getEntityManager();
+        $em = $this->getEntityManager();
         $dql   = "
-        SELECT o FROM DistribucionBundle:Operador o JOIN o.pais p JOIN o.tipooperador t
-        where p.id= :idpais and t.id= :idtipooperador
-        order by o.nombre ASC
+        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
+        where o.pais= :idpais and o.tipooperador= :idtipooperador and o.fecharegistro>= :fechadesde and o.fecharegistro<= :fechahasta order by o.nombre ASC
         ";
         $query = $em->createQuery($dql);
         $query->setParameter('idpais', $idpais);
         $query->setParameter('idtipooperador', $idtipooperador);
-     	return  $query->getResult(); 
+        $query->setParameter('fechadesde', $fechadesde);
+        $query->setParameter('fechahasta', $fechahasta);
+        return  $query->getResult(); 
     }
 
-
-
-     public function OperadorPorIdTipooperadorOperador($idpais, $idtipooperador, $idoperador)
+     public function OperadorPorIdo($idpais, $idoperador,$fechadesde,$fechahasta)
     {
         $em = $this->getEntityManager();
         $dql   = "
-        SELECT o FROM DistribucionBundle:Operador o JOIN o.pais p JOIN o.tipooperador t 
-        where p.id= :idpais and t.id= :idtipooperador and o.id= :idoperador
-        order by o.nombre ASC
+        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
+        where o.pais= :idpais and o.operador= :idoperador and o.fecharegistro>= :fechadesde and o.fecharegistro<= :fechahasta order by o.nombre ASC
+        ";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idpais', $idpais);
+        $query->setParameter('idoperador');
+        $query->setParameter('fechadesde', $fechadesde);
+        $query->setParameter('fechahasta', $fechahasta);
+        return  $query->getResult(); 
+    }
+
+
+     public function OperadorPorIdtoPorIdo($idpais, $idtipooperador, $idoperador,$fechadesde,$fechahasta)
+    {
+
+        $em = $this->getEntityManager();
+        $dql   = "
+        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
+        where o.pais= :idpais and o.tipooperador= :idtipooperador and o.id= :idoperador and o.fecharegistro>= :fechadesde and o.fecharegistro<= :fechahasta order by o.nombre ASC
         ";
         $query = $em->createQuery($dql);
         $query->setParameter('idpais', $idpais);
         $query->setParameter('idtipooperador', $idtipooperador);
         $query->setParameter('idoperador', $idoperador);
-        $operadores = $query->getResult();
-     	return  $query->getResult(); 
+        $query->setParameter('fechadesde', $fechadesde);
+        $query->setParameter('fechahasta', $fechahasta);
+        return  $query->getResult(); 
+   
     }
 
      public function RepresentanteOperador($idoperador)

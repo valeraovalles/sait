@@ -10,7 +10,7 @@
 
 {{ parent() }}
 
-<div class="titulo">EL OPERADOR ({{ entity.nombre | upper }}) ESTÁ ({% if entity.estatus==1 %}ACTIVO{% else %}INACTIVO{% endif %})</div>
+<div class="titulo">EL OPERADOR ({{ entity.nombre | upper }}) ESTÁ {% if entity.estatus==1 %}(ACTIVO){% else %}<br><br><div class='Redflash-notice'>INACTIVO</div>{% endif %}</div>
 
 
     <div id="a"><div class="divisor">DATOS DE OPERADOR</div></div>
@@ -164,13 +164,18 @@
         <div class="contenedor">
             <div class="labelshow">Objetos de Comodato:</div>
                 <div class="dato">
+
                     {% set cont = 0 %}
                     {% set largo = entity.comodato.objetocomodato | length %}
+                    {% if largo==0 %}
+                    Ninguno
+                    {% else %}
                     {% for co in entity.comodato.objetocomodato %} 
                         {% set cont=cont+1 %}
                         {{ co.objeto }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
                     {% endfor %}
-            </div>
+                    {% endif %}
+              </div>
         </div>
     </div>
     </div>
@@ -251,7 +256,7 @@
 <form action="{{ path('operador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar el operador y sus representantes?')">
     <input type="hidden" name="_method" value="DELETE" />
     {{ form_widget(delete_form) }}
-    <button class="btn btn-danger" type="submit">Borrar</button>
+    <button class="btn btn-danger" type="submit">Desactivar</button>
 </form>
 
 <script>

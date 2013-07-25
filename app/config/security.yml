@@ -24,6 +24,6 @@ security:
 
     access_control:
         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/distribucion, roles: ROLE_DISTRIBUCION }
+        #- { path: ^/distribucion, roles: ROLE_DISTRIBUCION }
         - { path:  ^/licencias/reportes, roles:[ROLE_LICENCIAS , ROLE_LICADMIN] }
         - { path: ^/licencias/modif, roles:ROLE_LICADMIN }

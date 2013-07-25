@@ -32,13 +32,6 @@ class Pais
     /**
      * @var string
      *
-     * @ORM\Column(name="capital", type="string", length=200, nullable=false)
-     */
-    private $capital;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="referencia", type="string", length=200, nullable=true)
      */
     private $referencia;

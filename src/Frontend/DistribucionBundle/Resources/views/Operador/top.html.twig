@@ -1,0 +1,47 @@
+{% extends '::distribucion.html.twig' %}
+ 
+{% block title %}Distribucion - Telesur{% endblock %}
+
+
+{% block titulobanner %}
+    TOP
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">SELECCIONE UN PAÍS</div>
+
+    <form class="formNewEditOperador" novalidate action="{{ path('generar_reporte', { 'tipo': 'informativo','formato': 'xls'}) }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+
+                <div class="form-contenedor">
+                    {{ form_errors(form.pais) }}
+                    <div class="labels">Pais:</div>
+                    <div class="widgets">{{ form_widget(form.pais) }}</div>
+                </div>
+
+                <div id="tipooperador"></div>
+                
+
+
+        
+
+    </form>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_pais').change(function(){
+                $('#tipooperador').load('/sait/web/app_dev.php/distribucion/ajax_top/'+$("#form_pais").val()+'/tipooperador');
+            });
+
+
+        });
+    </script>
+
+{% endblock %}
+
+
+    

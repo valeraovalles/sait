@@ -36,8 +36,8 @@ class DefaultController extends Controller
 
     	
     	/*echo $this->latlon('venezuela');
-    	die;
-    	$em = $this->getDoctrine()->getManager();
+    	die;*/
+    	/*$em = $this->getDoctrine()->getManager();
 
     	$entity = $em->getRepository('DistribucionBundle:Pais')->findAll();
     	foreach ($entity as $pais) {
@@ -63,7 +63,7 @@ class DefaultController extends Controller
         $dql = "
             select top.id, count (top.operador) as cantidad, top.operador, sum(o.numeroabonados) as totalabonados, p.pais, p.latitud, p.longitud 
             from DistribucionBundle:Operador o join o.pais p join o.tipooperador top
-            where o.tipooperador=top.id and o.pais=p.id
+            where o.tipooperador=top.id and o.pais=p.id and o.estatus=true
             group by top.operador, p.pais, p.latitud, p.longitud, top.id
             order by p.pais ASC
         ";

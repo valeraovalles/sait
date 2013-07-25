@@ -12,11 +12,16 @@
 
 <div class="titulo">DATOS DE USUARIO</div>
 
-{% if app.session.hasFlash('notice') %}
-    <div class="flash-notice">
-        {{ app.session.flash('notice') }}
-    </div>
+
+{% if app.session.started %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="Greenflash-notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
 {% endif %}
+
+
 <br>
 <table class="form-show">
     <tbody>

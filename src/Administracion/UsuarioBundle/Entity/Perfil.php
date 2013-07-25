@@ -32,7 +32,7 @@ class Perfil
     /**
      * @var string
      *
-     * @ORM\Column(name="segundo_nombre", type="string", length=255, nullable=false)
+     * @ORM\Column(name="segundo_nombre", type="string", length=255, nullable=true)
      */
     private $segundoNombre;
 
@@ -46,7 +46,7 @@ class Perfil
     /**
      * @var string
      *
-     * @ORM\Column(name="segundo_apellido", type="string", length=255, nullable=false)
+     * @ORM\Column(name="segundo_apellido", type="string", length=255, nullable=true)
      */
     private $segundoApellido;
 

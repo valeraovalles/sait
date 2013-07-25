@@ -15,6 +15,8 @@ use Administracion\UsuarioBundle\Entity\Perfil;
 
 use Symfony\Component\Security\Core\SecurityContext;
 
+use Doctrine\ORM\EntityRepository;
+
 /**
  * Operador controller.
  *
@@ -65,6 +67,7 @@ class OperadorController extends Controller
                             $datos[$pais['pais']][$cont]= array('operador'=>$operador['operador'],'totalabonados'=>$operador['totalabonados'],'cantidad'=>$operador['cantidad'],'idtipooperador'=>$operador['idtipo'],'idpais'=>$operador['idpais']); 
 
                         $cont++;
+                        
                     }
                 }        
             }
@@ -94,6 +97,7 @@ class OperadorController extends Controller
         
             $em = $this->getDoctrine()->getManager();
             $pais = $em->getRepository('DistribucionBundle:Pais')->find($id);
+
             return $this->render('DistribucionBundle:Operador:paisestadociudad.html.twig',array('form'=>$form->createView(),'pais'=>$pais,'mostrar'=>$mostrar));
     }
     
@@ -144,14 +148,14 @@ class OperadorController extends Controller
      */
     public function createAction(Request $request)
     {
+
+
         $datos=$request->request->all();
         $datos=$datos['frontend_distribucionbundle_operadortype'];
 
         if(!isset($datos['pais'])){
             $id=0;
         } else $id=$datos['pais'];
-
-
 
         $entity  = new Operador();
         $form = $this->createForm(new OperadorType($id), $entity);
@@ -182,7 +186,12 @@ class OperadorController extends Controller
             $em = $this->getDoctrine()->getManager();
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            $str = \date("Y-m-d G:i:s");
+            $fechaactual = \DateTime::createFromFormat('Y-m-d G:i:s', $str);
+            $entity->setFecharegistro($fechaactual);
+            $entity->setFechamodificacion($fechaactual);
             $entity->setUser($perfil);
+            $entity->getComodato()->setFechamodificacion($fechaactual);
             $entity->getComodato()->setUser($perfil);
             $entity2->setUser($perfil);
 
@@ -289,15 +298,24 @@ class OperadorController extends Controller
             throw $this->createNotFoundException('Unable to find Operador entity.');
         }
 
+
+        $datos=$request->request->all();
+        $datos=$datos['frontend_distribucionbundle_operadortype'];
+
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new OperadorType($entity->getPais()->getId()), $entity);
+        $editForm = $this->createForm(new OperadorType($datos['pais']), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
 
+            $str = \date("Y-m-d G:i:s");
+            $fechaactual = \DateTime::createFromFormat('Y-m-d G:i:s', $str);
+
+            $entity->setFechamodificacion($fechaactual);
             $entity->setUser($perfil);
+            $entity->getComodato()->setFechamodificacion($fechaactual);
             $entity->getComodato()->setUser($perfil);
             $em->persist($entity);
             $em->flush();
@@ -328,6 +346,20 @@ class OperadorController extends Controller
 
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
 
+            //desactivo operador
+            $consulta = $em->createQuery('update DistribucionBundle:Operador o set o.user= :idusuario, o.estatus=false
+                              WHERE o.id = :idoperador');
+            $consulta->setParameter('idoperador', $id);
+            $consulta->setParameter('idusuario', $idusuario);
+            $consulta->execute();
+
+            $entity = $em->getRepository('DistribucionBundle:Operador')->find($id);
+            $this->get('session')->getFlashBag()->add('notice', 'Se ha desactivado el operador '.$entity->getNombre());
+            return $this->redirect($this->generateUrl('operador'));
+
+
+//COMENTO ESTO PORQUE NO SE DEBEN ELIMINAR LOS REGISTROS
+/*
             //antes de eliminar representante actualizo el id del usuario
             $consulta = $em->createQuery('update DistribucionBundle:Representante r set r.user= :idusuario
                               WHERE r.operador = :idoperador');
@@ -360,7 +392,8 @@ class OperadorController extends Controller
         }
 
         $this->get('session')->getFlashBag()->add('notice', 'Se ha borrado el operador '.$entity->getNombre().' y sus representantes.');
-        return $this->redirect($this->generateUrl('operador'));
+        return $this->redirect($this->generateUrl('operador'));*/
+    }
     }
 
     /**
@@ -376,5 +409,31 @@ class OperadorController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    public function topAction(Request $request)
+    {
+
+        $entity = new Operador();
+        $form   = $this->createForm(new OperadorType(0), $entity);
+
+
+        // create a task and give it some dummy data for this example
+        $form = $this->createFormBuilder()
+            ->add('pais', 'entity', array(
+                    'class' => 'DistribucionBundle:Pais',
+                    'property' => 'pais',
+                    'empty_value' => 'Seleccione...',
+                    'query_builder' => function(EntityRepository $er) {
+                            return $er->createQueryBuilder('u')
+                            ->orderBy('u.pais', 'ASC')
+                            ;
+                    },
+                ))
+        ->getForm();
+
+        return $this->render('DistribucionBundle:Operador:top.html.twig', array('form'   => $form->createView()));
+
+
     }
 }

@@ -11,9 +11,25 @@
         <div class="labels">Operador:</div>
         <div class="widgets">{{ form_widget(form.operador) }}</div>
     </div>
-    <div id="formato"></div>
-
+    <div id="fechadesde"></div>
 {% endif %}
+
+{% if mostrar=='fechadesde' %}
+    <div class="form-contenedor">
+        <div class="labels">Fecha desde:</div>
+        <div class="widgets">{{ form_widget(form.fechadesde) }}</div>
+    </div>
+    <div id="fechahasta"></div>
+{% endif %}
+
+{% if mostrar=='fechahasta' %}
+    <div class="form-contenedor">
+        <div class="labels">Fecha hasta:</div>
+        <div class="widgets">{{ form_widget(form.fechahasta) }}</div>
+    </div>
+    <div id="formato"></div>
+{% endif %}
+
 
 {% if mostrar=='formato' %}
     <div class="form-contenedor">
@@ -37,9 +53,16 @@
         });
 
         $('#form_operador').change(function(){
-            $('#formato').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_operador").val()+'/formato');
+            $('#fechadesde').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_operador").val()+'/fechadesde');
         });
 
+        $('#form_fechadesde').change(function(){
+            $('#fechahasta').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_operador").val()+'/fechahasta');
+        });
+
+        $('#form_fechahasta').change(function(){
+            $('#formato').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_operador").val()+'/formato');
+        });
 
         $('#form_formato').change(function(){
             $('#botones').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_formato").val()+'/botones');
