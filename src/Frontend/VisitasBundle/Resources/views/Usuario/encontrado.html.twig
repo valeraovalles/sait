@@ -80,10 +80,31 @@
         open(url,'','top=300,left=300,width=300,height=300') ; 
         } 
         </script> 
-          <a class="btn btn-info" href="javascript:abrir(' /sait/web/libs/photobooth/index.html')">
+          <a class="btn btn-info" onclick="NewWindow('/sait/web/libs/photobooth/index.php?cedula=', document.getElementById('frontend_visitasbundle_usuariotype_cedula').value,'Ventana','440','570','no');return false;">
+
+
+
           <i class="icon-user icon-camera"></i> FOTO </a><br><br>
         <br><br>
         {% endblock %}
+
+
+
+<script language="JavaScript" type="text/JavaScript">
+var win = null;
+function NewWindow(mypage,cedula, myname,w,h,scroll){
+LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+mypage=mypage+cedula;
+settings =
+'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+win = window.open(mypage,myname,settings)
+}
+</script>
+
+
+
+
 
 
 

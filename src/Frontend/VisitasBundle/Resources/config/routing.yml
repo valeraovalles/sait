@@ -73,11 +73,15 @@ usuario_registrar_control:
     pattern:  /registrar
     defaults: { _controller: "FrontendVisitasBundle:Usuario:registrar" }
 
-
 registranuevavisita:
     pattern: /registranuevavisita
     defaults: { _controller: "FrontendVisitasBundle:Usuario:registranuevavisita"}
 
+foto:
+    pattern: /foto
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:foto"}
 
-
+agregarnuevavisita:
+    pattern: /agregarnuevavisita
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:agregarnuevavisita"}
 

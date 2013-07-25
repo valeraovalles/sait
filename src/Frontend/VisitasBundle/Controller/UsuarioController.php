@@ -29,9 +29,11 @@ class UsuarioController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('FrontendVisitasBundle:Usuario')->findAll();
+        $entities2= $em->getRepository('FrontendVisitasBundle:Visita')->findAll();
 
         return $this->render('FrontendVisitasBundle:Usuario:index.html.twig', array(
             'entities' => $entities,
+            'entities2'=> $entities2,
         ));
     }
     /**
@@ -82,6 +84,7 @@ class UsuarioController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('FrontendVisitasBundle:Usuario')->find($id);
+        $entity2= $em->getRepository('FrontendVisitasBundle:Visita')->findAll($fechaentrada);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Usuario entity.');
@@ -89,9 +92,18 @@ class UsuarioController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
+        $var=$entity->getCedula();
+
+        $filename = "/sait/web/libs/photobooth/uploads/original/".$var;
+        echo '<td><img src='.$filename.'></td></tr>';
+
+
         return $this->render('FrontendVisitasBundle:Usuario:show.html.twig', array(
             'entity'      => $entity,
+            'entity2'     => $entity2,
             'delete_form' => $deleteForm->createView(),        ));
+
+
     }
 
     /**
@@ -213,15 +225,21 @@ class UsuarioController extends Controller
         $usuario = $query->getResult(); 
 
 
+
     if ($usuario){
          $form   = $this->createForm(new UsuarioType(), $usuario[0]);
+
 
          return $this->render('FrontendVisitasBundle:Usuario:show.html.twig', array(
                 'entity' => $usuario[0],
                 'form'   => $form->createView(),
             ));
 
+
+
     }
+
+
 
     else{
         return $this->redirect($this->generateUrl('usuario_registrar_control'));
@@ -261,7 +279,10 @@ class UsuarioController extends Controller
         ));
 
     }
-
+/*
+*
+*
+*/
 
 
     public function registranuevavisitaAction(Request $request){
@@ -302,7 +323,12 @@ class UsuarioController extends Controller
 
 
 
+    public function agregarnuevavisitaAction(){
 
+
+
+
+    }
 
 
 
