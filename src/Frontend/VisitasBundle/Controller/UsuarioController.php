@@ -84,7 +84,7 @@ class UsuarioController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('FrontendVisitasBundle:Usuario')->find($id);
-        $entity2= $em->getRepository('FrontendVisitasBundle:Visita')->findAll($fechaentrada);
+ //       $entity2= $em->getRepository('FrontendVisitasBundle:Visita')->findAll($fechaentrada);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Usuario entity.');
@@ -95,12 +95,11 @@ class UsuarioController extends Controller
         $var=$entity->getCedula();
 
         $filename = "/sait/web/libs/photobooth/uploads/original/".$var;
-        echo '<td><img src='.$filename.'></td></tr>';
-
 
         return $this->render('FrontendVisitasBundle:Usuario:show.html.twig', array(
             'entity'      => $entity,
-            'entity2'     => $entity2,
+            'filename' => $filename,
+           // 'entity2'     => $entity2,
             'delete_form' => $deleteForm->createView(),        ));
 
 
@@ -235,14 +234,12 @@ class UsuarioController extends Controller
                 'form'   => $form->createView(),
             ));
 
-
-
     }
 
 
-
     else{
-        return $this->redirect($this->generateUrl('usuario_registrar_control'));
+
+        return $this->redirect($this->generateUrl('usuario_registrar_control', array('cedula'=>$cedula)));
 
     }
           
@@ -263,15 +260,16 @@ class UsuarioController extends Controller
      * Registra un usuario dentro de la entidad Usuario y lo asocia a la entidad Visita
      *
      */
-    public function registrarAction(Request $request){
+    public function registrarAction(Request $request, $cedula){
 
-        $entity = new Usuario();
+        $entity = new Usuario('1234');
         $form   = $this->createForm(new UsuarioType(), $entity);
         $entity2 = new Visita();
         $form2   = $this->createForm(new VisitaType(), $entity2);
 
 
         return $this->render('FrontendVisitasBundle:Usuario:encontrado.html.twig', array(
+            'cedula' => $cedula,
             'entity' => $entity,
             'form'   => $form->createView(),
             'entity2' => $entity2,
@@ -279,12 +277,11 @@ class UsuarioController extends Controller
         ));
 
     }
+
 /*
 *
 *
 */
-
-
     public function registranuevavisitaAction(Request $request){
 
         $entity = new Usuario();

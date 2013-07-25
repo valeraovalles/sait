@@ -71,75 +71,76 @@ class __TwigTemplate_4592d0df1d491e807655c792472bde7d extends Twig_Template
         echo "
 
 
+
             <div id=\"operador\">
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 26
+        // line 27
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "cedula"), 'errors');
         echo "</div>
                     <div class=\"labels\">Cedula:</div>
                     <div class=\"widgets\">";
-        // line 28
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "cedula"), 'widget');
+        // line 29
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "cedula"), 'widget', array("attr" => array("value" => $this->getContext($context, "cedula"))));
         echo "</div>
                 </div>
 
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 32
+        // line 33
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "nombres"), 'errors');
         echo "</div>
                     <div class=\"labels\">Nombres:</div>
                     <div class=\"widgets\">";
-        // line 34
+        // line 35
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "nombres"), 'widget');
         echo "</div>
                 </div>
 
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 38
+        // line 39
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "apellidos"), 'errors');
         echo "</div>
                     <div class=\"labels\">Apellidos:</div>
                     <div class=\"widgets\">";
-        // line 40
+        // line 41
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "apellidos"), 'widget');
         echo "</div>
                 </div>
 
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 44
+        // line 45
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "fechaentrada"), 'errors');
         echo "</div>
                     <div class=\"labels\">Fecha Entrada:</div>
                     <div class=\"widgets\">";
-        // line 46
+        // line 47
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "fechaentrada"), 'widget');
         echo "</div>
                 </div>
 
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 50
+        // line 51
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "horaentrada"), 'errors');
         echo "</div>
                     <div class=\"labels\">Hora Entrada:</div>
                     <div class=\"widgets\">";
-        // line 52
+        // line 53
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "horaentrada"), 'widget');
         echo "</div>
                 </div>
 
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 56
+        // line 57
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "contacto"), 'errors');
         echo "</div>
                     <div class=\"labels\">Contacto:</div>
                     <div class=\"widgets\">";
-        // line 58
+        // line 59
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "contacto"), 'widget');
         echo "</div>
                 </div>
@@ -147,12 +148,12 @@ class __TwigTemplate_4592d0df1d491e807655c792472bde7d extends Twig_Template
 
                 <div class=\"form-contenedor\">
                     <div>";
-        // line 63
+        // line 64
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "observaciones"), 'errors');
         echo "</div>
                     <div class=\"labels\">Observaciones:</div>
                     <div class=\"widgets\">";
-        // line 65
+        // line 66
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form2"), "observaciones"), 'widget');
         echo "</div>
                 </div>
@@ -160,20 +161,25 @@ class __TwigTemplate_4592d0df1d491e807655c792472bde7d extends Twig_Template
             </div> 
 
             <div class=\"widgets\">";
-        // line 70
+        // line 71
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "nombres"), 'widget');
         echo "</div>
                     <br><br>
 
 
-       <button class=\"btn\" type=\"submit\">Registrar</button> 
-    </form>
 
         ";
-        // line 77
+        // line 76
         $this->displayBlock('camara', $context, $blocks);
-        // line 90
+        // line 88
         echo "
+
+
+
+       <button class=\"btn\" type=\"submit\">Registrar</button> 
+
+
+    </form>
 
 
 <script language=\"JavaScript\" type=\"text/JavaScript\">
@@ -198,23 +204,22 @@ win = window.open(mypage,myname,settings)
 
 
     <script src=\"";
-        // line 114
+        // line 119
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/distribucion/operador_new.js"), "html", null, true);
         echo "\"></script>
 ";
     }
 
-    // line 77
+    // line 76
     public function block_camara($context, array $blocks = array())
     {
-        // line 78
+        // line 77
         echo "        <script> 
         function abrir(url) { 
         open(url,'','top=300,left=300,width=300,height=300') ; 
         } 
         </script> 
           <a class=\"btn btn-info\" onclick=\"NewWindow('/sait/web/libs/photobooth/index.php?cedula=', document.getElementById('frontend_visitasbundle_usuariotype_cedula').value,'Ventana','440','570','no');return false;\">
-
 
 
           <i class=\"icon-user icon-camera\"></i> FOTO </a><br><br>
@@ -234,6 +239,6 @@ win = window.open(mypage,myname,settings)
 
     public function getDebugInfo()
     {
-        return array (  211 => 78,  208 => 77,  202 => 114,  176 => 90,  174 => 77,  164 => 70,  156 => 65,  151 => 63,  143 => 58,  138 => 56,  131 => 52,  126 => 50,  119 => 46,  114 => 44,  107 => 40,  102 => 38,  95 => 34,  90 => 32,  83 => 28,  78 => 26,  70 => 21,  66 => 20,  58 => 18,  47 => 10,  44 => 9,  40 => 5,  37 => 4,  31 => 3,);
+        return array (  217 => 77,  214 => 76,  208 => 119,  175 => 88,  173 => 76,  165 => 71,  157 => 66,  152 => 64,  144 => 59,  139 => 57,  132 => 53,  127 => 51,  120 => 47,  115 => 45,  108 => 41,  103 => 39,  96 => 35,  91 => 33,  84 => 29,  79 => 27,  70 => 21,  66 => 20,  58 => 18,  47 => 10,  44 => 9,  40 => 5,  37 => 4,  31 => 3,);
     }
 }

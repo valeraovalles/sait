@@ -21,11 +21,12 @@
         {{ form_widget(form2._token) }}
 
 
+
             <div id="operador">
                 <div class="form-contenedor">
                     <div>{{ form_errors(form.cedula) }}</div>
                     <div class="labels">Cedula:</div>
-                    <div class="widgets">{{ form_widget(form.cedula) }}</div>
+                    <div class="widgets">{{ form_widget(form.cedula, {'attr':{'value':cedula}}) }}</div>
                 </div>
 
                 <div class="form-contenedor">
@@ -71,8 +72,6 @@
                     <br><br>
 
 
-       <button class="btn" type="submit">Registrar</button> 
-    </form>
 
         {% block camara %}
         <script> 
@@ -83,11 +82,17 @@
           <a class="btn btn-info" onclick="NewWindow('/sait/web/libs/photobooth/index.php?cedula=', document.getElementById('frontend_visitasbundle_usuariotype_cedula').value,'Ventana','440','570','no');return false;">
 
 
-
           <i class="icon-user icon-camera"></i> FOTO </a><br><br>
         <br><br>
         {% endblock %}
 
+
+
+
+       <button class="btn" type="submit">Registrar</button> 
+
+
+    </form>
 
 
 <script language="JavaScript" type="text/JavaScript">

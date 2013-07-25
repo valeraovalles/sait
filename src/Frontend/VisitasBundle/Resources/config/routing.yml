@@ -70,7 +70,7 @@ usuario_busqueda_control:
     defaults: { _controller: "FrontendVisitasBundle:Usuario:busqueda" }
 
 usuario_registrar_control:
-    pattern:  /registrar
+    pattern:  /registrar/{cedula}
     defaults: { _controller: "FrontendVisitasBundle:Usuario:registrar" }
 
 registranuevavisita:

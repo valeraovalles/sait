@@ -36,15 +36,13 @@ class __TwigTemplate_627046f18051a2dfdb7650709f896c95 extends Twig_Template
 <br>
     <h1>Listado de visitantes</h1>
 
-<script>
+<script type=\"text/javascript\">
 
 \$(document).ready( function () {
     \$('#id').dataTable();
 } );
 
-
 </script>
-
 
 
     <table class=\"records_list\" id=\"id\">
@@ -55,46 +53,44 @@ class __TwigTemplate_627046f18051a2dfdb7650709f896c95 extends Twig_Template
                 <th>Apellidos</th>
                 <th>Cedula</th>
                 <th>Acciones</th>
-                                <th>Fecha</th>
-                                                <th>Hora</th>
             </tr>
         </thead>
         <tbody>
         ";
-        // line 37
+        // line 33
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "entities"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 38
+            // line 34
             echo "            <tr>
                 <td><a href=\"";
-            // line 39
+            // line 35
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("usuario_show_control", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "</a></td>
                 <td>";
-            // line 40
+            // line 36
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "nombres"), "html", null, true);
             echo "</td>
                 <td>";
-            // line 41
+            // line 37
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "apellidos"), "html", null, true);
             echo "</td>
                 <td>";
-            // line 42
+            // line 38
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "cedula"), "html", null, true);
             echo "</td>
                 <td>
                 <ul>
                     <li>
                         <a href=\"";
-            // line 46
+            // line 42
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("usuario_show_control", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\"><i class=\"icon-user icon-eye-open\"></i></a>
 
                         <a href=\"";
-            // line 48
+            // line 44
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("usuario_edit_control", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\"><i class=\"icon-user icon-edit\"></i></a>
                     </li>
@@ -107,7 +103,7 @@ class __TwigTemplate_627046f18051a2dfdb7650709f896c95 extends Twig_Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 55
+        // line 51
         echo "
 
         </tbody>
@@ -136,6 +132,6 @@ class __TwigTemplate_627046f18051a2dfdb7650709f896c95 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  124 => 6,  121 => 5,  111 => 55,  98 => 48,  93 => 46,  86 => 42,  82 => 41,  78 => 40,  72 => 39,  69 => 38,  65 => 37,  34 => 8,  32 => 5,  29 => 3,);
+        return array (  120 => 6,  117 => 5,  107 => 51,  94 => 44,  89 => 42,  82 => 38,  78 => 37,  74 => 36,  68 => 35,  65 => 34,  61 => 33,  34 => 8,  32 => 5,  29 => 3,);
     }
 }

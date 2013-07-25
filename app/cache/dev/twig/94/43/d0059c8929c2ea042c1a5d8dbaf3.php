@@ -13,6 +13,7 @@ class __TwigTemplate_9443d0059c8929c2ea042c1a5d8dbaf3 extends Twig_Template
             'title' => array($this, 'block_title'),
             'menu' => array($this, 'block_menu'),
             'body' => array($this, 'block_body'),
+            'cedula' => array($this, 'block_cedula'),
         );
     }
 
@@ -73,7 +74,7 @@ class __TwigTemplate_9443d0059c8929c2ea042c1a5d8dbaf3 extends Twig_Template
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "cedula"), 'errors');
         echo "</div>
                     <div class=\"labels\">Cedula:</div>
-                    <div class=\"widgets\">";
+                    <div class=\"widgets\" id=\"cedula\">";
         // line 24
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "cedula"), 'widget');
         echo "</div>
@@ -81,8 +82,22 @@ class __TwigTemplate_9443d0059c8929c2ea042c1a5d8dbaf3 extends Twig_Template
             </div> 
 
 
+
+
        <button class=\"btn\" type=\"submit\">Busqueda</button> 
     </form>
+
+
+
+";
+        // line 36
+        $this->displayBlock('cedula', $context, $blocks);
+        // line 51
+        echo "
+
+
+
+
 
 
  <br><br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br>
@@ -90,10 +105,30 @@ class __TwigTemplate_9443d0059c8929c2ea042c1a5d8dbaf3 extends Twig_Template
 
 
     <script src=\"";
-        // line 37
+        // line 62
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/distribucion/operador_new.js"), "html", null, true);
         echo "\"></script>
 
+";
+    }
+
+    // line 36
+    public function block_cedula($context, array $blocks = array())
+    {
+        // line 37
+        echo "<script language=\"javascript\" type=\"text/javascript\">
+var cedula = \$('#cedula').val();
+\$.ajax(
+{
+type: \"POST\",
+data: \"cedula=\"+cedula;,
+url: \"encontrado\",
+success: function(respuesta){
+alert (respuesta);
+}
+}
+    );
+</script>
 ";
     }
 
@@ -109,6 +144,6 @@ class __TwigTemplate_9443d0059c8929c2ea042c1a5d8dbaf3 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  94 => 37,  78 => 24,  73 => 22,  65 => 17,  59 => 15,  55 => 14,  46 => 8,  43 => 7,  39 => 5,  36 => 4,  30 => 3,);
+        return array (  119 => 37,  116 => 36,  109 => 62,  96 => 51,  94 => 36,  79 => 24,  74 => 22,  66 => 17,  60 => 15,  56 => 14,  47 => 8,  44 => 7,  40 => 5,  37 => 4,  31 => 3,);
     }
 }
