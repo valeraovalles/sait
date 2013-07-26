@@ -51,7 +51,8 @@ class OperadorType extends AbstractType
             ->add('user')
             ->add('dialUrl')
             ->add('dialUrl2')
-            
+            ->add('franjatransmision','textarea')
+           
         ;
     }
 

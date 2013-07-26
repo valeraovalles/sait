@@ -24,6 +24,7 @@ class ComodatoType extends AbstractType
             ->add('observacion','textarea')
             ->add('objetocomodato')
             ->add('user')
+            ->add('recibereceptor')
         ;
     }
 

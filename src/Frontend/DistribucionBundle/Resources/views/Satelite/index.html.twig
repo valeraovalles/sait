@@ -1,0 +1,69 @@
+{% extends '::distribucion.html.twig' %}
+{% block title %}Distribución - Lista{% endblock %}
+
+{% block titulobanner %}
+    PÁGINA PRINCIPAL DISTRIBUCIÓN
+{% endblock %}
+
+    
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">PARÁMETROS DE SATELITALES</div>
+
+    {% if app.session.started %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Greenflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Satelite</th>
+                <th>Transponder</th>
+                <th>Frecuencia</th>
+                <th>Polarizacion</th>
+                <th>Modulacion</th>
+                <th>Symbolrate</th>
+                <th>Fec</th>
+                <th>Sid</th>
+                <th>Videopid</th>
+                <th>Audiopid</th>
+                <th>Tvro</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('satelite_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.satelite }}</td>
+                <td>{{ entity.transponder }}</td>
+                <td>{{ entity.frecuencia }}</td>
+                <td>{{ entity.polarizacion }}</td>
+                <td>{{ entity.modulacion }}</td>
+                <td>{{ entity.symbolrate }}</td>
+                <td>{{ entity.fec }}</td>
+                <td>{{ entity.sid }}</td>
+                <td>{{ entity.videopid }}</td>
+                <td>{{ entity.audiopid }}</td>
+                <td>{{ entity.tvro }}</td>
+                <td>
+                        <a href="{{ path('satelite_show', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/busca.png')}}"></a>
+         
+                        <a href="{{ path('satelite_edit', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/edit.png')}}"></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <br>
+        <a class="btn" href="{{ path('satelite_new') }}">Ir a nuevo</a>
+    <br><br>
+
+    {% endblock %}

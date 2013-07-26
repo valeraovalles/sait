@@ -48,7 +48,7 @@ class htmlreporte
 					<table>
 						<tr>
 							<td class='imagen'><img src='/sait/web/images/logo.png' height='150px'></td>
-							<td class='titulo' align='center' valing='middle' colspan='8'>REPORTE INFORMATIVO<br>".$titulo."<br> Fecha desde: ".$datos['fechadesde']." | Fecha hasta: ".$datos['fechahasta']."</td>
+							<td class='titulo' align='center' valing='middle' colspan='8'>REPORTE INFORMATIVO<br>".$titulo."<br> Fecha desde: ".date("d-m-Y",strtotime($datos['fechadesde']))." | Fecha hasta: ".date("d-m-Y",strtotime($datos['fechahasta']))."</td>
 						</tr>
 					</table>
 
