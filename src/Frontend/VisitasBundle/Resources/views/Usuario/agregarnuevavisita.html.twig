@@ -1,0 +1,106 @@
+{% extends '::base.html.twig' %}
+ 
+{% block title %}Control Visitas{% endblock %}
+{% block menu %}
+{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+
+
+    
+    <div class="titulo">AGREGAR NUEVA VISITA</div>
+
+
+
+    <form novalidate action="{{ path('agregarnuevavisita') }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+        {{ form_widget(form2._token) }}
+
+
+            <div id="operador">
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.cedula) }}</div>
+                    <div class="labels">Cedula:</div>
+                    <div class="widgets">{{ form_widget(form.cedula) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form2.fechaentrada) }}</div>
+                    <div class="labels">Fecha Entrada:</div>
+                    <div class="widgets">{{ form_widget(form2.fechaentrada) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form2.horaentrada) }}</div>
+                    <div class="labels">Hora Entrada:</div>
+                    <div class="widgets">{{ form_widget(form2.horaentrada) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form2.contacto) }}</div>
+                    <div class="labels">Contacto:</div>
+                    <div class="widgets">{{ form_widget(form2.contacto) }}</div>
+                </div>
+
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form2.observaciones) }}</div>
+                    <div class="labels">Observaciones:</div>
+                    <div class="widgets">{{ form_widget(form2.observaciones) }}</div>
+                </div>
+
+            </div> 
+
+            <div class="widgets">{{ form_widget(form.nombres) }}</div>
+                    <br><br>
+
+
+       <button class="btn" type="submit">Agregar</button> 
+    </form>
+
+        {% block camara %}
+        <script> 
+        function abrir(url) { 
+        open(url,'','top=300,left=300,width=300,height=300') ; 
+        } 
+        </script> 
+          <a class="btn btn-info" onclick="NewWindow('/sait/web/libs/photobooth/index.php?cedula=', document.getElementById('frontend_visitasbundle_usuariotype_cedula').value,'Ventana','440','570','no');return false;">
+
+
+
+          <i class="icon-user icon-camera"></i> FOTO </a><br><br>
+        <br><br>
+        {% endblock %}
+
+
+
+<script language="JavaScript" type="text/JavaScript">
+var win = null;
+function NewWindow(mypage,cedula, myname,w,h,scroll){
+LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+mypage=mypage+cedula;
+settings =
+'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+win = window.open(mypage,myname,settings)
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+    <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
+{% endblock %}
+
+
+    

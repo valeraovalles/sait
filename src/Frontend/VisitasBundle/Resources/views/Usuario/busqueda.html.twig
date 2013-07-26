@@ -21,13 +21,38 @@
                 <div class="form-contenedor">
                     <div>{{ form_errors(form.cedula) }}</div>
                     <div class="labels">Cedula:</div>
-                    <div class="widgets">{{ form_widget(form.cedula) }}</div>
+                    <div class="widgets" id="cedula">{{ form_widget(form.cedula) }}</div>
                 </div>
             </div> 
 
 
+
+
        <button class="btn" type="submit">Busqueda</button> 
     </form>
+
+
+
+{% block cedula %}
+<script language="javascript" type="text/javascript">
+var cedula = $('#cedula').val();
+$.ajax(
+{
+type: "POST",
+data: "cedula="+cedula;,
+url: "encontrado",
+success: function(respuesta){
+alert (respuesta);
+}
+}
+    );
+</script>
+{% endblock %}
+
+
+
+
+
 
 
  <br><br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br>

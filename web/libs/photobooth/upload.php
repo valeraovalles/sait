@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
 	This file receives the JPEG snapshot
 	from webcam.swf as a POST request.
@@ -40,9 +42,9 @@ if($info['mime'] != 'image/jpeg'){
 
 
 // Moving the temporary file to the originals folder:
-rename($original,'uploads/original/17312612.jpg');
+rename($original,'uploads/original/'.$_GET['cedula']); //concatenar
 
-$original = 'uploads/original/17312612.jpg';
+$original = 'uploads/original/'.$_GET['cedula'];
 
 // Using the GD library to resize 
 // the image into a thumbnail:
@@ -51,7 +53,7 @@ $origImage	= imagecreatefromjpeg($original);
 $newImage	= imagecreatetruecolor(154,110);
 imagecopyresampled($newImage,$origImage,0,0,0,0,154,110,520,370); 
 
-imagejpeg($newImage,'uploads/thumbs/'.$filename);
+//imagejpeg($newImage,'uploads/thumbs/'.$filename);
 
 echo '{"status":1,"message":"Success!","filename":"'.$filename.'"}';
 ?>
