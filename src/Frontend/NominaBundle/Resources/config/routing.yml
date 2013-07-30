@@ -1,0 +1,12 @@
+nomina_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: NominaBundle:Default:index }
+
+
+nomina_formalimentacion:
+    pattern:  /formalimentacion
+    defaults: { _controller: NominaBundle:Default:formalimentacion }
+
+nomina_txtalimentacion:
+    pattern:  /txtalimentacion
+    defaults: { _controller: NominaBundle:Default:txtalimentacion }

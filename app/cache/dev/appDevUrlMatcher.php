@@ -133,6 +133,24 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        if (0 === strpos($pathinfo, '/nomina')) {
+            // nomina_homepage
+            if (0 === strpos($pathinfo, '/nomina/hello') && preg_match('#^/nomina/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'nomina_homepage')), array (  '_controller' => 'Frontend\\NominaBundle\\Controller\\DefaultController::indexAction',));
+            }
+
+            // nomina_formalimentacion
+            if ($pathinfo === '/nomina/formalimentacion') {
+                return array (  '_controller' => 'Frontend\\NominaBundle\\Controller\\DefaultController::formalimentacionAction',  '_route' => 'nomina_formalimentacion',);
+            }
+
+            // nomina_txtalimentacion
+            if ($pathinfo === '/nomina/txtalimentacion') {
+                return array (  '_controller' => 'Frontend\\NominaBundle\\Controller\\DefaultController::txtalimentacionAction',  '_route' => 'nomina_txtalimentacion',);
+            }
+
+        }
+
         if (0 === strpos($pathinfo, '/licencias')) {
             if (0 === strpos($pathinfo, '/licencias/reportes')) {
                 // licencias_homepage
@@ -757,6 +775,62 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'zona_delete')), array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\ZonaController::deleteAction',));
                 }
                 not_zona_delete:
+
+            }
+
+            if (0 === strpos($pathinfo, '/distribucion/satelite')) {
+                // satelite
+                if ($pathinfo === '/distribucion/satelite') {
+                    return array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\SateliteController::indexAction',  '_route' => 'satelite',);
+                }
+
+                // satelite_show
+                if (preg_match('#^/distribucion/satelite/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'satelite_show')), array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\SateliteController::showAction',));
+                }
+
+                // satelite_new
+                if ($pathinfo === '/distribucion/satelite/new') {
+                    return array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\SateliteController::newAction',  '_route' => 'satelite_new',);
+                }
+
+                // satelite_create
+                if ($pathinfo === '/distribucion/satelite/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_satelite_create;
+                    }
+
+                    return array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\SateliteController::createAction',  '_route' => 'satelite_create',);
+                }
+                not_satelite_create:
+
+                // satelite_edit
+                if (preg_match('#^/distribucion/satelite/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'satelite_edit')), array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\SateliteController::editAction',));
+                }
+
+                // satelite_update
+                if (preg_match('#^/distribucion/satelite/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                        $allow = array_merge($allow, array('POST', 'PUT'));
+                        goto not_satelite_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'satelite_update')), array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\SateliteController::updateAction',));
+                }
+                not_satelite_update:
+
+                // satelite_delete
+                if (preg_match('#^/distribucion/satelite/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                        $allow = array_merge($allow, array('POST', 'DELETE'));
+                        goto not_satelite_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'satelite_delete')), array (  '_controller' => 'Frontend\\DistribucionBundle\\Controller\\SateliteController::deleteAction',));
+                }
+                not_satelite_delete:
 
             }
 

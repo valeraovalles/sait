@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityRepository;
 
 use Frontend\DistribucionBundle\Resources\misclases\htmlreporte;
 
+
 /**
  * Reporte controller.
  *
@@ -19,9 +20,12 @@ use Frontend\DistribucionBundle\Resources\misclases\htmlreporte;
 class ReporteController extends Controller
 {
 
+
   
     public function reporteinformativoAction(Request $request)
     {
+
+
 
 
     	$entity = new Operador();
@@ -62,9 +66,9 @@ class ReporteController extends Controller
             $this->get('session')->getFlashBag()->add('notice', 'No existen datos para los parámetros seleccionados.');
             return $this->redirect($this->generateUrl('reporte_informativo'));
         }
-echo '<link href="/sait/web/bundles/distribucion/css/reporteinformativo.css" rel="stylesheet" type="text/css" />';
+/*echo '<link href="/sait/web/bundles/distribucion/css/reporteinformativo.css" rel="stylesheet" type="text/css" />';
 echo $html;
-die;
+die;*/
         if($datos['formato']=='xls'){
 
             header("Content-type: application/octet-stream");
