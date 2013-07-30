@@ -35,12 +35,12 @@
 
 {% block cedula %}
 <script language="javascript" type="text/javascript">
-var cedula = $('#cedula').val();
+var cedula = $('#frontend_visitasbundle_usuariotype_cedula').val();
 $.ajax(
 {
 type: "POST",
 data: "cedula="+cedula;,
-url: "encontrado",
+url: "{{path}}",
 success: function(respuesta){
 alert (respuesta);
 }
