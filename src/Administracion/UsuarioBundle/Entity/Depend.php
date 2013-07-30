@@ -43,7 +43,7 @@ class Depend
     {
         $this->user = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
 
     /**
      * Get id
@@ -100,7 +100,8 @@ class Depend
     {
         $this->user->removeElement($user);
     }
-/**
+
+    /**
      * Get user
      *
      * @return \Doctrine\Common\Collections\Collection 
@@ -109,8 +110,19 @@ class Depend
     {
         return $this->user;
     }
-    public function __toString()
+
+        public function __toString()
     {
-        return $this->getUser();
+        return $this->getNombre();
     }
+    public function serialize()
+    {
+       return serialize($this->getId());
+    }
+ 
+    public function unserialize($data)
+    {
+        $this->id = unserialize($data);
+    }
+
 }

@@ -26,14 +26,23 @@ class UsuarioController extends Controller
      */
     public function indexAction()
     {
+      //  $em = $this->getDoctrine()->getManager();
+
+       // $entities = $em->getRepository('FrontendVisitasBundle:Usuario')->findAll();
+
+
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('FrontendVisitasBundle:Usuario')->findAll();
-        $entities2= $em->getRepository('FrontendVisitasBundle:Visita')->findAll();
+        $dql   = "SELECT v FROM FrontendVisitasBundle:Visita v join v.usuario u ";
+        $query = $em->createQuery($dql);
+        $entities = $query->getResult(); 
+
+
+
+
 
         return $this->render('FrontendVisitasBundle:Usuario:index.html.twig', array(
             'entities' => $entities,
-            'entities2'=> $entities2,
         ));
     }
     /**
@@ -321,6 +330,7 @@ class UsuarioController extends Controller
 
 
     public function agregarnuevavisitaAction(){
+
 
 
 

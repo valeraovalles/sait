@@ -68,11 +68,27 @@ class User implements UserInterface
     private $rol;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Depend", inversedBy="user")
+     * @ORM\JoinTable(name="usuarios.userdepend",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="depend_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $depend;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->rol = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->depend = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -227,6 +243,48 @@ class User implements UserInterface
             $cont++;
         }
           return $roles;
+    }
+
+    /**
+     * Add depend
+     *
+     * @param \Administracion\UsuarioBundle\Entity\Depend $depend
+     * @return User
+     */
+    public function addDepend(\Administracion\UsuarioBundle\Entity\Depend $depend)
+    {
+        $this->depend[] = $depend;
+    
+        return $this;
+    }
+
+    /**
+     * Remove depend
+     *
+     * @param \Administracion\UsuarioBundle\Entity\Depend $depend
+     */
+    public function removeDepend(\Administracion\UsuarioBundle\Entity\Depend $depend)
+    {
+        $this->depend->removeElement($depend);
+    }
+
+    /**
+     * Get depend
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDepend()
+    {
+        return $this->depend;
+    }
+    public function serialize()
+    {
+       return serialize($this->getId());
+    }
+ 
+    public function unserialize($data)
+    {
+        $this->id = unserialize($data);
     }
 
 }
