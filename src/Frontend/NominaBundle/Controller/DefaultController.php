@@ -39,6 +39,8 @@ class DefaultController extends Controller
         $datos=$request->request->all();
         $datos=$datos['form'];
 
+		$tn=array('0'=>'Seleccione...', '21'=>'Trabajadores e','25'=>'Trabajadores o','14'=>'Trabajadores an','24'=>'Contratados','32'=>'Comision de servicios','31'=>'Convenios internacionales','41'=>'Jubilados y pensionados');
+
 		$a=new Conexion;
 		$postgresql_sigefirrhh=$a->postgresql_sigefirrhh();
 
@@ -54,109 +56,104 @@ class DefaultController extends Controller
 		";
 
 		$rs = pg_query($postgresql_sigefirrhh,$query);
-		$row=pg_fetch_array($rs);
-
-		if(empty($row[0])){
-            $this->get('session')->getFlashBag()->add('notice', 'No existen datos para los parámetros seleccionados.');
-            return $this->redirect($this->generateUrl('nomina_formalimentacion'));
-        }
-
 
 		$cadena='';
 		$cont=0;
 		$total_monto=0;
 		while($row=pg_fetch_array($rs)){ 
-		    
-		    $cant=0;
-		    $ceros='';
-		    $monto_x='';
-		    
-		    $nac= trim($row['nacionalidad']);
+
+			$nac= trim($row['nacionalidad']);
 		    $ced= trim($row['cedula']);
 		    $mon= trim($row['neto']);
 		    
-		    // agrego ceros faltantes a las cedulas
+		    //agrego ceros faltantes a las cedulas
+		    $faltante=0;
+		    $ceros='';
 		    $l=strlen($ced);
-		                    
-		    $cant= 10 - $l;
-		    if($cant!=0){
-		        for($i=0;$i<$cant;$i++){
+		    $faltante= 10 - $l;
+		    if($faltante!=0){
+		        for($i=0;$i<$faltante;$i++){
 		            $ceros .= '0';
 		        }
 		                    
 		        $cedula = $ceros.$ced;
 		    }
 		    else $cedula = $ced;
-		    
+			//		    
+
 
 		    // agrego ceros faltantes al monto
+		    $faltante=0;
 		    $ceros='';
 		    $mon = str_replace(",", ".", $mon);
+
+			//monto total de todos los trabajadores
 		    $total_monto=$mon+$total_monto;
+
 		    $monto = number_format($mon, 2, "", ""); 
-		    
-		    
-		    
 		    $l=strlen($monto);
 		                
-		    $cant= 15 - $l;
-		    if($cant!=0){
-		        for($i=0;$i<$cant;$i++){
-		            $ceros .= '0';
+		    $faltante= 15 - $l;
+	        for($i=0;$i<$faltante;$i++){
+		        $ceros .= '0';
 		    }
 
-		    $monto_x = $ceros.$monto;
-		    }
-		    else $monto_x = $monto;
-		        
-		    $cadena .= $nac.$cedula.$monto_x."\r\n";
+		    $monto = $ceros.$monto;
+		    //
+		      
+		    //armo las lineas  
+		    $cadena .= $nac.$cedula.$monto."\r\n";
 		    
 		    $cont++;
 		}                   
 
-
+		if($cont==0){
+            $this->get('session')->getFlashBag()->add('notice', 'No existen datos para los parámetros seleccionados.');
+            return $this->redirect($this->generateUrl('nomina_formalimentacion'));
+        }
 
 		//ENCABEZADO
-		$ceros='';
+
+		//total trabajadores
+	    $faltante=0;
+	    $ceros='';
 		$l=strlen($cont);
 
-		$cant= 6 - $l;
-		if($cant!=0){
-		    for($i=0;$i<$cant;$i++){
+		$faltante= 6 - $l;
+		if($faltante!=0){
+		    for($i=0;$i<$faltante;$i++){
 		        $ceros .= '0';
 		    }
-
 		    $empleados = $ceros.$cont;
 		}
+		//
 
-		//MONTO
-
-		$ceros='';
+		//total MONTO
+	    $faltante=0;
+	    $ceros='';
 		$total_monto = number_format($total_monto, 2, "", "");
 		$l=strlen($total_monto);
-
-		$cant= 15 - $l;
-		if($cant!=0){
-		    for($i=0;$i<$cant;$i++){
+		$faltante= 15 - $l;
+		if($faltante!=0){
+		    for($i=0;$i<$faltante;$i++){
 		        $ceros .= '0';
 		    }
-
 		    $total = $ceros.$total_monto;
 		}
 		   
-		$encabezado="ATMCCBDE900061".$empleados.$total."20121130\r\n";
+		$encabezado="ATMCCBDE900061".$empleados.$total.date("Ymd")."\r\n";
 
 		$cadena_final =$encabezado.$cadena;
 
-		            header("Content-type: application/octet-stream");
-		            //indicamos al navegador que se está devolviendo un archivo
-		            header("Content-Disposition: attachment; filename=informativo.txt");
-		            //con esto evitamos que el navegador lo grabe en su caché
-		            header("Pragma: no-cache");
-		            header("Expires: 0");
-		            //damos salida a la tabla
-		            echo $cadena_final;
-		            die;
+        header("Content-type: application/octet-stream");
+        //indicamos al navegador que se está devolviendo un archivo
+        header("Content-Disposition: attachment; filename=".$tn[$datos['tiponomina']].".txt");
+        //con esto evitamos que el navegador lo grabe en su caché
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        //damos salida a la tabla
+        echo $cadena_final;
+        die;
 
     }
 }
