@@ -243,3 +243,37 @@ zona_delete:
     pattern:  /zona/{id}/delete
     defaults: { _controller: "DistribucionBundle:Zona:delete" }
     requirements: { _method: post|delete }
+
+
+#SATELITE
+
+satelite:
+    pattern:  /satelite
+    defaults: { _controller: "DistribucionBundle:Satelite:index" }
+
+satelite_show:
+    pattern:  /satelite/{id}/show
+    defaults: { _controller: "DistribucionBundle:Satelite:show" }
+
+satelite_new:
+    pattern:  /satelite/new
+    defaults: { _controller: "DistribucionBundle:Satelite:new" }
+
+satelite_create:
+    pattern:  /satelite/create
+    defaults: { _controller: "DistribucionBundle:Satelite:create" }
+    requirements: { _method: post }
+
+satelite_edit:
+    pattern:  /satelite/{id}/edit
+    defaults: { _controller: "DistribucionBundle:Satelite:edit" }
+
+satelite_update:
+    pattern:  /satelite/{id}/update
+    defaults: { _controller: "DistribucionBundle:Satelite:update" }
+    requirements: { _method: post|put }
+
+satelite_delete:
+    pattern:  /satelite/{id}/delete
+    defaults: { _controller: "DistribucionBundle:Satelite:delete" }
+    requirements: { _method: post|delete }

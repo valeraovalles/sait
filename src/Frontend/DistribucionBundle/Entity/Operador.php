@@ -221,6 +221,14 @@ class Operador
      * @ORM\Column(name="fechamodificacion", type="datetime", nullable=true)
      */
     private $fechamodificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="franjatransmision", type="string", length=500, nullable=true)
+      */
+    private $franjatransmision;
+
     /**
      * Constructor
      */
@@ -743,6 +751,30 @@ class Operador
         return $this->fechamodificacion;
     }
     
+
+    /**
+     * Set franjatransmision
+     *
+     * @param string $franjatransmision
+     * @return franjatransmision
+     */
+    public function setFranjatransmision($franjatransmision)
+    {
+        $this->franjatransmision = $franjatransmision;
+    
+        return $this;
+    }
+
+    /**
+     * Get franjatransmision
+     *
+     * @return string 
+     */
+    public function getFranjatransmision()
+    {
+        return $this->franjatransmision;
+    }
+
     public function __toString()
     {
         return $this->getNombre();

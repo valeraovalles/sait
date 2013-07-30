@@ -56,6 +56,12 @@
                     </div>
                 </div>
 
+                <div class="form-contenedor" id="franjatransmision" style="display:none;">
+                    <div>{{ form_errors(edit_form.franjatransmision) }}</div>
+                    <div class="labels">Franja transmision:</div>
+                    <div class="widgets">{{ form_widget(edit_form.franjatransmision) }}</div>
+                </div>
+                 
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.cobertura) }}</div>
                     <div class="labels">Cobertura:</div>
@@ -149,6 +155,12 @@
                     <div class="widgets">{{ form_widget(edit_form.comodato.fechafinacuerdo) }}</div>
                 </div>
 
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.comodato.recibereceptor) }}</div>
+                    <div class="labels">Recibe receptor:</div>
+                    <div class="widgets">{{ form_widget(edit_form.comodato.recibereceptor) }}</div>
+                </div>
+                
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.comodato.observacion) }}</div>
                     <div class="labels">Observacion:</div>

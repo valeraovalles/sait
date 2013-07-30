@@ -90,6 +90,13 @@ class Comodato
     private $fechamodificacion;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="recibereceptor", type="boolean", nullable=true)
+     */
+    private $recibereceptor;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -107,6 +114,30 @@ class Comodato
     {
         return $this->id;
     }
+
+    /**
+     * Set recibereceptor
+     *
+     * @param boolean $recibereceptor
+     * @return Comodato
+     */
+    public function setRecibereceptor($recibereceptor)
+    {
+        $this->recibereceptor = $recibereceptor;
+    
+        return $this;
+    }
+
+    /**
+     * Get estatus
+     *
+     * @return boolean 
+     */
+    public function getRecibereceptor()
+    {
+        return $this->recibereceptor;
+    }
+
 
      /**
      * Set codigo

@@ -3,12 +3,11 @@
 namespace Frontend\LicenciasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Licencias
  *
- * @ORM\Table(name="licencias.licencias_nueva")
+ * @ORM\Table(name="licencias.licencias")
  * @ORM\Entity
  */
 class Licencias
@@ -21,21 +20,26 @@ class Licencias
      * @ORM\GeneratedValue(strategy="SEQUENCE")
      * @ORM\SequenceGenerator(sequenceName="licencias.licencias_id_seq", allocationSize=1, initialValue=1)
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=250, nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="nombre", type="string", length=500, nullable=false)
      */
-    private $nombre;
+    protected $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo", type="string", length=20, nullable=false)
+     */
+    private $codigo;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_compra", type="date", nullable=false)
-     * @Assert\NotBlank()
      */
     private $fechaCompra;
 
@@ -43,51 +47,49 @@ class Licencias
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_vencimiento", type="date", nullable=false)
-     * @Assert\NotBlank()
      */
     private $fechaVencimiento;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="string", length=500, nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="descripcion", type="string", length=250, nullable=false)
      */
     private $descripcion;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="bandera_correo", type="integer", nullable=false)
+     * @ORM\Column(name="bandera_correo", type="integer", nullable=true)
      */
     private $banderaCorreo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tipo", type="string", length=50, nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="tipo", type="string", length=1, nullable=true)
      */
     private $tipo;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="codigo", type="string", length=30, nullable=false)
-     * @Assert\NotBlank()
-     */
-    private $codigo;
-
 
     /**
      * @var \Usuarios.user
      *
      * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuario", referencedColumnName="id")
+     * @ORM\JoinColumn(name="usuario", referencedColumnName="id")
      * })
      */
     private $usuario;
+
+    /**
+     * @var \Usuarios.depend
+     *
+     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\Depend")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="depend", referencedColumnName="id")
+     * })
+     */
+    private $depend;
 
 
 
@@ -122,6 +124,29 @@ class Licencias
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set codigo
+     *
+     * @param string $codigo
+     * @return Licencias
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+    
+        return $this;
+    }
+
+    /**
+     * Get codigo
+     *
+     * @return string 
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
     }
 
     /**
@@ -240,31 +265,6 @@ class Licencias
     }
 
     /**
-     * Set codigo
-     *
-     * @param string $codigo
-     * @return Licencias
-     */
-    public function setCodigo($codigo)
-    {
-        $this->codigo = $codigo;
-    
-        return $this;
-    }
-
-    /**
-     * Get codigo
-     *
-     * @return string 
-     */
-    public function getCodigo()
-    {
-        return $this->codigo;
-    }
-
-    
-
-    /**
      * Set usuario
      *
      * @param \Administracion\UsuarioBundle\Entity\User $usuario
@@ -285,6 +285,38 @@ class Licencias
     public function getUsuario()
     {
         return $this->usuario;
+    }
+
+    /**
+     * Set 
+     *
+     * @param \Administracion\UsuarioBundle\Entity\Depend $depend
+     * @return Licencias
+     */
+    public function setDepend(\Administracion\UsuarioBundle\Entity\Depend $depend = null)
+    {
+        $this->depend = $depend;
+        return $this;
+    }
+
+    /**
+     * Get depend
+     *
+     * @return \Administracion\UsuarioBundle\Entity\Depend 
+     */
+    public function getDepend()
+    {
+        return $this->depend;
+    }
+
+    public function serialize()
+    {
+       return serialize($this->getId());
+    }
+ 
+    public function unserialize($data)
+    {
+        $this->id = unserialize($data);
     }
 
 }

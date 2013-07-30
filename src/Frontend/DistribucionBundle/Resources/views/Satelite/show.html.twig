@@ -1,0 +1,88 @@
+{% extends '::distribucion.html.twig' %}
+
+{% block title %}DISTRIBUCIÓN{% endblock %}
+
+{% block titulobanner %}
+    PAQUETES - CONSULTA
+{% endblock %}
+
+{% block body %}
+
+{{ parent() }}
+
+    <div class="titulo">CONSULTA SATÉLITE</div>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Satelite</th>
+                <td>{{ entity.satelite }}</td>
+            </tr>
+            <tr>
+                <th>Transponder</th>
+                <td>{{ entity.transponder }}</td>
+            </tr>
+            <tr>
+                <th>Frecuencia</th>
+                <td>{{ entity.frecuencia }}</td>
+            </tr>
+            <tr>
+                <th>Polarizacion</th>
+                <td>{{ entity.polarizacion }}</td>
+            </tr>
+            <tr>
+                <th>Modulacion</th>
+                <td>{{ entity.modulacion }}</td>
+            </tr>
+            <tr>
+                <th>Symbolrate</th>
+                <td>{{ entity.symbolrate }}</td>
+            </tr>
+            <tr>
+                <th>Fec</th>
+                <td>{{ entity.fec }}</td>
+            </tr>
+            <tr>
+                <th>Sid</th>
+                <td>{{ entity.sid }}</td>
+            </tr>
+            <tr>
+                <th>Videopid</th>
+                <td>{{ entity.videopid }}</td>
+            </tr>
+            <tr>
+                <th>Audiopid</th>
+                <td>{{ entity.audiopid }}</td>
+            </tr>
+            <tr>
+                <th>Tvro</th>
+                <td>{{ entity.tvro }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <br>
+
+    <a class="btn" href="{{ path('satelite') }}">
+        Ir a lista
+    </a>
+    |
+    <a class="btn" href="{{ path('satelite_edit', { 'id': entity.id }) }}">
+        Ir a editar
+    </a>
+
+    <br><br>
+
+    <form action="{{ path('satelite_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
+
+    
+{% endblock %}
