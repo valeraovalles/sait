@@ -2,4 +2,4 @@ _assetic:
     resource: .
     type: assetic
 _app:
-    resource: /var/www/sait/app/config/routing_dev.yml
+    resource: /var/www/sait_nuevo/sait/app/config/routing_dev.yml

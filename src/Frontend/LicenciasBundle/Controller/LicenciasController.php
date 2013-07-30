@@ -23,9 +23,27 @@ class LicenciasController extends Controller
         $retorno= 'licencias_homepage';
         $em = $this->getDoctrine()->getManager();
 
-        $dql = 'select l.id, l.nombre, l.codigo, l.tipo, l.fechaCompra, l.fechaVencimiento, l.descripcion from LicenciasBundle:Licencias l 
-                order by l.id ASC ';
-        $consulta = $em->createQuery($dql);
+        $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
+
+        /* se hace el dql para traer el objeto de la dependencia, luego se hace un foreach 
+           para obtener la dependencia del usuario que inicio sesión*/
+        $dql = 'select u from UsuarioBundle:User u where u.id =:id';
+        $consulta = $em->createQuery($dql)->setParameter('id', $IdUsuario);
+        $entity_depend = $consulta->getResult();   
+
+        if(!empty($entity_depend)){
+            foreach ($entity_depend[0]->getDepend() as $key) {
+                $dependusuario = $key->getId();
+            }
+        }
+
+       /*realizo el dql para traer todas las licencias*/
+        $dql = 'select l.id, l.nombre, l.codigo, l.tipo, l.fechaCompra, l.fechaVencimiento, l.descripcion 
+                from LicenciasBundle:Licencias l 
+                where l.depend=:dep
+                order by l.id ASC';
+
+        $consulta = $em->createQuery($dql)->setParameter('dep', $dependusuario);
         $entities = $consulta->getResult();
         $hoy = date("Y-m-d", time());
         $mes = date('Y-m-d', strtotime('+8 week'));
@@ -250,9 +268,32 @@ class LicenciasController extends Controller
         $retorno= 'licencias_vencidas';
         $hoy =date("Y-m-d", time());
         $em = $this->getDoctrine()->getManager();
-        $dql = 'select l.id, l.nombre, l.codigo, l.fechaCompra, l.fechaVencimiento, l.descripcion from LicenciasBundle:Licencias l 
-                where l.fechaVencimiento < :hoy order by l.id ASC ';
-        $consulta = $em->createQuery($dql)->setParameter('hoy', $hoy);
+        $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
+
+        /* se hace el dql para traer el objeto de la dependencia, luego se hace un foreach 
+           para obtener la dependencia del usuario que inicio sesión*/
+        $dql = 'select u from UsuarioBundle:User u where u.id =:id';
+        $consulta = $em->createQuery($dql)->setParameter('id', $IdUsuario);
+        $entity_depend = $consulta->getResult();   
+
+        if(!empty($entity_depend)){
+            foreach ($entity_depend[0]->getDepend() as $key) {
+                $dependusuario = $key->getId();
+            }
+        }
+
+
+        $dql = 'select l.id, l.nombre, l.codigo, l.fechaCompra, l.fechaVencimiento, l.descripcion 
+               from LicenciasBundle:Licencias l 
+               where l.fechaVencimiento < :hoy 
+               and l.depend=:dep
+               order by l.id ASC ';
+        $consulta = $em->createQuery($dql)->setParameters(
+                                                            array(
+                                                                    'hoy' => $hoy, 
+                                                                    'dep' => $dependusuario
+                                                                 )
+                                                        );
         $entities = $consulta->getResult();
 
         $rol=0;
@@ -276,12 +317,31 @@ class LicenciasController extends Controller
         $hoy = date("Y-m-d", time());
         $mes_siguiente = date('Y-m-d', strtotime('+8 week'));
         $em = $this->getDoctrine()->getManager();
-        $dql = 'select l.id, l.nombre, l.codigo, l.fechaCompra, l.fechaVencimiento, l.descripcion from LicenciasBundle:Licencias l 
-                where l.fechaVencimiento  between :hoy and :dos_meses order by l.id ASC ';
+
+        $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
+
+        /* se hace el dql para traer el objeto de la dependencia, luego se hace un foreach 
+           para obtener la dependencia del usuario que inicio sesión*/
+        $dql = 'select u from UsuarioBundle:User u where u.id =:id';
+        $consulta = $em->createQuery($dql)->setParameter('id', $IdUsuario);
+        $entity_depend = $consulta->getResult();   
+
+        if(!empty($entity_depend)){
+            foreach ($entity_depend[0]->getDepend() as $key) {
+                $dependusuario = $key->getId();
+            }
+        }
+
+        $dql = 'select l.id, l.nombre, l.codigo, l.fechaCompra, l.fechaVencimiento, l.descripcion 
+               from LicenciasBundle:Licencias l 
+               where l.fechaVencimiento  between :hoy and :dos_meses 
+               and l.depend=:dep
+               order by l.id ASC ';
         $consulta = $em->createQuery($dql)->setParameters(
                                                             array(
                                                                     'hoy' => $hoy, 
-                                                                    'dos_meses' => $mes_siguiente
+                                                                    'dos_meses' => $mes_siguiente,
+                                                                    'dep' => $dependusuario
                                                                  )
                                                          );
         $entities = $consulta->getResult();
