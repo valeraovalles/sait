@@ -20,13 +20,14 @@ use Frontend\DistribucionBundle\Resources\misclases\htmlreporte;
 class ReporteController extends Controller
 {
 
+    public function reportegraficoAction(Request $request)
+    {
 
+        return $this->render('DistribucionBundle:Reportes:grafico.html.twig');
+    }
   
     public function reporteinformativoAction(Request $request)
     {
-
-
-
 
     	$entity = new Operador();
         $form   = $this->createForm(new OperadorType(0), $entity);

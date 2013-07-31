@@ -30,6 +30,10 @@ reporte_informativo:
     pattern:  /reporte/informativo
     defaults: { _controller: "DistribucionBundle:Reporte:reporteinformativo" }
 
+reporte_grafico:
+    pattern:  /reporte/grafico
+    defaults: { _controller: "DistribucionBundle:Reporte:reportegrafico" }
+
 generar_reporte:
     pattern:  /reporte/generar/{tipo}/{formato}
     defaults: { _controller: "DistribucionBundle:Reporte:generarreporte" }
