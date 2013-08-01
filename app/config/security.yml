@@ -19,7 +19,11 @@ security:
             entity: { class: Administracion\UsuarioBundle\Entity\User, property: username }
         
     encoders:
-        Administracion\UsuarioBundle\Entity\User: { algorithm: md5 }
+        Administracion\UsuarioBundle\Entity\User:
+            algorithm: md5
+            iterations:       0
+            encode_as_base64: false
+
         #Symfony\Component\Security\Core\User\User: plaintext
 
     access_control:
