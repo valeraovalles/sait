@@ -19,40 +19,35 @@ contacto:
         _controller: FrameworkBundle:Template:template
         template: 'UsuarioBundle:Default:contacto.html.twig'
 
-sincronizacion:
-    pattern: /sincronizacion
-    defaults: { _controller: UsuarioBundle:Default:sincronizacion }
-    
 #USUARIOS
-
 user:
-    pattern:  /lista
+    pattern:  /usuario/lista
     defaults: { _controller: "UsuarioBundle:User:index" }
 
 user_show:
-    pattern:  /{id}/show
+    pattern:  /usuario/{id}/show
     defaults: { _controller: "UsuarioBundle:User:show" }
 
 user_new:
-    pattern:  /new
+    pattern:  /usuario/new
     defaults: { _controller: "UsuarioBundle:User:new" }
 
 user_create:
-    pattern:  /create
+    pattern:  /usuario/create
     defaults: { _controller: "UsuarioBundle:User:create" }
     requirements: { _method: post }
 
 user_edit:
-    pattern:  /{id}/edit
+    pattern:  /usuario/{id}/edit
     defaults: { _controller: "UsuarioBundle:User:edit" }
 
 user_update:
-    pattern:  /{id}/update
+    pattern:  /usuario/{id}/update
     defaults: { _controller: "UsuarioBundle:User:update" }
     requirements: { _method: post }
 
 user_delete:
-    pattern:  /{id}/delete
+    pattern:  /usuario/{id}/delete
     defaults: { _controller: "UsuarioBundle:User:delete" }
     requirements: { _method: post }
 

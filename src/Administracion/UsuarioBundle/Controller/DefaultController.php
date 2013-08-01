@@ -57,8 +57,4 @@ class DefaultController extends Controller
         ));
     }
 
-    public function sincronizacionAction()
-    {
-        return $this->render('UsuarioBundle:Default:sincronizacion.html.twig');
-    }
 }
