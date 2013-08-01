@@ -23,10 +23,8 @@ class DefaultController extends Controller
           throw new AccessDeniedException();
         }
 
-        $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
-
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('UsuarioBundle:Perfil')->find($IdUsuario);
+        $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
 
         $consulta= $em->createQuery('SELECT p FROM UsuarioBundle:Perfil p
         JOIN p.user u
@@ -36,7 +34,7 @@ class DefaultController extends Controller
         $usuario = $consulta->getSingleResult();
         
         $f=new Funcion;
-        $datos_usuario=$f->datosUsuarioSigefirrhh($entity->getCedula());
+        $datos_usuario=$f->datosUsuarioSigefirrhh($usuario->getCedula());
         
         
         return $this->render('UsuarioBundle:Default:index.html.twig', array('usuario'=>$usuario,'datos'=>$datos_usuario)
