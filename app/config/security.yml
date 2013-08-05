@@ -32,8 +32,6 @@ security:
         - { path: ^/usuario/rol, roles: ROLE_ADMINISTRADOR }
 
         - { path: ^/distribucion, roles: ROLE_DISTRIBUCION }
-        - { path: ^/distribucion/ajax, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/distribucion/ajax_top, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
         - { path:  ^/licencias/reportes, roles:[ROLE_LICENCIAS , ROLE_LICADMIN] }
         - { path: ^/licencias/modif, roles:ROLE_LICADMIN }

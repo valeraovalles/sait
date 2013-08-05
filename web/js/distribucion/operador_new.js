@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     //ajax de pais
     $('#frontend_distribucionbundle_operadortype_pais').change(function(){
-        $('#estado').load('/sait/web/app_dev.php/distribucion/paisestadociudad/'+$("#frontend_distribucionbundle_operadortype_pais").val()+'/estado');
+        $('#estado').load('/sait/web/app.php/distribucion/paisestadociudad/'+$("#frontend_distribucionbundle_operadortype_pais").val()+'/estado');
 
     });
 
