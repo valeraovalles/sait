@@ -71,15 +71,6 @@ class Licencias
      */
     private $tipo;
 
-    /**
-     * @var \Usuarios.user
-     *
-     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\User")
-     * @ORM\JoinColumns({
-     * @ORM\JoinColumn(name="usuario", referencedColumnName="id")
-     * })
-     */
-    private $usuario;
 
     /**
      * @var \Usuarios.depend

@@ -96,6 +96,14 @@ class Comodato
      */
     private $recibereceptor;
 
+        /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecharecepcion", type="date", nullable=true)
+     * @Assert\Date()
+     */
+    private $fecharecepcion;
+
     /**
      * Constructor
      */
@@ -206,6 +214,30 @@ class Comodato
     public function getFechafinacuerdo()
     {
         return $this->fechafinacuerdo;
+    }
+
+
+    /**
+     * Set fecharecepcion
+     *
+     * @param \DateTime $fecharecepcion
+     * @return Comodato
+     */
+    public function setFecharecepcion($fecharecepcion)
+    {
+        $this->fecharecepcion = $fecharecepcion;
+    
+        return $this;
+    }
+
+    /**
+     * Get fecharecepcion
+     *
+     * @return \DateTime 
+     */
+    public function getFecharecepcion()
+    {
+        return $this->fecharecepcion;
     }
 
 

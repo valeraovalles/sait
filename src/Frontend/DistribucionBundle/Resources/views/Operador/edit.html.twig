@@ -162,6 +162,12 @@
                 </div>
                 
                 <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.comodato.fecharecepcion) }}</div>
+                    <div class="labels">Fecha recepción:</div>
+                    <div class="widgets">{{ form_widget(edit_form.comodato.fecharecepcion) }}</div>
+                </div>
+                
+                <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.comodato.observacion) }}</div>
                     <div class="labels">Observacion:</div>
                     <div class="widgets">{{ form_widget(edit_form.comodato.observacion) }}</div>

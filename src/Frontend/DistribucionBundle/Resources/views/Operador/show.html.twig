@@ -166,6 +166,13 @@
                 <div class="dato">{% if entity.comodato.recibereceptor=="1" %}Sí{% else %}No{% endif %}</div>
         </div>
 
+        {% if entity.comodato.fecharecepcion!='' %}
+            <div class="contenedor">
+                <div class="labelshow">Fecha recepción:</div>
+                <div class="dato">{{ entity.comodato.fecharecepcion|date("m/d/Y") }}</div>
+            </div>
+        {% endif %}
+
         <div class="contenedor">
             <div class="labelshow">Objetos de Comodato:</div>
                 <div class="dato">
