@@ -49,23 +49,23 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#form_tipooperador').change(function(){
-            $('#operador').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_pais").val()+'-'+$("#form_tipooperador").val()+'/operador');
+            $('#operador').load('/sait/web/app.php/distribucion/ajax/'+$("#form_pais").val()+'-'+$("#form_tipooperador").val()+'/operador');
         });
 
         $('#form_operador').change(function(){
-            $('#fechadesde').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_operador").val()+'/fechadesde');
+            $('#fechadesde').load('/sait/web/app.php/distribucion/ajax/'+$("#form_operador").val()+'/fechadesde');
         });
 
         $('#form_fechadesde').change(function(){
-            $('#fechahasta').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_operador").val()+'/fechahasta');
+            $('#fechahasta').load('/sait/web/app.php/distribucion/ajax/'+$("#form_operador").val()+'/fechahasta');
         });
 
         $('#form_fechahasta').change(function(){
-            $('#formato').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_operador").val()+'/formato');
+            $('#formato').load('/sait/web/app.php/distribucion/ajax/'+$("#form_operador").val()+'/formato');
         });
 
         $('#form_formato').change(function(){
-            $('#botones').load('/sait/web/app_dev.php/distribucion/ajax/'+$("#form_formato").val()+'/botones');
+            $('#botones').load('/sait/web/app.php/distribucion/ajax/'+$("#form_formato").val()+'/botones');
         });
     });
 </script>
