@@ -64,6 +64,7 @@ class htmlreporte
 							<th>DIAL</th>
 							<th>PAIS</th>
 							<th>ZONA</th>
+							<th>RECEPTOR</th>
 							<th>ABONADOS</th>
 
 							<th>NOMBRES</th>
@@ -92,12 +93,14 @@ class htmlreporte
 							$cont++;
 					}
 
+					if($o->getOperador()->getComodato()->getRecibereceptor()===true) $recibereceptor='Si'; else $recibereceptor='No';
 					$html .="<tr>";
 					$html .="<td rowspan=".$cont.">".$o->getOperador()->getTipooperador()."</td>";
 					$html .="<td rowspan=".$cont.">".$o->getOperador()->getNombre()."</td>";
 					$html .="<td rowspan=".$cont.">".$o->getOperador()->getDialUrl()."</td>";
 					$html .="<td rowspan=".$cont.">".$o->getOperador()->getPais()."</td>";
 					$html .="<td rowspan=".$cont.">".$o->getOperador()->getZona()."</td>";
+					$html .="<td rowspan=".$cont.">".$recibereceptor."</td>";
 					$html .="<td rowspan=".$cont.">".$o->getOperador()->getNumeroabonados()."</td>";
 				}
 
