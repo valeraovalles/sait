@@ -20,7 +20,7 @@ class OperadorRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $dql   = "
-        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
+        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p JOIN o.comodato c
         where o.pais= :idpais and o.fecharegistro>= :fechadesde and o.fecharegistro<= :fechahasta order by o.nombre ASC
         ";
         $query = $em->createQuery($dql);
@@ -35,7 +35,7 @@ class OperadorRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $dql   = "
-        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
+        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p JOIN o.comodato c
         where o.pais= :idpais and o.tipooperador= :idtipooperador and o.fecharegistro>= :fechadesde and o.fecharegistro<= :fechahasta order by o.nombre ASC
         ";
         $query = $em->createQuery($dql);
@@ -50,7 +50,7 @@ class OperadorRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $dql   = "
-        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
+        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p JOIN o.comodato c
         where o.pais= :idpais and o.operador= :idoperador and o.fecharegistro>= :fechadesde and o.fecharegistro<= :fechahasta order by o.nombre ASC
         ";
         $query = $em->createQuery($dql);
@@ -67,7 +67,7 @@ class OperadorRepository extends EntityRepository
 
         $em = $this->getEntityManager();
         $dql   = "
-        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
+        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p JOIN o.comodato c
         where o.pais= :idpais and o.tipooperador= :idtipooperador and o.id= :idoperador and o.fecharegistro>= :fechadesde and o.fecharegistro<= :fechahasta order by o.nombre ASC
         ";
         $query = $em->createQuery($dql);
@@ -84,7 +84,7 @@ class OperadorRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $dql   = "
-        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o 
+        SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.comodato c
         where r.operador= :idoperador order by r.nombres ASC
         ";
         $query = $em->createQuery($dql);
