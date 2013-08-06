@@ -22,7 +22,6 @@ class ReporteController extends Controller
 
     public function reportegraficoAction(Request $request)
     {
-
         return $this->render('DistribucionBundle:Reportes:grafico.html.twig');
     }
   
