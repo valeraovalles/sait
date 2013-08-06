@@ -262,6 +262,17 @@
 
     <br>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //ajax de pais
+            $('#frontend_distribucionbundle_operadortype_pais').change(function(){
+                    var dato = $("#frontend_distribucionbundle_operadortype_pais").val();
+                    var ruta = "{{ path('pais_estado_ciudad', {'id': 'variable','mostrar': 'estado'}) }}";
+                    ruta = ruta.replace("variable", dato);
+                    $('#estado').load(ruta);
+            });
+        });
+    </script>
     <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
 
 {% endblock %}

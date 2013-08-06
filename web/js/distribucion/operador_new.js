@@ -1,12 +1,5 @@
 $(document).ready(function () {
 
-    //ajax de pais
-    $('#frontend_distribucionbundle_operadortype_pais').change(function(){
-        $('#estado').load('/sait/web/app.php/distribucion/paisestadociudad/'+$("#frontend_distribucionbundle_operadortype_pais").val()+'/estado');
-
-    });
-
-
     if($("#frontend_distribucionbundle_operadortype_tipooperador").val()=='3'){
         $("#franjatransmision").show();
     }

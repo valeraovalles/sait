@@ -33,17 +33,19 @@
 
                 <div id="tipooperador"></div>
 
+
     </form>
 
     <script type="text/javascript">
         $(document).ready(function () {
             $('#form_pais').change(function(){
-                $('#tipooperador').load('/sait/web/app.php/distribucion/ajax/'+$("#form_pais").val()+'/tipooperador');
+                var dato = $("#form_pais").val();
+                var ruta = "{{ path('ajax', {'datos': 'variable','mostrar': 'tipooperador'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#tipooperador').load(ruta);
             });
-
         });
     </script>
-
 {% endblock %}
 
 
