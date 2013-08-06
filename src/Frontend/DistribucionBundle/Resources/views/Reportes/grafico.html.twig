@@ -13,6 +13,12 @@
 
     {% if app.session.started %}
         {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Greenflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('alert') %}
             <div class="Redflash-notice">
                 {{ flashMessage }}
             </div>

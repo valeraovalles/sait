@@ -41,6 +41,13 @@ class Operador
     private $numeroabonados;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechamodificacionabonados", type="datetime", nullable=true)
+     */
+    private $fechamodificacionabonados;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="dialUrl", type="string", length=100, nullable=true)
@@ -751,6 +758,29 @@ class Operador
     public function getFechamodificacion()
     {
         return $this->fechamodificacion;
+    }
+
+    /**
+     * Set fechamodificacion
+     *
+     * @param \DateTime $fechamodificacionabonados
+     * @return Comodato
+     */
+    public function setFechamodificacionabonados($fechamodificacionabonados)
+    {
+        $this->fechamodificacionabonados = $fechamodificacionabonados;
+    
+        return $this;
+    }
+
+    /**
+     * Get fechamodificacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechamodificacionabonados()
+    {
+        return $this->fechamodificacionabonados;
     }
     
 

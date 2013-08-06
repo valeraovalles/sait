@@ -43,6 +43,13 @@ class Historico
     private $operador;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechamodificacion", type="date", nullable=true)
+     */
+    private $fechamodificacion;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -75,28 +82,6 @@ class Historico
         return $this->numeroabonados;
     }
 
-     /**
-     * Set observacion
-     *
-     * @param string $observacion
-     * @return Representante
-     */
-    public function setObservacion($observacion)
-    {
-        $this->observacion = $observacion;
-    
-        return $this;
-    }
-
-    /**
-     * Get observacion
-     *
-     * @return string 
-     */
-    public function getObservacion()
-    {
-        return $this->observacion;
-    }
     
     /**
      * Set oprador
@@ -119,6 +104,30 @@ class Historico
     public function getOperador()
     {
         return $this->operador;
+    }
+
+
+    /**
+     * Set fechamodificacion
+     *
+     * @param \DateTime $fechamodificacion
+     * @return Comodato
+     */
+    public function setFechamodificacion($fechamodificacion)
+    {
+        $this->fechamodificacion = $fechamodificacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get fechamodificacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechamodificacion()
+    {
+        return $this->fechamodificacion;
     }
 
     public function __toString()
