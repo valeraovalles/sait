@@ -48,24 +48,40 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
         $('#form_tipooperador').change(function(){
-            $('#operador').load('/sait/web/app.php/distribucion/ajax/'+$("#form_pais").val()+'-'+$("#form_tipooperador").val()+'/operador');
+            var dato = $("#form_pais").val()+"-"+$("#form_tipooperador").val();
+            var ruta = "{{ path('ajax', {'datos': 'variable','mostrar': 'operador'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#operador').load(ruta);
         });
 
         $('#form_operador').change(function(){
-            $('#fechadesde').load('/sait/web/app.php/distribucion/ajax/'+$("#form_operador").val()+'/fechadesde');
+            var dato = $("#form_operador").val();
+            var ruta = "{{ path('ajax', {'datos': 'variable','mostrar': 'fechadesde'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#fechadesde').load(ruta);
         });
 
         $('#form_fechadesde').change(function(){
-            $('#fechahasta').load('/sait/web/app.php/distribucion/ajax/'+$("#form_operador").val()+'/fechahasta');
+            var dato = $("#form_operador").val();
+            var ruta = "{{ path('ajax', {'datos': 'variable','mostrar': 'fechahasta'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#fechahasta').load(ruta);
         });
 
         $('#form_fechahasta').change(function(){
-            $('#formato').load('/sait/web/app.php/distribucion/ajax/'+$("#form_operador").val()+'/formato');
+            var dato = $("#form_operador").val();
+            var ruta = "{{ path('ajax', {'datos': 'variable','mostrar': 'formato'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#formato').load(ruta);
         });
 
         $('#form_formato').change(function(){
-            $('#botones').load('/sait/web/app.php/distribucion/ajax/'+$("#form_formato").val()+'/botones');
+            var dato = $("#form_formato").val();
+            var ruta = "{{ path('ajax', {'datos': 'variable','mostrar': 'botones'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#botones').load(ruta);
         });
     });
 </script>

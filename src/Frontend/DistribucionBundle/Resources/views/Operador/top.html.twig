@@ -34,7 +34,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#form_pais').change(function(){
-                $('#tipooperador').load('/sait/web/app_dev.php/distribucion/ajax_top/'+$("#form_pais").val()+'/tipooperador');
+            var dato = $("#form_pais").val();
+            var ruta = "{{ path('ajax_top', {'datos': 'variable','mostrar': 'tipooperador'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#tipooperador').load(ruta);
+
             });
 
 
