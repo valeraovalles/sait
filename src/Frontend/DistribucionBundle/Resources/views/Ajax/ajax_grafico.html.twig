@@ -1,0 +1,120 @@
+{% if mostrar=='aniomes' %}
+	{% if dato[0]=='a' %}
+		{% if dato[1]=='1' %}
+		    <div class="form-contenedor">
+		        <div class="labels">Año desde:</div>
+				<div class="widgets">{{ form_widget(form.aniodesde) }}</div>
+		    </div>
+		    <div id="aniohasta"></div>
+	    {% elseif dato[1]=='2' %}
+		    <div class="form-contenedor">
+		        <div class="labels">Año hasta:</div>
+				<div class="widgets">{{ form_widget(form.aniohasta) }}</div>
+		    </div>
+		    <div id="pais"></div>
+	    {% endif %}
+    {% endif %}
+
+	{% if dato[0]=='m' %}
+		{% if dato[1]=='1' %}
+		    <div class="form-contenedor">
+		        <div class="labels">Año:</div>
+				<div class="widgets">{{ form_widget(form.anios) }}</div>
+		    </div>
+		    <div id="mesdesde"></div>
+	    {% elseif dato[1]=='2' %}
+		    <div class="form-contenedor">
+		        <div class="labels">Mes desde:</div>
+				<div class="widgets">{{ form_widget(form.mesdesde) }}</div>
+		    </div>
+		    <div id="meshasta"></div>
+	    {% elseif dato[1]=='3' %}
+		    <div class="form-contenedor">
+		        <div class="labels">Mes hasta:</div>
+				<div class="widgets">{{ form_widget(form.meshasta) }}</div>
+		    </div>
+		    <div id="pais"></div>
+		{% endif %}
+    {% endif %}
+{% endif %}
+
+{% if mostrar=='pais' %}
+    <div class="form-contenedor">
+        <div class="labels">Pais:</div>
+		<div class="widgets">{{ form_widget(form.pais) }}</div>
+    </div>	
+    <div id="tipooperador"></div>
+{% endif %}
+
+{% if mostrar=='tipooperador' %}
+    <div class="form-contenedor">
+        <div class="labels">tipo operador:</div>
+		<div class="widgets">{{ form_widget(form.tipooperador) }}</div>
+    </div>	
+    <div id="botones"></div>
+{% endif %}
+
+{% if mostrar=='botones' %}
+        <br>
+        <button class="btn" type="submit">Generar</button> | 
+
+        <a class="btn" href="{{ path('distribucion_homepage') }}">Ir al inicio</a>
+        <br><br>
+{% endif %}
+
+{% if mostrar=='s' %}{% endif %}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#form_aniodesde').change(function(){
+            var dato = $("#form_lapso").val()+'-2-'+$("#form_aniodesde").val();
+            var ruta = "{{ path('ajax_grafico', {'datos': 'variable','mostrar': 'aniomes'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#aniohasta').load(ruta);
+        });
+
+        $('#form_anios').change(function(){
+            var dato = $("#form_lapso").val()+'-2-'+$("#form_anios").val();
+            var ruta = "{{ path('ajax_grafico', {'datos': 'variable','mostrar': 'aniomes'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#mesdesde').load(ruta);
+        });
+
+        $('#form_mesdesde').change(function(){
+            var dato = $("#form_lapso").val()+'-3-'+$("#form_mesdesde").val();
+            var ruta = "{{ path('ajax_grafico', {'datos': 'variable','mostrar': 'aniomes'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#meshasta').load(ruta);
+        });
+
+        $('#form_meshasta').change(function(){
+            var dato = $("#form_meshasta").val();
+            var ruta = "{{ path('ajax_grafico', {'datos': 'variable','mostrar': 'pais'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#pais').load(ruta);
+        });
+
+        $('#form_aniohasta').change(function(){
+            var dato = $("#form_aniohasta").val();
+            var ruta = "{{ path('ajax_grafico', {'datos': 'variable','mostrar': 'pais'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#pais').load(ruta);
+        });
+
+        $('#form_pais').change(function(){
+            var dato = $("#form_pais").val();
+            var ruta = "{{ path('ajax_grafico', {'datos': 'variable','mostrar': 'tipooperador'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#tipooperador').load(ruta);
+        });
+
+        $('#form_tipooperador').change(function(){
+            var dato = $("#form_tipooperador").val();
+            var ruta = "{{ path('ajax_grafico', {'datos': 'variable','mostrar': 'botones'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#botones').load(ruta);
+        });
+
+    });
+</script>

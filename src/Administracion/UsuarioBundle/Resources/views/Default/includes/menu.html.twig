@@ -1,8 +1,6 @@
 <div id='cssmenu'>
 <ul>
    <li class='active'><a href='{{ path('usuario_homepage') }}'><span>INICIO</span></a></li>
-
-   {% if is_granted('ROLE_ADMINISTRADOR') %}
    <li class='has-sub'><a href='#'><span>ADMINISTRACION</span></a>
       <ul>
          <li class='has-sub'><a href='#'><span>USUARIOS</span></a>
@@ -18,9 +16,9 @@
             </ul>
          </li>
 
+         <li><a href='{{ path('sincronizacion') }}'><span>SINCRONIZAR</span></a></li>
       </ul>
    </li>
-   {% endif %}
    <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
    <li class='last'><a href='{{ path('contacto') }}'><span>CONTACTO</span></a></li>
 </ul>

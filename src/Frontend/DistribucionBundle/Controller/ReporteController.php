@@ -22,7 +22,80 @@ class ReporteController extends Controller
 
     public function reportegraficoAction(Request $request)
     {
-        return $this->render('DistribucionBundle:Reportes:grafico.html.twig');
+
+        $lapso=array('s'=>'selecione...','a'=>'Años','m'=>'Meses');
+        $form = $this->createFormBuilder()
+                ->add('lapso', 'choice', array(
+                    'choices'   => $lapso,
+                ))
+        ->getForm();
+
+
+        return $this->render('DistribucionBundle:Reportes:grafico.html.twig',array('form' => $form->createView()));
+
+
+
+        
+        //GRAFICA POR AÑO
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "
+        SELECT o FROM DistribucionBundle:Operador o order by o.fecharegistro ASC  
+        ";
+        $query = $em->createQuery($dql);
+        $operador=$query->getResult(); 
+        
+        foreach ($operador as $op) {
+            $anio=$op->getFecharegistro()->format('Y');
+            //cuento los operadores por mes
+            if(!isset($datos[$anio]))$datos[$anio]=0;
+
+            $datos[$anio]=$datos[$anio]+1;
+
+        }
+
+        $x='';$y='';
+        foreach ($datos as $key => $value) {
+            $x .=$key.',';
+            $y .=$value.',';
+        }
+        $l=strlen($x);
+        $x=substr($x, 0,$l-1);
+        $l=strlen($y);
+        $y=substr($y, 0,$l-1);
+        
+
+
+        /*
+        //GRAFICA POR MES EN UN AÑO
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "
+        SELECT o FROM DistribucionBundle:Operador o order by o.fecharegistro ASC  
+        ";
+        $query = $em->createQuery($dql);
+        $operador=$query->getResult(); 
+        
+        $meses= array('1'=>'Enero','2'=>'Febrero','3'=>'Marzo','4'=>'Abril','5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
+
+        foreach ($operador as $op) {
+            $numeromes=$op->getFecharegistro()->format('n');
+
+            if(!isset($datos[$numeromes]))$datos[$numeromes]=0;
+            $datos[$numeromes]=$datos[$numeromes]+1;
+        }
+        ksort($datos);
+
+        $x='';$y='';
+        foreach ($datos as $key => $value) {
+            $x .="'".$meses[$key]."'".',';
+            $y .=$value.',';
+        }
+        $l=strlen($x);
+        $x=substr($x, 0,$l-1);
+        $l=strlen($y);
+        $y=substr($y, 0,$l-1);
+        */
+        
+        return $this->render('DistribucionBundle:Reportes:grafico.html.twig',array('y'=>$y,'x'=>$x));
     }
   
     public function reporteinformativoAction(Request $request)

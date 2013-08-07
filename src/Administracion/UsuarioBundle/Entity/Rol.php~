@@ -5,12 +5,12 @@ namespace Administracion\UsuarioBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Depend
+ * Rol
  *
- * @ORM\Table(name="usuarios.depend")
+ * @ORM\Table(name="usuarios.rol")
  * @ORM\Entity
  */
-class Depend
+class Rol
 {
     /**
      * @var integer
@@ -18,21 +18,21 @@ class Depend
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="usuarios.depend_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="usuarios.rol_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=200, nullable=false)
+     * @ORM\Column(name="rol", type="string", length=255, nullable=false)
      */
-    private $nombre;
+    private $rol;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="depend")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="rol")
      */
     private $user;
 
@@ -44,7 +44,6 @@ class Depend
         $this->user = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
-
     /**
      * Get id
      *
@@ -56,33 +55,33 @@ class Depend
     }
 
     /**
-     * Set nombre
+     * Set rol
      *
-     * @param string $nombre
-     * @return Depend
+     * @param string $rol
+     * @return Rol
      */
-    public function setNombre($nombre)
+    public function setRol($rol)
     {
-        $this->nombre = $nombre;
+        $this->rol = $rol;
     
         return $this;
     }
 
     /**
-     * Get nombre
+     * Get rol
      *
      * @return string 
      */
-    public function getNombre()
+    public function getRol()
     {
-        return $this->nombre;
+        return $this->rol;
     }
-
-    /**
+    
+/**
      * Add user
      *
      * @param \Administracion\UsuarioBundle\Entity\User $user
-     * @return Depend
+     * @return Ciudad
      */
     public function addUser(\Administracion\UsuarioBundle\Entity\User $user)
     {
@@ -100,7 +99,8 @@ class Depend
     {
         $this->user->removeElement($user);
     }
-/**
+
+    /**
      * Get user
      *
      * @return \Doctrine\Common\Collections\Collection 
@@ -109,8 +109,11 @@ class Depend
     {
         return $this->user;
     }
-    public function __toString()
+
+
+        public function __toString()
     {
-        return $this->getUser();
+        return $this->getRol();
     }
+
 }

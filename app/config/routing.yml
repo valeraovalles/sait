@@ -1,14 +1,14 @@
 nomina:
     resource: "@NominaBundle/Resources/config/routing.yml"
     prefix:   /nomina
-
+    
 licencias:
     resource: "@LicenciasBundle/Resources/config/routing.yml"
     prefix:   /licencias
 
 frontend_visitas:
     resource: "@FrontendVisitasBundle/Resources/config/routing.yml"
-    prefix:   /visitas
+    prefix:   /usuario_control
     
 distribucion:
     resource: "@DistribucionBundle/Resources/config/routing.yml"
