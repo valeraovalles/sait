@@ -24,7 +24,27 @@
             </div>
         {% endfor %}
     {% endif %}
-  
+
+    <div class="form-contenedor">
+        <div class="text-warning">{{ form_errors(form.lapso) }}</div>
+        <div class="labels">Lapso:</div>
+        <div class="widgets">{{ form_widget(form.lapso) }}</div>
+    </div>
+
+    <div id="aniomes"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_lapso').change(function(){
+                var dato = $("#form_lapso").val()+'-1'+'-'+$("#form_lapso").val();
+                var ruta = "{{ path('ajax_grafico', {'datos': 'variable','mostrar': 'aniomes'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#aniomes').load(ruta);
+            });
+        });
+    </script>
+
+  {#
     <script type="text/javascript">
     $(function () {
         $('#container').highcharts({
@@ -37,20 +57,7 @@
                 text: 'CANTIDAD OPERADORES POR MES'
             },
             xAxis: {
-                categories: [
-                    'Enero',
-                    'Febrero',
-                    'Marzo',
-                    'Abril',
-                    'Mayo',
-                    'Junio',
-                    'Julio',
-                    'Agosto',
-                    'Septiembre',
-                    'Octubre',
-                    'Noviembre',
-                    'Diciembre'
-                ],
+                categories: [ {{ x|raw }} ],
                 labels: {
                     rotation: -45,
                     align: 'right',
@@ -75,7 +82,7 @@
 
             series: [{
                 name: 'Operadores',
-                data: [34.4, 21.8, 20.1,2,8,45,23,25,14,10,12,13],
+                data: [{{ y }}],
                 dataLabels: {
                     enabled: true,
                     rotation: -90,
@@ -99,5 +106,5 @@
 <script src="{{ asset('libs/highcharts/js/modules/exporting.js') }}"></script>
 
 <div id="container" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
-
+#}
 {% endblock %}

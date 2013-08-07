@@ -46,6 +46,14 @@
         <a class="btn" href="{{ path('distribucion_homepage') }}">Ir al inicio</a>
 {% endif %}
 
+{% if mostrar=='aniomes' %}
+    <div class="form-contenedor">
+        <div class="labels">Fecha hasta:</div>
+        <div class="widgets">{{ form_widget(form) }}</div>
+    </div>
+    <div id="formato"></div>
+{% endif %}
+
 <script type="text/javascript">
     $(document).ready(function () {
 

@@ -9,7 +9,158 @@ use Doctrine\ORM\EntityRepository;
 
 class AjaxController extends Controller
 {
+    public function ajaxgraficoAction($datos,$mostrar)
+    {
+        $em = $this->getDoctrine()->getManager();
 
+        if($mostrar=='aniomes'){
+
+            $dato=explode("-", $datos);
+            $lapso=$dato[0];
+            $formulario=$dato[1];
+            $valorcampo=$dato[2];
+
+            $dql   = "SELECT o FROM DistribucionBundle:Operador o order by o.fecharegistro ASC";
+            $query = $em->createQuery($dql);
+            $operador=$query->getResult(); 
+            $anios=array('s'=>'Seleccione...'); $meses=array('s'=>'Seleccione...');
+            foreach ($operador as $op) {
+                $mes=$op->getFecharegistro()->format('n');
+                $meses[$mes]=$mes;
+
+                $anio=$op->getFecharegistro()->format('Y');
+                $anios[$anio]=$anio;
+            }
+                $meshasta=$meses;
+                $aniohasta=$anios;
+
+                $mesdesde=$meses;
+                $aniodesde=$anios;
+                
+                ksort($mesdesde);
+                ksort($meshasta);
+                ksort($aniodesde);
+                ksort($aniohasta);
+                ksort($anios);
+
+            if($lapso=='a'){
+                if($formulario==1){
+                    $form = $this->createFormBuilder()
+                            ->add('aniodesde', 'choice', array(
+                                'choices'   => $aniodesde,
+                            ))
+                    ->getForm();
+                }
+                else if($formulario==2){
+                    $form = $this->createFormBuilder()
+                            ->add('aniohasta', 'choice', array(
+                                'choices'   => $aniohasta,
+                            ))
+                    ->getForm(); 
+                }
+            }
+
+            else if($lapso=='m'){
+                if($formulario==1){
+                    $form = $this->createFormBuilder()
+                            ->add('anios', 'choice', array(
+                                'choices'   => $anios,
+                            ))
+                    ->getForm();
+                }
+                else if($formulario==2){
+                    $form = $this->createFormBuilder()
+                            ->add('mesdesde', 'choice', array(
+                                'choices'   => $mesdesde,
+                            ))
+                    ->getForm();
+                }
+                else if($formulario==3){
+                    $form = $this->createFormBuilder()
+                            ->add('meshasta', 'choice', array(
+                                'choices'   => $meshasta,
+                            ))
+                    ->getForm();
+                }
+            }
+        }
+
+        if($mostrar=='pais'){
+            $dato=explode("-", $datos);
+            $valorcampo=$dato[0];
+
+            $dql   = "SELECT o FROM DistribucionBundle:Operador o JOIN o.pais p";
+            $query = $em->createQuery($dql);
+            $operador=$query->getResult();
+
+            $paises=array('s'=>'Seleccione...','t'=>'Todos');
+            foreach ($operador as $value) {
+                
+                $paises[$value->getPais()->getId()]=$value->getPais()->getPais();
+            }
+            ksort($paises);
+            $form = $this->createFormBuilder()
+                    ->add('pais', 'choice', array(
+                        'choices'   => $paises,
+                    ))
+            ->getForm();
+
+        }
+
+        if($mostrar=='tipooperador'){
+
+            $dato=explode("-", $datos);
+            $valorcampo=$dato[0];
+            if($valorcampo!='t')
+                $dql = "select distinct p.id, p.operador from DistribucionBundle:Operador o join o.tipooperador p where o.pais= :idpais order by p.operador ASC";
+            else
+                $dql = "select distinct p.id, p.operador from DistribucionBundle:Operador o join o.tipooperador p order by p.operador ASC";
+            $consulta = $em->createQuery($dql);
+            if($valorcampo!='t')
+                $consulta->setParameter('idpais', $valorcampo);
+            $tipooperador = $consulta->getResult();
+
+            if(!empty($tipooperador)){
+                $array['s']="seleccione";
+                $array['t']="todos";
+                foreach ($tipooperador as $tp) {
+                    $array[$tp['id']]=$tp['operador'];
+                }
+            } else $array=array(''=>'vacio');
+
+                // create a task and give it some dummy data for this example
+                $form = $this->createFormBuilder()
+                    ->add('tipooperador', 'choice', array(
+                        'choices'   => $array,
+           
+                    ))
+                ->getForm();
+
+        }
+
+        if($mostrar=='botones'){
+            $dato=explode("-", $datos);
+            $valorcampo=$dato[0];
+            $array=array();
+            // create a task and give it some dummy data for this example
+            $form = $this->createFormBuilder()
+                    ->add('formato', 'choice', array(
+                        'choices'   => $array,
+           
+                    ))
+                ->getForm();
+        }
+
+        if($valorcampo=='s'){
+            $mostrar='s';
+            $form = $this->createFormBuilder()
+                ->add('vacio', 'choice', array(
+                    'choices'   => array(),
+                ))
+            ->getForm();
+        }
+        return $this->render('DistribucionBundle:Ajax:ajax_grafico.html.twig',array('form'=>$form->createView(),'mostrar'=>$mostrar,'dato'=>$dato));
+    }
     public function topAction($datos,$mostrar)
     {
         $em = $this->getDoctrine()->getManager();
@@ -173,6 +324,6 @@ class AjaxController extends Controller
                 ->getForm();
         }
 
-        return $this->render('DistribucionBundle:Ajax:ajax.html.twig',array('form'=>$form->createView(),'mostrar'=>$mostrar,'mostrar'=>$mostrar));
+        return $this->render('DistribucionBundle:Ajax:ajax.html.twig',array('form'=>$form->createView(),'mostrar'=>$mostrar));
     }
 }

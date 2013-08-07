@@ -7,6 +7,10 @@ ajax:
     pattern:  /ajax/{datos}/{mostrar}
     defaults: { _controller: "DistribucionBundle:Ajax:formulario" }  
 
+ajax_grafico:
+    pattern:  /ajaxgrafico/{datos}/{mostrar}
+    defaults: { _controller: "DistribucionBundle:Ajax:ajaxgrafico" }  
+
 ajax_top:
     pattern:  /ajax_top/{datos}/{mostrar}
     defaults: { _controller: "DistribucionBundle:Ajax:top" }  
