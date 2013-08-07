@@ -29,20 +29,6 @@ class Depend
      */
     private $nombre;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="depend")
-     */
-    private $user;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
 
     /**
@@ -77,52 +63,4 @@ class Depend
     {
         return $this->nombre;
     }
-
-    /**
-     * Add user
-     *
-     * @param \Administracion\UsuarioBundle\Entity\User $user
-     * @return Depend
-     */
-    public function addUser(\Administracion\UsuarioBundle\Entity\User $user)
-    {
-        $this->user[] = $user;
-    
-        return $this;
-    }
-
-    /**
-     * Remove user
-     *
-     * @param \Administracion\UsuarioBundle\Entity\User $user
-     */
-    public function removeUser(\Administracion\UsuarioBundle\Entity\User $user)
-    {
-        $this->user->removeElement($user);
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-        public function __toString()
-    {
-        return $this->getNombre();
-    }
-    public function serialize()
-    {
-       return serialize($this->getId());
-    }
- 
-    public function unserialize($data)
-    {
-        $this->id = unserialize($data);
-    }
-
 }

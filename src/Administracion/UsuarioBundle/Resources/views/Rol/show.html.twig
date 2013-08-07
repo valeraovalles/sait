@@ -5,12 +5,10 @@
 {{ parent() }}
 <div class="titulo">ROL</div>
 
-{% if app.session.started %}
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="Greenflash-notice">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
+{% if app.session.hasFlash('notice') %}
+    <div class="flash-notice">
+        {{ app.session.flash('notice') }}
+    </div>
 {% endif %}
 <br>
 
