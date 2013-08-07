@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Licencias
  *
- * @ORM\Table(name="licencias.licencias_nueva")
+ * @ORM\Table(name="licencias.licencias")
  * @ORM\Entity
  */
 class Licencias

@@ -8,6 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\LicenciasBundle\Entity\Licencias;
 use Frontend\LicenciasBundle\Form\LicenciasType;
 
+use Administracion\UsuarioBundle\Entity\Perfil;
+use Administracion\UsuarioBundle\Entity\User;
+
 /**
  * Licencias controller.
  *
@@ -35,11 +38,11 @@ class LicenciasController extends Controller
             $rol = 1;
         }
         return $this->render('LicenciasBundle:Licencias:index.html.twig', array(
-            'entities' => $entities,
-            'retorno' => $retorno,
-            'rol' => $rol,
-            'hoy' => $hoy,
-            'mes' => $mes
+            'entities'  => $entities,
+            'retorno'   => $retorno,
+            'rol'       => $rol,
+            'hoy'       => $hoy,
+            'mes'       => $mes
         ));
     }
     /**
@@ -72,15 +75,15 @@ class LicenciasController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('licencias_show', array('id' => $entity->getId(), 
+            return $this->redirect($this->generateUrl('licencias_show', array('id'      => $entity->getId(), 
                                                                                'retorno'=>$retorno,
-                                                                               'rol' => $rol
+                                                                               'rol'    => $rol
                                                                              )));
         }
         return $this->render('LicenciasBundle:Licencias:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            'rol' => $rol
+            'entity'    => $entity,
+            'form'      => $form->createView(),
+            'rol'       => $rol
         ));
     }
 
@@ -102,7 +105,7 @@ class LicenciasController extends Controller
         return $this->render('LicenciasBundle:Licencias:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'rol' => $rol,
+            'rol'    => $rol,
         ));
     }
 
@@ -122,6 +125,9 @@ class LicenciasController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
         
+        $user_licencia = $entity->getUsuario();
+        $perfil_user_lic = $em->getRepository('UsuarioBundle:Perfil')->find($user_licencia);
+
         $rol=0;
         if($this->get('security.context')->isGranted('ROLE_LICADMIN'))
         {
@@ -131,7 +137,8 @@ class LicenciasController extends Controller
         return $this->render('LicenciasBundle:Licencias:show.html.twig', array(
             'entity'      => $entity,
             'retorno'     => $retorno,
-            'rol' => $rol,
+            'rol'         => $rol,
+            'perfil'      => $perfil_user_lic,
             'delete_form' => $deleteForm->createView(),        
             ));
     }
@@ -191,9 +198,9 @@ class LicenciasController extends Controller
         $editForm = $this->createForm(new LicenciasType(), $entity);
         $editForm->bind($request);
 
-            $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
-          $nombre_usuario = $em->getRepository('UsuarioBundle:User')->find($IdUsuario);
-          $bandera_correo = 2;
+        $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $nombre_usuario = $em->getRepository('UsuarioBundle:User')->find($IdUsuario);
+        $bandera_correo = 1;
 
           $entity->setBanderaCorreo($bandera_correo);
           $entity->setUsuario($nombre_usuario);
@@ -202,9 +209,9 @@ class LicenciasController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('licencias_edit', array(
-                                'id' => $id, 
-                                'rol' =>$rol, 
-                                'retorno' => $retorno
+                                'id'        => $id, 
+                                'rol'       =>$rol, 
+                                'retorno'   => $retorno
                                 )));
     }
     /**
@@ -227,7 +234,7 @@ class LicenciasController extends Controller
             $retorno='licencias_homepage';
 
            return $this->redirect($this->generateUrl('licencias_homepage', array('entities' => $entities, 
-                                                                               'retorno'=>$retorno
+                                                                                 'retorno'  =>$retorno
                                                                              )));
     }
 
@@ -264,8 +271,8 @@ class LicenciasController extends Controller
         return $this->render('LicenciasBundle:Licencias:vencidas.html.twig',
                                 array(
                                           'entities' => $entities,
-                                           'retorno'=>$retorno,
-                                           'rol' => $rol
+                                           'retorno' =>$retorno,
+                                           'rol'     => $rol
                                      )
                             );
     }
@@ -280,7 +287,7 @@ class LicenciasController extends Controller
                 where l.fechaVencimiento  between :hoy and :dos_meses order by l.id ASC ';
         $consulta = $em->createQuery($dql)->setParameters(
                                                             array(
-                                                                    'hoy' => $hoy, 
+                                                                    'hoy'       => $hoy, 
                                                                     'dos_meses' => $mes_siguiente
                                                                  )
                                                          );
@@ -293,8 +300,8 @@ class LicenciasController extends Controller
         return $this->render('LicenciasBundle:Licencias:porvencer.html.twig',
                                 array(
                                           'entities' => $entities,
-                                           'retorno'=>$retorno,
-                                           'rol'=>$rol
+                                           'retorno' =>$retorno,
+                                           'rol'     =>$rol
                                      )
                             );
     }
