@@ -3,6 +3,7 @@
 namespace Frontend\DistribucionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Satelite
@@ -26,6 +27,7 @@ class Satelite
      * @var string
      *
      * @ORM\Column(name="satelite", type="string", length=200, nullable=false)
+     * @Assert\NotBlank()
      */
     private $satelite;
 
@@ -33,6 +35,7 @@ class Satelite
      * @var string
      *
      * @ORM\Column(name="transponder", type="string", length=50, nullable=false)
+     * @Assert\NotBlank()
      */
     private $transponder;
 
@@ -40,6 +43,7 @@ class Satelite
      * @var string
      *
      * @ORM\Column(name="frecuencia", type="string", length=50, nullable=false)
+     * @Assert\NotBlank()
      */
     private $frecuencia;
 
@@ -47,6 +51,7 @@ class Satelite
      * @var string
      *
      * @ORM\Column(name="polarizacion", type="string", length=50, nullable=false)
+     * @Assert\NotBlank()
      */
     private $polarizacion;
 
@@ -54,6 +59,7 @@ class Satelite
      * @var string
      *
      * @ORM\Column(name="modulacion", type="string", length=50, nullable=false)
+     * @Assert\NotBlank()
      */
     private $modulacion;
 
@@ -61,6 +67,7 @@ class Satelite
      * @var string
      *
      * @ORM\Column(name="symbolrate", type="string", length=50, nullable=false)
+     * @Assert\NotBlank()
      */
     private $symbolrate;
 

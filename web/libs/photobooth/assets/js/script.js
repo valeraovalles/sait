@@ -11,9 +11,8 @@ $(document).ready(function(){
 		Setting up the web camera
 	----------------------------------*/
 
-
 	webcam.set_swf_url('assets/webcam/webcam.swf');
-	webcam.set_api_url('upload.php');	// The upload script
+	webcam.set_api_url('upload.php?cedula='+document.getElementById('cedula').value);	// The upload script
 	webcam.set_quality(80);				// JPEG Photo Quality
 	webcam.set_shutter_sound(true, 'assets/webcam/shutter.mp3');
 
@@ -48,6 +47,7 @@ $(document).ready(function(){
 	});
 	
 	$('#uploadButton').click(function(){
+
 		webcam.upload();
 		webcam.reset();
 		togglePane();

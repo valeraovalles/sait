@@ -1,13 +1,17 @@
 {% extends '::base.html.twig' %}
  
 {% block title %}Control Visitas{% endblock %}
-
+{% block menu %}
+{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
+{% endblock %}
 {% block body -%}
     {{ parent() }}
+
+
     
     <div class="titulo">Buscar Usuario</div>
 
-    <form novalidate action="{{ path('usuario_busqueda') }}" method="post" 
+    <form novalidate action="{{ path('usuario_busqueda_control') }}" method="post" 
     {{ form_enctype(form) }}>
 
         {{ form_widget(form._token) }}
@@ -17,18 +21,38 @@
                 <div class="form-contenedor">
                     <div>{{ form_errors(form.cedula) }}</div>
                     <div class="labels">Cedula:</div>
-                    <div class="widgets">{{ form_widget(form.cedula) }}</div>
+                    <div class="widgets" id="cedula">{{ form_widget(form.cedula) }}</div>
                 </div>
             </div> 
 
-<div class="widgets">{{ form_widget(form.nombres) }}</div>
-
-<div class="widgets">{{ form_widget(form.apellidos) }}</div>
 
 
-       
+
        <button class="btn" type="submit">Busqueda</button> 
     </form>
+
+
+
+{% block cedula %}
+<script language="javascript" type="text/javascript">
+var cedula = $('#frontend_visitasbundle_usuariotype_cedula').val();
+$.ajax(
+{
+type: "POST",
+data: "cedula="+cedula;,
+url: "{{path}}",
+success: function(respuesta){
+alert (respuesta);
+}
+}
+    );
+</script>
+{% endblock %}
+
+
+
+
+
 
 
  <br><br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br>

@@ -1,0 +1,30 @@
+satelite:
+    pattern:  /
+    defaults: { _controller: "DistribucionBundle:Satelite:index" }
+
+satelite_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "DistribucionBundle:Satelite:show" }
+
+satelite_new:
+    pattern:  /new
+    defaults: { _controller: "DistribucionBundle:Satelite:new" }
+
+satelite_create:
+    pattern:  /create
+    defaults: { _controller: "DistribucionBundle:Satelite:create" }
+    requirements: { _method: post }
+
+satelite_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "DistribucionBundle:Satelite:edit" }
+
+satelite_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "DistribucionBundle:Satelite:update" }
+    requirements: { _method: post|put }
+
+satelite_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "DistribucionBundle:Satelite:delete" }
+    requirements: { _method: post|delete }

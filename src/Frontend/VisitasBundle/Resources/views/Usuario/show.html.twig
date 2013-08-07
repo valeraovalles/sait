@@ -1,42 +1,54 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Usuario</h1>
 
-    <table class="record_properties">
-        <tbody>
+{% block menu %}
+{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
+{% endblock %}
+
+    <h1>Datos del Usuario</h1>
+
+    <br><br>
+
+
+
+
+    <table class="record_properties" border="1" cellspacing="9" cellpadding="5">
+        <thead >
             <tr>
                 <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombres</th>
-                <td>{{ entity.nombres }}</td>
-            </tr>
-            <tr>
-                <th>Apellidos</th>
-                <td>{{ entity.apellidos }}</td>
-            </tr>
-            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
                 <th>Cedula</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.nombres }}</td>
+                <td>{{ entity.apellidos }}</td>
                 <td>{{ entity.cedula }}</td>
             </tr>
+            <tr>
+                  <td colspan="4">
+
+                <img id="licencias" src="{{ asset(filename) }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover">
+
+
+                  </td>
+            </tr>
         </tbody>
-    </table>
+    </table>           
+
+
+
+<br><br>
+
 
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('usuario') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('usuario_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-
+    <li><br>
+        <a class="btn" href="{{ path('control_visitas_usuario') }}">Regresar</a>
+        <a class="btn" href="{{ path('usuario_edit_control', { 'id': entity.id }) }}">Editar</a>
     </li>
 </ul>
 {% endblock %}

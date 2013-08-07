@@ -1,9 +1,15 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+
+{% block menu %}
+{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
+{% endblock %}
+
+
     <h1>Usuario creation</h1>
 
-    <form action="{{ path('usuario_create') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('usuario_create_control') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <p>
             <button type="submit">Create</button>
@@ -12,7 +18,7 @@
 
         <ul class="record_actions">
     <li>
-        <a class="btn" href="{{ path('usuario') }}">
+        <a class="btn" href="{{ path('control_visitas_usuario') }}">
             Back to the list
         </a>
     </li>

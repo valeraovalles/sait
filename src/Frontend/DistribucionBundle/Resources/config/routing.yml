@@ -2,16 +2,18 @@ distribucion_homepage:
     pattern:  /inicio
     defaults: { _controller: DistribucionBundle:Default:index }
 
+#AJAX
 ajax:
     pattern:  /ajax/{datos}/{mostrar}
     defaults: { _controller: "DistribucionBundle:Ajax:formulario" }  
 
-
+ajax_top:
+    pattern:  /ajax_top/{datos}/{mostrar}
+    defaults: { _controller: "DistribucionBundle:Ajax:top" }  
 
 pais_estado_ciudad:
     pattern:  /paisestadociudad/{id}/{mostrar}
     defaults: { _controller: "DistribucionBundle:Operador:paisestadociudad" }  
-
 
 xx:
     pattern: /xx
@@ -28,11 +30,19 @@ reporte_informativo:
     pattern:  /reporte/informativo
     defaults: { _controller: "DistribucionBundle:Reporte:reporteinformativo" }
 
+reporte_grafico:
+    pattern:  /reporte/grafico
+    defaults: { _controller: "DistribucionBundle:Reporte:reportegrafico" }
+
 generar_reporte:
     pattern:  /reporte/generar/{tipo}/{formato}
     defaults: { _controller: "DistribucionBundle:Reporte:generarreporte" }
 
 # OPERADOR
+operador_top:
+    pattern:  /operador/top
+    defaults: { _controller: "DistribucionBundle:Operador:top" }
+
 operador:
     pattern:  /operador/lista
     defaults: { _controller: "DistribucionBundle:Operador:index" }
@@ -236,4 +246,38 @@ zona_update:
 zona_delete:
     pattern:  /zona/{id}/delete
     defaults: { _controller: "DistribucionBundle:Zona:delete" }
+    requirements: { _method: post|delete }
+
+
+#SATELITE
+
+satelite:
+    pattern:  /satelite
+    defaults: { _controller: "DistribucionBundle:Satelite:index" }
+
+satelite_show:
+    pattern:  /satelite/{id}/show
+    defaults: { _controller: "DistribucionBundle:Satelite:show" }
+
+satelite_new:
+    pattern:  /satelite/new
+    defaults: { _controller: "DistribucionBundle:Satelite:new" }
+
+satelite_create:
+    pattern:  /satelite/create
+    defaults: { _controller: "DistribucionBundle:Satelite:create" }
+    requirements: { _method: post }
+
+satelite_edit:
+    pattern:  /satelite/{id}/edit
+    defaults: { _controller: "DistribucionBundle:Satelite:edit" }
+
+satelite_update:
+    pattern:  /satelite/{id}/update
+    defaults: { _controller: "DistribucionBundle:Satelite:update" }
+    requirements: { _method: post|put }
+
+satelite_delete:
+    pattern:  /satelite/{id}/delete
+    defaults: { _controller: "DistribucionBundle:Satelite:delete" }
     requirements: { _method: post|delete }

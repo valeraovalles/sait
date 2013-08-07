@@ -1,0 +1,62 @@
+{% if mostrar=='tipooperador' %}
+    <div class="form-contenedor">
+        <div class="labels">Tipo Operador:</div>
+		<div class="widgets">{{ form_widget(form.tipooperador) }}</div>
+    </div>
+    <div id="top"></div>
+{% endif %}
+
+{% if mostrar=='top' %}
+
+	<div class='titulo'>TOP 5</div>
+	
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>País</th>
+                <th>Tipo operador</th>
+                <th>Estatus</th>
+                <th>Abonados</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in datos %}
+            <tr {% if loop.index is odd %}style="background-color: #e9f5fe;"{% endif %}>
+                <td>{{ entity.operador.id }}</td>
+                <td style="width:400px;">{{ entity.operador.nombre }}</td>
+                <td>{{ entity.operador.pais.pais }}</td>
+                <td>{{ entity.operador.tipooperador.operador }}</td>
+                <td>{% if entity.operador.estatus == 1 %} Activo {% else %} Inactivo {% endif %}</td>
+                <td>{{ entity.operador.numeroabonados }}</td>
+                <td>
+                        <a href="{{ path('operador_show', { 'id': entity.operador.id }) }}"><img width="15px" src="{{ asset('images/busca.png')}}"></a>
+         
+                        <a href="{{ path('operador_edit', { 'id': entity.operador.id }) }}"><img width="15px" src="{{ asset('images/edit.png')}}"></a>
+                </td>
+            </tr>
+
+
+            {% else %}
+
+                <tr><td colspan="6" style="text-align:center">NO EXISTEN DATOS PARA MOSTRAR</td></tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#form_tipooperador').change(function(){
+            var dato = $("#form_pais").val()+"-"+$("#form_tipooperador").val();
+            var ruta = "{{ path('ajax_top', {'datos': 'variable','mostrar': 'top'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#top').load(ruta);
+        });
+
+    });
+</script>
+

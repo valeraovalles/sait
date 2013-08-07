@@ -11,7 +11,7 @@
 {% block body %}
     {{ parent() }}
 
-    <div class="titulo">EDITAR OPERADOR {{ entity.nombre | upper}}</div>
+    <div class="titulo">EDITAR OPERADOR {{ entity.nombre | upper}} {% if entity.estatus==1 %}(ACTIVO){% else %}<br><br><div class='Redflash-notice'>INACTIVO</div>{% endif %}</div>
 
     {% if app.session.started %}
         {% for flashMessage in app.session.flashbag.get('notice') %}
@@ -36,6 +36,11 @@
                     <div class="widgets">{{ form_widget(edit_form.nombre) }}</div>
                 </div>
 
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.tipooperador) }}</div>
+                    <div class="labels">Tipo operador:</div>
+                    <div class="widgets">{{ form_widget(edit_form.tipooperador) }}</div>
+                </div>
   
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.pais) }}</div>
@@ -51,6 +56,12 @@
                     </div>
                 </div>
 
+                <div class="form-contenedor" id="franjatransmision" style="display:none;">
+                    <div>{{ form_errors(edit_form.franjatransmision) }}</div>
+                    <div class="labels">Franja transmision:</div>
+                    <div class="widgets">{{ form_widget(edit_form.franjatransmision) }}</div>
+                </div>
+                 
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.cobertura) }}</div>
                     <div class="labels">Cobertura:</div>
@@ -65,19 +76,19 @@
                     
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.numeroabonados) }}</div>
-                    <div class="labels">Nro. Abonados:</div>
+                    <div class="labels" id="usuario">Nro. Abonados:</div>
                     <div class="widgets">{{ form_widget(edit_form.numeroabonados) }}</div>
                 </div>
 
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.dialUrl) }}</div>
-                    <div class="labels">Dial|Url (1):</div>
+                    <div class="labels" id="ubicacion1">Dial1:</div>
                     <div class="widgets">{{ form_widget(edit_form.dialUrl) }}</div>
                 </div>
 
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.dialUrl2) }}</div>
-                    <div class="labels">Dial|Url (2):</div>
+                    <div class="labels" id="ubicacion2">Dial2:</div>
                     <div class="widgets">{{ form_widget(edit_form.dialUrl2) }}</div>
                 </div>
 
@@ -97,12 +108,6 @@
                     <div>{{ form_errors(edit_form.estatus) }}</div>
                     <div class="labels">Activo:</div>
                     <div class="widgets">{{ form_widget(edit_form.estatus) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.tipooperador) }}</div>
-                    <div class="labels">Tipo operador:</div>
-                    <div class="widgets">{{ form_widget(edit_form.tipooperador) }}</div>
                 </div>
 
                 <div class="form-contenedor">
@@ -150,6 +155,18 @@
                     <div class="widgets">{{ form_widget(edit_form.comodato.fechafinacuerdo) }}</div>
                 </div>
 
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.comodato.recibereceptor) }}</div>
+                    <div class="labels">Recibe receptor:</div>
+                    <div class="widgets">{{ form_widget(edit_form.comodato.recibereceptor) }}</div>
+                </div>
+                
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.comodato.fecharecepcion) }}</div>
+                    <div class="labels">Fecha recepción:</div>
+                    <div class="widgets">{{ form_widget(edit_form.comodato.fecharecepcion) }}</div>
+                </div>
+                
                 <div class="form-contenedor">
                     <div>{{ form_errors(edit_form.comodato.observacion) }}</div>
                     <div class="labels">Observacion:</div>
@@ -238,12 +255,24 @@
     <form action="{{ path('operador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar el operador y sus representantes?')">
         <input class="btn" type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button class="btn btn-danger" type="submit">Borrar</button> | 
+        <button class="btn btn-danger" type="submit">Desactivar</button> | 
         <a class="btn" href="{{ path('operador') }}">Ir a lista</a> | 
         <a class="btn" href="{{ path('operador_show', { 'id': entity.id }) }}">Ir a consultar</a>
     </form>
 
     <br>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //ajax de pais
+            $('#frontend_distribucionbundle_operadortype_pais').change(function(){
+                    var dato = $("#frontend_distribucionbundle_operadortype_pais").val();
+                    var ruta = "{{ path('pais_estado_ciudad', {'id': 'variable','mostrar': 'estado'}) }}";
+                    ruta = ruta.replace("variable", dato);
+                    $('#estado').load(ruta);
+            });
+        });
+    </script>
     <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
+
 {% endblock %}

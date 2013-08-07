@@ -41,10 +41,18 @@ class Operador
     private $numeroabonados;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechamodificacionabonados", type="datetime", nullable=true)
+     */
+    private $fechamodificacionabonados;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="dialUrl", type="string", length=100, nullable=true)
      * @Assert\NotBlank()
+     * @Assert\NotEqualTo(value = "0")
      */
     private $dialUrl;
 
@@ -52,6 +60,7 @@ class Operador
      * @var integer
      *
      * @ORM\Column(name="dialUrl2", type="string", length=100, nullable=true)
+     * @Assert\NotEqualTo(value = "0")
      */
     private $dialUrl2;
 
@@ -208,6 +217,27 @@ class Operador
      */
     private $urltwitter;
     
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecharegistro", type="datetime", nullable=true)
+     */
+    private $fecharegistro;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechamodificacion", type="datetime", nullable=true)
+     */
+    private $fechamodificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="franjatransmision", type="string", length=500, nullable=true)
+      */
+    private $franjatransmision;
+
     /**
      * Constructor
      */
@@ -684,6 +714,98 @@ class Operador
         return $this->urltwitter;
     }
 
+    /**
+     * Set fecharegistro
+     *
+     * @param \DateTime $fecharegistro
+     * @return Comodato
+     */
+    public function setFecharegistro($fecharegistro)
+    {
+        $this->fecharegistro = $fecharegistro;
+    
+        return $this;
+    }
+
+    /**
+     * Get fecharegistro
+     *
+     * @return \DateTime 
+     */
+    public function getFecharegistro()
+    {
+        return $this->fecharegistro;
+    }
+
+    /**
+     * Set fechamodificacion
+     *
+     * @param \DateTime $fechamodificacion
+     * @return Comodato
+     */
+    public function setFechamodificacion($fechamodificacion)
+    {
+        $this->fechamodificacion = $fechamodificacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get fechamodificacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechamodificacion()
+    {
+        return $this->fechamodificacion;
+    }
+
+    /**
+     * Set fechamodificacion
+     *
+     * @param \DateTime $fechamodificacionabonados
+     * @return Comodato
+     */
+    public function setFechamodificacionabonados($fechamodificacionabonados)
+    {
+        $this->fechamodificacionabonados = $fechamodificacionabonados;
+    
+        return $this;
+    }
+
+    /**
+     * Get fechamodificacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechamodificacionabonados()
+    {
+        return $this->fechamodificacionabonados;
+    }
+    
+
+    /**
+     * Set franjatransmision
+     *
+     * @param string $franjatransmision
+     * @return franjatransmision
+     */
+    public function setFranjatransmision($franjatransmision)
+    {
+        $this->franjatransmision = $franjatransmision;
+    
+        return $this;
+    }
+
+    /**
+     * Get franjatransmision
+     *
+     * @return string 
+     */
+    public function getFranjatransmision()
+    {
+        return $this->franjatransmision;
+    }
 
     public function __toString()
     {

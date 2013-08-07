@@ -1,0 +1,6 @@
+    {% for entity2 in entities2 %}
+        <td> <a href="{{ { 'fechaentrada': entity2.fechaentrada } }}">{{ entity2.fechaentrada|date('Y-m-d') }}
+        </a></td>
+        <td>{{ entity2.horaentrada|date('H:i:s') }}</td>
+        <td>
+        {% endfor %}

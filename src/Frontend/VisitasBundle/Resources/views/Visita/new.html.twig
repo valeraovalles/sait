@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Visita creation</h1>
 
-    <form action="{{ path('visita_create') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('visita_create_control') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <p>
             <button type="submit">Create</button>
@@ -12,14 +12,14 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('visita') }}">
+        <a href="{{ path('visita_control') }}">
             Back to the list
         </a>
     </li>
 </ul>
 {% endblock %}
 
-
+{% block script %}
 <script> 
 function abrir(url) { 
 open(url,'','top=300,left=300,width=300,height=300') ; 
@@ -28,3 +28,5 @@ open(url,'','top=300,left=300,width=300,height=300') ;
 
 
 <a href="javascript:abrir('/control/sait/web/libs/photobooth/index.html')">TOMAR FOTO</a> 
+
+{% endblock %}

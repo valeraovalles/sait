@@ -9,10 +9,60 @@ use Doctrine\ORM\EntityRepository;
 
 class AjaxController extends Controller
 {
-    public function formularioAction($datos,$mostrar)
+
+    public function topAction($datos,$mostrar)
     {
         $em = $this->getDoctrine()->getManager();
 
+        if($mostrar=='tipooperador'){
+            $id=explode("-", $datos);
+            $id=$id[0];
+            $dql = "select distinct p.id, p.operador from DistribucionBundle:Operador o join o.tipooperador p where o.pais= :idpais order by p.operador ASC";
+            $consulta = $em->createQuery($dql);
+            $consulta->setParameter('idpais', $id);
+            $tipooperador = $consulta->getResult();
+
+            if(!empty($tipooperador)){
+                $array['s']="seleccione";
+                foreach ($tipooperador as $tp) {
+                    $array[$tp['id']]=$tp['operador'];
+                }
+            } else $array=array(''=>'vacio');
+
+            // create a task and give it some dummy data for this example
+            $form = $this->createFormBuilder()
+                    ->add('tipooperador', 'choice', array(
+                        'choices'   => $array,
+           
+                    ))
+                ->getForm();
+
+            return $this->render('DistribucionBundle:Ajax:ajax_top.html.twig',array('form'=>$form->createView(),'mostrar'=>'tipooperador'));
+        }
+
+        if($mostrar=='top'){
+            $datos=explode("-", $datos);
+            $idpais=$datos[0];
+            $idtipooperador=$datos[1];
+
+            $dql   = "
+            SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p
+            where o.pais= :idpais and o.tipooperador= :idtipooperador order by o.numeroabonados DESC
+            ";
+            $query = $em->createQuery($dql)->SetMaxResults(5);
+            $query->setParameter('idpais', $idpais);
+            $query->setParameter('idtipooperador', $idtipooperador);
+            $operadores=$query->getResult();
+
+            return $this->render('DistribucionBundle:Ajax:ajax_top.html.twig',array('datos'=>$operadores, 'mostrar'=>'top'));
+        }
+
+        
+    }
+    public function formularioAction($datos,$mostrar)
+    {
+
+        $em = $this->getDoctrine()->getManager();
 
         if($mostrar=='operador'){
 
@@ -78,6 +128,25 @@ class AjaxController extends Controller
            
                     ))
                 ->getForm();
+        }
+
+
+        else if($mostrar=='fechadesde'){
+
+            $form = $this->createFormBuilder()
+            ->add('fechadesde', 'date', array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+            ))->getForm();
+        }
+
+        else if($mostrar=='fechahasta'){
+
+            $form = $this->createFormBuilder()
+            ->add('fechahasta', 'date', array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+            ))->getForm();
         }
 
         else if($mostrar=='formato'){

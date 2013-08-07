@@ -1,0 +1,53 @@
+{% extends '::nomina.html.twig' %}
+ 
+{% block title %}Nomina - Telesur{% endblock %}
+
+
+{% block titulobanner %}
+    TXT ALIMENTACION
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">INGRESE LOS PARÁMETROS</div>
+
+    {% if app.session.started %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Redflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form class="formNewEditOperador" novalidate action="{{ path('nomina_txtalimentacion')}}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+
+                <div class="form-contenedor">
+                    {{ form_errors(form.tiponomina) }}
+                    <div class="labels">Tipo nómina:</div>
+                    <div class="widgets">{{ form_widget(form.tiponomina) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(form.anio) }}
+                    <div class="labels">Año:</div>
+                    <div class="widgets">{{ form_widget(form.anio) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(form.mes) }}
+                    <div class="labels">Mes:</div>
+                    <div class="widgets">{{ form_widget(form.mes) }}</div>
+                </div>
+
+                <input type="submit">
+    </form>
+
+
+{% endblock %}
+
+
+    

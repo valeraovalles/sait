@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityRepository;
 
 use Frontend\DistribucionBundle\Resources\misclases\htmlreporte;
 
+
 /**
  * Reporte controller.
  *
@@ -19,10 +20,13 @@ use Frontend\DistribucionBundle\Resources\misclases\htmlreporte;
 class ReporteController extends Controller
 {
 
+    public function reportegraficoAction(Request $request)
+    {
+        return $this->render('DistribucionBundle:Reportes:grafico.html.twig');
+    }
   
     public function reporteinformativoAction(Request $request)
     {
-
 
     	$entity = new Operador();
         $form   = $this->createForm(new OperadorType(0), $entity);
@@ -56,8 +60,15 @@ class ReporteController extends Controller
         $em = $this->getDoctrine()->getManager();
         $html=new htmlreporte;
         $html=$html->$tipo($em, $datos);
+        $html=$html;
 
-
+        if($html==false){
+            $this->get('session')->getFlashBag()->add('notice', 'No existen datos para los parámetros seleccionados.');
+            return $this->redirect($this->generateUrl('reporte_informativo'));
+        }
+/*echo '<link href="/sait/web/bundles/distribucion/css/reporteinformativo.css" rel="stylesheet" type="text/css" />';
+echo $html;
+die;*/
         if($datos['formato']=='xls'){
 
             header("Content-type: application/octet-stream");
@@ -75,7 +86,13 @@ class ReporteController extends Controller
 
                 //GENERO EL PDF
                 include("libs/MPDF/mpdf.php");
-                $mpdf=new \mPDF(); 
+                $mpdf=new \mPDF();
+                //izq - der - arr - aba
+                $mpdf->AddPage('L','','','','',10,10,0,0);
+                //$mpdf->AddPage('L','','','','',25,25,55,45,18,12);
+                $stylesheet = file_get_contents('bundles/distribucion/css/reporteinformativo.css');
+                $mpdf->WriteHTML($stylesheet,1);    // The parameter 1 tells that this is css/style only and no body/html/text
+         
                 $mpdf->WriteHTML($html);
                 $mpdf->Output("reporte".".pdf","D");
                 exit;

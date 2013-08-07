@@ -91,10 +91,11 @@
         </p>
     </form>
 
+{#
     <form action="{{ path('representante_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
         <button class="btn btn-danger" type="submit">Borrar</button>
     </form>
-
+#}
 {% endblock %}

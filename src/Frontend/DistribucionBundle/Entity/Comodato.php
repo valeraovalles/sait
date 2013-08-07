@@ -83,6 +83,28 @@ class Comodato
     private $user;
     
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechamodificacion", type="datetime", nullable=true)
+     */
+    private $fechamodificacion;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="recibereceptor", type="boolean", nullable=true)
+     */
+    private $recibereceptor;
+
+        /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecharecepcion", type="date", nullable=true)
+     * @Assert\Date()
+     */
+    private $fecharecepcion;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -100,6 +122,30 @@ class Comodato
     {
         return $this->id;
     }
+
+    /**
+     * Set recibereceptor
+     *
+     * @param boolean $recibereceptor
+     * @return Comodato
+     */
+    public function setRecibereceptor($recibereceptor)
+    {
+        $this->recibereceptor = $recibereceptor;
+    
+        return $this;
+    }
+
+    /**
+     * Get estatus
+     *
+     * @return boolean 
+     */
+    public function getRecibereceptor()
+    {
+        return $this->recibereceptor;
+    }
+
 
      /**
      * Set codigo
@@ -168,6 +214,30 @@ class Comodato
     public function getFechafinacuerdo()
     {
         return $this->fechafinacuerdo;
+    }
+
+
+    /**
+     * Set fecharecepcion
+     *
+     * @param \DateTime $fecharecepcion
+     * @return Comodato
+     */
+    public function setFecharecepcion($fecharecepcion)
+    {
+        $this->fecharecepcion = $fecharecepcion;
+    
+        return $this;
+    }
+
+    /**
+     * Get fecharecepcion
+     *
+     * @return \DateTime 
+     */
+    public function getFecharecepcion()
+    {
+        return $this->fecharecepcion;
     }
 
 
@@ -249,7 +319,30 @@ class Comodato
     {
         return $this->user;
     }
+
+    /**
+     * Set fechamodificacion
+     *
+     * @param \DateTime $fechamodificacion
+     * @return Comodato
+     */
+    public function setFechamodificacion($fechamodificacion)
+    {
+        $this->fechamodificacion = $fechamodificacion;
     
+        return $this;
+    }
+
+    /**
+     * Get fechamodificacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechamodificacion()
+    {
+        return $this->fechamodificacion;
+    }
+
     public function __toString()
     {
         return $this->getObservacion();

@@ -11,19 +11,19 @@
             </tr>
             <tr>
                 <th>Fechaentrada</th>
-                <td>{{ entity.fechaentrada|date('Y-m-d H:i:s') }}</td>
+                <td>{{ entity.fechaentrada|date('Y-m-d') }}</td>
             </tr>
             <tr>
                 <th>Horaentrada</th>
-                <td>{{ entity.horaentrada }}</td>
+                <td>{{ entity.horaentrada|date('H:i:s') }}</td>
             </tr>
             <tr>
                 <th>Fechasalida</th>
-                <td>{{ entity.fechasalida|date('Y-m-d H:i:s') }}</td>
+                <td>{{ entity.fechasalida|date('Y-m-d') }}</td>
             </tr>
             <tr>
                 <th>Horasalida</th>
-                <td>{{ entity.horasalida }}</td>
+                <td>{{ entity.horasalida|date('H:i:s') }}</td>
             </tr>
             <tr>
                 <th>Contacto</th>
@@ -38,17 +38,17 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('visita') }}">
+        <a href="{{ path('visita_control') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('visita_edit', { 'id': entity.id }) }}">
-            Edit
+        <a href="{{ path('visita_edit_control', { 'id': entity.id }) }}">
+            Editar
         </a>
     </li>
     <li>
-        <form action="{{ path('visita_delete', { 'id': entity.id }) }}" method="post">
+        <form action="{{ path('visita_delete_control', { 'id': entity.id }) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
             <button type="submit">Delete</button>

@@ -46,7 +46,11 @@ class RepresentanteController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
+            $str = \date("Y-m-d G:i:s");
+            $fechaactual = \DateTime::createFromFormat('Y-m-d G:i:s', $str);
+            $entity->setFechamodificacion($fechaactual);
             $em->persist($entity);
             $em->flush();
 
@@ -186,7 +190,9 @@ class RepresentanteController extends Controller
         if ($editForm->isValid()) {
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-
+            $str = \date("Y-m-d G:i:s");
+            $fechaactual = \DateTime::createFromFormat('Y-m-d G:i:s', $str);
+            $entity->setFechamodificacion($fechaactual);
             $entity->setUser($perfil);
             $em->persist($entity);
             $em->flush();

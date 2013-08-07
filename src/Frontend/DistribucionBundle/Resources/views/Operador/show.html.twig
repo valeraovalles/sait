@@ -10,7 +10,7 @@
 
 {{ parent() }}
 
-<div class="titulo">EL OPERADOR ({{ entity.nombre | upper }}) ESTÁ ({% if entity.estatus==1 %}ACTIVO{% else %}INACTIVO{% endif %})</div>
+<div class="titulo">EL OPERADOR ({{ entity.nombre | upper }}) ESTÁ {% if entity.estatus==1 %}(ACTIVO){% else %}<br><br><div class='Redflash-notice'>INACTIVO</div>{% endif %}</div>
 
 
     <div id="a"><div class="divisor">DATOS DE OPERADOR</div></div>
@@ -19,6 +19,11 @@
         <div class="contenedor">
             <div class="labelshow">Nombre:</div>
             <div class="dato">{{ entity.nombre }}</div>
+        </div>
+
+        <div class="contenedor">
+                <div class="labelshow">Tipo Operador:</div>
+                <div class="dato">{{ entity.tipooperador }}</div>
         </div>
 
         <div class="contenedor">
@@ -49,18 +54,38 @@
         </div>
 
         <div class="contenedor">
-                <div class="labelshow">Nro abonados:</div>
+                <div class="labelshow">
+                    {% if entity.tipooperador.id == 4 %}
+                        Potenciales televidentes:
+                    {% elseif entity.tipooperador.id == 5 %}
+                        Suscriptores:
+                    {% else %}
+                        Abonados:
+                    {% endif %}
+                </div>
                 <div class="dato">{{ entity.numeroabonados }}</div>
         </div>
 
         <div class="contenedor">
-                <div class="labelshow">Dial|Url 1:</div>
+                <div class="labelshow">
+                    {% if entity.tipooperador.id == 4 %}
+                        Canal1:
+                    {% else %}
+                        Dial1:
+                    {% endif %}
+                </div>
                 <div class="dato">{{ entity.dialurl }}</div>
         </div>
 
         {% if entity.dialurl2!='' %}
             <div class="contenedor">
-                    <div class="labelshow">Dial|Url 2:</div>
+                <div class="labelshow">
+                    {% if entity.tipooperador.id == 4 %}
+                        Canal2:
+                    {% else %}
+                        Dial2:
+                    {% endif %}
+                </div>
                     <div class="dato">{{ entity.dialurl2 }}</div>
             </div>
         {% endif %}
@@ -76,11 +101,6 @@
                     <div class="dato">{{ entity.observacion }}</div>
             </div>
         {% endif %}
-
-        <div class="contenedor">
-                <div class="labelshow">Tipo Operador:</div>
-                <div class="dato">{{ entity.tipooperador }}</div>
-        </div>
 
         <div class="contenedor">
                 <div class="labelshow">Paquete:</div>
@@ -142,15 +162,32 @@
         {% endif %}
 
         <div class="contenedor">
+                <div class="labelshow">Recibe receptor:</div>
+                <div class="dato">{% if entity.comodato.recibereceptor=="1" %}Sí{% else %}No{% endif %}</div>
+        </div>
+
+        {% if entity.comodato.fecharecepcion!='' %}
+            <div class="contenedor">
+                <div class="labelshow">Fecha recepción:</div>
+                <div class="dato">{{ entity.comodato.fecharecepcion|date("m/d/Y") }}</div>
+            </div>
+        {% endif %}
+
+        <div class="contenedor">
             <div class="labelshow">Objetos de Comodato:</div>
                 <div class="dato">
+
                     {% set cont = 0 %}
                     {% set largo = entity.comodato.objetocomodato | length %}
+                    {% if largo==0 %}
+                    Ninguno
+                    {% else %}
                     {% for co in entity.comodato.objetocomodato %} 
                         {% set cont=cont+1 %}
                         {{ co.objeto }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
                     {% endfor %}
-            </div>
+                    {% endif %}
+              </div>
         </div>
     </div>
     </div>
@@ -231,7 +268,7 @@
 <form action="{{ path('operador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar el operador y sus representantes?')">
     <input type="hidden" name="_method" value="DELETE" />
     {{ form_widget(delete_form) }}
-    <button class="btn btn-danger" type="submit">Borrar</button>
+    <button class="btn btn-danger" type="submit">Desactivar</button>
 </form>
 
 <script>

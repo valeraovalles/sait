@@ -24,6 +24,11 @@ class ComodatoType extends AbstractType
             ->add('observacion','textarea')
             ->add('objetocomodato')
             ->add('user')
+            ->add('recibereceptor')
+            ->add('fecharecepcion','date',array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+                ))
         ;
     }
 

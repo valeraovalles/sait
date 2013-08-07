@@ -1,0 +1,91 @@
+{% extends '::distribucion.html.twig' %}
+ 
+{% block title %}Distribucion - Telesur{% endblock %}
+
+
+{% block titulobanner %}
+    OPERADORES
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">CREAR SATÉLITE</div>
+    <form novalidate action="{{ path('satelite_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.satelite) }}</div>
+            <div class="labels">Satelite:</div>
+            <div class="widgets">{{ form_widget(form.satelite) }}</div>
+        </div>  
+            
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.transponder) }}</div>
+            <div class="labels">Transponder:</div>
+            <div class="widgets">{{ form_widget(form.transponder) }}</div>
+        </div>  
+
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.frecuencia) }}</div>
+            <div class="labels">Frecuencia:</div>
+            <div class="widgets">{{ form_widget(form.frecuencia) }}</div>
+        </div>  
+            
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.polarizacion) }}</div>
+            <div class="labels">Polarizacion:</div>
+            <div class="widgets">{{ form_widget(form.polarizacion) }}</div>
+        </div>
+
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.modulacion) }}</div>
+            <div class="labels">Modulacion:</div>
+            <div class="widgets">{{ form_widget(form.modulacion) }}</div>
+        </div>  
+            
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.symbolrate) }}</div>
+            <div class="labels">Symbolrate:</div>
+            <div class="widgets">{{ form_widget(form.symbolrate) }}</div>
+        </div>
+
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.fec) }}</div>
+            <div class="labels">Fec:</div>
+            <div class="widgets">{{ form_widget(form.fec) }}</div>
+        </div>  
+            
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.sid) }}</div>
+            <div class="labels">Sid:</div>
+            <div class="widgets">{{ form_widget(form.sid) }}</div>
+        </div>
+
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.videopid) }}</div>
+            <div class="labels">Videopid:</div>
+            <div class="widgets">{{ form_widget(form.videopid) }}</div>
+        </div>  
+            
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.audiopid) }}</div>
+            <div class="labels">Audiopid:</div>
+            <div class="widgets">{{ form_widget(form.audiopid) }}</div>
+        </div>
+
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.tvro) }}</div>
+            <div class="labels">Tvro:</div>
+            <div class="widgets">{{ form_widget(form.tvro) }}</div>
+        </div>
+
+        <br>
+        <button class="btn" type="submit">Crear</button> |
+        <a class="btn" href="{{ path('satelite') }}">Volver</a>
+    </form>
+
+
+
+{% endblock %}

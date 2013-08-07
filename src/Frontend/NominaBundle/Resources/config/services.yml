@@ -1,0 +1,7 @@
+parameters:
+#    nomina.example.class: Frontend\NominaBundle\Example
+
+services:
+#    nomina.example:
+#        class: %nomina.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
