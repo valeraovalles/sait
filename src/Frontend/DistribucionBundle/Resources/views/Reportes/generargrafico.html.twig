@@ -1,0 +1,91 @@
+ {% extends '::distribucion.html.twig' %}
+ 
+{% block title %}Distribucion - Telesur{% endblock %}
+
+{% block titulobanner %}
+    REPORTES
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">INGRESE LOS PARÁMETROS</div>
+
+    {% if app.session.started %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Greenflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('alert') %}
+            <div class="Redflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
+    <script type="text/javascript">
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'column',
+                margin: [ 50, 50, 100, 80]
+            },
+
+            title: {
+                text: '{{ tituloprincipal|raw }}'
+            },
+            xAxis: {
+                categories: [ {{ x|raw }} ],
+                labels: {
+                    rotation: -45,
+                    align: 'right',
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '{{ titulovertical|raw }}'
+                }
+            },
+            legend: {
+                enabled: true
+            },
+            tooltip: {
+                pointFormat: 'Cantidad: <b>{point.y:.1f}</b>',
+            },
+
+            series: [{
+                name: 'Operadores',
+                data: [{{ y }}],
+                dataLabels: {
+                    enabled: true,
+                    rotation: -90,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    x: 4,
+                    y: 10,
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif',
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }]
+        });
+    });
+    
+    </script>
+
+<script src="{{ asset('libs/highcharts/js/highcharts.js') }}"></script>
+<script src="{{ asset('libs/highcharts/js/modules/exporting.js') }}"></script>
+
+<div id="container" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
+
+{% endblock %}

@@ -38,6 +38,15 @@
     {% endif %}
 {% endif %}
 
+{% if mostrar=='tipografico' %}
+    <div class="form-contenedor">
+        <div class="labels">Tipo gráfico:</div>
+		<div class="widgets">{{ form_widget(form.tipografico) }}</div>
+    </div>	
+    <div id="aniomes"></div>
+{% endif %}
+
+
 {% if mostrar=='pais' %}
     <div class="form-contenedor">
         <div class="labels">Pais:</div>
@@ -67,6 +76,14 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $('#form_tipografico').change(function(){
+            var dato = $("#form_lapso").val()+'-1'+'-'+$("#form_tipografico").val();
+            var ruta = "{{ path('ajax_grafico', {'datos': 'variable','mostrar': 'aniomes'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#aniomes').load(ruta);
+        });
+
         $('#form_aniodesde').change(function(){
             var dato = $("#form_lapso").val()+'-2-'+$("#form_aniodesde").val();
             var ruta = "{{ path('ajax_grafico', {'datos': 'variable','mostrar': 'aniomes'}) }}";

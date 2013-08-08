@@ -25,86 +25,28 @@
         {% endfor %}
     {% endif %}
 
-    <div class="form-contenedor">
-        <div class="text-warning">{{ form_errors(form.lapso) }}</div>
-        <div class="labels">Lapso:</div>
-        <div class="widgets">{{ form_widget(form.lapso) }}</div>
-    </div>
+    <form novalidate action="{{ path('generar_reporte_grafico') }}" method="post" {{ form_enctype(form) }}>
 
-    <div id="aniomes"></div>
+        <div class="form-contenedor">
+            <div class="text-warning">{{ form_errors(form.lapso) }}</div>
+            <div class="labels">Lapso:</div>
+            <div class="widgets">{{ form_widget(form.lapso) }}</div>
+        </div>
+
+        <div id="tipografico"></div>
+    </form>
 
     <script type="text/javascript">
         $(document).ready(function () {
             $('#form_lapso').change(function(){
-                var dato = $("#form_lapso").val()+'-1'+'-'+$("#form_lapso").val();
-                var ruta = "{{ path('ajax_grafico', {'datos': 'variable','mostrar': 'aniomes'}) }}";
+                var dato = $("#form_lapso").val()+'-1-'+$("#form_lapso").val();
+                var ruta = "{{ path('ajax_grafico', {'datos': 'variable','mostrar': 'tipografico'}) }}";
                 ruta = ruta.replace("variable", dato);
-                $('#aniomes').load(ruta);
+                $('#tipografico').load(ruta);
             });
+            
+
         });
     </script>
-
-  {#
-    <script type="text/javascript">
-    $(function () {
-        $('#container').highcharts({
-            chart: {
-                type: 'column',
-                margin: [ 50, 50, 100, 80]
-            },
-
-            title: {
-                text: 'CANTIDAD OPERADORES POR MES'
-            },
-            xAxis: {
-                categories: [ {{ x|raw }} ],
-                labels: {
-                    rotation: -45,
-                    align: 'right',
-                    style: {
-                        fontSize: '13px',
-                        fontFamily: 'Verdana, sans-serif'
-                    }
-                }
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'CANTIDAD OPERADORES'
-                }
-            },
-            legend: {
-                enabled: true
-            },
-            tooltip: {
-                pointFormat: 'Cantidad: <b>{point.y:.1f}</b>',
-            },
-
-            series: [{
-                name: 'Operadores',
-                data: [{{ y }}],
-                dataLabels: {
-                    enabled: true,
-                    rotation: -90,
-                    color: '#FFFFFF',
-                    align: 'right',
-                    x: 4,
-                    y: 10,
-                    style: {
-                        fontSize: '13px',
-                        fontFamily: 'Verdana, sans-serif',
-                        textShadow: '0 0 3px black'
-                    }
-                }
-            }]
-        });
-    });
-    
-    </script>
-
-<script src="{{ asset('libs/highcharts/js/highcharts.js') }}"></script>
-<script src="{{ asset('libs/highcharts/js/modules/exporting.js') }}"></script>
-
-<div id="container" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
-#}
+ 
 {% endblock %}
