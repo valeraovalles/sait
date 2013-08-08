@@ -85,6 +85,20 @@ class AjaxController extends Controller
             }
         }
 
+        if($mostrar=='tipografico'){
+
+            $dato=explode("-", $datos);
+            $valorcampo=$dato[0];
+
+            $tipografico=array('s'=>'Seleccione...','c'=>'Cantidad','a'=>'Abonados');
+            $form = $this->createFormBuilder()
+                    ->add('tipografico', 'choice', array(
+                        'choices'   => $tipografico,
+                    ))
+            ->getForm();
+
+        }
+
         if($mostrar=='pais'){
             $dato=explode("-", $datos);
             $valorcampo=$dato[0];

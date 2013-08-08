@@ -42,6 +42,10 @@ generar_reporte:
     pattern:  /reporte/generar/{tipo}/{formato}
     defaults: { _controller: "DistribucionBundle:Reporte:generarreporte" }
 
+generar_reporte_grafico:
+    pattern:  /reporte/generarreportegrafico
+    defaults: { _controller: "DistribucionBundle:Reporte:generarreportegrafico" }
+
 # OPERADOR
 operador_top:
     pattern:  /operador/top
