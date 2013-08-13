@@ -216,7 +216,7 @@ class porvencer
                                     $cuerpo5.="<td align=center>Licencia</td>";
                                 }elseif ($line['tipo']=='s')
                                 {
-                                    $cuerpol5.="<td align=center>Servicio</td>";
+                                    $cuerpo5.="<td align=center>Servicio</td>";
                                 }
                                 $cuerpo5.="<td align=center>$line[codigo]</td>";
                                 $cuerpo5.="<td align=center>$line[primer_nombre] $line[primer_apellido]</td>";
@@ -254,7 +254,7 @@ class porvencer
                     }
                     if(!empty($cuerpo5)) 
                     {
-                        $html4=$inicio5.$cuerpo5.$fin;
+                        $html5=$inicio5.$cuerpo5.$fin;
                          $html .= $html5.$esp;
                          //   echo $html5."<br>";
                     }
