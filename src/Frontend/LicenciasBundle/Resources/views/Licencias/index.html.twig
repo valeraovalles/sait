@@ -27,7 +27,7 @@
             {% for entity in entities %}
                 <tr>
                     <td align="center"><a href="{{ path('licencias_show', { 'id': entity.id, 'retorno' : retorno }) }}">{{ entity.codigo }}</a></td>
-                    <td>{{ entity.nombre }}</td>
+                    <td align="center">{{ entity.nombre }}</td>
                     <td align="center">{% if entity.fechaCompra %}{{ entity.fechaCompra|date('Y-m-d') }}{% endif %}</td>
                     <td align="center">{% if entity.fechaVencimiento %}{{ entity.fechaVencimiento|date('Y-m-d') }}{% endif %}</td>
                     {% if entity.fechaVencimiento|date('Y-m-d')>hoy and (entity.fechaVencimiento|date('Y-m-d')>mes)  %}
@@ -50,7 +50,6 @@
         </tbody>
     </table>
 <br>
-        <a href="{{ path('reporte_pdf') }}"><img width="40px" src="{{ asset('images/pdf.jpg')}}"></a> &nbsp;
-        <a href="{{ path('reporte_pdf') }}"><img width="40px" src="{{ asset('images/excel.png')}}"></a> &nbsp;
+        <a href="{{ path('reporte_total') }}"><img width="40px" src="{{ asset('images/pdf.jpg')}}"></a> &nbsp;
     <br><br>
 {% endblock %}

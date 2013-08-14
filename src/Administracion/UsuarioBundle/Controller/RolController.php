@@ -141,7 +141,7 @@ class RolController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            $this->get('session')->setFlash('notice', 'Actualizado.');
+            $this->get('session')->getFlashBag()->add('notice', 'Actualización exitosa!');
 
             return $this->redirect($this->generateUrl('rol_show', array('id' => $id)));
         }

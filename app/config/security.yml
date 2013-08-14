@@ -19,6 +19,8 @@ security:
             entity: { class: Administracion\UsuarioBundle\Entity\User, property: username }
         
     encoders:
+       # Administracion\UsuarioBundle\Entity\User: { algorithm: plaintext }
+
         Administracion\UsuarioBundle\Entity\User: 
             algorithm: md5
             iterations:       0
@@ -28,6 +30,12 @@ security:
 
     access_control:
         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/usuario/inicio, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
         - { path: ^/distribucion, roles: ROLE_DISTRIBUCION }
+
+        - { path: ^/usuario, roles: ROLE_ADMINISTRADOR }
+
+
         - { path:  ^/licencias/reportes, roles:[ROLE_LICENCIAS , ROLE_LICADMIN] }
         - { path: ^/licencias/modif, roles:ROLE_LICADMIN }

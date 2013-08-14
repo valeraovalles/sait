@@ -1,3 +1,7 @@
+neto:
+    resource: "@NetoBundle/Resources/config/routing.yml"
+    prefix:   /neto
+
 nomina:
     resource: "@NominaBundle/Resources/config/routing.yml"
     prefix:   /nomina
