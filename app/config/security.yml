@@ -31,6 +31,7 @@ security:
     access_control:
         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/usuario/inicio, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/usuario/contacto, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
         - { path: ^/distribucion, roles: ROLE_DISTRIBUCION }
 
