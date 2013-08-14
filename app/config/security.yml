@@ -28,6 +28,12 @@ security:
 
     access_control:
         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/usuario/inicio, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
         - { path: ^/distribucion, roles: ROLE_DISTRIBUCION }
+
+        - { path: ^/usuario, roles: ROLE_ADMINISTRADOR }
+
+
         - { path:  ^/licencias/reportes, roles:[ROLE_LICENCIAS , ROLE_LICADMIN] }
         - { path: ^/licencias/modif, roles:ROLE_LICADMIN }

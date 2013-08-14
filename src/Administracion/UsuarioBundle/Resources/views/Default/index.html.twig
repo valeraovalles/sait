@@ -13,22 +13,35 @@
 
     {% set datos  %} {% if app.user %} USUARIO: {{ app.user.username | upper }} | NOMBRE: {{ usuario.primerNombre | upper }} | APELLIDO: {{ usuario.primerApellido | upper }} | CEDULA: {{ usuario.cedula | upper }} | SUELDO: {{ datos.sueldo | upper }}{% endif %}{% endset %}
     
-    <div class="titulo"><span id="info" style="cursor:pointer;" data-content={{ datos|json_encode|raw }} title="USUARIO">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }}</span></div>
+    <div class="titulo"><span id="info" style="cursor:pointer;" data-content={{ datos|json_encode|raw }} title="USUARIO">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }} <div class="icon-search"></div></span></div>
 
     <br>
     <div class="jquery" align="left">
 
+            {% if is_granted('ROLE_DISTRIBUCION') %}
             <div class="listado_aplicaciones">
-                <a href="{{ path('distribucion_homepage')}}" onclick="document.form.submit()">DISTRIBUCIÓN<br><img id="neto" src="{{ asset("images/apps/mapamundi.jpg") }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover"></a><br>
+                <a href="{{ path('distribucion_homepage')}}" onclick="document.form.submit()">DISTRIBUCIÓN<br><img id="neto" src="{{ asset("images/apps/mapamundi.jpg") }}" data-placement="bottom" title="DISTRIBUCIÓN" data-trigger="hover"></a><br>
             </div>
+            {% endif %}
+
+            {% if is_granted('ROLE_LICENCIAS') %}
             <div class="listado_aplicaciones">
-              <a href="{{ path('licencias_homepage')}}" onclick="document.form.submit()">LICENCIAS<br><img id="licencias" src="{{ asset("images/licencias/candado.png") }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover"></a>
+              <a href="{{ path('licencias_homepage')}}" onclick="document.form.submit()">LICENCIAS<br><img id="licencias" src="{{ asset("images/licencias/candado.png") }}" data-placement="bottom" title="LICENCIAS" data-trigger="hover"></a>
             </div>
+            {% endif %}
            {# <div class="listado_aplicaciones">
               <a href="http://10.10.0.152/egroupware/login.php?phpgw_forward=%2Findex.php" onclick="document.form.submit()">PROYECTOS<br><img id="licencias" src="{{ asset("images/logo.png") }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover"></a>
             </div> #}
+
+            {% if is_granted('ROLE_VISITAS') %}
             <div class="listado_aplicaciones">
-              <a href="{{ path('control_visitas_usuario')}}" onclick="document.form.submit()">VISITAS<br><img id="licencias" src="{{ asset("images/User_male.png") }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover"></a>
+              <a href="{{ path('control_visitas_usuario')}}" onclick="document.form.submit()">VISITAS<br><img id="licencias" src="{{ asset("images/User_male.png") }}" data-placement="bottom" title="VISITAS" data-trigger="hover"></a>
+            </div>
+            {% endif %}
+
+
+            <div class="listado_aplicaciones">
+              <a href="{{ path('neto_homepage')}}" onclick="document.form.submit()">NETO<br><img id="licencias" src="{{ asset("images/moneda.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
             </div>
    </div>
 
@@ -48,7 +61,7 @@
         });
 
         $(document).ready(function () {
-            $('#info').gips({ 'theme': 'red', placement: 'right',text:{{ datos|json_encode|raw }}, autoHide: true });
+            $('#info').gips({ 'theme': 'red', placement: 'right',text:{{ datos|raw }}, autoHide: true });
         });
 
     </script>
