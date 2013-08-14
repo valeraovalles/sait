@@ -44,11 +44,14 @@ licencias_por_vencer:
     defaults: { _controller: LicenciasBundle:Licencias:porvencer}
 
 #REPORTES
-reporte_pdf:
-    pattern: /reportes/pdf
-    defaults: { _controller:LicenciasBundle:Licencias:vencidas}
+reporte_total:
+    pattern: /reporte/total/pdf
+    defaults: { _controller:LicenciasBundle:Reportes:total}
 
-#CORREO
-correo:
-    pattern: /envio/correo
-    defaults: { _controller:LicenciasBundle:Correo:envio}
+reporte_porvencer_pdf:
+    pattern: /reporte/licencias_por_vencer/pdf
+    defaults: { _controller:LicenciasBundle:Reportes:porvencer}
+
+reporte_vencidas_pdf:
+    pattern: /reportes/licencias_vencidas/pdf
+    defaults: { _controller:LicenciasBundle:Reportes:vencidas}
