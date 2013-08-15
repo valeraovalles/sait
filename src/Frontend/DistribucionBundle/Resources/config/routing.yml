@@ -60,7 +60,7 @@ operador_list:
     defaults: { _controller: "DistribucionBundle:Operador:lista" }
 
 operador_show:
-    pattern:  /{id}/show
+    pattern:  /operador/{id}/show
     defaults: { _controller: "DistribucionBundle:Operador:show" }
 
 operador_new:
@@ -73,16 +73,16 @@ operador_create:
     requirements: { _method: post }
 
 operador_edit:
-    pattern:  /{id}/edit
+    pattern:  /operador/edit/{id}
     defaults: { _controller: "DistribucionBundle:Operador:edit" }
 
 operador_update:
-    pattern:  /{id}/update
+    pattern:  /operador/{id}/update
     defaults: { _controller: "DistribucionBundle:Operador:update" }
     requirements: { _method: post|put }
 
 operador_delete:
-    pattern:  /{id}/delete
+    pattern:  /operador/{id}/delete
     defaults: { _controller: "DistribucionBundle:Operador:delete" }
     requirements: { _method: post|delete }
 
@@ -100,7 +100,7 @@ representante_show:
 #    defaults: { _controller: "DistribucionBundle:Representante:new" }
 
 representante_new_add:
-    pattern:  /representante/{id}/newAdd
+    pattern:  /representante/newAdd/{id}
     defaults: { _controller: "DistribucionBundle:Representante:newAdd" }
 
 representante_create:
@@ -114,7 +114,7 @@ representante_create_add:
     requirements: { _method: post }
 
 representante_edit:
-    pattern:  /representante/{id}/edit
+    pattern:  /representante/edit/{id}
     defaults: { _controller: "DistribucionBundle:Representante:edit" }
 
 representante_update:
@@ -146,7 +146,7 @@ tipooperador_create:
     requirements: { _method: post }
 
 tipooperador_edit:
-    pattern:  /tipooperador/{id}/edit
+    pattern:  /tipooperador/edit/{id}
     defaults: { _controller: "DistribucionBundle:Tipooperador:edit" }
 
 tipooperador_update:
@@ -178,7 +178,7 @@ objetocomodato_create:
     requirements: { _method: post }
 
 objetocomodato_edit:
-    pattern:  /objetocomodato/{id}/edit
+    pattern:  /objetocomodato/edit/{id}
     defaults: { _controller: "DistribucionBundle:Objetocomodato:edit" }
 
 objetocomodato_update:
@@ -243,7 +243,7 @@ zona_create:
     requirements: { _method: post }
 
 zona_edit:
-    pattern:  /zona/{id}/edit
+    pattern:  /zona/edit/{id}
     defaults: { _controller: "DistribucionBundle:Zona:edit" }
 
 zona_update:

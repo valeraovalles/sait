@@ -39,10 +39,11 @@
             </div>
             {% endif %}
 
-
+            {% if is_granted('ROLE_NETO') %}
             <div class="listado_aplicaciones">
               <a href="{{ path('neto_homepage')}}" onclick="document.form.submit()">NETO<br><img id="licencias" src="{{ asset("images/moneda.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
             </div>
+            {% endif %}
    </div>
 
     <br>

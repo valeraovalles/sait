@@ -40,23 +40,27 @@
         </div>
     </div>
 
-    <br>
+    <br>{% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
+        <form action="{{ path('paquete_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button class="btn btn-danger" type="submit">Borrar</button>
+    </form>
 
-    <a class="btn" href="{{ path('paquete') }}">
-        Ir a lista
-    </a>
-    |
+
     <a class="btn" href="{{ path('paquete_edit', { 'id': entity.id }) }}">
         Ir a editar
     </a>
+    |{% endif %}
+    <a class="btn" href="{{ path('paquete') }}">
+        Ir a lista
+    </a>
 
+    
     <br><br>
 
-    <form action="{{ path('paquete_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
-        <input type="hidden" name="_method" value="DELETE" />
-        {{ form_widget(delete_form) }}
-        <button class="btn btn-danger" type="submit">Delete</button>
-    </form>
 
-    <br>
+
+
+
 {% endblock %}

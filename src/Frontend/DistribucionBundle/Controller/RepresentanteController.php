@@ -159,8 +159,11 @@ class RepresentanteController extends Controller
             throw $this->createNotFoundException('Unable to find Representante entity.');
         }
 
+
         $editForm = $this->createForm(new RepresentanteType(), $entity);
+
         $deleteForm = $this->createDeleteForm($id);
+
 
         return $this->render('DistribucionBundle:Representante:edit.html.twig', array(
             'entity'      => $entity,
