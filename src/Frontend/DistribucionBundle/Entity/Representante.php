@@ -11,7 +11,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="distribucion.representante")
  * @ORM\Entity(repositoryClass="Frontend\DistribucionBundle\Entity\RepresentanteRepository")
- * @UniqueEntity("correo")
  */
 class Representante
 {
@@ -52,7 +51,7 @@ class Representante
     /**
      * @var string
      *
-     * @ORM\Column(name="correo", type="string", length=100, nullable=false, unique=true)
+     * @ORM\Column(name="correo", type="string", length=100, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Email()
      * 
