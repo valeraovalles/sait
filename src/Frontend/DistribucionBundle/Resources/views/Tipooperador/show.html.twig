@@ -48,19 +48,20 @@
 
     <br>
 
-    <a class="btn" href="{{ path('tipooperador') }}">
-        Ir a lista
-    </a>
-    |
-    <a class="btn" href="{{ path('tipooperador_edit', { 'id': entity.id }) }}">
-        Ir a editar
-    </a>
-    <br><br>
+    {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
     <form action="{{ path('tipooperador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
         <button class="btn btn-danger" type="submit">Borrar</button>
     </form>
 
+    <a class="btn" href="{{ path('tipooperador') }}">
+        Ir a lista
+    </a>
+    |{% endif %}
+    <a class="btn" href="{{ path('tipooperador_edit', { 'id': entity.id }) }}">
+        Ir a editar
+    </a>
     <br><br>
+
 {% endblock %}
