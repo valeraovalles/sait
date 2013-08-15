@@ -55,12 +55,12 @@
         <button class="btn btn-danger" type="submit">Borrar</button>
     </form>
 
-    <a class="btn" href="{{ path('tipooperador') }}">
-        Ir a lista
-    </a>
-    |{% endif %}
     <a class="btn" href="{{ path('tipooperador_edit', { 'id': entity.id }) }}">
         Ir a editar
+    </a>
+    |{% endif %}
+    <a class="btn" href="{{ path('tipooperador') }}">
+        Ir a lista
     </a>
     <br><br>
 
