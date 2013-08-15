@@ -5,18 +5,27 @@
    <li class='has-sub'><a href='#'><span>OPERADOR</span></a>
       <ul>
          <li><a href='{{ path('operador') }}'><span>LISTA DE OPERADORES</span></a></li>
+
+         {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
          <li><a href='{{ path('operador_new') }}'><span>NUEVO OPERADOR</span></a></li>
+         {% endif %}
          
          <li class='has-sub'><a href='#'><span>TIPO DE OPERADOR</span></a>
             <ul>
+               {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
                <li><a href='{{ path('tipooperador_new') }}'><span>NUEVO TIPO DE OPERADOR</span></a></li>
+               {% endif %}
+
                <li><a href='{{ path('tipooperador') }}'><span>LISTA TIPO DE OPERADORES</span></a></li>
             </ul>
          </li>
 
          <li class='has-sub'><a href='#'><span>PAQUETES</span></a>
             <ul>
+               {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
                <li><a href='{{ path('paquete_new') }}'><span>NUEVO PAQUETE</span></a></li>
+               {% endif %}
+
                <li><a href='{{ path('paquete') }}'><span>LISTA TIPO DE PAQUETES</span></a></li>
             </ul>
          </li>
@@ -29,14 +38,20 @@
 
          <li class='has-sub'><a href='#'><span>OBJETOS DEL COMODATO</span></a>
             <ul>
+               {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
                <li><a href='{{ path('objetocomodato_new') }}'><span>NUEVO OBJETO DEL COMODATO</span></a></li>
+               {% endif %}
+
                <li><a href='{{ path('objetocomodato') }}'><span>LISTA OBJETOS DEL COMODATO</span></a></li>
             </ul>
          </li>
 
          <li class='has-sub'><a href='#'><span>ZONA</span></a>
             <ul>
+               {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
                <li><a href='{{ path('zona_new') }}'><span>NUEVA ZONA</span></a></li>
+               {% endif %}
+
                <li><a href='{{ path('zona') }}'><span>LISTA DE ZONAS</span></a></li>
             </ul>
          </li>

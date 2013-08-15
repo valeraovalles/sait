@@ -33,7 +33,18 @@ security:
         - { path: ^/usuario/inicio, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/usuario/contacto, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
+        - { path: ^/distribucion/operador/new, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
+        - { path: ^/distribucion/operador/edit, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
+        - { path: ^/distribucion/tipooperador/new, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
+        - { path: ^/distribucion/tipooperador/edit, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
+        - { path: ^/distribucion/representante/newAdd, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
+        - { path: ^/distribucion/representante/edit, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
+        - { path: ^/distribucion/objetocomodato/new, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
+        - { path: ^/distribucion/objetocomodato/edit, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
+        - { path: ^/distribucion/zona/new, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
+        - { path: ^/distribucion/zona/edit, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
         - { path: ^/distribucion, roles: ROLE_DISTRIBUCION }
+
 
         - { path: ^/usuario, roles: ROLE_ADMINISTRADOR }
 

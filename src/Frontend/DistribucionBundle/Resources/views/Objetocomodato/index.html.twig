@@ -42,7 +42,9 @@
 
                     <a href="{{ path('objetocomodato_show', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/busca.png')}}"></a>
          
+                    {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
                     <a href="{{ path('objetocomodato_edit', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/edit.png')}}"></a>
+                    {% endif %}
 
 
                 </td>
@@ -51,9 +53,12 @@
         </tbody>
     </table>
 
+    {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
     <br>
     <a class="btn" href="{{ path('objetocomodato_new') }}">
         Ir a nuevo
     </a>
-    <br><br>
+        <br>
+    {% endif %}
+    <br>
     {% endblock %}
