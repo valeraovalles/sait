@@ -115,10 +115,14 @@ class ReporteController extends Controller
                     //cuento los operadores por mes
                     if(!isset($datos[$anio]))$datos[$anio]=0;
 
-                    if($datosform['tipografico']=='c')
+                    if($datosform['tipografico']=='c'){
                         $datos[$anio]=$datos[$anio]+1;
-                    else 
+                        $unidad='Operadores';
+                    }
+                    else {
                         $datos[$anio]=$datos[$anio]+$op->getNumeroabonados();
+                        $unidad='Abonados';
+                    }
                 }
 
                 $x='';$y='';
@@ -201,7 +205,7 @@ class ReporteController extends Controller
                 $query->setParameter(1, $mesdesde);
                 $query->setParameter(2, $meshasta);
 
-                //GRAFICA POR AÑO
+                //GRAFICA POR MESES
                 $operador=$query->getResult(); 
                     
                 $meses= array('1'=>'Enero','2'=>'Febrero','3'=>'Marzo','4'=>'Abril','5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
@@ -211,10 +215,14 @@ class ReporteController extends Controller
 
                     if(!isset($datos[$numeromes]))$datos[$numeromes]=0;
 
-                    if($datosform['tipografico']=='c')
+                    if($datosform['tipografico']=='c'){
                         $datos[$numeromes]=$datos[$numeromes]+1;
-                    else
+                        $unidad='Operadores';
+                    }
+                    else{
                         $datos[$numeromes]=$datos[$numeromes]+$op->getNumeroabonados();
+                        $unidad='Abonados';
+                    }
 
                 }
                 ksort($datos);
@@ -283,7 +291,7 @@ class ReporteController extends Controller
         $y=substr($y, 0,$l-1);
         */
         
-        return $this->render('DistribucionBundle:Reportes:generargrafico.html.twig',array('y'=>$y,'x'=>$x,'tituloprincipal'=>$tituloprincipal,'titulovertical'=>$titulovertical));
+        return $this->render('DistribucionBundle:Reportes:generargrafico.html.twig',array('y'=>$y,'x'=>$x,'tituloprincipal'=>$tituloprincipal,'titulovertical'=>$titulovertical,'unidad'=>$unidad));
     }
     public function generarreporteAction(Request $request, $tipo, $formato)
     {

@@ -52,10 +52,22 @@
                 min: 0,
                 title: {
                     text: '{{ titulovertical|raw }}'
+                },
+
+                labels: {
+                    format: '{value} M'
                 }
             },
             legend: {
-                enabled: true
+                enabled: false,
+
+            },
+             plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
             },
             tooltip: {
                 pointFormat: 'Cantidad: <b>{point.y:.1f}</b>',
@@ -81,6 +93,66 @@
         });
     });
     
+
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: '{{ tituloprincipal|raw }}'
+            },
+     
+            xAxis: {
+                categories: [{{ x|raw }}],
+                title: {
+                    text: null
+                },
+                labels: {
+                    format: '{value}'
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Cantidad de Abonados',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify',
+                    format: '{value}'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' {{unidad}}'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Cantidad',
+                data: [{{ y }}]
+            }]
+        });
+    });
     </script>
 
 <script src="{{ asset('libs/highcharts/js/highcharts.js') }}"></script>
