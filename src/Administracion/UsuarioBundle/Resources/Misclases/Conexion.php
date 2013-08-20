@@ -50,5 +50,12 @@ class Conexion
                 return $conexion;
                 
         }
+
+
+        public function postgresql_jhoan(){
+            
+                return pg_connect("host=localhost dbname=sait user=postgres password=postgres");
+                
+        }
         
 }
