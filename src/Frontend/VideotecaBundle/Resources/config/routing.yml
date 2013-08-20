@@ -1,3 +1,7 @@
 videoteca_homepage:
     pattern:  /inicio
     defaults: { _controller: VideotecaBundle:Default:index }
+
+videoteca_consulta:
+    pattern:  /consulta/{id}
+    defaults: { _controller: VideotecaBundle:Default:consulta }
