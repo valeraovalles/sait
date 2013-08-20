@@ -51,11 +51,11 @@
             </div>
             {% endif %}
 
-
+            {% if is_granted('ROLE_NOMINA') %}
             <div class="listado_aplicaciones">
               <a href="{{ path('nomina_formalimentacion')}}" onclick="document.form.submit()">nomina<br><img id="licencias" src="{{ asset("images/nomina.jpeg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
             </div>
-       
+            {% endif %}
    </div>
 
     <br>
