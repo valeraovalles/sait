@@ -14,11 +14,10 @@ class DefaultController extends Controller
     	$postgres=$con->postgresql_local();
 
 	   	$query="
-select distinct c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, 
-p.tcc as titulo_complementario, f.formato, e.evento, se.servicio
-from  avila.db_cinta c, avila.db_segmentos s, avila.db_ppal p, avila.db_formato f, avila.db_evento e, avila.db_servicio se
-where  c.id=s.id and p.alias=s.alias and c.id_formato=f.id and c.evento=e.id and c.servicio=se.id
---and (c.cota='2' )
+			select distinct c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio
+			from  avila.db_cinta c, avila.db_segmentos s, avila.db_ppal p, avila.db_formato f, avila.db_evento e, avila.db_servicio se
+			where  c.id=s.id and p.alias=s.alias and c.id_formato=f.id and c.evento=e.id and c.servicio=se.id
+			--and (c.cota='2' )
     	";
 
     	$rs = pg_query($postgres, $query);
