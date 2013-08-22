@@ -12,10 +12,9 @@
 
         <div class="titulo">HISTÓRICO SISTEMA AVILA</div>
 
-        <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+        <table class="table table-striped" style="font-size:12px">
         	<thead>
 	        	<tr>
-	        		<th>Ubicacion</th>
                     <th>Id segmento</th>
 	        		<th>Serial</th>
 	        		<th>Titulo</th>
@@ -27,7 +26,6 @@
         	<tbody>
         		{% for entity in cintas %}
         		<tr>
-        			<td>{{ entity['ubicacion_cinta'] }}</td>
                     <td>{{ entity['id_segmento'] }}</td>
         			<td>{{ entity['serial_cinta'] }}</td>
         			<td>{{ entity['titulo'] }}</td>
@@ -38,7 +36,7 @@
         		{% endfor %}	
         	</tbody>
         </table>
-        <br><br><br>
+
         <a class="btn" href="{{ path('videoteca_homepage') }}">Ir a la lista</a>
         <br>
 {% endblock %}
