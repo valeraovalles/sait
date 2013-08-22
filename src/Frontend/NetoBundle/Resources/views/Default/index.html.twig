@@ -1,1 +1,59 @@
-hola
+{% extends '::nomina.html.twig' %}
+ 
+{% block title %}Neto - Recibo de pago{% endblock %}
+
+
+{% block titulobanner %}
+    RECIBO DE PAGO
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">SELECCIONE LOS PARÁMETROS</div>
+
+
+    <form name="form1" class="formNewEditOperador" novalidate action="{{ path('operador_create') }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.tipnom) }}</div>
+            <div class="labels">Tipo:</div>
+            <div class="widgets">{{ form_widget(form.tipnom) }}</div>
+        </div>
+        <div id="periodo"></div>
+
+        {#
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.periodo) }}</div>
+            <div class="labels">Periodo:</div>
+            <div class="widgets">{{ form_widget(form.periodo) }}</div>
+        </div>
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.anios) }}</div>
+            <div class="labels">Año:</div>
+            <div class="widgets">{{ form_widget(form.anios) }}</div>
+        </div>
+        <div class="form-contenedor">
+            <div>{{ form_errors(form.meses) }}</div>
+            <div class="labels">Mes:</div>
+            <div class="widgets">{{ form_widget(form.meses) }}</div>
+        </div>
+        #}
+
+    </form>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_tipnom').change(function(){
+                var dato = $("#form_tipnom").val();
+                var ruta = "{{ path('ajax_neto', {'datos': 'variable','mostrar': 'periodo'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#periodo').load(ruta);
+            });
+        });
+    </script>
+
+
+{% endblock -%}

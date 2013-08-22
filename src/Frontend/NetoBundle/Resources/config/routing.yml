@@ -1,3 +1,7 @@
 neto_homepage:
     pattern:  /inicio
     defaults: { _controller: NetoBundle:Default:index }
+
+ajax_neto:
+    pattern:  /ajaxneto/{datos}/{mostrar}
+    defaults: { _controller: NetoBundle:Ajax:ajaxneto }

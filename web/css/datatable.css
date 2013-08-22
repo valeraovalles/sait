@@ -172,15 +172,15 @@ table.display td.center {
  */
 
 .sorting_asc {
-	background: #0fa1e0 url('../images/sort_asc.png') no-repeat center right;
+	background: #63a0bf url('../images/sort_asc.png') no-repeat center right;
 }
 
 .sorting_desc {
-	background:#0fa1e0 url('../images/sort_desc.png') no-repeat center right;
+	background:#63a0bf url('../images/sort_desc.png') no-repeat center right;
 }
 
 .sorting {
-	background: #0fa1e0 url('../images/sort_both.png') no-repeat center right;
+	background: #63a0bf url('../images/sort_both.png') no-repeat center right;
 }
 
 .sorting_asc_disabled {

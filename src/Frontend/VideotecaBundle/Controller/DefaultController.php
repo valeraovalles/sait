@@ -11,7 +11,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
     	$con=new Conexion;
-    	$postgres=$con->postgresql_local();
+    	$postgres=$con->postgresql_jhoan();
 
 	   	$query="
 			select distinct c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio
@@ -35,7 +35,7 @@ class DefaultController extends Controller
     public function consultaAction($id)
     {
     	$con=new Conexion;
-    	$postgres=$con->postgresql_local();
+    	$postgres=$con->postgresql_jhoan();
 
     	$query="
 			select c.cota as ubicacion_cinta, c.id as serial_cinta, 
