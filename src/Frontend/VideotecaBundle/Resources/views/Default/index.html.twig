@@ -12,37 +12,35 @@
 
         <div class="titulo">HISTÓRICO SISTEMA AVILA</div>
 
-        <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+        <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
         	<thead>
 	        	<tr>
 	        		<th>Ubicacion</th>
 	        		<th>Serial</th>
-	        		<th>Titulo</th>
+	        		<th width="40%">Titulo</th>
                     <th>Formato</th>
                     <th>Evento</th>
                     <th>Servicio</th>
                     <th>Acciones</th>
+       
 	        	</tr>
         	</thead>
 
         	<tbody>
-        		{% for entity in cintas %}
-        		<tr>
-        			<td>{{ entity['ubicacion_cinta'] }}</td>
-        			<td>{{ entity['serial_cinta'] }}</td>
-        			<td>{{ entity['titulo'] }}</td>
-                    <td>{{ entity['formato'] }}</td>
-                    <td>{{ entity['evento'] }}</td>
-                    <td>{{ entity['servicio'] }}</td>
-                    <td>
-                        <a href="{{ path('videoteca_consulta', { 'id':  entity['ubicacion_cinta']  }) }}"><img width="15px" src="{{ asset('images/busca.png')}}"></a>
-                    </td>
-        		</tr>
-        		{% endfor %}	
+
         	</tbody>
         </table>
 
-        
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $('#example').dataTable( {
+                    "bProcessing": true,
+                    "bServerSide": true,
+                    "sAjaxSource": "/sait/web/libs/datatables/avila.php",
+                    "sPaginationType": "full_numbers"
+                } );
+            } );
+        </script>
         <br><br><br>
 {% endblock %}
 
