@@ -13,6 +13,18 @@
     
     <div class="titulo">SELECCIONE LOS PARÁMETROS</div>
 
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
 
     <form novalidate action="{{ path('generarrecibo') }}" method="post" {{ form_enctype(form) }}>
 

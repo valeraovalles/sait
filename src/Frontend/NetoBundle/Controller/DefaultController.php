@@ -71,6 +71,7 @@ class DefaultController extends Controller
  
         $rs = pg_query($conn, $query);
 
+        $existe=0;
         while($row = pg_fetch_array($rs)){
 
             //empresa
@@ -112,11 +113,20 @@ class DefaultController extends Controller
             $recibo['cuenta']='N/A';
             else
             $recibo['cuenta']=$row['cuenta_nomina'];
+
+            $existe=1;
+        }
+
+
+        if($existe==0){
+             $this->get('session')->getFlashBag()->add('alert', 'No existen datos para los parámetros seleccionados.');
+             return $this->redirect($this->generateUrl('neto_homepage'));
+
         }
 
         $a=new htmlreporte;
         $html=$a->recibo($em,$recibo);
-        echo $html;
+        //echo $html;
         //die;
 
         //GENERO EL PDF
@@ -131,8 +141,5 @@ class DefaultController extends Controller
         $mpdf->Output("reporte".".pdf","D");
         exit;
 
-
-
-    	return $this->render('NetoBundle:Default:generarrecibo.html.twig',array('recibo'=>$recibo));
     }
 }
