@@ -6,39 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AjaxController extends Controller
 {
-    public function indexAction()
-    {
-    	$tipnom=array(''=>'Seleccione', 'n'=>'Nómina', 'a'=>'Aguinaldos');
-    	$anios=array(''=>'Seleccione', date('Y')-1 => date('Y')-1, date('Y') => date('Y'));
-    	$meses= array(''=>'Seleccione','1'=>'Enero','2'=>'Febrero','3'=>'Marzo','4'=>'Abril','5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
-    	
-        $form = $this->createFormBuilder()
-                ->add('tipnom', 'choice', array(
-                    'choices'   => $tipnom,
-                ))
-                ->add('periodo', 'choice', array(
-                    'choices'   => $periodo,
-                ))
-                 ->add('meses', 'choice', array(
-                    'choices'   => $meses,
-                ))
-
-                ->add('anios', 'choice', array(
-                    'choices'   => $anios,
-                ))
-
-
-        ->getForm();
-
-        return $this->render('NetoBundle:Default:index.html.twig',array('form'=>$form->createView()));
-    }
     public function ajaxnetoAction($datos,$mostrar)
     {
         $em = $this->getDoctrine()->getManager();
         $datos=explode("-", $datos);
 
         if ($mostrar=='periodo' and $datos[0]!='s' and $datos[0]!='a'){
-            $periodo=array('s'=>'Seleccione','1'=>'Primera quincena','2'=>'Segunda quincena','m'=>'Mensual');
+            $periodo=array('s'=>'Seleccione','1'=>'Primera quincena','2'=>'Segunda quincena');
             $form = $this->createFormBuilder()
                 ->add('periodo', 'choice', array(
                     'choices'   => $periodo,
@@ -62,7 +36,7 @@ class AjaxController extends Controller
         }
 
         else if ($mostrar=='mes' and $datos[0]!='s'){
-            $meses= array('s'=>'Seleccione','1'=>'Enero','2'=>'Febrero','3'=>'Marzo','4'=>'Abril','5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
+            $meses= array('s'=>'Seleccione','01'=>'Enero','02'=>'Febrero','03'=>'Marzo','04'=>'Abril','05'=>'Mayo','06'=>'Junio','07'=>'Julio','08'=>'Agosto','09'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
 
             $form = $this->createFormBuilder()
             ->add('meses', 'choice', array(

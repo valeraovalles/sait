@@ -5,3 +5,8 @@ neto_homepage:
 ajax_neto:
     pattern:  /ajaxneto/{datos}/{mostrar}
     defaults: { _controller: NetoBundle:Ajax:ajaxneto }
+
+
+generarrecibo:
+    pattern:  /generarrecibo
+    defaults: { _controller: NetoBundle:Default:generarrecibo }

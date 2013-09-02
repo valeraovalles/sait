@@ -6,6 +6,7 @@
                 <source>Bad credentials</source>
                 <target>Datos inválidos</target>
             </trans-unit>
+            
             <trans-unit id="2">
                 <source>Your session has timed out, or you have disabled cookies.</source>
                 <target>Su sessión a expirado o tienes deshabilitadas las cookies</target>

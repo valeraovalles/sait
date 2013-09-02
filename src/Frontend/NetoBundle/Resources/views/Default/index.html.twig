@@ -14,14 +14,16 @@
     <div class="titulo">SELECCIONE LOS PARÁMETROS</div>
 
 
-    <form name="form1" class="formNewEditOperador" novalidate action="{{ path('operador_create') }}" method="post" {{ form_enctype(form) }}>
+    <form novalidate action="{{ path('generarrecibo') }}" method="post" {{ form_enctype(form) }}>
 
         {{ form_widget(form._token) }}
+
         <div class="form-contenedor">
             <div>{{ form_errors(form.tipnom) }}</div>
             <div class="labels">Tipo:</div>
             <div class="widgets">{{ form_widget(form.tipnom) }}</div>
         </div>
+        
         <div id="periodo"></div>
 
         {#
