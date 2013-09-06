@@ -1,6 +1,8 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: '@ConstanciaBundle/Resources/config/parameters.yml' }
+
 
 framework:
     #esi:             ~
@@ -25,6 +27,8 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    globals:
+        directorio_imagenes: '/uploads/images/'
 
 
 # Assetic Configuration

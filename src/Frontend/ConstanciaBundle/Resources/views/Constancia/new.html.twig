@@ -1,0 +1,90 @@
+{% extends '::constancia.html.twig' %}
+ 
+{% block title %}Constancia{% endblock %}
+
+
+{% block titulobanner %}
+    CONSTANCIA DE TRABAJO
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">SELECCIONE LOS PARÁMETROS</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+    {% if form_errors(form.tipo) or form_errors(form.dirigida) %}
+    <div class="alert alert-error">
+        <ul>
+            <li>{{ form_errors(form.tipo) }}</li>
+            <li>{{ form_errors(form.dirigida) }}</li>
+        </ul>
+    </div>
+    {% endif %}
+
+    <form novalidate action="{{ path('constancia_create') }}" method="post" {{ form_enctype(form) }}>
+       {{ form_widget(form._token) }}
+
+        <div class="formShow">
+
+            <div class="contenedorform">
+                <div class="labelform">Nombres:</div>
+                <div class="widgetform">{{ datosnomina.primer_nombre|upper }} {{ datosnomina.segundo_nombre|upper }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Apellidos:</div>
+                <div class="widgetform">{{ datosnomina.primer_apellido|upper }} {{ datosnomina.segundo_apellido|upper }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Cedula:</div>
+                <div class="widgetform">{{ datosnomina.cedula|upper }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Cargo:</div>
+                <div class="widgetform">{{ datosnomina.descripcion_cargo|upper }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Tipo:</div>
+                <div class="widgetform">{{ form_widget(form.tipo) }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Dirigida a:</div>
+                <div class="widgetform">{{ form_widget(form.dirigida) }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Bono Alimentacion:</div>
+                <div class="widgetform">{{ form_widget(form.bonoalimentacion) }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Motivo:</div>
+                <div class="widgetform">{{ form_widget(form.motivo) }}</div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Enviar</button>
+    </form>
+
+
+
+
+{% endblock %}

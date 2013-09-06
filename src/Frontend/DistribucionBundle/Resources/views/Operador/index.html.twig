@@ -33,7 +33,7 @@
         <tbody>
         {% for entity in datos %}
             <tr {% if loop.index is odd %}style="background-color: #e9f5fe;"{% endif %}>
-                <td>{{ entity.id }}</td>
+                <td>'{{ entity.id|raw ) }}'</td>
                 <td style="width:400px;">{{ entity.nombre }}</td>
                 <td>{{ entity.pais.pais }}</td>
                 <td>{{ entity.tipooperador.operador }}</td>

@@ -11,7 +11,7 @@
     {{ parent() }}
 
 
-    {% set datos  %} {% if app.user %} USUARIO: {{ app.user.username | upper }} | NOMBRE: {{ usuario.primerNombre | upper }} | APELLIDO: {{ usuario.primerApellido | upper }} | CEDULA: {{ usuario.cedula | upper }} | SUELDO: {{ datos.sueldo | upper }}{% endif %}{% endset %}
+    {% set datos  %} {% if app.user %} USUARIO: {{ app.user.username | upper }} | NOMBRE: {{ usuario.primerNombre | upper }} | APELLIDO: {{ usuario.primerApellido | upper }} | CEDULA: {{ usuario.cedula | upper }} | SUELDO: {{ datos.sueldo_basico | upper }} | FECHA INGRESO: {{ datos.fecha_ingreso | upper | date('d-m-Y') }}{% endif %}{% endset %}
     
     <div class="titulo"><span id="info" style="cursor:pointer;" data-content={{ datos|json_encode|raw }} title="USUARIO">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }} <div class="icon-search"></div></span></div>
 
@@ -20,40 +20,53 @@
 
             {% if is_granted('ROLE_DISTRIBUCION') %}
             <div class="listado_aplicaciones">
-                <a href="{{ path('distribucion_homepage')}}" onclick="document.form.submit()">DISTRIBUCIÓN<br><img id="neto" src="{{ asset("images/apps/mapamundi.jpg") }}" data-placement="bottom" title="DISTRIBUCIÓN" data-trigger="hover"></a><br>
+                <a href="{{ path('distribucion_homepage')}}">DISTRIBUCIÓN<br><img id="neto" src="{{ asset("images/apps/mapamundi.jpg") }}" data-placement="bottom" title="DISTRIBUCIÓN" data-trigger="hover"></a><br>
             </div>
             {% endif %}
 
             {% if is_granted('ROLE_LICENCIAS') %}
             <div class="listado_aplicaciones">
-              <a href="{{ path('licencias_homepage')}}" onclick="document.form.submit()">LICENCIAS<br><img id="licencias" src="{{ asset("images/licencias/candado.png") }}" data-placement="bottom" title="LICENCIAS" data-trigger="hover"></a>
+              <a href="{{ path('licencias_homepage')}}">LICENCIAS<br><img id="licencias" src="{{ asset("images/licencias/candado.png") }}" data-placement="bottom" title="LICENCIAS" data-trigger="hover"></a>
             </div>
             {% endif %}
+            
            {# <div class="listado_aplicaciones">
-              <a href="http://10.10.0.152/egroupware/login.php?phpgw_forward=%2Findex.php" onclick="document.form.submit()">PROYECTOS<br><img id="licencias" src="{{ asset("images/logo.png") }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover"></a>
+              <a href="http://10.10.0.152/egroupware/login.php?phpgw_forward=%2Findex.php">PROYECTOS<br><img id="licencias" src="{{ asset("images/logo.png") }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover"></a>
             </div> #}
 
             {% if is_granted('ROLE_VISITAS') %}
             <div class="listado_aplicaciones">
-              <a href="{{ path('control_visitas_usuario')}}" onclick="document.form.submit()">VISITAS<br><img id="licencias" src="{{ asset("images/User_male.png") }}" data-placement="bottom" title="VISITAS" data-trigger="hover"></a>
+              <a href="{{ path('control_visitas_usuario')}}">VISITAS<br><img id="licencias" src="{{ asset("images/User_male.png") }}" data-placement="bottom" title="VISITAS" data-trigger="hover"></a>
             </div>
             {% endif %}
 
             {% if is_granted('ROLE_NETO') %}
             <div class="listado_aplicaciones">
-              <a href="{{ path('neto_homepage')}}" onclick="document.form.submit()">NETO<br><img id="licencias" src="{{ asset("images/moneda.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
+              <a href="{{ path('neto_homepage')}}">NETO<br><img id="licencias" src="{{ asset("images/moneda.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
             </div>
             {% endif %}
 
             {% if is_granted('ROLE_VIDEOTECA') %}
             <div class="listado_aplicaciones">
-              <a href="{{ path('videoteca_homepage')}}" onclick="document.form.submit()">VIDEOTECA<br><img id="licencias" src="{{ asset("images/videoteca.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
+              <a href="{{ path('videoteca_homepage')}}">VIDEOTECA<br><img id="licencias" src="{{ asset("images/videoteca.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
             </div>
             {% endif %}
 
             {% if is_granted('ROLE_NOMINA') %}
             <div class="listado_aplicaciones">
-              <a href="{{ path('nomina_formalimentacion')}}" onclick="document.form.submit()">nomina<br><img id="licencias" src="{{ asset("images/nomina.jpeg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
+              <a href="{{ path('nomina_formalimentacion')}}">nomina<br><img id="licencias" src="{{ asset("images/nomina.jpeg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
+            </div>
+            {% endif %}
+
+            {% if is_granted('ROLE_CONSTANCIA') %}
+            <div class="listado_aplicaciones">
+              <a href="{{ path('constancia_homepage')}}">CONSTANCIA<br><img id="licencias" src="{{ asset("images/constancia.jpeg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
+            </div>
+            {% endif %}
+
+            {% if is_granted('ROLE_SIT') %}
+            <div class="listado_aplicaciones">
+              <a href="{{ path('neto_homepage')}}">SIT<br><img id="licencias" src="{{ asset("images/sit.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
             </div>
             {% endif %}
    </div>

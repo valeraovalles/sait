@@ -1,0 +1,45 @@
+{% extends '::constancia.html.twig' %}
+ 
+{% block title %}Constancia{% endblock %}
+
+
+{% block titulobanner %}
+    CONSTANCIA DE TRABAJO
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">CONSTANCIA DE TRABAJO<BR><h5>(TIENES {{ constancia[0]['cantidad'] }} CONSTANCIAS PENDIENTES POR TRAMITAR)</h5></div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+    {% if form_errors(form.tipo) %}
+    <div class="alert alert-error">
+        <ul>
+            <li>{{ form_errors(form.texto) }}</lI>
+        </ul>
+    </div>
+    {% endif %}
+
+
+    {% if bloquea==false %}
+    <br><a href="{{ path('constancia_new') }}" class="btn btn-primary" type="button">SOLICITAR CONSTANCIA</a><br><br>
+    {% else %}
+    <div class="alert alert-error">Las solicitudes se realizan los días Lunes y Martes.</div>
+    {% endif %}
+
+
+{% endblock %}

@@ -23,6 +23,8 @@ class AppKernel extends Kernel
             new Frontend\LicenciasBundle\LicenciasBundle(),
             new Frontend\NominaBundle\NominaBundle(),
             new Frontend\NetoBundle\NetoBundle(),
+            new Frontend\ConstanciaBundle\ConstanciaBundle(),
+            new Frontend\SitBundle\SitBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

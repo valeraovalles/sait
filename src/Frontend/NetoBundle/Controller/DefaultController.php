@@ -5,6 +5,7 @@ namespace Frontend\NetoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Administracion\UsuarioBundle\Resources\Misclases\Conexion;
+use Administracion\UsuarioBundle\Resources\Misclases\Funcion;
 use Frontend\NetoBundle\Resources\Misclases\htmlreporte;
 
 class DefaultController extends Controller

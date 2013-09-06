@@ -1,3 +1,11 @@
+sit:
+    resource: "@SitBundle/Resources/config/routing.yml"
+    prefix:   /sit
+
+constancia:
+    resource: "@ConstanciaBundle/Resources/config/routing.yml"
+    prefix:   /constancia
+
 neto:
     resource: "@NetoBundle/Resources/config/routing.yml"
     prefix:   /neto

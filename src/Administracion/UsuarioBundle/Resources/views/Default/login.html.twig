@@ -8,42 +8,25 @@
 
 {% block body %}
 
-    <div class="titulo">FORMULARIO DE ACCESO</div>
 
+    <br><br>
     {% block mensaje %}
         {% if error %}
             <div class="alert" style="text-align: center;"><strong>Alerta!</strong> {{ error.message|trans() }}</div>
         {% endif %}
     {% endblock %}
+    
+    <div class="container">
+      <form class="form-signin" action="{{ path('usuario_login_check') }}" method="post">
+        <h4 class="form-signin-heading">INGRESE SUS DATOS</h4>
+        <input type="text" id="username" name="_username" class="input-block-level"placeholder="Ingrese usuario..." data-placement="right" data-content="Puede ingresar el mismo usuario y clave de su correo Zimbra. Ante cualquier inconveniente comunicarse con la extensión 264/339." title="USUARIO">
+        <input type="password" name="_password" class="input-block-level" placeholder="Ingrese clave...">
+        <button class="btn btn-large btn-primary" type="submit">Registrarse</button>
+      </form>
 
+    </div> <!-- /container -->
 
-
-    <form action="{{ path('usuario_login_check') }}" method="post">
-
-        <table id="table-login">
-            <tr>
-                <td colspan=2 align=center class="titulo-form">INGRESAR DATOS</td>
-            </tr>
-
-            <tr>
-                <th>Usuario:</th>
-                <td><input type="text" id="username" name="_username" value="{{ last_username }}"   placeholder="Ingrese usuario..." data-placement="right" data-content="Puede ingresar el mismo usuario y clave de su correo Zimbra. Ante cualquier inconveniente comunicarse con la extensión 264/339." title="USUARIO"></td>
-            </tr>
-
-            <tr>
-                <th>Clave:</th>
-                <td><input type="password" id="password" name="_password" placeholder="Ingrese clave..."></td>
-            </tr>
-
-            <tr>
-                <td colspan=2 align=center><button class="btn" type="submit">Ingresar</button></td>
-            </tr>
-        </table>
-
-        <div style="margin-top:10px;"><a href="#" class="recordar">¿Olvidó su contraseña?</a></div>
-    </form>
-
-    <br><br>
+    <br>
 
     <script>$('#username').popover();</script>
 

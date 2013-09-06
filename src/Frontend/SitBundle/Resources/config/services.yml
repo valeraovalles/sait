@@ -1,0 +1,7 @@
+parameters:
+#    sit.example.class: Frontend\SitBundle\Example
+
+services:
+#    sit.example:
+#        class: %sit.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/constancia.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block menu %}
+    {% include 'ConstanciaBundle:Default:includes/menu.html.twig' %}
+{% endblock %}

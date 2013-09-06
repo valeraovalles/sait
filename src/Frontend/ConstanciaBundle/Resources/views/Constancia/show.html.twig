@@ -1,0 +1,101 @@
+{% extends '::constancia.html.twig' %}
+ 
+{% block title %}Constancia{% endblock %}
+
+
+{% block titulobanner %}
+    CONSTANCIA DE TRABAJO
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">CONSULTA</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+ <div class="formShow">
+
+            <div class="contenedorform">
+                <div class="labelform">Nombres:</div>
+                <div class="widgetform">{{ datosnomina.primer_nombre|upper }} {{ datosnomina.segundo_nombre|upper }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Apellidos:</div>
+                <div class="widgetform">{{ datosnomina.primer_apellido|upper }} {{ datosnomina.segundo_apellido|upper }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Cedula:</div>
+                <div class="widgetform">{{ datosnomina.cedula|upper }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Cargo:</div>
+                <div class="widgetform">{{ datosnomina.descripcion_cargo|upper }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Tipo:</div>
+                <div class="widgetform">
+                    {% if entity.tipo=='sb' %}SUELDO BÁSICO{% elseif entity.tipo=='sn' %}SUELDO NORMAL{% elseif entity.tipo=='si' %}SUELDO INTEGRAL{% elseif entity.tipo=='sba' %}SUELDO BÁSICO ANUAL{% elseif entity.tipo=='sna' %}SUELDO NORMAL ANUAL{% elseif entity.tipo=='sia' %}SUELDO INTEGRAL ANUAL{% endif %}
+                </div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Dirigida a:</div>
+                <div class="widgetform">{{ entity.dirigida|upper }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Bono Alimentacion:</div>
+                <div class="widgetform">
+                    {% if entity.bonoalimentacion==false %}NO{% else %}SI{% endif %}
+                </div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Motivo:</div>
+                <div class="widgetform">
+                    {% if entity.motivo==null %}N/A{% else %}{{entity.motivo|upper}}{% endif %}
+                </div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Estatus:</div>
+                <div class="widgetform">
+                       {% if entity.culminada==false %}<img src="{{ asset('image/nuevo.gif') }}">{% else %}<img width="19px" src="{{ asset('image/bien.png') }}">{% endif %}
+                </div>
+            </div>
+
+        </div>
+
+
+        <a class="btn" href="{{ path('constancia') }}">
+            Ir a la lista
+        </a> | 
+
+        <a class="btn" href="{{ path('constancia_edit', { 'id': entity.id }) }}">
+            Ir a editar
+        </a> | 
+        <a href="{{ path('constancia_pdf', { 'id': entity.id }) }}"><img width="25px" src="{{ asset('images/pdf.gif')}}"></a>
+
+        <br><br>
+        <form action="{{ path('constancia_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Está seguro que desea borrar?')">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button class="btn btn-danger" type="submit">Borrar</button>
+        </form>
+{% endblock %}

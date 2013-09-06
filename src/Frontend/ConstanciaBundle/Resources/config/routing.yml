@@ -1,0 +1,40 @@
+constancia_homepage:
+    pattern:  /form
+    defaults: { _controller: ConstanciaBundle:Default:index }
+
+constancia:
+    pattern:  /inicio
+    defaults: { _controller: "ConstanciaBundle:Constancia:index" }
+
+
+constancia_pdf:
+    pattern:  /pdf/{id}
+    defaults: { _controller: "ConstanciaBundle:Constancia:pdf" }
+
+constancia_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ConstanciaBundle:Constancia:show" }
+
+constancia_new:
+    pattern:  /new
+    defaults: { _controller: "ConstanciaBundle:Constancia:new" }
+
+constancia_create:
+    pattern:  /create
+    defaults: { _controller: "ConstanciaBundle:Constancia:create" }
+    requirements: { _method: post }
+
+constancia_edit:
+    pattern:  /edit/{id}
+    defaults: { _controller: "ConstanciaBundle:Constancia:edit" }
+
+constancia_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ConstanciaBundle:Constancia:update" }
+    requirements: { _method: post|put }
+
+constancia_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ConstanciaBundle:Constancia:delete" }
+    requirements: { _method: post|delete }
+
