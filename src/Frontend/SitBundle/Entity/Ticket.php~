@@ -1,0 +1,126 @@
+<?php
+
+namespace Frontend\SitBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Ticket
+ *
+ * @ORM\Table(name="ticket")
+ * @ORM\Entity
+ */
+class Ticket
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ticket_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="solicitante_id", type="integer", nullable=false)
+     */
+    private $solicitanteId;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechasolicitud", type="date", nullable=false)
+     */
+    private $fechasolicitud;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="horasolicitud", type="time", nullable=false)
+     */
+    private $horasolicitud;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechasolucion", type="date", nullable=true)
+     */
+    private $fechasolucion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="horasolucion", type="time", nullable=true)
+     */
+    private $horasolucion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="solicitud", type="string", length=1000, nullable=false)
+     */
+    private $solicitud;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="solucion", type="string", length=500, nullable=true)
+     */
+    private $solucion;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="reasignado", type="boolean", nullable=false)
+     */
+    private $reasignado;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="estatus", type="string", length=2, nullable=false)
+     */
+    private $estatus;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="archivos", type="string", length=500, nullable=true)
+     */
+    private $archivos;
+
+    /**
+     * @var \Categoria
+     *
+     * @ORM\ManyToOne(targetEntity="Categoria")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
+     * })
+     */
+    private $categoria;
+
+    /**
+     * @var \Subcategoria
+     *
+     * @ORM\ManyToOne(targetEntity="Subcategoria")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="subcategoria_id", referencedColumnName="id")
+     * })
+     */
+    private $subcategoria;
+
+    /**
+     * @var \Unidad
+     *
+     * @ORM\ManyToOne(targetEntity="Unidad")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="unidad_id", referencedColumnName="id")
+     * })
+     */
+    private $unidad;
+
+
+}

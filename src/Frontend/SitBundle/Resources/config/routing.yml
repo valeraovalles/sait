@@ -1,3 +1,38 @@
 sit_homepage:
-    pattern:  /hello/{name}
+    pattern:  /inicio
     defaults: { _controller: SitBundle:Default:index }
+
+# TICKETS #
+
+ticket:
+    pattern:  /ticket
+    defaults: { _controller: "SitBundle:Ticket:index" }
+
+ticket_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SitBundle:Ticket:show" }
+
+ticket_new:
+    pattern:  /ticket/new
+    defaults: { _controller: "SitBundle:Ticket:new" }
+
+ticket_create:
+    pattern:  /ticket/create
+    defaults: { _controller: "SitBundle:Ticket:create" }
+    requirements: { _method: post }
+
+ticket_edit:
+    pattern:  /ticket/edit/{id}
+    defaults: { _controller: "SitBundle:Ticket:edit" }
+
+ticket_update:
+    pattern:  /ticket/update/{id}
+    defaults: { _controller: "SitBundle:Ticket:update" }
+    requirements: { _method: post|put }
+
+ticket_delete:
+    pattern:  /ticket/delete/{id}
+    defaults: { _controller: "SitBundle:Ticket:delete" }
+    requirements: { _method: post|delete }
+
+# FIN TICKET #

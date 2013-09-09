@@ -54,21 +54,17 @@
 
             {% if is_granted('ROLE_NOMINA') %}
             <div class="listado_aplicaciones">
-              <a href="{{ path('nomina_formalimentacion')}}">nomina<br><img id="licencias" src="{{ asset("images/nomina.jpeg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
+              <a href="{{ path('nomina_formalimentacion')}}">NÓMINA<br><img id="licencias" src="{{ asset("images/nomina.jpeg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
             </div>
             {% endif %}
 
-            {% if is_granted('ROLE_CONSTANCIA') %}
             <div class="listado_aplicaciones">
               <a href="{{ path('constancia_homepage')}}">CONSTANCIA<br><img id="licencias" src="{{ asset("images/constancia.jpeg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
             </div>
-            {% endif %}
 
-            {% if is_granted('ROLE_SIT') %}
             <div class="listado_aplicaciones">
-              <a href="{{ path('neto_homepage')}}">SIT<br><img id="licencias" src="{{ asset("images/sit.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
+              <a href="{{ path('sit_homepage')}}">SIT<br><img id="licencias" src="{{ asset("images/sit.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
             </div>
-            {% endif %}
    </div>
 
     <br>

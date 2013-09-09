@@ -25,16 +25,6 @@
         </div>
     {% endfor %}
 
-
-    {% if form_errors(form.tipo) %}
-    <div class="alert alert-error">
-        <ul>
-            <li>{{ form_errors(form.texto) }}</lI>
-        </ul>
-    </div>
-    {% endif %}
-
-
     {% if bloquea==false %}
     <br><a href="{{ path('constancia_new') }}" class="btn btn-primary" type="button">SOLICITAR CONSTANCIA</a><br><br>
     {% else %}

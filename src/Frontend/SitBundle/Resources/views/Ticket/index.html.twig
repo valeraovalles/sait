@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Ticket list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fechasolicitud</th>
+                <th>Horasolicitud</th>
+                <th>Fechasolucion</th>
+                <th>Horasolucion</th>
+                <th>Solicitud</th>
+                <th>Solucion</th>
+                <th>Reasignado</th>
+                <th>Estatus</th>
+                <th>Archivos</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('ticket_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.fechasolicitud %}{{ entity.fechasolicitud|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.horasolicitud }}</td>
+                <td>{% if entity.fechasolucion %}{{ entity.fechasolucion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.horasolucion }}</td>
+                <td>{{ entity.solicitud }}</td>
+                <td>{{ entity.solucion }}</td>
+                <td>{{ entity.reasignado }}</td>
+                <td>{{ entity.estatus }}</td>
+                <td>{{ entity.archivos }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('ticket_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('ticket_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('ticket_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

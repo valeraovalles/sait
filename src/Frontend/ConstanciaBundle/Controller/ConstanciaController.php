@@ -120,7 +120,7 @@ class ConstanciaController extends Controller
             $bloquea=false;
         }
 
-        if($bloquea==false){
+        if($bloquea==true){
 
             return $this->redirect($this->generateUrl('constancia_homepage'));
         }

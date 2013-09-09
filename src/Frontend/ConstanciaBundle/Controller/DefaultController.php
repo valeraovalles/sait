@@ -14,7 +14,7 @@ class DefaultController extends Controller
         $entity = new Constancia();
         $form   = $this->createForm(new ConstanciaType(), $entity);
 
-        $bloquea=false;
+        $bloquea=true;
         if(date('N')==1 || date('N')==2){
 			$bloquea=false;
 		}

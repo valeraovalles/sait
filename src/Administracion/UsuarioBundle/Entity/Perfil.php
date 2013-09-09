@@ -3,6 +3,7 @@
 namespace Administracion\UsuarioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Perfil
@@ -63,6 +64,17 @@ class Perfil
      * @ORM\Column(name="fechanacimiento", type="date", length=20, nullable=true)
      */
     private $fechanacimiento;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="extension", type="integer", nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\Type(type="integer", message="La extensión debe ser un número.")
+     * @Assert\NotEqualTo(value = "0", message="La extensión no puede ser igual a 0.")
+     */
+    private $extension=null;
 
     /**
      * @var \"user"
@@ -179,19 +191,6 @@ class Perfil
     }
 
     /**
-     * Set cedula
-     *
-     * @param string $cedula
-     * @return Perfil
-     */
-    public function setCedula($cedula)
-    {
-        $this->cedula = $cedula;
-    
-        return $this;
-    }
-
-    /**
      * Get cedula
      *
      * @return string 
@@ -215,6 +214,19 @@ class Perfil
     }
 
     /**
+     * Set cedula
+     *
+     * @param string $cedula
+     * @return Perfil
+     */
+    public function setCedula($cedula)
+    {
+        $this->cedula = $cedula;
+    
+        return $this;
+    }
+
+    /**
      * Get cedula
      *
      * @return string 
@@ -223,6 +235,30 @@ class Perfil
     {
         return $this->cedula;
     }
+
+    /**
+     * Set extension
+     *
+     * @param string $extension
+     * @return Perfil
+     */
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
+    
+        return $this;
+    }
+    
+    /**
+     * Get extension
+     *
+     * @return string 
+     */
+    public function getExtension()
+    {
+        return $this->extension;
+    }
+
 
     /**
      * Set user
