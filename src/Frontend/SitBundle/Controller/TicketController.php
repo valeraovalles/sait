@@ -11,6 +11,10 @@ use Frontend\SitBundle\Form\TicketType;
 use Administracion\UsuarioBundle\Entity\Perfil;
 use Administracion\UsuarioBundle\Form\PerfilType;
 
+
+use Doctrine\ORM\EntityRepository;
+
+
 /**
  * Ticket controller.
  *
@@ -51,6 +55,14 @@ class TicketController extends Controller
         $form2->bind($request);
 
 
+        //consulto los tickets del usuario
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+        $dql = "select t from SitBundle:Ticket t where t.solicitante= :id order by t.estatus ASC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('id',$idusuario);
+        $ticketusuario = $query->getResult();
+
         if ($form->isValid() && $form2->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
@@ -67,6 +79,41 @@ class TicketController extends Controller
             $entity->setHoraSolicitud(new \DateTime(\date("G:i:s")));
 
             $entity->setEstatus(1);
+
+            //genero y guardo archivo
+            if($form['file']->getData()){
+                //subo el archivo
+                $file=$form['file']->getData();
+
+                $tamaño=number_format($file->getClientSize()/1048576,0);
+
+                $extension = $file->guessExtension();
+                $nombre=$file->getClientOriginalName();
+                $nombre=explode(".", $nombre);
+                $nombre=$nombre[0];
+
+                $extensiones=array('jpg','jpeg','doc','odt','xls','xlsx');
+                //valido las extensiones
+                if (!array_search($extension,$extensiones)) {
+                    $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
+
+                    return $this->render('SitBundle:Default:index.html.twig', array(
+                        'form'   => $form->createView(),
+                        'form2'   => $form2->createView(),
+                        'ticketusuario'=>$ticketusuario
+                    ));
+                }
+
+
+                //GUARDO EL ARCHIVO
+                if($file->move('uploads/sit/',$nombre.'_'.\date("Gis").'.'.$extension) )
+                {
+                     $entity->setArchivo($nombre.'_'.\date("Gis").'.'.$extension);
+                }
+
+            }
+
+
             $em->persist($entity);
             $em->flush();
 
@@ -76,31 +123,18 @@ class TicketController extends Controller
             $query->setParameter('id', $perfil[0]->getId());
             $query->execute();
 
-
-
             $this->get('session')->getFlashBag()->add('notice', 'TU SOLICITUD SE HA REALIZADO EXITOSAMENTE');
 
             return $this->redirect($this->generateUrl('sit_homepage'));
         }
 
 
-        //consulto los tickets del usuario
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $em = $this->getDoctrine()->getManager();
-        $dql = "select t from SitBundle:Ticket t where t.solicitante= :id order by t.estatus ASC";
-        $query = $em->createQuery($dql);
-        $query->setParameter('id',$idusuario);
-        $ticketusuario = $query->getResult();
+
 
         return $this->render('SitBundle:Default:index.html.twig', array(
             'form'   => $form->createView(),
             'form2'   => $form2->createView(),
             'ticketusuario'=>$ticketusuario
-        ));
-
-        return $this->render('SitBundle:Ticket:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
         ));
     }
 
@@ -119,13 +153,84 @@ class TicketController extends Controller
         ));
     }
 
+    public function catsubAction($id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $dql = "select t from SitBundle:Ticket t where t.id= :id";
+        $query = $em->createQuery($dql);
+        $query->setParameter('id',$id);
+        $ticket = $query->getResult();
+
+        if($ticket[0]->getCategoria()!=null and $ticket[0]->getSubcategoria()!=null){
+            return $this->redirect($this->generateUrl('ticket_show', array('id' => $id))); 
+        }
+
+
+
+        //consulto los tickets del usuario
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+        $dql = "select s from SitBundle:Subcategoria s join s.categoria c where c.id=s.categoria";
+        $query = $em->createQuery($dql);
+        $subcat = $query->getResult();
+
+        foreach ($subcat as $value) {
+            $arraycatsub[$value->getCategoria()->getCategoria()][]=array('idcat'=>$value->getCategoria()->getId(),'idsub'=>$value->getId(),'subcategoria'=>$value->getSubcategoria());
+        }
+
+        return $this->render('SitBundle:Ticket:catsub.html.twig', array(
+            'arraycatsub' => $arraycatsub,
+            'id'=>$id
+
+        ));
+    }
+
+
+    public function guardacatsubAction(Request $request,$id)
+    {
+
+        $datos=$request->request->all();
+        $datos=$datos['subcat'];
+        $ids=explode("-", $datos);
+
+        if(empty($datos)){
+            $this->get('session')->getFlashBag()->add('alert', 'Debe seleccionar una subcategoria.');
+            return $this->redirect($this->generateUrl('ticket_asignarcatsub', array('id' => $id)));
+        }
+
+
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('update SitBundle:Ticket t set t.categoria= :idcat, t.subcategoria= :idsub WHERE t.id = :id');
+        $query->setParameter('idsub', $ids[1]);
+        $query->setParameter('idcat', $ids[0]);
+        $query->setParameter('id', $id);
+        $query->execute();  
+
+        $this->get('session')->getFlashBag()->add('alert', 'Categoria asignada exitosamente');
+        return $this->redirect($this->generateUrl('ticket_show', array('id' => $id)));      
+
+    }
     /**
      * Finds and displays a Ticket entity.
      *
      */
     public function showAction($id)
     {
+        //traigo los datos del usuario conectado
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
+        $datosusuario = $em->getRepository('UsuarioBundle:User')->datosusuario($idusuario);
+
+        //valido que tenga categoria asignada
+        $dql = "select t from SitBundle:Ticket t where t.id= :id";
+        $query = $em->createQuery($dql);
+        $query->setParameter('id',$id);
+        $ticket = $query->getResult();
+
+        if($ticket[0]->getCategoria()==null and $ticket[0]->getSubcategoria()==null){
+            return $this->redirect($this->generateUrl('ticket_asignarcatsub', array('id' => $id))); 
+        }
 
         $entity = $em->getRepository('SitBundle:Ticket')->find($id);
 
@@ -135,9 +240,16 @@ class TicketController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
+        $dql = "select u from SitBundle:Unidad u";
+        $query = $em->createQuery($dql);
+        $unidad = $query->getResult();
+
         return $this->render('SitBundle:Ticket:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(),
+            'datosusuario'=>$datosusuario[0],
+            'unidad'=>$unidad
+        ));
     }
 
     /**

@@ -1,52 +1,128 @@
-{% extends '::base.html.twig' %}
+{% extends '::sit.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+
+{% block titulobanner %}
+    GESTIONAR TICKET
+{% endblock %}
+
 
 {% block body -%}
-    <h1>Ticket</h1>
+    {{ parent() }}
+    
+    <div class="titulo">GESTIONAR TICKET</div>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Fechasolicitud</th>
-                <td>{{ entity.fechasolicitud|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Horasolicitud</th>
-                <td>{{ entity.horasolicitud }}</td>
-            </tr>
-            <tr>
-                <th>Fechasolucion</th>
-                <td>{{ entity.fechasolucion|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Horasolucion</th>
-                <td>{{ entity.horasolucion }}</td>
-            </tr>
-            <tr>
-                <th>Solicitud</th>
-                <td>{{ entity.solicitud }}</td>
-            </tr>
-            <tr>
-                <th>Solucion</th>
-                <td>{{ entity.solucion }}</td>
-            </tr>
-            <tr>
-                <th>Reasignado</th>
-                <td>{{ entity.reasignado }}</td>
-            </tr>
-            <tr>
-                <th>Estatus</th>
-                <td>{{ entity.estatus }}</td>
-            </tr>
-            <tr>
-                <th>Archivos</th>
-                <td>{{ entity.archivos }}</td>
-            </tr>
-        </tbody>
-    </table>
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+<div class="row-fluid">
+  <div class="span7">
+    <div class="formShow" style="width:85%;">
+        <div class="contenedorform">
+            <div class="labelform">Solicitante:</div>
+            <div class="widgetform">{{ entity.solicitante.primernombre }} {{ entity.solicitante.primerapellido }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Extensión:</div>
+            <div class="widgetform">{{ datosusuario.extension }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha solicitud:</div>
+            <div class="widgetform">{{ entity.fechasolicitud|date("d-m-Y") }}</div>
+        </div>
+
+        <div class="contenedorform">
+            <div class="labelform">Hora solicitud:</div>
+            <div class="widgetform">{{ entity.horasolicitud|date("G:i:s") }}</div>
+        </div>
+
+        <div class="contenedorform">
+            <div class="labelform">Solicitud:</div>
+            <div class="widgetform">{{ entity.solicitud}}</div>
+        </div>
+
+        <div class="contenedorform">
+            <div class="labelform">Categoria:</div>
+            <div class="widgetform">{{ entity.categoria.categoria|upper }}</div>
+        </div>
+
+        <div class="contenedorform">
+            <div class="labelform">Subcategoria:</div>
+            <div class="widgetform">{{ entity.subcategoria.subcategoria|upper }}</div>
+        </div>
+
+        <div class="contenedorform">
+            <div class="labelform">Archivo:</div>
+            <div class="widgetform">
+                {% if entity.archivo %}
+                <a data-toggle="modal" href="#myModal">
+                    <img class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ entity.archivo }}" width="150px">
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="span5">
+        <div class="contenedorcatsub">
+        <div class="accordion" id="accordion2">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                ASIGNAR TICKET
+              </a>
+            </div>
+            <div id="collapseOne" class="accordion-body collapse in">
+              <div class="accordion-inner">
+                Anim pariatur cliche...
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                REASIGNAR TICKET
+              </a>
+            </div>
+            <div id="collapseTwo" class="accordion-body collapse in">
+              <div class="accordion-inner">
+                {% for uni in unidad %}
+                <div class="situnidad"><input type="radio" name="datos" value="reasigna-{{ uni.id }}"> {{ uni.descripcion }}</div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+  </div>
+</div>
+
+
+    <div style="width:800px;left:44%;" id="myModal" class="modal hide fade" tabindex="5" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-body">
+            <img class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ entity.archivo }}">
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal">Cerrar</button>
+        </div>
+    </div>
+
+
+
+
+{#
 
         <ul class="record_actions">
     <li>
@@ -67,4 +143,7 @@
         </form>
     </li>
 </ul>
+#}
+
+<br><br>
 {% endblock %}

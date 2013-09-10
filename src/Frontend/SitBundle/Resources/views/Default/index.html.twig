@@ -26,7 +26,7 @@
 
 <div class="row-fluid">
   <div class="span6">
-  	<div class="tickettitulo alert alert-info"><h5>SOLICITUD DE SOPORTE TÉCNICO</h5></div>
+  	<div class="tickettitulo alert alert-info"><h5>SOLICITAR SOPORTE TÉCNICO</h5></div>
   	<div class="ticketsoporte">
 
 	    {% if form_errors(form.unidad) or form_errors(form.solicitud) or form_errors(form.file) or form_errors(form2.extension) %}
@@ -83,22 +83,24 @@
 			{% endif %}
 		{% endfor %}
 
-		<a style="cursor:pointer;" title="Tickets solicitados que aún no se han atendido">Nuevos: <span class="badge badge-important">{{ nuevo }}</span></a>
-		<a style="cursor:pointer;" title="Tickets asignados para su resolución">Asignados: <span class="badge badge-warning">{{ asignado }}</span></a>
-		<a style="cursor:pointer;"" title="Tickets resueltos">Culminados: <span class="badge badge-success">{{ culminado }}</span></a>
+		Nuevos: <a style="cursor:pointer;" title="Tickets solicitados que aún no se han atendido"><span class="badge badge-important">{{ nuevo }}</span></a>
+		Asignados: <a style="cursor:pointer;" title="Tickets asignados para su resolución"><span class="badge badge-warning">{{ asignado }}</span></a>
+		Culminados: <a style="cursor:pointer;" title="Tickets resueltos"><span class="badge badge-success">{{ culminado }}</span></a>
 
 		<div id="muestra">
 			<br>
 			<div><b>HISTORIAL</b></div>
 			<div class="listadoticketsolicitante">
 			<table class="ticketsolicitante table table-striped" cellpadding=0 cellspacing=0>
-				<tr><th>Solicitud</th><th>Fecha/Hora</th><th>Mensaje</th></tr>
+				<tr><th>Solicitud</th><th>Fecha/Hora</th><th>Accion</th></tr>
 				{% for tu in ticketusuario %}
 				
 					<tr {% if tu.estatus==1 %}style="color:red;"{% elseif tu.estatus==2 %}style="color:darkorange;"style="color:red;"{% elseif tu.estatus==4 %}style="color:green;"{% endif %}>
+
 						<td>{{ tu.solicitud|slice(0,20) }}</td>
 						<td>{{ tu.fechasolicitud|date("d-m-Y") }} {{ tu.horasolicitud|date("G:i:s") }}</td>
-						<td><span class="icon-pencil"></span></td>
+						<td><span class="icon-search"></span></td>
+
 					</tr>
 					
 				{% endfor %}

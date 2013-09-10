@@ -95,9 +95,9 @@ class Ticket
     /**
      * @var string
      *
-     * @ORM\Column(name="archivos", type="string", length=500, nullable=true)
+     * @ORM\Column(name="archivo", type="string", length=500, nullable=true)
      */
-    private $archivos;
+    private $archivo;
 
     /**
      * @var \Categoria
@@ -131,7 +131,7 @@ class Ticket
     private $unidad;
 
      /**
-     * @Assert\File(maxSize="10", maxSizeMessage="El archivo que intenta subir es demasiado grande.")
+     * @Assert\File(maxSize="5000000", maxSizeMessage="El archivo que intenta subir es demasiado grande.")
      *  
      */
     private $file;
@@ -376,26 +376,26 @@ class Ticket
     }
 
     /**
-     * Set archivos
+     * Set archivo
      *
-     * @param string $archivos
+     * @param string $archivo
      * @return Ticket
      */
-    public function setArchivos($archivos)
+    public function setArchivo($archivo)
     {
-        $this->archivos = $archivos;
+        $this->archivo = $archivo;
     
         return $this;
     }
 
     /**
-     * Get archivos
+     * Get archivo
      *
      * @return string 
      */
-    public function getArchivos()
+    public function getArchivo()
     {
-        return $this->archivos;
+        return $this->archivo;
     }
 
     /**
@@ -467,3 +467,4 @@ class Ticket
         return $this->unidad;
     }
 }
+

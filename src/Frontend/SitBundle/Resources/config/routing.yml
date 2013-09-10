@@ -12,6 +12,14 @@ ticket_show:
     pattern:  /{id}/show
     defaults: { _controller: "SitBundle:Ticket:show" }
 
+ticket_asignarcatsub:
+    pattern:  /{id}/catsub
+    defaults: { _controller: "SitBundle:Ticket:catsub" }
+
+ticket_guardacatsub:
+    pattern:  /{id}/guardacatsub
+    defaults: { _controller: "SitBundle:Ticket:guardacatsub" }
+
 ticket_new:
     pattern:  /ticket/new
     defaults: { _controller: "SitBundle:Ticket:new" }

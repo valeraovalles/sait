@@ -1,21 +1,40 @@
-{% extends '::base.html.twig' %}
+{% extends '::sit.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+
+{% block titulobanner %}
+    LISTADO DE TICKETS
+{% endblock %}
+
 
 {% block body -%}
-    <h1>Ticket list</h1>
+    {{ parent() }}
+    
+    <div class="titulo">LISTADO DE TICKETS</div>
 
-    <table class="records_list">
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Fechasolicitud</th>
                 <th>Horasolicitud</th>
-                <th>Fechasolucion</th>
-                <th>Horasolucion</th>
+                <th>Solicitante</th>
                 <th>Solicitud</th>
-                <th>Solucion</th>
-                <th>Reasignado</th>
                 <th>Estatus</th>
-                <th>Archivos</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -23,35 +42,20 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('ticket_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.fechasolicitud %}{{ entity.fechasolicitud|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.horasolicitud }}</td>
-                <td>{% if entity.fechasolucion %}{{ entity.fechasolucion|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.horasolucion }}</td>
-                <td>{{ entity.solicitud }}</td>
-                <td>{{ entity.solucion }}</td>
-                <td>{{ entity.reasignado }}</td>
+                <td>{% if entity.fechasolicitud %}{{ entity.fechasolicitud|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ entity.horasolicitud|date("G:i:s")  }}</td>
+                <td>{{ entity.solicitante.primernombre }} {{ entity.solicitante.primerapellido }}</td>
+                <td>{{ entity.solicitud|slice(0,10) }}</td>
                 <td>{{ entity.estatus }}</td>
-                <td>{{ entity.archivos }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('ticket_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('ticket_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+ 
+                    <a href="{{ path('ticket_asignarcatsub', { 'id': entity.id }) }}"><span class="icon-search"></span></a>
+
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('ticket_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+    <br><br>
     {% endblock %}

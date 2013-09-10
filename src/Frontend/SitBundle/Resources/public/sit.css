@@ -76,3 +76,26 @@
 	overflow-y: scroll;
 	height: 264px;
 }
+
+.SITcategoria{
+	font-weight: bold;
+	text-align: left;
+}
+
+.SITsubcategoria{
+	margin-left: 20px;
+	text-align: left;
+}
+
+.contenedorcatsub{
+	width: 350px;
+}
+
+.situnidad{
+	text-align: left;
+}
+
+.sitimagen img:hover{
+	width: 100%;
+	position: absolute;
+}

@@ -1,0 +1,54 @@
+{% extends '::sit.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+
+{% block titulobanner %}
+    LISTA DE CATEGORIAS Y SUBCATEGORIAS
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">LISTADO DE CATEGORIAS Y SUBCATEGORIAS</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+
+    <form novalidate action="{{ path('ticket_guardacatsub', { 'id': id }) }}" method="post">
+    <div class="contenedorcatsub">
+  		<div class="accordion" id="accordion2">
+			{% for categoria, catsub in arraycatsub %}
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{ loop.index }}">
+								<div class="SITcategoria">{{ categoria }}</div>
+						</a>
+					</div>
+
+				    <div id="collapse{{ loop.index }}" class="accordion-body collapse">
+				    	<div class="accordion-inner">
+							{% for subcategoria in catsub %}	
+								<div class="SITsubcategoria"><input type="radio" name="subcat" value="{{ subcategoria.idcat }}-{{ subcategoria.idsub }}"> {{ subcategoria.subcategoria }}</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<input type="submit" class="btn btn-primary">
+	</form>
+{% endblock %}
