@@ -25,30 +25,38 @@
         </div>
     {% endfor %}
 
+    
 
 
-    <form novalidate action="{{ path('ticket_guardacatsub', { 'id': id }) }}" method="post">
-    <div class="contenedorcatsub">
-  		<div class="accordion" id="accordion2">
-			{% for categoria, catsub in arraycatsub %}
-				<div class="accordion-group">
-					<div class="accordion-heading">
-					    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{ loop.index }}">
-								<div class="SITcategoria">{{ categoria }}</div>
-						</a>
-					</div>
+	<div class="row-fluid">
+	 	<div class="span6">
+			<form novalidate action="{{ path('ticket_guardacatsub', { 'id': id }) }}" method="post">
+			    <div class="contenedorcatsub">
+			  		<div class="accordion" id="accordion2">
+						{% for categoria, catsub in arraycatsub %}
+							<div class="accordion-group">
+								<div class="accordion-heading">
+								    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{ loop.index }}">
+											<div class="SITcategoria">{{ categoria }}</div>
+									</a>
+								</div>
 
-				    <div id="collapse{{ loop.index }}" class="accordion-body collapse">
-				    	<div class="accordion-inner">
-							{% for subcategoria in catsub %}	
-								<div class="SITsubcategoria"><input type="radio" name="subcat" value="{{ subcategoria.idcat }}-{{ subcategoria.idsub }}"> {{ subcategoria.subcategoria }}</div>
-							{% endfor %}
-						</div>
+							    <div id="collapse{{ loop.index }}" class="accordion-body collapse">
+							    	<div class="accordion-inner">
+										{% for subcategoria in catsub %}	
+											<div class="SITsubcategoria"><input type="radio" name="subcat" value="{{ subcategoria.idcat }}-{{ subcategoria.idsub }}"> {{ subcategoria.subcategoria }}</div>
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						{% endfor %}
 					</div>
 				</div>
-			{% endfor %}
+				<input type="submit" class="btn btn-primary">
+			</form>
+		</div>
+		<div class="span6" style="text-align:justify;padding-right:10px;">
+			<div style="width:400px;"><b>Solicitud: </b>{{ ticket[0].solicitud }}</div>
 		</div>
 	</div>
-	<input type="submit" class="btn btn-primary">
-	</form>
 {% endblock %}

@@ -62,16 +62,23 @@
             <div class="widgetform">{{ entity.subcategoria.subcategoria|upper }}</div>
         </div>
 
+        {% if entity.archivo %}
         <div class="contenedorform">
             <div class="labelform">Archivo:</div>
             <div class="widgetform">
-                {% if entity.archivo %}
-                <a data-toggle="modal" href="#myModal">
-                    <img class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ entity.archivo }}" width="150px">
-                </a>
+
+                {% set extension =  entity.archivo|split(".") %}
+
+                {% if extension[1]=='jpg' or extension[1]=='jpeg' or extension[1]=='png' or extension[1]=='gif'  %}
+                    <a data-toggle="modal" href="#myModal">
+                        <img class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ entity.archivo }}" width="150px">
+                    </a>
+                {% else %}
+                    <a href="{{ asset('uploads/sit/') }}/{{ entity.archivo }}">DESCARGA ARCHIVO {{ extension[1]|upper }}</a>
                 {% endif %}
             </div>
         </div>
+        {% endif %}
     </div>
   </div>
   <div class="span5">
@@ -106,6 +113,8 @@
           </div>
         </div>
         </div>
+
+        <input type="button" class="btn btn-primary" value="Enviar">
   </div>
 </div>
 

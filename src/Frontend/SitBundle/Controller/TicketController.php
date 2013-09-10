@@ -92,7 +92,7 @@ class TicketController extends Controller
                 $nombre=explode(".", $nombre);
                 $nombre=$nombre[0];
 
-                $extensiones=array('jpg','jpeg','doc','odt','xls','xlsx');
+                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf');
                 //valido las extensiones
                 if (!array_search($extension,$extensiones)) {
                     $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
@@ -166,8 +166,6 @@ class TicketController extends Controller
             return $this->redirect($this->generateUrl('ticket_show', array('id' => $id))); 
         }
 
-
-
         //consulto los tickets del usuario
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
@@ -181,7 +179,8 @@ class TicketController extends Controller
 
         return $this->render('SitBundle:Ticket:catsub.html.twig', array(
             'arraycatsub' => $arraycatsub,
-            'id'=>$id
+            'id'=>$id,
+            'ticket'=>$ticket
 
         ));
     }
