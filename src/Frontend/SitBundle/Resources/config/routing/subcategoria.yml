@@ -28,3 +28,4 @@ subcategoria_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "SitBundle:Subcategoria:delete" }
     requirements: { _method: post|delete }
+

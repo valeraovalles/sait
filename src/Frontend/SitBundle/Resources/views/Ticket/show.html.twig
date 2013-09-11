@@ -34,10 +34,12 @@
 <div class="row-fluid">
   <div class="span7">
     <div class="formShow" style="width:85%;">
+        {% if reasignado %}
         <div class="contenedorform">
             <div class="labelform">Reasignado por:</div>
             <div class="widgetform"><span class="label label-warning">{{ reasignado[0].user.primernombre }} {{ reasignado[0].user.primerapellido }}</span></div>
         </div>
+        {% endif %}
         <div class="contenedorform">
             <div class="labelform">Solicitante:</div>
             <div class="widgetform">{{ entity.solicitante.primernombre }} {{ entity.solicitante.primerapellido }}</div>
