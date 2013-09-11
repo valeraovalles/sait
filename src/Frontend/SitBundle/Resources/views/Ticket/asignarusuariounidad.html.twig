@@ -1,0 +1,32 @@
+{% extends '::sit.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+
+{% block titulobanner %}
+    ASIGNAR UNIDAD A USUARIO
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">ASIGNAR UNIDAD A USUARIO</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+    
+
+    <br><br>
+    {% endblock %}

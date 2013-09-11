@@ -1,0 +1,30 @@
+categoria:
+    pattern:  /
+    defaults: { _controller: "SitBundle:Categoria:index" }
+
+categoria_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SitBundle:Categoria:show" }
+
+categoria_new:
+    pattern:  /new
+    defaults: { _controller: "SitBundle:Categoria:new" }
+
+categoria_create:
+    pattern:  /create
+    defaults: { _controller: "SitBundle:Categoria:create" }
+    requirements: { _method: post }
+
+categoria_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SitBundle:Categoria:edit" }
+
+categoria_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SitBundle:Categoria:update" }
+    requirements: { _method: post|put }
+
+categoria_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SitBundle:Categoria:delete" }
+    requirements: { _method: post|delete }

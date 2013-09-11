@@ -29,6 +29,15 @@ class Categoria
      */
     private $categoria;
 
+    /**
+     * @var \Perfil
+     *
+     * @ORM\ManyToOne(targetEntity="Unidad")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="unidad_id", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $unidad;
 
 
     /**
@@ -39,6 +48,30 @@ class Categoria
     public function getId()
     {
         return $this->id;
+    }
+
+
+    /**
+     * Set user
+     *
+     * @param \Administracion\UsuarioBundle\Entity\User $user
+     * @return Tipooperador
+     */
+    public function setUnidad(Unidad $unidad = null)
+    {
+        $this->unidad = $unidad;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Administracion\UsuarioBundle\Entity\User 
+     */
+    public function getUnidad()
+    {
+        return $this->unidad;
     }
 
     /**
@@ -62,5 +95,9 @@ class Categoria
     public function getCategoria()
     {
         return $this->categoria;
+    }
+
+    public function __toString(){
+        return $this->getCategoria();
     }
 }

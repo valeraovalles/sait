@@ -46,10 +46,17 @@
                 <td>{{ entity.horasolicitud|date("G:i:s")  }}</td>
                 <td>{{ entity.solicitante.primernombre }} {{ entity.solicitante.primerapellido }}</td>
                 <td>{{ entity.solicitud|slice(0,10) }}</td>
-                <td>{{ entity.estatus }}</td>
+                <td>
+                    {% if entity.estatus==1 %}<span class="label label-important"><span style="display:none;">1-</span>Nuevo</span>
+                    {% elseif entity.estatus==2 %}<span class="label label-info"><span style="display:none;">2-</span>Asignado</span>
+                    {% elseif entity.estatus==3 %}<span class="label label-warning"><span style="display:none;">3-</span>Re-Asignado</span>
+                    {% elseif entity.estatus==4 %}<span class="label label-success"><span style="display:none;">2-</span>Culminado</span>
+                    {% endif %}
+
+                </td>
                 <td>
  
-                    <a href="{{ path('ticket_asignarcatsub', { 'id': entity.id }) }}"><span class="icon-search"></span></a>
+                    <a href="{{ path('ticket_show', { 'id': entity.id }) }}"><span class="icon-search"></span></a>
 
                 </td>
             </tr>

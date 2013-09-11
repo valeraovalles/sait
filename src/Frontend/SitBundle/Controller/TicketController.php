@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Frontend\SitBundle\Entity\Ticket;
+use Frontend\SitBundle\Entity\Reasignado;
+use Frontend\SitBundle\Entity\Unidad;
 use Frontend\SitBundle\Form\TicketType;
 
 use Administracion\UsuarioBundle\Entity\Perfil;
@@ -22,6 +24,160 @@ use Doctrine\ORM\EntityRepository;
 class TicketController extends Controller
 {
 
+    public function asigreasigAction(Request $request,$id)
+    {        
+        $datos=$request->request->all();
+        $em = $this->getDoctrine()->getManager();
+        $ticket = $em->getRepository('SitBundle:Ticket')->find($id);
+
+        if(empty($datos)){
+            $this->get('session')->getFlashBag()->add('alert', 'Debe seleccionar una opción de asignación o reasignación.');
+            return $this->redirect($this->generateUrl('ticket_show', array('id' => $id)));
+        }
+
+        $datos=explode("-", $datos['datos']);
+
+        if($datos[0]=='asignar'){
+            $user = $em->getRepository('UsuarioBundle:Perfil')->find($datos[1]);
+            
+            //busco si hay usuario asignado para borrarlo
+            $ticketusuario = $em->getRepository('SitBundle:Ticket')->buscaticketusuario($id);
+            if(!empty($ticketusuario)){
+                foreach($ticketusuario[0]->getUser() as $usr){
+                    $idusuarioticket=$usr->getId();
+                }
+                $useranterior = $em->getRepository('UsuarioBundle:Perfil')->find($idusuarioticket);
+                $ticket->removeUser($useranterior);
+            }
+
+            $ticket->addUser($user);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('notice', 'El ticket fie asignado exitosamente a '.ucfirst($user->getPrimerNombre().' '.$user->getPrimerapellido()).'.');
+            return $this->redirect($this->generateUrl('ticket_show', array('id' => $id)));
+        }
+
+
+        else if($datos[0]=='reasignar'){
+
+            $unidad = $em->getRepository('SitBundle:Unidad')->find($datos[1]);
+
+            //actualizo campos en ticket
+            $query = $em->createQuery('update SitBundle:Ticket t set t.reasignado=true, t.unidad= :idunidad, t.estatus=3, t.categoria=null, t.subcategoria=null WHERE t.id = :idticket');
+            $query->setParameter('idunidad', $datos[1]);
+            $query->setParameter('idticket', $id);
+            $query->execute();
+
+            //guardo en tabla reasignado
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $user = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            $reasig=new reasignado;
+            $reasig->setUser($user);
+            $reasig->setTicket($ticket);
+            $em->persist($reasig);
+            $em->flush();
+
+            //busco si hay usuario asignado para borrarlo
+            $ticketusuario = $em->getRepository('SitBundle:Ticket')->buscaticketusuario($id);
+            if(!empty($ticketusuario)){
+                foreach($ticketusuario[0]->getUser() as $usr){
+                    $idusuarioticket=$usr->getId();
+                }
+                $useranterior = $em->getRepository('UsuarioBundle:Perfil')->find($idusuarioticket);
+                $ticket->removeUser($useranterior);
+                $em->flush();
+            }
+
+            $this->get('session')->getFlashBag()->add('notice', 'Ticket reasignado exitosamente a '.ucfirst($unidad->getDescripcion()).'.');
+            return $this->redirect($this->generateUrl('ticket'));
+        }
+        
+        
+
+    }
+    public function listausuariounidadAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('UsuarioBundle:Perfil')->findAll();
+
+        return $this->render('SitBundle:Ticket:listausuariounidad.html.twig', array(
+            'entities' => $entities,
+        ));
+    }
+
+    public function usuariounidadAction($id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('UsuarioBundle:Perfil')->find($id);
+
+
+        //busco si el usuario ya posee una unidad asignada para que no se liste en el select
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($id);
+
+        if($usuariounidad){
+            $dql = "select u from SitBundle:Unidad u where u.id!= :id order by u.descripcion ASC";
+            $query = $em->createQuery($dql);
+            $query->setParameter('id',$usuariounidad[0]->getId());
+        }
+        else{
+            $dql = "select u from SitBundle:Unidad u order by u.descripcion ASC";
+            $query = $em->createQuery($dql);
+        }
+
+            $unidades = $query->getResult();
+
+        foreach ($unidades as $value) {
+            $unidad[$value->getId()]=$value->getDescripcion();
+        }
+        $form = $this->createFormBuilder()
+                ->add('unidad', 'choice', array(
+                    'choices'   => $unidad,
+                    'empty_value' => 'Seleccione...'
+                ))
+        ->getForm();
+
+        return $this->render('SitBundle:Ticket:usuariounidad.html.twig', array(
+            'entity' => $entities,
+            'form'   => $form->createView(),
+            'usuariounidad'=>$usuariounidad 
+        ));
+    }
+
+    public function asignarusuariounidadAction(Request $request,$id)
+    {
+        $datos=$request->request->all();
+
+        if(empty($datos)){
+            $this->get('session')->getFlashBag()->add('alert', 'Debe seleccionar una unidad.');
+            return $this->redirect($this->generateUrl('ticket_usuariounidad', array('id' => $id)));
+        }
+
+        else $idunidad=$datos['form']['unidad'];
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('UsuarioBundle:Perfil')->find($id);
+
+        //busco si el usuario ya posee una unidad asignada para eliminarla
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($id);
+
+        if($usuariounidad){
+            $unidad = $em->getRepository('SitBundle:Unidad')->find($usuariounidad[0]->getId());
+            $unidad->removeUser($user);
+            $em->flush();
+        }
+        
+
+        $unidad = $em->getRepository('SitBundle:Unidad')->find($idunidad);
+        $unidad->addUser($user);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add('notice', 'Unidad asociada con exito.');
+        return $this->redirect($this->generateUrl('ticket_usuariounidad', array('id' => $id)));
+
+    }
+
     /**
      * Lists all Ticket entities.
      *
@@ -30,7 +186,12 @@ class TicketController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SitBundle:Ticket')->findAll();
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+
+        $entities = $em->getRepository('SitBundle:Unidad')->ticketsunidad($usuariounidad[0]->getId());
+
+
 
         return $this->render('SitBundle:Ticket:index.html.twig', array(
             'entities' => $entities,
@@ -157,30 +318,43 @@ class TicketController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-        $dql = "select t from SitBundle:Ticket t where t.id= :id";
-        $query = $em->createQuery($dql);
-        $query->setParameter('id',$id);
-        $ticket = $query->getResult();
+        //busco un ticket en especifico
+        $ticket = $em->getRepository('SitBundle:Ticket')->find($id);
 
-        if($ticket[0]->getCategoria()!=null and $ticket[0]->getSubcategoria()!=null){
+        /*if($ticket->getCategoria()!=null and $ticket->getSubcategoria()!=null){
             return $this->redirect($this->generateUrl('ticket_show', array('id' => $id))); 
-        }
+        }*/
 
-        //consulto los tickets del usuario
+        //consulto las categorias de la unidad
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $em = $this->getDoctrine()->getManager();
-        $dql = "select s from SitBundle:Subcategoria s join s.categoria c where c.id=s.categoria";
+        //busco si el usuario ya posee una unidad asignada para eliminarla
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+        $dql = "select s from SitBundle:Subcategoria s join s.categoria c where c.id=s.categoria and c.unidad= :idunidad ";
         $query = $em->createQuery($dql);
+        $query->setParameter('idunidad', $usuariounidad[0]->getId());
         $subcat = $query->getResult();
+
 
         foreach ($subcat as $value) {
             $arraycatsub[$value->getCategoria()->getCategoria()][]=array('idcat'=>$value->getCategoria()->getId(),'idsub'=>$value->getId(),'subcategoria'=>$value->getSubcategoria());
         }
 
+        $dql = "select u from SitBundle:Unidad u";
+        $query = $em->createQuery($dql);
+        $unidad = $query->getResult();
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        //busco si el usuario ya posee una unidad asignada para eliminarla
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+
+
+
         return $this->render('SitBundle:Ticket:catsub.html.twig', array(
             'arraycatsub' => $arraycatsub,
             'id'=>$id,
-            'ticket'=>$ticket
+            'ticket'=>$ticket,
+            'unidad'=>$unidad,
+            'idunidad'=>$usuariounidad[0]->getId()
 
         ));
     }
@@ -216,26 +390,31 @@ class TicketController extends Controller
      */
     public function showAction($id)
     {
-        //traigo los datos del usuario conectado
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
-        $datosusuario = $em->getRepository('UsuarioBundle:User')->datosusuario($idusuario);
 
-        //valido que tenga categoria asignada
-        $dql = "select t from SitBundle:Ticket t where t.id= :id";
-        $query = $em->createQuery($dql);
-        $query->setParameter('id',$id);
-        $ticket = $query->getResult();
+        //busco si alguien tiene asignado el ticket
+        $ticketusuario = $em->getRepository('SitBundle:Ticket')->buscaticketusuario($id);
+        if(!empty($ticketusuario)){
+            foreach($ticketusuario[0]->getUser() as $usr){
+                $usuarioticket=$usr;
+            }
+        } else $usuarioticket=null;
 
-        if($ticket[0]->getCategoria()==null and $ticket[0]->getSubcategoria()==null){
+
+        //busco un ticket en especifico y valido que tenga categoria asignada
+        $ticket = $em->getRepository('SitBundle:Ticket')->find($id);
+
+        if($ticket->getCategoria()==null and $ticket->getSubcategoria()==null){
             return $this->redirect($this->generateUrl('ticket_asignarcatsub', array('id' => $id))); 
         }
 
-        $entity = $em->getRepository('SitBundle:Ticket')->find($id);
+        //traigo los datos del usuario conectado
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $datosusuario = $em->getRepository('UsuarioBundle:User')->datosusuario($idusuario);
+        //busco si el usuario ya posee una unidad asignada para eliminarla
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+        $usuariosunidad =  $em->getRepository('SitBundle:Unidad')->usuariosunidad($usuariounidad[0]->getId());
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Ticket entity.');
-        }
 
         $deleteForm = $this->createDeleteForm($id);
 
@@ -243,11 +422,23 @@ class TicketController extends Controller
         $query = $em->createQuery($dql);
         $unidad = $query->getResult();
 
+
+        //reasignado
+        $dql = "select r from SitBundle:Reasignado r where r.ticket= :id order by r.id DESC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('id',$id);
+        $query->setMaxResults(1);
+        $reasignado = $query->getResult();
+
         return $this->render('SitBundle:Ticket:show.html.twig', array(
-            'entity'      => $entity,
+            'entity'      => $ticket,
             'delete_form' => $deleteForm->createView(),
             'datosusuario'=>$datosusuario[0],
-            'unidad'=>$unidad
+            'unidad'=>$unidad,
+            'usuariosunidad'=>$usuariosunidad,
+            'usuarioticket'=>$usuarioticket,
+            'idunidad'=>$usuariounidad[0]->getId(),
+            'reasignado'=>$reasignado
         ));
     }
 

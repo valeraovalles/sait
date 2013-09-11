@@ -11,7 +11,12 @@
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">GESTIONAR TICKET</div>
+    <div class="titulo">GESTIONAR TICKET
+        {% if usuarioticket %}
+        <br><h5>ASIGNADO A {{ usuarioticket.primernombre|upper }} {{ usuarioticket.primerapellido|upper }}</h5>
+        {% endif %}
+
+    </div>
 
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="alert alert-success">
@@ -25,10 +30,14 @@
         </div>
     {% endfor %}
 
-
+<form action="{{ path('ticket_asigreasig',{'id':entity.id}) }}" method="post">
 <div class="row-fluid">
   <div class="span7">
     <div class="formShow" style="width:85%;">
+        <div class="contenedorform">
+            <div class="labelform">Reasignado por:</div>
+            <div class="widgetform"><span class="label label-warning">{{ reasignado[0].user.primernombre }} {{ reasignado[0].user.primerapellido }}</span></div>
+        </div>
         <div class="contenedorform">
             <div class="labelform">Solicitante:</div>
             <div class="widgetform">{{ entity.solicitante.primernombre }} {{ entity.solicitante.primerapellido }}</div>
@@ -54,7 +63,7 @@
 
         <div class="contenedorform">
             <div class="labelform">Categoria:</div>
-            <div class="widgetform">{{ entity.categoria.categoria|upper }}</div>
+            <div class="widgetform">{{ entity.categoria.categoria|upper }}<a href="{{ path('ticket_asignarcatsub',{'id':entity.id}) }}"> <span class="icon-edit"></span></a></div>
         </div>
 
         <div class="contenedorform">
@@ -92,7 +101,19 @@
             </div>
             <div id="collapseOne" class="accordion-body collapse in">
               <div class="accordion-inner">
-                Anim pariatur cliche...
+                {% for usu in usuariosunidad %}
+                    {% if usuarioticket %}
+                        {% for usuarios in usu.user if usuarios.id!= usuarioticket.id %}
+                            <div class="situnidad"><input type="radio" name="datos" value="asignar-{{usuarios.id}}"> 
+                            {{ usuarios.primernombre|title }} {{ usuarios.primerapellido|title }}</div>
+                        {% endfor %}
+                    {% else %}
+                        {% for usuarios in usu.user %}
+                            <div class="situnidad"><input type="radio" name="datos" value="asignar-{{usuarios.id}}"> 
+                            {{ usuarios.primernombre|title }} {{ usuarios.primerapellido|title }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
               </div>
             </div>
           </div>
@@ -105,8 +126,8 @@
             </div>
             <div id="collapseTwo" class="accordion-body collapse in">
               <div class="accordion-inner">
-                {% for uni in unidad %}
-                <div class="situnidad"><input type="radio" name="datos" value="reasigna-{{ uni.id }}"> {{ uni.descripcion }}</div>
+                {% for uni in unidad if uni.id!=idunidad %}
+                <div class="situnidad"><input type="radio" name="datos" value="reasignar-{{ uni.id }}"> {{ uni.descripcion }}</div>
                 {% endfor %}
               </div>
             </div>
@@ -114,10 +135,10 @@
         </div>
         </div>
 
-        <input type="button" class="btn btn-primary" value="Enviar">
+        <input type="submit" class="btn btn-primary" value="Enviar">
   </div>
 </div>
-
+</form>
 
     <div style="width:800px;left:44%;" id="myModal" class="modal hide fade" tabindex="5" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-body">
@@ -129,7 +150,7 @@
     </div>
 
 
-
+<a class="btn btn-primary" href="{{ path('ticket') }}">Ir a la lista</a>
 
 {#
 

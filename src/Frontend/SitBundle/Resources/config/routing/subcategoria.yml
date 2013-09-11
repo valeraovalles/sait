@@ -1,0 +1,30 @@
+subcategoria:
+    pattern:  /
+    defaults: { _controller: "SitBundle:Subcategoria:index" }
+
+subcategoria_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SitBundle:Subcategoria:show" }
+
+subcategoria_new:
+    pattern:  /new
+    defaults: { _controller: "SitBundle:Subcategoria:new" }
+
+subcategoria_create:
+    pattern:  /create
+    defaults: { _controller: "SitBundle:Subcategoria:create" }
+    requirements: { _method: post }
+
+subcategoria_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SitBundle:Subcategoria:edit" }
+
+subcategoria_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SitBundle:Subcategoria:update" }
+    requirements: { _method: post|put }
+
+subcategoria_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SitBundle:Subcategoria:delete" }
+    requirements: { _method: post|delete }

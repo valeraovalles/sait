@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Unidad
  *
  * @ORM\Table(name="unidad")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Frontend\SitBundle\Entity\UnidadRepository")
  */
 class Unidad
 {
@@ -37,11 +37,12 @@ class Unidad
     private $correo;
 
 
+
     /**
-     * @ORM\ManyToMany(targetEntity="Administracion\UsuarioBundle\Entity\User", inversedBy="unidad")
-     * @ORM\JoinTable(name="usuarios.usuariounidad",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="unidad_id", referencedColumnName="id")}
+     * @ORM\ManyToMany(targetEntity="Administracion\UsuarioBundle\Entity\Perfil")
+     * @ORM\JoinTable(name="usuariounidad",
+     *      joinColumns={@ORM\JoinColumn(name="unidad_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
      *      )
      **/
 
@@ -118,7 +119,7 @@ class Unidad
      * @param \Administracion\UsuarioBundle\Entity\User $user
      * @return Usuario
      */
-    public function addUser(\Administracion\UsuarioBundle\Entity\User $user)
+    public function addUser(\Administracion\UsuarioBundle\Entity\Perfil $user)
     {
         $this->user[] = $user;
         return $this;
@@ -129,7 +130,7 @@ class Unidad
      *
      * @param \Administracion\UsuarioBundle\Entity\User $user
      */
-    public function removeUser(\Administracion\UsuarioBundle\Entity\User $user)
+    public function removeUser(\Administracion\UsuarioBundle\Entity\Perfil $user)
     {
         $this->user->removeElement($user);
     }

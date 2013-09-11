@@ -12,6 +12,23 @@ ticket_show:
     pattern:  /{id}/show
     defaults: { _controller: "SitBundle:Ticket:show" }
 
+
+ticket_asigreasig:
+    pattern:  /asigreasig/{id}
+    defaults: { _controller: "SitBundle:Ticket:asigreasig" }
+
+ticket_listausuariounidad:
+    pattern:  /listausuariounidad
+    defaults: { _controller: "SitBundle:Ticket:listausuariounidad" }
+
+ticket_usuariounidad:
+    pattern:  /usuariounidad/{id}
+    defaults: { _controller: "SitBundle:Ticket:usuariounidad" }
+
+ticket_asignarusuariounidad:
+    pattern:  /asignarusuariounidad/{id}
+    defaults: { _controller: "SitBundle:Ticket:asignarusuariounidad" }
+
 ticket_asignarcatsub:
     pattern:  /{id}/catsub
     defaults: { _controller: "SitBundle:Ticket:catsub" }
@@ -44,3 +61,73 @@ ticket_delete:
     requirements: { _method: post|delete }
 
 # FIN TICKET #
+
+
+# CATEGORIA #
+categoria:
+    pattern:  /categoria
+    defaults: { _controller: "SitBundle:Categoria:index" }
+
+categoria_show:
+    pattern:  /categoria/{id}/show
+    defaults: { _controller: "SitBundle:Categoria:show" }
+
+categoria_new:
+    pattern:  /categoria/new
+    defaults: { _controller: "SitBundle:Categoria:new" }
+
+categoria_create:
+    pattern:  /categoria/create
+    defaults: { _controller: "SitBundle:Categoria:create" }
+    requirements: { _method: post }
+
+categoria_edit:
+    pattern:  /categoria/{id}/edit
+    defaults: { _controller: "SitBundle:Categoria:edit" }
+
+categoria_update:
+    pattern:  /categoria/{id}/update
+    defaults: { _controller: "SitBundle:Categoria:update" }
+    requirements: { _method: post|put }
+
+categoria_delete:
+    pattern:  /categoria/{id}/delete
+    defaults: { _controller: "SitBundle:Categoria:delete" }
+    requirements: { _method: post|delete }
+
+# FIN CATEGORIA #
+
+# SUBCATEGORIA #
+subcategoria:
+    pattern:  /subcategoria
+    defaults: { _controller: "SitBundle:Subcategoria:index" }
+
+subcategoria_show:
+    pattern:  /subcategoria/{id}/show
+    defaults: { _controller: "SitBundle:Subcategoria:show" }
+
+subcategoria_new:
+    pattern:  /subcategoria/new
+    defaults: { _controller: "SitBundle:Subcategoria:new" }
+
+subcategoria_create:
+    pattern:  /subcategoria/create
+    defaults: { _controller: "SitBundle:Subcategoria:create" }
+    requirements: { _method: post }
+
+subcategoria_edit:
+    pattern:  /subcategoria/{id}/edit
+    defaults: { _controller: "SitBundle:Subcategoria:edit" }
+
+subcategoria_update:
+    pattern:  /subcategoria/{id}/update
+    defaults: { _controller: "SitBundle:Subcategoria:update" }
+    requirements: { _method: post|put }
+
+subcategoria_delete:
+    pattern:  /subcategoria/{id}/delete
+    defaults: { _controller: "SitBundle:Subcategoria:delete" }
+    requirements: { _method: post|delete }
+
+
+# FIN SUBCATEGORIA #

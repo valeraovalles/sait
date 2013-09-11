@@ -52,11 +52,31 @@
 						{% endfor %}
 					</div>
 				</div>
-				<input type="submit" class="btn btn-primary">
+				<input type="submit" class="btn btn-primary" value="Asociar categoria">
 			</form>
 		</div>
 		<div class="span6" style="text-align:justify;padding-right:10px;">
-			<div style="width:400px;"><b>Solicitud: </b>{{ ticket[0].solicitud }}</div>
-		</div>
+			<div style="width:400px;"><b>Solicitud: </b>{{ ticket.solicitud }}</div>
+
+			<br>
+			<form action="{{ path('ticket_asigreasig',{'id':id}) }}" method="post">
+			<div class="accordion-group">
+	            <div class="accordion-heading">
+	              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+	                REASIGNAR TICKET
+	              </a>
+	            </div>
+	            <div id="collapseTwo" class="accordion-body collapse in">
+	              <div class="accordion-inner">
+	                {% for uni in unidad if uni.id!=idunidad %}
+	                <div class="situnidad"><input type="radio" name="datos" value="reasignar-{{ uni.id }}"> {{ uni.descripcion }}</div>
+	                {% endfor %}
+	              </div>
+	            </div>
+	          </div>
+			</div>
+
+			<input type="submit" class="btn btn-primary" value="Reasignar">
+			</form>
 	</div>
 {% endblock %}

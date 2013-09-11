@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Ticket
  *
  * @ORM\Table(name="ticket")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Frontend\SitBundle\Entity\TicketRepository")
  */
 class Ticket
 {
@@ -136,6 +136,50 @@ class Ticket
      */
     private $file;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Administracion\UsuarioBundle\Entity\Perfil")
+     * @ORM\JoinTable(name="usuarioticket",
+     *      joinColumns={@ORM\JoinColumn(name="ticket_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     *      )
+     **/
+
+    private $user;
+
+
+
+     /**
+     * Add user
+     *
+     * @param \Administracion\UsuarioBundle\Entity\User $user
+     * @return Usuario
+     */
+    public function addUser(\Administracion\UsuarioBundle\Entity\Perfil $user)
+    {
+        $this->user[] = $user;
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \Administracion\UsuarioBundle\Entity\User $user
+     */
+    public function removeUser(\Administracion\UsuarioBundle\Entity\Perfil $user)
+    {
+        $this->user->removeElement($user);
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 
 
     /**
