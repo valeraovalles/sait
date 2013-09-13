@@ -24,6 +24,109 @@ use Doctrine\ORM\EntityRepository;
 class TicketController extends Controller
 {
 
+ public function asignadosolucionAction(Request $request,$id)
+    {
+
+        $datos=$request->request->all();
+        $datos=$datos['form'];
+
+        if($datos['solucion']==null){
+            $this->get('session')->getFlashBag()->add('alert', 'DEBE ESCRIBIR UNA SOLUCIÓN');
+            return $this->redirect($this->generateUrl('ticket_showasignado',array('id'=>$id)));
+        }
+
+        $fechactual = date_create_from_format('Y-m-d', \date("Y-m-d"));
+        $horaactual=new \DateTime(\date("G:i:s"));
+
+        $em = $this->getDoctrine()->getManager();
+        //actualizo campos en ticket
+        $query = $em->createQuery('update SitBundle:Ticket t set t.solucion= :solucion, t.fechasolucion= :fechasolucion, t.horasolucion= :horasolucion, t.estatus=4 WHERE t.id = :idticket');
+        $query->setParameter('fechasolucion', $fechactual);
+        $query->setParameter('horasolucion', $horaactual);
+        $query->setParameter('solucion', $datos['solucion']);
+        $query->setParameter('idticket', $id);
+        $query->execute();
+
+        $this->get('session')->getFlashBag()->add('notice', 'EL TICKET SE HA CERRADO SATISFACTORIAMENTE');
+        return $this->redirect($this->generateUrl('ticket_show',array('id'=>$id)));
+
+
+    }
+
+    public function showasignadoAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        //busco si alguien tiene asignado el ticket
+        $ticketusuario = $em->getRepository('SitBundle:Ticket')->buscaticketusuario($id);
+        if(!empty($ticketusuario)){
+            foreach($ticketusuario[0]->getUser() as $usr){
+                $usuarioticket=$usr;
+            }
+        } else $usuarioticket=null;
+
+
+        //busco un ticket en especifico y valido que tenga categoria asignada
+        $ticket = $em->getRepository('SitBundle:Ticket')->find($id);
+
+        if($ticket->getCategoria()==null and $ticket->getSubcategoria()==null){
+            return $this->redirect($this->generateUrl('ticket_asignarcatsub', array('id' => $id))); 
+        }
+
+        //traigo los datos del usuario conectado
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $datosusuario = $em->getRepository('UsuarioBundle:User')->datosusuario($idusuario);
+        //busco si el usuario ya posee una unidad asignada para eliminarla
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+        $usuariosunidad =  $em->getRepository('SitBundle:Unidad')->usuariosunidad($usuariounidad[0]->getId());
+
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        $dql = "select u from SitBundle:Unidad u";
+        $query = $em->createQuery($dql);
+        $unidad = $query->getResult();
+
+
+        //reasignado
+        $dql = "select r from SitBundle:Reasignado r where r.ticket= :id order by r.id DESC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('id',$id);
+        $query->setMaxResults(1);
+        $reasignado = $query->getResult();
+
+
+        $form = $this->createFormBuilder()
+                ->add('solucion', 'textarea'
+                )
+        ->getForm();
+
+        return $this->render('SitBundle:Ticket:showasignado.html.twig', array(
+            'entity'      => $ticket,
+            'delete_form' => $deleteForm->createView(),
+            'datosusuario'=>$datosusuario[0],
+            'unidad'=>$unidad,
+            'usuariosunidad'=>$usuariosunidad,
+            'usuarioticket'=>$usuarioticket,
+            'idunidad'=>$usuariounidad[0]->getId(),
+            'reasignado'=>$reasignado,
+            'form'=>$form->createView(),
+        ));
+    }
+
+    public function asignadoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+        $entities = $em->getRepository('SitBundle:Ticket')->ticketsasignados($idusuario);
+
+        return $this->render('SitBundle:Ticket:asignado.html.twig', array(
+            'entities' => $entities,
+        ));
+    }
+
     public function asigreasigAction(Request $request,$id)
     {        
         $datos=$request->request->all();

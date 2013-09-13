@@ -4,9 +4,23 @@ sit_homepage:
 
 # TICKETS #
 
+
+ticket_asignado:
+    pattern:  /asignado
+    defaults: { _controller: "SitBundle:Ticket:asignado" }
+
+ticket_showasignado:
+    pattern:  /{id}/showasignado
+    defaults: { _controller: "SitBundle:Ticket:showasignado" }
+
+ticket_asignadosolucion:
+    pattern:  /{id}/asignadosolucion
+    defaults: { _controller: "SitBundle:Ticket:asignadosolucion" }
+
 ticket:
     pattern:  /ticket
     defaults: { _controller: "SitBundle:Ticket:index" }
+
 
 ticket_show:
     pattern:  /{id}/show

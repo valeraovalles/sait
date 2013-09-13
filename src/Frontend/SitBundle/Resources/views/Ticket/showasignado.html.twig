@@ -4,18 +4,16 @@
 
 
 {% block titulobanner %}
-    GESTIONAR TICKET
+    TICKET ASIGNADO
 {% endblock %}
 
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">GESTIONAR TICKET
+    <div class="titulo">TICKET ASIGNADO
         {% if usuarioticket %}
-        <br>
-
-        <h5>{% if entity.estatus!=4 %}ASIGNADO A{% else %}CERRADO POR{% endif %} {{ usuarioticket.primernombre|upper }} {{ usuarioticket.primerapellido|upper }}</h5>
+        <br><h5>ASIGNADO A {{ usuarioticket.primernombre|upper }} {{ usuarioticket.primerapellido|upper }}</h5>
         {% endif %}
 
     </div>
@@ -32,11 +30,9 @@
         </div>
     {% endfor %}
 
-{% if entity.estatus!=4 %}
-<form action="{{ path('ticket_asigreasig',{'id':entity.id}) }}" method="post">
+<form novalidate action="{{ path('ticket_asignadosolucion',{'id':entity.id}) }}" method="post">
 <div class="row-fluid">
   <div class="span7">
-{% endif %}
     <div class="formShow" style="width:85%;">
         {% if reasignado %}
         <div class="contenedorform">
@@ -62,33 +58,14 @@
             <div class="widgetform">{{ entity.horasolicitud|date("G:i:s") }}</div>
         </div>
 
-        {% if entity.estatus==4 %}
-            <div class="contenedorform">
-                <div class="labelform">Fecha solución:</div>
-                <div class="widgetform">{{ entity.fechasolucion|date("d-m-Y") }}</div>
-            </div>
-
-            <div class="contenedorform">
-                <div class="labelform">Hora solución:</div>
-                <div class="widgetform">{{ entity.horasolucion|date("G:i:s") }}</div>
-            </div>
-        {% endif %}
-
         <div class="contenedorform">
             <div class="labelform">Solicitud:</div>
             <div class="widgetform">{{ entity.solicitud}}</div>
         </div>
 
-        {% if entity.estatus==4 %}
-            <div class="contenedorform">
-                <div class="labelform">Solución:</div>
-                <div class="widgetform">{{ entity.solucion}}</div>
-            </div>
-        {% endif %}
-
         <div class="contenedorform">
             <div class="labelform">Categoria:</div>
-            <div class="widgetform">{{ entity.categoria.categoria|upper }}{% if entity.estatus!=4 %}<a href="{{ path('ticket_asignarcatsub',{'id':entity.id}) }}"> <span class="icon-edit"></span></a>{% endif %}</div>
+            <div class="widgetform">{{ entity.categoria.categoria|upper }}<a href="{{ path('ticket_asignarcatsub',{'id':entity.id}) }}"> <span class="icon-edit"></span></a></div>
         </div>
 
         <div class="contenedorform">
@@ -114,58 +91,18 @@
         </div>
         {% endif %}
     </div>
-{% if entity.estatus!=4 %}
   </div>
   <div class="span5">
-        <div class="contenedorcatsub">
-        <div class="accordion" id="accordion2">
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                ASIGNAR TICKET
-              </a>
+       
+            <div class="contenedorform">
+                <div class="labelform"><h5>SOLUCION</h5></div>
+                <div class="widgetform">{{ form_widget(form.solucion, { 'attr': {'style': 'width:80%;height:200px;'} }) }}</div>
             </div>
-            <div id="collapseOne" class="accordion-body collapse in">
-              <div class="accordion-inner">
-                {% for usu in usuariosunidad %}
-                    {% if usuarioticket %}
-                        {% for usuarios in usu.user if usuarios.id!= usuarioticket.id %}
-                            <div class="situnidad"><input type="radio" name="datos" value="asignar-{{usuarios.id}}"> 
-                            {{ usuarios.primernombre|title }} {{ usuarios.primerapellido|title }}</div>
-                        {% endfor %}
-                    {% else %}
-                        {% for usuarios in usu.user %}
-                            <div class="situnidad"><input type="radio" name="datos" value="asignar-{{usuarios.id}}"> 
-                            {{ usuarios.primernombre|title }} {{ usuarios.primerapellido|title }}</div>
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-          <br><br>
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                REASIGNAR TICKET
-              </a>
-            </div>
-            <div id="collapseTwo" class="accordion-body collapse in">
-              <div class="accordion-inner">
-                {% for uni in unidad if uni.id!=idunidad %}
-                <div class="situnidad"><input type="radio" name="datos" value="reasignar-{{ uni.id }}"> {{ uni.descripcion }}</div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
 
         <input type="submit" class="btn btn-primary" value="Enviar">
   </div>
 </div>
 </form>
-{% endif %}
 
     <div style="width:800px;left:44%;" id="myModal" class="modal hide fade" tabindex="5" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-body">
