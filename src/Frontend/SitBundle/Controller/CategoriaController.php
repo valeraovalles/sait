@@ -23,8 +23,16 @@ class CategoriaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SitBundle:Categoria')->findAll();
+        //traigo los datos del usuario conectado
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
 
+        $dql = "select c from SitBundle:Categoria c join c.unidad u where u.id= :id";
+        $query = $em->createQuery($dql);
+        $query->setParameter('id',$usuariounidad[0]->getId());
+        $entities = $query->getResult();
+
+        //$entities = $em->getRepository('SitBundle:Categoria')->findAll();
         return $this->render('SitBundle:Categoria:index.html.twig', array(
             'entities' => $entities,
         ));
@@ -134,7 +142,7 @@ class CategoriaController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-
+            $this->get('session')->getFlashBag()->add('notice', 'La categoria se actualizó con exito.');
             return $this->redirect($this->generateUrl('categoria_edit', array('id' => $id)));
         }
 

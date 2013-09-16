@@ -4,7 +4,9 @@
     <h1>Categoria creation</h1>
 
     <form action="{{ path('categoria_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
+        {{ form_widget(form._token) }}
+
+        
         <p>
             <button type="submit">Create</button>
         </p>

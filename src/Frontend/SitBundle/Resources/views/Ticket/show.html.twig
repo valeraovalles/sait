@@ -167,9 +167,10 @@
 </form>
 {% endif %}
 
+
     <div style="width:800px;left:44%;" id="myModal" class="modal hide fade" tabindex="5" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-body">
-            <img class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ entity.archivo }}">
+            <a href="/sait/web/libs/scripts/forzardescarga.php?archivo={{ entity.archivo }}&ruta=../../uploads/sit/"><img class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ entity.archivo }}"></a>
         </div>
         <div class="modal-footer">
           <button class="btn" data-dismiss="modal">Cerrar</button>
@@ -178,6 +179,8 @@
 
 
 <a class="btn btn-primary" href="{{ path('ticket') }}">Ir a la lista</a>
+
+
 
 {#
 

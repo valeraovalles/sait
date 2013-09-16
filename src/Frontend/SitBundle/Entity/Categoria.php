@@ -3,6 +3,7 @@
 namespace Frontend\SitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Categoria
@@ -26,6 +27,7 @@ class Categoria
      * @var string
      *
      * @ORM\Column(name="categoria", type="string", length=100, nullable=false)
+     * @Assert\NotBlank(message="Debe escribir la categoria.")
      */
     private $categoria;
 

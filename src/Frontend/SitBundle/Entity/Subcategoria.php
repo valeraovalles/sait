@@ -3,6 +3,7 @@
 namespace Frontend\SitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Subcategoria
@@ -26,6 +27,7 @@ class Subcategoria
      * @var string
      *
      * @ORM\Column(name="subcategoria", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="Debe escribir la subcategoria.")
      */
     private $subcategoria;
 

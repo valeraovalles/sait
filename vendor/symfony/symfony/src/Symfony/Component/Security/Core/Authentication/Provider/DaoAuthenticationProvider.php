@@ -53,7 +53,21 @@ class DaoAuthenticationProvider extends UserAuthenticationProvider
      */
     protected function checkAuthentication(UserInterface $user, UsernamePasswordToken $token)
     {
+
         $currentUser = $token->getUser();
+        $currentPassword = $token->getCredentials();
+
+        $ds = ldap_connect("192.168.3.5") or die ("No se pudo establecer coneccion con el servidor");
+        
+        ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
+        
+        $ldapbind = @ldap_bind($ds, "uid=".$currentUser.",ou=Personas,dc=telesur" , $currentPassword);
+                
+        if($ldapbind==false){}
+        
+        else if($ldapbind==true) return;
+
+
         if ($currentUser instanceof UserInterface) {
             if ($currentUser->getPassword() !== $user->getPassword()) {
                 throw new BadCredentialsException('The credentials were changed from another session.');

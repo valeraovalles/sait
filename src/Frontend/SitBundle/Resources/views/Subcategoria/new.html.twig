@@ -1,20 +1,61 @@
-{% extends '::base.html.twig' %}
+{% extends '::sit.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+
+{% block titulobanner %}
+    NUEVA SUBCATEGORIA
+{% endblock %}
+
+
 
 {% block body -%}
-    <h1>Subcategoria creation</h1>
+    {{ parent() }}
+    
+    <div class="titulo">NUEVA SUBCATEGORIA</div>
 
-    <form action="{{ path('subcategoria_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
-        <p>
-            <button type="submit">Create</button>
-        </p>
+
+    {% if form_errors(form.subcategoria)  %}
+    <div class="alert alert-danger">
+        <ul>
+            <li>{{ form_errors(form.subcategoria) }}</li>
+        </ul>
+    </div>
+    {% endif %}
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    <form novalidate action="{{ path('subcategoria_create', { 'id': id }) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+        <br>
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform">Subcategoria:</div>
+                <div class="widgetform">{{ form_widget(form.subcategoria) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Categoria:</div>
+                <div class="widgetform">{{ form_widget(form.categoria) }}</div>
+            </div>
+        </div>
+    
+        <button class="btn btn-primary" type="submit">Crear</button> | 
+        <a class="btn btn-default" href="{{ path('subcategoria') }}">
+            Ir a la lista
+        </a>
+      
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('subcategoria') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+
+
 {% endblock %}

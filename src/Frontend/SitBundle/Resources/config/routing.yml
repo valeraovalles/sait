@@ -121,11 +121,11 @@ subcategoria_show:
     defaults: { _controller: "SitBundle:Subcategoria:show" }
 
 subcategoria_new:
-    pattern:  /subcategoria/new
+    pattern:  /subcategoria/new/{id}
     defaults: { _controller: "SitBundle:Subcategoria:new" }
 
 subcategoria_create:
-    pattern:  /subcategoria/create
+    pattern:  /subcategoria/create/{id}
     defaults: { _controller: "SitBundle:Subcategoria:create" }
     requirements: { _method: post }
 

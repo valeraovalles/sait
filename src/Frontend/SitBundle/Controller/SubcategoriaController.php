@@ -33,10 +33,11 @@ class SubcategoriaController extends Controller
      * Creates a new Subcategoria entity.
      *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $id)
     {
+
         $entity  = new Subcategoria();
-        $form = $this->createForm(new SubcategoriaType(), $entity);
+        $form = $this->createForm(new SubcategoriaType($id), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -50,6 +51,7 @@ class SubcategoriaController extends Controller
         return $this->render('SitBundle:Subcategoria:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'id'=>$id
         ));
     }
 
@@ -57,14 +59,15 @@ class SubcategoriaController extends Controller
      * Displays a form to create a new Subcategoria entity.
      *
      */
-    public function newAction()
+    public function newAction($id)
     {
         $entity = new Subcategoria();
-        $form   = $this->createForm(new SubcategoriaType(), $entity);
+        $form   = $this->createForm(new SubcategoriaType($id), $entity);
 
         return $this->render('SitBundle:Subcategoria:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'id'=>$id
         ));
     }
 
