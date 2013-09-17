@@ -1,0 +1,45 @@
+<div id='cssmenu'>
+   <ul>
+      
+      <li class='active'><a href='{{ path('datosproveedor') }}'><span>INICIO</span></a></li>
+            
+         <li class='has-sub'><a href= '#' ><span>PROVEEDORES</span></a>
+            <ul>
+               <li><a href='{{ path('datoscompras') }}'><span>COMPRAS</span></a></li>
+               <li><a href='{{ path('datossatelites') }}'><span>SATELITES</span></a></li>
+               <li><a href='{{ path('datosinformacion') }}'><span>INFORMACI&Oacute;N</span></a></li>
+               <li><a href='{{ path('datosequipos') }}'><span>EQUIPOS TELESUR</span></a></li>
+            </ul>
+         </li>
+         <li class='has-sub'><a href='{{ path('datosproveedor_new') }}'><span>NUEVO REGISTRO</span></a></li>
+         <li class='has-sub'><a href='#'><span>EDITAR DATOS</span></a>
+            <ul>
+               <li class='has-sub'><a href='#'><span>PROVEEDOR</span></a>
+                  <ul>
+                     <li><a href='{{ path('datosproveedor') }}'><span>TIPO DE PROVEEDOR</span></a></li>
+                     <li><a href='{{ path('datosproveedor') }}'><span>DETALLES DEL PROVEEDOR</span></a></li>
+                  </ul>
+               </li>
+               <li class='has-sub'><a href='#'><span>DINERO</span></a>
+                  <ul>
+                     <li><a href='{{ path('datosproveedor') }}'><span>BANCO</span></a></li>
+                     <li><a href='{{ path('datosproveedor') }}'><span>CONTRATACI&Oacute;N</span></a></li>
+                     <li><a href='{{ path('datosproveedor') }}'><span>CONTROL DEL PAGO</span></a></li>
+                     <li><a href='{{ path('datosproveedor') }}'><span>DIAS DE ENTREGA</span></a></li>
+                     <li><a href='{{ path('datosproveedor') }}'><span>ANALISTA COMPRAS</span></a></li>
+                     <li><a href='{{ path('datosproveedor') }}'><span>PRESUPUESTO</span></a></li>
+                  </ul>
+               </li>
+               <li class='has-sub'><a href='#'><span>UNIDAD</span></a>
+                  <ul>
+                     <li><a href='{{ path('datosproveedor') }}'><span>EJECUTORA</span></a></li>
+                     <li><a href='{{ path('datosproveedor') }}'><span>ADMINISTRATIVA</span></a></li>
+                     <li><a href='{{ path('datosproveedor') }}'><span>SOLICITANTE</span></a></li>
+                  </ul>
+               </li>
+            </ul>
+         </li>
+      <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
+      <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
+   </ul>
+</div>

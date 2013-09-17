@@ -1,0 +1,126 @@
+<?php
+
+namespace Frontend\ContenidosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Pago
+ *
+ * @ORM\Table(name="contenidos.pago")
+ * @ORM\Entity
+ */
+class Pago
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="contenidos.pago_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="num_memo", type="string", length=30, nullable=false)
+     */
+    private $numMemo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_unidadejec", type="date", nullable=false)
+     */
+    private $fechaUnidadejec;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="num_factura", type="string", length=30, nullable=false)
+     */
+    private $numFactura;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_factura", type="date", nullable=false)
+     */
+    private $fechaFactura;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="monto_me", type="decimal", nullable=false)
+     */
+    private $montoMe;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="monto_bs", type="decimal", nullable=false)
+     */
+    private $montoBs;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="tipo_pago", type="boolean", nullable=true)
+     */
+    private $tipoPago;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="num_pago", type="string", length=30, nullable=false)
+     */
+    private $numPago;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_pago", type="date", nullable=false)
+     */
+    private $fechaPago;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="contra_entrega", type="boolean", nullable=true)
+     */
+    private $contraEntrega;
+
+    /**
+     * @var \Contenidos.diasentrega
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Diasentrega")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="dias_entrega", referencedColumnName="id")
+     * })
+     */
+    private $diasEntrega;
+
+    /**
+     * @var \Contenidos.unidadejecutora
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Unidadejecutora")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_unidadejec", referencedColumnName="id")
+     * })
+     */
+    private $idUnidadejec;
+
+    /**
+     * @var \Contenidos.datosproveedor
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Datosproveedor")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_proveedor", referencedColumnName="id")
+     * })
+     */
+    private $idProveedor;
+
+
+}

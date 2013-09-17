@@ -1,0 +1,40 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block body -%}
+ {{ parent() }}
+    <div class="titulo">PAGOS ASOCIADOS AL PROVEEDOR</div>
+
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+        <thead>
+            <tr>
+                <th>N&uacute;mero del Memorandum</th>
+                <th>N&uacute;mero de la f&aacute;ctura</th>
+                <th>Monto en $/€</th>
+                <th>Monto en bs</th>
+                <th>Tipo de Pago</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr align="center">
+                <td><a href="{{ path('pago_show', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}">{{ entity.numMemo }}</a></td>    
+                <td>{{ entity.numFactura }}</td>
+                <td>{{ entity.montoMe }}</td>
+                <td>{{ entity.montoBs }}</td>
+                {% if entity.tipoPago == 0 %}
+                    <td>Cheque</td>
+                {% elseif entity.tipoPago == 1 %}
+                    <td>Transferencia</td>
+                {% endif %}
+                <td>
+                    <a href="{{ path('pago_edit', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table><br>
+    <a class="btn btn-primary dropdown-toggle" href="{{ path( 'pago_new', {'id_proveedor': id_proveedor} ) }}">Registrar Nuevo Pago</a>
+        
+    <br><br>
+    {% endblock %}

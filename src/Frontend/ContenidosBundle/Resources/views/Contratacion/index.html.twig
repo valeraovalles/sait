@@ -1,0 +1,73 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Contratacion list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Concepto</th>
+                <th>Tipomoneda</th>
+                <th>Montome</th>
+                <th>Montobs</th>
+                <th>Numsolicitud</th>
+                <th>Numconformacion</th>
+                <th>Numpuntocuenta</th>
+                <th>Fechapunto</th>
+                <th>Numalcance</th>
+                <th>Fechaalcance</th>
+                <th>Numcontrato</th>
+                <th>Fechacontrato</th>
+                <th>Numaddendum</th>
+                <th>Fechaaddendum</th>
+                <th>Fechainicio</th>
+                <th>Fechafin</th>
+                <th>Observacionescompras</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('contratacion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.concepto }}</td>
+                <td>{{ entity.tipoMoneda }}</td>
+                <td>{{ entity.montoMe }}</td>
+                <td>{{ entity.montoBs }}</td>
+                <td>{{ entity.numSolicitud }}</td>
+                <td>{{ entity.numConformacion }}</td>
+                <td>{{ entity.numPuntocuenta }}</td>
+                <td>{% if entity.fechaPunto %}{{ entity.fechaPunto|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.numAlcance }}</td>
+                <td>{% if entity.fechaAlcance %}{{ entity.fechaAlcance|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.numContrato }}</td>
+                <td>{% if entity.fechaContrato %}{{ entity.fechaContrato|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.numAddendum }}</td>
+                <td>{% if entity.fechaAddendum %}{{ entity.fechaAddendum|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fechaFin %}{{ entity.fechaFin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.observacionesCompras }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('contratacion_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('contratacion_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('contratacion_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

@@ -1,0 +1,45 @@
+
+{% if datos == 1 %}
+	<div class="form-contenedor">
+        <div class="labels">Unidad Solicitante:</div>
+		<div class="widgets">{{ form_widget(form.unidadsolicitante) }}</div>
+    </div>
+{% endif %}
+{% if datos == 3 %}
+	<div class="form-contenedor">
+        <div class="labels">Unidad Solicitante:</div>
+		<div class="widgets">{{ form_widget(form.unidadsolicitante) }}</div>
+    </div>
+    <div class="form-contenedor">
+        <div class="labels">Tipo de Sat&eacute;lite:</div>
+		<div class="widgets">{{ form_widget(form.tipoSatelite) }}</div>
+    </div>
+{% endif %}
+{% if datos == 4 %}
+	<div class="form-contenedor">
+        <div class="labels">Unidad Solicitante:</div>
+		<div class="widgets">{{ form_widget(form.unidadsolicitante) }}</div>
+    </div>
+    <div class="form-contenedor">
+        <div class="labels">Detalle del Tipo de Proveedor:</div>
+		<div class="widgets">{{ form_widget(form.detalle) }}</div>
+    </div>
+{% endif %}
+{% if datos == 2 %}
+	<div class="form-contenedor">
+        <div class="labels">Unidad Solicitante:</div>
+		<div class="widgets">{{ form_widget(form.unidadsolicitante) }}</div>
+    </div>
+    <div class="form-contenedor">
+        <div class="labels">Observaciones de Unidad Solicitante:</div>
+		<div class="widgets">{{ form_widget(form.observacionUnidadsolicitante) }}</div>
+    </div>    
+    <div class="form-contenedor">
+        <div class="labels">Detalle del Tipo de Proveedor:</div>
+		<div class="widgets">{{ form_widget(form.detalle) }}</div>
+    </div>
+    <div class="form-contenedor">
+        <div class="labels">Observaciones de Tipo Proveedor:</div>
+		<div class="widgets">{{ form_widget(form.observacionTipoproveedor) }}</div>
+    </div>
+{% endif %}

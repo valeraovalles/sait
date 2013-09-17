@@ -3,6 +3,10 @@
 {% block menu %}
     {% include 'LicenciasBundle:Default:includes/menu.html.twig' %}
 {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/contenidos.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
 
 {% block title %}Inicio - Telesur{% endblock %}
 

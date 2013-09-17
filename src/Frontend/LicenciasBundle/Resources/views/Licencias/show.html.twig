@@ -1,9 +1,10 @@
 {% extends '::licencias.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}Licencias - Detalles{% endblock %}
+
 
 {% block titulobanner %}
-    DISTRIBUCIÓN - CONSULTAR - REPRESENTANTE
+    TECNOLOGIA - LICENCIAS
 {% endblock %}
 
 {% block body %}
@@ -11,30 +12,32 @@
 {{ parent() }}
 
 
-    <div class="titulo">REPRESENTANTE </div>
+    <div class="titulo"> DETALLES DE LICENCIA <br> ({{ entity.nombre }}) </div>
 
-    <div class="form-show">
+    <div class="form-show_edit">
+        
         <div class="contenedor">
-            <div class="labelshow">Nombres:</div>
+            <br>
+            <div class="labels">Nombre:</div>
             <div class="dato">{{ entity.nombre }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="labelshow">Fecha de Compra:</div>
+            <div class="labels">Fecha de Compra:</div>
             <div class="dato">{{ entity.fechaCompra|date('Y-m-d') }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="labelshow">Fecha de Vencimiento</div>
+            <div class="labels">Fecha de Vencimiento:</div>
             <div class="dato">{{ entity.fechaVencimiento|date('Y-m-d') }}</div>
         </div>
 
         <div class="contenedor">
-            <div class="labelshow">Descripcion</div>
+            <div class="labels">Descripci&oacute;n:</div>
             <div class="dato">{{ entity.descripcion }}</div>
         </div>       
         <div class="contenedor">
-            <div class="labelshow">Tipo de Licencia</div>
+            <div class="labels">Tipo de Licencia:</div>
             {% if entity.tipo == 'l'%}
                 <div class="dato">LICENCIA</div>
             {% elseif entity.tipo == 's' %}
@@ -42,12 +45,13 @@
             {% endif %}
         </div>
         <div class="contenedor">
-            <div class="labelshow">Codigo:</div>
+            <div class="labels">C&oacute;digo:</div>
             <div class="dato">{{ entity.codigo }}</div>
         </div>
         <div class="contenedor">
-            <div class="labelshow">Responsable:</div>
+            <div class="labels">Responsable:</div>
             <div class="dato">{{ perfil }}</div>
+            <br>
         </div>
     </div>
 

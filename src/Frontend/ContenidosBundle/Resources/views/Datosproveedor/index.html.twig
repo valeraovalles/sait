@@ -1,0 +1,46 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block body -%}
+ {{ parent() }}
+    <div class="titulo">LISTADO {{ titulo }}</div>
+
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+        <thead>
+            <tr>
+                <th width="12%">Identificaci&oacute;n Fiscal</th>
+                <th width="25%">Nombre de la Empresa</th>
+                <th width="16%">T&eacute;lefono Empresa</th>
+                <th width="16%">Representante</th>
+                <th width="16%">Proveedor</th>
+                <th width="15%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr align="center">
+                <td><a href="{{ path('datosproveedor_show', { 'id': entity.id }) }}">{{ entity.numIdentificacionfiscal }}</a></td>
+                <td>{{ entity.nombre }}</td>
+                <td>{{ entity.oficina1 }}</td>
+                <td>{{ entity.nombreRepr }} {{ entity.apellidoRepr }}</td>
+
+                {% if entity.idTipoprov.nombre == 'COMPRAS' %}
+                    <td>COMPRAS</td>
+                {% elseif entity.idTipoprov.nombre == 'INFORMACION' %}
+                    <td>INFORMACION</td>
+                {% elseif entity.idTipoprov.nombre == 'SATELITES' %}
+                    <td>SATELITES</td>
+                {% elseif entity.idTipoprov.nombre == 'EQUIPOS' %}
+                    <td>EQUIPOS TELESUR</td>
+                {% endif %}
+                <td>
+                            <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+                            <a href="{{ path('pago', { 'id_proveedor': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="pagos asociados"><img width="20px" src="{{ asset('images/dinero.jpg')}}"></a>
+                            <a href="{{ path('banco', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="datos bancarios"><img width="20px" src="{{ asset('images/banco.jpg')}}"></a>
+                            <a href="{{ path('contratacion', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="datos de la contratacion"><img width="20px" src="{{ asset('images/contratacion.jpg')}}"></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<br><br><br>
+    {% endblock %}

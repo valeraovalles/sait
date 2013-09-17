@@ -1,3 +1,7 @@
+contenidos:
+    resource: "@ContenidosBundle/Resources/config/routing.yml"
+    prefix:   /
+
 sit:
     resource: "@SitBundle/Resources/config/routing.yml"
     prefix:   /sit
@@ -13,7 +17,7 @@ neto:
 nomina:
     resource: "@NominaBundle/Resources/config/routing.yml"
     prefix:   /nomina
-    
+
 licencias:
     resource: "@LicenciasBundle/Resources/config/routing.yml"
     prefix:   /licencias
@@ -21,7 +25,7 @@ licencias:
 frontend_visitas:
     resource: "@FrontendVisitasBundle/Resources/config/routing.yml"
     prefix:   /usuario_control
-    
+
 distribucion:
     resource: "@DistribucionBundle/Resources/config/routing.yml"
     prefix:   /distribucion

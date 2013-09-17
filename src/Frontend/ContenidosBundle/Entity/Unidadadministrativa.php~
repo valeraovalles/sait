@@ -1,0 +1,43 @@
+<?php
+
+namespace Frontend\ContenidosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Unidadadministrativa
+ *
+ * @ORM\Table(name="contenidos.unidadadministrativa")
+ * @ORM\Entity
+ */
+class Unidadadministrativa
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="contenidos.unidadadministrativa_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=60, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var \Contenidos.unidadejecutora
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Unidadejecutora")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_unidadejecutora", referencedColumnName="id")
+     * })
+     */
+    private $idUnidadejecutora;
+
+
+}

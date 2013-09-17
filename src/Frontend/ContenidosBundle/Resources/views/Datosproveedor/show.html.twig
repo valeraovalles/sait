@@ -1,0 +1,117 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block body -%}
+ {{ parent() }}
+    <div class="titulo">DETALLES "{{ entity.nombre }}" </div>
+
+    <fieldset>       
+        <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
+        <div id="descripcion" class="form-show">
+            <div class="contenedor">
+                <div class="labelshow">Nombre:</div>
+                <div class="dato">{{ entity.nombre }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Identificaci&oacute;n F&iacute;scal:</div>
+                <div class="dato">{{ entity.Numidentificacionfiscal }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Pa&iacute;s:</div>
+                <div class="dato">{{ entity.pais }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Direcci&oacute;n:</div>
+                <div class="dato">{{ entity.direccionEmpresa }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Tel&eacute;fono de Oficina 1:</div>
+                <div class="dato">{{ entity.oficina1 }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Tel&eacute;fono de Oficina 2:</div>
+                <div class="dato">{{ entity.oficina2 }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Tel&eacute;fono de Oficina 3:</div>
+                <div class="dato">{{ entity.movil }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Direcci&oacute;n de Correo:</div>
+                <div class="dato">{{ entity.correoEmpresa }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Direcci&oacute;n de Skype:</div>
+                <div class="dato">{{ entity.skypeEmpresa }}</div>
+            </div>
+        </div>
+    </fieldset>
+    <br>
+    <fieldset>       
+        <legend id="b"><div class="divisor">DATOS DEL REPRESENTANTE</div> </legend>
+        <div id="detalles" class="form-show">
+            <div class="contenedor">
+                <div class="labelshow">Nombre del Representante:</div>
+                <div class="dato">{{ entity.nombreRepr }} {{ entity.apellidoRepr }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Cargo:</div>
+                <div class="dato">{{ entity.cargo }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Tel&eacute;fono de habitaci&oacute;n:</div>
+                <div class="dato">{{ entity.telfhab }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Tel&eacute;fono Movil:</div>
+                <div class="dato">{{ entity.movil2 }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Correo:</div>
+                <div class="dato">{{ entity.correoRepr }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labelshow">Skype:</div>
+                <div class="dato">{{ entity.skypeRepr }}</div>
+            </div>
+            
+        </div>
+    </fieldset>
+    <br>
+    <fieldset>       
+        <legend id="c"><div class="divisor">DETALLES DEL PROVEEDOR</div> </legend>
+        <div id="aprobaciones" class="form-show">
+            <div class="contenedor">
+                <div class="labelshow">Tipo de Proveedor:</div>
+                {% if entity.idTipoprov.nombre == 'EQUIPOS'  %}
+                <div class="dato">EQUIPOS TELESUR-{{ entity.idDetalletipoproveedor }}</div>
+                {% else %}
+                    <div class="dato">{{ entity.idTipoprov.nombre }}  {{ entity.idDetalletipoproveedor }}</div>
+                {% endif %}
+            </div>
+            {% if entity.idTipoprov.nombre == 'SATELITES' %}
+                {% if entity.tipoSatelite == FALSE %}
+                    <div class="contenedor">
+                        <div class="labelshow">Tipo de Satelite:</div>
+                        <div class="dato">OCASIONAL</div>
+                    </div>
+                {% else %}
+                    <div class="contenedor">
+                        <div class="labelshow">Tipo de Satelite:</div>
+                        <div class="dato">FIJO</div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            <div class="contenedor">
+                <div class="labelshow">Unidad Solicitante:</div>
+                <div class="dato">{{ entity.idUnidad }}</div>
+            </div>
+        </div>
+    </fieldset>
+
+<br>
+
+    <a href="{{ path('datosproveedor', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+<br><br> 
+
+<script src="{{ asset('js/contenidos/efecto.js') }}"></script>
+{% endblock %}

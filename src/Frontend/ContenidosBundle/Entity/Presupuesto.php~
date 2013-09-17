@@ -1,0 +1,71 @@
+<?php
+
+namespace Frontend\ContenidosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Presupuesto
+ *
+ * @ORM\Table(name="contenidos.presupuesto")
+ * @ORM\Entity
+ */
+class Presupuesto
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="contenidos.presupuesto_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_inicio", type="date", nullable=false)
+     */
+    private $fechaInicio;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_fin", type="date", nullable=false)
+     */
+    private $fechaFin;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="monto_dolares", type="decimal", nullable=true)
+     */
+    private $montoDolares;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="monto_euros", type="decimal", nullable=true)
+     */
+    private $montoEuros;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="monto_bs", type="decimal", nullable=false)
+     */
+    private $montoBs;
+
+    /**
+     * @var \Contenidos.datosproveedor
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Datosproveedor")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_proveedor", referencedColumnName="id")
+     * })
+     */
+    private $idProveedor;
+
+
+}
