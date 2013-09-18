@@ -12,7 +12,7 @@
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">NUEVA SUBCATEGORIA</div>
+    <div class="titulo">NUEVA SUBCATEGORIA<br><h5>CATEGORIA {{ categoria.categoria|upper }}</h5></div>
 
 
     {% if form_errors(form.subcategoria)  %}
@@ -35,7 +35,7 @@
         </div>
     {% endfor %}
 
-    <form novalidate action="{{ path('subcategoria_create', { 'id': id }) }}" method="post" {{ form_enctype(form) }}>
+    <form novalidate action="{{ path('subcategoria_create', { 'id': categoria.id }) }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
         <br>
         <div class="formShow">
@@ -43,16 +43,13 @@
                 <div class="labelform">Subcategoria:</div>
                 <div class="widgetform">{{ form_widget(form.subcategoria) }}</div>
             </div>
-            <div class="contenedorform">
+            <div class="contenedorform" style="display:none;">
                 <div class="labelform">Categoria:</div>
                 <div class="widgetform">{{ form_widget(form.categoria) }}</div>
             </div>
         </div>
     
-        <button class="btn btn-primary" type="submit">Crear</button> | 
-        <a class="btn btn-default" href="{{ path('subcategoria') }}">
-            Ir a la lista
-        </a>
+        <button class="btn btn-primary" type="submit">Crear</button>
       
     </form>
 

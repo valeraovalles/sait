@@ -24,7 +24,21 @@ use Doctrine\ORM\EntityRepository;
 class TicketController extends Controller
 {
 
- public function asignadosolucionAction(Request $request,$id)
+    public function filtrarsolicitud($solicitud){
+
+        $solicitud=strtolower($solicitud);
+
+        $eliminar=array(
+            "hola","muchas gracias","buenos dias,","buenos dias","buen día","buenas tardes,","buenas tardes","saludos","chicos:",
+            "buenos días","gracias","la presente es para","la presente es","por medio de la presente se","Buenas noches,",
+            "Buenas noches","el presente es para","por favor","favor","porfavor","chicos"
+        );
+
+        $solicitud=str_replace($eliminar, array(), $solicitud);
+        return $solicitud;
+    }
+
+    public function asignadosolucionAction(Request $request,$id)
     {
 
         $datos=$request->request->all();
@@ -134,7 +148,7 @@ class TicketController extends Controller
         $ticket = $em->getRepository('SitBundle:Ticket')->find($id);
 
         if(empty($datos)){
-            $this->get('session')->getFlashBag()->add('alert', 'Debe seleccionar una opción de asignación o reasignación.');
+            $this->get('session')->getFlashBag()->add('alert', 'Debe seleccionar una opción.');
             return $this->redirect($this->generateUrl('ticket_show', array('id' => $id)));
         }
 
@@ -155,6 +169,12 @@ class TicketController extends Controller
 
             $ticket->addUser($user);
             $em->flush();
+
+            //actualizo campos en ticket
+            $query = $em->createQuery('update SitBundle:Ticket t set t.estatus=2 WHERE t.id = :idticket');
+            $query->setParameter('idticket', $id);
+            $query->execute();
+
             $this->get('session')->getFlashBag()->add('notice', 'El ticket fie asignado exitosamente a '.ucfirst($user->getPrimerNombre().' '.$user->getPrimerapellido()).'.');
             return $this->redirect($this->generateUrl('ticket_show', array('id' => $id)));
         }
@@ -308,7 +328,10 @@ class TicketController extends Controller
     {
 
         $datos=$request->request->all();
+        $solicitud=$datos['frontend_sitbundle_tickettype']['solicitud'];
         $datos=$datos['administracion_usuariobundle_perfiltype'];
+
+
 
         $entity  = new Ticket();
         $form = $this->createForm(new TicketType(), $entity);
@@ -343,6 +366,12 @@ class TicketController extends Controller
             $entity->setHoraSolicitud(new \DateTime(\date("G:i:s")));
 
             $entity->setEstatus(1);
+
+            $solicitud=$this->filtrarsolicitud($solicitud);
+
+            $solicitud=ucfirst(trim($solicitud));
+      
+            $entity->setSolicitud($solicitud);
 
             //genero y guardo archivo
             if($form['file']->getData()){

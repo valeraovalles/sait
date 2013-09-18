@@ -113,7 +113,7 @@ categoria_delete:
 
 # SUBCATEGORIA #
 subcategoria:
-    pattern:  /subcategoria
+    pattern:  /subcategoria/{id}
     defaults: { _controller: "SitBundle:Subcategoria:index" }
 
 subcategoria_show:
@@ -130,11 +130,11 @@ subcategoria_create:
     requirements: { _method: post }
 
 subcategoria_edit:
-    pattern:  /subcategoria/{id}/edit
+    pattern:  /subcategoria/edit/{idsub}/{idcat}
     defaults: { _controller: "SitBundle:Subcategoria:edit" }
 
 subcategoria_update:
-    pattern:  /subcategoria/{id}/update
+    pattern:  /subcategoria/update/{idsub}/{idcat}
     defaults: { _controller: "SitBundle:Subcategoria:update" }
     requirements: { _method: post|put }
 
@@ -145,3 +145,16 @@ subcategoria_delete:
 
 
 # FIN SUBCATEGORIA #
+
+# REPORTE #
+reporte:
+    pattern:  /reporte
+    defaults: { _controller: "SitBundle:Reporte:index" }
+
+reporte_ajaxinformegestion:
+    pattern:  /ajaxinformegestion/{datos}/{mostrar}
+    defaults: { _controller: "SitBundle:Ajax:ajaxinformegestion" }
+
+reporte_generarinforme:
+    pattern:  /generarinforme
+    defaults: { _controller: "SitBundle:Reporte:generarinforme" }

@@ -43,16 +43,23 @@ class CategoriaController extends Controller
      */
     public function createAction(Request $request)
     {
+
+
+        $em = $this->getDoctrine()->getManager();
+        //traigo los datos del usuario conectado
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+
         $entity  = new Categoria();
-        $form = $this->createForm(new CategoriaType(), $entity);
+        $form = $this->createForm(new CategoriaType($usuariounidad[0]->getId()), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('categoria_show', array('id' => $entity->getId())));
+            $this->get('session')->getFlashBag()->add('notice', 'La categoria fue creada con exito.');
+            return $this->redirect($this->generateUrl('categoria'));
         }
 
         return $this->render('SitBundle:Categoria:new.html.twig', array(
@@ -67,8 +74,14 @@ class CategoriaController extends Controller
      */
     public function newAction()
     {
+
+        $em = $this->getDoctrine()->getManager();
+        //traigo los datos del usuario conectado
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+
         $entity = new Categoria();
-        $form   = $this->createForm(new CategoriaType(), $entity);
+        $form   = $this->createForm(new CategoriaType($usuariounidad[0]->getId()), $entity);
 
         return $this->render('SitBundle:Categoria:new.html.twig', array(
             'entity' => $entity,
@@ -104,6 +117,9 @@ class CategoriaController extends Controller
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        //traigo los datos del usuario conectado
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
 
         $entity = $em->getRepository('SitBundle:Categoria')->find($id);
 
@@ -111,7 +127,7 @@ class CategoriaController extends Controller
             throw $this->createNotFoundException('Unable to find Categoria entity.');
         }
 
-        $editForm = $this->createForm(new CategoriaType(), $entity);
+        $editForm = $this->createForm(new CategoriaType($usuariounidad[0]->getId()), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('SitBundle:Categoria:edit.html.twig', array(
@@ -128,6 +144,9 @@ class CategoriaController extends Controller
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
+        //traigo los datos del usuario conectado
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
 
         $entity = $em->getRepository('SitBundle:Categoria')->find($id);
 
@@ -136,7 +155,7 @@ class CategoriaController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new CategoriaType(), $entity);
+        $editForm = $this->createForm(new CategoriaType($usuariounidad[0]->getId()), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -158,13 +177,25 @@ class CategoriaController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('SitBundle:Categoria')->find($id);
+
+        $dql = "select s from SitBundle:Subcategoria s join s.categoria c where c.id= :id";
+        $query = $em->createQuery($dql);
+        $query->setParameter('id',$id);
+        $entities = $query->getResult();
+
+        if(!empty($entities)){
+            $this->get('session')->getFlashBag()->add('alert', 'No se peude eliminar la categoria '.$entity->getCategoria().' porque tiene subcategorias aociadas.');
+            return $this->redirect($this->generateUrl('categoria'));
+        }
+
+
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SitBundle:Categoria')->find($id);
-
+            
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Categoria entity.');
             }
