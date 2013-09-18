@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\SitBundle\Entity\Subcategoria;
 use Frontend\SitBundle\Form\SubcategoriaType;
 
+use Frontend\SitBundle\Entity\Categoria;
 /**
  * Subcategoria controller.
  *
@@ -19,11 +20,14 @@ class SubcategoriaController extends Controller
      * Lists all Subcategoria entities.
      *
      */
-    public function indexAction()
+    public function indexAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SitBundle:Subcategoria')->findAll();
+        $dql = "select s from SitBundle:Subcategoria s join s.categoria c where c.id= :id";
+        $query = $em->createQuery($dql);
+        $query->setParameter('id',$id);
+        $entities = $query->getResult();
 
         return $this->render('SitBundle:Subcategoria:index.html.twig', array(
             'entities' => $entities,
@@ -36,6 +40,9 @@ class SubcategoriaController extends Controller
     public function createAction(Request $request, $id)
     {
 
+        $em = $this->getDoctrine()->getManager();
+        $categoria=$em->getRepository('SitBundle:Categoria')->find($id);
+
         $entity  = new Subcategoria();
         $form = $this->createForm(new SubcategoriaType($id), $entity);
         $form->bind($request);
@@ -45,13 +52,15 @@ class SubcategoriaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('subcategoria_show', array('id' => $entity->getId())));
+            $this->get('session')->getFlashBag()->add('notice', 'La subcategoria se creó con exito.');
+            return $this->redirect($this->generateUrl('subcategoria', array('id' => $entity->getCategoria()->getId())));
         }
 
         return $this->render('SitBundle:Subcategoria:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'id'=>$id
+            'categoria'=>$categoria,
+
         ));
     }
 
@@ -61,13 +70,16 @@ class SubcategoriaController extends Controller
      */
     public function newAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $categoria=$em->getRepository('SitBundle:Categoria')->find($id);
+
         $entity = new Subcategoria();
         $form   = $this->createForm(new SubcategoriaType($id), $entity);
 
         return $this->render('SitBundle:Subcategoria:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'id'=>$id
+            'categoria'=>$categoria
         ));
     }
 
@@ -96,23 +108,24 @@ class SubcategoriaController extends Controller
      * Displays a form to edit an existing Subcategoria entity.
      *
      */
-    public function editAction($id)
+    public function editAction($idsub, $idcat)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('SitBundle:Subcategoria')->find($id);
+        $entity = $em->getRepository('SitBundle:Subcategoria')->find($idsub);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Subcategoria entity.');
         }
 
-        $editForm = $this->createForm(new SubcategoriaType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createForm(new SubcategoriaType($idcat), $entity);
+        $deleteForm = $this->createDeleteForm($idsub);
 
         return $this->render('SitBundle:Subcategoria:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'idcat'=>$idcat
         ));
     }
 
@@ -120,31 +133,33 @@ class SubcategoriaController extends Controller
      * Edits an existing Subcategoria entity.
      *
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $idsub,$idcat)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('SitBundle:Subcategoria')->find($id);
+        $entity = $em->getRepository('SitBundle:Subcategoria')->find($idsub);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Subcategoria entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new SubcategoriaType(), $entity);
+        $deleteForm = $this->createDeleteForm($idsub);
+        $editForm = $this->createForm(new SubcategoriaType($idcat), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('subcategoria_edit', array('id' => $id)));
+            $this->get('session')->getFlashBag()->add('notice', 'La subcategoria se actualizó con exito.');
+            return $this->redirect($this->generateUrl('subcategoria_edit', array('idsub' => $idsub,'idcat'=>$idcat)));
         }
 
         return $this->render('SitBundle:Subcategoria:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'idcat'=>$idcat
         ));
     }
     /**
@@ -167,8 +182,8 @@ class SubcategoriaController extends Controller
             $em->remove($entity);
             $em->flush();
         }
-
-        return $this->redirect($this->generateUrl('subcategoria'));
+        $this->get('session')->getFlashBag()->add('notice', 'La subcategoria '.$entity->getSubcategoria().' se eliminó con exito.');
+        return $this->redirect($this->generateUrl('subcategoria',array('id' => $entity->getCategoria()->getId())));
     }
 
     /**

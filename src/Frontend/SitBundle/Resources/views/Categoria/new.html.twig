@@ -1,22 +1,60 @@
-{% extends '::base.html.twig' %}
+{% extends '::sit.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+
+{% block titulobanner %}
+    NUEVA CATEGORIA
+{% endblock %}
+
 
 {% block body -%}
-    <h1>Categoria creation</h1>
+    {{ parent() }}
+    
+    <div class="titulo">NUEVA CATEGORIA</div>
 
-    <form action="{{ path('categoria_create') }}" method="post" {{ form_enctype(form) }}>
+    {% if form_errors(form.categoria)  %}
+    <div class="alert alert-danger">
+        <ul>
+            <li>{{ form_errors(form.categoria) }}</li>
+        </ul>
+    </div>
+    {% endif %}
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    <form novalidate action="{{ path('categoria_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
-
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform">Categoria:</div>
+                <div class="widgetform">{{ form_widget(form.categoria) }}</div>
+            </div>
+            <div class="contenedorform" style="display:none;">
+                <div class="labelform">Unidad:</div>
+                <div class="widgetform">{{ form_widget(form.unidad) }}</div>
+            </div>
+        </div>
         
-        <p>
-            <button type="submit">Create</button>
-        </p>
+     
+        <button class="btn btn-primary" type="submit">Crear</button> | 
+        <a class="btn btn-default" href="{{ path('categoria') }}">
+            Ir a la lista
+        </a>
+     
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('categoria') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+
+
+
 {% endblock %}

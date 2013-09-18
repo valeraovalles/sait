@@ -22,7 +22,7 @@ class TicketRepository extends EntityRepository
     public function ticketsasignados($idusuario)
     {
         $em = $this->getEntityManager();
-        $dql = "select t from SitBundle:Ticket t join t.user u where u.id= :id";
+        $dql = "select t from SitBundle:Ticket t join t.user u where u.id= :id and t.estatus=2";
         $query = $em->createQuery($dql);
         $query->setParameter('id',$idusuario);
         return $query->getResult();

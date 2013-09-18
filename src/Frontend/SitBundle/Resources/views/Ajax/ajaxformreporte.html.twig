@@ -1,0 +1,35 @@
+
+{% if mostrar=='anio' %}
+    <div class="contenedorform">
+        <div class="labelform" style="width:35%;">Año:</div>
+        <div class="widgetform">{{ form_widget(form.anios) }}</div>
+    </div>
+<div id="mes"></div>
+{% endif %}
+
+
+{% if mostrar=='mes' %}
+    <div class="contenedorform">
+        <div class="labelform" style="width:35%;">Mes:</div>
+        <div class="widgetform">{{ form_widget(form.meses) }}</div>
+    </div>
+<div id="boton"></div>
+{% endif %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_anios').change(function(){
+                var dato = $("#form_anios").val();
+                var ruta = "{{ path('reporte_ajaxinformegestion', {'datos': 'variable','mostrar': 'mes'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#mes').load(ruta);
+            });
+
+            $('#form_meses').change(function(){
+                var dato = $("#form_meses").val();
+                var ruta = "{{ path('reporte_ajaxinformegestion', {'datos': 'variable','mostrar': 'boton'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#boton').load(ruta);
+            });
+        });
+    </script>

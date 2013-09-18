@@ -1,0 +1,53 @@
+{% extends '::sit.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+
+{% block titulobanner %}
+    INFORME DE GESTIÓN
+{% endblock %}
+
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">INFORME DE GESTIÓN</div>
+
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    <form novalidate action="{{ path('reporte_generarinforme') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+        <br>
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform" style="width:35%;">Unidad:</div>
+                <div class="widgetform">{{ form_widget(form.unidad) }}</div>
+            </div>
+            <div id="anio"></div>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_unidad').change(function(){
+                var dato = $("#form_unidad").val();
+                var ruta = "{{ path('reporte_ajaxinformegestion', {'datos': 'variable','mostrar': 'anio'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#anio').load(ruta);
+            });
+        });
+    </script>
+
+{% endblock %}
