@@ -1,0 +1,53 @@
+<?php
+
+namespace Frontend\ContenidosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Controlpagounidad
+ *
+ * @ORM\Table(name="contenidos.controlpagounidad")
+ * @ORM\Entity
+ */
+class Controlpagounidad
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="contenidos.controlpagounidad_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="integer", nullable=true)
+     */
+    private $status;
+
+    /**
+     * @var \Contenidos.unidadadministrativa
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Unidadadministrativa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_ejecutora", referencedColumnName="id")
+     * })
+     */
+    private $idEjecutora;
+
+    /**
+     * @var \Contenidos.pago
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Pago")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_pago", referencedColumnName="id")
+     * })
+     */
+    private $idPago;
+
+
+}

@@ -1,0 +1,187 @@
+<?php
+
+namespace Frontend\ContenidosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Datosproveedor
+ *
+ * @ORM\Table(name="contenidos.datosproveedor")
+ * @ORM\Entity
+ */
+class Datosproveedor
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="contenidos.datosproveedor_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=100, nullable=true)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="num_identificacionfiscal", type="string", length=30, nullable=true)
+     */
+    private $numIdentificacionfiscal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion_empresa", type="string", length=500, nullable=true)
+     */
+    private $direccionEmpresa;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="oficina1", type="integer", nullable=true)
+     */
+    private $oficina1;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="oficina2", type="integer", nullable=true)
+     */
+    private $oficina2;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="movil", type="integer", nullable=true)
+     */
+    private $movil;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="correo_empresa", type="string", length=60, nullable=true)
+     */
+    private $correoEmpresa;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="skype_empresa", type="string", length=60, nullable=true)
+     */
+    private $skypeEmpresa;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_repr", type="string", length=60, nullable=true)
+     */
+    private $nombreRepr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apellido_repr", type="string", length=60, nullable=true)
+     */
+    private $apellidoRepr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cargo", type="string", length=100, nullable=true)
+     */
+    private $cargo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="telfhab", type="integer", nullable=true)
+     */
+    private $telfhab;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="movil2", type="integer", nullable=true)
+     */
+    private $movil2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="correo_repr", type="string", length=60, nullable=true)
+     */
+    private $correoRepr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="skype_repr", type="string", length=60, nullable=true)
+     */
+    private $skypeRepr;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="tipo_satelite", type="boolean", nullable=true)
+     */
+    private $tipoSatelite;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="observacion_tipoproveedor", type="string", length=60, nullable=true)
+     */
+    private $observacionTipoproveedor;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Frontend\ContenidosBundle\Entity\Tipoproveedor", inversedBy="idProveedor")
+     * @ORM\JoinTable(name="contenidos.proveedor_tipoproveedor",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="id_proveedor", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="id_tipoproveedor", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $idTipoproveedor;
+
+    /**
+     * @var \Contenidos.tipoproveedor
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Tipoproveedor")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_tipoprov", referencedColumnName="id")
+     * })
+     */
+    private $idTipoprov;
+
+    /**
+     * @var \Distribucion.pais
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\DistribucionBundle\Entity\Pais")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pais", referencedColumnName="id")
+     * })
+     */
+    private $pais;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idTipoproveedor = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+}

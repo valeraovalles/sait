@@ -24,7 +24,7 @@
             </div>
             {% endif %}
 
-            {% if is_granted('ROLE_LICENCIAS') %}
+            {% if is_granted('ROLE_LICENCIAS') or is_granted('ROLE_LICADMIN') %}
             <div class="listado_aplicaciones">
               <a href="{{ path('licencias_homepage')}}">LICENCIAS<br><img id="licencias" src="{{ asset("images/licencias/candado.png") }}" data-placement="bottom" title="LICENCIAS" data-trigger="hover"></a>
             </div>
@@ -48,22 +48,25 @@
 
             {% if is_granted('ROLE_VIDEOTECA') %}
             <div class="listado_aplicaciones">
-              <a href="{{ path('videoteca_homepage')}}">VIDEOTECA<br><img id="licencias" src="{{ asset("images/videoteca.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
+              <a href="{{ path('videoteca_homepage')}}">VIDEOTECA<br><img id="licencias" src="{{ asset("images/videoteca.jpg") }}" data-placement="bottom" title="VIDEOTECA" data-trigger="hover"></a>
             </div>
             {% endif %}
 
             {% if is_granted('ROLE_NOMINA') %}
             <div class="listado_aplicaciones">
-              <a href="{{ path('nomina_formalimentacion')}}">NÓMINA<br><img id="licencias" src="{{ asset("images/nomina.jpeg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
+              <a href="{{ path('nomina_formalimentacion')}}">NÓMINA<br><img id="licencias" src="{{ asset("images/nomina.jpeg") }}" data-placement="bottom" title="TXT PRESTACIONES" data-trigger="hover"></a>
             </div>
             {% endif %}
 
             <div class="listado_aplicaciones">
-              <a href="{{ path('constancia_homepage')}}">CONSTANCIA<br><img id="licencias" src="{{ asset("images/constancia.jpeg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
+              <a href="{{ path('constancia_homepage')}}">CONSTANCIA<br><img id="licencias" src="{{ asset("images/constancia.jpeg") }}" data-placement="bottom" title="CONSTANCIA DE TRABAJO" data-trigger="hover"></a>
             </div>
 
             <div class="listado_aplicaciones">
-              <a href="{{ path('sit_homepage')}}">SIT<br><img id="licencias" src="{{ asset("images/sit.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
+              <a href="{{ path('sit_homepage')}}">SIT<br><img id="licencias" src="{{ asset("images/sit.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            </div>
+            <div class="listado_aplicaciones">
+              <a href="{{ path('datosproveedor')}}">CONTENIDOS<br><img id="licencias" src="{{ asset("images/dinero.jpg") }}" data-placement="bottom" title="CONTROL DE PAGOS" data-trigger="hover"></a>
             </div>
    </div>
 

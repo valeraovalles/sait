@@ -13,7 +13,7 @@ class LicenciasType extends AbstractType
         $builder
            // ->add('id')
             ->add('usuario')
-            ->add('nombre')
+            ->add('nombre', 'textarea')
             ->add('fechaCompra','date',array(
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd',
@@ -23,7 +23,7 @@ class LicenciasType extends AbstractType
                     'format' => 'yyyy-MM-dd',
                 ))
             ->add('banderaCorreo')
-            ->add('descripcion')
+            ->add('descripcion','textarea')
             ->add('tipo','choice', array(
                                             'expanded'=>false, 
                                             'multiple'=>false,

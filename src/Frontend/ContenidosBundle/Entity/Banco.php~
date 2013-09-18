@@ -1,0 +1,144 @@
+<?php
+
+namespace Frontend\ContenidosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Banco
+ *
+ * @ORM\Table(name="contenidos.banco")
+ * @ORM\Entity
+ */
+class Banco
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="contenidos.banco_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_beneficiario", type="string", length=100, nullable=true)
+     */
+    private $nombreBeneficiario;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="banco_interm", type="string", length=100, nullable=true)
+     */
+    private $bancoInterm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="swift_interm", type="string", length=50, nullable=true)
+     */
+    private $swiftInterm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="aba_interm", type="string", length=50, nullable=true)
+     */
+    private $abaInterm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="iban_interm", type="string", length=50, nullable=true)
+     */
+    private $ibanInterm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cuenta_interm", type="string", length=50, nullable=true)
+     */
+    private $cuentaInterm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion_bancointerm", type="string", length=500, nullable=true)
+     */
+    private $direccionBancointerm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="banco_benef", type="string", length=100, nullable=true)
+     */
+    private $bancoBenef;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cuenta_benef", type="string", length=50, nullable=true)
+     */
+    private $cuentaBenef;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="swift_benef", type="string", length=50, nullable=true)
+     */
+    private $swiftBenef;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="aba_benef", type="string", length=50, nullable=true)
+     */
+    private $abaBenef;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="iban_benef", type="string", length=50, nullable=true)
+     */
+    private $ibanBenef;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion_bancobenef", type="string", length=500, nullable=true)
+     */
+    private $direccionBancobenef;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion_beneficiario", type="string", length=500, nullable=true)
+     */
+    private $direccionBeneficiario;
+
+    /**
+     * @var \Contenidos.datosproveedor
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Datosproveedor")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_proveedor", referencedColumnName="id")
+     * })
+     */
+    private $idProveedor;
+
+    /**
+     * @var \Distribucion.pais
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\DistribucionBundle\Entity\Pais")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pais", referencedColumnName="id")
+     * })
+     */
+    private $pais;
+
+
+}

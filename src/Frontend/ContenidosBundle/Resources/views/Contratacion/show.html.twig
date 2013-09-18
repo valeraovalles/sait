@@ -1,0 +1,102 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Contratacion</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Concepto</th>
+                <td>{{ entity.concepto }}</td>
+            </tr>
+            <tr>
+                <th>Tipomoneda</th>
+                <td>{{ entity.tipoMoneda }}</td>
+            </tr>
+            <tr>
+                <th>Montome</th>
+                <td>{{ entity.montoMe }}</td>
+            </tr>
+            <tr>
+                <th>Montobs</th>
+                <td>{{ entity.montoBs }}</td>
+            </tr>
+            <tr>
+                <th>Numsolicitud</th>
+                <td>{{ entity.numSolicitud }}</td>
+            </tr>
+            <tr>
+                <th>Numconformacion</th>
+                <td>{{ entity.numConformacion }}</td>
+            </tr>
+            <tr>
+                <th>Numpuntocuenta</th>
+                <td>{{ entity.numPuntocuenta }}</td>
+            </tr>
+            <tr>
+                <th>Fechapunto</th>
+                <td>{{ entity.fechaPunto|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Numalcance</th>
+                <td>{{ entity.numAlcance }}</td>
+            </tr>
+            <tr>
+                <th>Fechaalcance</th>
+                <td>{{ entity.fechaAlcance|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Numcontrato</th>
+                <td>{{ entity.numContrato }}</td>
+            </tr>
+            <tr>
+                <th>Fechacontrato</th>
+                <td>{{ entity.fechaContrato|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Numaddendum</th>
+                <td>{{ entity.numAddendum }}</td>
+            </tr>
+            <tr>
+                <th>Fechaaddendum</th>
+                <td>{{ entity.fechaAddendum|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fechainicio</th>
+                <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fechafin</th>
+                <td>{{ entity.fechaFin|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Observacionescompras</th>
+                <td>{{ entity.observacionesCompras }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('contratacion') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('contratacion_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('contratacion_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

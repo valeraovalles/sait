@@ -1,0 +1,57 @@
+.formNewEditOperador fieldset
+{
+    border: 1px solid #0fa1e0;
+    width: 550px;
+    background-color: #e9f5fe;
+    padding-top: 10px;
+}
+
+.divisor_representante
+{
+	background-color: #e9f5fe; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.divisor_representante a
+{
+	color: #0fa1e0;
+}
+
+.form-show_edit
+{
+    width: 600px;
+
+    border-color: #6495ed ;
+    border-style: inset;
+
+    -moz-border-radius: 20px; /* Firefox */
+-webkit-border-radius: 20px; /* Google Chrome y Safari */
+border-radius: 20px; /* CSS3 (Opera 10.5, IE 9 y estándar a ser soportado por todos los futuros */
+}
+
+.form-show_edit .contenedor
+{
+    width: 600px;
+    color: #000; 
+}
+
+.form-show_edit .labels
+{
+        float: left;
+        width: 40%;
+        text-align: right;
+        padding-right: 10px;
+        padding-bottom: 7px;
+        font-weight: bold;  
+
+}
+.form-show_edit .dato
+{
+        height: auto;
+        text-align: left;
+        padding-bottom: 7px;
+        overflow: hidden;
+        margin-left: 0%;
+}
+

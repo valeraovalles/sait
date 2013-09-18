@@ -1,0 +1,94 @@
+{% extends '::contenidos.html.twig' %}
+{% block title %}Licencia - Nueva{% endblock %}
+
+{% block titulobanner %}
+    LICENCIAS
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">NUEVO REGISTRO</div>
+    <form action="{{ path('pago_create', {'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(form) }}>
+        <fieldset>   
+            <legend id="a"><div class="divisor">DATOS DEL PAGO</div> </legend>
+            <div id="descripcion" class="form-show">
+                <br>
+                <div class="form-contenedor">
+                    {{ form_errors(form.numMemo) }}
+                    <div class="labels">N&uacute;mero del Memorandum:</div>
+                    <div class="widgets">{{ form_widget(form.numMemo) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.idUnidadejec) }}
+                    <div class="labels">Unidad Ejecutora:</div>
+                    <div class="widgets">{{ form_widget(form.idUnidadejec) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaUnidadejec) }}
+                    <div class="labels">Fecha de Recepción Unid. Ejec.:</div>
+                    <div class="widgets">{{ form_widget(form.fechaUnidadejec) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.numFactura) }}
+                    <div class="labels">N&uacute;mero de factura:</div>
+                    <div class="widgets">{{ form_widget(form.numFactura) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaFactura) }}
+                    <div class="labels">Fecha de factura:</div>
+                    <div class="widgets">{{ form_widget(form.fechaFactura) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.tipoMoneda) }}
+                    <div class="labels">Tipo de Moneda:</div>
+                    <div class="widgets">{{ form_widget(form.tipoMoneda) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.montoMe) }}
+                    <div class="labels">Monto en $/€:</div>
+                    <div class="widgets">{{ form_widget(form.montoMe) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.montoBs) }}
+                    <div class="labels">Monto en Bs:</div>
+                    <div class="widgets">{{ form_widget(form.montoBs) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.tipoPago) }}
+                    <div class="labels">Tipo de Pago:</div>
+                    <div class="widgets">{{ form_widget(form.tipoPago) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.numPago) }}
+                    <div class="labels">N&uacute;mero del Pago:</div>
+                    <div class="widgets">{{ form_widget(form.numPago) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaPago) }}
+                    <div class="labels">Fecha del Pago:</div>
+                    <div class="widgets">{{ form_widget(form.fechaPago) }}</div>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend id="b"><div class="divisor">CONDICIONES DEL PAGO</div> </legend>
+            <div id="detalles" class="form-show">
+                <div class="form-contenedor">
+                    {{ form_errors(form.contraEntrega) }}
+                    <div class="labels">Pago Contra Entrega:</div>
+                    <div class="widgets">{{ form_widget(form.contraEntrega) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.diasEntrega) }}
+                    <div class="labels">D&iacute;as de Entrega:</div>
+                    <div class="widgets">{{ form_widget(form.diasEntrega) }}</div>
+                </div>
+            </div>    
+        </fieldset>
+       <br>
+       <a class="btn" href="{{ path( 'pago', {'id_proveedor':id_proveedor }  ) }}">Listado de Pagos</a>
+        <button type="submit" class="btn">Registrar Pago</button> 
+    </form>
+<script src="{{ asset('js/contenidos/efecto.js') }}"></script>
+{% endblock %}

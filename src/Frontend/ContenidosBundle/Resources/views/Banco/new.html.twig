@@ -1,0 +1,109 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block titulobanner %}
+    PAGOS
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">NUEVO REGISTRO</div>
+
+    <form action="{{ path('banco_create') }}" method="post" {{ form_enctype(form) }}>
+
+        <fieldset>       
+            <legend id="a"><div class="divisor">DATOS DEL BENEFICIARIO</div> </legend>
+            <div id="descripcion" class="form-show">
+                <br>
+                <div class="form-contenedor">
+                    {{ form_errors(form.nombreBeneficiario) }}
+                    <div class="labels">Nombre del Beneficiario:</div>
+                    <div class="widgets">{{ form_widget(form.nombreBeneficiario) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.direccionBeneficiario) }}
+                    <div class="labels">Direcci&oacute;n del Beneficiario:</div>
+                    <div class="widgets">{{ form_widget(form.direccionBeneficiario) }}</div>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+         <fieldset>       
+            <legend id="b"><div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div> </legend>
+            <div id="detalles" class="form-show">
+                <br>
+                <div class="form-contenedor">
+                    {{ form_errors(form.bancoInterm) }}
+                    <div class="labels">Nombre del Banco Intermediario:</div>
+                    <div class="widgets">{{ form_widget(form.bancoInterm) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.swiftInterm) }}
+                    <div class="labels">SWIFT del Banco Intermediario:</div>
+                    <div class="widgets">{{ form_widget(form.swiftInterm) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.abaInterm) }}
+                    <div class="labels">ABA del Banco Intermediario:</div>
+                    <div class="widgets">{{ form_widget(form.abaInterm) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.ibanInterm) }}
+                    <div class="labels">IBAN del Banco Intermediario:</div>
+                    <div class="widgets">{{ form_widget(form.ibanInterm) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.cuentaInterm) }}
+                    <div class="labels">Cuenta del Banco Intermediario:</div>
+                    <div class="widgets">{{ form_widget(form.cuentaInterm) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.direccionBancointerm) }}
+                    <div class="labels">Direcci&oacute;n del Banco Intermediario:</div>
+                    <div class="widgets">{{ form_widget(form.direccionBancointerm) }}</div>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>       
+            <legend id="b"><div class="divisor">DATOS DEL BANCO BENEFICIARIO</div> </legend>
+            <div id="detalles" class="form-show">
+                <br>
+                <div class="form-contenedor">
+                    {{ form_errors(form.bancoBenef) }}
+                    <div class="labels">Nombre del Banco Beneficiario:</div>
+                    <div class="widgets">{{ form_widget(form.bancoBenef) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.swiftBenef) }}
+                    <div class="labels">SWIFT del Banco Beneficiario:</div>
+                    <div class="widgets">{{ form_widget(form.swiftBenef) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.abaBenef) }}
+                    <div class="labels">ABA del Banco Beneficiario:</div>
+                    <div class="widgets">{{ form_widget(form.abaBenef) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.ibanBenef) }}
+                    <div class="labels">IBAN del Banco Beneficiario:</div>
+                    <div class="widgets">{{ form_widget(form.ibanBenef) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.cuentaBenef) }}
+                    <div class="labels">Cuenta del Banco Intermediario:</div>
+                    <div class="widgets">{{ form_widget(form.cuentaBenef) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.direccionBancobenef) }}
+                    <div class="labels">Direcci&oacute;n del Banco Intermediario:</div>
+                    <div class="widgets">{{ form_widget(form.direccionBancobenef) }}</div>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+       <a class="btn" href="{{ path( 'banco' ) }}">Listado de Bancos</a>
+        <button type="submit" class="btn">Registrar Banco</button> 
+    </form>
+<script src="{{ asset('js/contenidos/efecto.js') }}"></script>
+
+{% endblock %}
