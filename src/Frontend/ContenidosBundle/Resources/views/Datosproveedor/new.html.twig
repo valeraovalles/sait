@@ -12,7 +12,7 @@
     <form action="{{ path('datosproveedor_create') }}" method="post" {{ form_enctype(form) }}>
         <fieldset>       
             <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
-            <div id="descripcion" class="form-show">
+            <div id="descripcion" class="form-show_edit">
                 <br>
                 <div class="form-contenedor">
                     {{ form_errors(form.nombre) }}
@@ -64,7 +64,7 @@
         <br>
          <fieldset>       
             <legend id="b"><div class="divisor">DATOS DEL REPRESENTANTE</div> </legend>
-            <div id="detalles" class="form-show">
+            <div id="detalles" class="form-show_edit">
                 <br>
                 <div class="form-contenedor">
                     {{ form_errors(form.nombreRepr) }}
@@ -106,7 +106,7 @@
         <br>
         <fieldset>       
             <legend id="c"><div class="divisor">DATOS DEL REPRESENTANTE</div> </legend>
-            <div id="aprobacion" class="form-show">
+            <div id="aprobacion" class="form-show_edit">
                 <br>
                 <div class="form-contenedor">
                     {{ form_errors(form.idTipoprov) }}

@@ -25,7 +25,10 @@ class BancoType extends AbstractType
             ->add('ibanBenef')
             ->add('direccionBancobenef')
             ->add('direccionBeneficiario','textarea')
-            ->add('idProveedor')
+            ->add('idProveedor','entity', array(
+                                                'class' => 'ContenidosBundle:Datosproveedor', 
+                                                'property'=>'nombre', 
+                                                'multiple'  => false, ))
             ->add('pais')
         ;
     }
