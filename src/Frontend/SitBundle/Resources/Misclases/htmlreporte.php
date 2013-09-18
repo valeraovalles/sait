@@ -7,7 +7,6 @@ class htmlreporte
     public function informe($em,$datos)
     {
 
-
         $unidad = $em->getRepository('SitBundle:Unidad')->findAll();
 
         $array['s']="Seleccione";
@@ -19,10 +18,18 @@ class htmlreporte
         $mes= array('s'=>'seleccione','01'=>'Enero','02'=>'Febrero','03'=>'Marzo','04'=>'Abril','05'=>'Mayo','06'=>'Junio','07'=>'Julio','08'=>'Agosto','09'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
 
 
-        $dql = "select t from SitBundle:Ticket t join t.subcategoria s join s.categoria c join t.user us where t.unidad= :idunidad and t.estatus=4 order by t.categoria,t.subcategoria,t.fechasolicitud, t.horasolicitud ASC";
+        $fechadesde="01-".$datos['meses']."-".$datos['anios'];
+        $dias=cal_days_in_month(CAL_GREGORIAN, $datos['meses'], $datos['anios']);
+        $fechahasta=$dias."-".$datos['meses']."-".$datos['anios'];
+
+        $dql = "select t from SitBundle:Ticket t join t.subcategoria s join s.categoria c join t.user us where t.unidad= :idunidad and t.estatus=4 and t.fechasolicitud BETWEEN ?1 AND ?2 order by t.categoria,t.subcategoria,t.fechasolicitud, t.horasolicitud ASC";
         $query = $em->createQuery($dql);
         $query->setParameter('idunidad',$datos['unidad']);
+        $query->setParameter(1, $fechadesde);
+        $query->setParameter(2, $fechahasta);
         $ticket = $query->getResult();
+
+        if(empty($ticket))return null;
 
         $ultimacategoria=null;$ultimasubcategoria=null;$info=null;$cont=1;
         foreach ($ticket as $value) {

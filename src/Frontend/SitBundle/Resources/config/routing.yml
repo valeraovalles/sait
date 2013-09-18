@@ -158,3 +158,8 @@ reporte_ajaxinformegestion:
 reporte_generarinforme:
     pattern:  /generarinforme
     defaults: { _controller: "SitBundle:Reporte:generarinforme" }
+
+
+reporte_generarimagenes:
+    pattern:  /generarimagenes
+    defaults: { _controller: "SitBundle:Reporte:generarimagenes" }

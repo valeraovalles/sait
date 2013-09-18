@@ -46,7 +46,10 @@ class AjaxController extends Controller
         if($mostrar=='boton'){
 
             if($datos=='s'){ echo ""; die;}
-            echo "<input class='btn btn-primary' type='submit' value='Generar informe'> <input class='btn btn-primary' type='submit' value='Generar grafico'>";
+            echo "
+
+                <input class='btn btn-primary' type='submit' value='Generar imágenes'>
+            ";
             die;
         }
 

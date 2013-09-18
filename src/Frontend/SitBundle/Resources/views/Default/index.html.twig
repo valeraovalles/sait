@@ -93,10 +93,35 @@
 
 						<td>{{ tu.solicitud|slice(0,20) }}</td>
 						<td>{{ tu.fechasolicitud|date("d-m-Y") }} {{ tu.horasolicitud|date("G:i:s") }}</td>
-						<td><span class="icon-search"></span></td>
+						<td><a data-toggle="modal" href="#myModal{{ tu.id }}"><span class="icon-search"></span></a></td>
 
 					</tr>
 					
+
+
+				    <div style="width:500px;left:52%;" id="myModal{{ tu.id }}" class="modal hide fade" tabindex="5" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				    	<div class="modal-header">
+				              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				              <h3 id="myModalLabel">ESTATUS DE TICKET</h3>
+				         </div>
+				        <div class="modal-body">
+				            
+				        	{% if tu.estatus==1 %}
+				        		El ticket aún no se ha asignado a un técnico.
+				        	{% elseif tu.estatus==2 %}
+				        		El ticket fue asignado a un técnico de la unidad de {{ tu.unidad.descripcion }}.
+				        	{% elseif tu.estatus==3 %}
+				        		Haz envíado el ticket a la unidad equivocada por lo que fue reasignado a la unidad de {{ tu.unidad.descripcion }}.
+				        	{% elseif tu.estatus==4 %}
+				        		Tu ticket fue cerrado el {{ tu.fechasolucion|date('d-m-Y') }} a las {{ tu.horasolucion|date('G:i:s') }} y la solucion fue la siguiente: "<b>{{ tu.solucion }}</b>".
+				        	{% endif %}
+				            
+				        </div>
+				        <div class="modal-footer">
+				          <button class="btn" data-dismiss="modal">Cerrar</button>
+				        </div>
+				    </div>
+
 				{% endfor %}
 			</table>
 			</div>
@@ -105,6 +130,5 @@
 	</div>
   </div>
 </div>
-
 
 {% endblock %}

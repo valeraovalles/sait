@@ -27,7 +27,7 @@
         </div>
     {% endfor %}
 
-    <form novalidate action="{{ path('reporte_generarinforme') }}" method="post" {{ form_enctype(form) }}>
+    <form id="form" novalidate action="{{ path('reporte_generarimagenes') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
         <br>
         <div class="formShow">

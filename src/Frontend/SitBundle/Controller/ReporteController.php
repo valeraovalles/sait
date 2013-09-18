@@ -37,6 +37,54 @@ class ReporteController extends Controller
 
     }
 
+
+    public function generarimagenesAction(Request $request)
+    {
+        $datos=$request->request->all();
+        $datos=$datos['form'];
+
+        $mes= array('s'=>'seleccione','01'=>'Enero','02'=>'Febrero','03'=>'Marzo','04'=>'Abril','05'=>'Mayo','06'=>'Junio','07'=>'Julio','08'=>'Agosto','09'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $fechadesde="01-".$datos['meses']."-".$datos['anios'];
+        $dias=cal_days_in_month(CAL_GREGORIAN, $datos['meses'], $datos['anios']);
+        $fechahasta=$dias."-".$datos['meses']."-".$datos['anios'];
+
+        $dql = "select t from SitBundle:Ticket t join t.categoria c where t.unidad= :idunidad and t.estatus=4 and t.fechasolicitud BETWEEN ?1 AND ?2 order by t.categoria,t.subcategoria,t.fechasolicitud, t.horasolicitud ASC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idunidad',$datos['unidad']);
+        $query->setParameter(1, $fechadesde);
+        $query->setParameter(2, $fechahasta);
+        $ticket = $query->getResult();
+
+        if(empty($ticket)){
+            $this->get('session')->getFlashBag()->add('alert', 'No existen datos para la fecha seleccionada');
+            return $this->redirect($this->generateUrl('reporte'));
+        }
+
+
+        foreach ($ticket as $value) {
+            $categorias[$value->getCategoria()->getCategoria()]=0;
+        }
+
+        foreach ($ticket as $value) {
+            $categorias[$value->getCategoria()->getCategoria()]=$categorias[$value->getCategoria()->getCategoria()]+1;
+        }
+
+        $grafico="";
+        foreach ($categorias as $key => $value) {
+
+            $grafico .="['".$key."',".$value."],";
+
+        }
+        $grafico = substr($grafico, 0, -1);
+
+
+        return $this->render('SitBundle:Reporte:imagenesinforme.html.twig',array('datos'=>$datos,'datosgrafico'=>$grafico,'mes'=>$mes));
+
+
+    }
     public function generarinformeAction(Request $request)
     {
         $datos=$request->request->all();
@@ -47,10 +95,14 @@ class ReporteController extends Controller
         $a=new htmlreporte;
         $html=$a->informe($em,$datos);
 
+        if($html==null){
+            $this->get('session')->getFlashBag()->add('alert', 'No existen datos para la fecha seleccionada');
+            return $this->redirect($this->generateUrl('reporte'));
+        }
 
         echo $html;
         header('Content-type: application/vnd.ms-word');
-        header("Content-Disposition: attachment; filename=millonarios_fc.doc");
+        header("Content-Disposition: attachment; filename=informe.doc");
         header("Pragma: no-cache");
         header("Expires: 0");
         die;
@@ -58,64 +110,3 @@ class ReporteController extends Controller
     }
 }
 
-/*
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript">
-
-$(function () {
-    var chart;
-    
-    $(document).ready(function () {
-        
-        // Build the chart
-        $('#container').highcharts({
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-            title: {
-                text: 'CANTIDAD DE TICKETS CERRADOS '
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    },
-                    showInLegend: true
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Browser share',
-                data: [
-                    ['Firefox',   45.0],
-                    ['IE',       26.8],
-                    {
-                        name: 'Chrome',
-                        y: 12.8,
-                        sliced: true,
-                        selected: true
-                    },
-                    ['Safari',    8.5],
-                    ['Opera',     6.2],
-                    ['Others',   0.7]
-                ]
-            }]
-        });
-    });
-    
-});
-        </script>
-
-
-<script src="/sait/web/libs/highcharts/js/highcharts.js"></script>
-<script src="/sait/web/libs/highcharts/js/modules/exporting.js"></script>
-<div id="container" style="min-width: 500px; height: 400px; margin: 0 auto">sdsdsdsd</div>
-*/

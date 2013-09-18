@@ -1,0 +1,84 @@
+{% extends '::sit.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+
+{% block titulobanner %}
+    INFORME DE GESTIÓN
+{% endblock %}
+
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">IMAGENES INFORME DE GESTIÓN</div>
+
+
+
+
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
+<script type="text/javascript">
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: 'CANTIDAD DE TICKETS MES: {{ mes[datos.meses]|upper }}  AÑO: {{ datos.anios }}'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Tickets',
+            data: [ {{ datosgrafico|upper|raw }} ]
+        }]
+    });
+});
+    
+
+        </script>
+
+
+<script src='/sait/web/libs/highcharts/js/highcharts.js'></script>
+<script src='/sait/web/libs/highcharts/js/modules/exporting.js'></script>
+
+<h5 class="alert alert-info">DESCARGA GRÁFICO</h5>
+
+<div id='container' style='width: 600px; height: 200px; margin: 0 auto'></div>
+
+
+<h5 class="alert alert-info">DESCARGA LOGO TELESUR</h5>
+<a href="/sait/web/libs/scripts/forzardescarga.php?archivo=logosit.jpg&ruta=../../images/">
+<div id='container' style='width: 600px; height: 200px; margin: 0 auto'><img src="{{ asset('images/logosit.jpg') }}"></div>
+</a>
+
+
+    <form id="form" novalidate action="{{ path('reporte_generarinforme') }}" method="post">
+
+        <input type="hidden" name="form[unidad]" value="{{datos['unidad']}}">
+        <input type="hidden" name="form[anios]" value="{{datos['anios']}}">
+        <input type="hidden" name="form[meses]" value="{{datos['meses']}}">
+        <br>
+        <input class='btn btn-primary' type='submit' value='Generar informe'> |
+        <a href="{{ path('reporte') }}" class='btn btn-default'>Volver</a>
+    </form>
+
+
+{% endblock %}
