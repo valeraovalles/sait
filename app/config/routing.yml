@@ -1,6 +1,6 @@
 contenidos:
     resource: "@ContenidosBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /contenidos
 
 sit:
     resource: "@SitBundle/Resources/config/routing.yml"

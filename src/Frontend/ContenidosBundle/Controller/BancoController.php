@@ -39,10 +39,13 @@ class BancoController extends Controller
         $entity  = new Banco();
         $form = $this->createForm(new BancoType(), $entity);
         $form->bind($request);
-            $id = 'PRUEBA';
-            $entity->setidProveedor($id);
+            
+
+            $id_p = '1';
+            
         
             $em = $this->getDoctrine()->getManager();
+            $entity->setIdProveedor($id_p);
             $em->persist($entity);
             $em->flush();
 

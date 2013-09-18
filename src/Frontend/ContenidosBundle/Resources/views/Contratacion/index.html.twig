@@ -1,73 +1,40 @@
-{% extends '::base.html.twig' %}
+{% extends '::contenidos.html.twig' %}
 
 {% block body -%}
-    <h1>Contratacion list</h1>
+   {{ parent() }}
+    <div class="titulo">CONTRATACIONES</div>
 
-    <table class="records_list">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Concepto</th>
-                <th>Tipomoneda</th>
-                <th>Montome</th>
-                <th>Montobs</th>
-                <th>Numsolicitud</th>
-                <th>Numconformacion</th>
-                <th>Numpuntocuenta</th>
-                <th>Fechapunto</th>
-                <th>Numalcance</th>
-                <th>Fechaalcance</th>
-                <th>Numcontrato</th>
-                <th>Fechacontrato</th>
-                <th>Numaddendum</th>
-                <th>Fechaaddendum</th>
-                <th>Fechainicio</th>
-                <th>Fechafin</th>
-                <th>Observacionescompras</th>
-                <th>Actions</th>
+            <tr align="center">
+                <th width="23%">Concepto</th>
+                <th width="11%">Monto <br> ($ / €):</th>
+                <th width="11%">Monto <br> (Bs)</th>
+                <th width="17%">N&uacute;mero del <br> punto de cuenta</th>
+                <th width="17%">N&uacute;mero de Alcance <br> (punto de cuenta)</th>
+                <th width="17%">N&uacute;mero de <br> Contrato</th>
+                <th width="4%">Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('contratacion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.concepto }}</td>
-                <td>{{ entity.tipoMoneda }}</td>
-                <td>{{ entity.montoMe }}</td>
-                <td>{{ entity.montoBs }}</td>
-                <td>{{ entity.numSolicitud }}</td>
-                <td>{{ entity.numConformacion }}</td>
-                <td>{{ entity.numPuntocuenta }}</td>
-                <td>{% if entity.fechaPunto %}{{ entity.fechaPunto|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.numAlcance }}</td>
-                <td>{% if entity.fechaAlcance %}{{ entity.fechaAlcance|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.numContrato }}</td>
-                <td>{% if entity.fechaContrato %}{{ entity.fechaContrato|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.numAddendum }}</td>
-                <td>{% if entity.fechaAddendum %}{{ entity.fechaAddendum|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.fechaFin %}{{ entity.fechaFin|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.observacionesCompras }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('contratacion_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('contratacion_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+            <tr align="center">
+                <td width="23%"><a href="{{ path('contratacion_show', { 'id': entity.id }) }}">{{ entity.concepto }}</a></td>
+                <td width="11%">{{ entity.montoMe }}</td>
+                <td width="11%">{{ entity.montoBs }}</td>
+                <td width="17%">{{ entity.numPuntocuenta }}</td>
+                <td width="17%">{{ entity.numAlcance }}</td>
+                <td width="17%">{{ entity.numContrato }}</td>
+                <td width="4%">
+                        <a href="{{ path('contratacion_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+                        <a href="{{ path('pago', { 'id_proveedor': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="pagos asociados"><img width="20px" src="{{ asset('images/dinero.jpg')}}"></a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('contratacion_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+    <br><br>
+    <a class="btn btn-primary dropdown-toggle" href="{{ path( 'contratacion_new' ) }}">Crear Contrataci&oacute;n</a>
+        
+    <br><br>
     {% endblock %}

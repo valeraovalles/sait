@@ -519,4 +519,10 @@ class Banco
     {
         return $this->pais;
     }
+
+    public function __toString()
+    {   
+        return strval($this->id);
+    }
+
 }

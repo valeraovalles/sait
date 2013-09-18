@@ -34,7 +34,6 @@
                 {% endif %}
                 <td>
                             <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
-                            <a href="{{ path('pago', { 'id_proveedor': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="pagos asociados"><img width="20px" src="{{ asset('images/dinero.jpg')}}"></a>
                             <a href="{{ path('banco', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="datos bancarios"><img width="20px" src="{{ asset('images/banco.jpg')}}"></a>
                             <a href="{{ path('contratacion', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="datos de la contratacion"><img width="20px" src="{{ asset('images/contratacion.jpg')}}"></a>
                 </td>

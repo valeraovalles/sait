@@ -123,12 +123,12 @@ class Pago
     /**
      * @var \Contenidos.datosproveedor
      *
-     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Datosproveedor")
+     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Contratacion")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_proveedor", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_contratacion", referencedColumnName="id")
      * })
      */
-    private $idProveedor;
+    private $idContratacion;
 
 
 
@@ -444,25 +444,25 @@ class Pago
     }
 
     /**
-     * Set idProveedor
+     * Set idContratacion
      *
-     * @param \Frontend\ContenidosBundle\Entity\Datosproveedor $idProveedor
+     * @param \Frontend\ContenidosBundle\Entity\Contratacion $idContratacion
      * @return Pago
      */
-    public function setIdProveedor(\Frontend\ContenidosBundle\Entity\Datosproveedor $idProveedor = null)
+    public function setIdContratacion(\Frontend\ContenidosBundle\Entity\Contratacion $idContratacion = null)
     {
-        $this->idProveedor = $idProveedor;
+        $this->idContratacion = $idContratacion;
     
         return $this;
     }
 
     /**
-     * Get idProveedor
+     * Get idContratacion
      *
-     * @return \Frontend\ContenidosBundle\Entity\Datosproveedor 
+     * @return \Frontend\ContenidosBundle\Entity\Contratacion 
      */
-    public function getIdProveedor()
+    public function getIdContratacionContratacion()
     {
-        return $this->idProveedor;
+        return $this->idContratacion;
     }
 }

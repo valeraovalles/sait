@@ -55,3 +55,12 @@ border-radius: 20px; /* CSS3 (Opera 10.5, IE 9 y estándar a ser soportado por t
         margin-left: 0%;
 }
 
+.divisor{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color:  #091060; 
+}
+
+.divisor a{
+    color: #0fa1e0;
+}

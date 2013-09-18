@@ -3,81 +3,80 @@
 {% block body -%}
  {{ parent() }}
     <div class="titulo">DETALLES BANCO</div>
+    <div class="form-show_edit">
     <fieldset>       
         <legend id="a"><div class="divisor">DATOS DEL BENEFICIARIO</div> </legend>
-        <div id="descripcion" class="form-show">
             <div class="contenedor">
-                <br>
-                <div class="labelshow">Nombre del Beneficiario:</div>
+                <div class="labels">Nombre del Beneficiario:</div>
                 <div class="dato">{{ entity.nombreBeneficiario }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">Direcci&oacute;n del Beneficiario:</div>
+                <div class="labels">Direcci&oacute;n del Beneficiario:</div>
                 <div class="dato">{{ entity.direccionBeneficiario }}</div>
             </div>
-        </div>
+        
     </fieldset>
-    <br>
+    
     <fieldset>       
         <legend id="b"><div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div> </legend>
-        <div id="detalles" class="form-show">
+        
             <div class="contenedor">
-                <div class="labelshow">Banco Intermediario:</div>
+                <div class="labels">Banco Intermediario:</div>
                 <div class="dato">{{ entity.bancoInterm }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">Cuenta Banco Intermediario:</div>
+                <div class="labels">Cuenta Banco Intermediario:</div>
                 <div class="dato">{{ entity.cuentaInterm }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">SWIFT Banco Intermediario:</div>
+                <div class="labels">SWIFT Banco Intermediario:</div>
                 <div class="dato">{{ entity.swiftInterm }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">ABA Banco Intermediario:</div>
+                <div class="labels">ABA Banco Intermediario:</div>
                 <div class="dato">{{ entity.abaInterm }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">IBAN Banco Intermediario:</div>
+                <div class="labels">IBAN Banco Intermediario:</div>
                 <div class="dato">{{ entity.ibanInterm }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">Direcci&oacute;n del Banco Intermediario:</div>
+                <div class="labels">Direcci&oacute;n del Banco Intermediario:</div>
                 <div class="dato">{{ entity.direccionBancointerm }}</div>
             </div>
-        </div>
+        
     </fieldset>
-    <br>
+    
     <fieldset>       
         <legend id="c"><div class="divisor">DATOS DEL BANCO BENEFICIARIO</div> </legend>
-        <div id="aprobaciones" class="form-show">
+        
             <div class="contenedor">
-                <div class="labelshow">Banco Beneficiario:</div>
+                <div class="labels">Banco Beneficiario:</div>
                 <div class="dato">{{ entity.bancoBenef }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">Cuenta Banco Beneficiario:</div>
+                <div class="labels">Cuenta Banco Beneficiario:</div>
                 <div class="dato">{{ entity.cuentaBenef }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">SWIFT Banco Beneficiario:</div>
+                <div class="labels">SWIFT Banco Beneficiario:</div>
                 <div class="dato">{{ entity.swiftBenef }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">ABA Banco Beneficiario:</div>
+                <div class="labels">ABA Banco Beneficiario:</div>
                 <div class="dato">{{ entity.abaBenef }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">IBAN Banco Beneficiario:</div>
+                <div class="labels">IBAN Banco Beneficiario:</div>
                 <div class="dato">{{ entity.ibanBenef }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">Direcci&oacute;n del Banco Beneficiario:</div>
+                <div class="labels">Direcci&oacute;n del Banco Beneficiario:</div>
                 <div class="dato">{{ entity.direccionBancobenef }}</div>
             </div>
-        </div>
+        
     </fieldset>
-
+    </div>
     <br>
     <a href="{{ path('banco') }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
     <br><br> 

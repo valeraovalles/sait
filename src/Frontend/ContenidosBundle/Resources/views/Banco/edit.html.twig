@@ -12,10 +12,11 @@
 
     <form action="{{ path('banco_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
+        <div id="descripcion" class="form-show_edit">
+            <br>
         <fieldset>       
             <legend id="a"><div class="divisor">DATOS DEL BENEFICIARIO</div> </legend>
-            <div id="descripcion" class="form-show">
-                <br>
+            
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.nombreBeneficiario) }}
                     <div class="labels">Nombre del Beneficiario:</div>
@@ -26,13 +27,12 @@
                     <div class="labels">Direcci&oacute;n del Beneficiario:</div>
                     <div class="widgets">{{ form_widget(edit_form.direccionBeneficiario) }}</div>
                 </div>
-            </div>
+            
         </fieldset>
         <br>
         <fieldset>       
             <legend id="b"><div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div> </legend>
-            <div id="detalles" class="form-show">
-                <br>
+            
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.bancoInterm) }}
                     <div class="labels">Nombre:</div>
@@ -63,13 +63,12 @@
                     <div class="labels">Direcci&oacute;n:</div>
                     <div class="widgets">{{ form_widget(edit_form.direccionBancointerm) }}</div>
                 </div>
-            </div>
+            
         </fieldset>
         <br>
         <fieldset>       
             <legend id="c"><div class="divisor">DATOS DEL BANCO BENEFICIARIO</div> </legend>
-            <div id="aprobaciones" class="form-show">
-                <br>
+            
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.bancoBenef) }}
                     <div class="labels">Nombre:</div>
@@ -100,9 +99,9 @@
                     <div class="labels">Direcci&oacute;n:</div>
                     <div class="widgets">{{ form_widget(edit_form.direccionBancobenef) }}</div>
                 </div>
-            </div>
+           
         </fieldset>
-
+ </div>
 
         <br>       
         <a class="btn" href="{{ path('banco') }}">Listado de Bancos</a>
