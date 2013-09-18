@@ -191,7 +191,7 @@
                     $row[] = $aRow[ $aColumns[$i] ];
 
                     if($i==5)
-                    $row[] = "<a href='consulta/".$id."'><img width='20px' src='/sait/web/images/busca.png'></a>";    
+                    $row[] = "<a href='consulta/".$id."'><span class='icon-search'></span></a>";    
             }
         }
         $output['aaData'][] = $row;

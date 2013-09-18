@@ -51,6 +51,12 @@ security:
         - { path: ^/constancia/inicio, roles: ROLE_CONSTANCIA_ADMINISTRADOR}
         - { path: ^/constancia/edit, roles: ROLE_CONSTANCIA_ADMINISTRADOR}
 
+        - { path: ^/sit/listausuariounidad, roles: ROLE_SIT_SUPERADMINISTRADOR}
+        - { path: ^/sit/ticket, roles: ROLE_SIT_ADMINISTRADOR}
+        - { path: ^/sit/asignado, roles: ROLE_SIT_ADMINISTRADOR}
+        - { path: ^/sit/categoria, roles: ROLE_SIT_ADMINISTRADOR}
+        - { path: ^/sit/subcategoria, roles: ROLE_SIT_ADMINISTRADOR}
+
 
         - { path:  ^/licencias/reportes, roles:[ROLE_LICENCIAS , ROLE_LICADMIN] }
         - { path: ^/licencias/modif, roles:ROLE_LICADMIN }
