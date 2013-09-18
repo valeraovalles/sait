@@ -59,6 +59,12 @@
 </div>
 
 <div class="form-contenedor">
+    {{ form_errors(edit_form_perfil.extension) }}
+    <div class="labels">Extensión:</div>
+    <div class="widgets">{{ form_widget(edit_form_perfil.extension) }}</div>
+</div>
+
+<div class="form-contenedor">
     {{ form_errors(edit_form.rol) }}
     <div class="labels">Rol:</div>
     <div class="widgets">{{ form_widget(edit_form.rol) }}</div>
