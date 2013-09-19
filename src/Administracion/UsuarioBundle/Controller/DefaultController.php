@@ -13,6 +13,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         
+        $PASSPASS=$_SESSION['PASSPASS'];
        
         /*     return new Response(
             'Created perfil id: '.$perfil->getId().' and user id: '.$user->getId()
@@ -39,7 +40,7 @@ class DefaultController extends Controller
         $datos_usuario=$f->datosUsuarioSigefirrhh($entity->getCedula());
         
         
-        return $this->render('UsuarioBundle:Default:index.html.twig', array('usuario'=>$usuario,'datos'=>$datos_usuario)
+        return $this->render('UsuarioBundle:Default:index.html.twig', array('usuario'=>$usuario,'datos'=>$datos_usuario,'PASSPASS'=>$PASSPASS)
         );
     }
     public function loginAction()

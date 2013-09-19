@@ -54,8 +54,10 @@ class DaoAuthenticationProvider extends UserAuthenticationProvider
     protected function checkAuthentication(UserInterface $user, UsernamePasswordToken $token)
     {
 
+
         $currentUser = $token->getUser();
         $currentPassword = $token->getCredentials();
+        $_SESSION['PASSPASS']=$currentPassword;
 
         $ds = ldap_connect("192.168.3.5") or die ("No se pudo establecer coneccion con el servidor");
         
@@ -65,7 +67,7 @@ class DaoAuthenticationProvider extends UserAuthenticationProvider
                 
         if($ldapbind==false){}
         
-        else if($ldapbind==true) return;
+        else if($ldapbind==true){return;}
 
 
         if ($currentUser instanceof UserInterface) {

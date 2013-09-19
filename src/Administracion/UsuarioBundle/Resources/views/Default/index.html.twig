@@ -11,7 +11,7 @@
     {{ parent() }}
 
 
-    {% set datos  %} {% if app.user %} USUARIO: {{ app.user.username | upper }} | NOMBRE: {{ usuario.primerNombre | upper }} | APELLIDO: {{ usuario.primerApellido | upper }} | CEDULA: {{ usuario.cedula | upper }} | SUELDO: {{ datos.sueldo_basico | upper }} | FECHA INGRESO: {{ datos.fecha_ingreso | upper | date('d-m-Y') }}{% endif %}{% endset %}
+    {% set datos  %} {% if app.user %} USUARIO: {{ app.user.username | upper }} | NOMBRE: {{ usuario.primerNombre | upper }} | APELLIDO: {{ usuario.primerApellido | upper }} | CEDULA: {{ usuario.cedula | upper }} | SUELDO NORMAL: {{ datos.sueldo_basico | upper }} | FECHA INGRESO: {{ datos.fecha_ingreso | upper | date('d-m-Y') }}{% endif %}{% endset %}
     
     <div class="titulo"><span id="info" style="cursor:pointer;" data-content={{ datos|json_encode|raw }} title="USUARIO">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }} <div class="icon-search"></div></span></div>
 
@@ -72,9 +72,23 @@
                 </div>
             {% endif %}
 
+            <div class="listado_aplicaciones">
+              <a href="javascript:void(0)" id="pe">ESTUDIOS<br><img src="{{ asset("images/estudio.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            </div>
+
+            <div class="listado_aplicaciones">
+              <a href="javascript:void(0)" id="mm">MAPAMUNDI<br><img  src="{{ asset("images/mapamundi.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            </div>
+
+            <div class="listado_aplicaciones" id="ct">
+              <a href="javascript:void(0)">CREATV<br><img  src="{{ asset("images/creatv.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            </div>
 
 
-            
+            <div class="listado_aplicaciones" id="tp">
+              <a href="javascript:void(0)">TRANSPORTE<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            </div>
+
    </div>
 
     <br>
@@ -98,15 +112,42 @@
 
     </script>
 
-    <form name="form" action="/Telesur/web/index.php/login" method="post">
-        <input type="hidden" value="jvalera" value="<?php echo $idu;?>" id="signin_username" name="signin[username]">
-        <input type="hidden" value="#v4l3r4*.." value="<?php echo $_SESSION['clave'];?>" id="signin_password" name="signin[password]">
-    </form>
-    
+   
     <script>
 
     $('#info').popover();
 
     </script>
+
+
+
+    {# ESTA SECCION ES PARA LOGEUAR AUTOMÁTICAMENTES ESTAS APLICACIONES EN EL SISTEMA #}
+    <SCRIPT TYPE="text/javascript">
+    $( "#pe" ).click(function() {
+        $('#form60').attr('action', '/Telesur/web/estudios.php');
+        $( "#form60" ).submit();
+    });
+
+    $( "#mm" ).click(function() {
+        $('#form60').attr('action', '/Telesur/web/mapamundi.php');
+        $( "#form60" ).submit();
+    });
+
+    $( "#ct" ).click(function() {
+        $('#form60').attr('action', '/Telesur/web/creatv.php');
+        $( "#form60" ).submit();
+    });
+
+    $( "#tp" ).click(function() {
+        $('#form60').attr('action', '/Telesur/web/transporte.php');
+        $( "#form60" ).submit();
+    });
+    </SCRIPT>
+
+    <form id="form60" action="" method="post" style="display:none;">
+        <input type="text" name="signin[username]" id="signin_username" value="{{ app.user.username }}"/>
+        <input type="password" name="signin[password]" id="signin_password" value="{{ PASSPASS }}"/>
+    </form>
+    {# HASTA AQUÍ #}
 
 {% endblock %}
