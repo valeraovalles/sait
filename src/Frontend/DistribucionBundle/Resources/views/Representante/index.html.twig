@@ -32,10 +32,10 @@
                 <td>{{ entity.operador.nombre }}</td>
                 <td align='center'>{% if entity.operador.estatus==true %}Activo{% else %}<div style="background-color:yellow;color:red;">Inactivo<div>{% endif %}</td>
                 <td>
-                    <a href="{{ path('representante_show', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/busca.png')}}"></a>
+                    <a href="{{ path('representante_show', { 'id': entity.id }) }}"><span class="icon-search"></a>
 
                     {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
-                    <a href="{{ path('representante_edit', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/edit.png')}}"></a>
+                    <a href="{{ path('representante_edit', { 'id': entity.id }) }}"><span class="icon-edit"></a>
                     {% endif %}
                 </td>
             </tr>

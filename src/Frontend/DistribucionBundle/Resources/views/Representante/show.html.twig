@@ -13,50 +13,50 @@
 
     <div class="titulo">REPRESENTANTE ({{ entity.nombreS | upper }})</div>
 
-    <div class="form-show">
-        <div class="contenedor">
-            <div class="labelshow">Nombres:</div>
-            <div class="dato">{{ entity.nombres }}</div>
+    <div class="formShow">
+        <div class="contenedorform">
+            <div class="labelform">Nombres:</div>
+            <div class="widgetform">{{ entity.nombres }}</div>
         </div>
 
-        <div class="contenedor">
-            <div class="labelshow">Apellidos:</div>
-            <div class="dato">{{ entity.apellidos }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Apellidos:</div>
+            <div class="widgetform">{{ entity.apellidos }}</div>
         </div>
 
-        <div class="contenedor">
-            <div class="labelshow">Cargo:</div>
-            <div class="dato">{{ entity.cargo }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Cargo:</div>
+            <div class="widgetform">{{ entity.cargo }}</div>
         </div>
 
-        <div class="contenedor">
-            <div class="labelshow">correo:</div>
-            <div class="dato">{{ entity.correo }}</div>
+        <div class="contenedorform">
+            <div class="labelform">correo:</div>
+            <div class="widgetform">{{ entity.correo }}</div>
         </div>
 
-        <div class="contenedor">
-            <div class="labelshow">Telefono 1:</div>
-            <div class="dato">{{ entity.telefono1 }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Telefono 1:</div>
+            <div class="widgetform">{{ entity.telefono1 }}</div>
         </div>
 
         {% if entity.telefono2!='' %}
-            <div class="contenedor">
-                <div class="labelshow">Telefono 2:</div>
-                <div class="dato">{{ entity.telefono2 }}</div>
+            <div class="contenedorform">
+                <div class="labelform">Telefono 2:</div>
+                <div class="widgetform">{{ entity.telefono2 }}</div>
             </div>
         {% endif %}
 
         {% if entity.fax!='' %}
-            <div class="contenedor">
-                <div class="labelshow">Fax:</div>
-                <div class="dato">{{ entity.fax }}</div>
+            <div class="contenedorform">
+                <div class="labelform">Fax:</div>
+                <div class="widgetform">{{ entity.fax }}</div>
             </div>
         {% endif %}
 
         {% if entity.observacion!='' %}
-            <div class="contenedor">
-                <div class="labelshow">Observacion:</div>
-                <div class="dato">{{ entity.observacion }}</div>
+            <div class="contenedorform">
+                <div class="labelform">Observacion:</div>
+                <div class="widgetform">{{ entity.observacion }}</div>
             </div>
         {% endif %}
     </div>

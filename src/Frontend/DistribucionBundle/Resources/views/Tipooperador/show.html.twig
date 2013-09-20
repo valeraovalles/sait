@@ -20,26 +20,26 @@
         {% endfor %}
     {% endif %}
 
-    <div class="form-show">
+    <div class="formShow">
 
-        <div class="contenedor">
-            <div class="labelshow">Id:</div>
-            <div class="dato">{{ entity.id }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Id:</div>
+            <div class="widgetform">{{ entity.id }}</div>
         </div>
 
-        <div class="contenedor">
-            <div class="labelshow">Tipo:</div>
-            <div class="dato">{{ entity.operador }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Tipo:</div>
+            <div class="widgetform">{{ entity.operador }}</div>
         </div>
 
-        <div class="contenedor">
-                <div class="labelshow">Código:</div>
-                <div class="dato">{{ entity.codigo }}</div>
+        <div class="contenedorform">
+                <div class="labelform">Código:</div>
+                <div class="widgetform">{{ entity.codigo }}</div>
         </div>
 
-        <div class="contenedor">
-                <div class="labelshow">Última Modificación:</div>
-                <div class="dato">{{ entity.user.primernombre | title
+        <div class="contenedorform">
+                <div class="labelform">Última Modificación:</div>
+                <div class="widgetform">{{ entity.user.primernombre | title
  }} {{ entity.user.primerapellido | title
  }}</div>
         </div>

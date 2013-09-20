@@ -32,9 +32,9 @@
                 <td>{% if entity.operador.estatus == 1 %} Activo {% else %} Inactivo {% endif %}</td>
                 <td>{{ entity.operador.numeroabonados }}</td>
                 <td>
-                        <a href="{{ path('operador_show', { 'id': entity.operador.id }) }}"><img width="15px" src="{{ asset('images/busca.png')}}"></a>
+                        <a href="{{ path('operador_show', { 'id': entity.operador.id }) }}"><span class="icon-search"></a>
          
-                        <a href="{{ path('operador_edit', { 'id': entity.operador.id }) }}"><img width="15px" src="{{ asset('images/edit.png')}}"></a>
+                        <a href="{{ path('operador_edit', { 'id': entity.operador.id }) }}"><span class="icon-edit"></a>
                 </td>
             </tr>
 

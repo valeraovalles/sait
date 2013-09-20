@@ -20,21 +20,21 @@
         {% endfor %}
     {% endif %}
 
-    <div class="form-show">
+    <div class="formShow">
 
-        <div class="contenedor">
-            <div class="labelshow">Id:</div>
-            <div class="dato">{{ entity.id }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Id:</div>
+            <div class="widgetform">{{ entity.id }}</div>
         </div>
 
-        <div class="contenedor">
-            <div class="labelshow">Objeto:</div>
-            <div class="dato">{{ entity.objeto }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Objeto:</div>
+            <div class="widgetform">{{ entity.objeto }}</div>
         </div>
 
-        <div class="contenedor">
-                <div class="labelshow">Última Modificación:</div>
-                <div class="dato">{{ entity.user.primernombre | title
+        <div class="contenedorform">
+                <div class="labelform">Última Modificación:</div>
+                <div class="widgetform">{{ entity.user.primernombre | title
  }} {{ entity.user.primerapellido | title
  }}</div>
         </div>
@@ -44,17 +44,17 @@
     <br>
 
     {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
-    <form action="{{ path('objetocomodato_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
+    <form action="{{ path('objetocomowidgetform_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
         <button class="btn btn-danger" type="submit">Borrar</button>
     </form>
 
-    <a class="btn" href="{{ path('objetocomodato_edit', { 'id': entity.id }) }}">
+    <a class="btn" href="{{ path('objetocomowidgetform_edit', { 'id': entity.id }) }}">
         Ir a editar
     </a>
     |{% endif %}
-    <a class="btn" href="{{ path('objetocomodato') }}">
+    <a class="btn" href="{{ path('objetocomowidgetform') }}">
         Ir a la lista
     </a>
     

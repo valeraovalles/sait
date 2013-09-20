@@ -23,10 +23,10 @@
                 <td><a href="{{ path('zona_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.zona }}</td>
                 <td>
-                    <a href="{{ path('zona_show', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/busca.png')}}"></a>
+                    <a href="{{ path('zona_show', { 'id': entity.id }) }}"><span class="icon-search"></a>
          
                     {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
-                    <a href="{{ path('zona_edit', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/edit.png')}}"></a>
+                    <a href="{{ path('zona_edit', { 'id': entity.id }) }}"><span class="icon-edit"></a>
                     {% endif %}
 
                 </td>

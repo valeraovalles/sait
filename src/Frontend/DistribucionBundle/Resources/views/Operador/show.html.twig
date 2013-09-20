@@ -15,25 +15,25 @@
 
     <div id="a"><div class="divisor">DATOS DE OPERADOR</div></div>
     <div id="operador">
-    <div class="form-show">
-        <div class="contenedor">
-            <div class="labelshow">Nombre:</div>
-            <div class="dato">{{ entity.nombre }}</div>
+    <div class="formShow">
+        <div class="contenedorform">
+            <div class="labelform">Nombre:</div>
+            <div class="widgetform">{{ entity.nombre }}</div>
         </div>
 
-        <div class="contenedor">
-                <div class="labelshow">Tipo Operador:</div>
-                <div class="dato">{{ entity.tipooperador }}</div>
+        <div class="contenedorform">
+                <div class="labelform">Tipo Operador:</div>
+                <div class="widgetform">{{ entity.tipooperador }}</div>
         </div>
 
-        <div class="contenedor">
-                <div class="labelshow">Pais:</div>
-                <div class="dato">{{ entity.pais.pais }}</div>
+        <div class="contenedorform">
+                <div class="labelform">Pais:</div>
+                <div class="widgetform">{{ entity.pais.pais }}</div>
         </div>
 
-        <div class="contenedor">
-                <div class="labelshow">Estado:</div>
-                <div class="dato">
+        <div class="contenedorform">
+                <div class="labelform">Estado:</div>
+                <div class="widgetform">
                     {% set cont = 0 %}
                     {% set largo = entity.estado | length %}
                     {% for es in entity.estado %} 
@@ -43,18 +43,18 @@
                 </div>
         </div>
 
-        <div class="contenedor">
-                <div class="labelshow">Cobertura:</div>
-                <div class="dato">{{ entity.cobertura }}</div>
+        <div class="contenedorform">
+                <div class="labelform">Cobertura:</div>
+                <div class="widgetform">{{ entity.cobertura }}</div>
         </div>
 
-        <div class="contenedor">
-                <div class="labelshow">Zona:</div>
-                <div class="dato">{{ entity.zona }}</div>
+        <div class="contenedorform">
+                <div class="labelform">Zona:</div>
+                <div class="widgetform">{{ entity.zona }}</div>
         </div>
 
-        <div class="contenedor">
-                <div class="labelshow">
+        <div class="contenedorform">
+                <div class="labelform">
                     {% if entity.tipooperador.id == 4 %}
                         Potenciales televidentes:
                     {% elseif entity.tipooperador.id == 5 %}
@@ -63,74 +63,74 @@
                         Abonados:
                     {% endif %}
                 </div>
-                <div class="dato">{{ entity.numeroabonados }}</div>
+                <div class="widgetform">{{ entity.numeroabonados }}</div>
         </div>
 
-        <div class="contenedor">
-                <div class="labelshow">
+        <div class="contenedorform">
+                <div class="labelform">
                     {% if entity.tipooperador.id == 4 %}
                         Canal1:
                     {% else %}
                         Dial1:
                     {% endif %}
                 </div>
-                <div class="dato">{{ entity.dialurl }}</div>
+                <div class="widgetform">{{ entity.dialurl }}</div>
         </div>
 
         {% if entity.dialurl2!='' %}
-            <div class="contenedor">
-                <div class="labelshow">
+            <div class="contenedorform">
+                <div class="labelform">
                     {% if entity.tipooperador.id == 4 %}
                         Canal2:
                     {% else %}
                         Dial2:
                     {% endif %}
                 </div>
-                    <div class="dato">{{ entity.dialurl2 }}</div>
+                    <div class="widgetform">{{ entity.dialurl2 }}</div>
             </div>
         {% endif %}
 
-        <div class="contenedor">
-                <div class="labelshow">Direccion:</div>
-                <div class="dato">{{ entity.direccion }}</div>
+        <div class="contenedorform">
+                <div class="labelform">Direccion:</div>
+                <div class="widgetform">{{ entity.direccion }}</div>
         </div>
 
         {% if entity.observacion!='' %}
-            <div class="contenedor">
-                    <div class="labelshow">Observacion:</div>
-                    <div class="dato">{{ entity.observacion }}</div>
+            <div class="contenedorform">
+                    <div class="labelform">Observacion:</div>
+                    <div class="widgetform">{{ entity.observacion }}</div>
             </div>
         {% endif %}
 
-        <div class="contenedor">
-                <div class="labelshow">Paquete:</div>
-                <div class="dato">{{ entity.paquete.paquete }}</div>
+        <div class="contenedorform">
+                <div class="labelform">Paquete:</div>
+                <div class="widgetform">{{ entity.paquete.paquete }}</div>
         </div>
 
         {% if entity.urlweb!='' %}
-            <div class="contenedor">
-                    <div class="labelshow">Url Web:</div>
-                    <div class="dato">{{ entity.urlweb }}</div>
+            <div class="contenedorform">
+                    <div class="labelform">Url Web:</div>
+                    <div class="widgetform">{{ entity.urlweb }}</div>
             </div>
         {% endif %}
 
         {% if entity.urlfacebook!='' %}
-            <div class="contenedor">
-                    <div class="labelshow">Url Facebook:</div>
-                    <div class="dato">{{ entity.urlfacebook }}</div>
+            <div class="contenedorform">
+                    <div class="labelform">Url Facebook:</div>
+                    <div class="widgetform">{{ entity.urlfacebook }}</div>
             </div>
         {% endif %}
 
         {% if entity.urltwitter!='' %}
-            <div class="contenedor">
-                    <div class="labelshow">Url Twitter:</div>
-                    <div class="dato">{{ entity.urltwitter }}</div>
+            <div class="contenedorform">
+                    <div class="labelform">Url Twitter:</div>
+                    <div class="widgetform">{{ entity.urltwitter }}</div>
             </div>
         {% endif %}
 
-            <div class="contenedor">
-                <div class="labelshow">Última Modificación:</div>
-                <div class="dato">{{ entity.user.primernombre | title }} {{ entity.user.primerapellido | title }}</div>
+            <div class="contenedorform">
+                <div class="labelform">Última Modificación:</div>
+                <div class="widgetform">{{ entity.user.primernombre | title }} {{ entity.user.primerapellido | title }}</div>
             </div>
 
     </div>
@@ -138,44 +138,44 @@
 
     <div id="b"><div class="divisor">DATOS DE COMODATO</div></div>
     <div id="comodato">
-    <div class="form-show">
-        <div class="contenedor">
-            <div class="labelshow">Código:</div>
-            <div class="dato">{{ entity.comodato.codigo }}</div>
+    <div class="formShow">
+        <div class="contenedorform">
+            <div class="labelform">Código:</div>
+            <div class="widgetform">{{ entity.comodato.codigo }}</div>
         </div>
 
-        <div class="contenedor">
-            <div class="labelshow">Fecha Inicio:</div>
-            <div class="dato">{{ entity.comodato.fechainicioacuerdo|date("m/d/Y") }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha Inicio:</div>
+            <div class="widgetform">{{ entity.comodato.fechainicioacuerdo|date("m/d/Y") }}</div>
         </div>
 
-        <div class="contenedor">
-            <div class="labelshow">Fecha Fin:</div>
-            <div class="dato">{{ entity.comodato.fechafinacuerdo|date("m/d/Y") }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha Fin:</div>
+            <div class="widgetform">{{ entity.comodato.fechafinacuerdo|date("m/d/Y") }}</div>
         </div>
 
         {% if entity.comodato.observacion!='' %}
-            <div class="contenedor">
-                    <div class="labelshow">Observacion:</div>
-                    <div class="dato">{{ entity.comodato.observacion }}</div>
+            <div class="contenedorform">
+                    <div class="labelform">Observacion:</div>
+                    <div class="widgetform">{{ entity.comodato.observacion }}</div>
             </div>
         {% endif %}
 
-        <div class="contenedor">
-                <div class="labelshow">Recibe receptor:</div>
-                <div class="dato">{% if entity.comodato.recibereceptor=="1" %}Sí{% else %}No{% endif %}</div>
+        <div class="contenedorform">
+                <div class="labelform">Recibe receptor:</div>
+                <div class="widgetform">{% if entity.comodato.recibereceptor=="1" %}Sí{% else %}No{% endif %}</div>
         </div>
 
         {% if entity.comodato.fecharecepcion!='' %}
-            <div class="contenedor">
-                <div class="labelshow">Fecha recepción:</div>
-                <div class="dato">{{ entity.comodato.fecharecepcion|date("m/d/Y") }}</div>
+            <div class="contenedorform">
+                <div class="labelform">Fecha recepción:</div>
+                <div class="widgetform">{{ entity.comodato.fecharecepcion|date("m/d/Y") }}</div>
             </div>
         {% endif %}
 
-        <div class="contenedor">
-            <div class="labelshow">Objetos de Comodato:</div>
-                <div class="dato">
+        <div class="contenedorform">
+            <div class="labelform">Objetos de Comodato:</div>
+                <div class="widgetform">
 
                     {% set cont = 0 %}
                     {% set largo = entity.comodato.objetocomodato | length %}
@@ -199,7 +199,7 @@
     <br>
     {% endif %}
     <div id="representante">
-    <div class="form-show">
+    <div class="formShow">
 
     {% set cont = 0 %}
     {% set largo = representante | length %}
@@ -208,49 +208,49 @@
         <div style="background-color:
 #e9f5fe; padding-bottom:5px;font-weight:bold;">REPRESENTANTE {{ cont+1 }}</div>
 
-        <div class="contenedor">
-            <div class="labelshow">Nombres:</div>
-            <div class="dato">{{ re.nombres }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Nombres:</div>
+            <div class="widgetform">{{ re.nombres }}</div>
         </div>
 
-        <div class="contenedor">
-            <div class="labelshow">Apellidos:</div>
-            <div class="dato">{{ re.apellidos }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Apellidos:</div>
+            <div class="widgetform">{{ re.apellidos }}</div>
         </div>
 
-        <div class="contenedor">
-            <div class="labelshow">Cargo:</div>
-            <div class="dato">{{ re.cargo }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Cargo:</div>
+            <div class="widgetform">{{ re.cargo }}</div>
         </div>
 
-        <div class="contenedor">
-            <div class="labelshow">correo:</div>
-            <div class="dato">{{ re.correo }}</div>
+        <div class="contenedorform">
+            <div class="labelform">correo:</div>
+            <div class="widgetform">{{ re.correo }}</div>
         </div>
 
-        <div class="contenedor">
-            <div class="labelshow">Telefono 1:</div>
-            <div class="dato">{{ re.telefono1 }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Telefono 1:</div>
+            <div class="widgetform">{{ re.telefono1 }}</div>
         </div>
 
         {% if re.telefono2!='' %}
-            <div class="contenedor">
-                <div class="labelshow">Telefono 2:</div>
-                <div class="dato">{{ re.telefono2 }}</div>
+            <div class="contenedorform">
+                <div class="labelform">Telefono 2:</div>
+                <div class="widgetform">{{ re.telefono2 }}</div>
             </div>
         {% endif %}
 
         {% if re.fax!='' %}
-            <div class="contenedor">
-                <div class="labelshow">Fax:</div>
-                <div class="dato">{{ re.fax }}</div>
+            <div class="contenedorform">
+                <div class="labelform">Fax:</div>
+                <div class="widgetform">{{ re.fax }}</div>
             </div>
         {% endif %}
 
         {% if re.observacion!='' %}
-            <div class="contenedor">
-                <div class="labelshow">Observacion:</div>
-                <div class="dato">{{ re.observacion }}</div>
+            <div class="contenedorform">
+                <div class="labelform">Observacion:</div>
+                <div class="widgetform">{{ re.observacion }}</div>
             </div>
         {% endif %}
 
