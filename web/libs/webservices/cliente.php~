@@ -1,0 +1,6 @@
+<?php
+        require_once('nusoap/lib/nusoap.php');
+        $cliente = new nusoap_client('http://10.10.7.234/prueba_nusoap/servicio.php');
+        $resultado = $cliente->call('cuenta', array('usuario' => 'jvalera', 'clave' => '#v4l3r4*..'));
+        print_r($resultado);
+?>

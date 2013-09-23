@@ -10,7 +10,7 @@
 
 {{ parent() }}
 
-<div class="titulo">EL OPERADOR ({{ entity.nombre | upper }}) ESTÁ {% if entity.estatus==1 %}(ACTIVO){% else %}<br><br><div class='Redflash-notice'>INACTIVO</div>{% endif %}</div>
+<div class="titulo">EL OPERADOR {{ entity.nombre | upper }} ESTÁ {% if entity.estatus==1 %}(ACTIVO){% else %}<br><br><div class='Redflash-notice'>INACTIVO</div>{% endif %}</div>
 
 
     <div id="a"><div class="divisor">DATOS DE OPERADOR</div></div>

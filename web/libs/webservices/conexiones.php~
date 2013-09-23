@@ -1,0 +1,12 @@
+<?php
+
+	$host = "192.168.3.60";
+	$port = "5432";
+	$user = "jvalera";
+	$pass = "jhoangvo123";
+	$dbname = "Telesur";
+	$conectado = pg_connect("host=$host port=$port user=$user password=$pass dbname=$dbname");
+
+
+?>
+
