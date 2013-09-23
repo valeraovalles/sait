@@ -80,14 +80,17 @@
               <a href="javascript:void(0)" id="mm">MAPAMUNDI<br><img  src="{{ asset("images/mapamundi.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
 
+            {% if is_granted('ROLE_CREATV') %}
             <div class="listado_aplicaciones" id="ct">
               <a href="javascript:void(0)">CREATV<br><img  src="{{ asset("images/creatv.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
+            {% endif %}
 
-
+            {% if is_granted('ROLE_TRANSPORTE') %}
             <div class="listado_aplicaciones" id="tp">
               <a href="javascript:void(0)">TRANSPORTE<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
+            {% endif %}
 
    </div>
 
