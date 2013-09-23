@@ -81,6 +81,7 @@
 
 	//EXTRAER DATOS DE SIGEFIRRHH CON LDAP E INSERTARLOS EN TELESUR////////////////
 	$query="select * from personal p, trabajador t where p.id_personal=t.id_personal and t.estatus='A'";
+
 	$rs = pg_query($postgresql_sigefirrhh,$query);
 	
 	echo "\nINSERTANDO Y/O ACTUALIZANDO USUARIOS CON LDAP Y CREANDO ARRAY DE USUARIO SIN LDAP \n\n";
@@ -177,7 +178,7 @@
 	//INSERTO USUARIOS SIN LDAP
 	if($usuariossinldap!=null){
 		echo "\nINSERTANDO Y/O ACTUALIZANDO USUARIOS SIN LDAP \n\n";
-		$contuser=0; $contperfil=0;$porcentaje=0;$contadordeporcentaje=0;
+		$contuser=0; $contperfil=0;
 		foreach ($usuariossinldap as $row) {
 			
 			$cedula = strtoupper(trim($row['cedula']));
@@ -196,15 +197,6 @@
    			$query="insert into usuarios.perfil (id,user_id, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, cedula, fechanacimiento) values (".$val['nextval'].",".$val['nextval'].",'".$row['primer_nombre']."','".$row['segundo_nombre']."','".$row['primer_apellido']."','".$row['segundo_apellido']."',$cedula,'".$row['fecha_nacimiento']."')";
    			if(pg_query($postgresql_local,$query))$contperfil++;
 
-		    $porcentajeanterior=$porcentaje;
-		    $contadordeporcentaje++;
-		    $porcentaje=($contadordeporcentaje*100) / $contarraysinldap;
-		    $porcentaje=number_format($porcentaje,0);
-			if($porcentaje!=$porcentajeanterior){
-				if(strlen($porcentaje)==1)$porcentaje="0".$porcentaje;
-				echo $porcentaje.'% | '; 
-				if($porcentaje==20 or $porcentaje==40 or $porcentaje==60 or $porcentaje==80)echo "\n";
-			}
 		}
 
 		echo "\nTOTAL ARRAY: ".$contarraysinldap."\n";
