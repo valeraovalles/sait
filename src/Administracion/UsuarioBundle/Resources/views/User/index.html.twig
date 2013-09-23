@@ -12,11 +12,15 @@
 
     <div class="titulo">LISTA DE USUARIOS</div>
 
+
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
             <tr>
                 <th style="width:100px;">Id</th>
                 <th>Username</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Cedula</th>
                 <th>Estatus</th>
                 <th>Id</th>
             </tr>
@@ -25,17 +29,20 @@
         {% for entity in entities %}
             <tr>
                 <td>{{ entity.id }}</td>
-                <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+                <td><a href="{{ path('user_show', { 'id': entity.user.id }) }}">{{ entity.user.username }}</a></td>
+                <td>{{ entity.primernombre }} {{ entity.segundonombre }}</td>
+                <td>{{ entity.primerapellido }} {{ entity.segundoapellido }}</td>
+                <td>{{ entity.cedula }}</td>
                 <td>
-                    {% if entity.isActive == 1 %}
+                    {% if entity.user.isActive == 1 %}
                         Activo
-                    {% elseif entity.isActive == null %}
+                    {% elseif entity.user.isActive == null %}
                         Inactivo
                     {% endif %}
                 </td>
                 <td>
-                        <a href="{{ path('user_show', { 'id': entity.id }) }}">Ver</a>
-                        <a href="{{ path('user_edit', { 'id': entity.id }) }}">Editar</a>
+                        <a href="{{ path('user_show', { 'id': entity.user.id }) }}"><span class="icon-search"></a>
+                        <a href="{{ path('user_edit', { 'id': entity.user.id }) }}"><span class="icon-edit"></a>
            
                 </td>
             </tr>
@@ -43,9 +50,9 @@
         </tbody>
     </table>
 
-    <br><br><br><br>
+    <br><br>
 
-    <button><a href="{{ path('user_new') }}">Nuevo</a></button>
+    <a class="btn btn-primary" href="{{ path('user_new') }}">Nuevo</a>
 
     <br><br>
 

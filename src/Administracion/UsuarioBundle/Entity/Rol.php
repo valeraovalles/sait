@@ -3,6 +3,7 @@
 namespace Administracion\UsuarioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Rol
@@ -26,6 +27,7 @@ class Rol
      * @var string
      *
      * @ORM\Column(name="rol", type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
      */
     private $rol;
 
