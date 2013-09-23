@@ -15,18 +15,18 @@
 
 		{{ form_widget(form._token) }}
 
-		<div class="form-contenedor">
-		    {{ form_errors(form.rol) }}
-		    <div class="labels">Rol:</div>
-		    <div class="widgets">{{ form_widget(form.rol) }}</div>
-		</div>
 
-		<br><br>
+     <div class="formShow">
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.rol) }}</div>
+            <div class="labelform">Rol:</div>
+            <div class="widgetform">{{ form_widget(form.rol) }}</div>
+        </div>
+     </div>
+     <br>
 
-	        <button type="submit">Create</button>
-	    	<button><a href="{{ path('rol') }}">Volver</a></button>
+	        <button class="btn btn-primary" type="submit">Crear</button>
+	    	<a class="btn btn-default"  href="{{ path('rol') }}">Ir a la lista</a>
 	</form>
-
-	<br>
 
 {% endblock %}

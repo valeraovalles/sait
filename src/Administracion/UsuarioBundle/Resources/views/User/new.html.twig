@@ -14,67 +14,67 @@
 <div class="titulo">CREACIÓN DE USUARIO</div>
 <form novalidate action="{{ path('user_create') }}" method="post" {{ form_enctype(form) }} {{ form_enctype(form_perfil) }}>
 
-{{ form_widget(form._token) }}
-{{ form_widget(form_perfil._token) }}
- 
-<div class="form-contenedor">
-    {{ form_errors(form.username) }}
-    <div class="labels">Username:</div>
-    <div class="widgets">{{ form_widget(form.username) }}</div>
-</div>
+    {{ form_widget(form._token) }}
+    {{ form_widget(form_perfil._token) }}
 
-<div class="form-contenedor">
-    {{ form_errors(form.password) }}
-    <div class="labels">password:</div>
-    <div class="widgets">{{ form_widget(form.password) }}</div>
-</div>
+     <div class="formShow">
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.username) }}</div>
+            <div class="labelform">Username:</div>
+            <div class="widgetform">{{ form_widget(form.username) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.password) }}</div>
+            <div class="labelform">Password:</div>
+            <div class="widgetform">{{ form_widget(form.password) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.isActive) }}</div>
+            <div class="labelform">Activo:</div>
+            <div class="widgetform">{{ form_widget(form.isActive) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form_perfil.primerNombre) }}</div>
+            <div class="labelform">Primer nombre:</div>
+            <div class="widgetform">{{ form_widget(form_perfil.primerNombre) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form_perfil.segundoNombre) }}</div>
+            <div class="labelform">Segundo nombre:</div>
+            <div class="widgetform">{{ form_widget(form_perfil.segundoNombre) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form_perfil.primerApellido) }}</div>
+            <div class="labelform">Primer apellido:</div>
+            <div class="widgetform">{{ form_widget(form_perfil.primerApellido) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form_perfil.segundoApellido) }}</div>
+            <div class="labelform">Segundo apellido:</div>
+            <div class="widgetform">{{ form_widget(form_perfil.segundoApellido) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form_perfil.cedula) }}</div>
+            <div class="labelform">Cédula:</div>
+            <div class="widgetform">{{ form_widget(form_perfil.cedula) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form_perfil.extension) }}</div>
+            <div class="labelform">Extensión:</div>
+            <div class="widgetform">{{ form_widget(form_perfil.extension) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.rol) }}</div>
+            <div class="labelform">Rol:</div>
+            <div class="widgetform">{{ form_widget(form.rol) }}</div>
+        </div>
+    </div>
 
-<div class="form-contenedor">
-    {{ form_errors(form.isActive) }}
-    <div class="labels">Activo:</div>
-    <div class="widgets">{{ form_widget(form.isActive) }}</div>
-</div>
-
-<div class="form-contenedor">
-    {{ form_errors(form_perfil.primerNombre) }}
-    <div class="labels">Nombre 1:</div>
-    <div class="widgets">{{ form_widget(form_perfil.primerNombre) }}</div>
-</div>
-
-<div class="form-contenedor">
-    {{ form_errors(form_perfil.segundoNombre) }}
-    <div class="labels">Nombre 2:</div>
-    <div class="widgets">{{ form_widget(form_perfil.segundoNombre) }}</div>
-</div>
-
-<div class="form-contenedor">
-    {{ form_errors(form_perfil.primerApellido) }}
-    <div class="labels">Apellido 1:</div>
-    <div class="widgets">{{ form_widget(form_perfil.primerApellido) }}</div>
-</div>
-
-<div class="form-contenedor">
-    {{ form_errors(form_perfil.segundoApellido) }}
-    <div class="labels">Apellido 2:</div>
-    <div class="widgets">{{ form_widget(form_perfil.segundoApellido) }}</div>
-</div>
-
-<div class="form-contenedor">
-    {{ form_errors(form_perfil.cedula) }}
-    <div class="labels">Cedula:</div>
-    <div class="widgets">{{ form_widget(form_perfil.cedula) }}</div>
-</div>
-
-<div class="form-contenedor">
-    {{ form_errors(form.rol) }}
-    <div class="labels">Rol:</div>
-    <div class="widgets">{{ form_widget(form.rol) }}</div>
-</div>
 
 <br>
 
-    <button type="submit">Create</button>
-    <a href="{{ path('user') }}">Volver</a>
+    <button class="btn btn-primary" type="submit">Crear</button> | 
+    <a class="btn btn-default"  href="{{ path('user') }}">Volver</a>
 </form>
 
 <br>

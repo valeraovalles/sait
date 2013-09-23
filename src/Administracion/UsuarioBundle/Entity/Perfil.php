@@ -27,6 +27,7 @@ class Perfil
      * @var string
      *
      * @ORM\Column(name="primer_nombre", type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
      */
     private $primerNombre;
 
@@ -41,6 +42,7 @@ class Perfil
      * @var string
      *
      * @ORM\Column(name="primer_apellido", type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
      */
     private $primerApellido;
 
@@ -55,6 +57,7 @@ class Perfil
      * @var string
      *
      * @ORM\Column(name="cedula", type="string", length=20, nullable=false)
+     * @Assert\NotBlank()
      */
     private $cedula;
 
@@ -62,6 +65,7 @@ class Perfil
      * @var string
      *
      * @ORM\Column(name="fechanacimiento", type="date", length=20, nullable=true)
+     * @Assert\NotBlank()
      */
     private $fechanacimiento;
 
