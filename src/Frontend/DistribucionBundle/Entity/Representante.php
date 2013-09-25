@@ -64,6 +64,7 @@ class Representante
      * @ORM\Column(name="telefono1", type="bigint", nullable=true)
      * @Assert\NotBlank()
      * @Assert\Type(type="numeric", message="La extensión debe ser un número.")
+     * @Assert\NotEqualTo(value = "0", message="La extensión no puede ser igual a 0.")
      */
     private $telefono1;
 
@@ -72,6 +73,7 @@ class Representante
      *
      * @ORM\Column(name="telefono2", type="bigint", nullable=true)
      * @Assert\Type(type="numeric", message="La extensión debe ser un número.")
+     * @Assert\NotEqualTo(value = "0", message="La extensión no puede ser igual a 0.")
      */
     private $telefono2;
 
@@ -80,6 +82,7 @@ class Representante
      *
      * @ORM\Column(name="fax",type="bigint", nullable=true)
      * @Assert\Type(type="numeric", message="La extensión debe ser un número.")
+     * @Assert\NotEqualTo(value = "0", message="La extensión no puede ser igual a 0.")
      */
     private $fax;
 
