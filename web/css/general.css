@@ -269,7 +269,8 @@ width                  :220px;
 
 input[type="number"]
 {
-width                  :150px;
+	width                  :150px;
+	padding-top: 100px;
 /* Sólo afecto a los campos de texto */
 }
 

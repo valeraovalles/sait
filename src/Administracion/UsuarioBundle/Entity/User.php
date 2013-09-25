@@ -5,6 +5,7 @@ namespace Administracion\UsuarioBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * User
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="usuarios.user")
  * @ORM\Entity(repositoryClass="Administracion\UsuarioBundle\Entity\UserRepository")
  */
-class User implements UserInterface
+class User implements UserInterface, AdvancedUserInterface
 {
     /**
      * @var integer
@@ -229,6 +230,26 @@ class User implements UserInterface
             $cont++;
         }
           return $roles;
+    }
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
     }
 
 }

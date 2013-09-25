@@ -351,6 +351,7 @@ class TicketController extends Controller
         $ticketusuario = $query->getResult();
 
         if ($form->isValid() && $form2->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $dql = "select p from UsuarioBundle:Perfil p where p.user= :id";

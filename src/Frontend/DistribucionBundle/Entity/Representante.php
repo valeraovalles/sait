@@ -61,25 +61,25 @@ class Representante
     /**
      * @var string
      *
-     * @ORM\Column(name="telefono1", type="string", length=25, nullable=false)
+     * @ORM\Column(name="telefono1", type="bigint", nullable=true)
      * @Assert\NotBlank()
-     * @Assert\Type(type="numeric", message="Este valor debe ser numérico {{ type }}")
+     * @Assert\Type(type="numeric", message="La extensión debe ser un número.")
      */
     private $telefono1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telefono2", type="string", length=25, nullable=true)
-     * @Assert\Type(type="numeric", message="Este valor debe ser numérico {{ type }}")
+     * @ORM\Column(name="telefono2", type="bigint", nullable=true)
+     * @Assert\Type(type="numeric", message="La extensión debe ser un número.")
      */
     private $telefono2;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fax", type="string", length=25, nullable=true)
-     * @Assert\Type(type="numeric", message="Este valor debe ser numérico {{ type }}")
+     * @ORM\Column(name="fax",type="bigint", nullable=true)
+     * @Assert\Type(type="numeric", message="La extensión debe ser un número.")
      */
     private $fax;
 

@@ -4,12 +4,14 @@ namespace Administracion\UsuarioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Rol
  *
  * @ORM\Table(name="usuarios.rol")
  * @ORM\Entity
+ * @UniqueEntity("rol")
  */
 class Rol
 {
@@ -26,7 +28,7 @@ class Rol
     /**
      * @var string
      *
-     * @ORM\Column(name="rol", type="string", length=255, nullable=false)
+     * @ORM\Column(name="rol", type="string", length=255, nullable=false, unique=true)
      * @Assert\NotBlank()
      */
     private $rol;

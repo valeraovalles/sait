@@ -14,6 +14,25 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+
+        $datos="";
+        $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+
+        ->setSubject('Hello Email')     // we configure the title
+
+        ->setFrom('jvalera@telesurtv.net')     // we configure the sender
+
+        ->setTo('jvalera@telesurtv.net')     // we configure the recipient
+
+        ->setBody( $this->renderView(
+                'SitBundle:Correo:solicitud.html.twig',
+                array('datos' => $datos)
+            ));
+
+        $this->get('mailer')->send($message);     // then we send the message.
+
+
+
     	//consulto el perfil del usuario
     	$idusuario = $this->get('security.context')->getToken()->getUser()->getId();
     	$em = $this->getDoctrine()->getManager();

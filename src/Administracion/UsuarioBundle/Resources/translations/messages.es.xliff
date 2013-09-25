@@ -11,7 +11,10 @@
                 <source>Your session has timed out, or you have disabled cookies.</source>
                 <target>Su sessión a expirado o tienes deshabilitadas las cookies</target>
             </trans-unit>
-           
+            <trans-unit id="3">
+                <source>User account is disabled.</source>
+                <target>El usuario se encuentra desactivado, contacte con la extensión 264.</target>
+            </trans-unit>           
         </body>
     </file>
 </xliff>
