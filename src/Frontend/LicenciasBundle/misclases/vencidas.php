@@ -7,7 +7,7 @@ class vencidas
 	{
 		$hoy = strtotime('now');
 
-      $conecta = pg_connect("host=localhost port=5432 dbname=sait user=postgres password=postgres")
+      $conecta = pg_connect("host=192.168.3.139 port=5432 dbname=sait user=postgres password=..*t3l35ur*..")
                or die('No se ha podido conectar: ' . pg_last_error());
            
         // Realizando una consulta SQL
@@ -34,7 +34,7 @@ class vencidas
                             <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
                             <table>
                                 <tr>
-                                    <td class='imagen'><img src='/sait/sait/web/images/logo.jpg' height='150px'></td>
+                                    <td class='imagen'><img src='/sait/web/images/logo.jpg' height='150px'></td>
                                     <td class='titulo' align='center' valing='middle' colspan='8'>LISTADO TOTAL DE LICENCIAS</td>
                                 </tr>
                             </table>";

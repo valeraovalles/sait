@@ -40,7 +40,7 @@ class porvencer
                             <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
                             <table>
                                 <tr>
-                                    <td class='imagen'><img src='/sait/sait/web/images/logo.jpg' height='150px'></td>
+                                    <td class='imagen'><img src='/sait/web/images/logo.jpg' height='150px'></td>
                                     <td class='titulo' align='center' valing='middle' colspan='8'>LISTADO LICENCIAS POR VENCER</td>
                                 </tr>
                             </table>";
