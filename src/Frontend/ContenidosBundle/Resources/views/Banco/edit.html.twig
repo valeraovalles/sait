@@ -99,14 +99,15 @@
                     <div class="labels">Direcci&oacute;n:</div>
                     <div class="widgets">{{ form_widget(edit_form.direccionBancobenef) }}</div>
                 </div>
-           
+                <button type="submit" class="btn">Editar</button> <br><br>
         </fieldset>
- </div>
-
-        <br>       
-        <a class="btn" href="{{ path('banco') }}">Listado de Bancos</a>
-        <button type="submit" class="btn">Editar</button> 
+    </div>
+    
+        
     </form>
+    
+    <br><br> 
+
 
 <script src="{{ asset('js/contenidos/efecto.js') }}"></script>
 {% endblock %}

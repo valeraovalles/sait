@@ -4,51 +4,51 @@
  {{ parent() }}
     <div class="titulo">DETALLES</div>
 
-    <div id="descripcion" class="form-show">
+    <div id="descripcion" class="form-show_edit">
             <div class="contenedor">
                 <br>
-                <div class="labelshow">N&uacute;mero del Memorandum:</div>
+                <div class="labels">N&uacute;mero del Memorandum:</div>
                 <div class="dato">{{ entity.numMemo }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">Fecha de Entrega Unid. Ejec.:</div>
+                <div class="labels">Fecha de Entrega Unid. Ejec.:</div>
                 <div class="dato">{{ entity.fechaUnidadejec|date('Y-m-d') }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">N&uacute;mero de la Factura:</div>
+                <div class="labels">N&uacute;mero de la Factura:</div>
                 <div class="dato">{{ entity.numFactura }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">Fecha de la Factura:</div>
+                <div class="labels">Fecha de la Factura:</div>
                 <div class="dato">{{ entity.fechaFactura|date('Y-m-d') }}</div>
             </div>
              
             {% if entity.tipoMoneda == 0 %}
                 <div class="contenedor">
-                    <div class="labelshow">Tipo de Moneda:</div>
+                    <div class="labels">Tipo de Moneda:</div>
                     <div class="dato">DOLARES</div>
                 </div>
                 <div class="contenedor">
-                    <div class="labelshow">Monto en $:</div>
+                    <div class="labels">Monto en $:</div>
                     <div class="dato">{{ entity.montoMe }}</div>
                 </div>
             {% elseif entity.tipoMoneda == 1 %}
                 <div class="contenedor">
-                    <div class="labelshow">Tipo de Moneda:</div>
+                    <div class="labels">Tipo de Moneda:</div>
                     <div class="dato">EUROS</div>
                 </div>
                 <div class="contenedor">
-                    <div class="labelshow">Monto en €:</div>
+                    <div class="labels">Monto en €:</div>
                     <div class="dato">{{ entity.montoMe }}</div>
                 </div>
             {% endif %}
 
             <div class="contenedor">
-                <div class="labelshow">Monto en Bs:</div>
+                <div class="labels">Monto en Bs:</div>
                 <div class="dato">{{ entity.montoBs }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">Tipo de Pago:</div>
+                <div class="labels">Tipo de Pago:</div>
                 {% if entity.tipoPago == 0 %}
                     <div class="dato">CHEQUE</div>
                 {% elseif entity.tipoPago == 1 %}
@@ -56,15 +56,15 @@
                 {% endif %}
             </div>
             <div class="contenedor">
-                <div class="labelshow">N&uacute;mero del Pago:</div>
+                <div class="labels">N&uacute;mero del Pago:</div>
                 <div class="dato">{{ entity.numPago }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">Fecha del Pago:</div>
+                <div class="labels">Fecha del Pago:</div>
                 <div class="dato">{{ entity.fechaPago|date('Y-m-d') }}</div>
             </div>
             <div class="contenedor">
-                <div class="labelshow">Pago Contra Entrega:</div>
+                <div class="labels">Pago Contra Entrega:</div>
                 <div class="dato">{{ entity.contraEntrega }}</div>
             <br>
             </div>

@@ -24,7 +24,7 @@ class PagoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ContenidosBundle:Pago')->findByIdProveedor($id_proveedor);
+        $entities = $em->getRepository('ContenidosBundle:Pago')->findByIdContratacion($id_proveedor);
 
         return $this->render('ContenidosBundle:Pago:index.html.twig', array(
             'entities' => $entities,

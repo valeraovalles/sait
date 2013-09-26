@@ -19,14 +19,15 @@ class ContratacionController extends Controller
      * Lists all Contratacion entities.
      *
      */
-    public function indexAction()
+    public function indexAction($id_proveedor)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ContenidosBundle:Contratacion')->findAll();
+        $entities = $em->getRepository('ContenidosBundle:Contratacion')->findByidProveedor($id_proveedor);
 
         return $this->render('ContenidosBundle:Contratacion:index.html.twig', array(
             'entities' => $entities,
+            'id_proveedor' => $id_proveedor,
         ));
     }
     /**
@@ -57,22 +58,24 @@ class ContratacionController extends Controller
      * Displays a form to create a new Contratacion entity.
      *
      */
-    public function newAction()
+    public function newAction($id_proveedor)
     {
         $entity = new Contratacion();
         $form   = $this->createForm(new ContratacionType(), $entity);
 
         return $this->render('ContenidosBundle:Contratacion:new.html.twig', array(
             'entity' => $entity,
+            'id_proveedor' => $id_proveedor,
             'form'   => $form->createView(),
         ));
+
     }
 
     /**
      * Finds and displays a Contratacion entity.
      *
      */
-    public function showAction($id)
+    public function showAction($id_proveedor,$id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -86,6 +89,7 @@ class ContratacionController extends Controller
 
         return $this->render('ContenidosBundle:Contratacion:show.html.twig', array(
             'entity'      => $entity,
+            'id_proveedor' => $id_proveedor,
             'delete_form' => $deleteForm->createView(),        ));
     }
 

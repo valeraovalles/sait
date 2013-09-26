@@ -36,12 +36,25 @@ class DatosproveedorType extends AbstractType
                                                                   )
                                         )
                 )
-            ->add('observacionTipoproveedor','textarea')
             ->add('idTipoprov')
             ->add('pais')
             ->add('idDetalletipoproveedor')
             ->add('idUnidad')
-            ->add('observacionUnidadsolicitante','textarea')
+            ->add('estatus','choice', array(
+                                            'expanded'=>false, 
+                                            'multiple'=>false,
+                                            'empty_value' => 'Seleccione...',
+                                            'choices' => array(
+                                                                    "A" =>"Activo", 
+                                                                    "I" =>"Inactivo"
+                                                                  )
+                                        )
+                )
+            ->add('usuario')
+            ->add('fechaRegistro','date',array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+                )) 
         ;
     }
 

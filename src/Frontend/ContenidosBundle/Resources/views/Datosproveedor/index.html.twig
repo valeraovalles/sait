@@ -16,30 +16,21 @@
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
-            <tr align="center">
-                <td><a href="{{ path('datosproveedor_show', { 'id': entity.id }) }}">{{ entity.numIdentificacionfiscal }}</a></td>
-                <td>{{ entity.nombre }}</td>
-                <td>{{ entity.oficina1 }}</td>
-                <td>{{ entity.nombreRepr }} {{ entity.apellidoRepr }}</td>
-
-                {% if entity.idTipoprov.nombre == 'COMPRAS' %}
-                    <td>COMPRAS</td>
-                {% elseif entity.idTipoprov.nombre == 'INFORMACION' %}
-                    <td>INFORMACION</td>
-                {% elseif entity.idTipoprov.nombre == 'SATELITES' %}
-                    <td>SATELITES</td>
-                {% elseif entity.idTipoprov.nombre == 'EQUIPOS' %}
-                    <td>EQUIPOS TELESUR</td>
-                {% endif %}
-                <td>
-                            <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
-                            <a href="{{ path('banco', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="datos bancarios"><img width="20px" src="{{ asset('images/banco.jpg')}}"></a>
-                            <a href="{{ path('contratacion', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="datos de la contratacion"><img width="20px" src="{{ asset('images/contratacion.jpg')}}"></a>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for entity in entities %}
+                <tr align="center">
+                    <td><a href="{{ path('datosproveedor_show', { 'id': entity.id }) }}">{{ entity.numIdentificacionfiscal }}</a></td>
+                    <td>{{ entity.nombre }}</td>
+                    <td>{{ entity.oficina1 }}</td>
+                    <td>{{ entity.nombreRepr }} {{ entity.apellidoRepr }}</td>     
+                    <td>{{entity.idTipoprov.nombre }}</td>                
+                    <td>
+                                <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+                                <a href="{{ path('banco', { 'id_proveedor': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="datos bancarios"><img width="20px" src="{{ asset('images/banco.jpg')}}"></a>
+                                <a href="{{ path('contratacion', { 'id_proveedor': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="datos de la contratacion"><img width="20px" src="{{ asset('images/contratacion.jpg')}}"></a>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
-<br><br><br>
-    {% endblock %}
+    <br><br><br>
+{% endblock %}

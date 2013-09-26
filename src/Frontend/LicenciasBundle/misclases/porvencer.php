@@ -13,7 +13,7 @@ class porvencer
 	    $div_cinco    = 6048000;
 	    $hoy          = strtotime('now');
 
-    	$conecta = pg_connect("host=localhost port=5432 dbname=sait user=postgres password=postgres")
+    	$conecta = pg_connect("host=192.168.3.139 port=5432 dbname=sait user=postgres password=..*t3l35ur*..")
                or die('No se ha podido conectar: ' . pg_last_error());
            
     	// Realizando una consulta SQL

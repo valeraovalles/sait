@@ -19,7 +19,7 @@
         <tbody>
         {% for entity in entities %}
             <tr align="center">
-                <td width="23%"><a href="{{ path('contratacion_show', { 'id': entity.id }) }}">{{ entity.concepto }}</a></td>
+                <td width="23%"><a href="{{ path('contratacion_show', { 'id': entity.id, 'id_proveedor': id_proveedor }) }}">{{ entity.concepto }}</a></td>
                 <td width="11%">{{ entity.montoMe }}</td>
                 <td width="11%">{{ entity.montoBs }}</td>
                 <td width="17%">{{ entity.numPuntocuenta }}</td>
@@ -34,7 +34,7 @@
         </tbody>
     </table>
     <br><br>
-    <a class="btn btn-primary dropdown-toggle" href="{{ path( 'contratacion_new' ) }}">Crear Contrataci&oacute;n</a>
+    <a class="btn btn-primary dropdown-toggle" href="{{ path( 'contratacion_new', {'id_proveedor':id_proveedor} ) }}">Crear Contrataci&oacute;n</a>
         
     <br><br>
     {% endblock %}

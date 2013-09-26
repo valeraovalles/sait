@@ -7,7 +7,7 @@ class vencidas
 	{
 		$hoy = strtotime('now');
 
-       $conecta = pg_connect("host=localhost port=5432 dbname=sait user=postgres password=postgres")
+      $conecta = pg_connect("host=localhost port=5432 dbname=sait user=postgres password=postgres")
                or die('No se ha podido conectar: ' . pg_last_error());
            
         // Realizando una consulta SQL

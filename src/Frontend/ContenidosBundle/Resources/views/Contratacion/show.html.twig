@@ -1,102 +1,104 @@
-{% extends '::base.html.twig' %}
+{% extends '::contenidos.html.twig' %}
+
+{% block titulobanner %}
+    CONTRATACIONES
+{% endblock %}
 
 {% block body -%}
-    <h1>Contratacion</h1>
+ {{ parent() }}
+    <div class="titulo">DETALLES CONTRATACION</div>
+        <fieldset> 
+            <div class="form-show_edit">
+               
+                    <div class="divisor">DATOS DE LA CONTRATACI&Oacute;N</div> 
+                    <div class="contenedor">
+                        <div class="labels">Concepto:</div>
+                        <div class="dato">{{ entity.concepto }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">Moneda:</div>
+                        <div class="dato">{{ entity.tipoMoneda }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">Monto en $/:</div>
+                        <div class="dato">{{ entity.montoMe }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">Monto en Bs:</div>
+                        <div class="dato">{{ entity.montoBs }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">Fecha del Addendum:</div>
+                        <div class="dato">{{ entity.fechaInicio|date('Y-m-d') }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">Fecha del Addendum:</div>
+                        <div class="dato">{{ entity.fechaFin|date('Y-m-d') }}</div>
+                    </div>
+            </div><br>
+            <div class="form-show_edit">
+               
+                    <div class="divisor">DATOS DE LA SOLICITUD</div>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Concepto</th>
-                <td>{{ entity.concepto }}</td>
-            </tr>
-            <tr>
-                <th>Tipomoneda</th>
-                <td>{{ entity.tipoMoneda }}</td>
-            </tr>
-            <tr>
-                <th>Montome</th>
-                <td>{{ entity.montoMe }}</td>
-            </tr>
-            <tr>
-                <th>Montobs</th>
-                <td>{{ entity.montoBs }}</td>
-            </tr>
-            <tr>
-                <th>Numsolicitud</th>
-                <td>{{ entity.numSolicitud }}</td>
-            </tr>
-            <tr>
-                <th>Numconformacion</th>
-                <td>{{ entity.numConformacion }}</td>
-            </tr>
-            <tr>
-                <th>Numpuntocuenta</th>
-                <td>{{ entity.numPuntocuenta }}</td>
-            </tr>
-            <tr>
-                <th>Fechapunto</th>
-                <td>{{ entity.fechaPunto|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Numalcance</th>
-                <td>{{ entity.numAlcance }}</td>
-            </tr>
-            <tr>
-                <th>Fechaalcance</th>
-                <td>{{ entity.fechaAlcance|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Numcontrato</th>
-                <td>{{ entity.numContrato }}</td>
-            </tr>
-            <tr>
-                <th>Fechacontrato</th>
-                <td>{{ entity.fechaContrato|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Numaddendum</th>
-                <td>{{ entity.numAddendum }}</td>
-            </tr>
-            <tr>
-                <th>Fechaaddendum</th>
-                <td>{{ entity.fechaAddendum|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Fechainicio</th>
-                <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Fechafin</th>
-                <td>{{ entity.fechaFin|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Observacionescompras</th>
-                <td>{{ entity.observacionesCompras }}</td>
-            </tr>
-        </tbody>
-    </table>
+                    <div class="contenedor">
+                        <div class="labels">N&uacute;mero de la Solicitud:</div>
+                        <div class="dato">{{ entity.numSolicitud }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">N&uacute;mero de la Conformaci&oacute;n:</div>
+                        <div class="dato">{{ entity.numConformacion }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">N&uacute;mero del Punto de Cuenta:</div>
+                        <div class="dato">{{ entity.numPuntocuenta }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">Fecha del Punto de Cuenta:</div>
+                        <div class="dato">{{ entity.fechaPunto|date('Y-m-d') }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">N&uacute;mero de Alcance (Punto de Cuenta):</div>
+                        <div class="dato">{{ entity.numAlcance }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">Fecha de Alcance (Punto de Cuenta):</div>
+                        <div class="dato">{{ entity.fechaAlcance|date('Y-m-d') }}</div>
+                    </div>
+            </div><br>
+            <div class="form-show_edit">
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('contratacion') }}">
-            Back to the list
+                <div class="divisor">DETALLES DE LA CONTRATACI&Oacute;N</div>
+
+                    <div class="contenedor">
+                        <div class="labels">N&uacute;mero del Contrato:</div>
+                        <div class="dato">{{ entity.numContrato }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">Fecha del Contrato:</div>
+                        <div class="dato">{{ entity.fechaContrato|date('Y-m-d') }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">N&uacute;mero del Addendum:</div>
+                        <div class="dato">{{ entity.numAddendum }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">Fecha del Addendum:</div>
+                        <div class="dato">{{ entity.fechaAddendum|date('Y-m-d') }}</div>
+                    </div>
+                    
+                    <div class="contenedor">
+                        <div class="labels">Observaciones Compras:</div>
+                        <div class="dato">{{ entity.observacionesCompras }}</div>
+                    </div>
+                    <br><br>
+            </div>
+        </fieldset>
+  
+  
+        <a href="{{ path('contratacion', { 'id': entity.id, 'id_proveedor': id_proveedor }) }}">
+            <img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
         </a>
-    </li>
-    <li>
-        <a href="{{ path('contratacion_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('contratacion_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+    
+    
+  
 {% endblock %}
