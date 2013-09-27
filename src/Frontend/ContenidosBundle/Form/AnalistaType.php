@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class diasType extends AbstractType
+class analistaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,12 +19,12 @@ class diasType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Frontend\ContenidosBundle\Entity\Diasentrega'
+            'data_class' => 'Frontend\ContenidosBundle\Entity\Analista'
         ));
     }
 
     public function getName()
     {
-        return 'frontend_contenidosbundle_diasentregatype';
+        return 'frontend_contenidosbundle_analistatype';
     }
 }

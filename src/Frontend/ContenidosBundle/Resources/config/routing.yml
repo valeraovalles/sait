@@ -273,13 +273,50 @@ updatedetalle:
 
 #DETALLE DIAS DE ENTREGA
 indexdias:
-    pattern:  detalledias/home
+    pattern:  diasdeentrega/home
     defaults: { _controller: "ContenidosBundle:editardatos:indexdias" }
 
 editdias:
-    pattern: detalledias/detalles/{id}
+    pattern: diasdeentrega/detalles/{id}
     defaults: { _controller: "ContenidosBundle:editardatos:editdias" }
 
 updatedias:
-    pattern: detalledias/actualizar/{id}
+    pattern: diasdeentrega/actualizar/{id}
     defaults: { _controller: "ContenidosBundle:editardatos:updatedias" }
+
+newdias:
+    pattern: diasdeentrega/nuevo
+    defaults: { _controller: "ContenidosBundle:editardatos:newdias"}
+
+createdias:
+    pattern: diasdeentrega/create
+    defaults: { _controller: "ContenidosBundle:editardatos:createdias"}
+
+deletedias:
+    pattern: diasdeentrega/eliminar/{id}
+    defaults: { _controller: "ContenidosBundle:editardatos:deletedias"}
+
+#ANALISTA DE COMPRAS
+indexanalista:
+    pattern:  analista/home
+    defaults: { _controller: "ContenidosBundle:editardatos:indexanalista" }
+
+editanalista:
+    pattern: analista/detalles/{id}
+    defaults: { _controller: "ContenidosBundle:editardatos:editanalista" }
+
+updateanalista:
+    pattern: analista/actualizar/{id}
+    defaults: { _controller: "ContenidosBundle:editardatos:updateanalista" }
+
+newanalista:
+    pattern: analista/nuevo
+    defaults: { _controller: "ContenidosBundle:editardatos:newanalista"}
+
+createanalista:
+    pattern: analista/create
+    defaults: { _controller: "ContenidosBundle:editardatos:createanalista"}
+
+deleteanalista:
+    pattern: analista/eliminar/{id}
+    defaults: { _controller: "ContenidosBundle:editardatos:deleteanalista"}

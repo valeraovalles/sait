@@ -64,31 +64,62 @@ class total
                     	$fecha = $line['fecha_vencimiento'];
                     	$fecha_venc= strtotime($fecha);
 
-                                $cuerpo.="<tr align=center style='font-weight:bold' bgcolor='white'>";
-                                $cuerpo.="<td align=center>$line[nombre]</td>";
-                                $cuerpo.="<td align=center>$line[fecha_compra]</td>";
-                                $cuerpo.="<td align=center>$line[fecha_vencimiento]</td>";
-                                $cuerpo.="<td align=center>$line[descripcion]</td>";
-                                if ($line['tipo']=='l')
-                                {
-                                    $cuerpo.="<td align=center>Licencia</td>";
-                                }elseif ($line['tipo']=='s')
-                                {
-                                    $cuerpo.="<td align=center>Servicio</td>";
-                                }
-                                if ($fecha_venc > $hoy && $fecha_venc> $mes)
-                                {
-                                	$cuerpo.= "<td align=center> ACTIVO </td>";
-                                }elseif($fecha_venc>=$hoy && $fecha_venc <=$mes)
-                                {
-									$cuerpo.= "<td align=center> POR VENCER </td>";
-                    			}elseif($fecha_venc<$hoy)
-                        		{
-                        			$cuerpo.= "<td align=center> VENCIDO </td>";
-                    			}
-                                $cuerpo.="<td align=center>$line[codigo]</td>";
-                                $cuerpo.="<td align=center>$line[primer_nombre] $line[primer_apellido]</td>";
-                                $cuerpo.="</tr><br><br>";
+
+                        if ($fecha_venc > $hoy && $fecha_venc> $mes)
+                        {
+                            $cuerpo.="<tr align=center style='font-weight:bold' bgcolor='white'>";
+                            $cuerpo.="<td align=center>$line[nombre]</td>";
+                            $cuerpo.="<td align=center>$line[fecha_compra]</td>";
+                            $cuerpo.="<td align=center>$line[fecha_vencimiento]</td>";
+                            $cuerpo.="<td align=center>$line[descripcion]</td>";
+                            if ($line['tipo']=='l')
+                            {
+                                $cuerpo.="<td align=center>Licencia</td>";
+                            }elseif ($line['tipo']=='s')
+                            {
+                                $cuerpo.="<td align=center>Servicio</td>";
+                            }
+                            $cuerpo.= "<td align=center style=color:#00cc00;> ACTIVO </td>";
+                            $cuerpo.="<td align=center>$line[codigo]</td>";
+                            $cuerpo.="<td align=center>$line[primer_nombre] $line[primer_apellido]</td>";
+                            $cuerpo.="</tr><br><br>";
+                        }elseif($fecha_venc>=$hoy && $fecha_venc <=$mes)
+                        {   
+                            $cuerpo.="<tr align=center style='font-weight:bold' bgcolor='white'>";
+                            $cuerpo.="<td align=center>$line[nombre]</td>";
+                            $cuerpo.="<td align=center>$line[fecha_compra]</td>";
+                            $cuerpo.="<td align=center>$line[fecha_vencimiento]</td>";
+                            $cuerpo.="<td align=center>$line[descripcion]</td>";
+                            if ($line['tipo']=='l')
+                            {
+                                $cuerpo.="<td align=center>Licencia</td>";
+                            }elseif ($line['tipo']=='s')
+                            {
+                                $cuerpo.="<td align=center>Servicio</td>";
+                            }
+                            $cuerpo.= "<td align=center style=color:#ff8000;> POR VENCER </td>";
+                            $cuerpo.="<td align=center>$line[codigo]</td>";
+                            $cuerpo.="<td align=center>$line[primer_nombre] $line[primer_apellido]</td>";
+                            $cuerpo.="</tr><br><br>";
+                        }elseif($fecha_venc<$hoy)
+                        {
+                            $cuerpo.="<tr align=center style='font-weight:bold' bgcolor='white'>";
+                            $cuerpo.="<td align=center>$line[nombre]</td>";
+                            $cuerpo.="<td align=center>$line[fecha_compra]</td>";
+                            $cuerpo.="<td align=center>$line[fecha_vencimiento]</td>";
+                            $cuerpo.="<td align=center>$line[descripcion]</td>";
+                            if ($line['tipo']=='l')
+                            {
+                                $cuerpo.="<td align=center>Licencia</td>";
+                            }elseif ($line['tipo']=='s')
+                            {
+                                $cuerpo.="<td align=center>Servicio</td>";
+                            }
+                            $cuerpo.= "<td align=center style=color:red;> VENCIDO </td>";
+                            $cuerpo.="<td align=center>$line[codigo]</td>";
+                            $cuerpo.="<td align=center>$line[primer_nombre] $line[primer_apellido]</td>";
+                            $cuerpo.="</tr><br><br>";
+                        }                   
 
                     }//while  
 

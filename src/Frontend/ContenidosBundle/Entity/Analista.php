@@ -63,4 +63,5 @@ class Analista
     {
         return $this->nombre;
     }
+
 }
