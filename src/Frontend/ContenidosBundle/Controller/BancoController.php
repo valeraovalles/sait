@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Frontend\ContenidosBundle\Entity\Banco;
+use Frontend\ContenidosBundle\Entity\Datosproveedor;
 use Frontend\ContenidosBundle\Form\BancoType;
 
 /**
@@ -19,50 +20,59 @@ class BancoController extends Controller
      * Lists all Banco entities.
      *
      */
-    public function indexAction()
+    public function indexAction($id_proveedor)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ContenidosBundle:Banco')->findAll();
+        $entities = $em->getRepository('ContenidosBundle:Banco')->findByidProveedor($id_proveedor);
 
         return $this->render('ContenidosBundle:Banco:index.html.twig', array(
             'entities' => $entities,
+            'id_proveedor' => $id_proveedor,
         ));
     }
     /**
      * Creates a new Banco entity.
      *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $id_proveedor)
     {
 
         $entity  = new Banco();
         $form = $this->createForm(new BancoType(), $entity);
         $form->bind($request);
-            
+        $em = $this->getDoctrine()->getManager();
 
-            $id_p = '1';
+           
+            $user = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id_proveedor);            
+
             
+            $entity->setIdProveedor($user);
+
         
-            $em = $this->getDoctrine()->getManager();
-            $entity->setIdProveedor($id_p);
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('banco_show', array('id' => $entity->getId())));    
+            return $this->redirect($this->generateUrl('banco_show', array('id' => $entity->getId(),
+                                                                          'id_proveedor' => $id_proveedor,
+                                                                            ))); 
+        
+
+
     }
 
     /**
      * Displays a form to create a new Banco entity.
      *
      */
-    public function newAction()
+    public function newAction($id_proveedor)
     {
         $entity = new Banco();
         $form   = $this->createForm(new BancoType(), $entity);
 
         return $this->render('ContenidosBundle:Banco:new.html.twig', array(
             'entity' => $entity,
+            'id_proveedor' => $id_proveedor,
             'form'   => $form->createView(),
         ));
     }
@@ -92,7 +102,7 @@ class BancoController extends Controller
      * Displays a form to edit an existing Banco entity.
      *
      */
-    public function editAction($id)
+    public function editAction($id,$id_proveedor)
     {
         $em = $this->getDoctrine()->getManager();
 

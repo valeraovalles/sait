@@ -1,0 +1,33 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block titulobanner %}
+    EDICION DE DATOS
+{% endblock %}
+
+{% block body -%}
+ {{ parent() }}
+    <div class="titulo">EDITAR DETALLE TIPO-PROVEEDOR</div>
+
+    <form novalidate action="{{ path('updatedetalle', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+        <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
+            <div id="descripcion" class="form-show_edit">
+                <br>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.nombre) }}
+                    <div class="labels">Detalle del Proveedor:</div>
+                    <div class="widgets">{{ form_widget(edit_form.nombre) }}</div>
+                </div>
+
+        <p>
+            <button type="submit" class="btn">Editar</button><br><br>
+        </p>
+    </form>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('indexdias') }}">
+                <img width="85px" src="{{ asset('images/listado.jpg')}}">
+            </a>
+        </li>
+    </ul>
+{% endblock %}

@@ -134,20 +134,7 @@ class Datosproveedor
      */
     private $tipoSatelite;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="observacion_tipoproveedor", type="string", length=60, nullable=true)
-     */
-    private $observacionTipoproveedor;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="observacion_unidadsolicitante", type="string", length=60, nullable=true)
-     */
-    private $observacionUnidadsolicitante;
-
+    
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -202,6 +189,34 @@ class Datosproveedor
      * })
      */
     private $idUnidad;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="estatus", type="string", length=1, nullable=true)
+     */
+    private $estatus;
+
+   /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_registro", type="date", nullable=true)
+     */
+    private $fechaRegistro;
+
+    
+    /**
+     * @var \Usuarios.user
+     *
+     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuario", referencedColumnName="id")
+     * })
+     */
+    private $usuario;
+
+
+
 
     /**
      * Constructor
@@ -591,55 +606,6 @@ class Datosproveedor
     }
 
     /**
-     * Set observacionTipoproveedor
-     *
-     * @param string $observacionTipoproveedor
-     * @return Datosproveedor
-     */
-    public function setObservacionTipoproveedor($observacionTipoproveedor)
-    {
-        $this->observacionTipoproveedor = $observacionTipoproveedor;
-    
-        return $this;
-    }
-
-    /**
-     * Get observacionTipoproveedor
-     *
-     * @return string 
-     */
-    public function getObservacionTipoproveedor()
-    {
-        return $this->observacionTipoproveedor;
-    }
-
-    /**
-     * Set observacionUnidadsolicitante
-     *
-     * @param string $observacionUnidadsolicitante
-     * @return Datosproveedor
-     */
-    public function setObservacionUnidadsolicitante($observacionUnidadsolicitante)
-    {
-        $this->observacionUnidadsolicitante = $observacionUnidadsolicitante;
-    
-        return $this;
-    }
-
-    /**
-     * Get observacionUnidadsolicitante
-     *
-     * @return string 
-     */
-    public function getObservacionUnidadsolicitante()
-    {
-        return $this->observacionUnidadsolicitante;
-    }
-
-
-
-
-    /**
      * Add idTipoproveedor
      *
      * @param \Frontend\ContenidosBundle\Entity\Tipoproveedor $idTipoproveedor
@@ -763,6 +729,81 @@ class Datosproveedor
     {
         return $this->idUnidad;
     }
+
+    /**
+     * Set estatus
+     *
+     * @param string $estatus
+     * @return Datosproveedor
+     */
+    public function setEstatus($estatus)
+    {
+        $this->estatus = $estatus;
+    
+        return $this;
+    }
+
+    /**
+     * Get estatus
+     *
+     * @return string 
+     */
+    public function getEstatus()
+    {
+        return $this->estatus;
+    }
+
+    /**
+     * Set fechaRegistro
+     *
+     * @param \DateTime $fechaRegistro
+     * @return Contratacion
+     */
+    public function setFechaRegistro($fechaRegistro)
+    {
+        $this->fechaRegistro = $fechaRegistro;
+    
+        return $this;
+    }
+    /**
+     * Get fechaRegistro
+     *
+     * @return \DateTime 
+     */
+    public function getFechaRegistro()
+    {
+        return $this->fechaRegistro;
+    }
+
+
+    /**
+     * Set usuario
+     *
+     * @param \Administracion\UsuarioBundle\Entity\User $usuario
+     * @return Licencias
+     */
+    public function setUsuario(\Administracion\UsuarioBundle\Entity\User $usuario = null)
+    {
+        $this->usuario = $usuario;
+    
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return \Administracion\UsuarioBundle\Entity\User 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+
+
+
+
+
     public function __toString()
     {
         return $this->getNombre();

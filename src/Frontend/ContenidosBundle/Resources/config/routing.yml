@@ -39,69 +39,33 @@ datosproveedor_update:
     defaults: { _controller: "ContenidosBundle:Datosproveedor:update" }
     requirements: { _method: post|put }
 
-datosproveedor_delete:
-    pattern:  /proveedor/eliminar/{id}
-    defaults: { _controller: "ContenidosBundle:Datosproveedor:delete" }
-    requirements: { _method: post|delete }
-
-
-##########################################################################################################
-#                                          TIPO DE PROVEEDOR
-##########################################################################################################
-tipoproveedor:
-    pattern:  tipoproveedor/home
-    defaults: { _controller: "ContenidosBundle:Tipoproveedor:index" }
-
-tipoproveedor_show:
-    pattern:  tipoproveedor/detalles/{id}
-    defaults: { _controller: "ContenidosBundle:Tipoproveedor:show" }
-
-tipoproveedor_new:
-    pattern:  tipoproveedor/nuevo
-    defaults: { _controller: "ContenidosBundle:Tipoproveedor:new" }
-
-tipoproveedor_create:
-    pattern:  tipoproveedor/crear
-    defaults: { _controller: "ContenidosBundle:Tipoproveedor:create" }
-    requirements: { _method: post }
-
-tipoproveedor_edit:
-    pattern:  tipoproveedor/editar/{id}
-    defaults: { _controller: "ContenidosBundle:Tipoproveedor:edit" }
-
-tipoproveedor_update:
-    pattern:  tipoproveedor/actualizar/{id}
-    defaults: { _controller: "ContenidosBundle:Tipoproveedor:update" }
-    requirements: { _method: post|put }
-
-tipoproveedor_delete:
-    pattern:  tipoproveedor/eliminar/{id}
-    defaults: { _controller: "ContenidosBundle:Tipoproveedor:delete" }
-    requirements: { _method: post|delete }
-
+#datosproveedor_delete:
+#    pattern:  /proveedor/eliminar/{id}
+#    defaults: { _controller: "ContenidosBundle:Datosproveedor:delete" }
+#    requirements: { _method: post|delete }
 
 ##########################################################################################################
 #                                                 BANCO
 ##########################################################################################################
 banco:
-    pattern:  banco/home
+    pattern:  banco/home/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Banco:index" }
 
 banco_show:
-    pattern:  banco/detalles/{id}
+    pattern:  banco/detalles/{id_proveedor}/{id}
     defaults: { _controller: "ContenidosBundle:Banco:show" }
 
 banco_new:
-    pattern:  banco/nuevo
+    pattern:  banco/nuevo/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Banco:new" }
 
 banco_create:
-    pattern:  banco/crear
+    pattern:  banco/crear/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Banco:create" }
     requirements: { _method: post }
 
 banco_edit:
-    pattern:  banco/editar/{id}
+    pattern:  banco/editar/{id}/prueba/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Banco:edit" }
 
 banco_update:
@@ -109,25 +73,25 @@ banco_update:
     defaults: { _controller: "ContenidosBundle:Banco:update" }
     requirements: { _method: post|put }
 
-banco_delete:
-    pattern:  banco/eliminar/{id}
-    defaults: { _controller: "ContenidosBundle:Banco:delete" }
-    requirements: { _method: post|delete }
+#banco_delete:
+#    pattern:  banco/eliminar/{id}
+#    defaults: { _controller: "ContenidosBundle:Banco:delete" }
+#    requirements: { _method: post|delete }
 
 
 ##########################################################################################################
 #                                             CONTRATACION
 ##########################################################################################################
 contratacion:
-    pattern:  contratacion/home
+    pattern:  contratacion/home/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Contratacion:index" }
 
 contratacion_show:
-    pattern:  contratacion/detalles/{id}
+    pattern:  contratacion/detalles/{id}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Contratacion:show" }
 
 contratacion_new:
-    pattern:  contratacion/nuevo
+    pattern:  contratacion/nuevo/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Contratacion:new" }
 
 contratacion_create:
@@ -144,10 +108,10 @@ contratacion_update:
     defaults: { _controller: "ContenidosBundle:Contratacion:update" }
     requirements: { _method: post|put }
 
-contratacion_delete:
-    pattern:  contratacion/eliminar/{id}
-    defaults: { _controller: "ContenidosBundle:Contratacion:delete" }
-    requirements: { _method: post|delete }
+#contratacion_delete:
+#    pattern:  contratacion/eliminar/{id}
+#    defaults: { _controller: "ContenidosBundle:Contratacion:delete" }
+#    requirements: { _method: post|delete }
 
 
 ##########################################################################################################
@@ -179,10 +143,10 @@ pago_update:
     defaults: { _controller: "ContenidosBundle:Pago:update" }
     requirements: { _method: post|put }
 
-pago_delete:
-    pattern:  pago/eliminar/{id}
-    defaults: { _controller: "ContenidosBundle:Pago:delete" }
-    requirements: { _method: post|delete }
+#pago_delete:
+#    pattern:  pago/eliminar/{id}
+#    defaults: { _controller: "ContenidosBundle:Pago:delete" }
+#    requirements: { _method: post|delete }
 
 
 ##########################################################################################################
@@ -214,10 +178,10 @@ controlpagounidad_update:
     defaults: { _controller: "ContenidosBundle:Controlpagounidad:update" }
     requirements: { _method: post|put }
 
-controlpagounidad_delete:
-    pattern:  controlpagounidad/eliminar/{id}
-    defaults: { _controller: "ContenidosBundle:Controlpagounidad:delete" }
-    requirements: { _method: post|delete }
+#controlpagounidad_delete:
+#    pattern:  controlpagounidad/eliminar/{id}
+#    defaults: { _controller: "ContenidosBundle:Controlpagounidad:delete" }
+#    requirements: { _method: post|delete }
 
 
 ##########################################################################################################
@@ -249,15 +213,73 @@ presupuesto_update:
     defaults: { _controller: "ContenidosBundle:Presupuesto:update" }
     requirements: { _method: post|put }
 
-presupuesto_delete:
-    pattern:  presupuesto/eliminar/{id}
-    defaults: { _controller: "ContenidosBundle:Presupuesto:delete" }
-    requirements: { _method: post|delete }
+#presupuesto_delete:
+#    pattern:  presupuesto/eliminar/{id}
+#    defaults: { _controller: "ContenidosBundle:Presupuesto:delete" }
+#    requirements: { _method: post|delete }
 
 
 ##########################################################################################################
-#                                               OTRAS
+#                                               AJAX
 ##########################################################################################################
 ajax_datosproveedor:
     pattern: /ajax/contenidos/{datos}
     defaults: { _controller: "ContenidosBundle:Ajax:datosproveedor"}
+
+
+##########################################################################################################
+#                                EDITAR DATOS DE TABLAS AUXILIARES
+##########################################################################################################
+
+#TIPO DE PROVEEDOR
+tipoproveedor:
+    pattern:  tipoproveedor/home
+    defaults: { _controller: "ContenidosBundle:Tipoproveedor:index" }
+
+tipoproveedor_show:
+    pattern:  tipoproveedor/detalles/{id}
+    defaults: { _controller: "ContenidosBundle:Tipoproveedor:show" }
+
+tipoproveedor_new:
+    pattern:  tipoproveedor/nuevo
+    defaults: { _controller: "ContenidosBundle:Tipoproveedor:new" }
+
+tipoproveedor_create:
+    pattern:  tipoproveedor/crear
+    defaults: { _controller: "ContenidosBundle:Tipoproveedor:create" }
+    requirements: { _method: post }
+
+tipoproveedor_edit:
+    pattern:  tipoproveedor/editar/{id}
+    defaults: { _controller: "ContenidosBundle:Tipoproveedor:edit" }
+
+tipoproveedor_update:
+    pattern:  tipoproveedor/actualizar/{id}
+    defaults: { _controller: "ContenidosBundle:Tipoproveedor:update" }
+    requirements: { _method: post|put }
+
+#DETALLE TIPO PROVEEDOR
+indexdetalle:
+    pattern:  detalletipoproveedor/home
+    defaults: { _controller: "ContenidosBundle:editardatos:indexdetalle" }
+
+editdetalle:
+    pattern: detalletipoproveedor/detalles/{id}
+    defaults: { _controller: "ContenidosBundle:editardatos:editdetalle" }
+
+updatedetalle:
+    pattern: detalletipoproveedor/actualizar/{id}
+    defaults: { _controller: "ContenidosBundle:editardatos:updatedetalle" }
+
+#DETALLE DIAS DE ENTREGA
+indexdias:
+    pattern:  detalledias/home
+    defaults: { _controller: "ContenidosBundle:editardatos:indexdias" }
+
+editdias:
+    pattern: detalledias/detalles/{id}
+    defaults: { _controller: "ContenidosBundle:editardatos:editdias" }
+
+updatedias:
+    pattern: detalledias/actualizar/{id}
+    defaults: { _controller: "ContenidosBundle:editardatos:updatedias" }

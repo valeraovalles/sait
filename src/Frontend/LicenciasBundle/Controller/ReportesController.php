@@ -27,11 +27,15 @@ class ReportesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $dql = 'select l.id, l.nombre, l.codigo, l.tipo, l.fechaCompra, l.fechaVencimiento, l.descripcion 
-                from LicenciasBundle:Licencias l 
-                order by l.id ASC ';
-        $consulta = $em->createQuery($dql);
-        $entities = $consulta->getResult();
+        
+
+
+
+        $entities = $em->getRepository('LicenciasBundle:Licencias')->findAll();
+
+
+
+
 
         $html=new total;
         $html=$html->total($em, $entities);

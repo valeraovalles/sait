@@ -23,20 +23,20 @@
         <tbody>
         {% for entity in entities %}
             <tr align="center">
-                <td><a href="{{ path('banco_show', { 'id': entity.id }) }}">{{ entity.nombreBeneficiario }}</a></td>
+                <td><a href="{{ path('banco_show', { 'id': entity.id, 'id_proveedor':entity.idProveedor.id }) }}">{{ entity.nombreBeneficiario }}</a></td>
                 <td>{{ entity.bancoInterm }}</td>
                 <td>{{ entity.cuentaInterm }}</td>
                 <td>{{ entity.bancoBenef }}</td>
                 <td>{{ entity.cuentaBenef }}</td>
                 <td>
-                    <a href="{{ path('banco_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+                    <a href="{{ path('banco_edit', { 'id': entity.id, 'id_proveedor':entity.idProveedor.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
         <br><br>
-       <a class="btn btn-primary dropdown-toggle" href="{{ path( 'banco_new' ) }}">Registrar Datos Bancarios</a>
+       <a class="btn btn-primary dropdown-toggle" href="{{ path( 'banco_new',{ 'id_proveedor':id_proveedor } ) }}">Registrar Datos Bancarios </a>
         
     <br><br>
     {% endblock %}

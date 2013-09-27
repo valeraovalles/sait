@@ -1,20 +1,120 @@
-{% extends '::base.html.twig' %}
+{% extends '::contenidos.html.twig' %}
 
+{% block titulobanner %}
+    CONTRATACIONES
+{% endblock %}
+    
 {% block body -%}
-    <h1>Contratacion creation</h1>
+    {{ parent() }}
+    <div class="titulo">NUEVA CONTRATACION</div>
 
-    <form action="{{ path('contratacion_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
-        <p>
-            <button type="submit">Create</button>
-        </p>
+
+
+
+    <form action="{{ path('contratacion_create',{ 'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(form) }}>
+
+
+        <fieldset>     
+            <div class="form-show_edit">
+                <legend id="a"><div class="divisor">DATOS DE LA CONTRATACI&Oacute;N</div> </legend>
+                <div class="form-contenedor">
+                    {{ form_errors(form.concepto) }}
+                    <div class="labels">Concepto:</div>
+                    <div class="dato">{{ form_widget(form.concepto) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.tipoMoneda) }}
+                    <div class="labels">Moneda:</div>
+                    <div class="dato">{{ form_widget(form.tipoMoneda) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(form.montoMe) }}
+                    <div class="labels">Monto en $/€:</div>
+                    <div class="dato">{{ form_widget(form.montoMe) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.montoBs) }}
+                    <div class="labels">Monto en Bs:</div>
+                    <div class="dato">{{ form_widget(form.montoBs) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaInicio) }}
+                    <div class="labels">Fecha de Inicio:</div>
+                    <div class="dato">{{ form_widget(form.fechaInicio) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaFin) }}
+                    <div class="labels">Fecha de Fin:</div>
+                    <div class="dato">{{ form_widget(form.fechaFin) }}</div>
+                </div>
+            </div><br>
+            <div class="form-show_edit">
+                <legend id="a"><div class="divisor">DATOS DE LA SOLICITUD</div> </legend>
+                <div class="form-contenedor">
+                    {{ form_errors(form.numSolicitud) }}
+                    <div class="labels">N&uacute;mero de la Solictud:</div>
+                    <div class="dato">{{ form_widget(form.numSolicitud) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.numConformacion) }}
+                    <div class="labels">N&uacute;mero de la Conformaci&oacute;n:</div>
+                    <div class="dato">{{ form_widget(form.numConformacion) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.numPuntocuenta) }}
+                    <div class="labels">N&uacute;mero del Punto de Cuenta:</div>
+                    <div class="dato">{{ form_widget(form.numPuntocuenta) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaPunto) }}
+                    <div class="labels">Fecha del Punto de Cuenta:</div>
+                    <div class="dato">{{ form_widget(form.fechaPunto) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.numAlcance) }}
+                    <div class="labels">N&uacute;mero Alcance (Punto de Cuenta):</div>
+                    <div class="dato">{{ form_widget(form.numAlcance) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaAlcance) }}
+                    <div class="labels">Fecha de Alcance (Punto de Cuenta):</div>
+                    <div class="dato">{{ form_widget(form.fechaAlcance) }}</div>
+                </div>
+            </div><br>
+            <div class="form-show_edit">
+                <legend id="a"><div class="divisor">DETALLES DE LA CONTRATACI&Oacute;N</div> </legend>
+
+
+                <div class="form-contenedor">
+                    {{ form_errors(form.numContrato) }}
+                    <div class="labels">N&uacute;mero de Contrato:</div>
+                    <div class="dato">{{ form_widget(form.numContrato) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaContrato) }}
+                    <div class="labels">Fecha del Contrato:</div>
+                    <div class="dato">{{ form_widget(form.fechaContrato) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    {{ form_errors(form.numAddendum) }}
+                    <div class="labels">N&uacute;mero de Addendum:</div>
+                    <div class="dato">{{ form_widget(form.numAddendum) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaAddendum) }}
+                    <div class="labels">Fecha del Addendum:</div>
+                    <div class="dato">{{ form_widget(form.fechaAddendum) }}</div>
+                </div>
+
+                
+                <button type="submit">Crear</button>
+                <br><br>
+            </div>
+        </fieldset>
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('contratacion') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <a href="{{ path('contratacion', { 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+
 {% endblock %}

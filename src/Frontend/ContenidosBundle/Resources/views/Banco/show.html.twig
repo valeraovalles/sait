@@ -1,5 +1,10 @@
 {% extends '::contenidos.html.twig' %}
 
+{% block titulobanner %}
+    PAGOS
+{% endblock %}
+
+
 {% block body -%}
  {{ parent() }}
     <div class="titulo">DETALLES BANCO</div>
@@ -14,35 +19,9 @@
                 <div class="labels">Direcci&oacute;n del Beneficiario:</div>
                 <div class="dato">{{ entity.direccionBeneficiario }}</div>
             </div>
-        
-    </fieldset>
-    
-    <fieldset>       
-        <legend id="b"><div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div> </legend>
-        
             <div class="contenedor">
-                <div class="labels">Banco Intermediario:</div>
-                <div class="dato">{{ entity.bancoInterm }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">Cuenta Banco Intermediario:</div>
-                <div class="dato">{{ entity.cuentaInterm }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">SWIFT Banco Intermediario:</div>
-                <div class="dato">{{ entity.swiftInterm }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">ABA Banco Intermediario:</div>
-                <div class="dato">{{ entity.abaInterm }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">IBAN Banco Intermediario:</div>
-                <div class="dato">{{ entity.ibanInterm }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">Direcci&oacute;n del Banco Intermediario:</div>
-                <div class="dato">{{ entity.direccionBancointerm }}</div>
+                <div class="labels">Pa&iacute;s del Beneficiario:</div>
+                <div class="dato">{{ entity.pais }}</div>
             </div>
         
     </fieldset>
@@ -76,9 +55,41 @@
             </div>
         
     </fieldset>
+
+    <fieldset>       
+        <legend id="b"><div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div> </legend>
+        
+            <div class="contenedor">
+                <div class="labels">Banco Intermediario:</div>
+                <div class="dato">{{ entity.bancoInterm }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labels">Cuenta Banco Intermediario:</div>
+                <div class="dato">{{ entity.cuentaInterm }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labels">SWIFT Banco Intermediario:</div>
+                <div class="dato">{{ entity.swiftInterm }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labels">ABA Banco Intermediario:</div>
+                <div class="dato">{{ entity.abaInterm }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labels">IBAN Banco Intermediario:</div>
+                <div class="dato">{{ entity.ibanInterm }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labels">Direcci&oacute;n del Banco Intermediario:</div>
+                <div class="dato">{{ entity.direccionBancointerm }}</div>
+            </div>
+        
+    </fieldset>
+    
+    
     </div>
     <br>
-    <a href="{{ path('banco') }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    <a href="{{ path('banco', { 'id_proveedor': entity.idProveedor.id }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
     <br><br> 
 
 {% endblock %}

@@ -15,6 +15,11 @@
             <div id="descripcion" class="form-show_edit">
                 <br>
                 <div class="form-contenedor">
+                    {{ form_errors(form.estatus) }}
+                    <div class="labels">Estatus:</div>
+                    <div class="widgets">{{ form_widget(form.estatus) }}</div>
+                </div>
+                <div class="form-contenedor">
                     {{ form_errors(form.nombre) }}
                     <div class="labels">Nombre:</div>
                     <div class="widgets">{{ form_widget(form.nombre) }}</div>
@@ -62,7 +67,7 @@
             </div>
         </fieldset>    
         <br>
-         <fieldset>       
+        <fieldset>       
             <legend id="b"><div class="divisor">DATOS DEL REPRESENTANTE</div> </legend>
             <div id="detalles" class="form-show_edit">
                 <br>
@@ -114,16 +119,12 @@
                     <div class="widgets">{{ form_widget(form.idTipoprov) }}</div>
                 </div>
                 <div id="muestra"></div>
-
             </div>
         </fieldset>
-
         <br>
         <button type="submit" class="btn">CREAR</button> 
-        
     </form>
-
-<script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function () {
             $('#frontend_contenidosbundle_datosproveedortype_idTipoprov').change(function(){
                 var dato = $("#frontend_contenidosbundle_datosproveedortype_idTipoprov").val();
@@ -131,11 +132,6 @@
                 ruta = ruta.replace("variable", dato);
                 $('#muestra').load(ruta);
             });
-            
-
         });
     </script>
-
-
-<script src="{{ asset('js/contenidos/efecto.js') }}"></script>
 {% endblock %}

@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\ContenidosBundle\Entity\Datosproveedor;
 use Frontend\ContenidosBundle\Form\DatosproveedorType;
 
+use Administracion\UsuarioBundle\Entity\User;
+
 /**
  * Datosproveedor controller.
  *
@@ -102,8 +104,15 @@ class DatosproveedorController extends Controller
         $form = $this->createForm(new DatosproveedorType(), $entity);
         $form->bind($request);
 
-
             $em = $this->getDoctrine()->getManager();
+
+            $idUsuario = $this->get('security.context')->getToken()->getUser()->getId();       
+            $user = $em->getRepository('UsuarioBundle:User')->find($idUsuario);
+            $entity->setUsuario($user);
+
+            $hoy = date_create_from_format('Y-m-d', \date("Y-m-d"));
+            $entity->setFechaRegistro($hoy);
+            
             $em->persist($entity);
             $em->flush();
 
@@ -166,6 +175,7 @@ class DatosproveedorController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
+
         return $this->render('ContenidosBundle:Datosproveedor:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
@@ -191,6 +201,7 @@ class DatosproveedorController extends Controller
         $editForm = $this->createForm(new DatosproveedorType(), $entity);
         $editForm->bind($request);
 
+//       die;
             $em->persist($entity);
             $em->flush();
 

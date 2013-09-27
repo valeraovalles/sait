@@ -13,9 +13,8 @@
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
             <tr>
-                
                 <th width="80%">Nombre</th>
-                <th width="10%">Acciones</th>
+                <th width="20%">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -23,11 +22,7 @@
             <tr align="center">
                 <td>{{ entity.nombre }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('tipoproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar Tipo de Proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
-                        </li>
-                    </ul>
+                            <a href="{{ path('editdias', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar Tipo de Proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>    
                 </td>
             </tr>
         {% endfor %}

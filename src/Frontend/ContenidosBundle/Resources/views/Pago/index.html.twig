@@ -29,6 +29,7 @@
                 {% endif %}
                 <td>
                     <a href="{{ path('pago_edit', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+                    <a href="{{ path('pago_edit', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="control de pagos"><img width="20px" src="{{ asset('images/dinero.jpg')}}"></a>
                 </td>
             </tr>
         {% endfor %}
