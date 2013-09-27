@@ -19,7 +19,7 @@ class UserRepository extends EntityRepository
         $dql = "select p from UsuarioBundle:Perfil p where p.user= :id";
         $query = $em->createQuery($dql);
         $query->setParameter('id', $id);
-
-        return $query->getResult();
+        $datos=$query->getOneOrNullResult();
+        return $datos;
     }
 }

@@ -12,7 +12,8 @@ use Frontend\SitBundle\Form\TicketType;
 
 use Administracion\UsuarioBundle\Entity\Perfil;
 use Administracion\UsuarioBundle\Form\PerfilType;
-
+use Administracion\UsuarioBundle\Entity\Extension;
+use Administracion\UsuarioBundle\Form\ExtensionType;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -118,7 +119,7 @@ class TicketController extends Controller
         return $this->render('SitBundle:Ticket:showasignado.html.twig', array(
             'entity'      => $ticket,
             'delete_form' => $deleteForm->createView(),
-            'datosusuario'=>$datosusuario[0],
+            'datosusuario'=>$datosusuario,
             'unidad'=>$unidad,
             'usuariosunidad'=>$usuariosunidad,
             'usuarioticket'=>$usuarioticket,
@@ -329,28 +330,29 @@ class TicketController extends Controller
 
         $datos=$request->request->all();
         $solicitud=$datos['frontend_sitbundle_tickettype']['solicitud'];
-        $datos=$datos['administracion_usuariobundle_perfiltype'];
-
-
+        $extensionusuario=$datos['extension']['extension'];
 
         $entity  = new Ticket();
         $form = $this->createForm(new TicketType(), $entity);
         $form->bind($request);
 
-        $entity2 = new Perfil();
-        $form2   = $this->createForm(new PerfilType(), $entity2);
+        $entity2  = new Extension();
+        $form2 = $this->createForm(new ExtensionType(), $entity2);
         $form2->bind($request);
-
 
         //consulto los tickets del usuario
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
+        //datos del usuario
+        $datosusuario =  $em->getRepository('UsuarioBundle:User')->datosusuario($idusuario);
+        $datosusuario->setExtension($extensionusuario);
+
         $dql = "select t from SitBundle:Ticket t where t.solicitante= :id order by t.estatus ASC";
         $query = $em->createQuery($dql);
         $query->setParameter('id',$idusuario);
         $ticketusuario = $query->getResult();
 
-        if ($form->isValid() && $form2->isValid()) {
+        if ($form->isValid() and $form2->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
@@ -394,10 +396,10 @@ class TicketController extends Controller
                     return $this->render('SitBundle:Default:index.html.twig', array(
                         'form'   => $form->createView(),
                         'form2'   => $form2->createView(),
-                        'ticketusuario'=>$ticketusuario
+                        'ticketusuario'=>$ticketusuario,
+                        'datosusuario'=>$datosusuario
                     ));
                 }
-
 
                 //GUARDO EL ARCHIVO
                 if($file->move('uploads/sit/',$nombre.'_'.\date("Gis").'.'.$extension) )
@@ -406,16 +408,39 @@ class TicketController extends Controller
                 }
 
             }
-
+            //fin archivo
 
             $em->persist($entity);
             $em->flush();
 
-            //actualizo el estatus
+            //actualizo la extensión del usuario
             $query = $em->createQuery('update UsuarioBundle:Perfil p set p.extension= :extension WHERE p.id = :id');
-            $query->setParameter('extension', $datos['extension']);
+            $query->setParameter('extension', $extensionusuario);
             $query->setParameter('id', $perfil[0]->getId());
             $query->execute();
+
+            //envio correo
+            $dql = "select t from SitBundle:Ticket t order by t.id DESC";
+            $query = $em->createQuery($dql);
+            $query->setMaxResults(1);
+            $ultimoticket = $query->getResult();
+
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+
+            ->setSubject('Sit-Solicitud')     // we configure the title
+
+            ->setFrom('sit@telesurtv.net')     // we configure the sender
+
+            ->setTo('jvalera@telesurtv.net')     // we configure the recipient
+
+            ->setBody( $this->renderView(
+                    'SitBundle:Correo:solicitud.html.twig',
+                    array('ticket' => $ultimoticket[0])
+                ));
+
+            $this->get('mailer')->send($message);     // then we send the message.
+            //fin enviar correo
+
 
             $this->get('session')->getFlashBag()->add('notice', 'TU SOLICITUD SE HA REALIZADO EXITOSAMENTE');
 
@@ -428,7 +453,8 @@ class TicketController extends Controller
         return $this->render('SitBundle:Default:index.html.twig', array(
             'form'   => $form->createView(),
             'form2'   => $form2->createView(),
-            'ticketusuario'=>$ticketusuario
+            'ticketusuario'=>$ticketusuario,
+            'datosusuario'=>$datosusuario
         ));
     }
 
@@ -566,7 +592,7 @@ class TicketController extends Controller
         return $this->render('SitBundle:Ticket:show.html.twig', array(
             'entity'      => $ticket,
             'delete_form' => $deleteForm->createView(),
-            'datosusuario'=>$datosusuario[0],
+            'datosusuario'=>$datosusuario,
             'unidad'=>$unidad,
             'usuariosunidad'=>$usuariosunidad,
             'usuarioticket'=>$usuarioticket,

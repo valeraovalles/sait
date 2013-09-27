@@ -74,7 +74,6 @@ class Perfil
      * @var string
      *
      * @ORM\Column(name="extension", type="integer", nullable=true)
-     * @Assert\NotBlank()
      * @Assert\Type(type="integer", message="La extensión debe ser un número.")
      * @Assert\NotEqualTo(value = "0", message="La extensión no puede ser igual a 0.")
      */
