@@ -1,0 +1,33 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block titulobanner %}
+    ANALISTA
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">Anal&iacute;sta</div>
+
+    <form action="{{ path('createanalista') }}" method="post" {{ form_enctype(form) }}>
+       
+        <div id="descripcion" class="form-show_edit">
+            <div class="contenedor">
+                <br>
+                {{ form_errors(form.nombre) }}
+                <div class="labels">Nombre del Analista:</div>
+                <div class="widgets">{{ form_widget(form.nombre) }}</div>
+            </div>  
+            <br>     
+            <button class="btn" type="submit">Crear</button>
+            <br><br>
+        </div>
+    </form>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('indexanalista') }}">
+            <img width="85px" src="{{ asset('images/listado.jpg')}}">
+        </a>
+    </li>
+</ul>
+{% endblock %}

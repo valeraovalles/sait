@@ -67,6 +67,6 @@ class DatosproveedorType extends AbstractType
 
     public function getName()
     {
-        return 'frontend_contenidosbundle_datosproveedortype';
+        return 'form';
     }
 }

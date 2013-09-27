@@ -6,9 +6,9 @@
 
 {% block body -%}
  {{ parent() }}
-    <div class="titulo">EDITAR DETALLE TIPO-PROVEEDOR</div>
+    <div class="titulo">EDITAR DATOS DE ANALISTA</div>
 
-    <form novalidate action="{{ path('updatedias', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <form novalidate action="{{ path('updateanalista', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
         <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
             <div id="descripcion" class="form-show_edit">
@@ -25,7 +25,7 @@
     </form>
     <ul class="record_actions">
         <li>
-            <a href="{{ path('indexdias') }}">
+            <a href="{{ path('indexanalista') }}">
                 <img width="85px" src="{{ asset('images/listado.jpg')}}">
             </a>
         </li>

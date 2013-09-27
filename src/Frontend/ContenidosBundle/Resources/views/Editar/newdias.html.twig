@@ -1,0 +1,33 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block titulobanner %}
+    DIAS DE ENTREGA
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">D&iacute;as de Entrega</div>
+
+    <form action="{{ path('tipoproveedor_create') }}" method="post" {{ form_enctype(form) }}>
+       
+        <div id="descripcion" class="form-show_edit">
+            <div class="contenedor">
+                <br>
+                {{ form_errors(form.nombre) }}
+                <div class="labels">Nombre del Tipo de Proveedor:</div>
+                <div class="widgets">{{ form_widget(form.nombre) }}</div>
+            </div>  
+            <br>     
+            <button class="btn" type="submit">Crear</button>
+            <br><br>
+        </div>
+    </form>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('tipoproveedor') }}">
+            <img width="85px" src="{{ asset('images/listado.jpg')}}">
+        </a>
+    </li>
+</ul>
+{% endblock %}
