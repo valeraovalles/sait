@@ -33,7 +33,7 @@ class TicketController extends Controller
             "hola","muchas gracias","buenos dias,","buenos dias","buen día","buenas tardes,","buenas tardes","saludos","chicos:",
             "buenos días","gracias","la presente es para","la presente es","por medio de la presente se","Buenas noches,",
             "Buenas noches","el presente es para","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
-            "urgente"
+            "urgente","esto con caracter de urgencia","con caracter de urgencia"
         );
 
         $solicitud=str_replace($eliminar, array(), $solicitud);
@@ -61,7 +61,24 @@ class TicketController extends Controller
         $query->setParameter('horasolucion', $horaactual);
         $query->setParameter('solucion', $datos['solucion']);
         $query->setParameter('idticket', $id);
-        $query->execute();
+        //$query->execute();
+
+
+        //CORREO
+        $ticket = $em->getRepository('SitBundle:Ticket')->find($id);
+        //$ticket->getUnidad()->getCorreo();
+        //$ticket->getSolicitante()->getUser()->getUsername();
+        $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+        ->setSubject('Sit-Cerrado')     // we configure the title
+        ->setFrom('sit@telesurtv.net')     // we configure the sender
+        ->setTo(array('jvalera@telesurtv.net','jvalesra@telesurtv.net'))    // we configure the recipient
+        ->setBody( $this->renderView(
+                'SitBundle:Correo:solucion.html.twig',
+                array('ticket' => $ticket)
+            ), 'text/html');
+
+        $this->get('mailer')->send($message);     // then we send the message.
+        //FIN CORREO
 
         $this->get('session')->getFlashBag()->add('notice', 'EL TICKET SE HA CERRADO SATISFACTORIAMENTE');
         return $this->redirect($this->generateUrl('ticket_show',array('id'=>$id)));
@@ -177,6 +194,21 @@ class TicketController extends Controller
             $query->setParameter('idticket', $id);
             $query->execute();
 
+            //echo $user->getUser()->getUsername();
+
+            //CORREO
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            ->setSubject('Sit-Asignado')     // we configure the title
+            ->setFrom('sit@telesurtv.net')     // we configure the sender
+            ->setTo('jvalera@telesurtv.net')     // we configure the recipient
+            ->setBody( $this->renderView(
+                    'SitBundle:Correo:asignado.html.twig',
+                    array('ticket' => $ticket,'usuario'=>$user)
+                ), 'text/html');
+
+            $this->get('mailer')->send($message);     // then we send the message.
+            //FIN CORREO
+
             $this->get('session')->getFlashBag()->add('notice', 'El ticket fie asignado exitosamente a '.ucfirst($user->getPrimerNombre().' '.$user->getPrimerapellido()).'.');
             return $this->redirect($this->generateUrl('ticket_show', array('id' => $id)));
         }
@@ -219,6 +251,8 @@ class TicketController extends Controller
             $query->setParameter('iduser', $idusuario);
             $query->setParameter('idticket', $id);
             $reasignado = $query->getResult(); 
+
+            //echo $unidad->getCorreo();
 
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Reasignado')     // we configure the title
@@ -336,10 +370,30 @@ class TicketController extends Controller
 
         $entities = $em->getRepository('SitBundle:Unidad')->ticketsunidad($usuariounidad[0]->getId());
 
+        //cuento la cantidad de tickets por unidad
+        $tickets = $em->getRepository('SitBundle:Ticket')->findAll();
+        $contador[1]['nuevo']=0;$contador[1]['asignado']=0;$contador[1]['cerrado']=0;
+        $contador[2]['nuevo']=0;$contador[2]['asignado']=0;$contador[2]['cerrado']=0;
+        $contador[3]['nuevo']=0;$contador[3]['asignado']=0;$contador[3]['cerrado']=0;
+        $contador[4]['nuevo']=0;$contador[4]['asignado']=0;$contador[4]['cerrado']=0;
 
+        foreach ($tickets as $t){ 
+            if($t->getEstatus()!='3'){
+
+                if($t->getEstatus()=='1')
+                    $contador[$t->getUnidad()->getId()]['nuevo']=$contador[$t->getUnidad()->getId()]['nuevo']+1;
+                else if($t->getEstatus()=='2')
+                    $contador[$t->getUnidad()->getId()]['asignado']=$contador[$t->getUnidad()->getId()]['asignado']+1;
+                else if($t->getEstatus()=='4')
+                    $contador[$t->getUnidad()->getId()]['cerrado']=$contador[$t->getUnidad()->getId()]['cerrado']+1;
+            }
+            
+        }
+        //FIN
 
         return $this->render('SitBundle:Ticket:index.html.twig', array(
             'entities' => $entities,
+            'contador'=> $contador
         ));
     }
     /**
