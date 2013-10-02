@@ -9,33 +9,21 @@ use Frontend\SitBundle\Form\TicketType;
 
 use Administracion\UsuarioBundle\Entity\Perfil;
 use Administracion\UsuarioBundle\Form\PerfilType;
+use Administracion\UsuarioBundle\Entity\Extension;
+use Administracion\UsuarioBundle\Form\ExtensionType;
 
 class DefaultController extends Controller
 {
     public function indexAction()
     {
 
-        $datos="";
-        $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-
-        ->setSubject('Hello Email')     // we configure the title
-
-        ->setFrom('jvalera@telesurtv.net')     // we configure the sender
-
-        ->setTo('jvalera@telesurtv.net')     // we configure the recipient
-
-        ->setBody( $this->renderView(
-                'SitBundle:Correo:solicitud.html.twig',
-                array('datos' => $datos)
-            ));
-
-        $this->get('mailer')->send($message);     // then we send the message.
-
-
-
     	//consulto el perfil del usuario
     	$idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-    	$em = $this->getDoctrine()->getManager();
+
+        $em = $this->getDoctrine()->getManager();
+        //datos del usuario
+        $datosusuario =  $em->getRepository('UsuarioBundle:User')->datosusuario($idusuario);
+    	
         $dql = "select p from UsuarioBundle:Perfil p where p.user= :id";
         $query = $em->createQuery($dql);
         $query->setParameter('id',$idusuario);
@@ -50,12 +38,14 @@ class DefaultController extends Controller
         $entity = new Ticket();
         $form   = $this->createForm(new TicketType(), $entity);
 
-        $form2   = $this->createForm(new PerfilType(), $perfil[0]);
+        $entity2 = new Extension();
+        $form2   = $this->createForm(new ExtensionType(), $entity2);
 
         return $this->render('SitBundle:Default:index.html.twig', array(
             'form'   => $form->createView(),
             'form2'   => $form2->createView(),
-            'ticketusuario'=>$ticketusuario
+            'ticketusuario'=>$ticketusuario,
+            'datosusuario'=>$datosusuario
         ));
 
         return $this->render('SitBundle:Default:index.html.twig');
