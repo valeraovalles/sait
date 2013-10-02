@@ -32,7 +32,8 @@ class TicketController extends Controller
         $eliminar=array(
             "hola","muchas gracias","buenos dias,","buenos dias","buen día","buenas tardes,","buenas tardes","saludos","chicos:",
             "buenos días","gracias","la presente es para","la presente es","por medio de la presente se","Buenas noches,",
-            "Buenas noches","el presente es para","por favor","favor","porfavor","chicos"
+            "Buenas noches","el presente es para","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
+            "urgente"
         );
 
         $solicitud=str_replace($eliminar, array(), $solicitud);
@@ -211,6 +212,26 @@ class TicketController extends Controller
                 $em->flush();
             }
 
+            //CORREO
+            $em = $this->getDoctrine()->getManager();
+            $dql   = "SELECT r FROM SitBundle:Reasignado r where r.user= :iduser and r.ticket= :idticket";
+            $query = $em->createQuery($dql);
+            $query->setParameter('iduser', $idusuario);
+            $query->setParameter('idticket', $id);
+            $reasignado = $query->getResult(); 
+
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            ->setSubject('Sit-Reasignado')     // we configure the title
+            ->setFrom('sit@telesurtv.net')     // we configure the sender
+            ->setTo('jvalera@telesurtv.net')     // we configure the recipient
+            ->setBody( $this->renderView(
+                    'SitBundle:Correo:reasignado.html.twig',
+                    array('ticket' => $ticket,'unidad'=>$unidad,'reasignado'=>$reasignado)
+                ), 'text/html');
+
+            $this->get('mailer')->send($message);     // then we send the message.
+            //FIN CORREO
+
             $this->get('session')->getFlashBag()->add('notice', 'Ticket reasignado exitosamente a '.ucfirst($unidad->getDescripcion()).'.');
             return $this->redirect($this->generateUrl('ticket'));
         }
@@ -327,62 +348,65 @@ class TicketController extends Controller
      */
     public function createAction(Request $request)
     {
-
         $datos=$request->request->all();
+        //RECIBO LOS DATOS QUE SE ENVIAN DESDE EL FORMULARIO
         $solicitud=$datos['frontend_sitbundle_tickettype']['solicitud'];
+        $idunidad=$datos['frontend_sitbundle_tickettype']['unidad'];
         $extensionusuario=$datos['extension']['extension'];
+        //FIN
 
+        //GENERO LOS FORMULARIOS
         $entity  = new Ticket();
         $form = $this->createForm(new TicketType(), $entity);
         $form->bind($request);
-
         $entity2  = new Extension();
         $form2 = $this->createForm(new ExtensionType(), $entity2);
         $form2->bind($request);
+        //FIN
 
-        //consulto los tickets del usuario
+        //CONSULTO LOS DATOS DEL USUARIO
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
-        //datos del usuario
         $datosusuario =  $em->getRepository('UsuarioBundle:User')->datosusuario($idusuario);
-        $datosusuario->setExtension($extensionusuario);
+        //FIN
 
+        //AGREGO LA EXTENSION YA QUE LA TENGO ASIGNADA MEDIANTE VALUE AL CAMPO EN TWIG, SI NO LO HAGO TRAE LA EXT DE LA BD
+        $datosusuario->setExtension($extensionusuario);
+        //FIN
+
+        //CONSULTO LOS TICKETS DEL USUARIO PARA LA PARTE DERACHA DE LA INTERFAZ DE USUARIO
         $dql = "select t from SitBundle:Ticket t where t.solicitante= :id order by t.estatus ASC";
         $query = $em->createQuery($dql);
         $query->setParameter('id',$idusuario);
         $ticketusuario = $query->getResult();
+        //FIN
 
         if ($form->isValid() and $form2->isValid()) {
 
-            $em = $this->getDoctrine()->getManager();
-            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-            $dql = "select p from UsuarioBundle:Perfil p where p.user= :id";
-            $query = $em->createQuery($dql);
-            $query->setParameter('id',$idusuario);
-            $perfil = $query->getResult();
-            
-            $entity->setSolicitante($perfil[0]);
+            $perfil =  $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
 
+            //ASOCIO EL SOLICITANTE
+            $entity->setSolicitante($perfil);
+
+            //GUARDO LA FECHA Y HORA DE SOLICITUD
             $fechactual = date_create_from_format('Y-m-d', \date("Y-m-d"));
             $entity->setFechaSolicitud($fechactual);
-
             $entity->setHoraSolicitud(new \DateTime(\date("G:i:s")));
 
+            //ASIGNO ESTATUS NUEVO
             $entity->setEstatus(1);
 
+            //GUARDO LA SOLICITUD FILTRANDO LO ESCRITO POR EL USUARIO
             $solicitud=$this->filtrarsolicitud($solicitud);
-
             $solicitud=ucfirst(trim($solicitud));
-      
             $entity->setSolicitud($solicitud);
 
-            //genero y guardo archivo
+            //GUARDO EL ARCHIVO
             if($form['file']->getData()){
-                //subo el archivo
+      
                 $file=$form['file']->getData();
 
                 $tamaño=number_format($file->getClientSize()/1048576,0);
-
                 $extension = $file->guessExtension();
                 $nombre=$file->getClientOriginalName();
                 $nombre=explode(".", $nombre);
@@ -416,27 +440,26 @@ class TicketController extends Controller
             //actualizo la extensión del usuario
             $query = $em->createQuery('update UsuarioBundle:Perfil p set p.extension= :extension WHERE p.id = :id');
             $query->setParameter('extension', $extensionusuario);
-            $query->setParameter('id', $perfil[0]->getId());
+            $query->setParameter('id', $perfil->getId());
             $query->execute();
 
+
             //envio correo
-            $dql = "select t from SitBundle:Ticket t order by t.id DESC";
-            $query = $em->createQuery($dql);
-            $query->setMaxResults(1);
-            $ultimoticket = $query->getResult();
+            $ticketcreado['solicitante']=$perfil->getPrimerNombre().' '.$perfil->getPrimerApellido();
+            $ticketcreado['extension']=$extensionusuario;
+            $ticketcreado['solicitud']=$solicitud;
+
+            $unidad =  $em->getRepository('SitBundle:Unidad')->find($idunidad);
+            //$unidad->getCorreo();
 
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-
             ->setSubject('Sit-Solicitud')     // we configure the title
-
             ->setFrom('sit@telesurtv.net')     // we configure the sender
-
             ->setTo('jvalera@telesurtv.net')     // we configure the recipient
-
             ->setBody( $this->renderView(
                     'SitBundle:Correo:solicitud.html.twig',
-                    array('ticket' => $ultimoticket[0])
-                ));
+                    array('ticket' => $ticketcreado)
+                ), 'text/html');
 
             $this->get('mailer')->send($message);     // then we send the message.
             //fin enviar correo
@@ -446,9 +469,6 @@ class TicketController extends Controller
 
             return $this->redirect($this->generateUrl('sit_homepage'));
         }
-
-
-
 
         return $this->render('SitBundle:Default:index.html.twig', array(
             'form'   => $form->createView(),

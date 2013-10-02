@@ -32,23 +32,29 @@
 
     <body>
     	<div align="center">
-			<div><h3>NUEVO TICKET</h3></div>
+			<div><h3>TICKET REASIGNADO</h3></div>
 
 			<table cellspacing=0>
 				<tr>
 					<th>Solicitante:</th>
-					<td>{{ ticket.solicitante|title }}</td>
+					<td>{{ ticket.solicitante.primernombre|title }} {{ ticket.solicitante.primerapellido|title }}</td>
 				</tr>
 
 				<tr>
 					<th>Extensión:</th>
-					<td>{{ ticket.extension }}</td>
+					<td>{{ ticket.solicitante.extension }}</td>
 				</tr>
 
 				<tr>
 					<th>Solicitud:</th>
 					<td class="solicitud">{{ ticket.solicitud }}</td>
 				</tr>
+
+                <tr>
+                    <th>Reasignado por:</th>
+                    <td class="solicitud">{{ reasignado[0].user.primernombre|title }} {{ reasignado[0].user.primerapellido|title }} de {{ ticket.unidad.descripcion }}</td>
+                </tr>
+
 			</table>
 			<br>
 			<div>GESTIONAR TICKETS <a href="http://aplicaciones.telesurtv.net/sait/web/app.php/sit/ticket">AQUÍ</a></div>
