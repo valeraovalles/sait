@@ -34,7 +34,7 @@ class Operador
     /**
      * @var integer
      *
-     * @ORM\Column(name="numeroabonados", type="integer", nullable=false)
+     * @ORM\Column(name="numeroabonados", type="bigint", nullable=false)
      * @Assert\NotBlank()
      * @Assert\Type(type="numeric", message="Este valor debe ser numérico {{ type }}")
      */
