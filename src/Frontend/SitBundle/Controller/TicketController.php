@@ -30,10 +30,11 @@ class TicketController extends Controller
         $solicitud=strtolower($solicitud);
 
         $eliminar=array(
-            "hola","muchas gracias","buenos dias,","buenos dias","buen día","buenas tardes,","buenas tardes","saludos","chicos:",
+            "hola","muchas gracias","buenos dias,","buenos dias","buenos días,","buenos días","buen día","buenas tardes,","buenas tardes","saludos","chicos:",
             "buenos días","gracias","la presente es para","la presente es","por medio de la presente se","Buenas noches,",
             "Buenas noches","el presente es para","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
-            "urgente","esto con caracter de urgencia","con caracter de urgencia"
+            "urgente","esto con caracter de urgencia","con caracter de urgencia","Se agradece su valiosa colaboracion","carmen",
+            "buenas tardes el motivo es para","el motivo es para","el motivo es para","por su colaboracion","por su colaboración","buen dia"
         );
 
         $solicitud=str_replace($eliminar, array(), $solicitud);
@@ -61,7 +62,7 @@ class TicketController extends Controller
         $query->setParameter('horasolucion', $horaactual);
         $query->setParameter('solucion', $datos['solucion']);
         $query->setParameter('idticket', $id);
-        //$query->execute();
+        $query->execute();
 
 
         //CORREO
@@ -71,7 +72,7 @@ class TicketController extends Controller
         $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
         ->setSubject('Sit-Cerrado')     // we configure the title
         ->setFrom('sit@telesurtv.net')     // we configure the sender
-        ->setTo(array('jvalera@telesurtv.net','jvalesra@telesurtv.net'))    // we configure the recipient
+        ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
         ->setBody( $this->renderView(
                 'SitBundle:Correo:solucion.html.twig',
                 array('ticket' => $ticket)
@@ -200,7 +201,7 @@ class TicketController extends Controller
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Asignado')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
-            ->setTo('jvalera@telesurtv.net')     // we configure the recipient
+            ->setTo($user->getUser()->getUsername().'@telesurtv.net')     // we configure the recipient
             ->setBody( $this->renderView(
                     'SitBundle:Correo:asignado.html.twig',
                     array('ticket' => $ticket,'usuario'=>$user)
@@ -257,7 +258,7 @@ class TicketController extends Controller
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Reasignado')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
-            ->setTo('jvalera@telesurtv.net')     // we configure the recipient
+            ->setTo($unidad->getCorreo())     // we configure the recipient
             ->setBody( $this->renderView(
                     'SitBundle:Correo:reasignado.html.twig',
                     array('ticket' => $ticket,'unidad'=>$unidad,'reasignado'=>$reasignado)
@@ -310,6 +311,7 @@ class TicketController extends Controller
         foreach ($unidades as $value) {
             $unidad[$value->getId()]=$value->getDescripcion();
         }
+        
         $form = $this->createFormBuilder()
                 ->add('unidad', 'choice', array(
                     'choices'   => $unidad,
@@ -451,7 +453,7 @@ class TicketController extends Controller
             $entity->setEstatus(1);
 
             //GUARDO LA SOLICITUD FILTRANDO LO ESCRITO POR EL USUARIO
-            $solicitud=$this->filtrarsolicitud($solicitud);
+            $solicitud=$this->filtrarsolicitud(strtolower($solicitud));
             $solicitud=ucfirst(trim($solicitud));
             $entity->setSolicitud($solicitud);
 
@@ -509,7 +511,7 @@ class TicketController extends Controller
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Solicitud')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
-            ->setTo('jvalera@telesurtv.net')     // we configure the recipient
+            ->setTo($unidad->getCorreo())     // we configure the recipient
             ->setBody( $this->renderView(
                     'SitBundle:Correo:solicitud.html.twig',
                     array('ticket' => $ticketcreado)
