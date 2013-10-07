@@ -25,6 +25,42 @@ use Doctrine\ORM\EntityRepository;
 class TicketController extends Controller
 {
 
+    public function ticketgeneralAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+
+        $tickets = $em->getRepository('SitBundle:Ticket')->tickets();
+
+        //cuento la cantidad de tickets por unidad
+        $contador[1]['nuevo']=0;$contador[1]['asignado']=0;$contador[1]['cerrado']=0;
+        $contador[2]['nuevo']=0;$contador[2]['asignado']=0;$contador[2]['cerrado']=0;
+        $contador[3]['nuevo']=0;$contador[3]['asignado']=0;$contador[3]['cerrado']=0;
+        $contador[4]['nuevo']=0;$contador[4]['asignado']=0;$contador[4]['cerrado']=0;
+
+        foreach ($tickets as $t){ 
+            if($t->getEstatus()!='3'){
+
+                if($t->getEstatus()=='1')
+                    $contador[$t->getUnidad()->getId()]['nuevo']=$contador[$t->getUnidad()->getId()]['nuevo']+1;
+                else if($t->getEstatus()=='2')
+                    $contador[$t->getUnidad()->getId()]['asignado']=$contador[$t->getUnidad()->getId()]['asignado']+1;
+                else if($t->getEstatus()=='4')
+                    $contador[$t->getUnidad()->getId()]['cerrado']=$contador[$t->getUnidad()->getId()]['cerrado']+1;
+            }
+            
+        }
+        //FIN
+
+        return $this->render('SitBundle:Ticket:general.html.twig', array(
+            'entities' => $tickets,
+            'contador'=> $contador
+        ));
+    }
+
     public function filtrarsolicitud($solicitud){
 
         $solicitud=strtolower($solicitud);
@@ -69,7 +105,7 @@ class TicketController extends Controller
         $ticket = $em->getRepository('SitBundle:Ticket')->find($id);
         //$ticket->getUnidad()->getCorreo();
         //$ticket->getSolicitante()->getUser()->getUsername();
-        $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+       /* $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
         ->setSubject('Sit-Cerrado')     // we configure the title
         ->setFrom('sit@telesurtv.net')     // we configure the sender
         ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
@@ -78,7 +114,7 @@ class TicketController extends Controller
                 array('ticket' => $ticket)
             ), 'text/html');
 
-        $this->get('mailer')->send($message);     // then we send the message.
+        //$this->get('mailer')->send($message); */    // then we send the message.
         //FIN CORREO
 
         $this->get('session')->getFlashBag()->add('notice', 'EL TICKET SE HA CERRADO SATISFACTORIAMENTE');
@@ -198,7 +234,7 @@ class TicketController extends Controller
             //echo $user->getUser()->getUsername();
 
             //CORREO
-            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            /*$message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Asignado')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
             ->setTo($user->getUser()->getUsername().'@telesurtv.net')     // we configure the recipient
@@ -207,7 +243,7 @@ class TicketController extends Controller
                     array('ticket' => $ticket,'usuario'=>$user)
                 ), 'text/html');
 
-            $this->get('mailer')->send($message);     // then we send the message.
+            $this->get('mailer')->send($message); */    // then we send the message.
             //FIN CORREO
 
             $this->get('session')->getFlashBag()->add('notice', 'El ticket fie asignado exitosamente a '.ucfirst($user->getPrimerNombre().' '.$user->getPrimerapellido()).'.');
@@ -255,7 +291,7 @@ class TicketController extends Controller
 
             //echo $unidad->getCorreo();
 
-            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            /*$message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Reasignado')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
             ->setTo($unidad->getCorreo())     // we configure the recipient
@@ -264,7 +300,7 @@ class TicketController extends Controller
                     array('ticket' => $ticket,'unidad'=>$unidad,'reasignado'=>$reasignado)
                 ), 'text/html');
 
-            $this->get('mailer')->send($message);     // then we send the message.
+            $this->get('mailer')->send($message);*/     // then we send the message.
             //FIN CORREO
 
             $this->get('session')->getFlashBag()->add('notice', 'Ticket reasignado exitosamente a '.ucfirst($unidad->getDescripcion()).'.');
@@ -508,7 +544,7 @@ class TicketController extends Controller
             $unidad =  $em->getRepository('SitBundle:Unidad')->find($idunidad);
             //$unidad->getCorreo();
 
-            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            /*$message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Solicitud')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
             ->setTo($unidad->getCorreo())     // we configure the recipient
@@ -517,7 +553,7 @@ class TicketController extends Controller
                     array('ticket' => $ticketcreado)
                 ), 'text/html');
 
-            $this->get('mailer')->send($message);     // then we send the message.
+            $this->get('mailer')->send($message); */    // then we send the message.
             //fin enviar correo
 
 
