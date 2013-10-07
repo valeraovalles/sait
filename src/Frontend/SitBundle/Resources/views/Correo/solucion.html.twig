@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style type="text/css">
+        	th{
+        		text-align: right;
+        		margin-right: 20px;
+        	}
+
+        	.solicitud{
+        		text-align: justify;
+        	}
+
+        	table{
+        		width: 600px;
+
+        	}
+
+        	table td{
+        		padding: 10px;
+        		border:1px solid gray;
+        	}
+
+        	table th{
+        		border:1px solid gray;
+        		background-color: #d9edf7;
+        		padding-right: 10px;
+        		width: 25%;
+        	}
+        </style>
+    </head>
+
+    <body>
+    	<div align="center">
+			<div><h3>LA UNIDAD DE {{ ticket.unidad.descripcion|upper }} HA CERRADO UN TICKET</h3></div>
+
+			<table cellspacing=0>
+
+                <tr>
+                    <th>Solicitud:</th>
+                    <td class="solicitud">{{ ticket.solicitud }}</td>
+                </tr>
+
+
+                <tr>
+                    <th>Solución:</th>
+                    <td class="solicitud">{{ ticket.solucion }}</td>
+                </tr>
+
+				<tr>
+					<th>Solicitante:</th>
+					<td>{{ ticket.solicitante|title }}</td>
+				</tr>
+
+				<tr>
+					<th>Extensión:</th>
+					<td>{{ ticket.solicitante.extension }}</td>
+				</tr>
+
+
+			</table>
+			<br>
+		</div>
+	</body>
+	
+</html>

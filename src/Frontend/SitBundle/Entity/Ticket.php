@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * Ticket
  *
- * @ORM\Table(name="ticket")
+ * @ORM\Table(name="sit.ticket")
  * @ORM\Entity(repositoryClass="Frontend\SitBundle\Entity\TicketRepository")
  */
 class Ticket
@@ -20,7 +20,7 @@ class Ticket
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="ticket_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="sit.ticket_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
@@ -139,7 +139,7 @@ class Ticket
 
     /**
      * @ORM\ManyToMany(targetEntity="Administracion\UsuarioBundle\Entity\Perfil")
-     * @ORM\JoinTable(name="usuarioticket",
+     * @ORM\JoinTable(name="sit.usuarioticket",
      *      joinColumns={@ORM\JoinColumn(name="ticket_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
      *      )
