@@ -1,40 +1,33 @@
-{% extends '::sit.html.twig' %}
- 
-{% block title %}Sit{% endblock %}
+       <body style="background:white;">
+       <head>
+        <meta content="300" http-equiv="REFRESH"> </meta>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <title>{% block title %}Telesur{% endblock %}</title>
+        {% block javascripts %}
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="{{ asset('js/datatable.js') }}"></script>
+            <script src="{{ asset('js/general.js') }}"></script>
+            <script src="{{ asset('libs/twitter-bootstrap/docs/assets/js/bootstrap.js') }}"></script>
+        {% endblock %}
 
+        {% block stylesheets %}
+            <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('libs/menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('css/datatable.css') }}" rel="stylesheet" type="text/css"/>
+            <link rel="stylesheet" href="{{ asset('libs/twitter-bootstrap/docs/assets/css/bootstrap.css') }}">
+        {% endblock %}
+    </head>
 
-{% block titulobanner %}
-    LISTADO DE TICKETS
-{% endblock %}
-
-
-{% block body -%}
-    {{ parent() }}
-    
-    <div class="titulo">LISTADO DE TICKETS</div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalistaespecial">
+    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped" style="font-size:12px;">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Fechasolicitud</th>
-                <th>Horasolicitud</th>
+                <th>Fecha solicitud</th>
+                <th>Hora solicitud</th>
                 <th>Solicitante</th>
                 <th>Solicitud</th>
                 <th>Estatus</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -53,18 +46,13 @@
                     {% endif %}
 
                 </td>
-                <td>
- 
-                    <a href="{{ path('ticket_show', { 'id': entity.id }) }}"><span class="icon-search"></span></a>
-
-                </td>
-            </tr>
+              </tr>
         {% endfor %}
         </tbody>
     </table>
 
     <br><br>
-    <div><span class="label label-important">Nuevos:</span> <b>{{ contador[entities[0].unidad.id].nuevo }}</b> | <span class="label label-info">Asignados:</span> <b>{{ contador[entities[0].unidad.id].asignado }}</b> | <span class="label label-success">Cerrados:</span>  <b>{{ contador[entities[0].unidad.id].cerrado }}</b></div>
+    <div align="center"><span class="label label-important">Nuevos:</span> <b>{{ contador[entities[0].unidad.id].nuevo }}</b> | <span class="label label-info">Asignados:</span> <b>{{ contador[entities[0].unidad.id].asignado }}</b> | <span class="label label-success">Cerrados:</span>  <b>{{ contador[entities[0].unidad.id].cerrado }}</b></div>
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -74,4 +62,4 @@
             } );
         })
     </script>
-    {% endblock %}
+    </body>

@@ -1,7 +1,5 @@
 <?php
-
 namespace Frontend\SitBundle\Controller;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\SitBundle\Resources\Misclases\htmlreporte;
@@ -87,24 +85,22 @@ class ReporteController extends Controller
     }
     public function generarinformeAction(Request $request)
     {
+        header('Content-type: application/vnd.ms-word');
+        header("Content-Disposition: attachment; filename=informe.doc");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
         $datos=$request->request->all();
         $datos=$datos['form'];
-
         $em = $this->getDoctrine()->getManager();
-
         $a=new htmlreporte;
         $html=$a->informe($em,$datos);
-
         if($html==null){
             $this->get('session')->getFlashBag()->add('alert', 'No existen datos para la fecha seleccionada');
             return $this->redirect($this->generateUrl('reporte'));
         }
 
         echo $html;
-        header('Content-type: application/vnd.ms-word');
-        header("Content-Disposition: attachment; filename=informe.doc");
-        header("Pragma: no-cache");
-        header("Expires: 0");
         die;
 
     }

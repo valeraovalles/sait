@@ -16,6 +16,10 @@
    </li>
    <li class='has-sub'><a href='{{ path('reporte') }}'><span>INFORME</span></a></li>
    {% endif %}
+
+   {% if is_granted('ROLE_SIT_GENERAL') %}
+   <li class='has-sub'><a href='{{ path('ticketgeneral') }}'><span>GENERAL</span></a></li>
+   {% endif %}
    <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
    <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
 </ul>
