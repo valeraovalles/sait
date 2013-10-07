@@ -306,11 +306,9 @@ class OperadorController extends Controller
         $editForm = $this->createForm(new OperadorType($datos['pais']), $entity);
         $editForm->bind($request);
 
+        if ($editForm->isValid()) {
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-
-
-
 
             $str = \date("Y-m-d G:i:s");
             $fechaactual = \DateTime::createFromFormat('Y-m-d G:i:s', $str);
@@ -324,7 +322,14 @@ class OperadorController extends Controller
 
             $this->get('session')->getFlashBag()->add('notice', 'Actualización exitosa!');
             return $this->redirect($this->generateUrl('operador_edit', array('id' => $id)));
-        
+        }
+
+        return $this->render('DistribucionBundle:Operador:edit.html.twig', array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+            'representante' => $representante
+        ));
     }
 
     /**
