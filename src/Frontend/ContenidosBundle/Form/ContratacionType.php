@@ -56,7 +56,7 @@ class ContratacionType extends AbstractType
                 )) 
             ->add('observacionesCompras')
             ->add('analistaCompras')
-            ->add('idProveedor')
+            ->add('idPresupuesto')
         ;
     }
 

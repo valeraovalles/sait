@@ -37,6 +37,7 @@ class DatosproveedorType extends AbstractType
                                         )
                 )
             ->add('idTipoprov')
+            ->add('idTipoproveedor')
             ->add('pais')
             ->add('idDetalletipoproveedor')
             ->add('idUnidad')
@@ -67,6 +68,6 @@ class DatosproveedorType extends AbstractType
 
     public function getName()
     {
-        return 'form';
+        return 'form_datosproveedor';
     }
 }

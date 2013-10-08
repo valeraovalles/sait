@@ -107,7 +107,7 @@
                     <div class="labels">Fecha del Addendum:</div>
                     <div class="dato">{{ form_widget(form.fechaAddendum) }}</div>
                 </div>
-
+                
                 
                 <button type="submit">Crear</button>
                 <br><br>
@@ -115,6 +115,6 @@
         </fieldset>
     </form>
 
-    <a href="{{ path('contratacion', { 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    <a href="{{ path('contratacion', { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto, 't':t }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
 
 {% endblock %}

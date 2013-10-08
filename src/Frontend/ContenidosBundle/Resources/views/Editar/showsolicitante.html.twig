@@ -1,0 +1,26 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block titulobanner %}
+    UNIDAD SOLICITANTE
+{% endblock %}
+
+{% block body -%}
+ {{ parent() }}
+    <div class="titulo">UNIDAD SOLICITANTE</div>
+
+    <fieldset> 
+        <div class="form-show_edit"><br>
+                    <div class="contenedor">
+                        <div class="labels">Nombre:</div>
+                        <div class="dato">{{ entity.nombre }}</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">Tipo de Proveedor:</div>
+                        <div class="dato">{{ entity.idTipoproveedor }}</div>
+                    </div><br>
+        </div>
+    </fieldset>        
+    <a href="{{ path('indexsolicitante') }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>   
+    <a href="{{ path('editsolicitante', { 'id': entity.id }) }}"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
+    
+{% endblock %}

@@ -22,7 +22,8 @@
             <tr align="center">
                 <td>{{ entity.nombre }}</td>
                 <td>
-                            <a href="{{ path('editdias', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar Tipo de Proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>    
+                            <a href="{{ path('editdias', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar Tipo de Proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+                            <a onclick="return confirm('Desea borrar')" href="{{ path('deletedias', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/mal.png')}}"></a>    
                 </td>
             </tr>
         {% endfor %}
