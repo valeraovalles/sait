@@ -25,7 +25,6 @@ class DefaultController extends Controller
         }
 
         $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
-
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UsuarioBundle:Perfil')->find($IdUsuario);
 
@@ -33,7 +32,7 @@ class DefaultController extends Controller
         $datos_usuario=$f->datosUsuarioSigefirrhh($entity->getCedula());
         
         
-        return $this->render('UsuarioBundle:Default:index.html.twig', array('usuario'=>,'datos'=>$datos_usuario,'PASSPASS'=>$PASSPASS)
+        return $this->render('UsuarioBundle:Default:index.html.twig', array('usuario'=>$entity,'datos'=>$datos_usuario,'PASSPASS'=>$PASSPASS)
         );
     }
     public function loginAction()
