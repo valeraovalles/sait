@@ -40,10 +40,11 @@
             </div>
             {% endif %}
 
-
+            {% if usuario.user.fueradenomina==false %}
             <div class="listado_aplicaciones">
               <a href="{{ path('neto_homepage')}}">NETO<br><img id="licencias" src="{{ asset("images/moneda.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
             </div>
+            {% endif %}
 
 
             {% if is_granted('ROLE_VIDEOTECA') %}
@@ -58,9 +59,11 @@
             </div>
             {% endif %}
 
+            {% if usuario.user.fueradenomina==false %}
             <div class="listado_aplicaciones">
               <a href="{{ path('constancia_homepage')}}">CONSTANCIA<br><img id="licencias" src="{{ asset("images/constancia.jpeg") }}" data-placement="bottom" title="CONSTANCIA DE TRABAJO" data-trigger="hover"></a>
             </div>
+            {% endif %}
 
             <div class="listado_aplicaciones">
               <a href="{{ path('sit_homepage')}}">SIT<br><img id="licencias" src="{{ asset("images/sit.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
