@@ -599,6 +599,7 @@ class TicketController extends Controller
             $unidad =  $em->getRepository('SitBundle:Unidad')->find($idunidad);
             //$unidad->getCorreo();
 
+
             /*$message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Solicitud')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
@@ -607,15 +608,15 @@ class TicketController extends Controller
                     'SitBundle:Correo:solicitud.html.twig',
                     array('ticket' => $ticketcreado)
                 ), 'text/html');
-            $this->get('mailer')->send($message); */    // then we send the message.
-            //fin enviar correo
+            //$this->get('mailer')->send($message);    // then we send the message.
+            //fin enviar correo*/
 
 
-            /*$message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-            ->setSubject('telesurweb.imk:*t3l3SURcl4v3* @SitTelesur:'.ucfirst($this->filtrarsms($solicitud)))    // we configure the title
-            ->setFrom('sit@telesurtv.net')
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            ->setSubject('telesurweb.imk:*t3l3SURcl4v3* @Sit:'.substr(ucfirst($this->filtrarsms($solicitud))),0,150)    // we configure the title
+            ->setFrom('contactenos@telesurtv.net')
             ->setTo($unidad->getSms());
-            $this->get('mailer')->send($message);*/     // then we send the message.
+            $this->get('mailer')->send($message);     // then we send the message.
             //fin enviar correo
 
             $this->get('session')->getFlashBag()->add('notice', 'TU SOLICITUD SE HA REALIZADO EXITOSAMENTE');

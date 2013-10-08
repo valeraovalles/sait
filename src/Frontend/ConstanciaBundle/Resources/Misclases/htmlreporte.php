@@ -32,7 +32,7 @@ class htmlreporte
         hq.id_grupo_nomina=gn.id_grupo_nomina and
 
         hq.anio=(select max(anio) from historicoquincena) and hq.mes=(select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena)) and hq.semana_quincena=(select max(semana_quincena) from historicoquincena where anio=(select max(anio) from historicoquincena) and mes = (select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena)))";   
-        
+
       $rs = pg_query($conn, $query);
 
       $suma_conceptos=0;
@@ -44,8 +44,25 @@ class htmlreporte
           }
       }
 
+
+      //DOMINGOS DE JORNADA
+      $query="
+        select hq.monto_asigna from historicoquincena hq, trabajador t 
+        where hq.id_trabajador=t.id_trabajador and t.cedula='17836833' 
+        and anio=(select max(anio) from historicoquincena) 
+        and mes=(select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena)) 
+        and semana_quincena=(select max(semana_quincena) from historicoquincena 
+        where anio=(select max(anio) from historicoquincena) and mes = (select max(mes) 
+        from historicoquincena where anio = (select max(anio) from historicoquincena)))
+        AND id_concepto_tipo_personal='2003'
+      ";
+
+      $rs = pg_query($conn, $query);
+      $row = pg_fetch_array($rs);
+      if(!empty($row))$domingojornada=$row[0];else $domingojornada=0;
+
      $s_basico=$sueldo;
-     $s_normal=$sueldo+$suma_conceptos;
+     $s_normal=$sueldo+$suma_conceptos+$domingojornada;
      $s_integral=($s_normal/30)*41.25;   
      $s_anual_integral= $s_integral * 12;
      $s_anual_basico=$s_basico * 12;

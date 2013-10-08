@@ -11,7 +11,7 @@
     {{ parent() }}
 
 
-    {% set datos  %} {% if app.user %} USUARIO: {{ app.user.username | upper }} | NOMBRE: {{ usuario.primerNombre | upper }} | APELLIDO: {{ usuario.primerApellido | upper }} | CEDULA: {{ usuario.cedula | upper }} {% if usuario.user.fueradenomina==false %}| SUELDO NORMAL: {{ datos.sueldo_basico | upper }} | FECHA INGRESO: {{ datos.fecha_ingreso | upper | date('d-m-Y') }}{% endif %}{% endif %}{% endset %}
+    {% set datos  %} {% if app.user %} USUARIO: {{ app.user.username | upper }} | NOMBRE: {{ usuario.primerNombre | upper }} | APELLIDO: {{ usuario.primerApellido | upper }} | CEDULA: {{ usuario.cedula | upper }} {% if usuario.user.fueradenomina==false %}| SUELDO NORMAL: {{ datos.sueldo_basico | upper }} | FECHA INGRESO: {{ datos.fecha_ingreso | upper | date('d-m-Y') }} | CARGO: {{ datos.descripcion_cargo }}{% endif %}{% endif %}{% endset %}
     
     <div class="titulo"><span id="info" style="cursor:pointer;" data-content={{ datos|json_encode|raw }} title="USUARIO">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }} <div class="icon-search"></div></span></div>
 
@@ -95,6 +95,14 @@
               <a href="javascript:void(0)">TRANSPORTE<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
             {% endif %}
+
+            {% if is_granted('ROLE_ADMINISTRADOR') %}
+            <div class="listado_aplicaciones">
+              <a href="{{ path('transporte_homepage') }}">TRANSPORTE NUEVO<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            </div>
+            {% endif %}
+
+
 
    </div>
 

@@ -24,11 +24,10 @@ class ConstanciaController extends Controller
 
         $parametros['directora']=$this->container->getParameter('directora');
         $parametros['montoticket']=$this->container->getParameter('montoticket');
-
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
-        $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+        
         $constancia = $em->getRepository('ConstanciaBundle:Constancia')->find($id);
+        $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($constancia->getUser()->getId());
         $f=new Funcion;
         $datosnomina=$f->datosUsuarioSigefirrhh($usuario->getCedula());
 

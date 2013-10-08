@@ -30,8 +30,10 @@
         <thead>
             <tr>
                 <th>Fecha solicitud</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cedula</th>
                 <th>Tipo</th>
-                <th>Bonoalimentacion</th>
                 <th>Dirigida</th>
                 <th>Estatus</th>
                 <th>Actions</th>
@@ -40,11 +42,14 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.fechasolicitud|date("d-m-Y G:i:s") }}</td>
+                <td>{{ entity.fechasolicitud|date("d-m-Y") }}</td>
+                <td>{{ entity.user.primernombre|title }}</td>
+                <td>{{ entity.user.primerapellido|title }}</td>
+                <td>{{ entity.user.cedula|title }}</td>
+
                 <td>
                     {% if entity.tipo=='sb' %}SUELDO BÁSICO{% elseif entity.tipo=='sn' %}SUELDO NORMAL{% elseif entity.tipo=='si' %}SUELDO INTEGRAL{% elseif entity.tipo=='sba' %}SUELDO BÁSICO ANUAL{% elseif entity.tipo=='sna' %}SUELDO NORMAL ANUAL{% elseif entity.tipo=='sia' %}SUELDO INTEGRAL ANUAL{% endif %}
                 </td>
-                <td>{% if entity.bonoalimentacion==false %}NO{% else %}SI{% endif %}</td>
                 <td>{{ entity.dirigida }}</td>
                 <td align="center">{% if entity.culminada==false %}<span style="display:none;">1-</span><span class="label label-important">Nuevo</span>{% else %}<span style="display:none;">2-</span><span class="label label-success">Cerrado</span>{% endif %}</td>
                 <td>
