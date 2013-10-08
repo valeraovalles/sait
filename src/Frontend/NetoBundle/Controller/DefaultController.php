@@ -12,13 +12,20 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+<<<<<<< HEAD
         //valido si el suuario está en nomina para dejarlo entrar a la aplicación
+=======
+>>>>>>> pre-master
         $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UsuarioBundle:Perfil')->find($IdUsuario);
         if($entity->getUser()->getFueradenomina()==true)
+<<<<<<< HEAD
             return $this->redirect($this->generateUrl('usuario_homepage'));
 
+=======
+             return $this->redirect($this->generateUrl('usuario_homepage'));
+>>>>>>> pre-master
 
     	$tipnom=array('s'=>'Seleccione', 'n'=>'Nómina', 'a'=>'Aguinaldos');
     	

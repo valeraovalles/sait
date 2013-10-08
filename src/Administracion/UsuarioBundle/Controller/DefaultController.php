@@ -25,7 +25,6 @@ class DefaultController extends Controller
         }
 
         $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
-
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UsuarioBundle:Perfil')->find($IdUsuario);
 
