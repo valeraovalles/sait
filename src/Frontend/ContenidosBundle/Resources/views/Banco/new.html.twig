@@ -32,6 +32,43 @@
             </div>
         </fieldset>
         <br>
+        <fieldset>       
+            <legend id="b"><div class="divisor">DATOS DEL BANCO BENEFICIARIO</div> </legend>
+            <div id="detalles" class="form-show_edit">
+                <br>
+                <div class="form-contenedor">
+                    {{ form_errors(form.bancoBenef) }}
+                    <div class="labels">Nombre del Banco Beneficiario:</div>
+                    <div class="dato">{{ form_widget(form.bancoBenef) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.swiftBenef) }}
+                    <div class="labels">SWIFT del Banco Beneficiario:</div>
+                    <div class="dato">{{ form_widget(form.swiftBenef) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.abaBenef) }}
+                    <div class="labels">ABA del Banco Beneficiario:</div>
+                    <div class="dato">{{ form_widget(form.abaBenef) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.ibanBenef) }}
+                    <div class="labels">IBAN del Banco Beneficiario:</div>
+                    <div class="dato">{{ form_widget(form.ibanBenef) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.cuentaBenef) }}
+                    <div class="labels">Cuenta del Banco Intermediario:</div>
+                    <div class="dato">{{ form_widget(form.cuentaBenef) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.direccionBancobenef) }}
+                    <div class="labels">Direcci&oacute;n del Banco Intermediario:</div>
+                    <div class="dato">{{ form_widget(form.direccionBancobenef) }}</div>
+                </div>
+            </div>
+        </fieldset>
+        <br>
          <fieldset>       
             <legend id="b"><div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div> </legend>
             <div id="detalles" class="form-show_edit">
@@ -66,44 +103,7 @@
                     <div class="labels">Direcci&oacute;n del Banco Intermediario:</div>
                     <div class="dato">{{ form_widget(form.direccionBancointerm) }}</div>
                 </div>
-            </div>
-        </fieldset>
-        <br>
-        <fieldset>       
-            <legend id="b"><div class="divisor">DATOS DEL BANCO BENEFICIARIO</div> </legend>
-            <div id="detalles" class="form-show_edit">
-                <br>
-                <div class="form-contenedor">
-                    {{ form_errors(form.bancoBenef) }}
-                    <div class="labels">Nombre del Banco Beneficiario:</div>
-                    <div class="dato">{{ form_widget(form.bancoBenef) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(form.swiftBenef) }}
-                    <div class="labels">SWIFT del Banco Beneficiario:</div>
-                    <div class="dato">{{ form_widget(form.swiftBenef) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(form.abaBenef) }}
-                    <div class="labels">ABA del Banco Beneficiario:</div>
-                    <div class="dato">{{ form_widget(form.abaBenef) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(form.ibanBenef) }}
-                    <div class="labels">IBAN del Banco Beneficiario:</div>
-                    <div class="dato">{{ form_widget(form.ibanBenef) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(form.cuentaBenef) }}
-                    <div class="labels">Cuenta del Banco Intermediario:</div>
-                    <div class="dato">{{ form_widget(form.cuentaBenef) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(form.direccionBancobenef) }}
-                    <div class="labels">Direcci&oacute;n del Banco Intermediario:</div>
-                    <div class="dato">{{ form_widget(form.direccionBancobenef) }}</div>
-                    <button type="submit" class="btn">Registrar Banco</button>
-                </div><br>
+                <button type="submit" class="btn">Registrar Banco</button><br><br>
             </div>
         </fieldset>
         <br>

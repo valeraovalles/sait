@@ -1,14 +1,9 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 {% if datos == 1 %}
 	<div class="form-contenedor">
         <div class="labels">Unidad Solicitante:</div>
 		<div class="widgets">{{ form_widget(form.unidadsolicitante) }}</div>
-    </div>
-{% endif %}
-{% if datos == 3 %}
-    <div class="form-contenedor">
-        <div class="labels">Tipo de Sat&eacute;lite:</div>
-		<div class="widgets">{{ form_widget(form.tipoSatelite) }}</div>
     </div>
 {% endif %}
 {% if datos == 4 %}
@@ -20,6 +15,7 @@
         <div class="labels">Detalle del Tipo de Proveedor:</div>
 		<div class="widgets">{{ form_widget(form.detalle) }}</div>
     </div>
+    
 {% endif %}
 {% if datos == 2 %}
 	<div class="form-contenedor">
@@ -30,4 +26,17 @@
         <div class="labels">Detalle del Tipo de Proveedor:</div>
 		<div class="widgets">{{ form_widget(form.detalle) }}</div>
     </div>
+    <div id="satelite"></div>
 {% endif %}
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_detalle').change(function(){
+                var sat = $("#form_detalle").val();
+                var ruta = "{{ path('ajax_datossat', {'sats': 'variable'}) }}";
+                ruta = ruta.replace("variable", sat);
+                $('#satelite').load(ruta);
+            });
+
+
+        });
+</script>

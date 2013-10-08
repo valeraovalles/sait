@@ -1,20 +1,20 @@
 {% extends '::contenidos.html.twig' %}
 
 {% block titulobanner %}
-    DIAS DE ENTREGA
+    UNIDAD EJECUTORA
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
-    <div class="titulo">D&iacute;as de Entrega</div>
+    <div class="titulo">Unidad Ejecutora</div>
 
-    <form action="{{ path('createdias') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('createejecutora') }}" method="post" {{ form_enctype(form) }}>
        
         <div id="descripcion" class="form-show_edit">
             <div class="contenedor">
                 <br>
                 {{ form_errors(form.nombre) }}
-                <div class="labels">Nombre:</div>
+                <div class="labels">Nombre de Unidad Ejecutora:</div>
                 <div class="widgets">{{ form_widget(form.nombre) }}</div>
             </div>  
             <br>     
@@ -25,7 +25,7 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('indexdias') }}">
+        <a href="{{ path('indexejecutora') }}">
             <img width="85px" src="{{ asset('images/listado.jpg')}}">
         </a>
     </li>

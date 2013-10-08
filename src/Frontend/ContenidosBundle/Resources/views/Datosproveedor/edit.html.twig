@@ -11,10 +11,6 @@
 
     <div class="titulo">EDITAR PROVEEDOR</div>
     <form action="{{ path('datosproveedor_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-
-       
-
-
         <input type="hidden" name="_method" value="PUT" />
         <fieldset>       
             <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
@@ -124,7 +120,23 @@
                     <div class="labels">Tipo:</div>
                     <div class="widgets">{{ form_widget(edit_form.idTipoprov) }}</div>
                 </div>
-                <div id="muestra"> </div>
+                <div id="muestra">
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form.idUnidad) }}
+                        <div class="labels">Unidad Solicitante:</div>
+                        <div class="widgets">{{ form_widget(edit_form.idUnidad) }}</div>
+                    </div>
+                    <div class="form-contenedor campodetalle">
+                        {{ form_errors(edit_form.idDetalletipoproveedor) }}
+                        <div class="labels">Detalle del Tipo de Proveedor:</div>
+                        <div class="widgets">{{ form_widget(edit_form.idDetalletipoproveedor) }}</div>
+                    </div>
+                    <div class="form-contenedor camposatelite">
+                        {{ form_errors(edit_form.tipoSatelite) }}
+                        <div class="labels">Tipo de Satelite:</div>
+                        <div class="widgets">{{ form_widget(edit_form.tipoSatelite) }}</div>
+                    </div>
+                </div>
                 <button type="submit" class="btn">Editar</button>
                 <br><br>
             </div>
@@ -132,7 +144,25 @@
         </fieldset>
         <br>        
         <a href="{{ path( 'datosproveedor' ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
-           
     </form>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_datosproveedor_idTipoprov').change(function(){
+                var dato = $("#form_datosproveedor_idTipoprov").val();
+                var ruta = "{{ path('ajax_datosproveedor', {'datos': 'variable'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#muestra').load(ruta);
+            });
+
+            if($("#form_datosproveedor_idDetalletipoproveedor").val()=='11')
+                $("#form_datosproveedor_tipoSatelite").show();
+            else
+                $(".camposatelite").hide();
+
+            if($("#form_datosproveedor_idTipoprov").val()=='1')
+                $(".campodetalle").hide();           
+        });
+    </script>
 
 {% endblock %}
