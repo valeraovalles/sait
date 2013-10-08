@@ -1,28 +1,131 @@
-{% extends '::base.html.twig' %}
+{% extends '::contenidos.html.twig' %}
+{% block title %}Contenidos-Contratacion- Editar{% endblock %}
 
+{% block titulobanner %}
+    CONTRATACION
+{% endblock %}
+    
 {% block body -%}
-    <h1>Contratacion edit</h1>
+    {{ parent() }}
 
-    <form action="{{ path('contratacion_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <div class="titulo">EDITAR DATOS DE LA CONTRATACI&Oacute;N</div>
+
+    <form action="{{ path('contratacion_update', { 'id': entity.id, 'id_presupuesto': entity.idPresupuesto }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
-        {{ form_widget(edit_form) }}
-        <p>
-            <button type="submit">Edit</button>
-        </p>
+
+        <div id="descripcion" class="form-show_edit">
+            
+            <fieldset>
+                 <div class="divisor">DATOS DE LA CONTRATACI&Oacute;N</div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.concepto) }}
+                    <div class="labels">Concepto:</div>
+                    <div class="widgets">{{ form_widget(edit_form.concepto) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.tipoMoneda) }}
+                    <div class="labels">Tipo de Moneda:</div>
+                    <div class="widgets">{{ form_widget(edit_form.tipoMoneda) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.montoMe) }}
+                    <div class="labels">Monto en $/€:</div>
+                    <div class="widgets">{{ form_widget(edit_form.montoMe) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.montoBs) }}
+                    <div class="labels">Monto en Bs:</div>
+                    <div class="widgets">{{ form_widget(edit_form.montoBs) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.fechaInicio) }}
+                    <div class="labels">Fecha de Inicio:</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaInicio) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.fechaFin) }}
+                    <div class="labels">Fecha de Fin:</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaFin) }}</div>
+                </div>
+
+                <div class="divisor">DATOS DE LA SOLICITUD</div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.numSolicitud) }}
+                    <div class="labels">N&uacute;mero de la Solicitud:</div>
+                    <div class="widgets">{{ form_widget(edit_form.numSolicitud) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.numConformacion) }}
+                    <div class="labels">N&uacute;mero de la Conformaci&oacute;n:</div>
+                    <div class="widgets">{{ form_widget(edit_form.numConformacion) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.numPuntocuenta) }}
+                    <div class="labels">N&uacute;mero del Punto de Cuenta:</div>
+                    <div class="widgets">{{ form_widget(edit_form.numPuntocuenta) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.fechaPunto) }}
+                    <div class="labels">Fecha del Punto de Cuenta:</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaPunto) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.numAlcance) }}
+                    <div class="labels">N&uacute;mero de alcance (Punto de Cuenta):</div>
+                    <div class="widgets">{{ form_widget(edit_form.numAlcance) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.fechaAlcance) }}
+                    <div class="labels">Fecha de alcance (Punto de Cuenta):</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaAlcance) }}</div>
+                </div>
+
+                <div class="divisor">DETALLES DE LA CONTRATACI&Oacute;N</div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.numContrato) }}
+                    <div class="labels">N&uacute;mero del Contrato:</div>
+                    <div class="widgets">{{ form_widget(edit_form.numContrato) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.fechaContrato) }}
+                    <div class="labels">Fecha del Contrato:</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaContrato) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.numAddendum) }}
+                    <div class="labels">N&uacute;mero del Addendum:</div>
+                    <div class="widgets">{{ form_widget(edit_form.numAddendum) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.fechaAddendum) }}
+                    <div class="labels">Fecha del Addendum:</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaAddendum) }}</div>
+                </div>
+
+                {% if tipoprov == 'COMPRAS' %}
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form.analistaCompras) }}
+                        <div class="labels">Analista de Compras:</div>
+                        <div class="widgets">{{ form_widget(edit_form.analistaCompras) }}</div>
+                    </div>
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form.observacionesCompras) }}
+                        <div class="labels">Observaciones de Compras:</div>
+                        <div class="widgets">{{ form_widget(edit_form.observacionesCompras) }}</div>
+                    </div>
+
+                {% endif %}
+
+            </fieldset>
+
+            <button type="submit" class="btn">Editar</button><br><br>
+        </div>
+        <br>       
+        <a href="{{ path('contratacion' , { 'id_proveedor': prov, 'id_presupuesto': entity.idPresupuesto, 't':t } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+        
+
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('contratacion') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('contratacion_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+
+
 {% endblock %}

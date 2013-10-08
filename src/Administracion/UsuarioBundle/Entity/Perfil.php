@@ -65,7 +65,6 @@ class Perfil
      * @var string
      *
      * @ORM\Column(name="fechanacimiento", type="date", length=20, nullable=true)
-     * @Assert\NotBlank()
      */
     private $fechanacimiento;
 

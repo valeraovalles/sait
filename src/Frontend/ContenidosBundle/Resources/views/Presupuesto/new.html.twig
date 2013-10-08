@@ -1,20 +1,48 @@
-{% extends '::base.html.twig' %}
+{% extends '::contenidos.html.twig' %}
 
 {% block body -%}
-    <h1>Presupuesto creation</h1>
+ {{ parent() }}
+    <div class="titulo">NUEVO PRESUPUESTO</div>
 
-    <form action="{{ path('presupuesto_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
-        <p>
-            <button type="submit">Create</button>
-        </p>
+    <form action="{{ path('presupuesto_create', { 'id_proveedor': id_proveedor }) }}" method="post" {{ form_enctype(form) }}>
+        <fieldset>
+            <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
+            <div id="descripcion" class="form-show_edit">
+                <br>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaInicio) }}
+                    <div class="labels">Fecha de Inicio:</div>
+                    <div class="widgets">{{ form_widget(form.fechaInicio) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaFin) }}
+                    <div class="labels">Fecha de Fin:</div>
+                    <div class="widgets">{{ form_widget(form.fechaFin) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.montoDolares) }}
+                    <div class="labels">Monto en Dolares:</div>
+                    <div class="widgets">{{ form_widget(form.montoDolares) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.montoEuros) }}
+                    <div class="labels">Monto en Euros:</div>
+                    <div class="widgets">{{ form_widget(form.montoEuros) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.montoBs) }}
+                    <div class="labels">Monto en Bs:</div>
+                    <div class="widgets">{{ form_widget(form.montoBs) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.tipo) }}
+                    <div class="labels">Tipo de Presupuesto:</div>
+                    <div class="widgets">{{ form_widget(form.tipo) }}</div>
+                </div>
+            </div>
+        </fieldset>
+
+        <br>
+        <button type="submit" class="btn">CREAR</button> 
     </form>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('presupuesto') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
 {% endblock %}

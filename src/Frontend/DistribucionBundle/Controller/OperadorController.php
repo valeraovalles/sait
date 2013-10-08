@@ -275,11 +275,13 @@ class OperadorController extends Controller
         $representante = $em->getRepository('DistribucionBundle:Representante')->RepresentanteOperador($id);
 
 
+        $verifica=null;
         return $this->render('DistribucionBundle:Operador:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'representante' => $representante,
+            'verifica'=>$verifica
         ));
     }
 
@@ -324,11 +326,13 @@ class OperadorController extends Controller
             return $this->redirect($this->generateUrl('operador_edit', array('id' => $id)));
         }
 
+        $verifica="Verifica los campos del formulario.";
         return $this->render('DistribucionBundle:Operador:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'representante' => $representante
+            'representante' => $representante,
+            'verifica'=>$verifica
         ));
     }
 

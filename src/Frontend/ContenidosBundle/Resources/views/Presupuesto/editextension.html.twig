@@ -10,7 +10,7 @@
 
      <div class="titulo">EDITAR DATOS DEL PRESUPUESTO</div>
 
-    <form novalidate="novalidate" action="{{ path('presupuesto_update', { 'id': entity.id, 'id_proveedor': id_proveedor  }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <form novalidate="novalidate" action="{{ path('presupuesto_extensionupdate', { 'id': entity.id, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
         
         <div id="descripcion" class="form-show_edit">
@@ -52,7 +52,7 @@
             <button type="submit" class="btn">Editar</button><br><br>
         </div>
         <br>       
-        <a href="{{ path('presupuesto' , { 'id_proveedor': id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+        <a href="{{ path('presupuesto_extensionindex' , { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
         
 
     </form>

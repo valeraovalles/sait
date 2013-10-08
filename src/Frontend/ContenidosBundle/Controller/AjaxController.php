@@ -15,6 +15,8 @@ class AjaxController extends Controller
 {
     public function datosproveedorAction($datos)
     {
+
+        $ajax=1;
     	$em = $this->getDoctrine()->getManager();
     	if ($datos == 1)
     	{
@@ -55,41 +57,14 @@ class AjaxController extends Controller
                     ->add('unidadsolicitante', 'choice', array(
                           'choices'   => $unidadsolicitante,                          
                     	 ))
-                    ->add('observacionTipoproveedor','textarea')
                     ->add('detalle', 'choice', array(
                           'choices'   => $detalletipo,
                     	 ))
-                    ->add('observacionUnidadsolicitante','textarea')
                     
             ->getForm();
 
 
 
-    	}elseif ($datos == 3)
-    	{
-    		$dql   = "SELECT det FROM ContenidosBundle:Unidadsolicitante det where det.idTipoproveedor= :id";
-            $query = $em->createQuery($dql)->setParameter('id',$datos);
-          
-            $detalle=$query->getResult();
-            foreach ($detalle as $key) {
-            	$unidadsolicitante[$key->getId()]=$key->getNombre();
-
-            }
-            $form = $this->createFormBuilder()
-                    ->add('unidadsolicitante', 'choice', array(
-                          'choices'   => $unidadsolicitante,
-                    	 ))
-                    ->add('tipoSatelite','choice', array(
-			                                            'expanded'=>false, 
-			                                            'multiple'=>false,
-			                                            'empty_value' => 'Seleccione...',
-			                                            'choices' => array(
-			                                                                    "0" =>"Ocasional", 
-			                                                                    "1" =>"Fijo"
-			                                                              )
-                                        				)
-                		)
-            ->getForm();
     	}elseif ($datos == 4) 
     	{
 
@@ -123,6 +98,31 @@ class AjaxController extends Controller
     	}
     	return $this->render('ContenidosBundle:Ajax:datosproveedor.html.twig', array(
             'datos' => $datos,
+            'ajax'=> $ajax,
+            'form'   => $form->createView(),
+        ));
+    }
+
+    public function datossatAction($sats)
+    {
+        $ajax=1;
+        $em = $this->getDoctrine()->getManager();
+
+           $form = $this->createFormBuilder()
+                    
+                    ->add('tipoSatelite','choice', array(
+                                                        'expanded'=>false, 
+                                                        'multiple'=>false,
+                                                        'choices' => array(
+                                                                                "0" =>"Ocasional", 
+                                                                                "1" =>"Fijo"
+                                                                          )
+                                                        )
+                        )
+            ->getForm();
+        return $this->render('ContenidosBundle:Ajax:satelites.html.twig', array(
+            'sats' => $sats,
+            'ajax'=> $ajax,
             'form'   => $form->createView(),
         ));
     }

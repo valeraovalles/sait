@@ -11,11 +11,30 @@ class PresupuestoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fechaInicio')
-            ->add('fechaFin')
+            //->add('codigo')
+            ->add('descripcion', 'textarea')
+            ->add('fechaInicio','date',array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+                )) 
+            ->add('fechaFin','date',array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+                )) 
             ->add('montoDolares')
             ->add('montoEuros')
             ->add('montoBs')
+            ->add('tipo','choice', array(
+                                            'expanded'=>false, 
+                                            'multiple'=>false,
+                                            'empty_value' => 'Seleccione...',
+                                            'choices' => array(
+                                                                    "0" =>"Normal", 
+                                                                    "1" =>"Extension"
+                                                                  )
+                                        )
+                )
+            ->add('idPresext')
             ->add('idProveedor')
         ;
     }

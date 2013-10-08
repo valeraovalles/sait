@@ -152,14 +152,14 @@ class Contratacion
     private $analistaCompras;
 
     /**
-     * @var \Contenidos.datosproveedor
+     * @var \Contenidos.presupuesto
      *
-     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Datosproveedor")
+     * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Presupuesto")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_proveedor", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_presupuesto", referencedColumnName="id")
      * })
      */
-    private $idProveedor;
+    private $idPresupuesto;
 
 
 
@@ -588,25 +588,25 @@ class Contratacion
     }
 
     /**
-     * Set idProveedor
+     * Set idPresupuesto
      *
-     * @param \Frontend\ContenidosBundle\Entity\Datosproveedor $idProveedor
+     * @param \Frontend\ContenidosBundle\Entity\Presupuesto $idPresupuesto
      * @return Contratacion
      */
-    public function setIdProveedor(\Frontend\ContenidosBundle\Entity\Datosproveedor $idProveedor = null)
+    public function setIdPresupuesto(\Frontend\ContenidosBundle\Entity\Presupuesto $idPresupuesto = null)
     {
-        $this->idProveedor = $idProveedor;
+        $this->idPresupuesto = $idPresupuesto;
     
         return $this;
     }
 
     /**
-     * Get idProveedor
+     * Get idPresupuesto
      *
-     * @return \Frontend\ContenidosBundle\Entity\Datosproveedor 
+     * @return \Frontend\ContenidosBundle\Entity\Presupuesto 
      */
-    public function getIdProveedor()
+    public function getIdPresupuesto()
     {
-        return $this->idProveedor;
+        return $this->idPresupuesto;
     }
 }

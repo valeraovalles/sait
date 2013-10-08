@@ -37,6 +37,7 @@
     </table>
         <br><br>
        <a class="btn btn-primary dropdown-toggle" href="{{ path( 'banco_new',{ 'id_proveedor':id_proveedor } ) }}">Registrar Datos Bancarios </a>
+       <a href="{{ path('datosproveedor') }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
         
     <br><br>
     {% endblock %}

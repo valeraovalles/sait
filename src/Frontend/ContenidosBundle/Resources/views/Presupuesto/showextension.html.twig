@@ -18,6 +18,10 @@
         <fieldset>
             <legend id="a"><div class="divisor">DATOS DEL PRESUPUESTO</div> </legend>
             <div class="contenedor">
+                <div class="labels">Descripci&oacute;n:</div>
+                <div class="dato">{{ entity.descripcion }}</div>
+            </div>
+            <div class="contenedor">
                 <div class="labels">Fecha de Inicio:</div>
                 <div class="dato">{{ entity.fechaInicio|date('Y-m-d') }}</div>
             </div>
@@ -55,7 +59,7 @@
             </div>
         </fieldset>
     </div>
-    <a href="{{ path('presupuesto', { 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Volver al Listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
-    <a href="{{ path('presupuesto_edit', { 'id': entity.id, 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Editar Presupuesto"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
+    <a href="{{ path('presupuesto_extensionindex', { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto }) }}" data-toggle="tooltip" data-placement="top" title="Volver al Listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    <a href="{{ path('presupuesto_extensionedit', { 'id': entity.id, 'id_proveedor':id_proveedor, 'id_presupuesto': id_presupuesto }) }}" data-toggle="tooltip" data-placement="top" title="Editar Presupuesto"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
 
 {% endblock %}
