@@ -27,6 +27,11 @@
             <div class="widgetform">{{ form_widget(edit_form.isActive) }}</div>
         </div>
         <div class="contenedorform">
+            <div class="text-error">{{ form_errors(edit_form.fueradenomina) }}</div>
+            <div class="labelform">Fuera de Nomina:</div>
+            <div class="widgetform">{{ form_widget(edit_form.fueradenomina) }}</div>
+        </div>
+        <div class="contenedorform">
             <div class="text-error">{{ form_errors(edit_form_perfil.primerNombre) }}</div>
             <div class="labelform">Primer nombre:</div>
             <div class="widgetform">{{ form_widget(edit_form_perfil.primerNombre) }}</div>

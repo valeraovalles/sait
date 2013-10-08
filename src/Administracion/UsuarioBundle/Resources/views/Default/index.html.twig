@@ -11,7 +11,7 @@
     {{ parent() }}
 
 
-    {% set datos  %} {% if app.user %} USUARIO: {{ app.user.username | upper }} | NOMBRE: {{ usuario.primerNombre | upper }} | APELLIDO: {{ usuario.primerApellido | upper }} | CEDULA: {{ usuario.cedula | upper }} | SUELDO NORMAL: {{ datos.sueldo_basico | upper }} | FECHA INGRESO: {{ datos.fecha_ingreso | upper | date('d-m-Y') }}{% endif %}{% endset %}
+    {% set datos  %} {% if app.user %} USUARIO: {{ app.user.username | upper }} | NOMBRE: {{ usuario.primerNombre | upper }} | APELLIDO: {{ usuario.primerApellido | upper }} | CEDULA: {{ usuario.cedula | upper }} {% if usuario.user.fueradenomina==false %}| SUELDO NORMAL: {{ datos.sueldo_basico | upper }} | FECHA INGRESO: {{ datos.fecha_ingreso | upper | date('d-m-Y') }}{% endif %}{% endif %}{% endset %}
     
     <div class="titulo"><span id="info" style="cursor:pointer;" data-content={{ datos|json_encode|raw }} title="USUARIO">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }} <div class="icon-search"></div></span></div>
 
@@ -40,10 +40,12 @@
             </div>
             {% endif %}
 
-
+            {% if usuario.user.fueradenomina==false %}
             <div class="listado_aplicaciones">
               <a href="{{ path('neto_homepage')}}">NETO<br><img id="licencias" src="{{ asset("images/moneda.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
             </div>
+            {% endif %}
+
 
 
             {% if is_granted('ROLE_VIDEOTECA') %}
@@ -52,15 +54,18 @@
             </div>
             {% endif %}
 
+
             {% if is_granted('ROLE_NOMINA') %}
             <div class="listado_aplicaciones">
               <a href="{{ path('nomina_formalimentacion')}}">NÓMINA<br><img id="licencias" src="{{ asset("images/nomina.jpeg") }}" data-placement="bottom" title="TXT PRESTACIONES" data-trigger="hover"></a>
             </div>
             {% endif %}
 
+            {% if usuario.user.fueradenomina==false %}
             <div class="listado_aplicaciones">
               <a href="{{ path('constancia_homepage')}}">CONSTANCIA<br><img id="licencias" src="{{ asset("images/constancia.jpeg") }}" data-placement="bottom" title="CONSTANCIA DE TRABAJO" data-trigger="hover"></a>
             </div>
+            {% endif %}
 
             <div class="listado_aplicaciones">
               <a href="{{ path('sit_homepage')}}">SIT<br><img id="licencias" src="{{ asset("images/sit.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>

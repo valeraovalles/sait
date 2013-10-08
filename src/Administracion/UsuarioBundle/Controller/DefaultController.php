@@ -29,18 +29,11 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UsuarioBundle:Perfil')->find($IdUsuario);
 
-        $consulta= $em->createQuery('SELECT p FROM UsuarioBundle:Perfil p
-        JOIN p.user u
-        WHERE u.id = :userid
-        ');
-        $consulta->setParameter('userid', $IdUsuario);
-        $usuario = $consulta->getSingleResult();
-        
         $f=new Funcion;
         $datos_usuario=$f->datosUsuarioSigefirrhh($entity->getCedula());
         
         
-        return $this->render('UsuarioBundle:Default:index.html.twig', array('usuario'=>$usuario,'datos'=>$datos_usuario,'PASSPASS'=>$PASSPASS)
+        return $this->render('UsuarioBundle:Default:index.html.twig', array('usuario'=>$entity,'datos'=>$datos_usuario,'PASSPASS'=>$PASSPASS)
         );
     }
     public function loginAction()
