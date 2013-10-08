@@ -126,8 +126,8 @@
     </form>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#form_idTipoprov').change(function(){
-                var dato = $("#form_idTipoprov").val();
+            $('#form_datosproveedor_idTipoprov').change(function(){
+                var dato = $("#form_datosproveedor_idTipoprov").val();
                 var ruta = "{{ path('ajax_datosproveedor', {'datos': 'variable'}) }}";
                 ruta = ruta.replace("variable", dato);
                 $('#muestra').load(ruta);

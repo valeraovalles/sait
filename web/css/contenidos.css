@@ -64,3 +64,18 @@ border-radius: 20px; /* CSS3 (Opera 10.5, IE 9 y estándar a ser soportado por t
 .divisor a{
     color: #0fa1e0;
 }
+
+
+.activo 
+{
+    font-size: 18px;
+    color: green;
+    font-style: italic;
+}
+
+.inactivo 
+{
+    font-size: 18px;
+    color: red;
+    font-style: italic;
+}

@@ -46,7 +46,7 @@
                 </td>
                 <td>{% if entity.bonoalimentacion==false %}NO{% else %}SI{% endif %}</td>
                 <td>{{ entity.dirigida }}</td>
-                <td align="center">{% if entity.culminada==false %}<img src="{{ asset('image/nuevo.gif') }}">-N{% else %}<img width="19px" src="{{ asset('image/bien.png') }}">-C{% endif %}</td>
+                <td align="center">{% if entity.culminada==false %}<span style="display:none;">1-</span><span class="label label-important">Nuevo</span>{% else %}<span style="display:none;">2-</span><span class="label label-success">Cerrado</span>{% endif %}</td>
                 <td>
 
                         <a href="{{ path('constancia_show', { 'id': entity.id }) }}"><span class="icon-search"></span></a>
@@ -62,6 +62,6 @@
         </tbody>
     </table>
 
-    <br>
-
+    <br><br>
+    <div><span class="label label-important">Nuevo</span> | <span class="label label-success">Cerrado</span></div>
     {% endblock %}

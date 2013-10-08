@@ -26,7 +26,7 @@
                     <td>
                                 <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
                                 <a href="{{ path('banco', { 'id_proveedor': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="datos bancarios"><img width="20px" src="{{ asset('images/banco.jpg')}}"></a>
-                                <a href="{{ path('contratacion', { 'id_proveedor': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="datos de la contratacion"><img width="20px" src="{{ asset('images/contratacion.jpg')}}"></a>
+                                <a href="{{ path('presupuesto', { 'id_proveedor': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="datos del presupuesto"><img width="30px" src="{{ asset('images/calcu.jpg')}}"></a>
                     </td>
                 </tr>
             {% endfor %}

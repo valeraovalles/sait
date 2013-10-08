@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Unidad
  *
- * @ORM\Table(name="reasignado")
+ * @ORM\Table(name="sit.reasignado")
  * @ORM\Entity
  */
 class Reasignado
@@ -18,7 +18,7 @@ class Reasignado
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="reasignado_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="sit.reasignado_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 

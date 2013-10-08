@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Unidad
  *
- * @ORM\Table(name="unidad")
+ * @ORM\Table(name="sit.unidad")
  * @ORM\Entity(repositoryClass="Frontend\SitBundle\Entity\UnidadRepository")
  */
 class Unidad
@@ -18,7 +18,7 @@ class Unidad
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="unidad_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="sit.unidad_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
@@ -40,7 +40,7 @@ class Unidad
 
     /**
      * @ORM\ManyToMany(targetEntity="Administracion\UsuarioBundle\Entity\Perfil")
-     * @ORM\JoinTable(name="usuariounidad",
+     * @ORM\JoinTable(name="sit.usuariounidad",
      *      joinColumns={@ORM\JoinColumn(name="unidad_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
      *      )

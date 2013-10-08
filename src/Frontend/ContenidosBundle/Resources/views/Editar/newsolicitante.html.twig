@@ -1,0 +1,39 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block titulobanner %}
+    UNIDAD EJECUTORA
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">Unidad Solicitante</div>
+
+    <form action="{{ path('createsolicitante') }}" method="post" {{ form_enctype(form) }}>
+       
+        <div id="descripcion" class="form-show_edit">
+            <div class="contenedor">
+                <br>
+                {{ form_errors(form.nombre) }}
+                <div class="labels">Nombre de Unidad Solicitante:</div>
+                <div class="widgets">{{ form_widget(form.nombre) }}</div>
+            </div>
+            <div class="contenedor">
+                <br>
+                {{ form_errors(form.idTipoproveedor) }}
+                <div class="labels">Tipo de Proveedor:</div>
+                <div class="widgets">{{ form_widget(form.idTipoproveedor) }}</div>
+            </div>  
+            <br>     
+            <button class="btn" type="submit">Crear</button>
+            <br><br>
+        </div>
+    </form>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('indexsolicitante') }}">
+            <img width="85px" src="{{ asset('images/listado.jpg')}}">
+        </a>
+    </li>
+</ul>
+{% endblock %}

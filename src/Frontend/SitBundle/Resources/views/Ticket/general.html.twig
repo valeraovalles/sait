@@ -1,0 +1,65 @@
+       <body style="background:white;">
+       <head>
+        <meta content="300" http-equiv="REFRESH"> </meta>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <title>{% block title %}Telesur{% endblock %}</title>
+        {% block javascripts %}
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="{{ asset('js/datatable.js') }}"></script>
+            <script src="{{ asset('js/general.js') }}"></script>
+            <script src="{{ asset('libs/twitter-bootstrap/docs/assets/js/bootstrap.js') }}"></script>
+        {% endblock %}
+
+        {% block stylesheets %}
+            <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('libs/menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('css/datatable.css') }}" rel="stylesheet" type="text/css"/>
+            <link rel="stylesheet" href="{{ asset('libs/twitter-bootstrap/docs/assets/css/bootstrap.css') }}">
+        {% endblock %}
+    </head>
+
+    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped" style="font-size:12px;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha solicitud</th>
+                <th>Hora solicitud</th>
+                <th>Solicitante</th>
+                <th>Solicitud</th>
+                <th>Estatus</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('ticket_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.fechasolicitud %}{{ entity.fechasolicitud|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ entity.horasolicitud|date("G:i:s")  }}</td>
+                <td>{{ entity.solicitante.primernombre }} {{ entity.solicitante.primerapellido }}</td>
+                <td>{{ entity.solicitud|slice(0,10) }}</td>
+                <td>
+                    {% if entity.estatus==1 %}<span class="label label-important"><span style="display:none;">1-</span>Nuevo</span>
+                    {% elseif entity.estatus==2 %}<span class="label label-info"><span style="display:none;">2-</span>Asignado</span>
+                    {% elseif entity.estatus==3 %}<span class="label label-warning"><span style="display:none;">3-</span>Re-Asignado</span>
+                    {% elseif entity.estatus==4 %}<span class="label label-success"><span style="display:none;">2-</span>Culminado</span>
+                    {% endif %}
+
+                </td>
+              </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br><br>
+    <div align="center"><span class="label label-important">Nuevos:</span> <b>{{ contador[entities[0].unidad.id].nuevo }}</b> | <span class="label label-info">Asignados:</span> <b>{{ contador[entities[0].unidad.id].asignado }}</b> | <span class="label label-success">Cerrados:</span>  <b>{{ contador[entities[0].unidad.id].cerrado }}</b></div>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tablalistaespecial').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[5,'asc'],[1,'asc'],[2,'asc']],
+            } );
+        })
+    </script>
+    </body>

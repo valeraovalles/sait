@@ -1,0 +1,39 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block titulobanner %}
+    UNIDAD EJECUTORA
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">Detalle Tipo Proveedor</div>
+
+    <form action="{{ path('createdetalle') }}" method="post" {{ form_enctype(form) }}>
+       
+        <div id="descripcion" class="form-show_edit">
+            <div class="contenedor">
+                <br>
+                {{ form_errors(form.nombre) }}
+                <div class="labels">Nombre Detalle Tipo-Proveedor:</div>
+                <div class="widgets">{{ form_widget(form.nombre) }}</div>
+            </div>  
+            <div class="contenedor">
+                <br>
+                {{ form_errors(form.idTipoproveedo) }}
+                <div class="labels">Nombre Tipo-Proveedor:</div>
+                <div class="widgets">{{ form_widget(form.idTipoproveedo) }}</div>
+            </div> 
+            <br>     
+            <button class="btn" type="submit">Crear</button>
+            <br><br>
+        </div>
+    </form>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('indexdetalle') }}">
+            <img width="85px" src="{{ asset('images/listado.jpg')}}">
+        </a>
+    </li>
+</ul>
+{% endblock %}

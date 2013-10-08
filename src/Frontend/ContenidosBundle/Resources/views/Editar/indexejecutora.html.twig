@@ -1,0 +1,34 @@
+{% extends '::contenidos.html.twig' %}
+
+
+{% block titulobanner %}
+    EDICION DE DATOS
+{% endblock %}
+
+
+{% block body -%}
+ {{ parent() }}
+    <div class="titulo">LISTADO UNIDAD EJECUTORA</div>
+
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+        <thead>
+            <tr>
+                <th width="80%">Nombre</th>
+                <th width="20%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr align="center">
+                <td>{{ entity.nombre }}</td>
+                <td>
+                            <a href="{{ path('editejecutora', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar unidad ejecutora"><img width="20px" src="{{ asset('images/edit.png')}}"></a> 
+                            <a onclick="return confirm('Desea borrar')" href="{{ path('deleteejecutora', { 'id': entity.id }) }}"><img width="15px" src="{{ asset('images/mal.png')}}"></a>   
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table><br><br>
+    <a class="btn btn-primary dropdown-toggle" href="{{ path('newejecutora') }}">Nueva Unidad Ejecutora</a>
+    <br>    
+{% endblock %}
