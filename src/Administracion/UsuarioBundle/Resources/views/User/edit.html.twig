@@ -82,12 +82,10 @@
 
 </form>
 
-
-        <form action="{{ path('rol_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('Seguro que desea eliminar')">
-            {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit">Borrar</button>
-        </form>
-
+<form action="{{ path('rol_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('Seguro que desea eliminar')">
+    {{ form_widget(delete_form) }}
+    <button class="btn btn-danger" type="submit">Borrar</button>
+</form>
 <br>
 
 {% endblock %}

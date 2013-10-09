@@ -76,7 +76,50 @@ class TicketController extends Controller
         $solicitud=str_replace($eliminar, array(), $solicitud);
         return $solicitud;
     }
+    function filtrarsms($palabrotas) 
+    {     
+        $texto_limpio= $palabrotas; 
+        //$texto_limpio= strtolower($palabrotas);                
+        $texto_limpio= rtrim(ltrim($texto_limpio));
+        $texto_limpio = str_replace("á", "a", $texto_limpio);
+        $texto_limpio = str_replace("é", "e", $texto_limpio); 
+        $texto_limpio = str_replace("í", "i", $texto_limpio);
+        $texto_limpio = str_replace("ó", "o", $texto_limpio);
+        $texto_limpio = str_replace("ú", "u", $texto_limpio);
+        $texto_limpio = str_replace("Á", "A", $texto_limpio);
+        $texto_limpio = str_replace("É", "E", $texto_limpio); 
+        $texto_limpio = str_replace("Í", "I", $texto_limpio);
+        $texto_limpio = str_replace("Ó", "O", $texto_limpio);
+        $texto_limpio = str_replace("Ú", "U", $texto_limpio);
+        $texto_limpio = str_replace("ñ", "n", $texto_limpio);       
+        $texto_limpio = str_replace("ü", "u", $texto_limpio);
+        $texto_limpio = str_replace("'", "", $texto_limpio);       
+        $texto_limpio = str_replace('', "", $texto_limpio);
+        $texto_limpio = str_replace('', "", $texto_limpio);
+        $texto_limpio = str_replace("", "", $texto_limpio);
+        $texto_limpio = str_replace("", "", $texto_limpio);
+        $texto_limpio = str_replace('°', "", $texto_limpio);
+        $texto_limpio = str_replace("Ž", "", $texto_limpio);
+        $texto_limpio = str_replace('ô', "o", $texto_limpio);
+        $texto_limpio = str_replace('õ', "o", $texto_limpio);
+        $texto_limpio = str_replace('ç', "c", $texto_limpio);
+        $texto_limpio = str_replace('à', "a", $texto_limpio);
+        $texto_limpio = str_replace('è', "e", $texto_limpio);
+        $texto_limpio = str_replace('û', "u", $texto_limpio);
+        $texto_limpio = str_replace('Ñ', "n", $texto_limpio);
+        $texto_limpio = str_replace('ã', "a", $texto_limpio);
+        $texto_limpio = str_replace("š", "", $texto_limpio);
+        $texto_limpio = str_replace("", "", $texto_limpio);
+           
+        $find = array('&', '\r\n', '\n', '+'); 
+        $texto_limpio = str_replace ($find, ' ', $texto_limpio);
 
+        $sustituye = array("\r\n", "\n\r", "\n", "\r");
+        $texto_limpio = str_replace($sustituye, "", $texto_limpio); 
+    
+        $texto_limpio=strip_tags($texto_limpio);
+        return $texto_limpio; 
+    }
     public function asignadosolucionAction(Request $request,$id)
     {
 
@@ -498,12 +541,24 @@ class TicketController extends Controller
       
                 $file=$form['file']->getData();
 
-                $tamaño=number_format($file->getClientSize()/1048576,0);
+                $tamaño=number_format($file->getClientSize(),0, ',', '')/1000;
                 $extension = $file->guessExtension();
                 $nombre=$file->getClientOriginalName();
                 $nombre=explode(".", $nombre);
                 $nombre=$nombre[0];
 
+                //valido tamaño
+                if ($tamaño>2000) {
+                    $this->get('session')->getFlashBag()->add('alert', 'El archivo no puede ser mayor a 2MB.');
+
+                    return $this->render('SitBundle:Default:index.html.twig', array(
+                        'form'   => $form->createView(),
+                        'form2'   => $form2->createView(),
+                        'ticketusuario'=>$ticketusuario,
+                        'datosusuario'=>$datosusuario
+                    ));
+
+                }
                 $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf');
                 //valido las extensiones
                 if (!array_search($extension,$extensiones)) {
@@ -552,10 +607,16 @@ class TicketController extends Controller
                     'SitBundle:Correo:solicitud.html.twig',
                     array('ticket' => $ticketcreado)
                 ), 'text/html');
-
             $this->get('mailer')->send($message); */    // then we send the message.
             //fin enviar correo
 
+
+            /*$message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            ->setSubject('telesurweb.imk:*t3l3SURcl4v3* @SitTelesur:'.ucfirst($this->filtrarsms($solicitud)))    // we configure the title
+            ->setFrom('sit@telesurtv.net')
+            ->setTo($unidad->getSms());
+            $this->get('mailer')->send($message);*/     // then we send the message.
+            //fin enviar correo
 
             $this->get('session')->getFlashBag()->add('notice', 'TU SOLICITUD SE HA REALIZADO EXITOSAMENTE');
 
