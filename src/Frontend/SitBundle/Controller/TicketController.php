@@ -486,6 +486,7 @@ class TicketController extends Controller
         $datos=$request->request->all();
         //RECIBO LOS DATOS QUE SE ENVIAN DESDE EL FORMULARIO
         $solicitud=$datos['frontend_sitbundle_tickettype']['solicitud'];
+        if(isset($datos['frontend_sitbundle_tickettype']['unidad']))
         $idunidad=$datos['frontend_sitbundle_tickettype']['unidad'];
         $extensionusuario=$datos['extension']['extension'];
         //FIN
@@ -616,7 +617,7 @@ class TicketController extends Controller
             ->setSubject('telesurweb.imk:*t3l3SURcl4v3* @Sit:'.substr(ucfirst($this->filtrarsms($solicitud)),0,150))    // we configure the title
             ->setFrom('contactenos@telesurtv.net')
             ->setTo($unidad->getSms());
-            $this->get('mailer')->send($message);     // then we send the message.
+            //$this->get('mailer')->send($message);     // then we send the message.
             //fin enviar correo
 
             $this->get('session')->getFlashBag()->add('notice', 'TU SOLICITUD SE HA REALIZADO EXITOSAMENTE');
