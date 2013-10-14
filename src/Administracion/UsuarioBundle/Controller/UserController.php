@@ -41,7 +41,7 @@ class UserController extends Controller
         $datos=$datos['form'];
 
         $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-            ->setSubject('Olvido de clave')     // we configure the title
+            ->setSubject('CLAVE INTRANET')     // we configure the title
             ->setFrom('intranet@telesurtv.net')     // we configure the sender
             ->setTo("jvalera@telesurtv.net")     // we configure the recipient
             ->setBody("
