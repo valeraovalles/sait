@@ -1,0 +1,54 @@
+{% extends '::administracion.html.twig' %}
+
+{% block title %}Inicio - Telesur{% endblock %}
+
+{% block titulobanner %}
+    CAMBIO DE CLAVE
+{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+
+    <div class="titulo">CAMBIO DE CLAVE</div>
+
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+	<form novalidate action="{{ path('actualizacambioclave') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+        <br>
+        <div class="formShow">
+            <div class="contenedorform">
+            	<div class="text-error">{{ form_errors(form.claveanterior) }}</div>
+                <div class="labelform">Clave anterior:</div>
+                <div class="widgetform">{{ form_widget(form.claveanterior) }}</div>
+            </div>
+            <div class="contenedorform">
+            	<div class="text-error">{{ form_errors(form.clavenueva) }}</div>
+                <div class="labelform">Clave nueva:</div>
+                <div class="widgetform">{{ form_widget(form.clavenueva) }}</div>
+            </div>
+            <div class="contenedorform">
+            	<div class="text-error">{{ form_errors(form.claveconfirmacion) }}</div>
+                <div class="labelform">Clave confirmación:</div>
+                <div class="widgetform">{{ form_widget(form.claveconfirmacion) }}</div>
+            </div>
+        </div>
+    
+        <button class="btn btn-primary" type="submit">Cambiar clave</button>
+      
+    </form>
+
+
+{% endblock %}

@@ -613,7 +613,7 @@ class TicketController extends Controller
 
 
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-            ->setSubject('telesurweb.imk:*t3l3SURcl4v3* @Sit:'.substr(ucfirst($this->filtrarsms($solicitud))),0,150)    // we configure the title
+            ->setSubject('telesurweb.imk:*t3l3SURcl4v3* @Sit:'.substr(ucfirst($this->filtrarsms($solicitud)),0,150))    // we configure the title
             ->setFrom('contactenos@telesurtv.net')
             ->setTo($unidad->getSms());
             $this->get('mailer')->send($message);     // then we send the message.

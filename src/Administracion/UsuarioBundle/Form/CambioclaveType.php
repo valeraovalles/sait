@@ -1,29 +1,33 @@
 <?php
 
-namespace Frontend\ContenidosBundle\Form;
+namespace Administracion\UsuarioBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TipoproveedorType extends AbstractType
+class CambioclaveType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre','textarea')
+            ->add('claveanterior','password')
+            ->add('clavenueva','password')
+            ->add('claveconfirmacion','password')
+
         ;
     }
+
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Frontend\ContenidosBundle\Entity\Tipoproveedor'
+            'data_class' => 'Administracion\UsuarioBundle\Entity\Cambioclave'
         ));
     }
 
     public function getName()
     {
-        return 'frontend_contenidosbundle_tipoproveedortype';
+        return 'cambioclave';
     }
 }

@@ -10,13 +10,28 @@
 
     {{ parent() }}
 
-
-    {% set datos  %} {% if app.user %} USUARIO: {{ app.user.username | upper }} | NOMBRE: {{ usuario.primerNombre | upper }} | APELLIDO: {{ usuario.primerApellido | upper }} | CEDULA: {{ usuario.cedula | upper }} {% if usuario.user.fueradenomina==false %}| SUELDO NORMAL: {{ datos.sueldo_basico | upper }} | FECHA INGRESO: {{ datos.fecha_ingreso | upper | date('d-m-Y') }} | CARGO: {{ datos.descripcion_cargo }}{% endif %}{% endif %}{% endset %}
     
-    <div class="titulo"><span id="info" style="cursor:pointer;" data-content={{ datos|json_encode|raw }} title="USUARIO">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }} <div class="icon-search"></div></span></div>
+    <div class="titulo" style="cursor:pointer" data-toggle="modal" href="#myModal">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }}<br><div style="font-size:9px;">CONSULTAR DATOS DE USUARIO AQUÍ</div> </div>
 
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
     <br>
     <div class="jquery" align="left">
+
+            {% if usuario.user.password!=null %}
+            <div class="listado_aplicaciones">
+                <a href="{{ path('cambioclave')}}">CAMBIAR CLAVE<br><img id="neto" src="{{ asset("images/CLAVE.jpg") }}" data-placement="bottom" title="CAMBIAR CLAVE" data-trigger="hover"></a><br>
+            </div>
+            {% endif %}
 
             {% if is_granted('ROLE_DISTRIBUCION') %}
             <div class="listado_aplicaciones">
@@ -162,5 +177,35 @@
         <input type="password" name="signin[password]" id="signin_password" value="{{ PASSPASS }}"/>
     </form>
     {# HASTA AQUÍ #}
+
+    {# modal #}
+    <div style="width:500px;left:52%;" id="myModal" class="modal hide fade" tabindex="5" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h3 id="myModalLabel">DATOS DE USUARIO</h3>
+         </div>
+        <div class="modal-body">
+            
+            {% if app.user %} 
+            <div align="left">
+                <div><b>USUARIO:</b> {{ app.user.username | upper }}</div>
+                <div><b>NOMBRE:</b> {{ usuario.primerNombre | upper }}</div>
+                <div><b>APELLIDO:</b> {{ usuario.primerApellido | upper }}</div>
+                <div><b>CEDULA:</b> {{ usuario.cedula | upper }} </div>
+                {% if usuario.user.fueradenomina==false %}
+                    <div><b>SUELDO NORMAL:</b> {{ datos.sueldo_basico | upper }}</div>
+                    <div><b>FECHA INGRESO:</b> {{ datos.fecha_ingreso | upper | date('d-m-Y') }}</div>
+                    <div><b>FECHA NACIMIENTO:</b> {{ datos.fecha_nacimiento| upper | date('d-m-Y') }}</div>
+                    <div><b>DEPENDENCIA:</b> {{ datos.nombre }}</div>
+                    <div><b>CARGO:</b> {{ datos.descripcion_cargo }}</div>
+                {% endif %}
+            {% endif %}
+            </div>
+                    
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal">Cerrar</button>
+        </div>
+    </div>
 
 {% endblock %}

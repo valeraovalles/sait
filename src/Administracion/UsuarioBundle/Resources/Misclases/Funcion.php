@@ -23,7 +23,7 @@ class Funcion
     {
         $a=new Conexion();
         $db=$a->postgresql_sigefirrhh();
-        $query="SELECT * FROM personal p, trabajador t, cargo c where t.estatus='A' and p.cedula=t.cedula and t.id_cargo=c.id_cargo and t.cedula='".$cedula."'";
+        $query="SELECT * FROM personal p, trabajador t, cargo c, dependencia d where t.estatus='A' and p.cedula=t.cedula and t.id_cargo=c.id_cargo and t.cedula='".$cedula."' and t.id_dependencia=d.id_dependencia";
         $rs = pg_query($db, $query);
         $row = pg_fetch_array($rs);
          

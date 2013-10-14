@@ -16,8 +16,16 @@
         {% endif %}
     {% endblock %}
 
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    
+
     <h3>APLICACIONES TELESUR</h3>
     
+
     <div class="container">
       <form class="form-signin" action="{{ path('usuario_login_check') }}" method="post">
         <h4 class="form-signin-heading">INGRESE SUS DATOS</h4>
@@ -28,8 +36,63 @@
 
     </div> <!-- /container -->
 
+    <div class="text-error" style="cursor:pointer" data-toggle="modal" href="#myModal"><b>¿OLVIDÓ SU CLAVE?</b></div>
+
     <br>
 
     <script>$('#username').popover();</script>
+
+
+    {# modal #}
+    <div style="width:500px;left:52%;" id="myModal" class="modal hide fade" tabindex="5" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h3 id="myModalLabel">NOTIFICAR</h3>
+         </div>
+        <div class="modal-body">
+
+
+              <div class="alert fade in" style="display:none;">
+                <strong>Alerta!!</strong> Todos los campos son obligatorios.
+              </div>
+
+            <form id="notif" action="{{ path('notificar') }}" method="post">
+              <table class="notificacion">
+                <tr>
+                    <th>Nombres: </th>
+                    <td><input id="nombre" type="text" name="form[nombre]"></td>
+                </tr>
+                <tr>
+                    <th>Apellidos: </th>
+                    <td><input id="apellido" type="text" name="form[apellido]"></td>
+                </tr>
+                <tr>
+                    <th>Cedula: </th>
+                    <td><input id="cedula" type="text" name="form[cedula]"></td>
+                </tr>
+                <tr>
+                    <th>Extensión: </th>
+                    <td><input id="extension" type="text" name="form[extension]"></td>
+                </tr>
+                <tr>
+                    <th>Comentario: </th>
+                    <td><textarea id="comentario" name="form[comentario]"></textarea>
+                </tr>
+                <tr>
+                    <td colspan="2" align=center><input type="button" onclick="validar()" class="btn btn-primary" value="Notificar"></td>
+                </tr>
+              </table>
+            </form>
+
+            <script type="text/javascript">
+                function validar() {
+                  if($("#nombre").val()=='' || $("#apellido").val()=='' || $("#cedula").val()=='' || $("#extension").val()=='' || $("#comentario").val()=='') $(".alert").show(); else $("#notif").submit()
+                };
+            </script>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal">Cerrar</button>
+        </div>
+    </div>
 
 {% endblock %}
