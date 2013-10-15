@@ -148,7 +148,7 @@ class TicketController extends Controller
         $ticket = $em->getRepository('SitBundle:Ticket')->find($id);
         //$ticket->getUnidad()->getCorreo();
         //$ticket->getSolicitante()->getUser()->getUsername();
-       /* $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+        $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
         ->setSubject('Sit-Cerrado')     // we configure the title
         ->setFrom('sit@telesurtv.net')     // we configure the sender
         ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
@@ -157,7 +157,7 @@ class TicketController extends Controller
                 array('ticket' => $ticket)
             ), 'text/html');
 
-        //$this->get('mailer')->send($message); */    // then we send the message.
+        $this->get('mailer')->send($message);    // then we send the message.
         //FIN CORREO
 
         $this->get('session')->getFlashBag()->add('notice', 'EL TICKET SE HA CERRADO SATISFACTORIAMENTE');
@@ -277,7 +277,7 @@ class TicketController extends Controller
             //echo $user->getUser()->getUsername();
 
             //CORREO
-            /*$message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Asignado')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
             ->setTo($user->getUser()->getUsername().'@telesurtv.net')     // we configure the recipient
@@ -286,7 +286,7 @@ class TicketController extends Controller
                     array('ticket' => $ticket,'usuario'=>$user)
                 ), 'text/html');
 
-            $this->get('mailer')->send($message); */    // then we send the message.
+            $this->get('mailer')->send($message);     // then we send the message.
             //FIN CORREO
 
             $this->get('session')->getFlashBag()->add('notice', 'El ticket fie asignado exitosamente a '.ucfirst($user->getPrimerNombre().' '.$user->getPrimerapellido()).'.');
@@ -334,7 +334,7 @@ class TicketController extends Controller
 
             //echo $unidad->getCorreo();
 
-            /*$message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Reasignado')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
             ->setTo($unidad->getCorreo())     // we configure the recipient
@@ -343,7 +343,7 @@ class TicketController extends Controller
                     array('ticket' => $ticket,'unidad'=>$unidad,'reasignado'=>$reasignado)
                 ), 'text/html');
 
-            $this->get('mailer')->send($message);*/     // then we send the message.
+            $this->get('mailer')->send($message);*    // then we send the message.
             //FIN CORREO
 
             $this->get('session')->getFlashBag()->add('notice', 'Ticket reasignado exitosamente a '.ucfirst($unidad->getDescripcion()).'.');
@@ -601,7 +601,7 @@ class TicketController extends Controller
             //$unidad->getCorreo();
 
 
-            /*$message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Solicitud')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
             ->setTo($unidad->getCorreo())     // we configure the recipient
@@ -610,7 +610,7 @@ class TicketController extends Controller
                     array('ticket' => $ticketcreado)
                 ), 'text/html');
             //$this->get('mailer')->send($message);    // then we send the message.
-            //fin enviar correo*/
+            //fin enviar correo
 
 
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
