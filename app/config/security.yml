@@ -33,6 +33,7 @@ security:
         - { path: ^/usuario/notificar, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/usuario/inicio, roles: ROLE_USER }
         - { path: ^/usuario/contacto, roles: ROLE_USER }
+        - { path: ^/usuario/cambioclave, roles: ROLE_USER }
         - { path: ^/usuario, roles: ROLE_ADMINISTRADOR }
 
         - { path: ^/distribucion/operador/new, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
