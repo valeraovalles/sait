@@ -343,7 +343,7 @@ class TicketController extends Controller
                     array('ticket' => $ticket,'unidad'=>$unidad,'reasignado'=>$reasignado)
                 ), 'text/html');
 
-            $this->get('mailer')->send($message);*    // then we send the message.
+            $this->get('mailer')->send($message);    // then we send the message.
             //FIN CORREO
 
             $this->get('session')->getFlashBag()->add('notice', 'Ticket reasignado exitosamente a '.ucfirst($unidad->getDescripcion()).'.');
