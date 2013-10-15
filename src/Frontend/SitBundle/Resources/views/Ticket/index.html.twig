@@ -25,6 +25,12 @@
         </div>
     {% endfor %}
 
+   {% if entities==null %}
+
+         <div class="alert alert-error">NO EXISTEN TICKETS</div>
+
+    {% else %}
+
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalistaespecial">
         <thead>
             <tr>
@@ -74,4 +80,5 @@
             } );
         })
     </script>
+    {% endif %}
     {% endblock %}
