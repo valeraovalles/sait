@@ -76,7 +76,7 @@
             <div class="contenedorform">
                 <div class="labelform">Estatus:</div>
                 <div class="widgetform">
-                       {% if entity.culminada==false %}<img src="{{ asset('image/nuevo.gif') }}">{% else %}<img width="19px" src="{{ asset('image/bien.png') }}">{% endif %}
+                       {% if entity.culminada==false %}<span class="label label-important">Nuevo</span>{% else %}<span class="label label-success">Cerrado</span>{% endif %}
                 </div>
             </div>
 

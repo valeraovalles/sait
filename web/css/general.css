@@ -343,3 +343,16 @@ margin-bottom          :5px;
 
 }
 
+#administracion_usuariobundle_usertype_rol label{
+	font-size: 12px;
+}
+
+
+#administracion_usuariobundle_usertype_rol input{
+	float: left;
+	text-align: left;
+	padding: 0px;
+	margin: 0px;
+}
+
+
