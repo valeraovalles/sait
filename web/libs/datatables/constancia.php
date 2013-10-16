@@ -22,7 +22,7 @@
      
     /* Database connection information */
     $gaSql['user']       = "postgres";
-    $gaSql['password']   = "postgres";
+    $gaSql['password']   = "..*t3l35ur*..";
     $gaSql['db']         = "sait";
     $gaSql['server']     = "localhost";
      
