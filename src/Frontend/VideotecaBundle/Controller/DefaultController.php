@@ -10,7 +10,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-    	$con=new Conexion;
+    	/*$con=new Conexion;
     	$postgres=$con->postgresql_local();
 
 	   	$query="
@@ -28,8 +28,8 @@ class DefaultController extends Controller
     		$cintas[$cont]=$row;
     		$cont++;
     	}
-
-        return $this->render('VideotecaBundle:Default:index.html.twig',array('cintas'=>$cintas));
+*/
+        return $this->render('VideotecaBundle:Default:index.html.twig');
     }
 
     public function consultaAction($id)
@@ -38,7 +38,7 @@ class DefaultController extends Controller
     	$postgres=$con->postgresql_local();
 
     	$query="
-			select c.cota as ubicacion_cinta, c.id as serial_cinta, 
+			select distinct c.cota as ubicacion_cinta, c.id as serial_cinta, 
 			s.alias as id_segmento, s.contenido as contenido_segmento, p.titulo, 
 			p.tcc as titulo_complementario, p.capitulo, f.formato, e.evento, se.servicio
 			from  avila.db_cinta c, avila.db_segmentos s, avila.db_ppal p, avila.db_formato f, avila.db_evento e, avila.db_servicio se

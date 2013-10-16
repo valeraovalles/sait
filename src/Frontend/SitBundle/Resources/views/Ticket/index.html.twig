@@ -40,6 +40,7 @@
                 <th>Horasolicitud</th>
                 <th>Solicitante</th>
                 <th>Solicitud</th>
+                <th>Asignado a</th>
                 <th>Estatus</th>
                 <th>Actions</th>
             </tr>
@@ -52,6 +53,13 @@
                 <td>{{ entity.horasolicitud|date("G:i:s")  }}</td>
                 <td>{{ entity.solicitante.primernombre }} {{ entity.solicitante.primerapellido }}</td>
                 <td>{{ entity.solicitud|slice(0,10) }}</td>
+                {% if entity.user[0] is defined %}
+                    {% for asig in entity.user %}
+                    <td>{{ asig.primernombre }} {{ asig.primerapellido}}</td>
+                    {% endfor %}
+                {% else %}
+                <td>N/A</td>
+                {% endif %}
                 <td>
                     {% if entity.estatus==1 %}<span class="label label-important"><span style="display:none;">1-</span>Nuevo</span>
                     {% elseif entity.estatus==2 %}<span class="label label-info"><span style="display:none;">2-</span>Asignado</span>
@@ -77,7 +85,7 @@
         $(document).ready(function(){
            $('#tablalistaespecial').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-                "aaSorting": [[5,'asc'],[1,'asc'],[2,'asc']],
+                "aaSorting": [[6,'asc'],[1,'asc'],[2,'asc']],
             } );
         })
     </script>

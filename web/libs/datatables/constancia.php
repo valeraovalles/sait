@@ -12,14 +12,13 @@
     /* Array of database columns which should be read and sent back to DataTables. Use a space where
      * you want to insert a non-database field (for example a counter or static image)
      */
-    $aColumns = array( 'ubicacion_cinta', 'serial_cinta', 'titulo', 'formato', 'evento', 'servicio' );
-    $bColumns = array( 'c.cota', 'c.id', 'p.titulo', 'f.formato', 'e.evento', 'se.servicio' );
+    $aColumns = array( 'primer_nombre', 'primer_nombre','primer_apellido','cedula','tipo' );
      
     /* Indexed column (used for fast and accurate table cardinality) */
-    $sIndexColumn = "c.cota";
+    $sIndexColumn = "primer_nombre";
      
     /* DB table to use */
-    $sTable = "avila.db_cinta c, avila.db_segmentos s, avila.db_ppal p, avila.db_formato f, avila.db_evento e, avila.db_servicio se";
+    $sTable = "constancia.constancia c, usuarios.perfil p";
      
     /* Database connection information */
     $gaSql['user']       = "postgres";
@@ -67,7 +66,7 @@
         {
             if ( $_GET[ 'bSortable_'.intval($_GET['iSortCol_'.$i]) ] == "true" )
             {
-                $sOrder .= $bColumns[ intval( $_GET['iSortCol_'.$i] ) ]."
+                $sOrder .= $aColumns[ intval( $_GET['iSortCol_'.$i] ) ]."
                     ".($_GET['sSortDir_'.$i]==='asc' ? 'asc' : 'desc').", ";
             }
         }
@@ -85,23 +84,27 @@
      * NOTE This assumes that the field that is being searched on is a string typed field (ie. one
      * on which ILIKE can be used). Boolean fields etc will need a modification here.
      */
+
     $sWhere = "";
     if ( $_GET['sSearch'] != "" )
     {
         $sWhere = "WHERE (";
-        for ( $i=0 ; $i<count($bColumns) ; $i++ )
+
+        for ( $i=0 ; $i<count($aColumns) ; $i++ )
         {
             if ( $_GET['bSearchable_'.$i] == "true" )
             {
-                $sWhere .= "CAST(".$bColumns[$i]." AS TEXT) ILIKE '%".pg_escape_string( $_GET['sSearch'] )."%' OR ";
+                $sWhere .= "CAST(".$aColumns[$i]." AS TEXT) ILIKE '%".pg_escape_string( $_GET['sSearch'] )."%' OR ";
             }
+
         }
         $sWhere = substr_replace( $sWhere, "", -3 );
         $sWhere .= ")";
     }
      
+
     /* Individual column filtering */
-    for ( $i=0 ; $i<count($bColumns) ; $i++ )
+    for ( $i=0 ; $i<count($aColumns) ; $i++ )
     {
         if ( $_GET['bSearchable_'.$i] == "true" && $_GET['sSearch_'.$i] != '' )
         {
@@ -113,40 +116,37 @@
             {
                 $sWhere .= " AND ";
             }
-            $sWhere .= $bColumns[$i]." ILIKE '%".pg_escape_string($_GET['sSearch_'.$i])."%' ";
+            $sWhere .= $aColumns[$i]." ILIKE '%".pg_escape_string($_GET['sSearch_'.$i])."%' ";
         }
     }
-     
-    if($sWhere=='') $sWhere='WHERE c.id=s.id and p.alias=s.alias and c.id_formato=f.id and c.evento=e.id and c.servicio=se.id';
-    else $sWhere .=' and c.id=s.id and p.alias=s.alias and c.id_formato=f.id and c.evento=e.id and c.servicio=se.id';
 
-     
+    if($sWhere=="") $sWhere="where c.user_id=p.id";
+    else $sWhere .=" and c.user_id=p.id";
+
+
     $sQuery = "
-        SELECT distinct c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio
+        SELECT ".str_replace(" , ", " ", implode(", ", $aColumns)).", c.id as idconstancia, c.culminada
         FROM   $sTable
         $sWhere
-        $sOrder
+        order by c.culminada ASC
         $sLimit
     ";
- 
 
     $rResult = pg_query( $gaSql['link'], $sQuery ) or die(pg_last_error());
-     
 
     $sQuery = "
-        SELECT distinct c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio
+        SELECT $sIndexColumn
         FROM   $sTable
         $sWhere
     ";
-
     $rResultTotal = pg_query( $gaSql['link'], $sQuery ) or die(pg_last_error());
     $iTotal = pg_num_rows($rResultTotal);
     pg_free_result( $rResultTotal );
-         
+     
     if ( $sWhere != "" )
     {
         $sQuery = "
-            SELECT distinct c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio
+            SELECT $sIndexColumn
             FROM   $sTable
             $sWhere
         ";
@@ -171,15 +171,11 @@
         "aaData" => array()
     );
      
-    // echo $iTotal; die;
     while ( $aRow = pg_fetch_array($rResult, null, PGSQL_ASSOC) )
     {
         $row = array();
         for ( $i=0 ; $i<count($aColumns) ; $i++ )
-        {   
-            if($i==0)
-                $id=$aRow[ $aColumns[$i]];
-
+        {
             if ( $aColumns[$i] == "version" )
             {
                 /* Special output formatting for 'version' column */
@@ -187,23 +183,34 @@
             }
             else if ( $aColumns[$i] != ' ' )
             {
+                /* General output */
+                $row[] = $aRow[ $aColumns[$i] ];
 
-                    $row[] = $aRow[ $aColumns[$i] ];
 
-                    if($i==5)
-                    $row[] = "<a href='consulta/".$id."'><span class='icon-search'></span></a>";    
+                if($i==4){
+                    if($aRow['culminada']=='f')
+                        $estatus='<span style="display:none;">1-</span><span class="label label-important">Nueva</span>';
+                    else
+                        $estatus='<span style="display:none;">2-</span><span class="label label-success">Cerrada</span>';
+                $row[] =$estatus;
+                $row[] = "<a href='".$aRow['idconstancia']."/show'><span class='icon-search'></span></a>
+                          <a href='edit/".$aRow['idconstancia']."'><span class='icon-edit'></span></a>
+                          <a href='pdf/".$aRow['idconstancia']."'><img style='width:18px;' src='/sait/web/images/pdf.gif'></a>"; 
+                }
             }
         }
         $output['aaData'][] = $row;
     }
      
 
-
     echo json_encode( $output );
      
+
     // Free resultset
     pg_free_result( $rResult );
      
     // Closing connection
     pg_close( $gaSql['link'] );
-?>
+
+
+    //http://localhost/sait/web/libs/datatables/avila.php?sEcho=1&iDisplayStart=0&iDisplayLength=10&bSortable=false&sSearch=&bSearchable_0=false&bSearchable_1=false&bSearchable_2=false&bSearchable_3=false&bSearchable_4=false&bSearchable_5=false
