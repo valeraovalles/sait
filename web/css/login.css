@@ -90,3 +90,8 @@ body{
     padding-right: 10px;
 
 }
+
+.form-signin {
+    width: 300px;
+}
+
