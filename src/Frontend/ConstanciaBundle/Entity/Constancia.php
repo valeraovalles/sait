@@ -66,7 +66,7 @@ class Constancia
     /**
      * @var date
      *
-     * @ORM\Column(name="fechasolicitud", type="datetime", nullable=true)
+     * @ORM\Column(name="fechasolicitud", type="date", nullable=true)
      */
     private $fechasolicitud;
 

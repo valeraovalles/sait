@@ -471,7 +471,6 @@ class TicketController extends Controller
             
         }
         //FIN
-
         return $this->render('SitBundle:Ticket:index.html.twig', array(
             'entities' => $entities,
             'contador'=> $contador
