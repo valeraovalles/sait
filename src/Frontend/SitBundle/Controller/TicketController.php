@@ -35,29 +35,27 @@ class TicketController extends Controller
 
         $tickets = $em->getRepository('SitBundle:Ticket')->tickets();
 
+        $dql = "select t from SitBundle:Ticket t where t.estatus!=4 and t.estatus!=3 order by  t.estatus ASC, t.fechasolicitud DESC, t.horasolicitud DESC";
+        $query = $em->createQuery($dql);
+        $tickets = $query->getResult();
+
         //cuento la cantidad de tickets por unidad
-        $contador[1]['nuevo']=0;$contador[1]['asignado']=0;$contador[1]['cerrado']=0;
-        $contador[2]['nuevo']=0;$contador[2]['asignado']=0;$contador[2]['cerrado']=0;
-        $contador[3]['nuevo']=0;$contador[3]['asignado']=0;$contador[3]['cerrado']=0;
-        $contador[4]['nuevo']=0;$contador[4]['asignado']=0;$contador[4]['cerrado']=0;
+        $nuevos=0;$asignados=0;
+
 
         foreach ($tickets as $t){ 
-            if($t->getEstatus()!='3'){
-
                 if($t->getEstatus()=='1')
-                    $contador[$t->getUnidad()->getId()]['nuevo']=$contador[$t->getUnidad()->getId()]['nuevo']+1;
+                    $nuevos=$nuevos+1;
                 else if($t->getEstatus()=='2')
-                    $contador[$t->getUnidad()->getId()]['asignado']=$contador[$t->getUnidad()->getId()]['asignado']+1;
-                else if($t->getEstatus()=='4')
-                    $contador[$t->getUnidad()->getId()]['cerrado']=$contador[$t->getUnidad()->getId()]['cerrado']+1;
-            }
+                    $asignados=$asignados+1;
             
         }
         //FIN
 
         return $this->render('SitBundle:Ticket:general.html.twig', array(
             'entities' => $tickets,
-            'contador'=> $contador
+            'nuevos'=> $nuevos,
+            'asignados'=> $asignados
         ));
     }
 
