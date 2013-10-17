@@ -5,7 +5,9 @@
 
     <div class="titulo">Registrar Usuario</div>
 
-    <form novalidate action="{{ path('registranuevavisita') }}" method="post" {{ form_enctype(form) }}>
+
+    <form novalidate action="{{ path('registranuevavisita', {'cedula':cedula}) }}" method="post" {{ form_enctype(form) }}>
+
 
         {{ form_widget(form._token) }}
         {{ form_widget(form2._token) }}
@@ -16,7 +18,9 @@
                 <div class="form-contenedor">
                     <div>{{ form_errors(form.cedula) }}</div>
                     <div class="labels"  disabled>Cedula:</div>
-                    <div class="widgets" disabled>{{ form_widget(form.cedula, {'attr':{'value':cedula}}) }}</div>
+
+                    <div class="widgets" disabled>{{ form_widget(form.cedula) }}</div>
+
                 </div>
 
                 <div class="form-contenedor">
@@ -41,18 +45,6 @@
                     <div>{{ form_errors(form.direccion) }}</div>
                     <div class="labels">Direccion:</div>
                     <div class="widgets">{{ form_widget(form.direccion) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form2.fechaentrada)  }}</div>
-                    <div class="labels">Fecha entrada:</div>
-                    <div class="widgets">{{ form_widget(form2.fechaentrada) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form2.horaentrada) }}</div>
-                    <div class="labels">Hora:</div>
-                    <div class="widgets inputhora">{{ form_widget(form2.horaentrada) }}</div>
                 </div>
 
                 <div class="form-contenedor">
