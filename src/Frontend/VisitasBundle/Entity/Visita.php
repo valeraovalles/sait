@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Visita
  *
- * @ORM\Table(name="visita")
+ * @ORM\Table(name="visita.visita")
  * @ORM\Entity
  */
 class Visita
@@ -41,14 +41,14 @@ class Visita
      * @var \DateTime
      * @Assert\Time()
      *
-     * @ORM\Column(name="fechasalida", type="date")
+     * @ORM\Column(name="fechasalida", type="date", nullable=true)
      */
     private $fechasalida;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="horasalida", type="time")
+     * @ORM\Column(name="horasalida", type="time", nullable=true)
      */
     private $horasalida;
 
