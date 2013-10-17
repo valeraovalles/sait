@@ -25,7 +25,7 @@ class VisitaType extends AbstractType
             ->add('horasalida')
             ->add('contacto')
             ->add('observaciones')
-            ->add('usuario')
+            //->add('usuario')
         ;
     }
 

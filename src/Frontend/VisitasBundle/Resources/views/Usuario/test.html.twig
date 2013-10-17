@@ -1,23 +1,12 @@
-{% extends '::visita.html.twig' %}
+{% extends '::base.html.twig' %}
 
 
 {% block body -%}
 
 
-
 <br>
     <h2>Listado de visitantes</h2>
-
-<script type="text/javascript">
-$(document).ready(function(){
-   $('#id').dataTable( { 
-        "sPaginationType": "full_numbers",
-        "aaSorting": [[0,'desc']],
-    } );
-})
-
-</script>
-
+¡
 
     <table class="records_list" id="id">
         <thead>
@@ -29,6 +18,8 @@ $(document).ready(function(){
                 <th>Hora Entrada</th>
                 <th>Fecha Salida</th>
                 <th>Hora Salida</th>
+                <th>Telefono</th>
+                <th>Direccion</th>
                 <th>Acciones</th>
 
             </tr>
@@ -49,35 +40,16 @@ $(document).ready(function(){
                     <td>{{ entity.fechasalida}}</td>
                     <td>{{ entity.horasalida}}</td>
                 {% endif %}
-                <td>
-                <ul>
-                    <li>
-
-                        <a href="{{ path('usuario_show_control', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
-                        <a href="{{ path('usu', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Nueva Visita"><i class="icon-edit"></i></a>
-                        {% if entity.fechasalida=='' %}
-                        <a href="{{ path('salida', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Salida"><i class="icon-user icon-eject"></i></a>
-                        {% endif %}
-
-                    </li>
-                </ul>
-                </td
+                <td>{{ entity.usuario.telefono }}</td>
+                <td>{{ entity.usuario.direccion }}</td>
             </tr>
         {% endfor %}
 
         </tbody>
     </table>                   
-    <br><br>
-    <!--a href="{{ path('reporteinfo')}}" class="btn btn-info"><i class="icon-user icon-print"></i> Generar Reporte </a-->
-    <br><br>
-
 
 
 
     {% endblock %}
 
 
-
-
-
-       

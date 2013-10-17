@@ -2,18 +2,12 @@
 
 {% block body -%}
 
-    {% if app.session.started %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="Greenflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {% endif %}
-
-
     <h1>Datos del Usuario</h1>
 
     <br><br>
+
+
+
 
     <table class="record_properties" border="1" cellspacing="9" cellpadding="5">
         <thead >
@@ -22,24 +16,23 @@
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Cedula</th>
-                <th>Telefono</th>
-
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>{{ entity.usuario.id }}</td>
-                <td>{{ entity.usuario.nombres }}</td>
-                <td>{{ entity.usuario.apellidos }}</td>
-                <td>{{ entity.usuario.cedula }}</td>
-                <td>{{ entity.usuario.telefono }}</td>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.nombres }}</td>
+                <td>{{ entity.apellidos }}</td>
+                <td>{{ entity.cedula }}</td>
             </tr>
             <tr>
-                  <td colspan="5">
-                    <img  src="{{ filename  }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover">
+                  <td colspan="4">
+
+        <img  src="{{ filename  }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover">
+
+
                   </td>
             </tr>
-
         </tbody>
     </table>           
 
@@ -54,6 +47,5 @@
         <br>
         <br>
         <a class="btn" href="{{ path('control_visitas_usuario') }}">Regresar</a>
-        <a class="btn" href="{{ path('usuario_edit_control', { 'id': entity.id }) }}">Editar</a>
 </ul>
 {% endblock %}

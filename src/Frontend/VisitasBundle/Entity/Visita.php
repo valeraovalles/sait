@@ -26,14 +26,14 @@ class Visita
     /**
      * @var \DateTime
      * 
-     * @ORM\Column(name="fechaentrada", type="date", nullable=false)
+     * @ORM\Column(name="fechaentrada", type="date")
      */
     private $fechaentrada;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="horaentrada", type="time", nullable=false)
+     * @ORM\Column(name="horaentrada", type="time")
      */
     private $horaentrada;
 
@@ -41,14 +41,14 @@ class Visita
      * @var \DateTime
      * @Assert\Time()
      *
-     * @ORM\Column(name="fechasalida", type="date", nullable=true)
+     * @ORM\Column(name="fechasalida", type="date")
      */
     private $fechasalida;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="horasalida", type="time", nullable=true)
+     * @ORM\Column(name="horasalida", type="time")
      */
     private $horasalida;
 
@@ -65,6 +65,13 @@ class Visita
      * @ORM\Column(name="observaciones", type="string", nullable=true)
      */
     private $observaciones;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estatus", type="boolean", nullable=true)
+     */
+    private $estatus=false;
 
     /**
      * @var \Usuario
@@ -227,6 +234,29 @@ class Visita
     }
 
     /**
+     * Set estatus
+     *
+     * @param boolean $estatus
+     * @return Operador
+     */
+    public function setEstatus($estatus)
+    {
+        $this->estatus = $estatus;
+    
+        return $this;
+    }
+
+    /**
+     * Get estatus
+     *
+     * @return boolean 
+     */
+    public function getEstatus()
+    {
+        return $this->estatus;
+    }
+
+    /**
      * Set usuario
      *
      * @param \Frontend\VisitasBundle\Entity\Usuario $usuario
@@ -258,24 +288,10 @@ class Visita
 
         return $this->getHoraentrada();
 
+        return $this->getFechasalida();
+
+        return $this->getHorasalida();
     
-
-/*
-    $fechaentrada;
-
-   
- $horaentrada;
-
-    $fechasalida;
-
- $horasalida;
-
- */
-
-
-
-
-
 
     }
 

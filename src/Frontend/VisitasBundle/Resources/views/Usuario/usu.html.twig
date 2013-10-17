@@ -20,7 +20,7 @@
 
 
 
-    <form novalidate action="{{ path('visita_update_control', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <form novalidate action="{{ path('usua', { 'id': visita.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
 
         {{ form_widget(edit_form._token) }}
@@ -30,57 +30,57 @@
 
             <div id="operador">
                 <div class="form-contenedor">
-                    <div>{{ form_errors(form.cedula) }}</div>
+                    <div>{{ form_errors(edit_form.cedula) }}</div>
                     <div class="labels">Cedula:</div>
-                    <div class="widgets">{{ form_widget(form.cedula) }}</div>
+                    <div class="widgets">{{ form_widget(edit_form.cedula) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    <div>{{ form_errors(form.nombres) }}</div>
+                    <div>{{ form_errors(edit_form.nombres) }}</div>
                     <div class="labels">Nombres:</div>
-                    <div class="widgets">{{ form_widget(form.nombres) }}</div>
+                    <div class="widgets">{{ form_widget(edit_form.nombres) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    <div>{{ form_errors(form.apellidos) }}</div>
+                    <div>{{ form_errors(edit_form.apellidos) }}</div>
                     <div class="labels">Apellidos:</div>
-                    <div class="widgets">{{ form_widget(form.apellidos) }}</div>
+                    <div class="widgets">{{ form_widget(edit_form.apellidos) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    <div>{{ form_errors(form.telefono) }}</div>
+                    <div>{{ form_errors(edit_form.telefono) }}</div>
                     <div class="labels">Telefono:</div>
-                    <div class="widgets">{{ form_widget(form.telefono) }}</div>
+                    <div class="widgets">{{ form_widget(edit_form.telefono) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    <div>{{ form_errors(form.direccion) }}</div>
+                    <div>{{ form_errors(edit_form.direccion) }}</div>
                     <div class="labels">Direccion:</div>
-                    <div class="widgets">{{ form_widget(form.direccion) }}</div>
+                    <div class="widgets">{{ form_widget(edit_form.direccion) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.fechaentrada)  }}</div>
+                    <div>{{ form_errors(form.fechaentrada)  }}</div>
                     <div class="labels">Fecha entrada:</div>
-                    <div class="widgets">{{ form_widget(edit_form.fechaentrada) }}</div>
+                    <div class="widgets">{{ form_widget(form.fechaentrada) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.horaentrada) }}</div>
+                    <div>{{ form_errors(form.horaentrada) }}</div>
                     <div class="labels">Hora:</div>
-                    <div class="widgets">{{ form_widget(edit_form.horaentrada) }}</div>
+                    <div class="widgets">{{ form_widget(form.horaentrada) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.contacto) }}</div>
+                    <div>{{ form_errors(form.contacto) }}</div>
                     <div class="labels">Contacto:</div>
-                    <div class="widgets">{{ form_widget(edit_form.contacto) }}</div>
+                    <div class="widgets">{{ form_widget(form.contacto) }}</div>
                 </div>
 
                 <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.observaciones) }}</div>
+                    <div>{{ form_errors(form.observaciones) }}</div>
                     <div class="labels">Observaciones:</div>
-                    <div class="widgets">{{ form_widget(edit_form.observaciones) }}</div>
+                    <div class="widgets">{{ form_widget(form.observaciones) }}</div>
                 </div>
 
 

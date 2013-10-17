@@ -1,0 +1,62 @@
+{% extends '::distribucion.html.twig' %}
+
+{% block title %}Distribución{% endblock %}
+
+{% block titulobanner %}
+    DISTRIBUCIÓN - EDITAR OPERADOR
+{% endblock %}
+
+
+
+{% block body %}
+    {{ parent() }}
+
+    <div class="titulo">EDITAR OPERADOR {{ entity.nombre | upper}} {% if entity.estatus==1 %}(ACTIVO){% else %}<br><br><div class='Redflash-notice'>INACTIVO</div>{% endif %}</div>
+
+    {% if app.session.started %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Greenflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form novalidate class="formNewEditOperador" action="{{ path('operador_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+        {{ form_widget(edit_form._token) }}
+
+
+        <fieldset>
+            <legend id="a"><div class="divisor">EDITAR DATOS DE OPERADOR</div></legend>
+
+            <div id="operador">
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.nombres) }}</div>
+                    <div class="labels">Nombres:</div>
+                    <div class="widgets">{{ form_widget(edit_form.nombres) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.id) }}</div>
+                    <div class="labels">Apellidos:</div>
+                    <div class="widgets">{{ form_widget(edit_form.id) }}</div>
+                </div>
+  
+
+
+
+            </div> 
+        </fieldset>
+        
+     
+        <br>
+        <button class="btn" type="submit">Editar</button>
+
+    </form>
+
+    <br>
+
+
+    <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
+
+{% endblock %}

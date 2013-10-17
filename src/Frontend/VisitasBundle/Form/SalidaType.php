@@ -6,29 +6,32 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UsuarioType extends AbstractType
+class salidaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombres')
-            ->add('apellidos')
-            ->add('cedula', 'text')
-            ->add('telefono', 'text')
-            ->add('direccion', 'textarea')
-
+            ->add('hora')
+            ->add('fecha')
         ;
     }
+
+
+
+
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Frontend\VisitasBundle\Entity\Usuario'
+            'data_class' => 'Frontend\VisitasBundle\Entity\Salida'
         ));
     }
 
+
+
+
     public function getName()
     {
-        return 'frontend_visitasbundle_usuariotype';
+        return 'frontend_visitasbundle_salidatype';
     }
 }

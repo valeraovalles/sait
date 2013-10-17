@@ -1,9 +1,6 @@
-{% extends '::base.html.twig' %}
+{% extends '::visita.html.twig' %}
  
 {% block title %}Control Visitas{% endblock %}
-{% block menu %}
-{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
-{% endblock %}
 {% block body -%}
     {{ parent() }}
 
@@ -33,21 +30,7 @@
 
 
 
-{% block cedula %}
-<script language="javascript" type="text/javascript">
-var cedula = $('#frontend_visitasbundle_usuariotype_cedula').val();
-$.ajax(
-{
-type: "POST",
-data: "cedula="+cedula;,
-url: "{{path}}",
-success: function(respuesta){
-alert (respuesta);
-}
-}
-    );
-</script>
-{% endblock %}
+
 
 
 
