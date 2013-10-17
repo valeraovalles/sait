@@ -23,6 +23,20 @@ class Presupuesto
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=100, nullable=true)
+     */
+    private $descripcion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo", type="string", length=10, nullable=true)
+     */
+    private $codigo;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_inicio", type="date", nullable=false)
@@ -58,6 +72,20 @@ class Presupuesto
     private $montoBs;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="tipo", type="string", length=1, nullable=true)
+     */
+    private $tipo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_presext", type="integer", nullable=true)
+     */
+    private $idPresext;
+
+    /**
      * @var \Contenidos.datosproveedor
      *
      * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Datosproveedor")
@@ -69,6 +97,8 @@ class Presupuesto
 
 
 
+
+
     /**
      * Get id
      *
@@ -77,6 +107,54 @@ class Presupuesto
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Presupuesto
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+
+
+     /**
+     * Set codigo
+     *
+     * @param string $codigo
+     * @return Presupuesto
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+    
+        return $this;
+    }
+
+    /**
+     * Get codigo
+     *
+     * @return string 
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
     }
 
     /**
@@ -195,10 +273,55 @@ class Presupuesto
     }
 
     /**
+     * Set tipo
+     *
+     * @param boolean $tipo
+     * @return Presupuesto
+     */
+    public function setTipo($tipo)
+    {
+        $this->tipo = $tipo;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipo
+     * @return boolean 
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+
+    /**
+     * Set idPresext
+     *
+     * @param integer $idPresext
+     * @return Presupuesto
+     */
+    public function setIdPresext($idPresext)
+    {
+        $this->idPresext = $idPresext;
+    
+        return $this;
+    }
+
+    /**
+     * Get idPresext
+     * @return integer 
+     */
+    public function getIdPresext()
+    {
+        return $this->idPresext;
+    }
+
+
+    /**
      * Set idProveedor
      *
      * @param \Frontend\ContenidosBundle\Entity\Datosproveedor $idProveedor
-     * @return Presupuesto
+     * @return Banco
      */
     public function setIdProveedor(\Frontend\ContenidosBundle\Entity\Datosproveedor $idProveedor = null)
     {
@@ -215,5 +338,10 @@ class Presupuesto
     public function getIdProveedor()
     {
         return $this->idProveedor;
+    }
+
+    public function __toString()
+    {
+        return $this->getDescripcion();
     }
 }

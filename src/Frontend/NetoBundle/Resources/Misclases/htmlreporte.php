@@ -8,16 +8,34 @@ class htmlreporte
     public function recibo($em,$datos)
     {
 
+    	foreach ($datos['concepto'] as $value) {
+    		
+    		if($value['descripcion']=="SUELDO BASICO"){
+    			$sueldo=$value['asigna']*2;
+    			$sueldo=number_format($sueldo, 2,',','.');
+    			break;
+    		}
+    	}
+
+
     	$html ="<div style='text-align:center;'><h1>RECIBO DE PAGO</h1></div><div align='center'><link href='/sait/web/bundles/neto/reporte.css' rel='stylesheet' type='text/css'/><meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />";
     	$html .="
     		<table cellspacing='0' class='tablaprincipal'>
 				<tr>
-					<td class='imagen'><img src='/sait/web/images/logo.jpg' height='150px'></td>
+					<td class='imagen'><img src='/sait/web/images/logo.jpg' height='100px'></td>
 					<td class='titulo' align='center' valing='middle'>
 						<table cellspacing='0' class='tableencabezado'>
 							<tr>
+								<th>NOMBRE Y APELLIDO:</th>
+								<td>".strtoupper($datos['primernombre'].' '.$datos['primerapellido'])."</td>
+								<th>CÉDULA:</th>
+								<td>".$datos['cedula']."</td>
+							</tr>
+							<tr>
 								<th>EMPRESA:</th>
-								<td colspan='3'>".strtoupper($datos['empresa'])."</td>
+								<td>".strtoupper($datos['empresa'])."</td>
+								<th>SUELDO MENSUAL:</th>
+								<td>".$sueldo." Bs.</td>
 							</tr>
 							<tr>
 								<th>PERIODO: </th>

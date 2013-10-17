@@ -1,0 +1,65 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block titulobanner %}
+    PAGOS
+{% endblock %}
+
+
+{% block body -%}
+{{ parent() }}
+    <div class="titulo">DETALLES PRESUPUESTO</div>
+
+
+    {% if entity.tipo == 1 %}
+        <div class="activo">EXTENSION DE PRESUPUESTO</div>
+    {% endif %}
+
+    <div class="form-show_edit">
+        <fieldset>
+            <legend id="a"><div class="divisor">DATOS DEL PRESUPUESTO</div> </legend>
+            <div class="contenedor">
+                <div class="labels">Descripci&oacute;n:</div>
+                <div class="dato">{{ entity.descripcion }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labels">Fecha de Inicio:</div>
+                <div class="dato">{{ entity.fechaInicio|date('Y-m-d') }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labels">Fecha de Fin:</div>
+                <div class="dato">{{ entity.fechaFin|date('Y-m-d') }}</div>
+            </div>
+            {% if entity.montoDolares != NULL %}
+                <div class="contenedor">
+                    <div class="labels">Monto en Dolares:</div>
+                    <div class="dato">{{ entity.montoDolares }}</div>
+                </div>
+            {% else %}
+                <div class="contenedor">
+                    <div class="labels">Monto en Dolares:</div>
+                    <div class="dato">NO TIENE DESCRIPCION</div>
+                </div>
+            {% endif %}
+
+            {% if entity.montoEuros != NULL %}
+                <div class="contenedor">
+                    <div class="labels">Monto en Euros:</div>
+                    <div class="dato">{{ entity.montoEuros }}</div>
+                </div>
+            {% else %}
+                <div class="contenedor">
+                    <div class="labels">Monto en Euros:</div>
+                    <div class="dato">NO TIENE DESCRIPCION</div>
+                </div>
+            {% endif %}
+            
+            <div class="contenedor">
+                <div class="labels">Monto en Bolivares:</div>
+                <div class="dato">{{ entity.montoBs }}</div>
+            </div>
+        </fieldset>
+    </div>
+    <a href="{{ path('presupuesto_extensionindex', { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto }) }}" data-toggle="tooltip" data-placement="top" title="Volver al Listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    <a href="{{ path('presupuesto_extensionedit', { 'id': entity.id, 'id_proveedor':id_proveedor, 'id_presupuesto': id_presupuesto }) }}" data-toggle="tooltip" data-placement="top" title="Editar Presupuesto"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
+
+{% endblock %}

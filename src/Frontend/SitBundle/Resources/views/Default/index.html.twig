@@ -63,7 +63,7 @@
   </div>
   
   <div class="span6">
-  	<div class="tickettitulo alert alert-info"><h5>ESTADÍSTICAS DE USUARIO</h5></div>
+  	<div class="tickettitulo alert alert-info"><h5>ESTATUS DE TICKETS</h5></div>
 	<div class="ticketespera">
 		
 		{% set nuevo=0 %} {% set asignado=0 %} {% set culminado=0 %}
@@ -78,7 +78,7 @@
 		{% endfor %}
 
 		Nuevos: <a style="cursor:pointer;" title="Tickets solicitados que aún no se han atendido"><span class="badge badge-important">{{ nuevo }}</span></a>
-		Asignados: <a style="cursor:pointer;" title="Tickets asignados para su resolución"><span class="badge badge-warning">{{ asignado }}</span></a>
+		Asignados: <a style="cursor:pointer;" title="Tickets asignados para su resolución"><span class="badge badge-info">{{ asignado }}</span></a>
 		Culminados: <a style="cursor:pointer;" title="Tickets resueltos"><span class="badge badge-success">{{ culminado }}</span></a>
 
 		<div id="muestra">
@@ -89,7 +89,7 @@
 				<tr><th>Solicitud</th><th>Fecha/Hora</th><th>Accion</th></tr>
 				{% for tu in ticketusuario %}
 				
-					<tr {% if tu.estatus==1 %}style="color:red;"{% elseif tu.estatus==2 %}style="color:darkorange;"style="color:red;"{% elseif tu.estatus==4 %}style="color:green;"{% endif %}>
+					<tr {% if tu.estatus==1 %}style="color:red;"{% elseif tu.estatus==2 %}style="color:steelblue;"style="color:red;"{% elseif tu.estatus==4 %}style="color:green;"{% endif %}>
 
 						<td>{{ tu.solicitud|slice(0,20) }}</td>
 						<td>{{ tu.fechasolicitud|date("d-m-Y") }} {{ tu.horasolicitud|date("G:i:s") }}</td>
@@ -106,14 +106,17 @@
 				         </div>
 				        <div class="modal-body">
 				            
+				            <b>Solicitud:</b> {{ tu.solicitud }} <br> <br>
+
+
 				        	{% if tu.estatus==1 %}
-				        		El ticket aún no se ha asignado a un técnico.
+				        		<p class="text-error">El ticket aún no se ha asignado a un técnico.</p>
 				        	{% elseif tu.estatus==2 %}
-				        		El ticket fue asignado a un técnico de la unidad de {{ tu.unidad.descripcion }}.
+				        		<p class="text-info">El ticket fue asignado a un técnico de la unidad de {{ tu.unidad.descripcion }}.</p>
 				        	{% elseif tu.estatus==3 %}
-				        		Haz envíado el ticket a la unidad equivocada por lo que fue reasignado a la unidad de {{ tu.unidad.descripcion }}.
+				        		<p class="text-error">Haz envíado el ticket a la unidad equivocada por lo que fue reasignado a la unidad de {{ tu.unidad.descripcion }}.</p>
 				        	{% elseif tu.estatus==4 %}
-				        		Tu ticket fue cerrado el {{ tu.fechasolucion|date('d-m-Y') }} a las {{ tu.horasolucion|date('G:i:s') }} y la solucion fue la siguiente: "<b>{{ tu.solucion }}</b>".
+				        		<p class="text-success">Tu ticket fue cerrado el {{ tu.fechasolucion|date('d-m-Y') }} a las {{ tu.horasolucion|date('G:i:s') }} y la solucion fue la siguiente: "<b>{{ tu.solucion }}</b>".</p>
 				        	{% endif %}
 				            
 				        </div>

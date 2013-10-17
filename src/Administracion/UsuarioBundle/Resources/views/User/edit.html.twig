@@ -16,7 +16,7 @@
             <div class="labelform">Username:</div>
             <div class="widgetform">{{ form_widget(edit_form.username) }}</div>
         </div>
-        <div class="contenedorform">
+        <div class="contenedorform" style="display:none">
             <div class="text-error">{{ form_errors(edit_form.password) }}</div>
             <div class="labelform">Password:</div>
             <div class="widgetform">{{ form_widget(edit_form.password) }}</div>
@@ -25,6 +25,11 @@
             <div class="text-error">{{ form_errors(edit_form.isActive) }}</div>
             <div class="labelform">Activo:</div>
             <div class="widgetform">{{ form_widget(edit_form.isActive) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(edit_form.fueradenomina) }}</div>
+            <div class="labelform">Fuera de Nomina:</div>
+            <div class="widgetform">{{ form_widget(edit_form.fueradenomina) }}</div>
         </div>
         <div class="contenedorform">
             <div class="text-error">{{ form_errors(edit_form_perfil.primerNombre) }}</div>
@@ -77,12 +82,10 @@
 
 </form>
 
-
-        <form action="{{ path('rol_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('Seguro que desea eliminar')">
-            {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit">Borrar</button>
-        </form>
-
+<form action="{{ path('rol_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('Seguro que desea eliminar')">
+    {{ form_widget(delete_form) }}
+    <button class="btn btn-danger" type="submit">Borrar</button>
+</form>
 <br>
 
 {% endblock %}

@@ -12,7 +12,7 @@ class diasType extends AbstractType
     {
         $builder
             //->add('id')
-            ->add('nombre','textarea')
+            ->add('nombre')
        ;
     }
 
@@ -25,6 +25,6 @@ class diasType extends AbstractType
 
     public function getName()
     {
-        return 'frontend_contenidosbundle_diasentregatype';
+        return 'frontend_contenidosbundle_diastype';
     }
 }

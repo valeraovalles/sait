@@ -29,6 +29,14 @@ class TicketRepository extends EntityRepository
     }
 
 
+    //busca los tickets de la unidad especificada
+    public function tickets()
+    {
+        $em = $this->getEntityManager();
+        $dql = "select t from SitBundle:Ticket t order by t.estatus ASC";
+        $query = $em->createQuery($dql);
+        return  $query->getResult();
 
+    }
 
 }

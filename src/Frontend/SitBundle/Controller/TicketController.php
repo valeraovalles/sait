@@ -25,21 +25,99 @@ use Doctrine\ORM\EntityRepository;
 class TicketController extends Controller
 {
 
+    public function ticketgeneralAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+
+        $tickets = $em->getRepository('SitBundle:Ticket')->tickets();
+
+        $dql = "select t from SitBundle:Ticket t where t.estatus!=4 and t.estatus!=3 order by  t.estatus ASC, t.fechasolicitud DESC, t.horasolicitud DESC";
+        $query = $em->createQuery($dql);
+        $tickets = $query->getResult();
+
+        //cuento la cantidad de tickets por unidad
+        $nuevos=0;$asignados=0;
+
+
+        foreach ($tickets as $t){ 
+                if($t->getEstatus()=='1')
+                    $nuevos=$nuevos+1;
+                else if($t->getEstatus()=='2')
+                    $asignados=$asignados+1;
+            
+        }
+        //FIN
+
+        return $this->render('SitBundle:Ticket:general.html.twig', array(
+            'entities' => $tickets,
+            'nuevos'=> $nuevos,
+            'asignados'=> $asignados
+        ));
+    }
+
     public function filtrarsolicitud($solicitud){
 
         $solicitud=strtolower($solicitud);
 
         $eliminar=array(
-            "hola","muchas gracias","buenos dias,","buenos dias","buen día","buenas tardes,","buenas tardes","saludos","chicos:",
+            "hola","muchas gracias","buenos dias,","buenos dias","buenos días,","buenos días","buen día","buenas tardes,","buenas tardes","saludos","chicos:",
             "buenos días","gracias","la presente es para","la presente es","por medio de la presente se","Buenas noches,",
             "Buenas noches","el presente es para","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
-            "urgente"
+            "urgente","esto con caracter de urgencia","con caracter de urgencia","Se agradece su valiosa colaboracion","carmen",
+            "buenas tardes el motivo es para","el motivo es para","el motivo es para","por su colaboracion","por su colaboración","buen dia"
         );
 
         $solicitud=str_replace($eliminar, array(), $solicitud);
         return $solicitud;
     }
+    function filtrarsms($palabrotas) 
+    {     
+        $texto_limpio= $palabrotas; 
+        //$texto_limpio= strtolower($palabrotas);                
+        $texto_limpio= rtrim(ltrim($texto_limpio));
+        $texto_limpio = str_replace("á", "a", $texto_limpio);
+        $texto_limpio = str_replace("é", "e", $texto_limpio); 
+        $texto_limpio = str_replace("í", "i", $texto_limpio);
+        $texto_limpio = str_replace("ó", "o", $texto_limpio);
+        $texto_limpio = str_replace("ú", "u", $texto_limpio);
+        $texto_limpio = str_replace("Á", "A", $texto_limpio);
+        $texto_limpio = str_replace("É", "E", $texto_limpio); 
+        $texto_limpio = str_replace("Í", "I", $texto_limpio);
+        $texto_limpio = str_replace("Ó", "O", $texto_limpio);
+        $texto_limpio = str_replace("Ú", "U", $texto_limpio);
+        $texto_limpio = str_replace("ñ", "n", $texto_limpio);       
+        $texto_limpio = str_replace("ü", "u", $texto_limpio);
+        $texto_limpio = str_replace("'", "", $texto_limpio);       
+        $texto_limpio = str_replace('', "", $texto_limpio);
+        $texto_limpio = str_replace('', "", $texto_limpio);
+        $texto_limpio = str_replace("", "", $texto_limpio);
+        $texto_limpio = str_replace("", "", $texto_limpio);
+        $texto_limpio = str_replace('°', "", $texto_limpio);
+        $texto_limpio = str_replace("Ž", "", $texto_limpio);
+        $texto_limpio = str_replace('ô', "o", $texto_limpio);
+        $texto_limpio = str_replace('õ', "o", $texto_limpio);
+        $texto_limpio = str_replace('ç', "c", $texto_limpio);
+        $texto_limpio = str_replace('à', "a", $texto_limpio);
+        $texto_limpio = str_replace('è', "e", $texto_limpio);
+        $texto_limpio = str_replace('û', "u", $texto_limpio);
+        $texto_limpio = str_replace('Ñ', "n", $texto_limpio);
+        $texto_limpio = str_replace('ã', "a", $texto_limpio);
+        $texto_limpio = str_replace("š", "", $texto_limpio);
+        $texto_limpio = str_replace("", "", $texto_limpio);
+           
+        $find = array('&', '\r\n', '\n', '+'); 
+        $texto_limpio = str_replace ($find, ' ', $texto_limpio);
 
+        $sustituye = array("\r\n", "\n\r", "\n", "\r");
+        $texto_limpio = str_replace($sustituye, "", $texto_limpio); 
+    
+        $texto_limpio=strip_tags($texto_limpio);
+        return $texto_limpio; 
+    }
     public function asignadosolucionAction(Request $request,$id)
     {
 
@@ -62,6 +140,23 @@ class TicketController extends Controller
         $query->setParameter('solucion', $datos['solucion']);
         $query->setParameter('idticket', $id);
         $query->execute();
+
+
+        //CORREO
+        $ticket = $em->getRepository('SitBundle:Ticket')->find($id);
+        //$ticket->getUnidad()->getCorreo();
+        //$ticket->getSolicitante()->getUser()->getUsername();
+        $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+        ->setSubject('Sit-Cerrado')     // we configure the title
+        ->setFrom('sit@telesurtv.net')     // we configure the sender
+        ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
+        ->setBody( $this->renderView(
+                'SitBundle:Correo:solucion.html.twig',
+                array('ticket' => $ticket)
+            ), 'text/html');
+
+        $this->get('mailer')->send($message);    // then we send the message.
+        //FIN CORREO
 
         $this->get('session')->getFlashBag()->add('notice', 'EL TICKET SE HA CERRADO SATISFACTORIAMENTE');
         return $this->redirect($this->generateUrl('ticket_show',array('id'=>$id)));
@@ -177,11 +272,20 @@ class TicketController extends Controller
             $query->setParameter('idticket', $id);
             $query->execute();
 
+<<<<<<< HEAD
+=======
+            //echo $user->getUser()->getUsername();
+
+>>>>>>> e0ad958812e2291a497512d07d0e2d2ffd9ee813
             //CORREO
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Asignado')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
+<<<<<<< HEAD
             ->setTo('jvalera@telesurtv.net')     // we configure the recipient
+=======
+            ->setTo($user->getUser()->getUsername().'@telesurtv.net')     // we configure the recipient
+>>>>>>> e0ad958812e2291a497512d07d0e2d2ffd9ee813
             ->setBody( $this->renderView(
                     'SitBundle:Correo:asignado.html.twig',
                     array('ticket' => $ticket,'usuario'=>$user)
@@ -233,16 +337,18 @@ class TicketController extends Controller
             $query->setParameter('idticket', $id);
             $reasignado = $query->getResult(); 
 
+            //echo $unidad->getCorreo();
+
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Reasignado')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
-            ->setTo('jvalera@telesurtv.net')     // we configure the recipient
+            ->setTo($unidad->getCorreo())     // we configure the recipient
             ->setBody( $this->renderView(
                     'SitBundle:Correo:reasignado.html.twig',
                     array('ticket' => $ticket,'unidad'=>$unidad,'reasignado'=>$reasignado)
                 ), 'text/html');
 
-            $this->get('mailer')->send($message);     // then we send the message.
+            $this->get('mailer')->send($message);    // then we send the message.
             //FIN CORREO
 
             $this->get('session')->getFlashBag()->add('notice', 'Ticket reasignado exitosamente a '.ucfirst($unidad->getDescripcion()).'.');
@@ -289,6 +395,7 @@ class TicketController extends Controller
         foreach ($unidades as $value) {
             $unidad[$value->getId()]=$value->getDescripcion();
         }
+        
         $form = $this->createFormBuilder()
                 ->add('unidad', 'choice', array(
                     'choices'   => $unidad,
@@ -349,10 +456,33 @@ class TicketController extends Controller
 
         $entities = $em->getRepository('SitBundle:Unidad')->ticketsunidad($usuariounidad[0]->getId());
 
+        //cuento la cantidad de tickets por unidad
+        $tickets = $em->getRepository('SitBundle:Ticket')->findAll();
+        $contador[1]['nuevo']=0;$contador[1]['asignado']=0;$contador[1]['cerrado']=0;
+        $contador[2]['nuevo']=0;$contador[2]['asignado']=0;$contador[2]['cerrado']=0;
+        $contador[3]['nuevo']=0;$contador[3]['asignado']=0;$contador[3]['cerrado']=0;
+        $contador[4]['nuevo']=0;$contador[4]['asignado']=0;$contador[4]['cerrado']=0;
 
+        foreach ($tickets as $t){ 
+            if($t->getEstatus()!='3'){
+
+                if($t->getEstatus()=='1')
+                    $contador[$t->getUnidad()->getId()]['nuevo']=$contador[$t->getUnidad()->getId()]['nuevo']+1;
+                else if($t->getEstatus()=='2')
+                    $contador[$t->getUnidad()->getId()]['asignado']=$contador[$t->getUnidad()->getId()]['asignado']+1;
+                else if($t->getEstatus()=='4')
+                    $contador[$t->getUnidad()->getId()]['cerrado']=$contador[$t->getUnidad()->getId()]['cerrado']+1;
+            }
+            
+        }
+        //FIN
+
+
+        if(empty($entities))$entities=null;
 
         return $this->render('SitBundle:Ticket:index.html.twig', array(
             'entities' => $entities,
+            'contador'=> $contador
         ));
     }
     /**
@@ -364,6 +494,7 @@ class TicketController extends Controller
         $datos=$request->request->all();
         //RECIBO LOS DATOS QUE SE ENVIAN DESDE EL FORMULARIO
         $solicitud=$datos['frontend_sitbundle_tickettype']['solicitud'];
+        if(isset($datos['frontend_sitbundle_tickettype']['unidad']))
         $idunidad=$datos['frontend_sitbundle_tickettype']['unidad'];
         $extensionusuario=$datos['extension']['extension'];
         //FIN
@@ -410,7 +541,7 @@ class TicketController extends Controller
             $entity->setEstatus(1);
 
             //GUARDO LA SOLICITUD FILTRANDO LO ESCRITO POR EL USUARIO
-            $solicitud=$this->filtrarsolicitud($solicitud);
+            $solicitud=$this->filtrarsolicitud(strtolower($solicitud));
             $solicitud=ucfirst(trim($solicitud));
             $entity->setSolicitud($solicitud);
 
@@ -419,12 +550,24 @@ class TicketController extends Controller
       
                 $file=$form['file']->getData();
 
-                $tamaño=number_format($file->getClientSize()/1048576,0);
+                $tamaño=number_format($file->getClientSize(),0, ',', '')/1000;
                 $extension = $file->guessExtension();
                 $nombre=$file->getClientOriginalName();
                 $nombre=explode(".", $nombre);
                 $nombre=$nombre[0];
 
+                //valido tamaño
+                if ($tamaño>2000) {
+                    $this->get('session')->getFlashBag()->add('alert', 'El archivo no puede ser mayor a 2MB.');
+
+                    return $this->render('SitBundle:Default:index.html.twig', array(
+                        'form'   => $form->createView(),
+                        'form2'   => $form2->createView(),
+                        'ticketusuario'=>$ticketusuario,
+                        'datosusuario'=>$datosusuario
+                    ));
+
+                }
                 $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf');
                 //valido las extensiones
                 if (!array_search($extension,$extensiones)) {
@@ -465,18 +608,25 @@ class TicketController extends Controller
             $unidad =  $em->getRepository('SitBundle:Unidad')->find($idunidad);
             //$unidad->getCorreo();
 
+
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Solicitud')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
-            ->setTo('jvalera@telesurtv.net')     // we configure the recipient
+            ->setTo($unidad->getCorreo())     // we configure the recipient
             ->setBody( $this->renderView(
                     'SitBundle:Correo:solicitud.html.twig',
                     array('ticket' => $ticketcreado)
                 ), 'text/html');
-
-            $this->get('mailer')->send($message);     // then we send the message.
+            $this->get('mailer')->send($message);    // then we send the message.
             //fin enviar correo
 
+
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            ->setSubject('telesurweb.imk:*t3l3SURcl4v3* @Sit:'.substr(ucfirst($this->filtrarsms($solicitud)),0,150))    // we configure the title
+            ->setFrom('contactenos@telesurtv.net')
+            ->setTo($unidad->getSms());
+            $this->get('mailer')->send($message);     // then we send the message.
+            //fin enviar correo
 
             $this->get('session')->getFlashBag()->add('notice', 'TU SOLICITUD SE HA REALIZADO EXITOSAMENTE');
 

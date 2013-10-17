@@ -44,7 +44,6 @@ class User implements UserInterface, AdvancedUserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=40, nullable=true)
-     * @Assert\NotBlank()
      */
     private $password;
 
@@ -54,6 +53,14 @@ class User implements UserInterface, AdvancedUserInterface
      * @ORM\Column(name="is_active", type="boolean", nullable=false)
      */
     private $isActive;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="fueradenomina", type="boolean", nullable=false)
+     */
+    private $fueradenomina=false;
+     
      
      /**
      * @var \Doctrine\Common\Collections\Collection
@@ -178,6 +185,29 @@ class User implements UserInterface, AdvancedUserInterface
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set fueradenomina
+     *
+     * @param boolean $fueradenomina
+     * @return User
+     */
+    public function setFueradenomina($fueradenomina)
+    {
+        $this->fueradenomina = $fueradenomina;
+    
+        return $this;
+    }
+
+    /**
+     * Get fueradenomina
+     *
+     * @return boolean 
+     */
+    public function getFueradenomina()
+    {
+        return $this->fueradenomina;
     }
 
      /**

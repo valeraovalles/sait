@@ -10,6 +10,18 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+        $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('UsuarioBundle:Perfil')->find($IdUsuario);
+        if($entity->getUser()->getFueradenomina()==true)
+             return $this->redirect($this->generateUrl('usuario_homepage'));
+
+        $IdUsuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('UsuarioBundle:Perfil')->find($IdUsuario);
+        if($entity->getUser()->getFueradenomina()==true)
+            return $this->redirect($this->generateUrl('usuario_homepage'));
+
 
         $entity = new Constancia();
         $form   = $this->createForm(new ConstanciaType(), $entity);

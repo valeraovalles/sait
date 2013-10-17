@@ -4,13 +4,25 @@
 
 
 {% block titulobanner %}
-    LISTADO DE TATEGORIAS
+    LISTADO DE SUBCATEGORIAS
 {% endblock %}
 
 
 {% block body -%}
     {{ parent() }}
     
+
+    {% if entities==null %}
+         <div class="titulo">LISTADO DE SUBCATEGORIAS<BR></div>
+
+         <div class="alert alert-error">NO EXISTEN SUBCATEGORIAS</div>
+         <br>
+        <a class="btn btn-default" href="{{ path('categoria') }}">
+            Ir a la lista de categorias
+        </a>
+        <br><br>
+    {% else %}
+
     <div class="titulo">LISTADO DE SUBCATEGORIAS<BR><h5>CATEGORIA: {{ entities[0].categoria.categoria|upper }}</h5></div>
 
     {% for flashMessage in app.session.flashbag.get('notice') %}
@@ -24,6 +36,7 @@
             {{ flashMessage }}
         </div>
     {% endfor %}
+
 
     <table class="records_list">
         <thead>
@@ -56,5 +69,5 @@
             Ir a la lista de categorias
         </a>
     <br><br>
-
+    {% endif %}
     {% endblock %}

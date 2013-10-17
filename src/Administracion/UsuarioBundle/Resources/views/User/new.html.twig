@@ -34,6 +34,11 @@
             <div class="widgetform">{{ form_widget(form.isActive) }}</div>
         </div>
         <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.fueradenomina) }}</div>
+            <div class="labelform">Fuera de Nomina:</div>
+            <div class="widgetform">{{ form_widget(form.fueradenomina) }}</div>
+        </div>
+        <div class="contenedorform">
             <div class="text-error">{{ form_errors(form_perfil.primerNombre) }}</div>
             <div class="labelform">Primer nombre:</div>
             <div class="widgetform">{{ form_widget(form_perfil.primerNombre) }}</div>

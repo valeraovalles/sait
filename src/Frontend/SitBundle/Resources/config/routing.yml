@@ -21,6 +21,9 @@ ticket:
     pattern:  /ticket
     defaults: { _controller: "SitBundle:Ticket:index" }
 
+ticketgeneral:
+    pattern:  /ticketgeneral
+    defaults: { _controller: "SitBundle:Ticket:ticketgeneral" }
 
 ticket_show:
     pattern:  /{id}/show

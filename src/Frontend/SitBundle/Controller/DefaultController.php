@@ -16,12 +16,11 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-
-    	//consulto el perfil del usuario
-    	$idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-
         $em = $this->getDoctrine()->getManager();
         //datos del usuario
+        
+        //consulto el perfil del usuario
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $datosusuario =  $em->getRepository('UsuarioBundle:User')->datosusuario($idusuario);
     	
         $dql = "select p from UsuarioBundle:Perfil p where p.user= :id";

@@ -14,7 +14,11 @@ class UserType extends AbstractType
             ->add('username')
             ->add('password')
             ->add('isActive')
-            ->add('rol', null, array('required' => false))
+            ->add('fueradenomina')
+            ->add('rol',null, array(
+                                            'expanded'=>true, 
+                                            'multiple'=>true,
+                                            'required' => false))
         ;
     }
 

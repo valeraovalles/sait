@@ -8,6 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\ContenidosBundle\Entity\Datosproveedor;
 use Frontend\ContenidosBundle\Form\DatosproveedorType;
 
+
+use Frontend\ContenidosBundle\Entity\DetalleTipoproveedor;
+use Frontend\ContenidosBundle\Entity\Unidadsolicitante;
 use Administracion\UsuarioBundle\Entity\User;
 
 /**
@@ -27,7 +30,12 @@ class DatosproveedorController extends Controller
 
         $titulo = "COMPLETO DE PROVEEDORES";
 
-        $entities = $em->getRepository('ContenidosBundle:Datosproveedor')->findAll();
+        //OBTENGO LA INFORMACION DE TODOS LOS PROVEEDORES ACTIVOS
+
+        $estatus = 'A';
+        $dql = "select d from ContenidosBundle:Datosproveedor d where d.estatus=:estatus";
+        $consulta = $em->createQuery($dql)->setParameter('estatus', $estatus);
+        $entities = $consulta->getResult();
 
         return $this->render('ContenidosBundle:Datosproveedor:index.html.twig', array(
             'entities' => $entities,
@@ -38,11 +46,26 @@ class DatosproveedorController extends Controller
     public function comprasAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $titulo = "PROVEEDORES DE COMPRAS";
+        $titulo = "PROVEEDORES (COMPRAS)";
+
+
+        //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE COMPRAS QUE ESTEN ACTIVOS
 
         $id_tipoproveedor = 1;
-        $dql = "select d from ContenidosBundle:Datosproveedor d where d.idTipoprov=:id_tipoproveedor";
-        $consulta = $em->createQuery($dql)->setParameter('id_tipoproveedor', $id_tipoproveedor);
+        $estatus = 'A';
+
+        $dql = "select d from ContenidosBundle:Datosproveedor d 
+                where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
+        $consulta = $em->createQuery($dql)->setParameters(
+                                                            array(
+                                                                    'id_tipoproveedor'=> $id_tipoproveedor, 
+                                                                    'estatus' => $estatus,
+                                                                 )
+
+
+                                                         );
+
+
         $entities = $consulta->getResult();
         return $this->render('ContenidosBundle:Datosproveedor:index.html.twig', array(
             'entities' => $entities,
@@ -53,11 +76,24 @@ class DatosproveedorController extends Controller
     public function informacionAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $id_tipoproveedor = 2;
-        $titulo = "PROVEEDORES DE INFORMACION";
 
-        $dql = "select d from ContenidosBundle:Datosproveedor d where d.idTipoprov=:id_tipoproveedor";
-        $consulta = $em->createQuery($dql)->setParameter('id_tipoproveedor', $id_tipoproveedor);
+
+        //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE INFORMACION QUE ESTEN ACTIVOS
+        $id_tipoproveedor = 2;
+        $estatus = 'A';
+        $titulo = "PROVEEDORES (VP DE CONTENIDOS)";
+
+        $dql = "select d from ContenidosBundle:Datosproveedor d 
+                where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
+        $consulta = $em->createQuery($dql)->setParameters(
+                                                            array(
+                                                                    'id_tipoproveedor'=> $id_tipoproveedor, 
+                                                                    'estatus' => $estatus,
+                                                                 )
+
+
+                                                         );
+
         $entities = $consulta->getResult();
         return $this->render('ContenidosBundle:Datosproveedor:index.html.twig', array(
             'entities' => $entities,
@@ -68,11 +104,23 @@ class DatosproveedorController extends Controller
     public function equiposAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $id_tipoproveedor = 4;
 
+        //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE EQUIPOS QUE ESTEN ACTIVOS
+
+        $id_tipoproveedor = 4;
+        $estatus = 'A';
         $titulo = "DE EQUIPOS TELESUR";
-        $dql = "select d from ContenidosBundle:Datosproveedor d where d.idTipoprov=:id_tipoproveedor";
-        $consulta = $em->createQuery($dql)->setParameter('id_tipoproveedor', $id_tipoproveedor);
+
+        $dql = "select d from ContenidosBundle:Datosproveedor d 
+                where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
+        $consulta = $em->createQuery($dql)->setParameters(
+                                                            array(
+                                                                    'id_tipoproveedor'=> $id_tipoproveedor, 
+                                                                    'estatus' => $estatus,
+                                                                 )
+
+
+                                                         );
         $entities = $consulta->getResult();
         return $this->render('ContenidosBundle:Datosproveedor:index.html.twig', array(
             'entities' => $entities,
@@ -80,13 +128,16 @@ class DatosproveedorController extends Controller
         ));
     }
 
-    public function satelitesAction()
+    public function inactivosAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $id_tipoproveedor = 3;
-        $titulo = "PROVEEDORES DE SATELITES";
-        $dql = "select d from ContenidosBundle:Datosproveedor d where d.idTipoprov=:id_tipoproveedor";
-        $consulta = $em->createQuery($dql)->setParameter('id_tipoproveedor', $id_tipoproveedor);
+
+        //OBTENGO LA INFORMACION  DE LOS PROVEEDORES QUE ESTEN INACTIVOS
+
+        $estatus = 'I';
+        $titulo = "PROVEEDORES INACTIVOS";
+        $dql = "select d from ContenidosBundle:Datosproveedor d where d.estatus=:estatus";
+        $consulta = $em->createQuery($dql)->setParameter('estatus', $estatus);
         $entities = $consulta->getResult();
         return $this->render('ContenidosBundle:Datosproveedor:index.html.twig', array(
             'entities' => $entities,
@@ -105,6 +156,27 @@ class DatosproveedorController extends Controller
         $form->bind($request);
 
             $em = $this->getDoctrine()->getManager();
+
+            // OBTENGO LOS DATOS DEL FORMULARIO AJAX
+            $datosform = $request->request->all();
+            $datosform = $datosform['form'];
+
+            $unidad = $datosform['unidadsolicitante'];
+            $detalle = $datosform['detalle'];
+            $tiposat = $datosform['tipoSatelite'];
+            
+            if (!empty($tiposat))
+            {
+                $entity->setTipoSatelite($tiposat);
+            }
+
+
+
+            $det = $em->getRepository('ContenidosBundle:DetalleTipoproveedor')->find($detalle);
+            $entity->setIdDetalletipoproveedor($det);
+
+            $unid = $em->getRepository('ContenidosBundle:Unidadsolicitante')->find($unidad);
+            $entity->setIdUnidad($unid);
 
             $idUsuario = $this->get('security.context')->getToken()->getUser()->getId();       
             $user = $em->getRepository('UsuarioBundle:User')->find($idUsuario);
@@ -163,6 +235,7 @@ class DatosproveedorController extends Controller
     public function editAction($id)
     {
 
+       
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id);
@@ -175,7 +248,7 @@ class DatosproveedorController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-
+        
         return $this->render('ContenidosBundle:Datosproveedor:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
@@ -189,9 +262,54 @@ class DatosproveedorController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
 
+
+        $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id);
+
+
+        // OBTENGO LOS DATOS DEL FORMULARIO AJAX
+        $datosform = $request->request->all();
+        $cont = 0;
+        if (!empty($datosform))
+        {
+           // hace un bucle con variable $datosform porque si el contador es mayor a 2 quiere decir que
+           // entro al ajax pero si es menor los datos quedaron iguales
+            foreach ($datosform as $key) {
+                $cont ++;
+            }
+            if ($cont > 2)
+            {
+
+                $datosform = $datosform['form'];
+       
+                $unid = $datosform['unidadsolicitante'];
+                $unidad = $em->getRepository('ContenidosBundle:Unidadsolicitante')->find($unid);
+                $detalle = NULL;
+                $tiposat = NULL;
+
+                // ASOCIO A VARIABLE SEGUN EL TIPO DE PROVEEDOR
+                $tipoprov =      $entity->getIdTipoprov();
+                if (($tipoprov == 'VICEPRESIDENCIA DE CONTENIDOS') or ($tipoprov == 'EQUIPOS TELESUR' ))
+                {
+                    $detalle = $datosform['detalle'];
+                    $detalle = $em->getRepository('ContenidosBundle:DetalleTipoproveedor')->find($detalle);
+                    
+                    if ($detalle == 'SATELITES')
+                    {
+                        $tiposat = $datosform['tipoSatelite'];
+                    }
+                }
+
+            }
+        }
+               
+
+        // OBTENGO LA FECHA EN LA QUE SE CREO EL REGISTRO Y EL USUARIO QUE LO CREO
+        $fecha= $entity->getFechaRegistro();
+        $usuario=$entity->getUsuario(); 
+        $usuarioss = $em->getRepository('UsuarioBundle:User')->find($usuario);
+
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Datosproveedor entity.');
@@ -201,15 +319,26 @@ class DatosproveedorController extends Controller
         $editForm = $this->createForm(new DatosproveedorType(), $entity);
         $editForm->bind($request);
 
-//       die;
-            $em->persist($entity);
-            $em->flush();
+        // AGREGO A LA VARIABLE  $entity LA FECHA, USUARIO, UNIDAD, DETALLE Y TIPO DE SATELITE    
 
-            return $this->redirect($this->generateUrl('datosproveedor_edit', array('id' => $id)));
+        $entity->setFechaRegistro($fecha);
+        $entity->setUsuario($usuarioss);
+
+        if ($cont > 2)
+        {
+            $entity->setIdUnidad($unidad);
+            $entity->setIdDetalletipoproveedor($detalle);
+            $entity->setTipoSatelite($tiposat);
+        }
+        //INGRESO LA INFORMACION EN LA BASE DE DATOS
+        $em->persist($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('datosproveedor_edit', array('id' => $id)));
         
     }
     /**
-     * Deletes a Datosproveedor entity.
+     * FUNCION PARA ELIMINAR UN REGISTRO DE TABLA DATOSPROVEEDOR
      *
      */
     public function deleteAction(Request $request, $id)

@@ -15,28 +15,34 @@
                         <div class="labels">Concepto:</div>
                         <div class="dato">{{ entity.concepto }}</div>
                     </div>
-                    <div class="contenedor">
-                        <div class="labels">Moneda:</div>
-                        <div class="dato">{{ entity.tipoMoneda }}</div>
-                    </div>
-                    <div class="contenedor">
-                        <div class="labels">Monto en $/:</div>
-                        <div class="dato">{{ entity.montoMe }}</div>
-                    </div>
+                    
+                    {% if entity.tipoMoneda == 0 %}
+                        <div class="contenedor">
+                            <div class="labels">Monto en $:</div>
+                            <div class="dato">{{ entity.montoMe }}</div>
+                        </div>
+                    {% elseif entity.tipoMoneda == 1 %}
+                        <div class="contenedor">
+                            <div class="labels">Monto en €:</div>
+                            <div class="dato">{{ entity.montoMe }}</div>
+                        </div>
+                    {% endif %}
+
+                    
                     <div class="contenedor">
                         <div class="labels">Monto en Bs:</div>
                         <div class="dato">{{ entity.montoBs }}</div>
                     </div>
                     <div class="contenedor">
-                        <div class="labels">Fecha del Addendum:</div>
+                        <div class="labels">Fecha de Inicio:</div>
                         <div class="dato">{{ entity.fechaInicio|date('Y-m-d') }}</div>
                     </div>
                     <div class="contenedor">
-                        <div class="labels">Fecha del Addendum:</div>
+                        <div class="labels">Fecha de Fin:</div>
                         <div class="dato">{{ entity.fechaFin|date('Y-m-d') }}</div>
                     </div>
-            </div><br>
-            <div class="form-show_edit">
+         
+           
                
                     <div class="divisor">DATOS DE LA SOLICITUD</div>
 
@@ -64,8 +70,8 @@
                         <div class="labels">Fecha de Alcance (Punto de Cuenta):</div>
                         <div class="dato">{{ entity.fechaAlcance|date('Y-m-d') }}</div>
                     </div>
-            </div><br>
-            <div class="form-show_edit">
+      
+            
 
                 <div class="divisor">DETALLES DE LA CONTRATACI&Oacute;N</div>
 
@@ -77,27 +83,37 @@
                         <div class="labels">Fecha del Contrato:</div>
                         <div class="dato">{{ entity.fechaContrato|date('Y-m-d') }}</div>
                     </div>
-                    <div class="contenedor">
-                        <div class="labels">N&uacute;mero del Addendum:</div>
-                        <div class="dato">{{ entity.numAddendum }}</div>
-                    </div>
-                    <div class="contenedor">
-                        <div class="labels">Fecha del Addendum:</div>
-                        <div class="dato">{{ entity.fechaAddendum|date('Y-m-d') }}</div>
-                    </div>
-                    
-                    <div class="contenedor">
-                        <div class="labels">Observaciones Compras:</div>
+                    {% if entity.numAddendum != NULL %}
+                        <div class="contenedor">
+                            <div class="labels">N&uacute;mero del Addendum:</div>
+                            <div class="dato">{{ entity.numAddendum }}</div>
+                        </div>
+                        <div class="contenedor">
+                            <div class="labels">Fecha del Addendum:</div>
+                            <div class="dato">{{ entity.fechaAddendum|date('Y-m-d') }}</div>
+                        </div>
+                    {% else %}
+                        <div class="contenedor">
+                            <div class="labels">N&uacute;mero del Addendum:</div>
+                            <div class="dato"> NO HAY DESCRIPCION</div>
+                        </div>
+                        <div class="contenedor">
+                            <div class="labels">Fecha del Addendum:</div>
+                            <div class="dato">NO HAY DESCRIPCION</div>
+                        </div>
+                    {% endif %}
+                
+                {#    <div class="contenedor">
+                        <div class="labels">Observaciones:</div>
                         <div class="dato">{{ entity.observacionesCompras }}</div>
                     </div>
+                #}
                     <br><br>
             </div>
         </fieldset>
   
   
-        <a href="{{ path('contratacion', { 'id': entity.id, 'id_proveedor': id_proveedor }) }}">
-            <img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
-        </a>
+        <a href="{{ path('contratacion' , { 'id_proveedor': prov, 'id_presupuesto': entity.idPresupuesto, 't':t } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
     
     
   

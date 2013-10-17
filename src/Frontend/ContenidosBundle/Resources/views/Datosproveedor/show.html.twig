@@ -3,7 +3,17 @@
 {% block body -%}
  {{ parent() }}
     <div class="titulo">DETALLES "{{ entity.nombre }}" </div>
+    
+    
+        {% if entity.estatus == 'I' %}
+            <div class="inactivo">PROVEEDOR INACTIVO</div>
+        {% elseif  entity.estatus == 'A' %}
+            <div class="activo">PROVEEDOR ACTIVO</div>
+        {% endif %}
+        
     <div class="form-show_edit">
+    <br> 
+    <div class="contenedor">
     <fieldset>      
         <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
             <div class="contenedor">
@@ -74,36 +84,35 @@
     <fieldset>       
         <legend id="c"><div class="divisor">DETALLES DEL PROVEEDOR</div> </legend>
             <div class="contenedor">
-                <div class="labels">Tipo de Proveedor:</div>
-                {% if entity.idTipoprov.nombre == 'EQUIPOS'  %}
-                <div class="dato">EQUIPOS TELESUR-{{ entity.idDetalletipoproveedor }}</div>
+                <div class="labels">Tipo de Proveedor:</div>       
+                {% if entity.idDetalletipoproveedor != NULL %}
+                    <div class="dato">
+                        {{ entity.idTipoprov.nombre }}
+                         
+                        {% if entity.idDetalletipoproveedor == 'SATELITES' %}
+                            <br>{{ entity.idDetalletipoproveedor }}
+                            {% if entity.tipoSatelite == TRUE %}
+                                -- FIJO
+                            {% elseif  entity.tipoSatelite == FALSE %} 
+                               -- OCACIONAL
+                            {% endif %}
+                        {% else %}    
+                            -- {{ entity.idDetalletipoproveedor }}
+                        {% endif %}                
+                    </div>
                 {% else %}
-                    <div class="dato">{{ entity.idTipoprov.nombre }}  {{ entity.idDetalletipoproveedor }}</div>
+                    <div class="dato">{{ entity.idTipoprov.nombre }}</div>
                 {% endif %}
             </div>
-            {% if entity.idTipoprov.nombre == 'SATELITES' %}
-                {% if entity.tipoSatelite == FALSE %}
-                    <div class="contenedor">
-                        <div class="labels">Tipo de Satelite:</div>
-                        <div class="dato">OCASIONAL</div>
-                    </div>
-                {% else %}
-                    <div class="contenedor">
-                        <div class="labels">Tipo de Satelite:</div>
-                        <div class="dato">FIJO</div>
-                    </div>
-                {% endif %}
-            {% endif %}
             <div class="contenedor">
                 <div class="labels">Unidad Solicitante:</div>
                 <div class="dato">{{ entity.idUnidad }}</div>
             </div>
-            <br>
     </fieldset>
+    <br>
 </div>
-<br>
-
+</div>
     <a href="{{ path('datosproveedor', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
-<br><br> 
+<br>
 
 {% endblock %}

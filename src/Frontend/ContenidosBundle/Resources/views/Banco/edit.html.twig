@@ -31,42 +31,6 @@
         </fieldset>
         <br>
         <fieldset>       
-            <legend id="b"><div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div> </legend>
-            
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.bancoInterm) }}
-                    <div class="labels">Nombre:</div>
-                    <div class="widgets">{{ form_widget(edit_form.bancoInterm) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.cuentaInterm) }}
-                    <div class="labels">N&uacute;mero de Cuenta:</div>
-                    <div class="widgets">{{ form_widget(edit_form.cuentaInterm) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.swiftInterm) }}
-                    <div class="labels">C&oacute;digo SWIFT:</div>
-                    <div class="widgets">{{ form_widget(edit_form.swiftInterm) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.abaInterm) }}
-                    <div class="labels">C&oacute;digo ABA:</div>
-                    <div class="widgets">{{ form_widget(edit_form.abaInterm) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.ibanInterm) }}
-                    <div class="labels">C&oacute;digo IBAN:</div>
-                    <div class="widgets">{{ form_widget(edit_form.ibanInterm) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.direccionBancointerm) }}
-                    <div class="labels">Direcci&oacute;n:</div>
-                    <div class="widgets">{{ form_widget(edit_form.direccionBancointerm) }}</div>
-                </div>
-            
-        </fieldset>
-        <br>
-        <fieldset>       
             <legend id="c"><div class="divisor">DATOS DEL BANCO BENEFICIARIO</div> </legend>
             
                 <div class="form-contenedor">
@@ -99,14 +63,49 @@
                     <div class="labels">Direcci&oacute;n:</div>
                     <div class="widgets">{{ form_widget(edit_form.direccionBancobenef) }}</div>
                 </div>
-                <button type="submit" class="btn">Editar</button> <br><br>
+                
         </fieldset>
-    </div>
-    
+        <br>
+        <fieldset>       
+            <legend id="b"><div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div> </legend>
+            
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.bancoInterm) }}
+                    <div class="labels">Nombre:</div>
+                    <div class="widgets">{{ form_widget(edit_form.bancoInterm) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.cuentaInterm) }}
+                    <div class="labels">N&uacute;mero de Cuenta:</div>
+                    <div class="widgets">{{ form_widget(edit_form.cuentaInterm) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.swiftInterm) }}
+                    <div class="labels">C&oacute;digo SWIFT:</div>
+                    <div class="widgets">{{ form_widget(edit_form.swiftInterm) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.abaInterm) }}
+                    <div class="labels">C&oacute;digo ABA:</div>
+                    <div class="widgets">{{ form_widget(edit_form.abaInterm) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.ibanInterm) }}
+                    <div class="labels">C&oacute;digo IBAN:</div>
+                    <div class="widgets">{{ form_widget(edit_form.ibanInterm) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.direccionBancointerm) }}
+                    <div class="labels">Direcci&oacute;n:</div>
+                    <div class="widgets">{{ form_widget(edit_form.direccionBancointerm) }}</div>
+                </div>
+            <button type="submit" class="btn">Editar</button> <br><br>
+        </fieldset>
+    </div><br>
+    <a href="{{ path('banco', { 'id_proveedor': entity.idProveedor.id }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
         
     </form>
     
-    <br><br> 
 
 
 <script src="{{ asset('js/contenidos/efecto.js') }}"></script>

@@ -28,6 +28,7 @@ class SubcategoriaController extends Controller
         $query = $em->createQuery($dql);
         $query->setParameter('id',$id);
         $entities = $query->getResult();
+        if(empty($entities))$entities=null;
 
         return $this->render('SitBundle:Subcategoria:index.html.twig', array(
             'entities' => $entities,

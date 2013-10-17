@@ -39,18 +39,12 @@ class TipoproveedorController extends Controller
         $form = $this->createForm(new TipoproveedorType(), $entity);
         $form->bind($request);
 
-        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tipoproveedor_show', array('id' => $entity->getId())));
-        }
-
-        return $this->render('ContenidosBundle:Tipoproveedor:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+            return $this->redirect($this->generateUrl('tipoproveedor', array('id' => $entity->getId())));
+       
     }
 
     /**
@@ -153,7 +147,7 @@ class TipoproveedorController extends Controller
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
-        if ($form->isValid()) {
+        
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('ContenidosBundle:Tipoproveedor')->find($id);
 
@@ -163,7 +157,7 @@ class TipoproveedorController extends Controller
 
             $em->remove($entity);
             $em->flush();
-        }
+        
 
         return $this->redirect($this->generateUrl('tipoproveedor'));
     }
