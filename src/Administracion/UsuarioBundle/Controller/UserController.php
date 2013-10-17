@@ -43,7 +43,7 @@ class UserController extends Controller
         $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('CLAVE INTRANET')     // we configure the title
             ->setFrom('intranet@telesurtv.net')     // we configure the sender
-            ->setTo("jvalera@telesurtv.net")     // we configure the recipient
+            ->setTo("aplicaciones@telesurtv.net")     // we configure the recipient
             ->setBody("
                 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
                 El usuario ".$datos['nombre']." ".$datos['apellido']." de cédula ".$datos['cedula']." y extensión ".$datos['extension']." tiene la siguiente solicitud: ".$datos['comentario']."
