@@ -177,6 +177,19 @@ class TicketController extends Controller
             $query->setParameter('idticket', $id);
             $query->execute();
 
+            //CORREO
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            ->setSubject('Sit-Asignado')     // we configure the title
+            ->setFrom('sit@telesurtv.net')     // we configure the sender
+            ->setTo('jvalera@telesurtv.net')     // we configure the recipient
+            ->setBody( $this->renderView(
+                    'SitBundle:Correo:asignado.html.twig',
+                    array('ticket' => $ticket,'usuario'=>$user)
+                ), 'text/html');
+
+            $this->get('mailer')->send($message);     // then we send the message.
+            //FIN CORREO
+
             $this->get('session')->getFlashBag()->add('notice', 'El ticket fie asignado exitosamente a '.ucfirst($user->getPrimerNombre().' '.$user->getPrimerapellido()).'.');
             return $this->redirect($this->generateUrl('ticket_show', array('id' => $id)));
         }

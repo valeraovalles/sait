@@ -108,7 +108,7 @@
 				  $query="
 					select 
 
-						p.user_id,p.primer_nombre as nombre1,p.segundo_nombre as nombre2,p.primer_apellido as apellido1,p.segundo_apellido as apellido2,p.cedula,p.extension,u.username 
+						p.user_id,p.primer_nombre as nombre1,p.segundo_nombre as nombre2,p.primer_apellido as apellido1,p.segundo_apellido as apellido2,p.cedula,p.extension,u.username
 					
 					from 
 

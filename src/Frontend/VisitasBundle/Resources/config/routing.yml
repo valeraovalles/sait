@@ -33,7 +33,6 @@ visita_delete_control:
 
 
 
-
 control_visitas_usuario:
     pattern:  /listado
     defaults: { _controller: "FrontendVisitasBundle:Usuario:index" }
@@ -81,7 +80,64 @@ foto:
     pattern: /foto
     defaults: { _controller: "FrontendVisitasBundle:Usuario:foto"}
 
-agregarnuevavisita:
-    pattern: /agregarnuevavisita
-    defaults: { _controller: "FrontendVisitasBundle:Usuario:agregarnuevavisita"}
 
+mostrar:
+    pattern: /mostrar
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:mostrar"}
+
+
+
+
+# Reportes
+
+reporteinfo:
+    pattern:  /reporteinfo
+    defaults: { _controller: "FrontendVisitasBundle:Reporte:reporteinfo" }
+
+finalreporte:
+    pattern: /finalreporte
+    defaults: { _controller: "FrontendVisitasBundle:Reporte:finalreporte"}
+    requirements:
+        _method: POST
+
+generarreporte:
+    pattern:  /reporte/generar/{tipo}/{formato}
+    defaults: { _controller: "FrontendVisitasBundle:Reporte:generarreporte" }
+
+ajaxreporte:
+    pattern:  /ajax/{datos}/{mostrar}
+    defaults: { _controller: "FrontendVisitasBundle:Ajax:formulario" }
+
+
+
+#******************************************************************************
+
+
+carnet:
+    pattern: /{id}/carnet
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:carnet"}
+
+#******************************************************************************
+
+
+
+usu:
+    pattern:  /{id}/usu
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:usu" }
+
+usua:
+    pattern:  /{id}/usua
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:usua" }
+    requirements: { _method: post|put }
+
+#******************************************************************************
+
+salida:
+    pattern: /{id}/salida
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:salida"}
+
+
+
+test:
+    pattern: /test
+    defaults: { _controller: "FrontendVisitasBundle:Usuario:test"}

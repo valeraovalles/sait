@@ -14,6 +14,9 @@ class UsuarioType extends AbstractType
             ->add('nombres')
             ->add('apellidos')
             ->add('cedula', 'text')
+            ->add('telefono', 'text')
+            ->add('direccion', 'textarea')
+
         ;
     }
 

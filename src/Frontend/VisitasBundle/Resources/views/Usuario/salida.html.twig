@@ -1,0 +1,27 @@
+{% extends '::visita.html.twig' %}
+
+{% block body -%}
+    {{ parent() }}
+
+    <div class="titulo">Marcar Salida</div>
+
+    <form novalidate action="{{ path('registranuevavisita') }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+
+
+            <div id="operador">
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.cedula) }}</div>
+                    <div class="labels"  disabled>Cedula:</div>
+                    <div class="widgets" disabled>{{ form_widget(form.cedula, {'attr':{'value':cedula}}) }}</div>
+                </div>
+            </div>
+
+       <button class="btn" type="submit">Salir</button> 
+    </form>
+
+{% endblock %}
+
+
+    

@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Control Visitas{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/frontendvisitas/cssvisita.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block menu %}
+    {% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
+{% endblock %}

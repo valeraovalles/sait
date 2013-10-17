@@ -1,19 +1,9 @@
-{% extends '::base.html.twig' %}
- 
-{% block title %}Control Visitas{% endblock %}
-{% block menu %}
-{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
-{% endblock %}
-
+{% extends '::visita.html.twig' %}
 
 {% block body -%}
     {{ parent() }}
 
-
-    
     <div class="titulo">Registrar Usuario</div>
-
-
 
     <form novalidate action="{{ path('registranuevavisita') }}" method="post" {{ form_enctype(form) }}>
 
@@ -25,8 +15,8 @@
             <div id="operador">
                 <div class="form-contenedor">
                     <div>{{ form_errors(form.cedula) }}</div>
-                    <div class="labels">Cedula:</div>
-                    <div class="widgets">{{ form_widget(form.cedula, {'attr':{'value':cedula}}) }}</div>
+                    <div class="labels"  disabled>Cedula:</div>
+                    <div class="widgets" disabled>{{ form_widget(form.cedula, {'attr':{'value':cedula}}) }}</div>
                 </div>
 
                 <div class="form-contenedor">
@@ -42,15 +32,27 @@
                 </div>
 
                 <div class="form-contenedor">
-                    <div>{{ form_errors(form2.fechaentrada) }}</div>
-                    <div class="labels">Fecha Entrada:</div>
+                    <div>{{ form_errors(form.telefono) }}</div>
+                    <div class="labels">Telefono:</div>
+                    <div class="widgets">{{ form_widget(form.telefono) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.direccion) }}</div>
+                    <div class="labels">Direccion:</div>
+                    <div class="widgets">{{ form_widget(form.direccion) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form2.fechaentrada)  }}</div>
+                    <div class="labels">Fecha entrada:</div>
                     <div class="widgets">{{ form_widget(form2.fechaentrada) }}</div>
                 </div>
 
                 <div class="form-contenedor">
                     <div>{{ form_errors(form2.horaentrada) }}</div>
-                    <div class="labels">Hora Entrada:</div>
-                    <div class="widgets">{{ form_widget(form2.horaentrada) }}</div>
+                    <div class="labels">Hora:</div>
+                    <div class="widgets inputhora">{{ form_widget(form2.horaentrada) }}</div>
                 </div>
 
                 <div class="form-contenedor">
@@ -58,7 +60,6 @@
                     <div class="labels">Contacto:</div>
                     <div class="widgets">{{ form_widget(form2.contacto) }}</div>
                 </div>
-
 
                 <div class="form-contenedor">
                     <div>{{ form_errors(form2.observaciones) }}</div>
@@ -106,11 +107,6 @@ settings =
 win = window.open(mypage,myname,settings)
 }
 </script>
-
-
-
-
-
 
 
 
