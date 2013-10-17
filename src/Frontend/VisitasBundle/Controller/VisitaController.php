@@ -110,8 +110,13 @@ class VisitaController extends Controller
 
         $editForm = $this->createForm(new VisitaType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
+        $entity2 = new Usuario();
+        $form   = $this->createForm(new UsuarioType(), $entity2);
+
+
 
         return $this->render('FrontendVisitasBundle:Visita:edit.html.twig', array(
+            'form'        => $form->createView(),
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -135,16 +140,41 @@ class VisitaController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new VisitaType(), $entity);
         $editForm->bind($request);
+        $entity2 = new Usuario();
+        $form   = $this->createForm(new UsuarioType(), $entity2);
+        $form->bind($request);
 
-        if ($editForm->isValid()) {
+
+        if ($editForm->isValid() && $form->isValid()) {
             $em->persist($entity);
+            $em->persist($entity2);
             $em->flush();
 
             return $this->redirect($this->generateUrl('visita_edit_control', array('id' => $id)));
         }
 
+/*
+        if ($editForm->isValid() && $form->isValid())  {
+            $entity2->setUsuario($entity);
+            $em->persist($entity);
+            $em->persist($entity2);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('notice', 'Se registro una nueva visita!');
+
+            return $this->redirect($this->generateUrl('usuario_show_control', array('id' => $id)));
+
+        
+        }
+
+
+
+*/
+
+
         return $this->render('FrontendVisitasBundle:Visita:edit.html.twig', array(
             'entity'      => $entity,
+            'form'        => $form->createView(),
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -188,3 +218,19 @@ class VisitaController extends Controller
         ;
     }
 }
+
+
+/*
+
+
+    <li>
+        <form action="{{ path('visita_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+
+
+
+    */

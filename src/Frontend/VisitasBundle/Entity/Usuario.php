@@ -24,7 +24,6 @@ class Usuario
      */
     private $id;
 
-
     /**
      * @var string
      *
@@ -42,11 +41,29 @@ class Usuario
     private $apellidos;
 
     /**
-     * @var integer
+     * @var string
+     *
+     * @ORM\Column(name="cedula", type="string", nullable=false)
      * @Assert\NotBlank()
-     * @ORM\Column(name="cedula", type="integer", nullable=false)
      */
     private $cedula;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", nullable=true)
+     * @Assert\NotBlank()
+     */
+    private $telefono;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", nullable=true)
+     * @Assert\NotBlank()
+     */
+    private $direccion;
+
 
 
 
@@ -130,31 +147,63 @@ class Usuario
     }
 
 
+    /**
+     * Set telefono
+     *
+     * @param integer $telefono
+     * @return Usuario
+     */
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+    
+        return $this;
+    }
+
+    /**
+     * Get telefono
+     *
+     * @return integer 
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+
+    /**
+     * Set direccion
+     *
+     * @param string $direccion
+     * @return Usuario
+     */
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+    
+        return $this;
+    }
+
+    /**
+     * Get direccion
+     *
+     * @return integer 
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+
+
+
 
     public function __toString()
     {
         return $this->getNombres();
     
 
-/*
-    $fechaentrada;
-
-   
- $horaentrada;
-
-    $fechasalida;
-
- $horasalida;
-
- */
-
-
-
-
-
-
     }
-
 
 
 

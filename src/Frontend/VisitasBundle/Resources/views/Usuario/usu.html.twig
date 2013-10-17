@@ -1,0 +1,86 @@
+{% extends '::visita.html.twig' %}
+ 
+
+
+{% block body -%}
+    {{ parent() }}
+
+
+
+    {% if app.session.started %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Greenflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    
+    <div class="titulo">Nueva Visita</div>
+
+
+
+    <form novalidate action="{{ path('usua', { 'id': visita.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+
+        {{ form_widget(edit_form._token) }}
+        {{ form_widget(form._token) }}
+
+
+
+            <div id="operador">
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.cedula) }}</div>
+                    <div class="labels">Cedula:</div>
+                    <div class="widgets">{{ form_widget(edit_form.cedula) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.nombres) }}</div>
+                    <div class="labels">Nombres:</div>
+                    <div class="widgets">{{ form_widget(edit_form.nombres) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.apellidos) }}</div>
+                    <div class="labels">Apellidos:</div>
+                    <div class="widgets">{{ form_widget(edit_form.apellidos) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.telefono) }}</div>
+                    <div class="labels">Telefono:</div>
+                    <div class="widgets">{{ form_widget(edit_form.telefono) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.direccion) }}</div>
+                    <div class="labels">Direccion:</div>
+                    <div class="widgets">{{ form_widget(edit_form.direccion) }}</div>
+                </div>
+
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.contacto) }}</div>
+                    <div class="labels">Contacto:</div>
+                    <div class="widgets">{{ form_widget(form.contacto) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.observaciones) }}</div>
+                    <div class="labels">Observaciones:</div>
+                    <div class="widgets">{{ form_widget(form.observaciones) }}</div>
+                </div>
+
+
+            </div> 
+
+       <button class="btn btn-success" type="submit">Agregar</button> 
+    </form>
+
+
+    <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
+{% endblock %}
+
+
+    

@@ -67,6 +67,13 @@ class Visita
     private $observaciones;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estatus", type="boolean", nullable=true)
+     */
+    private $estatus=false;
+
+    /**
      * @var \Usuario
      *
      * @ORM\ManyToOne(targetEntity="Usuario")
@@ -227,6 +234,29 @@ class Visita
     }
 
     /**
+     * Set estatus
+     *
+     * @param boolean $estatus
+     * @return Operador
+     */
+    public function setEstatus($estatus)
+    {
+        $this->estatus = $estatus;
+    
+        return $this;
+    }
+
+    /**
+     * Get estatus
+     *
+     * @return boolean 
+     */
+    public function getEstatus()
+    {
+        return $this->estatus;
+    }
+
+    /**
      * Set usuario
      *
      * @param \Frontend\VisitasBundle\Entity\Usuario $usuario
@@ -258,24 +288,10 @@ class Visita
 
         return $this->getHoraentrada();
 
+        return $this->getFechasalida();
+
+        return $this->getHorasalida();
     
-
-/*
-    $fechaentrada;
-
-   
- $horaentrada;
-
-    $fechasalida;
-
- $horasalida;
-
- */
-
-
-
-
-
 
     }
 

@@ -68,3 +68,5 @@ security:
         - { path: ^/contenidos, roles:ROLE_CONTENIDOS }
 
         - { path: ^/neto, roles: ROLE_USER }
+
+        - { path: ^/visita, roles: ROLE_VISITAS }
