@@ -55,6 +55,7 @@ security:
         
         - { path: ^/sit/inicio, roles: ROLE_USER}
         - { path: ^/sit/ticket/create, roles: ROLE_USER}
+        - { path: ^/sit/ticketgeneral, roles: ROLE_SIT_GENERAL}
         - { path: ^/sit/listausuariounidad, roles: ROLE_SIT_SUPERADMINISTRADOR}
         - { path: ^/sit/ticket, roles: ROLE_SIT_ADMINISTRADOR}
         - { path: ^/sit/asignado, roles: ROLE_SIT_ADMINISTRADOR}
