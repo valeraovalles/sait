@@ -45,3 +45,7 @@ usuario:
 login:
     pattern:  /
     defaults: { _controller: UsuarioBundle:Default:index }
+
+visitas:
+    resource: "@FrontendVisitasBundle/Resources/config/routing.yml"
+    prefix:   /visitas

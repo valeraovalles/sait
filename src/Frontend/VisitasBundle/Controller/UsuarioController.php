@@ -224,6 +224,7 @@ class UsuarioController extends Controller
     public function busquedaAction(Request $request)
     {
 
+
         $cedula=0;
         $entity = new Usuario();
         $form   = $this->createForm(new UsuarioType(), $entity);
@@ -286,8 +287,25 @@ class UsuarioController extends Controller
     public function registrarAction(Request $request, $cedula){
 
         $entity = new Usuario();
+        $entity->setCedula($cedula);
         $form   = $this->createForm(new UsuarioType(), $entity);
         $entity2 = new Visita();
+
+
+
+/*
+        $entity = new Usuario();
+        $entity->setCedula($cedula);
+        $form   = $this->createForm(new UsuarioType(), $entity);
+        $entity2 = new Visita();
+        $fecha = date_create_from_format('Y-m-d', \date("Y-m-d"));
+        $hora = date_create_from_format('Y-m-d', \date("H-i-s"));
+        $entity2->setFechaentrada($fecha);
+        $entity2->setHoraentrada($hora);
+
+*/
+
+
         $form2   = $this->createForm(new VisitaType(), $entity2);
 
         return $this->render('FrontendVisitasBundle:Usuario:encontrado.html.twig', array(
@@ -306,14 +324,17 @@ class UsuarioController extends Controller
     * Registra un usuario dentro de la entidad Usuario y lo asocia a la entidad Visita
     *
     */
-    public function registranuevavisitaAction(Request $request){
+    public function registranuevavisitaAction(Request $request,$cedula){
+
 
         $entity = new Usuario();
+        $entity->setCedula($cedula);
         $form   = $this->createForm(new UsuarioType(), $entity);
         $form->bind($request);
         $entity2 = new Visita();
         $form2   = $this->createForm(new VisitaType(), $entity2);
         $form2->bind($request);
+
 
 
         if ($form->isValid() && $form2->isValid()) {
@@ -322,6 +343,10 @@ class UsuarioController extends Controller
 
             $em->persist($entity);
             $entity2->setUsuario($entity);
+            $fecha = date_create_from_format('Y-m-d', \date("Y-m-d"));
+            $hora = date_create_from_format('Y-m-d', \date("H-i-s"));
+            $entity2->setFechaentrada($fecha);
+            $entity2->setHoraentrada($hora);
             $em->persist($entity2);
             $em->flush();
  
@@ -333,6 +358,7 @@ class UsuarioController extends Controller
             'form'   => $form->createView(),
             'entity2' => $entity2,
             'form2'   => $form2->createView(),
+            'cedula' => $cedula
         ));
 
     }
@@ -439,8 +465,10 @@ class UsuarioController extends Controller
 
 
             $entity2->setUsuario($entity);
-        //    $entity2 -> setFechasalida($fechasal);
-          //  $entity2 -> setHorasalida($horasalida);
+            $fecha = date_create_from_format('Y-m-d', \date("Y-m-d"));
+            $hora = date_create_from_format('Y-m-d', \date("H-i-s"));
+            $entity2->setFechaentrada($fecha);
+            $entity2->setHoraentrada($hora);
             $em->persist($entity);
             $em->persist($entity2);
             $em->flush();

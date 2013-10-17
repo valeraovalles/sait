@@ -4,7 +4,11 @@ parameters:
     database_host: 127.0.0.1
     database_port: null
     database_name: sait
+<<<<<<< HEAD
     database_user: postgres
+=======
+    database_user: jeff
+>>>>>>> pre-master
     database_password: 123456
 
     mailer_transport: smtp

@@ -57,7 +57,7 @@ class User implements UserInterface, AdvancedUserInterface
     /**
      * @var boolean
      *
-     * @ORM\Column(name="fueradenomina", type="boolean", nullable=false)
+     * @ORM\Column(name="fueradenomina", type="boolean", nullable=true)
      */
     private $fueradenomina=false;
      
