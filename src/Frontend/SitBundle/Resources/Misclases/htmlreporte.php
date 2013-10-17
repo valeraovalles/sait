@@ -41,9 +41,9 @@ class htmlreporte
         	$info .="<div class='subcat'>".ucfirst($value->getSubcategoria()->getSubcategoria())."</div>";
 
 
-
+            $usuariocierraticket=$value->getUser();
         	$info .="<div class='solicitud'>".$cont.".- <b>Solicitud (".$value->getFechasolicitud()->format("d-m-Y")." ".$value->getHorasolicitud()->format("G:i:s")."):</b> ".ucfirst($value->getSolicitud())."</div>";
-        	$info .="<div class='solucion'><b>Solución (".ucfirst(strtolower($value->getSolicitante()->getPrimernombre()))." ".ucfirst(strtolower($value->getSolicitante()->getPrimerapellido()))."):</b> ".ucfirst($value->getSolucion())."</div>";
+        	$info .="<div class='solucion'><b>Solución (".ucfirst(strtolower($usuariocierraticket[0]->getPrimernombre()))." ".ucfirst(strtolower($value->getSolicitante()->getPrimerapellido()))."):</b> ".ucfirst($value->getSolucion())."</div>";
 
         	$ultimacategoria=$value->getCategoria();
         	$ultimasubcategoria=$value->getSubcategoria()->getSubcategoria();
