@@ -12,7 +12,7 @@
     /* Array of database columns which should be read and sent back to DataTables. Use a space where
      * you want to insert a non-database field (for example a counter or static image)
      */
-    $aColumns = array( 'primer_nombre', 'primer_nombre','primer_apellido','cedula','tipo' );
+    $aColumns = array( 'primer_nombre', 'primer_nombre','primer_apellido','cedula','tipo', 'culminada' );
      
     /* Indexed column (used for fast and accurate table cardinality) */
     $sIndexColumn = "primer_nombre";
@@ -22,7 +22,7 @@
      
     /* Database connection information */
     $gaSql['user']       = "postgres";
-    $gaSql['password']   = "..*t3l35ur*..";
+    $gaSql['password']   = "postgres";
     $gaSql['db']         = "sait";
     $gaSql['server']     = "localhost";
      
@@ -94,6 +94,10 @@
         {
             if ( $_GET['bSearchable_'.$i] == "true" )
             {
+                if($_GET['sSearch']=='cerrada')
+                    $_GET['sSearch']='true';
+                else if($_GET['sSearch']=='nueva')
+                    $_GET['sSearch']='false';
                 $sWhere .= "CAST(".$aColumns[$i]." AS TEXT) ILIKE '%".pg_escape_string( $_GET['sSearch'] )."%' OR ";
             }
 
@@ -108,6 +112,8 @@
     {
         if ( $_GET['bSearchable_'.$i] == "true" && $_GET['sSearch_'.$i] != '' )
         {
+             str_replace(array('cerrada','nueva'), array(true,false), $_GET['sSearch_5']);
+            
             if ( $sWhere == "" )
             {
                 $sWhere = "WHERE ";
@@ -123,12 +129,11 @@
     if($sWhere=="") $sWhere="where c.user_id=p.id";
     else $sWhere .=" and c.user_id=p.id";
 
-
     $sQuery = "
         SELECT ".str_replace(" , ", " ", implode(", ", $aColumns)).", c.id as idconstancia, c.culminada
         FROM   $sTable
         $sWhere
-        order by c.culminada ASC
+        $sOrder
         $sLimit
     ";
 
@@ -187,12 +192,12 @@
                 $row[] = $aRow[ $aColumns[$i] ];
 
 
-                if($i==4){
+                if($i==5){
                     if($aRow['culminada']=='f')
                         $estatus='<span style="display:none;">1-</span><span class="label label-important">Nueva</span>';
                     else
                         $estatus='<span style="display:none;">2-</span><span class="label label-success">Cerrada</span>';
-                $row[] =$estatus;
+                $row[5] =$estatus;
                 $row[] = "<a href='".$aRow['idconstancia']."/show'><span class='icon-search'></span></a>
                           <a href='edit/".$aRow['idconstancia']."'><span class='icon-edit'></span></a>
                           <a href='pdf/".$aRow['idconstancia']."'><img style='width:18px;' src='/sait/web/images/pdf.gif'></a>"; 

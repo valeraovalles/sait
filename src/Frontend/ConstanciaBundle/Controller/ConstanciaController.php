@@ -32,8 +32,7 @@ class ConstanciaController extends Controller
         $datosnomina=$f->datosUsuarioSigefirrhh($usuario->getCedula());
 
         //$fc=new funciones;
-        
-        
+               
         
         $a=new htmlreporte;
         $html=$a->constancia($em,$constancia,$usuario,$datosnomina,$parametros);
