@@ -272,20 +272,14 @@ class TicketController extends Controller
             $query->setParameter('idticket', $id);
             $query->execute();
 
-<<<<<<< HEAD
-=======
             //echo $user->getUser()->getUsername();
 
->>>>>>> e0ad958812e2291a497512d07d0e2d2ffd9ee813
+
             //CORREO
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Asignado')     // we configure the title
             ->setFrom('sit@telesurtv.net')     // we configure the sender
-<<<<<<< HEAD
-            ->setTo('jvalera@telesurtv.net')     // we configure the recipient
-=======
             ->setTo($user->getUser()->getUsername().'@telesurtv.net')     // we configure the recipient
->>>>>>> e0ad958812e2291a497512d07d0e2d2ffd9ee813
             ->setBody( $this->renderView(
                     'SitBundle:Correo:asignado.html.twig',
                     array('ticket' => $ticket,'usuario'=>$user)
