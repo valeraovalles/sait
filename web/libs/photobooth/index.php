@@ -26,7 +26,6 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" ></script>
 <script src="assets/fancybox/jquery.easing-1.3.pack.js"></script>
-
 <script src="assets/webcam/webcam.js"></script>
 <script src="assets/js/script.js"></script>
 
