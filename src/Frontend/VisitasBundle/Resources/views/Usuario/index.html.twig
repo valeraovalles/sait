@@ -6,7 +6,7 @@
 
 
 <br>
-    <h2>Listado de visitantes</h2>
+    <h2>Listado de visitdantes</h2>
 
 
     <table class="records_list" id="tablalistax">
@@ -44,7 +44,10 @@
                     <li>
 
                         <a href="{{ path('usuario_show_control', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
-                        <a href="{{ path('usu', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Nueva Visita"><i class="icon-edit"></i></a>
+                        
+                        {#<a href="{{ path('usu', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Nueva Visita"><i class="icon-edit"></i></a>#}
+                         <a href="{{ path('usuario_edit_control', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
+
                         {% if entity.fechasalida=='' %}
                         <a href="{{ path('salida', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Salida"><i class="icon-user icon-eject"></i></a>
                         {% endif %}
@@ -59,9 +62,8 @@
     </table>                   
     <br><br>
     <!--a href="{{ path('reporteinfo')}}" class="btn btn-info"><i class="icon-user icon-print"></i> Generar Reporte </a-->
-    <br><br>
-
-
+<a class="btn btn-primary" href='{{ path('usuario_busqueda_control') }}'><span>REGISTRAR VISITA</span></a>
+<br>
 <script type="text/javascript">
 
 
