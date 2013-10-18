@@ -185,13 +185,8 @@ class ConstanciaController extends Controller
         $editForm = $this->createForm(new ConstanciaType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $em = $this->getDoctrine()->getManager();
-        $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-
         $f=new Funcion;
-        $datosnomina=$f->datosUsuarioSigefirrhh($usuario->getCedula());
+        $datosnomina=$f->datosUsuarioSigefirrhh($entity->getUser()->getCedula());
 
         return $this->render('ConstanciaBundle:Constancia:edit.html.twig', array(
             'entity'      => $entity,
