@@ -10,7 +10,7 @@ parameters:
     mailer_transport: smtp
     mailer_host: correo.telesurtv.net
     mailer_user: webtelesur@telesurtv.net
-    mailer_password: '/W3b-Tele$ur..xxxxx'
+    mailer_password: '/W3b-Tele$ur..'
     mailer_port: 25
 
     locale: es
