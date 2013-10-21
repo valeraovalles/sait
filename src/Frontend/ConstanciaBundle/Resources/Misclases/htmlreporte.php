@@ -134,6 +134,9 @@ class htmlreporte
       $fc=new funcion;
     //FIN PARAMETROS
       
+
+    $fechaingreso=explode("-",$datosnomina['fecha_ingreso']);
+    $fechaingreso=$fechaingreso[2].'-'.$fechaingreso[1].'-'.$fechaingreso[0];
     //armo el html
     $html ="<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />";
     $html .="
@@ -152,7 +155,7 @@ class htmlreporte
 
                     <div align='justify' class='interlineado'>
 
-                            Quien suscribe, Director(a) de Recursos Humanos de La Nueva Televisión del Sur, C.A., por medio de la presente hace constar que ".$ciudada." <span class='agregado'>".strtoupper(($nombre))."</span>, titular de la cédula de identidad N° <span class='agregado'>".number_format($usuario->getCedula(),0, ",", ".")."</span> labora en esta empresa desde el <span class='agregado'>".$datosnomina['fecha_ingreso']."</span>".$sicont.", desempeñando el cargo de <span class='agregado'>".strtoupper($datosnomina['descripcion_cargo'])."</span>, devengando un <span class='agregado'>".$tipo_salario."</span> de <span class='agregado'>".str_replace("é","É",strtoupper($fc->ValorEnLetras($sueldox,"BOLÍVARES")))."</span>(Bs. ".$sueldo.").
+                            Quien suscribe, Director(a) de Recursos Humanos de La Nueva Televisión del Sur, C.A., por medio de la presente hace constar que ".$ciudada." <span class='agregado'>".strtoupper(($nombre))."</span>, titular de la cédula de identidad N° <span class='agregado'>".number_format($usuario->getCedula(),0, ",", ".")."</span> labora en esta empresa desde el <span class='agregado'>".$fechaingreso."</span>".$sicont.", desempeñando el cargo de <span class='agregado'>".strtoupper($datosnomina['descripcion_cargo'])."</span>, devengando un <span class='agregado'>".$tipo_salario."</span> de <span class='agregado'>".str_replace("é","É",strtoupper($fc->ValorEnLetras($sueldox,"BOLÍVARES")))."</span>(Bs. ".$sueldo.").
 
                     </div>
 
