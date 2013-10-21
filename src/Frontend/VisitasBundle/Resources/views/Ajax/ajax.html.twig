@@ -1,0 +1,54 @@
+{% if mostrar=='hasta' %}
+    <div class="form-contenedor">
+        <div class="labels">Fecha hasta:</div>
+        <div class="widgets">{{ form_widget(form.Hasta) }}</div>
+    </div>
+    <div id="campo_formato"></div>
+{% endif %}
+
+{% if mostrar=='formato' %}
+    <div class="form-contenedor">
+        <div class="labels">Formato:</div>
+        <div class="widgets">{{ form_widget(form.Formato) }}</div>
+    </div>
+    <div id="campo_botones"></div>
+{% endif %}
+
+{% if mostrar=='botones' %}
+
+        <a class="widget"> {{ form_widget(form.Reporte) }}</a>
+
+
+        <br><br><br><br><br>
+        <a class="btn" href="{{ path('control_visitas_usuario') }}">Ir al inicio</a>
+{% endif %}
+
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_Hasta').change(function(){
+                var dato = $("#form_Hasta").val();
+                var ruta = "{{ path('ajaxreporte', {'datos': 'variable','mostrar': 'formato'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#campo_formato').load(ruta);
+            });
+
+            $('#form_Formato').change(function(){
+                var dato = $("#form_Formato").val();
+                var ruta = "{{ path('ajaxreporte', {'datos': 'variable','mostrar': 'botones'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#campo_botones').load(ruta);
+            });
+
+
+        });
+
+
+
+
+
+    </script>
+

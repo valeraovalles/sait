@@ -1,0 +1,64 @@
+{% extends '::visita.html.twig' %}
+
+{% block body -%}
+
+
+    <h1>Datos del Usuario</h1>
+
+    <br><br>
+
+
+
+
+    <table class="record_properties" border="1" cellspacing="9" cellpadding="5">
+        <thead >
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cedula</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ entity.nombres }}</td>
+                <td>{{ entity.apellidos }}</td>
+                <td>{{ entity.cedula }}</td>
+            </tr>
+            <tr rowspan="4">
+                  <td colspan="4">
+
+        <img  src="{{ filename  }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover">
+
+
+                  </td>
+            </tr>
+        </tbody>
+    </table>           
+
+
+    <table border="2px">
+        <tr><td>  <img src="{{ asset('libs/twitter-bootstrap/docs/assets/js/bootstrap.js') }}"></img> </td></tr>
+
+            <tr> <td> <img  src="{{ filename  }}" width="250px" height="250px"> </td> </tr>
+            
+            <tr> <td> {{ entity.nombres }}   </td> </tr>
+            <tr> <td> {{ entity.apellidos }} </td> </tr>
+            <tr> <td> {{ entity.cedula }}    </td> </tr>
+
+        </table>
+
+
+<br><br>
+
+
+        <ul class="record_actions">
+    <li><br>
+        <a class="btn btn-success"   href="{{ path('otroform', { 'cedula':entity.cedula }) }}">Nueva Visita</a>
+        <br>
+        <br>
+        <a class="btn" href="{{ path('control_visitas_usuario') }}">Regresar</a>
+        <a class="btn" href="{{ path('usuario_edit_control', { 'id': entity.id }) }}">Editar</a>
+
+    </li>
+</ul>
+{% endblock %}

@@ -1,0 +1,69 @@
+{# informativo.html.twig #}
+
+
+{% extends '::base.html.twig' %}
+ 
+{% block title %}Telesur{% endblock %}
+
+
+{% block menu %}
+{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
+{% endblock %}
+    
+
+{% block body -%}
+
+    {{ parent() }}
+
+
+    <div class="titulo">INGRESE LAS FECHAS A CONSULTAR</div>
+
+    {% if app.session.started %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Redflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    
+
+    <form class="formNewEditOperador" novalidate action="{{ path('finalreporte', { 'tipo': 'informativo','formato': 'xls'}) }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+
+
+
+        <div class="form-contenedor">
+
+        <div class="labels">Fecha desde:</div>
+        <div class="widgets">{{ form_widget(form.Desde) }}</div>        
+        </div>
+
+
+        <div id="calendario_hasta"></div>  <!-- aqui va el id del siguiente campo del formulario -->
+
+    </form>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_Desde').change(function(){
+                var dato = $("#form_Desde").val();
+                var ruta = "{{ path('ajaxreporte', {'datos': 'variable','mostrar': 'hasta'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#calendario_hasta').load(ruta);
+            });
+        });
+    </script>
+
+
+
+
+
+{% endblock %}
+
+
+
+

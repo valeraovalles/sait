@@ -1,28 +1,97 @@
-{% extends '::base.html.twig' %}
+{% extends '::visita.html.twig' %}
+ 
+
 
 {% block body -%}
-    <h1>Visita edit</h1>
+    {{ parent() }}
 
-    <form action="{{ path('visita_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+
+
+    {% if app.session.started %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Greenflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    
+    <div class="titulo">Nueva Visita</div>
+
+
+
+    <form novalidate action="{{ path('visita_update_control', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
-        {{ form_widget(edit_form) }}
-        <p>
-            <button type="submit">Edit</button>
-        </p>
+
+        {{ form_widget(edit_form._token) }}
+        {{ form_widget(form._token) }}
+
+
+
+            <div id="operador">
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.cedula) }}</div>
+                    <div class="labels">Cedula:</div>
+                    <div class="widgets">{{ form_widget(form.cedula) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.nombres) }}</div>
+                    <div class="labels">Nombres:</div>
+                    <div class="widgets">{{ form_widget(form.nombres) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.apellidos) }}</div>
+                    <div class="labels">Apellidos:</div>
+                    <div class="widgets">{{ form_widget(form.apellidos) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.telefono) }}</div>
+                    <div class="labels">Telefono:</div>
+                    <div class="widgets">{{ form_widget(form.telefono) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.direccion) }}</div>
+                    <div class="labels">Direccion:</div>
+                    <div class="widgets">{{ form_widget(form.direccion) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.fechaentrada)  }}</div>
+                    <div class="labels">Fecha entrada:</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaentrada) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.horaentrada) }}</div>
+                    <div class="labels">Hora:</div>
+                    <div class="widgets">{{ form_widget(edit_form.horaentrada) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.contacto) }}</div>
+                    <div class="labels">Contacto:</div>
+                    <div class="widgets">{{ form_widget(edit_form.contacto) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div>{{ form_errors(edit_form.observaciones) }}</div>
+                    <div class="labels">Observaciones:</div>
+                    <div class="widgets">{{ form_widget(edit_form.observaciones) }}</div>
+                </div>
+
+
+            </div> 
+
+       <button class="btn btn-success" type="submit">Agregar</button> 
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('visita') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('visita_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+
+    <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
 {% endblock %}
+
+
+    
