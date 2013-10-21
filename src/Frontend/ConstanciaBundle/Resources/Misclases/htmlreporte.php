@@ -21,7 +21,6 @@ class htmlreporte
         where 
         t.cedula='".$usuario->getCedula()."' and
         t.estatus='A' and
-        c.cod_concepto<'1000' and 
         c.cod_concepto<>'0102' and
         t.id_trabajador=hq.id_trabajador and
 
