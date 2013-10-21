@@ -38,11 +38,14 @@ class htmlreporte
       $suma_conceptos=0;
       while ($row = pg_fetch_array($rs)){
           $tipo_nomina = $row['tipo_nomina'];
-          if($row['cod_concepto']==0001) $sueldo = $row['monto_asigna']*2;
-          else{
-              $suma_conceptos += $row['monto_asigna']*2;            
+          if($row['cod_concepto']!='0102'){
+            if($row['cod_concepto']=='0001') $sueldo = $row['monto_asigna']*2;
+            else{
+                $suma_conceptos += $row['monto_asigna']*2;            
+            }
           }
       }
+
 
 
       //DOMINGOS DE JORNADA
@@ -60,6 +63,7 @@ class htmlreporte
       $rs = pg_query($conn, $query);
       $row = pg_fetch_array($rs);
       if(!empty($row))$domingojornada=$row[0];else $domingojornada=0;
+
 
      $s_basico=$sueldo;
      $s_normal=$sueldo+$suma_conceptos+$domingojornada;
