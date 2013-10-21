@@ -12,17 +12,17 @@
     /* Array of database columns which should be read and sent back to DataTables. Use a space where
      * you want to insert a non-database field (for example a counter or static image)
      */
-    $aColumns = array( 'primer_nombre', 'primer_nombre','primer_apellido','cedula','tipo', 'culminada' );
+    $aColumns = array( 'fechasolicitud', 'primer_nombre','primer_apellido','cedula','tipo', 'culminada' );
      
     /* Indexed column (used for fast and accurate table cardinality) */
-    $sIndexColumn = "primer_nombre";
+    $sIndexColumn = "fechasolicitud";
      
     /* DB table to use */
     $sTable = "constancia.constancia c, usuarios.perfil p";
      
     /* Database connection information */
     $gaSql['user']       = "postgres";
-    $gaSql['password']   = "..*t3l35ur*..";
+    $gaSql['password']   = "postgres";
     $gaSql['db']         = "sait";
     $gaSql['server']     = "localhost";
      
