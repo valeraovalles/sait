@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Visita
  *
- * @ORM\Table(name="visita")
+ * @ORM\Table(name="visita.visita")
  * @ORM\Entity
  */
 class Visita
@@ -19,7 +19,7 @@ class Visita
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="visita_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="visita.visita_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 

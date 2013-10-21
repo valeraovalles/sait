@@ -401,11 +401,14 @@ class UsuarioController extends Controller
     public function usuAction($id)
     {
 
+      
+
         $em = $this->getDoctrine()->getManager();
 
-        $entityx = $em->getRepository('FrontendVisitasBundle:Visita')->find($id);
-
-
+        $dql = "select v from FrontendVisitasBundle:Visita v where v.usuario= :id";
+        $query = $em->createQuery($dql);
+        $query->setParameter('id',$id);
+        $entityx = $query->getSingleResult();
         $entity = $em->getRepository('FrontendVisitasBundle:Usuario')->find($entityx->getUsuario()->getId());
 
 
