@@ -21,6 +21,8 @@ class htmlreporte
         where 
         t.cedula='".$usuario->getCedula()."' and
         t.estatus='A' and
+        c.cod_concepto<'1000' and 
+        c.cod_concepto<>'0102' and
         t.id_trabajador=hq.id_trabajador and
 
         hq.id_concepto<>0 and
@@ -38,12 +40,10 @@ class htmlreporte
       $suma_conceptos=0;
       while ($row = pg_fetch_array($rs)){
           $tipo_nomina = $row['tipo_nomina'];
-          if($row['cod_concepto']!='0102'){
             if($row['cod_concepto']=='0001') $sueldo = $row['monto_asigna']*2;
             else{
                 $suma_conceptos += $row['monto_asigna']*2;            
             }
-          }
       }
 
 
@@ -51,7 +51,7 @@ class htmlreporte
       //DOMINGOS DE JORNADA
       $query="
         select hq.monto_asigna from historicoquincena hq, trabajador t 
-        where hq.id_trabajador=t.id_trabajador and t.cedula='17836833' 
+        where hq.id_trabajador=t.id_trabajador and t.cedula='".$usuario->getCedula()."' 
         and anio=(select max(anio) from historicoquincena) 
         and mes=(select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena)) 
         and semana_quincena=(select max(semana_quincena) from historicoquincena 
@@ -59,6 +59,8 @@ class htmlreporte
         from historicoquincena where anio = (select max(anio) from historicoquincena)))
         AND id_concepto_tipo_personal='2003'
       ";
+
+
 
       $rs = pg_query($conn, $query);
       $row = pg_fetch_array($rs);
