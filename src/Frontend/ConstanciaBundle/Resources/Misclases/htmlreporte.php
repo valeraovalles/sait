@@ -113,7 +113,7 @@ class htmlreporte
       $sueldox=str_replace(",", ".",$sueldox);
 
       //imagen de reporte con logo telesur
-      $img_telesur = "<img width='150px' src='/sait/web/images/logo.jpg'>";
+      $img_telesur = "<img width='150px' src='/var/www/sait/web/images/logo.jpg'>";
 
       //monto cesta tickets
       $monto_cesta_ticket=$parametros['montoticket'];
