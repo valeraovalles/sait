@@ -41,7 +41,7 @@
                 <td>{% if entity.fechasolicitud %}{{ entity.fechasolicitud|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ entity.horasolicitud|date("G:i:s")  }}</td>
                 <td>{{ entity.solicitante.primernombre }} {{ entity.solicitante.primerapellido }}</td>
-                <td>{{ entity.solicitud|slice(0,20) }}</td>
+                <td><span style="cursor:pointer;font-weight:bold;" title="{{ entity.solicitud }}">{{ entity.solicitud|slice(0,30) }}</span></td>
                 <td>{{ entity.unidad.descripcion }}</td>
                 <td>
                     {% if entity.estatus==1 %}<span class="label label-important"><span style="display:none;">1-</span>Nuevo</span>
