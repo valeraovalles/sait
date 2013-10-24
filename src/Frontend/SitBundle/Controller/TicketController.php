@@ -538,6 +538,8 @@ class TicketController extends Controller
             $solicitud=ucfirst(trim($solicitud));
             $entity->setSolicitud($solicitud);
 
+echo $solicitud;
+die;
             //GUARDO EL ARCHIVO
             if($form['file']->getData()){
       
