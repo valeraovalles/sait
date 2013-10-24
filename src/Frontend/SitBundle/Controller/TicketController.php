@@ -68,10 +68,11 @@ class TicketController extends Controller
             "buenos días","gracias","la presente es para","la presente es","por medio de la presente se","Buenas noches,",
             "Buenas noches","el presente es para","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
             "urgente","esto con caracter de urgencia","con caracter de urgencia","Se agradece su valiosa colaboracion","carmen",
-            "buenas tardes el motivo es para","el motivo es para","el motivo es para","por su colaboracion","por su colaboración","buen dia","Buenos tardes"
+            "buenas tardes el motivo es para","el motivo es para","el motivo es para","por su colaboracion","por su colaboración","buen dia","Buenos tardes","camaradas","los molesto para"
         );
 
         $solicitud=str_replace($eliminar, array(), $solicitud);
+        $solicitud=str_replace(array("Á","É","Í","Ó","Ú"), array("á","é","í","ó","ú"), $solicitud);
         return $solicitud;
     }
     function filtrarsms($palabrotas) 
@@ -538,8 +539,7 @@ class TicketController extends Controller
             $solicitud=ucfirst(trim($solicitud));
             $entity->setSolicitud($solicitud);
 
-echo $solicitud;
-die;
+
             //GUARDO EL ARCHIVO
             if($form['file']->getData()){
       
@@ -612,7 +612,7 @@ die;
                     'SitBundle:Correo:solicitud.html.twig',
                     array('ticket' => $ticketcreado)
                 ), 'text/html');
-            $this->get('mailer')->send($message);    // then we send the message.
+            //$this->get('mailer')->send($message);    // then we send the message.
             //fin enviar correo
 
 
@@ -620,7 +620,7 @@ die;
             ->setSubject('telesurwebimk:*t3l3SURcl4v32013/.* @SitTelesur:'.substr(ucfirst($this->filtrarsms($solicitud)),0,145))    // we configure the title
             ->setFrom('contactenos@telesurtv.net')
             ->setTo($unidad->getSms());
-            $this->get('mailer')->send($message);     // then we send the message.
+            //$this->get('mailer')->send($message);     // then we send the message.
             //fin enviar correo
 
             $this->get('session')->getFlashBag()->add('notice', 'TU SOLICITUD SE HA REALIZADO EXITOSAMENTE');
