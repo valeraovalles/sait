@@ -46,7 +46,7 @@
                     <li>
 
                         <a href="{{ path('usuario_show_control', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
-                        <a href="{{ path('usu', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Nueva Visita"><i class="icon-edit"></i></a>
+                        <a href="{{ path('usu', { 'id': entity.usuario.id }) }}" data-toggle="tooltip" data-placement="top" title="Nueva Visita"><i class="icon-edit"></i></a>
                         {% if entity.fechasalida=='' %}
                         <a href="{{ path('salida', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Salida"><i class="icon-user icon-eject"></i></a>
                         {% endif %}
