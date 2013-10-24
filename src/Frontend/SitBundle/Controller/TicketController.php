@@ -612,7 +612,7 @@ class TicketController extends Controller
                     'SitBundle:Correo:solicitud.html.twig',
                     array('ticket' => $ticketcreado)
                 ), 'text/html');
-            //$this->get('mailer')->send($message);    // then we send the message.
+            $this->get('mailer')->send($message);    // then we send the message.
             //fin enviar correo
 
 
@@ -620,7 +620,7 @@ class TicketController extends Controller
             ->setSubject('telesurwebimk:*t3l3SURcl4v32013/.* @SitTelesur:'.substr(ucfirst($this->filtrarsms($solicitud)),0,145))    // we configure the title
             ->setFrom('contactenos@telesurtv.net')
             ->setTo($unidad->getSms());
-            //$this->get('mailer')->send($message);     // then we send the message.
+            $this->get('mailer')->send($message);     // then we send the message.
             //fin enviar correo
 
             $this->get('session')->getFlashBag()->add('notice', 'TU SOLICITUD SE HA REALIZADO EXITOSAMENTE');
