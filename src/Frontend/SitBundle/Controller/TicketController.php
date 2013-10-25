@@ -577,6 +577,8 @@ class TicketController extends Controller
                     ));
                 }
 
+                $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre));
+
                 //GUARDO EL ARCHIVO
                 if($file->move('uploads/sit/',$nombre.'_'.\date("Gis").'.'.$extension) )
                 {
