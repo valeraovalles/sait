@@ -105,7 +105,7 @@
 
                 {% if extension[1]=='jpg' or extension[1]=='jpeg' or extension[1]=='png' or extension[1]=='gif'  %}
                     <a data-toggle="modal" href="#myModal">
-                        <img class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ entity.archivo }}" width="150px">
+                        <img class="img-rounded" src="{{ asset('uploads/sit/') }}{{ entity.archivo }}" width="150px">
                     </a>
                 {% else %}
                     <a href="{{ asset('uploads/sit/') }}/{{ entity.archivo }}">DESCARGA ARCHIVO {{ extension[1]|upper }}</a>
