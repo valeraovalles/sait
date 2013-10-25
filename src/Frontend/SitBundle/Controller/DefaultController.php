@@ -29,7 +29,7 @@ class DefaultController extends Controller
         $perfil = $query->getResult();
 
         //consulto los tickets del usuario
-        $dql = "select t from SitBundle:Ticket t where t.solicitante= :id order by t.estatus ASC";
+        $dql = "select t from SitBundle:Ticket t where t.solicitante= :id order by t.estatus ASC, t.fechasolicitud DESC, t.horasolicitud DESC";
         $query = $em->createQuery($dql);
         $query->setParameter('id',$idusuario);
         $ticketusuario = $query->getResult();
