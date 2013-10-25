@@ -34,6 +34,7 @@ class htmlreporte
 
         hq.anio=(select max(anio) from historicoquincena) and hq.mes=(select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena)) and hq.semana_quincena=(select max(semana_quincena) from historicoquincena where anio=(select max(anio) from historicoquincena) and mes = (select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena)))";   
 
+
       $rs = pg_query($conn, $query);
 
       $suma_conceptos=0;
@@ -49,14 +50,14 @@ class htmlreporte
 
       //DOMINGOS DE JORNADA
       $query="
-        select hq.monto_asigna from historicoquincena hq, trabajador t 
+        select sum(hq.monto_asigna) as monto_asigna from historicoquincena hq, trabajador t, conceptotipopersonal ctp 
         where hq.id_trabajador=t.id_trabajador and t.cedula='".$usuario->getCedula()."' 
-        and anio=(select max(anio) from historicoquincena) 
-        and mes=(select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena)) 
-        and semana_quincena=(select max(semana_quincena) from historicoquincena 
-        where anio=(select max(anio) from historicoquincena) and mes = (select max(mes) 
-        from historicoquincena where anio = (select max(anio) from historicoquincena)))
-        AND id_concepto_tipo_personal='2003'
+        and hq.anio=(select max(anio) from historicoquincena) 
+        and hq.mes=(select max(mes-1) from historicoquincena where anio = (select max(anio) from historicoquincena)) 
+        and ctp.id_concepto='1061'
+        and ctp.id_tipo_personal=hq.id_tipo_personal
+        and ctp.id_concepto_tipo_personal=hq.id_concepto_tipo_personal
+
       ";
 
 
