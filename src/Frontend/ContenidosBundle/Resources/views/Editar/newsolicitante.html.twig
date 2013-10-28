@@ -8,7 +8,7 @@
     {{ parent() }}
     <div class="titulo">Unidad Solicitante</div>
 
-    <form action="{{ path('createsolicitante') }}" method="post" {{ form_enctype(form) }}>
+    <form novalidate="novalidate" action="{{ path('createsolicitante') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
        
         <div id="descripcion" class="form-show_edit">
             <div class="contenedor">

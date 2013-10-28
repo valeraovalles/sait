@@ -7,7 +7,21 @@
 
 {% block body -%}
  {{ parent() }}
+
     <div class="titulo">DETALLES BANCO</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+
     <div class="form-show_edit">
     <fieldset>       
         <legend id="a"><div class="divisor">DATOS DEL BENEFICIARIO</div> </legend>
@@ -89,8 +103,8 @@
     
     </div>
     <br>
-    <a href="{{ path('banco', { 'id_proveedor': entity.idProveedor.id }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
-    <a href="{{ path('banco_edit', { 'id': entity.id, 'id_proveedor':entity.idProveedor.id }) }}" data-toggle="tooltip" data-placement="top" title="editar datos bancarios"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
+    <a href="{{ path('banco', { 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    <a href="{{ path('banco_edit', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar datos bancarios"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
     <br><br> 
 
 {% endblock %}

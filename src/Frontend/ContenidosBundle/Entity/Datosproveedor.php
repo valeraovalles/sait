@@ -3,6 +3,7 @@
 namespace Frontend\ContenidosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Datosproveedor
@@ -26,6 +27,7 @@ class Datosproveedor
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=100, nullable=true)
+     * @Assert\NotBlank()
      */
     private $nombre;
 
@@ -33,6 +35,7 @@ class Datosproveedor
      * @var string
      *
      * @ORM\Column(name="num_identificacionfiscal", type="string", length=30, nullable=true)
+     * @Assert\NotBlank()
      */
     private $numIdentificacionfiscal;
 
@@ -40,6 +43,7 @@ class Datosproveedor
      * @var string
      *
      * @ORM\Column(name="direccion_empresa", type="string", length=500, nullable=true)
+     * @Assert\NotBlank()
      */
     private $direccionEmpresa;
 
@@ -47,6 +51,7 @@ class Datosproveedor
      * @var string
      *
      * @ORM\Column(name="oficina1", type="string", length=100, nullable=true)
+     * @Assert\NotBlank()
      */
     private $oficina1;
 
@@ -68,6 +73,7 @@ class Datosproveedor
      * @var string
      *
      * @ORM\Column(name="correo_empresa", type="string", length=60, nullable=true)
+     * @Assert\NotBlank()
      */
     private $correoEmpresa;
 
@@ -167,6 +173,7 @@ class Datosproveedor
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="pais", referencedColumnName="id")
      * })
+     * @Assert\NotBlank()
      */
     private $pais;
 
@@ -215,9 +222,7 @@ class Datosproveedor
      */
     private $usuario;
 
-
-
-
+ 
     /**
      * Constructor
      */
@@ -798,11 +803,6 @@ class Datosproveedor
     {
         return $this->usuario;
     }
-
-
-
-
-
 
     public function __toString()
     {

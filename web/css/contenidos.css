@@ -18,6 +18,15 @@
 	color: #0fa1e0;
 }
 
+.form-show
+{
+    width: 700px;
+    font-weight: bold;  
+
+}
+
+
+
 .form-show_edit
 {
     width: 600px;

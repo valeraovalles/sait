@@ -3,6 +3,7 @@
 namespace Frontend\ContenidosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Pago
@@ -26,6 +27,7 @@ class Pago
      * @var string
      *
      * @ORM\Column(name="num_memo", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
      */
     private $numMemo;
 
@@ -33,6 +35,7 @@ class Pago
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_unidadejec", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaUnidadejec;
 
@@ -40,6 +43,7 @@ class Pago
      * @var string
      *
      * @ORM\Column(name="num_factura", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
      */
     private $numFactura;
 
@@ -47,6 +51,7 @@ class Pago
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_factura", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaFactura;
 
@@ -69,6 +74,7 @@ class Pago
      * @var float
      *
      * @ORM\Column(name="monto_bs", type="decimal", nullable=false)
+     * @Assert\NotBlank()
      */
     private $montoBs;
 
@@ -76,6 +82,7 @@ class Pago
      * @var boolean
      *
      * @ORM\Column(name="tipo_pago", type="boolean", nullable=true)
+     * @Assert\NotBlank()
      */
     private $tipoPago;
 

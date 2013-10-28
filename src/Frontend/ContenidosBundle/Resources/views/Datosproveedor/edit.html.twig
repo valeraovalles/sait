@@ -10,7 +10,7 @@
     {{ parent() }}
 
     <div class="titulo">EDITAR PROVEEDOR</div>
-    <form action="{{ path('datosproveedor_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <form novalidate="novalidate" action="{{ path('datosproveedor_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
         <input type="hidden" name="_method" value="PUT" />
         <fieldset>       
             <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>

@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Tipoproveedor creation</h1>
 
-    <form action="{{ path('tipoproveedor_create') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('tipoproveedor_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
        
         <div id="descripcion" class="form-show_edit">
             <div class="contenedor">

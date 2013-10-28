@@ -4,7 +4,19 @@
  {{ parent() }}
     <div class="titulo">DETALLES</div>
 
-    <div id="descripcion" class="form-show_edit">
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+
+    <div class="form-show_edit">
             <div class="contenedor">
                 <br>
                 <div class="labels">N&uacute;mero del Memorandum:</div>
@@ -70,7 +82,7 @@
             </div>
     </div>
 <br>
-<a href="{{ path('pago', {'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+<a href="{{ path('pago', {'id_contratacion':id_contratacion }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
 <br><br> 
-<script src="{{ asset('js/contenidos/efecto.js') }}"></script>
+
 {% endblock %}

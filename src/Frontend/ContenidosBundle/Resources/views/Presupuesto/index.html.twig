@@ -7,7 +7,7 @@
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
             <tr>
-                <th width="25%">Dscripcion</th>
+                <th width="25%">Descripcion</th>
                 <th width="20%">Fecha de Inicio</th>
                 <th width="20%">Fecha de Fin</th>
                 <th width="20%">Monto en Bs</th>
@@ -18,18 +18,18 @@
         {% for entity in entities %}
             <tr align="center">
                 
-                <td>{{ entity.descripcion }}</td>
+                <td><a href="{{ path('presupuesto_show', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}">{{ entity.descripcion }}</a></td>
                 <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d') }}{% endif %}</td>
                 <td>{% if entity.fechaFin %}{{ entity.fechaFin|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ entity.montoBs }}</td>
                 <td>
-                    <a href="{{ path('presupuesto_show', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="detalles del presupuesto"><img width="20px" src="{{ asset('images/lupa.png')}}"></a>
+                   
 
                     <a href="{{ path('presupuesto_edit', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar presupuesto"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
 
                     <a href="{{ path('presupuesto_extensionindex', { 'id_proveedor': id_proveedor, 'id_presupuesto':entity.id }) }}" data-toggle="tooltip" data-placement="top" title="extensión de presupuesto"><img width="30px" src="{{ asset('images/calcu.jpg')}}"></a>
 
-                    <a href="{{ path('contratacion', { 'id_presupuesto': entity.id, 'id_proveedor':id_proveedor, 't':t }) }}" data-toggle="tooltip" data-placement="top" title="contrataciones"><img width="20px" src="{{ asset('images/contratacion.jpg')}}"></a>
+                    <a href="{{ path('contratacion', { 'id_presupuesto': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="contrataciones"><img width="20px" src="{{ asset('images/contratacion.jpg')}}"></a>
                 </td>
                 
             </tr>

@@ -1,0 +1,150 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block titulobanner %}
+    PAGOS
+{% endblock %}
+
+
+{% block body -%}
+{{ parent() }}
+    <div class="titulo">DISPONIBILIDAD DEL PROVEEDOR <br> ({{ nombre }})</div>
+    <div class="form-show">
+        <legend id="a"><div class="divisor">PRESUPUESTOS</div> </legend>
+        <table cellpadding="1" cellspacing="1" border="1" class="display" id="tabla">
+            <thead>
+                <tr>
+                    <th width="20%">Descripcion</th>
+                    <th width="20%">Monto en Dolares</th>
+                    <th width="20%">Monto en Euros</th>
+                    <th width="20%">Monto en Bs</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr align="center">
+                        <td>{{ pres.descripcion }}</td>
+                        {% if pres.montoDolares == NULL or pres.montoDolares == 0 %}
+                            <td>0</td>
+                        {% else %}
+                            <td>{{ pres.montoDolares }}</td>
+                        {% endif %}
+                        {% if pres.montoEuros == NULL or pres.montoEuros == 0 %}
+                            <td>0</td>
+                        {% else %}
+                            <td>{{ pres.montoEuros }}</td>
+                        {% endif %}
+                        <td>{{ pres.montoBs }}</td>
+                        
+                    </tr>
+                {% for entity in presupuesto %}
+                    <tr align="center">
+                        <td>{{ entity.descripcion }} (EXTENSION)</td>
+                        {% if entity.montoDolares == NULL or entity.montoDolares == 0 %}
+                            <td>0</td>
+                        {% else %}
+                            <td>{{ entity.montoDolares }}</td>
+                        {% endif %}
+                        {% if entity.montoEuros == NULL or entity.montoEuros == 0 %}
+                            <td>0</td>
+                        {% else %}
+                            <td>{{ entity.montoEuros }}</td>
+                        {% endif %}
+                        <td>{{ entity.montoBs }}</td>
+                    </tr>
+                {% endfor %}
+                <div class="activo">
+                <th></th>
+                <tr align="center" face="impact"; style="color:#091060; fontsize:20;">  
+                <b>              
+                        <td>TOTALES</td>
+                        <td>{{ totaldolarespres }}</td>
+                        <td>{{ totaleurospres }}</td>
+                        <td>{{ totalbspres }}</td>
+                </b>
+                </tr>
+                </div>
+            </tbody>
+        </table>
+        <legend id="a"><div class="divisor">CONTRATACIONES</div> </legend>
+        <table cellpadding="1" cellspacing="1" border="1" class="display" id="tabla">
+            <thead>
+                <tr>
+                    <th width="20%">Concepto</th>
+                    <th width="20%">Monto en Dolares</th>
+                    <th width="20%">Monto en Euros</th>
+                    <th width="20%">Monto en Bs</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity1 in contratacion %}
+                    <tr align="center">
+                        <td>{{ entity1.concepto }}</td>
+                        {% if entity1.tipoMoneda == 0 %}
+                            <td>{{ entity1.montoMe }}</td>
+                            <td>0</td>
+                        {% elseif entity1.tipoMoneda == 1 %}
+                            <td>0</td>
+                            <td>{{ entity1.montoMe }}</td>
+                        {% elseif entity1.tipoMoneda != 0 and entity1.tipoMoneda != 1 %}
+                            <td>0</td>
+                            <td>0</td>
+                        {% endif %}
+                        <td>{{ entity1.montoBs }}</td>
+                    </tr>
+                {% endfor %}
+                <th></th>
+                <tr align="center" style="color:#091060; fontsize:20;">                
+                    <td>TOTALES</td>
+                    {% if tipomoneda == 0 %}
+                        <td>{{ totalmecontr }}</td>
+                        <td>0</td>
+                    {% elseif tipomoneda == 1 %}
+                        <td>0</td>
+                        <td>{{ totalmecontr }}</td>
+                    {% elseif tipomoneda != 0 and tipomoneda != 1 %}
+                        <td>0</td>
+                        <td>0</td>
+                    {% endif %}
+                    <td>{{ totalbscontr }}
+                </tr>
+            </tbody>
+        </table><br>
+
+        <legend id="a"><div class="divisor">DISPONIBILIDAD</div> </legend>
+        <table cellpadding="1" cellspacing="1" border="1" class="display" id="tabla">
+            <thead>
+                <tr>                
+                    <th width="20%">Monto en Dolares</th>
+                    <th width="20%">Monto en Euros</th>
+                    <th width="20%">Monto en Bs</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if dispbs > 0 %}
+                    <tr align="center" style="color:#00aa00; size=4;">
+                        <td>{{ dispdolares }}</td>
+                        <td>{{ dispeuros }}</td>
+                        <td>{{ dispbs }}</td>
+                    </tr>
+                    <div class="activo">SALDO DE {{ dispbs }}Bs</div>
+                {% elseif dispbs < 0 %}
+                    <tr align="center" style="color:#ff0000; size=4;">
+                        <td>{{ dispdolares }}</td>
+                        <td>{{ dispeuros }}</td>
+                        <td>{{ dispbs }}</td>
+                    </tr>
+                    <div class="inactivo">DEUDA DE {{ -1*dispbs }}Bs</div>
+                {% elseif dispbs == 0 %}
+                    <tr align="center" style="color:#ff0000; size=4;">
+                        <td>{{ dispdolares }}</td>
+                        <td>{{ dispeuros }}</td>
+                        <td>{{ dispbs }}</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+    </div><br>
+    <a href="{{ path('disponibilidad_home') }}" data-toggle="tooltip" data-placement="top" title="Otra Consulta"><img width="75px" src="{{ asset('images/lupa.png')}}"></a>
+
+<br>
+{% endblock %}

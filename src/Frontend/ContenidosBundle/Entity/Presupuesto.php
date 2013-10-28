@@ -3,6 +3,7 @@
 namespace Frontend\ContenidosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Presupuesto
@@ -26,6 +27,7 @@ class Presupuesto
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=100, nullable=true)
+     * @Assert\NotBlank()
      */
     private $descripcion;
 
@@ -40,6 +42,7 @@ class Presupuesto
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_inicio", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaInicio;
 
@@ -47,6 +50,7 @@ class Presupuesto
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_fin", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaFin;
 
@@ -68,6 +72,7 @@ class Presupuesto
      * @var float
      *
      * @ORM\Column(name="monto_bs", type="decimal", nullable=false)
+     * @Assert\NotBlank()
      */
     private $montoBs;
 
@@ -95,8 +100,19 @@ class Presupuesto
      */
     private $idProveedor;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="disponibilidad", type="decimal", nullable=true)
+     */
+    private $disponibilidad;
 
-
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="signo", type="boolean", nullable=true)
+     */
+    private $signo;
 
 
     /**
@@ -340,8 +356,56 @@ class Presupuesto
         return $this->idProveedor;
     }
 
+    /**
+     * Set disponibilidad
+     *
+     * @param float $disponibilidad
+     * @return Presupuesto
+     */
+    public function setDisponibilidad($disponibilidad)
+    {
+        $this->disponibilidad = $disponibilidad;
+    
+        return $this;
+    }
+
+    /**
+     * Get disponibilidad
+     *
+     * @return float 
+     */
+    public function getDisponibilidad()
+    {
+        return $this->disponibilidad;
+    }
+    
+    /**
+     * Set signo
+     *
+     * @param boolean $signo
+     * @return Contratacion
+     */
+    public function setSigno($signo)
+    {
+        $this->signo = $signo;
+    
+        return $this;
+    }
+
+    /**
+     * Get signo
+     *
+     * @return boolean 
+     */
+    public function getSigno()
+    {
+        return $this->signo;
+    }
+
     public function __toString()
     {
         return $this->getDescripcion();
     }
+
+
 }

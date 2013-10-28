@@ -7,31 +7,33 @@
     
 {% block body -%}
     {{ parent() }}
-
     <div class="titulo">EDITAR DATOS DE LA CONTRATACI&Oacute;N</div>
 
-    <form action="{{ path('contratacion_update', { 'id': entity.id, 'id_presupuesto': entity.idPresupuesto }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <form novalidate="novalidate" action="{{ path('contratacion_update', { 'id': entity.id, 'id_presupuesto': id_presupuesto, 'id_proveedor': id_proveedor }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
         <input type="hidden" name="_method" value="PUT" />
 
         <div id="descripcion" class="form-show_edit">
-            
             <fieldset>
-                 <div class="divisor">DATOS DE LA CONTRATACI&Oacute;N</div>
+                <div class="divisor">DATOS DE LA CONTRATACI&Oacute;N</div>
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.concepto) }}
                     <div class="labels">Concepto:</div>
                     <div class="widgets">{{ form_widget(edit_form.concepto) }}</div>
                 </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.tipoMoneda) }}
-                    <div class="labels">Tipo de Moneda:</div>
-                    <div class="widgets">{{ form_widget(edit_form.tipoMoneda) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.montoMe) }}
-                    <div class="labels">Monto en $/€:</div>
-                    <div class="widgets">{{ form_widget(edit_form.montoMe) }}</div>
-                </div>
+                {% if tipomoneda == 1  %}
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form.montoMe) }}
+                        <div class="labels">Monto en $:</div>
+                        <div class="widgets">{{ form_widget(edit_form.montoMe) }}</div>
+                    </div>
+                {% endif %}
+                {% if tipomoneda == 2 %}
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form.montoMe) }}
+                        <div class="labels">Monto en €:</div>
+                        <div class="widgets">{{ form_widget(edit_form.montoMe) }}</div>
+                    </div>
+                {% endif %}
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.montoBs) }}
                     <div class="labels">Monto en Bs:</div>
@@ -113,19 +115,11 @@
                         <div class="labels">Observaciones de Compras:</div>
                         <div class="widgets">{{ form_widget(edit_form.observacionesCompras) }}</div>
                     </div>
-
                 {% endif %}
-
             </fieldset>
-
             <button type="submit" class="btn">Editar</button><br><br>
         </div>
         <br>       
-        <a href="{{ path('contratacion' , { 'id_proveedor': prov, 'id_presupuesto': entity.idPresupuesto, 't':t } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
-        
-
+        <a href="{{ path('contratacion' , { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
     </form>
-
-
-
 {% endblock %}

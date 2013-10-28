@@ -3,6 +3,7 @@
 namespace Frontend\ContenidosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Banco
@@ -26,6 +27,7 @@ class Banco
      * @var string
      *
      * @ORM\Column(name="nombre_beneficiario", type="string", length=100, nullable=true)
+     * @Assert\NotBlank()
      */
     private $nombreBeneficiario;
 
@@ -75,6 +77,7 @@ class Banco
      * @var string
      *
      * @ORM\Column(name="banco_benef", type="string", length=100, nullable=true)
+     * @Assert\NotBlank()
      */
     private $bancoBenef;
 
@@ -82,6 +85,7 @@ class Banco
      * @var string
      *
      * @ORM\Column(name="cuenta_benef", type="string", length=50, nullable=true)
+     * @Assert\NotBlank()
      */
     private $cuentaBenef;
 
@@ -89,6 +93,7 @@ class Banco
      * @var string
      *
      * @ORM\Column(name="swift_benef", type="string", length=50, nullable=true)
+     * @Assert\NotBlank()
      */
     private $swiftBenef;
 
@@ -96,6 +101,7 @@ class Banco
      * @var string
      *
      * @ORM\Column(name="aba_benef", type="string", length=50, nullable=true)
+     * @Assert\NotBlank()
      */
     private $abaBenef;
 
@@ -103,6 +109,7 @@ class Banco
      * @var string
      *
      * @ORM\Column(name="iban_benef", type="string", length=50, nullable=true)
+     * @Assert\NotBlank()
      */
     private $ibanBenef;
 
@@ -110,6 +117,7 @@ class Banco
      * @var string
      *
      * @ORM\Column(name="direccion_bancobenef", type="string", length=500, nullable=true)
+     * @Assert\NotBlank()
      */
     private $direccionBancobenef;
 
@@ -117,6 +125,7 @@ class Banco
      * @var string
      *
      * @ORM\Column(name="direccion_beneficiario", type="string", length=500, nullable=true)
+     * @Assert\NotBlank()
      */
     private $direccionBeneficiario;
 
@@ -137,6 +146,7 @@ class Banco
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="pais", referencedColumnName="id")
      * })
+     * @Assert\NotBlank()
      */
     private $pais;
 

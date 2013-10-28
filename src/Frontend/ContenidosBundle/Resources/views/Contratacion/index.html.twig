@@ -26,7 +26,7 @@
                 <td width="17%">{{ entity.numAlcance }}</td>
                 <td width="17%">{{ entity.numContrato }}</td>
                 <td width="4%">
-                        <a href="{{ path('contratacion_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+                        <a href="{{ path('contratacion_edit', { 'id': entity.id,'id_presupuesto': id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
                         <a href="{{ path('pago', { 'id_contratacion': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="pagos asociados"><img width="20px" src="{{ asset('images/dinero.jpg')}}"></a>
                 </td>
             </tr>

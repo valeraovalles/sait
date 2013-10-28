@@ -4,6 +4,17 @@
  {{ parent() }}
     <div class="titulo">DETALLES "{{ entity.nombre }}" </div>
     
+     {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
     
         {% if entity.estatus == 'I' %}
             <div class="inactivo">PROVEEDOR INACTIVO</div>
@@ -108,11 +119,15 @@
                 <div class="labels">Unidad Solicitante:</div>
                 <div class="dato">{{ entity.idUnidad }}</div>
             </div>
+
     </fieldset>
     <br>
 </div>
 </div>
     <a href="{{ path('datosproveedor', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    
+    <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="70px" src="{{ asset('images/edit.png')}}"></a>
+
 <br>
 
 {% endblock %}

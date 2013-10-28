@@ -8,7 +8,7 @@
 {% block body -%}
     {{ parent() }}
     <div class="titulo">NUEVO REGISTRO</div>
-    <form action="{{ path('pago_create', {'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(form) }}>
+    <form novalidate="novalidate" action="{{ path('pago_create', {'id_contratacion':id_contratacion }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
         <fieldset>   
             <legend id="a"><div class="divisor">DATOS DEL PAGO</div> </legend>
             <div id="descripcion" class="form-show">
@@ -87,7 +87,7 @@
             </div>    
         </fieldset>
        <br>
-       <a class="btn" href="{{ path( 'pago', {'id_proveedor':id_proveedor }  ) }}">Listado de Pagos</a>
+       <a class="btn" href="{{ path( 'pago', {'id_contratacion':id_contratacion }  ) }}">Listado de Pagos</a>
         <button type="submit" class="btn">Registrar Pago</button> 
     </form>
 <script src="{{ asset('js/contenidos/efecto.js') }}"></script>

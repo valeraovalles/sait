@@ -77,7 +77,7 @@ banco_edit:
     defaults: { _controller: "ContenidosBundle:Banco:edit" }
 
 banco_update:
-    pattern:  banco/actualizar/{id}
+    pattern:  banco/actualizar/{id}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Banco:update" }
     requirements: { _method: post|put }
 
@@ -95,7 +95,7 @@ banco_delete:
 ##########################################################################################################
 ##########################################################################################################
 contratacion:
-    pattern:  contratacion/home/{id_presupuesto}/{id_proveedor}/{t}
+    pattern:  contratacion/home/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Contratacion:index" }
 
 contratacion_show:
@@ -107,16 +107,16 @@ contratacion_new:
     defaults: { _controller: "ContenidosBundle:Contratacion:new" }
 
 contratacion_create:
-    pattern:  contratacion/crear
+    pattern:  contratacion/crear/{id_proveedor}/{id_presupuesto}
     defaults: { _controller: "ContenidosBundle:Contratacion:create" }
     requirements: { _method: post }
 
 contratacion_edit:
-    pattern:  contratacion/editar/{id}
+    pattern:  contratacion/editar/{id}/{id_proveedor}/{id_presupuesto}
     defaults: { _controller: "ContenidosBundle:Contratacion:edit" }
 
 contratacion_update:
-    pattern:  contratacion/actualizar/{id}/{id_presupuesto}
+    pattern:  contratacion/actualizar/{id}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Contratacion:update" }
     requirements: { _method: post|put }
 
@@ -138,24 +138,24 @@ pago:
     defaults: { _controller: "ContenidosBundle:Pago:index" }
 
 pago_show:
-    pattern:  pago/detalles/{id}/{id_proveedor}
+    pattern:  pago/detalles/{id}/{id_contratacion}
     defaults: { _controller: "ContenidosBundle:Pago:show" }
 
 pago_new:
-    pattern:  pago/nuevo/{id_proveedor}
+    pattern:  pago/nuevo/{id_contratacion}
     defaults: { _controller: "ContenidosBundle:Pago:new" }
 
 pago_create:
-    pattern:  pago/crear/{id_proveedor}
+    pattern:  pago/crear/{id_contratacion}
     defaults: { _controller: "ContenidosBundle:Pago:create" }
     requirements: { _method: post }
 
 pago_edit:
-    pattern:  pago/editar/{id}/{id_proveedor}
+    pattern:  pago/editar/{id}/{id_contratacion}
     defaults: { _controller: "ContenidosBundle:Pago:edit" }
 
 pago_update:
-    pattern:  pago/actualizar/{id}
+    pattern:  pago/actualizar/{id}/{id_contratacion}
     defaults: { _controller: "ContenidosBundle:Pago:update" }
     requirements: { _method: post|put }
 
@@ -233,7 +233,7 @@ presupuesto_edit:
     defaults: { _controller: "ContenidosBundle:Presupuesto:edit" }
 
 presupuesto_update:
-    pattern:  presupuesto/actualizar/{id}/{id_proveedor}
+    pattern:  presupuesto/actualizar/{id}/{id_proveedor}/{monto_ant}/{disp_actual}
     defaults: { _controller: "ContenidosBundle:Presupuesto:update" }
     requirements: { _method: post|put }
 
@@ -289,12 +289,30 @@ ajax_datosproveedor:
 ajax_datossat:
     pattern: /ajax/contenidos/satelites/{sats}
     defaults: { _controller: "ContenidosBundle:Ajax:datossat"}
+ajax_disponibilidad:
+    pattern: /ajax/contenidos/disponilidad/{datos}
+    defaults: { _controller: "ContenidosBundle:Ajax:dis"}
 
+##########################################################################################################
+##########################################################################################################
+#
+#                                DISPONIBILIDAD PRESUPUESTARIA
+#
+##########################################################################################################
+##########################################################################################################
+disponibilidad_home:
+    pattern: disponibilidad/home
+    defaults: { _controller:"ContenidosBundle:Presupuesto:disponibilidadhome"}
+disponibilidad_show:
+    pattern: disponibilidad/show
+    defaults: { _controller:"ContenidosBundle:Presupuesto:disponibilidadshow"}
+    requirements: { _method: post }
 
 ##########################################################################################################
 ##########################################################################################################
 #
 #                                EDITAR DATOS DE TABLAS AUXILIARES
+#
 ##########################################################################################################
 ##########################################################################################################
 

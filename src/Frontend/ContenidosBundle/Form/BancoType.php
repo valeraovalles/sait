@@ -32,7 +32,8 @@ class BancoType extends AbstractType
             ->add('pais')
         ;
     }
-
+ 
+    
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(

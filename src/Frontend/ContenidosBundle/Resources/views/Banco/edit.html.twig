@@ -10,7 +10,7 @@
 
     <div class="titulo">EDITAR DATOS BANCARIOS</div>
 
-    <form action="{{ path('banco_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <form novalidate="novalidate" action="{{ path('banco_update', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
         <input type="hidden" name="_method" value="PUT" />
         <div id="descripcion" class="form-show_edit">
             <br>
@@ -26,6 +26,11 @@
                     {{ form_errors(edit_form.direccionBeneficiario) }}
                     <div class="labels">Direcci&oacute;n del Beneficiario:</div>
                     <div class="widgets">{{ form_widget(edit_form.direccionBeneficiario) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.pais) }}
+                    <div class="labels">Pais:</div>
+                    <div class="widgets">{{ form_widget(edit_form.pais) }}</div>
                 </div>
             
         </fieldset>
@@ -102,7 +107,7 @@
             <button type="submit" class="btn">Editar</button> <br><br>
         </fieldset>
     </div><br>
-    <a href="{{ path('banco', { 'id_proveedor': entity.idProveedor.id }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    <a href="{{ path('banco', { 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
         
     </form>
     

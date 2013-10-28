@@ -8,7 +8,7 @@
     {{ parent() }}
     <div class="titulo">NUEVO REGISTRO</div>
 
-    <form action="{{ path('banco_create',{ 'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(form) }}>
+    <form novalidate="novalidate" action="{{ path('banco_create',{ 'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
 
         <fieldset>       
             <legend id="a"><div class="divisor">DATOS DEL BENEFICIARIO</div> </legend>

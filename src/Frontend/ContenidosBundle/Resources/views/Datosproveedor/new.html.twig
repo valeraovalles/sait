@@ -4,21 +4,17 @@
 {% block titulobanner %}
     LICENCIAS
 {% endblock %}
-    
+   
+ 
 {% block body -%}
     {{ parent() }}
     <div class="titulo">NUEVO REGISTRO</div>
 
-    <form action="{{ path('datosproveedor_create') }}" method="post" {{ form_enctype(form) }}>
+    <form novalidate="novalidate" action="{{ path('datosproveedor_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
         <fieldset>       
             <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
             <div id="descripcion" class="form-show_edit">
                 <br>
-                <div class="form-contenedor">
-                    {{ form_errors(form.estatus) }}
-                    <div class="labels">Estatus:</div>
-                    <div class="widgets">{{ form_widget(form.estatus) }}</div>
-                </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.nombre) }}
                     <div class="labels">Nombre:</div>
@@ -124,6 +120,7 @@
         <br>
         <button type="submit" class="btn">CREAR</button> 
     </form>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#form_datosproveedor_idTipoprov').change(function(){
@@ -134,4 +131,5 @@
             });
         });
     </script>
+
 {% endblock %}

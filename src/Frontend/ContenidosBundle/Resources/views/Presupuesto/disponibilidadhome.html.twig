@@ -1,0 +1,33 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block body -%}
+ {{ parent() }}
+    <div class="titulo">NUEVO PRESUPUESTO</div>
+
+    <form action="{{ path('disponibilidad_show') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
+        <fieldset>       
+            <legend id="c"><div class="divisor">DATOS (PPRESUPUESTO - PROVEEDOR)</div> </legend>
+            <div id="aprobacion" class="form-show_edit">
+                <br>
+                <div class="form-contenedor">
+                    {{ form_errors(form.nombre) }}
+                    <div class="labels">Proveedor:</div>
+                    <div class="widgets">{{ form_widget(form.nombre) }}</div>
+                </div>
+                <div id="muestra"></div>
+            </div>
+        </fieldset>
+        <br>
+        <button type="submit" class="btn">CONSULTAR</button> 
+    </form>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_nombre').change(function(){
+                var dato = $("#form_nombre").val();
+                var ruta = "{{ path('ajax_disponibilidad', {'datos': 'variable'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#muestra').load(ruta);
+            });
+        });
+    </script>
+{% endblock %}

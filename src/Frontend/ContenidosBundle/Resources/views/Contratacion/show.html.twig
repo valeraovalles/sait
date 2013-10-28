@@ -7,6 +7,19 @@
 {% block body -%}
  {{ parent() }}
     <div class="titulo">DETALLES CONTRATACION</div>
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+
+
         <fieldset> 
             <div class="form-show_edit">
                
@@ -16,12 +29,12 @@
                         <div class="dato">{{ entity.concepto }}</div>
                     </div>
                     
-                    {% if entity.tipoMoneda == 0 %}
+                    {% if tipomoneda == 1 %}
                         <div class="contenedor">
                             <div class="labels">Monto en $:</div>
                             <div class="dato">{{ entity.montoMe }}</div>
                         </div>
-                    {% elseif entity.tipoMoneda == 1 %}
+                    {% elseif tipomoneda == 2 %}
                         <div class="contenedor">
                             <div class="labels">Monto en €:</div>
                             <div class="dato">{{ entity.montoMe }}</div>
@@ -113,7 +126,8 @@
         </fieldset>
   
   
-        <a href="{{ path('contratacion' , { 'id_proveedor': prov, 'id_presupuesto': entity.idPresupuesto, 't':t } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+        <a href="{{ path('contratacion' , { 'id_presupuesto': id_presupuesto,'id_proveedor': id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+        <a href="{{ path('contratacion_edit', { 'id': entity.id,'id_presupuesto': id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
     
     
   

@@ -17,8 +17,9 @@ class ContratacionType extends AbstractType
                                             'multiple'=>false,
                                             'empty_value' => 'Seleccione...',
                                             'choices' => array(
-                                                                    "0" =>"Dolares", 
-                                                                    "1" =>"Euros"
+                                                                    "1" =>"Dolares", 
+                                                                    "2" =>"Euros",
+                                                                    "3" =>"Bolivares"
                                                                   )
                                         )
                 )
@@ -69,6 +70,6 @@ class ContratacionType extends AbstractType
 
     public function getName()
     {
-        return 'frontend_contenidosbundle_contrataciontype';
+        return 'form_contratacion';
     }
 }
