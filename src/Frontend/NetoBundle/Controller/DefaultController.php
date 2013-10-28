@@ -19,7 +19,7 @@ class DefaultController extends Controller
         if($entity->getUser()->getFueradenomina()==true)
             return $this->redirect($this->generateUrl('usuario_homepage'));
 
-    	$tipnom=array('s'=>'Seleccione', 'n'=>'Nómina', 'a'=>'Aguinaldos');
+    	$tipnom=array('s'=>'Seleccione', 'n'=>'Nómina'/*, 'a'=>'Aguinaldos'*/);
     	
         $form = $this->createFormBuilder()
                 ->add('tipnom', 'choice', array(
