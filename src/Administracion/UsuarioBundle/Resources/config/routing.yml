@@ -19,9 +19,17 @@ contacto:
         _controller: FrameworkBundle:Template:template
         template: 'UsuarioBundle:Default:contacto.html.twig'
 
-sincronizacion:
-    pattern: /sincronizacion
-    defaults: { _controller: UsuarioBundle:Default:sincronizacion }
+cambioclave:
+    pattern:  /cambioclave
+    defaults: { _controller: "UsuarioBundle:User:cambioclave" }
+
+actualizacambioclave:
+    pattern:  /actualizacambioclave
+    defaults: { _controller: "UsuarioBundle:User:actualizacambioclave" }
+
+notificar:
+    pattern:  /notificar
+    defaults: { _controller: "UsuarioBundle:User:notificar" }
     
 #USUARIOS
 

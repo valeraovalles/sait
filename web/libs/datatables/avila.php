@@ -122,7 +122,7 @@
 
      
     $sQuery = "
-        SELECT distinct c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio
+        SELECT c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio
         FROM   $sTable
         $sWhere
         $sOrder
@@ -134,7 +134,7 @@
      
 
     $sQuery = "
-        SELECT $sIndexColumn
+        SELECT c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio
         FROM   $sTable
         $sWhere
     ";
@@ -146,7 +146,7 @@
     if ( $sWhere != "" )
     {
         $sQuery = "
-            SELECT $sIndexColumn
+            SELECT c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio
             FROM   $sTable
             $sWhere
         ";

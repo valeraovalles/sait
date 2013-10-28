@@ -36,6 +36,13 @@ class Unidad
      */
     private $correo;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sms", type="string", length=50, nullable=true)
+     */
+    private $sms;
+
 
 
     /**
@@ -110,6 +117,29 @@ class Unidad
     public function getCorreo()
     {
         return $this->correo;
+    }
+
+    /**
+     * Set sms
+     *
+     * @param string $sms
+     * @return Unidad
+     */
+    public function setSms($sms)
+    {
+        $this->sms = $sms;
+    
+        return $this;
+    }
+
+    /**
+     * Get sms
+     *
+     * @return string 
+     */
+    public function getSms()
+    {
+        return $this->sms;
     }
 
 

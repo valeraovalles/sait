@@ -26,42 +26,42 @@
     {% endfor %}
 
 
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalistaespecial">
         <thead>
             <tr>
                 <th>Fecha solicitud</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>cedula</th>
                 <th>Tipo</th>
-                <th>Bonoalimentacion</th>
-                <th>Dirigida</th>
                 <th>Estatus</th>
-                <th>Actions</th>
+                <th>Acciones</th>
+
             </tr>
         </thead>
+
         <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td>{{ entity.fechasolicitud|date("d-m-Y G:i:s") }}</td>
-                <td>
-                    {% if entity.tipo=='sb' %}SUELDO BÁSICO{% elseif entity.tipo=='sn' %}SUELDO NORMAL{% elseif entity.tipo=='si' %}SUELDO INTEGRAL{% elseif entity.tipo=='sba' %}SUELDO BÁSICO ANUAL{% elseif entity.tipo=='sna' %}SUELDO NORMAL ANUAL{% elseif entity.tipo=='sia' %}SUELDO INTEGRAL ANUAL{% endif %}
-                </td>
-                <td>{% if entity.bonoalimentacion==false %}NO{% else %}SI{% endif %}</td>
-                <td>{{ entity.dirigida }}</td>
-                <td align="center">{% if entity.culminada==false %}<span style="display:none;">1-</span><span class="label label-important">Nuevo</span>{% else %}<span style="display:none;">2-</span><span class="label label-success">Cerrado</span>{% endif %}</td>
-                <td>
 
-                        <a href="{{ path('constancia_show', { 'id': entity.id }) }}"><span class="icon-search"></span></a>
-      
-                        <a href="{{ path('constancia_edit', { 'id': entity.id }) }}"><span class="icon-edit"></span></a>
-
-                        <a href="{{ path('constancia_pdf', { 'id': entity.id }) }}"><img width="18px" src="{{ asset('images/pdf.gif')}}"></a>
-
-
-                </td>
-            </tr>
-        {% endfor %}
         </tbody>
     </table>
 
     <br><br>
     <div><span class="label label-important">Nuevo</span> | <span class="label label-success">Cerrado</span></div>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tablalistaespecial').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                    "bProcessing": true,
+                    "bServerSide": true,
+                    "sAjaxSource": "/sait/web/libs/datatables/constancia.php",
+                    "sPaginationType": "full_numbers",
+                    "aaSorting": [[5,'asc']],
+
+            } );
+        })
+    </script>
+{#
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[5,'asc'],[0,'asc']],#}
+
     {% endblock %}

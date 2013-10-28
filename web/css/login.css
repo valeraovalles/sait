@@ -84,3 +84,14 @@ body{
         margin-bottom: 15px;
         padding: 7px 9px;
       }
+
+.notificacion th{
+    text-align: right;
+    padding-right: 10px;
+
+}
+
+.form-signin {
+    width: 300px;
+}
+

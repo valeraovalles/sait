@@ -34,6 +34,10 @@ class htmlreporte
 
         hq.anio=(select max(anio) from historicoquincena) and hq.mes=(select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena)) and hq.semana_quincena=(select max(semana_quincena) from historicoquincena where anio=(select max(anio) from historicoquincena) and mes = (select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena)))";   
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
       $rs = pg_query($conn, $query);
 
       $suma_conceptos=0;
@@ -49,6 +53,7 @@ class htmlreporte
 
       //DOMINGOS DE JORNADA
       $query="
+<<<<<<< HEAD
         select hq.monto_asigna from historicoquincena hq, trabajador t 
         where hq.id_trabajador=t.id_trabajador and t.cedula='".$usuario->getCedula()."' 
         and anio=(select max(anio) from historicoquincena) 
@@ -57,6 +62,16 @@ class htmlreporte
         where anio=(select max(anio) from historicoquincena) and mes = (select max(mes) 
         from historicoquincena where anio = (select max(anio) from historicoquincena)))
         AND id_concepto_tipo_personal='2003'
+=======
+        select sum(hq.monto_asigna) as monto_asigna from historicoquincena hq, trabajador t, conceptotipopersonal ctp 
+        where hq.id_trabajador=t.id_trabajador and t.cedula='".$usuario->getCedula()."' 
+        and hq.anio=(select max(anio) from historicoquincena) 
+        and hq.mes=(select max(mes-1) from historicoquincena where anio = (select max(anio) from historicoquincena)) 
+        and ctp.id_concepto='1061'
+        and ctp.id_tipo_personal=hq.id_tipo_personal
+        and ctp.id_concepto_tipo_personal=hq.id_concepto_tipo_personal
+
+>>>>>>> master
       ";
 
 
@@ -113,7 +128,11 @@ class htmlreporte
       $sueldox=str_replace(",", ".",$sueldox);
 
       //imagen de reporte con logo telesur
+<<<<<<< HEAD
       $img_telesur = "<img width='150px' src='/sait/sait/web/images/logo.jpg'>";
+=======
+      $img_telesur = "<img width='150px' src='images/logo.jpg'>";
+>>>>>>> master
 
       //monto cesta tickets
       $monto_cesta_ticket=$parametros['montoticket'];

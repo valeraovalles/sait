@@ -127,8 +127,42 @@ class DefaultController extends Controller
             $existe=1;
         }
 
+<<<<<<< HEAD
+=======
+        //valido la fecha de activación del neto
+        if($anio==date('Y'))
+            //mes
+            if($mes==date('n'))
+                //quicena
+                if($quincena==1){
+
+                    $diasemana=date("w", mktime(0, 0, 0, $mes, 14, $anio));
+
+                    //dia de la semana
+                    if($diasemana==0)$diaactivacion=12;
+                    else if($diasemana==1)$diaactivacion=11;
+                    else if($diasemana==6)$diaactivacion=13;
+                    else $diaactivacion=14;
+
+                    if(date('j')>=$diaactivacion)$existe=$existe; else $existe=0;
+
+                }
+
+                else if($quincena==2){
+
+                    $ultimodia=date('t');
+                    if($ultimodia==31)$ultimodia=29;
+                    $diasemana=date("w", mktime(0, 0, 0, $mes, $ultimodia, $anio));
+
+                    //dia de la semana
+                    if($diasemana==0)$diaactivacion=$ultimodia-1;
+                    else if($diasemana==1)$diaactivacion=$ultimodia-2;
+                    else if($diasemana==6)$diaactivacion=$ultimodia;
+                    else $diaactivacion=$ultimodia;
+>>>>>>> master
 
 
+<<<<<<< HEAD
         //valido la fecha de activación del neto
         if($anio==date('Y'))
             //mes
@@ -169,6 +203,10 @@ class DefaultController extends Controller
                 }
 
 ;          
+=======
+
+
+>>>>>>> master
 
         if($existe==0){
              $this->get('session')->getFlashBag()->add('alert', 'No existen datos para los parámetros seleccionados.');

@@ -12,7 +12,7 @@ class htmlreporte
     		
     		if($value['descripcion']=="SUELDO BASICO"){
     			$sueldo=$value['asigna']*2;
-    			$sueldo=number_format($sueldo, 2);
+    			$sueldo=number_format($sueldo, 2,',','.');
     			break;
     		}
     	}
@@ -25,6 +25,12 @@ class htmlreporte
 					<td class='imagen'><img src='/sait/web/images/logo.jpg' height='100px'></td>
 					<td class='titulo' align='center' valing='middle'>
 						<table cellspacing='0' class='tableencabezado'>
+							<tr>
+								<th>NOMBRE Y APELLIDO:</th>
+								<td>".strtoupper($datos['primernombre'].' '.$datos['primerapellido'])."</td>
+								<th>CÉDULA:</th>
+								<td>".$datos['cedula']."</td>
+							</tr>
 							<tr>
 								<th>EMPRESA:</th>
 								<td>".strtoupper($datos['empresa'])."</td>

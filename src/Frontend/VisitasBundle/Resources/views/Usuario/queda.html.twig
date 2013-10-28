@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+ 
+{% block title %}Control Visitas{% endblock %}
+{% block menu %}
+{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
+{% endblock %}
+
+
+
+
+{% block body -%}
+    {{ parent() }}
+
+    <div class="titulo">Registrar Usuario</div>
+
+
+
+
+
+    <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
+{% endblock %}
+
+
+    

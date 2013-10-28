@@ -24,17 +24,15 @@ class ConstanciaController extends Controller
 
         $parametros['directora']=$this->container->getParameter('directora');
         $parametros['montoticket']=$this->container->getParameter('montoticket');
-
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
-        $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+        
         $constancia = $em->getRepository('ConstanciaBundle:Constancia')->find($id);
+        $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($constancia->getUser()->getId());
         $f=new Funcion;
         $datosnomina=$f->datosUsuarioSigefirrhh($usuario->getCedula());
 
         //$fc=new funciones;
-        
-        
+               
         
         $a=new htmlreporte;
         $html=$a->constancia($em,$constancia,$usuario,$datosnomina,$parametros);
@@ -158,12 +156,8 @@ class ConstanciaController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $em = $this->getDoctrine()->getManager();
-        $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-
         $f=new Funcion;
-        $datosnomina=$f->datosUsuarioSigefirrhh($usuario->getCedula());
+        $datosnomina=$f->datosUsuarioSigefirrhh($entity->getUser()->getCedula());
 
 
         return $this->render('ConstanciaBundle:Constancia:show.html.twig', array(
@@ -190,13 +184,8 @@ class ConstanciaController extends Controller
         $editForm = $this->createForm(new ConstanciaType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $em = $this->getDoctrine()->getManager();
-        $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-
         $f=new Funcion;
-        $datosnomina=$f->datosUsuarioSigefirrhh($usuario->getCedula());
+        $datosnomina=$f->datosUsuarioSigefirrhh($entity->getUser()->getCedula());
 
         return $this->render('ConstanciaBundle:Constancia:edit.html.twig', array(
             'entity'      => $entity,

@@ -3,12 +3,7 @@
    <li class='active'><a href='{{ path('constancia_homepage') }}'><span>INICIO</span></a></li>
    
    {% if is_granted('ROLE_CONSTANCIA_ADMINISTRADOR') %}
-   <li class='has-sub'><a href='#'><span>CONSTANCIA</span></a>
-      <ul>
-         <li><a href='{{ path('constancia') }}'><span>GESTIONAR</span></a></li>
-
-      </ul>
-   </li>
+   <li class='has-sub'><a href='{{ path('constancia') }}'><span>GESTIONAR</span></a></li>
    {% endif %}
    
    <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>

@@ -10,7 +10,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-    	$con=new Conexion;
+    	/*$con=new Conexion;
     	$postgres=$con->postgresql_local();
 
 	   	$query="
@@ -28,8 +28,8 @@ class DefaultController extends Controller
     		$cintas[$cont]=$row;
     		$cont++;
     	}
-
-        return $this->render('VideotecaBundle:Default:index.html.twig',array('cintas'=>$cintas));
+*/
+        return $this->render('VideotecaBundle:Default:index.html.twig');
     }
 
     public function consultaAction($id)

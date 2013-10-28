@@ -68,6 +68,13 @@ class Ticket
      *
      * @ORM\Column(name="solicitud", type="string", length=1000, nullable=false)
      * @Assert\NotBlank(message="Debe escribir la solicitud.")
+     * @Assert\Length(
+     *      min = "10",
+     *      max = "1000",
+     *      minMessage = "La solicitud no puede se menor a {{ limit }} caracteres de largo.",
+     *      maxMessage = "La solicitud no puede se mayor a {{ limit }} caracteres de largo."
+     * )
+     * )
      */
     private $solicitud;
 

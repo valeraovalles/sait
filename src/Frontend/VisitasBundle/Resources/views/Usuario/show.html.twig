@@ -1,17 +1,19 @@
-{% extends '::base.html.twig' %}
+{% extends '::visita.html.twig' %}
 
 {% block body -%}
 
-{% block menu %}
-{% include 'FrontendVisitasBundle:Default:menu.html.twig' %}
-{% endblock %}
+    {% if app.session.started %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="Greenflash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
 
     <h1>Datos del Usuario</h1>
 
     <br><br>
-
-
-
 
     <table class="record_properties" border="1" cellspacing="9" cellpadding="5">
         <thead >
@@ -20,23 +22,24 @@
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Cedula</th>
+                <th>Telefono</th>
+
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>{{ entity.id }}</td>
-                <td>{{ entity.nombres }}</td>
-                <td>{{ entity.apellidos }}</td>
-                <td>{{ entity.cedula }}</td>
+                <td>{{ entity.usuario.id }}</td>
+                <td>{{ entity.usuario.nombres }}</td>
+                <td>{{ entity.usuario.apellidos }}</td>
+                <td>{{ entity.usuario.cedula }}</td>
+                <td>{{ entity.usuario.telefono }}</td>
             </tr>
             <tr>
-                  <td colspan="4">
-
-                <img id="licencias" src="{{ asset(filename) }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover">
-
-
+                  <td colspan="5">
+                    <img  src="{{ filename  }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover">
                   </td>
             </tr>
+
         </tbody>
     </table>           
 
@@ -47,8 +50,10 @@
 
         <ul class="record_actions">
     <li><br>
+        <a class="btn btn-success"   href="{{ path('usu', { 'id':entity.id }) }}">Nueva Visita</a>
+        <br>
+        <br>
         <a class="btn" href="{{ path('control_visitas_usuario') }}">Regresar</a>
         <a class="btn" href="{{ path('usuario_edit_control', { 'id': entity.id }) }}">Editar</a>
-    </li>
 </ul>
 {% endblock %}

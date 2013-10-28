@@ -1,6 +1,6 @@
        <body style="background:white;">
        <head>
-        <meta content="300" http-equiv="REFRESH"> </meta>
+        <meta content="120" http-equiv="REFRESH"> </meta>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
         <title>{% block title %}Telesur{% endblock %}</title>
@@ -19,6 +19,9 @@
         {% endblock %}
     </head>
 
+    <div align="center"><span class="label label-important">Nuevos:</span> <b>{{ nuevos }}</b> | <span class="label label-info">Asignados:</span> <b>{{ asignados }}</b></div>
+
+    <br>
     <table cellpadding="0" cellspacing="0" border="0" class="table table-striped" style="font-size:12px;">
         <thead>
             <tr>
@@ -27,6 +30,7 @@
                 <th>Hora solicitud</th>
                 <th>Solicitante</th>
                 <th>Solicitud</th>
+                <th>Unidad</th>
                 <th>Estatus</th>
             </tr>
         </thead>
@@ -37,7 +41,8 @@
                 <td>{% if entity.fechasolicitud %}{{ entity.fechasolicitud|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ entity.horasolicitud|date("G:i:s")  }}</td>
                 <td>{{ entity.solicitante.primernombre }} {{ entity.solicitante.primerapellido }}</td>
-                <td>{{ entity.solicitud|slice(0,10) }}</td>
+                <td><span style="cursor:pointer;font-weight:bold;" title="{{ entity.solicitud }}">{{ entity.solicitud|slice(0,30) }}</span></td>
+                <td>{{ entity.unidad.descripcion }}</td>
                 <td>
                     {% if entity.estatus==1 %}<span class="label label-important"><span style="display:none;">1-</span>Nuevo</span>
                     {% elseif entity.estatus==2 %}<span class="label label-info"><span style="display:none;">2-</span>Asignado</span>
@@ -52,7 +57,6 @@
     </table>
 
     <br><br>
-    <div align="center"><span class="label label-important">Nuevos:</span> <b>{{ contador[entities[0].unidad.id].nuevo }}</b> | <span class="label label-info">Asignados:</span> <b>{{ contador[entities[0].unidad.id].asignado }}</b> | <span class="label label-success">Cerrados:</span>  <b>{{ contador[entities[0].unidad.id].cerrado }}</b></div>
 
     <script type="text/javascript">
         $(document).ready(function(){

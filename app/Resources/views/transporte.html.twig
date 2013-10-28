@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/transporte.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block menu %}
+    {% include 'DistribucionBundle:Default:includes/menu.html.twig' %}
+{% endblock %}

@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Administracion\UsuarioBundle\Entity\Rol;
 use Administracion\UsuarioBundle\Form\RolType;
+use Administracion\UsuarioBundle\Form\RolTextType;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -63,7 +64,7 @@ class RolController extends Controller
     public function newAction()
     {
         $entity = new Rol();
-        $form   = $this->createForm(new RolType(), $entity);
+        $form   = $this->createForm(new RolTextType(), $entity);
 
         return $this->render('UsuarioBundle:Rol:new.html.twig', array(
             'entity' => $entity,
@@ -78,7 +79,7 @@ class RolController extends Controller
     public function createAction(Request $request)
     {
         $entity  = new Rol();
-        $form = $this->createForm(new RolType(), $entity);
+        $form = $this->createForm(new RolTextType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {

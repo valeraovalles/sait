@@ -25,6 +25,13 @@
         </div>
     {% endfor %}
 
+
+    {% if entities==null %}
+
+         <div class="alert alert-error">NO EXISTEN TICKETS</div>
+
+    {% else %}
+
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalistaespecial">
         <thead>
             <tr>
@@ -33,6 +40,7 @@
                 <th>Horasolicitud</th>
                 <th>Solicitante</th>
                 <th>Solicitud</th>
+                <th>Asignado a</th>
                 <th>Estatus</th>
                 <th>Actions</th>
             </tr>
@@ -44,12 +52,19 @@
                 <td>{% if entity.fechasolicitud %}{{ entity.fechasolicitud|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ entity.horasolicitud|date("G:i:s")  }}</td>
                 <td>{{ entity.solicitante.primernombre }} {{ entity.solicitante.primerapellido }}</td>
-                <td>{{ entity.solicitud|slice(0,10) }}</td>
+                <td><span style="cursor:pointer;font-weight:bold;" title="{{ entity.solicitud }}">{{ entity.solicitud|slice(0,15) }}</span></td>
+                {% if entity.user[0] is defined %}
+                    {% for asig in entity.user %}
+                    <td>{{ asig.primernombre }} {{ asig.primerapellido}}</td>
+                    {% endfor %}
+                {% else %}
+                <td>N/A</td>
+                {% endif %}
                 <td>
                     {% if entity.estatus==1 %}<span class="label label-important"><span style="display:none;">1-</span>Nuevo</span>
                     {% elseif entity.estatus==2 %}<span class="label label-info"><span style="display:none;">2-</span>Asignado</span>
                     {% elseif entity.estatus==3 %}<span class="label label-warning"><span style="display:none;">3-</span>Re-Asignado</span>
-                    {% elseif entity.estatus==4 %}<span class="label label-success"><span style="display:none;">2-</span>Culminado</span>
+                    {% elseif entity.estatus==4 %}<span class="label label-success"><span style="display:none;">4-</span>Culminado</span>
                     {% endif %}
 
                 </td>
@@ -70,8 +85,9 @@
         $(document).ready(function(){
            $('#tablalistaespecial').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-                "aaSorting": [[5,'asc'],[1,'asc'],[2,'asc']],
+                "aaSorting": [[6,'asc'],[1,'desc'],[2,'desc']],
             } );
         })
     </script>
+    {% endif %}
     {% endblock %}
