@@ -188,7 +188,7 @@ class TicketController extends Controller
 
         //traigo los datos del usuario conectado
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $datosusuario = $em->getRepository('UsuarioBundle:User')->datosusuario($idusuario);
+        $datossolicitante= $em->getRepository('UsuarioBundle:User')->datosusuario($ticket->getSolicitante()->getId());
         //busco si el usuario ya posee una unidad asignada para eliminarla
         $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
         $usuariosunidad =  $em->getRepository('SitBundle:Unidad')->usuariosunidad($usuariounidad[0]->getId());
@@ -217,7 +217,7 @@ class TicketController extends Controller
         return $this->render('SitBundle:Ticket:showasignado.html.twig', array(
             'entity'      => $ticket,
             'delete_form' => $deleteForm->createView(),
-            'datosusuario'=>$datosusuario,
+            'datossolicitante'=>$datossolicitante,
             'unidad'=>$unidad,
             'usuariosunidad'=>$usuariosunidad,
             'usuarioticket'=>$usuarioticket,
