@@ -20,7 +20,7 @@ framework:
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:
-        cookie_lifetime:       5000
+        cookie_lifetime:       10000
     fragments:       ~
 
 # Twig Configuration
