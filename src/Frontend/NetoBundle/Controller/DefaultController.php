@@ -164,7 +164,7 @@ class DefaultController extends Controller
 
 
 
-
+        $existe=1;
         if($existe==0){
              $this->get('session')->getFlashBag()->add('alert', 'No existen datos para los parámetros seleccionados.');
              return $this->redirect($this->generateUrl('neto_homepage'));
