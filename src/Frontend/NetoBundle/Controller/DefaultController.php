@@ -238,8 +238,6 @@ class DefaultController extends Controller
                         if(date('j')>=$diaactivacion)$existe=$existe; else $existe=0;
               
                     }
-
-                    $existe=1;
         }
 
         if($existe==0){
