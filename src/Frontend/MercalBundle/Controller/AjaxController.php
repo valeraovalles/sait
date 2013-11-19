@@ -42,10 +42,10 @@ class AjaxController extends Controller
         $query->setParameter('numero', $valor);
         $usernumero = $query->getResult();
 
-print_r($usernumero->getNumero());
-die;
         if(!empty($usernumero))        
-   		   echo $valor."<br>".$usernumero->getTrabajador()->getPrimerNombre()."<input id='valor' type='hidden' value='".$valor."'>";
+   		   echo "
+            <div style='margin-bottom:90px;'>".$valor."</div>
+            <div style='font-size:50px;'>".$usernumero[0]->getTrabajador()->getPrimerNombre()." ".$usernumero[0]->getTrabajador()->getPrimerApellido()."</div><input id='valor' type='hidden' value='".$valor."'>";
 
 die;
     	$em = $this->getDoctrine()->getManager();
