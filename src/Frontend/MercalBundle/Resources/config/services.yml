@@ -1,0 +1,7 @@
+parameters:
+#    mercal.example.class: Frontend\MercalBundle\Example
+
+services:
+#    mercal.example:
+#        class: %mercal.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

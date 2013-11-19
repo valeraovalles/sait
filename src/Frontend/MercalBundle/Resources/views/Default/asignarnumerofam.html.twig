@@ -1,0 +1,60 @@
+{% extends '::mercal.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+{% block titulobanner %}
+    MERCAL
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">AGREGAR FAMILIAR DE {{ trabajador.primerNombre }} {{ trabajador.primerApellido }}<br><h4>JORNADA {{ jornada.nombrejornada|upper }}</h4></div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+    <form action="{{ path('mercal_guardaasignarnumerofam', {'idtrabajador':trabajador.id}) }}" method="post">
+        <div class="formShow" style="width:85%;">
+            <div class="contenedorform">
+                <div class="labelform">Nombres:</div>
+                <div class="text-error">{{ form_errors(form.nombres) }}</div>
+                <div class="widgetform">{{ form_widget(form.nombres) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Apellidos:</div>
+                <div class="text-error">{{ form_errors(form.apellidos) }}</div>
+                <div class="widgetform">{{ form_widget(form.apellidos) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Cedula:</div>
+                <div class="text-error">{{ form_errors(form.cedula) }}</div>
+                <div class="widgetform">{{ form_widget(form.cedula) }}</div>
+            </div>
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Guardar y asignar número"><br><br>
+        <a class="btn btn-default" href="{{ path('mercal_asignarnumero', {'idtrabajador':trabajador.id}) }}">Volver a trabajador</a> | 
+        <a class="btn btn-default" href="{{ path('mercal_listado') }}">Volver al listado</a> | 
+        <a class="btn btn-danger" href="javascript:void(0)" id="cerrar">Cerrar ventana</a>
+    </form>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#cerrar').click(function(){
+                var rs=confirm('¿Esta seguro que desea cerrar la ventana?')
+                if(rs==true) window.close();
+            });
+        });
+    </script>
+{% endblock %}

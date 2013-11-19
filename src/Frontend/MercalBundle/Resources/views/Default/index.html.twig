@@ -1,0 +1,54 @@
+{% extends '::mercal.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+{% block titulobanner %}
+    MERCAL
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulonumeracionmercal">NUMERACIÓN MERCAL</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+    <div id="numeracion"> 0 <input id="valor" type="hidden" value="0"> </div>
+    <div>
+        <span style="display:none;"><a href="javascript:void(0)"><img id="anterior" width="100px" src="{{ asset('images/anterior.png') }}"></a> |</span> 
+
+        <a href="javascript:void(0)"><img id="siguiente" width="100px" src="{{ asset('images/siguiente.png') }}"></a></div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#anterior').click(function(){
+                var valor = $("#valor").val();
+                var ruta = "{{ path('ajaxmercal_anterior', {'valor': 'variable'}) }}";
+                ruta = ruta.replace("variable", valor);
+                $('#numeracion').load(ruta);
+            });
+
+            $('#siguiente').click(function(){
+                var valor = $("#valor").val();
+                var ruta = "{{ path('ajaxmercal_siguiente', {'valor': 'numero','idjornada':'valoridjornada'}) }}";
+                ruta = ruta.replace("numero", valor);
+                ruta = ruta.replace("valoridjornada", "1");
+                $('#numeracion').load(ruta);
+            });
+        });
+    </script>
+
+
+{% endblock %}

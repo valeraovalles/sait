@@ -30,10 +30,15 @@ class htmlreporte
         c.id_concepto=ctp.id_concepto and
         ctp.id_concepto_tipo_personal = hq.id_concepto_tipo_personal and
 
-        hq.id_grupo_nomina=gn.id_grupo_nomina and
+        hq.id_grupo_nomina=gn.id_grupo_nomina 
 
-        hq.anio=(select max(anio) from historicoquincena) and hq.mes=(select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena)) and hq.semana_quincena=(select max(semana_quincena) from historicoquincena where anio=(select max(anio) from historicoquincena) and mes = (select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena)))";   
+        and hq.anio=(select max(anio) from historicoquincena where numero_nomina=0) 
 
+        and hq.mes=(select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena where numero_nomina=0) and numero_nomina=0) 
+
+        and hq.semana_quincena=(select max(semana_quincena) from historicoquincena where anio=(select max(anio) from historicoquincena where numero_nomina=0) 
+        and mes = (select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena where numero_nomina=0) and numero_nomina=0) and numero_nomina=0) and hq.numero_nomina=0
+";
 
       $rs = pg_query($conn, $query);
 
@@ -52,15 +57,13 @@ class htmlreporte
       $query="
         select sum(hq.monto_asigna) as monto_asigna from historicoquincena hq, trabajador t, conceptotipopersonal ctp 
         where hq.id_trabajador=t.id_trabajador and t.cedula='".$usuario->getCedula()."' 
-        and hq.anio=(select max(anio) from historicoquincena) 
-        and hq.mes=(select max(mes-1) from historicoquincena where anio = (select max(anio) from historicoquincena)) 
-        and ctp.id_concepto='1061'
-        and ctp.id_tipo_personal=hq.id_tipo_personal
+        and hq.anio=(select max(anio) from historicoquincena where numero_nomina=0) 
+        and hq.mes=(select max(mes-1) from historicoquincena where anio = (select max(anio) from historicoquincena where numero_nomina=0) and numero_nomina=0) 
+        and ctp.id_concepto='1061' and ctp.id_tipo_personal=hq.id_tipo_personal 
         and ctp.id_concepto_tipo_personal=hq.id_concepto_tipo_personal
 
+
       ";
-
-
 
       $rs = pg_query($conn, $query);
       $row = pg_fetch_array($rs);

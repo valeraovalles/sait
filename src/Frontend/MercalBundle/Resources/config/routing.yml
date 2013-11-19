@@ -1,0 +1,100 @@
+mercal_homepage:
+    pattern:  /numeracion
+    defaults: { _controller: MercalBundle:Default:index }
+
+
+ajaxmercal_anterior:
+    pattern:  /ajaxmercalanterior/{valor}
+    defaults: { _controller: MercalBundle:Ajax:ajaxmercalanterior }
+
+
+ajaxmercal_siguiente:
+    pattern:  /ajaxmercalsiguiente/{valor}/{idjornada}
+    defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguiente }
+
+mercal_seleccionajornada:
+    pattern:  /seleccionajornada
+    defaults: { _controller: MercalBundle:Default:seleccionajornada }
+
+
+mercal_listado:
+    pattern:  /listado/{idjornada}
+    defaults: { _controller: MercalBundle:Default:listado }
+
+mercal_listadofam:
+    pattern:  /listadofam/{idtrabajador}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:listadofam }
+
+mercal_asignarnumero:
+    pattern:  /asignarnumero/{idtrabajador}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:asignarnumero }
+
+mercal_eliminarnumerotrab:
+    pattern:  /eliminarnumerotrab/{idtrabajador}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:eliminarnumerotrab }
+
+mercal_eliminarnumerofam:
+    pattern:  /eliminarnumerofam/{idtrabajador}/{idfamiliar}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:eliminarnumerofam }
+
+mercal_guardaasignarnumero:
+    pattern:  /guardaasignarnumero/{idtrabajador}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:guardaasignarnumero }
+
+mercal_nuevofam:
+    pattern:  /nuevofam/{idtrabajador}
+    defaults: { _controller: MercalBundle:Default:nuevofam }
+
+mercal_guardanuevofam:
+    pattern:  /guardanuevofam/{idtrabajador}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:guardanuevofam }
+
+mercal_guardaasignarnumerofam:
+    pattern:  /guardaasignarnumerofam/{idtrabajador}/{idfamiliar}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:guardaasignarnumerofam }
+
+mercal_editarfam:
+    pattern:  /editarfam/{idfamiliar}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:editarfam }
+
+mercal_actualizaeditarfam:
+    pattern:  /actualizaeditarfam/{idfamiliar}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:actualizaeditarfam }
+
+
+mercal_borrarfam:
+    pattern:  /borrarfam/{idtrabajador}/{idfamiliar}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:borrarfam }
+
+
+
+jornada:
+    pattern:  /jornada/lista
+    defaults: { _controller: "MercalBundle:Jornada:index" }
+
+jornada_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MercalBundle:Jornada:show" }
+
+jornada_new:
+    pattern:  /new
+    defaults: { _controller: "MercalBundle:Jornada:new" }
+
+jornada_create:
+    pattern:  /create
+    defaults: { _controller: "MercalBundle:Jornada:create" }
+    requirements: { _method: post }
+
+jornada_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MercalBundle:Jornada:edit" }
+
+jornada_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MercalBundle:Jornada:update" }
+    requirements: { _method: post|put }
+
+jornada_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MercalBundle:Jornada:delete" }
+    requirements: { _method: post|delete }

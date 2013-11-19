@@ -1,0 +1,53 @@
+{% extends '::mercal.html.twig' %}
+ 
+{% block title %}Mercal{% endblock %}
+
+{% block titulobanner %}
+    MERCAL
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">CONSULTAR JORNADA</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+        <div class="formShow" style="width:85%;">
+            <div class="contenedorform">
+                <div class="labelform">Nombre jornada:</div>
+                <div class="widgetform">{{ entity.nombrejornada }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Fecha jornada:</div>
+                <div class="widgetform">{{ entity.fechajornada|date('Y-m-d') }}</div>
+            </div>
+        </div>
+
+
+        <a class="btn btn-default" href="{{ path('jornada') }}">
+            Volver al listado
+        </a> | 
+
+        <a class="btn btn-default" href="{{ path('jornada_edit', { 'id': entity.id }) }}">
+            Ir a editar
+        </a>
+        <br><br>
+        <form action="{{ path('jornada_delete', { 'id': entity.id }) }}" onclick="return confirm('¿Seguro que desea eliminar?')" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button  class="btn btn-danger"type="submit">Borrar</button>
+        </form>
+
+{% endblock %}

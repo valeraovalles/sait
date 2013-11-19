@@ -1,0 +1,55 @@
+{% extends '::mercal.html.twig' %}
+ 
+{% block title %}Mercal{% endblock %}
+
+{% block titulobanner %}
+    MERCAL
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">EDITAR JORNADA</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+    <form action="{{ path('jornada_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+        {{ form_widget(edit_form._token) }}
+        <div class="formShow" style="width:85%;">
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(edit_form.nombrejornada) }}</div>
+                <div class="labelform">Nombre jornada:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nombrejornada) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(edit_form.fechajornada) }}</div>
+                <div class="labelform">Fecha jornada:</div>
+                <div class="widgetform">{{ form_widget(edit_form.fechajornada) }}</div>
+            </div>
+        </div>
+            <button class="btn btn-primary" type="submit">Editar</button> | 
+
+            <a class="btn btn-default" href="{{ path('jornada') }}">
+            Ir al listado
+            </a>
+    </form>
+
+    <form onclick="return confirm('¿Seguro que desea eliminar?')" action="{{ path('jornada_delete', { 'id': entity.id }) }}" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button class="btn btn-danger" type="submit">Borrar</button>
+    </form>
+
+{% endblock %}

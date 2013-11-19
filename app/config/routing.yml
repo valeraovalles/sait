@@ -1,3 +1,7 @@
+mercal:
+    resource: "@MercalBundle/Resources/config/routing.yml"
+    prefix:   /mercal
+
 transporte:
     resource: "@TransporteBundle/Resources/config/routing.yml"
     prefix:   /
