@@ -1,0 +1,51 @@
+{% extends '::mercal.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+{% block titulobanner %}
+    MERCAL
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">CREAR NUEVA JORNADA</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+    <form novalidate action="{{ path('jornada_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+
+        <div class="formShow" style="width:85%;">
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(form.nombrejornada) }}</div>
+                <div class="labelform">Nombre jornada:</div>
+                <div class="widgetform">{{ form_widget(form.nombrejornada) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(form.fechajornada) }}</div>
+                <div class="labelform">Fecha jornada:</div>
+                <div class="widgetform">{{ form_widget(form.fechajornada) }}</div>
+            </div>
+        </div>
+            <button class="btn btn-primary" type="submit">Crear</button> | 
+
+            <a class="btn btn-default" href="{{ path('jornada') }}">
+                ir al listado
+            </a>
+    </form>
+
+
+
+{% endblock %}

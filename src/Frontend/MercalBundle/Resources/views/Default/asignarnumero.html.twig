@@ -1,0 +1,72 @@
+{% extends '::mercal.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+{% block titulobanner %}
+    MERCAL
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">ASIGNAR NÚMERO A {{ trabajador.primerNombre }} {{ trabajador.primerApellido }}<br><h4>JORNADA {{ jornada.nombrejornada|upper }} {{ jornada.fechajornada|date('d/m/Y') }}</h4></div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+    <form action="{{ path('mercal_guardaasignarnumero', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" method="post">
+        <div class="formShow" style="width:85%;">
+            <div class="contenedorform">
+                <div class="labelform">Nombres:</div>
+                <div class="widgetform">{{ trabajador.primerNombre }} {{ trabajador.segundoNombre }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Apellidos:</div>
+                <div class="widgetform">{{ trabajador.primerApellido }} {{ trabajador.segundoApellido }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Cedula:</div>
+                <div class="widgetform">{{ trabajador.cedula }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Dependencia:</div>
+                <div class="widgetform">{{ datossf.nombre }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Cargo:</div>
+                <div class="widgetform">{{ datossf.descripcion_cargo }}</div>
+            </div>
+           
+            <div class="contenedorform">
+                <div class="labelform">Número trabajador:</div>
+                <div class="widgetform">{% if numerotrabajador!=0 %}<b class="label label-success">{{ numerotrabajador}}</b> <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerotrab', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" ><b class="icon-remove"></b></a>{% else %}<b class="label label-warning">Sin asignar</b>{% endif %}</div>
+            </div>
+
+        </div>
+        {% if numerotrabajador==0 %}
+        <input class="btn btn-primary" type="submit" value="Asignar número a trabajador"><br><br> 
+        {% endif %}
+
+        <a class="btn btn-default" href="{{ path('mercal_listado', {'idjornada':jornada.id}) }}">Volver al listado</a> | 
+        <a class="btn btn-danger" href="javascript:void(0)" id="cerrar">Cerrar ventana</a>
+    </form>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#cerrar').click(function(){
+                var rs=confirm('¿Esta seguro que desea cerrar la ventana?')
+                if(rs==true) window.close();
+            });
+        });
+    </script>
+{% endblock %}
