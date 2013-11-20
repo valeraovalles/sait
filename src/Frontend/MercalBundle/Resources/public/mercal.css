@@ -1,12 +1,19 @@
-#numeracion{
-	padding-top: 90px;
-	padding-bottom: 50px;
+#numeracion .numero{
+	padding-top: 100px;
+	padding-bottom: 60px;
 	font-size: 180px;
+
 }
 
-.titulonumeracionmercal{
-
+#numeracion .nombre{
+	padding-top: 60px;
+	padding-bottom: 40px;
 	font-size: 40px;
+
+}
+
+.titulojornada{
 	padding-top: 30px;
+	font-size: 50px;
 
 }
