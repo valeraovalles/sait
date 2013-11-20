@@ -50,7 +50,7 @@ class DefaultController extends Controller
 		from nominaespecial ne, historicoquincena hq, trabajador t, personal p
 		where 
 		ne.id_nomina_especial=hq.id_nomina_especial and
-		ne.id_frecuencia_pago=44 and ne.anio=".$datos['anio']." and ne.mes=".$datos['mes']." and
+		ne.id_frecuencia_pago=22 and ne.anio=".$datos['anio']." and ne.mes=".$datos['mes']." and
 		hq.id_trabajador=t.id_trabajador and p.id_personal=t.id_personal and hq.id_tipo_personal=".$datos['tiponomina']."
 		group by p.nacionalidad, p.cedula
 		";
