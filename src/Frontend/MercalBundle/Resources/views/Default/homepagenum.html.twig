@@ -35,36 +35,22 @@
             {% if numeracion.familiar is null %}
                 {{ numeracion.trabajador.primerNombre|upper }} {{ numeracion.trabajador.primerApellido|upper }}
             {% else %}
-                Familiar: {{ numeracion.familiar.nombres }} {{ numeracion.familiar.apellidos }}
+                {{ numeracion.familiar.nombres }} {{ numeracion.trabajador.apellidos }}
             {% endif %}
         </div>
-        <input id="valor" type="hidden" value="{{ valor }}">
     </div>
     {% endif %}
-    {#<a href="javascript:void(0)"><img id="anterior" width="100px" src="{{ asset('images/anterior.png') }}"></a> |#}
 
-    <a href="javascript:void(0)"><img id="siguiente" width="100px" src="{{ asset('images/siguiente.png') }}"></a>
 
     <input type="hidden" id="idjornada" value="{{ jornada.id }}">
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#anterior').click(function(){
-                var valor = $("#valor").val();
+            function consultaAjax(){
                 var idjornada = $("#idjornada").val();
-                var ruta = "{{ path('ajaxmercal_anterior', {'valor': 'variable'}) }}";
-                ruta = ruta.replace("variable", valor);
-                $('#numeracion').load(ruta);
-            });
-
-            $('#siguiente').click(function(){
-                var valor = $("#valor").val();
-                var idjornada = $("#idjornada").val();
-                var ruta = "{{ path('ajaxmercal_siguiente', {'valor': 'numero','idjornada':'valoridjornada'}) }}";
-                ruta = ruta.replace("numero", valor);
+                var ruta = "{{ path('ajaxmercal_siguienteautomatico', {'idjornada':'valoridjornada'}) }}";
                 ruta = ruta.replace("valoridjornada", "1");
                 $('#numeracion').load(ruta);
-            });
-        });
+            };
+        setInterval(consultaAjax, 1000 );
     </script>
 
 

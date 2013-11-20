@@ -23,12 +23,6 @@ class Numeracion
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="numero", type="integer", length=3, nullable=false)
-     */
-    private $numero;
 
     /**
      * @var \DateTime
@@ -36,6 +30,24 @@ class Numeracion
      * @ORM\Column(name="fechahora", type="datetime", nullable=false)
      */
     private $fechahora;
+
+    /**
+     * @var \Perfil
+     *
+     * @ORM\ManyToOne(targetEntity="Usernumero")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usernumero_id", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $usernumero;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="valor", type="integer", length=3, nullable=false)
+     */
+    private $valor;
 
 
     /**
@@ -55,9 +67,9 @@ class Numeracion
      * @param \Administracion\UsuarioBundle\Entity\User $user
      * @return Tipooperador
      */
-    public function setNumero($numero)
+    public function setValor($valor)
     {
-        $this->numero = $numero;
+        $this->valor = $valor;
     
         return $this;
     }
@@ -67,9 +79,9 @@ class Numeracion
      *
      * @return \Administracion\UsuarioBundle\Entity\User 
      */
-    public function getNumero()
+    public function getValor()
     {
-        return $this->numero;
+        return $this->valor;
     }
 
 
@@ -95,4 +107,28 @@ class Numeracion
     {
         return $this->fechahora;
     }
+    
+   /**
+     * Set usernumero
+     *
+     * @param \Frontend\SitBundle\Entity\Usernumero $usernumero
+     * @return Ticket
+     */
+    public function setUsernumero(\Frontend\MercalBundle\Entity\Usernumero $usernumero = null)
+    {
+        $this->usernumero = $usernumero;
+    
+        return $this;
+    }
+
+    /**
+     * Get usernumero
+     *
+     * @return \Frontend\SitBundle\Entity\Usernumero 
+     */
+    public function getUsernumero()
+    {
+        return $this->usernumero;
+    }
+
 }
