@@ -448,7 +448,7 @@ class DefaultController extends Controller
     }
 
 
-   public function nuevofamAction($idtrabajador)
+   public function nuevofamAction($idtrabajador,$idjornada)
     {
         $em = $this->getDoctrine()->getManager();
         $trabajador =  $em->getRepository('UsuarioBundle:Perfil')->find($idtrabajador);
@@ -456,7 +456,8 @@ class DefaultController extends Controller
         $entity = new Familiar;
         $form   = $this->createForm(new FamiliarType(), $entity);
 
-        $jornada =  $em->getRepository('MercalBundle:Jornada')->find(1);
+        $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
+
 
         return $this->render('MercalBundle:Default:nuevofam.html.twig',array('form'=> $form->createView(),'trabajador'=>$trabajador,'jornada'=>$jornada));
     }
