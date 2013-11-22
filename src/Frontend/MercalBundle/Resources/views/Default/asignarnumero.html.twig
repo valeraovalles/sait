@@ -49,7 +49,28 @@
            
             <div class="contenedorform">
                 <div class="labelform">Número trabajador:</div>
-                <div class="widgetform">{% if numerotrabajador!=0 %}<b class="label label-success">{{ numerotrabajador}}</b> <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerotrab', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" ><b class="icon-remove"></b></a>{% else %}<b class="label label-warning">Sin asignar</b>{% endif %}</div>
+                <div class="widgetform">
+
+                    {% if numerotrabajador!=0 %}
+                        <b class="label label-success">{{ numerotrabajador}}</b> 
+
+                        {% if numeros[0] is defined %}
+                            {% if numeros[0].compro==false %}
+                                <b class="label label-warning">Rezagado
+                                    <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerotrab', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" ><b class="icon-remove"></b></a>
+                                </b>
+                            {% else %}
+                                <b class="label label-info">Ya compró</b>
+                            {% endif %}
+                        {% else %}
+                                <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerotrab', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" ><b class="icon-remove"></b></a>                       
+                        {% endif %}
+
+                    {% else %}
+
+                        <b class="label label-warning">Sin asignar</b>
+                    {% endif %}
+                </div>
             </div>
 
         </div>
