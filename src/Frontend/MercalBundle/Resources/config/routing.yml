@@ -15,18 +15,21 @@ mercal_homepage:
     pattern:  /numeracion/{idjornada}
     defaults: { _controller: MercalBundle:Default:index }
 
+mercal_cerrarjornada:
+    pattern:  /cerrarjornada/{idjornada}
+    defaults: { _controller: MercalBundle:Ajax:cerrarjornada }
+
 mercal_jornadanumeracion:
     pattern:  /jornadanumeracion
     defaults: { _controller: MercalBundle:Default:jornadanumeracion }
 
-ajaxmercal_anterior:
-    pattern:  /ajaxmercalanterior/{valor}
-    defaults: { _controller: MercalBundle:Ajax:ajaxmercalanterior }
-
-
 ajaxmercal_siguiente:
-    pattern:  /ajaxmercalsiguiente/{valor}/{idjornada}
+    pattern:  /ajaxmercalsiguiente/{valor}/{idjornada}/{usernumeroid}/{compro}
     defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguiente }
+
+ajaxmercal_siguientecomprobar:
+    pattern:  /ajaxmercalsiguientecomprobar/{valor}/{idjornada}
+    defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguientecomprobar }
 
 mercal_seleccionajornada:
     pattern:  /seleccionajornada

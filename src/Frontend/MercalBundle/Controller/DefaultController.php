@@ -26,79 +26,22 @@ class DefaultController extends Controller
 
     public function homepagenumAction($idjornada)
     {
-        $em = $this->getDoctrine()->getManager();
+         $em = $this->getDoctrine()->getManager();
 
         //consulto jornada
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
-        //consulto a ver si ya se empezo a guardar la nuemracion en la tabla numeracion
-        $dql = "select n from MercalBundle:Numeracion n join n.usernumero un where un.jornada= :jornada order by un.numero DESC";
-        $query = $em->createQuery($dql);
-        $query->setParameter('jornada', $jornada->getId());
-        $query->setMaxResults(1);
-        $numeroactual = $query->getResult();
-        if(!empty($numeroactual)){
-            $numeroactual=$numeroactual[0];
+        if (file_exists("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json")) {
+            $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
+            $datos = json_decode($str_datos,true);
+            $datos=$datos[0];
 
-            //json
-            if($numeroactual->getUsernumero()->getFamiliar()==null){
-                $nomape=$numeroactual->getUsernumero()->getTrabajador()->getPrimerNombre().' '.$numeroactual->getUsernumero()->getTrabajador()->getPrimerApellido();
-            }
-            else{
-                $nomape=$numeroactual->getUsernumero()->getFamiliar()->getNombres().' '.$numeroactual->getUsernumero()->getFamiliar()->getApellidos();
-            }
+        } else{
 
-            $json[0]=array(
-                'numero'=>$numeroactual->getUsernumero()->getNumero(),
-                'nombre'=>strtoupper($nomape)
-            );
-            $jsonencoded = json_encode($json);
-            $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().".json", 'w+');
-            fwrite($fh, $jsonencoded);
-            fclose($fh);
-            //fin json
-
-            $numeracion=$numeroactual->getUsernumero();
-            $valor=$numeroactual->getValor();
+            $datos=null;
         }
 
-        else{
-
-            //em esta seccion se supone que no ha empezado la numeracion
-            $valor=0;
-
-            //consulto numero del primer trabajador trabajador
-            $dql = "select un from MercalBundle:Usernumero un where un.jornada= :jornada order by un.numero ASC";
-            $query = $em->createQuery($dql);
-            $query->setParameter('jornada', $idjornada);
-            $query->setMaxResults(1);
-            $query->setFirstResult(0);
-            $numeracion = $query->getResult();
-            if(!empty($numeracion)){
-                $numeracion=$numeracion[0];
-
-                //json
-                if($numeracion->getFamiliar()==null){
-                    $nomape=$numeracion->getTrabajador()->getPrimerNombre().' '.$numeracion->getTrabajador()->getPrimerApellido();
-                }
-                else{
-                    $nomape=$numeracion->getFamiliar()->getNombres().' '.$numeracion->getFamiliar()->getApellidos();
-                }
-                $json[0]=array(
-                    'numero'=>$numeracion->getNumero(),
-                    'nombre'=>strtoupper($nomape)
-                );
-                $jsonencoded = json_encode($json);
-                $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().".json", 'w+');
-                fwrite($fh, $jsonencoded);
-                fclose($fh);
-                //fin json
-                    }
-            else
-                $numeracion=null;
-        }
-
-        return $this->render('MercalBundle:Default:homepagenum.html.twig',array('numeracion'=>$numeracion,'jornada'=>$jornada));
+        return $this->render('MercalBundle:Default:homepagenum.html.twig',array('datos'=>$datos,'jornada'=>$jornada));
     }
 
     public function jornadanumeracionAction()
@@ -120,41 +63,13 @@ class DefaultController extends Controller
         //consulto jornada
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
-        //consulto a ver si ya se empezo a guardar la nuemracion en la tabla numeracion
-        $dql = "select n from MercalBundle:Numeracion n join n.usernumero un where un.jornada= :jornada order by un.numero DESC";
-        $query = $em->createQuery($dql);
-        $query->setParameter('jornada', $jornada->getId());
-        $query->setMaxResults(1);
-        $numeroactual = $query->getResult();
-        if(!empty($numeroactual)){
-            $numeroactual=$numeroactual[0];
+        if (file_exists("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json")) {
+            $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
+            $datos = json_decode($str_datos,true);
+            $datos=$datos[0];
 
+        } else{
 
-            //json
-            if($numeroactual->getUsernumero()->getFamiliar()==null){
-                $nomape=$numeroactual->getUsernumero()->getTrabajador()->getPrimerNombre().' '.$numeroactual->getUsernumero()->getTrabajador()->getPrimerApellido();
-            }
-            else{
-                $nomape=$numeroactual->getUsernumero()->getFamiliar()->getNombres().' '.$numeroactual->getUsernumero()->getFamiliar()->getApellidos();
-            }
-
-            $json[0]=array(
-                'numero'=>$numeroactual->getUsernumero()->getNumero(),
-                'nombre'=>strtoupper($nomape)
-            );
-            $jsonencoded = json_encode($json);
-            $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().".json", 'w+');
-            fwrite($fh, $jsonencoded);
-            fclose($fh);
-            //fin json
-
-            $numeracion=$numeroactual->getUsernumero();
-            $valor=$numeroactual->getValor();
-        }
-
-        else{
-
-            //em esta seccion se supone que no ha empezado la numeracion
             $valor=0;
             //consulto numero del primer trabajador trabajador
             $dql = "select un from MercalBundle:Usernumero un where un.jornada= :jornada order by un.numero ASC";
@@ -162,33 +77,50 @@ class DefaultController extends Controller
             $query->setParameter('jornada', $idjornada);
             $query->setMaxResults(1);
             $query->setFirstResult(0);
-            $numeracion = $query->getResult();
-            if(!empty($numeracion)){
-                $numeracion=$numeracion[0];
+            $usernumero = $query->getResult();
+            if(!empty($usernumero)){
+                $usernumero=$usernumero[0];
 
                 //json
-                if($numeracion->getFamiliar()==null){
-                    $nomape=$numeracion->getTrabajador()->getPrimerNombre().' '.$numeracion->getTrabajador()->getPrimerApellido();
+                if($usernumero->getFamiliar()==null){
+                    $nomape=$usernumero->getTrabajador()->getPrimerNombre().' '.$usernumero->getTrabajador()->getPrimerApellido();
+                    $cedula=$usernumero->getTrabajador()->getCedula();
+                    $tipo="t";
                 }
                 else{
-                    $nomape=$numeracion->getFamiliar()->getNombres().' '.$numeracion->getFamiliar()->getApellidos();
+                    $nomape=$usernumero->getFamiliar()->getNombres().' '.$usernumero->getFamiliar()->getApellidos();
+                    $cedula=$usernumero->getFamiliar()->getCedula();
+                    $tipo="f";
                 }
                 $json[0]=array(
-                    'numero'=>$numeracion->getNumero(),
-                    'nombre'=>strtoupper($nomape)
+                    'usernumeroid'=>$usernumero->getId(),
+                    'numero'=>$usernumero->getNumero(),
+                    'nombre'=>strtoupper($nomape),
+                    'cedula'=>$cedula,
+                    'tipo'=>$tipo,
+                    'valor'=>0,
+                    'compro'=>null
                 );
                 $jsonencoded = json_encode($json);
-                $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().".json", 'w+');
+                $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w+');
                 fwrite($fh, $jsonencoded);
                 fclose($fh);
                 //fin json
-                    }
-            else
-                $numeracion=null;
+
+                $datos=array(
+                        'usernumeroid'=>$usernumero->getId(),
+                        'numero'=>$usernumero->getNumero(),
+                        'nombre'=>strtoupper($nomape),
+                        'cedula'=>'C.I. '.$cedula,  
+                        'tipo'=>$tipo,
+                        'valor'=>0,
+                        'compro'=>null
+                );
+
+            } else $datos=null;
         }
 
-
-        return $this->render('MercalBundle:Default:index.html.twig',array('numeracion'=>$numeracion,'jornada'=>$jornada,'valor'=>$valor));
+        return $this->render('MercalBundle:Default:index.html.twig',array('datos'=>$datos,'jornada'=>$jornada));
     }
 
     public function seleccionajornadaAction()
@@ -232,6 +164,7 @@ class DefaultController extends Controller
             $arraynumeroasignadofam[$v->getTrabajador()->getId()]=$v->getNumero();
         }  
 
+
         return $this->render('MercalBundle:Default:listado.html.twig',array('trabajadores'=>$trabajadores,'arraynumeroasignadotrab'=>$arraynumeroasignadotrab,'arraynumeroasignadofam'=>$arraynumeroasignadofam,'jornada'=>$jornada));
     }
 
@@ -263,7 +196,14 @@ class DefaultController extends Controller
             $arraynumerofam[$v->getFamiliar()->getId()]=$v->getNumero();
         }
 
-        return $this->render('MercalBundle:Default:listadofam.html.twig',array('trabajador'=>$trabajador,'jornada'=>$jornada,'famtrabajador'=>$famtrabajador,'arraynumerofam'=>$arraynumerofam));
+        //consulto los numeros que han pasado
+        $dql = "select n from MercalBundle:Numeracion n join n.usernumero un where un.jornada= :jornada and un.trabajador= :idtrabajador and un.familiar is not null";
+        $query = $em->createQuery($dql);
+        $query->setParameter('jornada', $jornada->getId());
+        $query->setParameter('idtrabajador', $idtrabajador);
+        $numeros = $query->getResult();
+
+        return $this->render('MercalBundle:Default:listadofam.html.twig',array('trabajador'=>$trabajador,'jornada'=>$jornada,'famtrabajador'=>$famtrabajador,'arraynumerofam'=>$arraynumerofam,'numeros'=>$numeros));
     }
 
     public function asignarnumeroAction($idtrabajador,$idjornada)
@@ -286,7 +226,15 @@ class DefaultController extends Controller
         if(empty($numerotrabajador))$numerotrabajador=0;
         else $numerotrabajador=$numerotrabajador[0]->getNumero();
 
-        return $this->render('MercalBundle:Default:asignarnumero.html.twig',array('trabajador'=>$trabajador,'datossf'=>$datossf,'numerotrabajador'=>$numerotrabajador,'jornada'=>$jornada));
+
+        //consulto los numeros que han pasado
+        $dql = "select n from MercalBundle:Numeracion n join n.usernumero un where un.jornada= :jornada and un.trabajador= :idtrabajador and un.familiar is null";
+        $query = $em->createQuery($dql);
+        $query->setParameter('jornada', $jornada->getId());
+        $query->setParameter('idtrabajador', $idtrabajador);
+        $numeros = $query->getResult();
+
+        return $this->render('MercalBundle:Default:asignarnumero.html.twig',array('trabajador'=>$trabajador,'datossf'=>$datossf,'numerotrabajador'=>$numerotrabajador,'jornada'=>$jornada,'numeros'=>$numeros));
     }
 
     public function guardaasignarnumeroAction($idtrabajador,$idjornada)
@@ -411,15 +359,48 @@ class DefaultController extends Controller
 
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
-        //numero trabajador
+
+        //elimino de la tabla usernumero
         $dql = "select un from MercalBundle:Usernumero un where un.trabajador= :idtrabajador and un.familiar is null and un.jornada= :jornada";
         $query = $em->createQuery($dql);
         $query->setParameter('idtrabajador', $idtrabajador);
         $query->setParameter('jornada', $jornada->getId());
         $query ->setMaxResults(1);
-        $entity = $query->getResult();
-        $em->remove($entity[0]);
+        $usernumero = $query->getResult();
+
+        //verifico si esta en la tabla numeracion para eliminar
+        $dql = "select n from MercalBundle:Numeracion n where n.usernumero= :idusernumero";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idusernumero', $usernumero[0]->getId());
+        $query ->setMaxResults(1);
+        $numeracion = $query->getResult();
+        if(isset($numeracion[0]))
+            $em->remove($numeracion[0]);
+
+        $em->remove($usernumero[0]);
         $em->flush();
+
+
+        //actualizo los valores para que sean una secuencia en la tabla y el json
+        $dql = "select n from MercalBundle:Numeracion n order by n.id ASC";
+        $query = $em->createQuery($dql);
+        $numeracion = $query->getResult();
+        $cont=1;
+        foreach ($numeracion as $v) {
+            $query = $em->createQuery('update MercalBundle:Numeracion n set n.valor= :valor WHERE n.id = :idnumeracion');
+            $query->setParameter('valor', $cont);
+            $query->setParameter('idnumeracion', $v->getId());
+            $query->execute();
+            $cont++;
+        }
+        //actualizo el campo compro del usuario
+        $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
+        $datos = json_decode($str_datos,true);
+        $datos[0]["valor"] = $cont-2;
+        $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w') or die("Error al abrir fichero de salida");
+        fwrite($fh, json_encode($datos));
+        fclose($fh);
+
 
         $this->get('session')->getFlashBag()->add('notice', 'El número asignado se ha eliminado correctamente.');
         return $this->redirect($this->generateUrl('mercal_asignarnumero',array('idjornada'=>$idjornada,'idtrabajador'=>$idtrabajador)));
@@ -439,9 +420,41 @@ class DefaultController extends Controller
         $query->setParameter('idfamiliar', $idfamiliar);
         $query->setParameter('jornada', $jornada->getId());
         $query ->setMaxResults(1);
-        $entity = $query->getResult();
-        $em->remove($entity[0]);
+        $usernumero = $query->getResult();
+
+        //verifico si esta en la tabla numeracion para eliminar
+        $dql = "select n from MercalBundle:Numeracion n where n.usernumero= :idusernumero";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idusernumero', $usernumero[0]->getId());
+        $query ->setMaxResults(1);
+        $numeracion = $query->getResult();
+        if(isset($numeracion[0]))
+            $em->remove($numeracion[0]);
+
+        $em->remove($usernumero[0]);
         $em->flush();
+
+
+
+        //actualizo los valores para que sean una secuencia en la tabla y el json
+        $dql = "select n from MercalBundle:Numeracion n order by n.id ASC";
+        $query = $em->createQuery($dql);
+        $numeracion = $query->getResult();
+        $cont=1;
+        foreach ($numeracion as $v) {
+            $query = $em->createQuery('update MercalBundle:Numeracion n set n.valor= :valor WHERE n.id = :idnumeracion');
+            $query->setParameter('valor', $cont);
+            $query->setParameter('idnumeracion', $v->getId());
+            $query->execute();
+            $cont++;
+        }
+        //actualizo el campo compro del usuario
+        $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
+        $datos = json_decode($str_datos,true);
+        $datos[0]["valor"] = $cont-2;
+        $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w') or die("Error al abrir fichero de salida");
+        fwrite($fh, json_encode($datos));
+        fclose($fh);
 
         $this->get('session')->getFlashBag()->add('notice', 'El número asignado se ha eliminado correctamente.');
         return $this->redirect($this->generateUrl('mercal_listadofam',array('idjornada'=>$idjornada,'idtrabajador'=>$idtrabajador)));
