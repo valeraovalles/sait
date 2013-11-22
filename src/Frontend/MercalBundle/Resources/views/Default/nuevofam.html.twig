@@ -9,7 +9,7 @@
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">AGREGAR FAMILIAR DE {{ trabajador.primerNombre }} {{ trabajador.primerApellido }}<br><h4>JORNADA {{ jornada.nombrejornada|upper }}</h4></div>
+    <div class="titulo">AGREGAR FAMILIAR DE {{ trabajador.primerNombre }} {{ trabajador.primerApellido }}<br></div>
 
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="alert alert-success">

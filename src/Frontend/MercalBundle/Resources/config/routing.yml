@@ -58,7 +58,7 @@ mercal_guardaasignarnumero:
     defaults: { _controller: MercalBundle:Default:guardaasignarnumero }
 
 mercal_nuevofam:
-    pattern:  /nuevofam/{idtrabajador}
+    pattern:  /nuevofam/{idtrabajador}/{idjornada}
     defaults: { _controller: MercalBundle:Default:nuevofam }
 
 mercal_guardanuevofam:
