@@ -393,13 +393,16 @@ class DefaultController extends Controller
             $query->execute();
             $cont++;
         }
-        //actualizo el campo compro del usuario
-        $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
-        $datos = json_decode($str_datos,true);
-        $datos[0]["valor"] = $cont-2;
-        $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w') or die("Error al abrir fichero de salida");
-        fwrite($fh, json_encode($datos));
-        fclose($fh);
+
+        if (file_exists("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json")) {
+            //actualizo el campo compro del usuario
+            $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
+            $datos = json_decode($str_datos,true);
+            $datos[0]["valor"] = $cont-2;
+            $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w') or die("Error al abrir fichero de salida");
+            fwrite($fh, json_encode($datos));
+            fclose($fh);
+        }
 
 
         $this->get('session')->getFlashBag()->add('notice', 'El número asignado se ha eliminado correctamente.');
@@ -448,13 +451,16 @@ class DefaultController extends Controller
             $query->execute();
             $cont++;
         }
-        //actualizo el campo compro del usuario
-        $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
-        $datos = json_decode($str_datos,true);
-        $datos[0]["valor"] = $cont-2;
-        $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w') or die("Error al abrir fichero de salida");
-        fwrite($fh, json_encode($datos));
-        fclose($fh);
+
+        if (file_exists("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json")) {
+            //actualizo el campo compro del usuario
+            $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
+            $datos = json_decode($str_datos,true);
+            $datos[0]["valor"] = $cont-2;
+            $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w') or die("Error al abrir fichero de salida");
+            fwrite($fh, json_encode($datos));
+            fclose($fh);
+        }
 
         $this->get('session')->getFlashBag()->add('notice', 'El número asignado se ha eliminado correctamente.');
         return $this->redirect($this->generateUrl('mercal_listadofam',array('idjornada'=>$idjornada,'idtrabajador'=>$idtrabajador)));
