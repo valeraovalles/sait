@@ -57,7 +57,7 @@ class AjaxController extends Controller
             echo'
                 <div id="numeracion"> 
                     <div class="numero">0</div>
-                    <div class="nombre">SIN COMENZAR</div>
+                    <div class="nombre">NO HA COMENZADO</div>
                 </div>';
         }
            
@@ -205,25 +205,6 @@ class AjaxController extends Controller
             fwrite($fh, $jsonencoded);
             fclose($fh);
         }
-        /*else{      
-            $valor=$valor-1; 
-           echo '
-            <div class="numero">0</div>
-            <div class="nombre">JORNADA CULMINADA</div>
-            <input id="valor" type="hidden" value="'.$valor.'">
-            ';
-
-            $json[0]=array(
-                'numero'=>"0",
-                'nombre'=>"JORNADA CULMINADA"
-            );
-
-            $jsonencoded = json_encode($json);
-            $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().".json", 'w+');
-            fwrite($fh, $jsonencoded);
-            fclose($fh);
-
-        }*/
         return $this->redirect($this->generateUrl('mercal_homepage',array('idjornada'=>$jornada->getId())));
     }
 

@@ -359,7 +359,6 @@ class DefaultController extends Controller
 
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
-
         //elimino de la tabla usernumero
         $dql = "select un from MercalBundle:Usernumero un where un.trabajador= :idtrabajador and un.familiar is null and un.jornada= :jornada";
         $query = $em->createQuery($dql);
@@ -374,33 +373,64 @@ class DefaultController extends Controller
         $query->setParameter('idusernumero', $usernumero[0]->getId());
         $query ->setMaxResults(1);
         $numeracion = $query->getResult();
-        if(isset($numeracion[0]))
+
+        if(isset($numeracion[0])){
             $em->remove($numeracion[0]);
+            $em->flush();
+        }
 
         $em->remove($usernumero[0]);
         $em->flush();
+
 
 
         //actualizo los valores para que sean una secuencia en la tabla y el json
         $dql = "select n from MercalBundle:Numeracion n order by n.id ASC";
         $query = $em->createQuery($dql);
         $numeracion = $query->getResult();
-        $cont=1;
+        $cont=0;
         foreach ($numeracion as $v) {
+            $cont++;
             $query = $em->createQuery('update MercalBundle:Numeracion n set n.valor= :valor WHERE n.id = :idnumeracion');
             $query->setParameter('valor', $cont);
             $query->setParameter('idnumeracion', $v->getId());
             $query->execute();
-            $cont++;
         }
 
-        if (file_exists("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json")) {
-            //actualizo el campo compro del usuario
-            $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
-            $datos = json_decode($str_datos,true);
-            $datos[0]["valor"] = $cont-2;
-            $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w') or die("Error al abrir fichero de salida");
-            fwrite($fh, json_encode($datos));
+
+        //ACTUALIZXO JSON CON EL ULTIMO REGISTRO DE numeros
+        $dql = "select n from MercalBundle:Numeracion n order by n.id DESC";
+        $query = $em->createQuery($dql);
+        $query ->setMaxResults(1);
+        $numeracion = $query->getResult();
+
+        if(empty($numeracion)){ unlink("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");}
+        else{
+            $usernumero=$numeracion[0]->getUsernumero();
+            //json
+            if($usernumero->getFamiliar()==null){
+                $nomape=$usernumero->getTrabajador()->getPrimerNombre().' '.$usernumero->getTrabajador()->getPrimerApellido();
+                $cedula=$usernumero->getTrabajador()->getCedula();
+                $tipo="t";
+            }
+            else{
+                $nomape=$usernumero->getFamiliar()->getNombres().' '.$usernumero->getFamiliar()->getApellidos();
+                $cedula=$usernumero->getFamiliar()->getCedula();
+                $tipo="f";
+            }
+
+            $json[0]=array(
+                'usernumeroid'=>$usernumero->getId(),
+                'numero'=>$usernumero->getNumero(),
+                'nombre'=>strtoupper($nomape),
+                'cedula'=>'C.I. '.$cedula,
+                'tipo'=>$tipo,
+                'valor'=>$numeracion->getValor(),
+                'compro'=>$numeracion[0]->getCompro()
+            );
+            $jsonencoded = json_encode($json);
+            $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w+');
+            fwrite($fh, $jsonencoded);
             fclose($fh);
         }
 
@@ -416,6 +446,8 @@ class DefaultController extends Controller
 
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
+
+
         //numero trabajador
         $dql = "select un from MercalBundle:Usernumero un where un.trabajador= :idtrabajador and un.familiar= :idfamiliar and un.jornada= :jornada";
         $query = $em->createQuery($dql);
@@ -425,40 +457,70 @@ class DefaultController extends Controller
         $query ->setMaxResults(1);
         $usernumero = $query->getResult();
 
+
         //verifico si esta en la tabla numeracion para eliminar
         $dql = "select n from MercalBundle:Numeracion n where n.usernumero= :idusernumero";
         $query = $em->createQuery($dql);
         $query->setParameter('idusernumero', $usernumero[0]->getId());
         $query ->setMaxResults(1);
         $numeracion = $query->getResult();
-        if(isset($numeracion[0]))
+
+        if(isset($numeracion[0])){
             $em->remove($numeracion[0]);
+            $em->flush();
+        }
 
         $em->remove($usernumero[0]);
         $em->flush();
-
 
 
         //actualizo los valores para que sean una secuencia en la tabla y el json
         $dql = "select n from MercalBundle:Numeracion n order by n.id ASC";
         $query = $em->createQuery($dql);
         $numeracion = $query->getResult();
-        $cont=1;
+        $cont=0;
         foreach ($numeracion as $v) {
+            $cont++;
             $query = $em->createQuery('update MercalBundle:Numeracion n set n.valor= :valor WHERE n.id = :idnumeracion');
             $query->setParameter('valor', $cont);
             $query->setParameter('idnumeracion', $v->getId());
             $query->execute();
-            $cont++;
+            
         }
 
-        if (file_exists("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json")) {
-            //actualizo el campo compro del usuario
-            $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
-            $datos = json_decode($str_datos,true);
-            $datos[0]["valor"] = $cont-2;
-            $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w') or die("Error al abrir fichero de salida");
-            fwrite($fh, json_encode($datos));
+        //ACTUALIZXO JSON CON EL ULTIMO REGISTRO DE numeros
+        $dql = "select n from MercalBundle:Numeracion n order by n.id DESC";
+        $query = $em->createQuery($dql);
+        $query ->setMaxResults(1);
+        $numeracion = $query->getResult();
+
+        if(empty($numeracion)){ unlink("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");}
+        else{
+            $usernumero=$numeracion[0]->getUsernumero();
+            //json
+            if($usernumero->getFamiliar()==null){
+                $nomape=$usernumero->getTrabajador()->getPrimerNombre().' '.$usernumero->getTrabajador()->getPrimerApellido();
+                $cedula=$usernumero->getTrabajador()->getCedula();
+                $tipo="t";
+            }
+            else{
+                $nomape=$usernumero->getFamiliar()->getNombres().' '.$usernumero->getFamiliar()->getApellidos();
+                $cedula=$usernumero->getFamiliar()->getCedula();
+                $tipo="f";
+            }
+
+            $json[0]=array(
+                'usernumeroid'=>$usernumero->getId(),
+                'numero'=>$usernumero->getNumero(),
+                'nombre'=>strtoupper($nomape),
+                'cedula'=>'C.I. '.$cedula,
+                'tipo'=>$tipo,
+                'valor'=>$cont-2,
+                'compro'=>$numeracion[0]->getCompro()
+            );
+            $jsonencoded = json_encode($json);
+            $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w+');
+            fwrite($fh, $jsonencoded);
             fclose($fh);
         }
 
