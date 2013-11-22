@@ -47,7 +47,7 @@
             function consultaAjax(){
                 var idjornada = $("#idjornada").val();
                 var ruta = "{{ path('ajaxmercal_siguienteautomatico', {'idjornada':'valoridjornada'}) }}";
-                ruta = ruta.replace("valoridjornada", "1");
+                ruta = ruta.replace("valoridjornada", idjornada);
                 $('#numeracion').load(ruta);
             };
         setInterval(consultaAjax, 1000 );
