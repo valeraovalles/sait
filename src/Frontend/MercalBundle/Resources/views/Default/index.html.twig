@@ -43,7 +43,7 @@
     {% if datos!=null and datos.compro==null and datos.compro!='fin'  %}
         <a style="width:100px;padding:10px;" class="label label-success" href="{{ path('ajaxmercal_siguiente', {'valor': datos.valor,'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'true'}) }}">COMPRO</a> | 
         <a style="width:100px;padding:10px;" class="label label-important" href="{{ path('ajaxmercal_siguiente', {'valor': datos.valor,'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'false'}) }}">NO COMPRO</a>
-    {% elseif datos.compro!='fin' %}
+    {% elseif datos.compro is defined and datos.compro!='fin' %}
         <b class="alert alert-info">LA COLA DE USUARIOS HA CULMINADO</b><br><br>
         <a id="comprobar" style="padding:10px;" class="label label-warning" href="{{ path('ajaxmercal_siguientecomprobar', {'valor':  datos.valor ,'idjornada': jornada.id ,'usernumeroid': datos.usernumeroid }) }}">VERIFICAR COLA</a> | 
         <a onclick="return confirm('¿Está seguro que desea culminar la jornada?')" id="" style="padding:10px;" class="label label-important" href="{{ path('mercal_cerrarjornada',{'idjornada':jornada.id}) }}">CULMINAR JORNADA</a>

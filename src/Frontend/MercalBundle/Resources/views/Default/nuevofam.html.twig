@@ -45,9 +45,8 @@
         </div>
 
         <input class="btn btn-primary" type="submit" value="Guardar familiar"><br><br>
-        <a class="btn btn-default" href="{{ path('mercal_asignarnumero', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}">Volver a trabajador</a> | 
-        <a class="btn btn-default" href="{{ path('mercal_listadofam',{'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}">Volver a listado</a> | 
-        <a class="btn btn-danger" href="javascript:void(0)" id="cerrar">Cerrar ventana</a>
+        <a class="btn btn-default" href="{{ path('mercal_listadofam',{'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}">Volver a listado</a> |
+        <a class="btn btn-default" href="{{ path('mercal_asignarnumero', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}">Volver a trabajador</a>
     </form>
 
     <script type="text/javascript">
