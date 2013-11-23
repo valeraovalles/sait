@@ -28,7 +28,7 @@ ajaxmercal_siguiente:
     defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguiente }
 
 ajaxmercal_siguientecomprobar:
-    pattern:  /ajaxmercalsiguientecomprobar/{valor}/{idjornada}
+    pattern:  /ajaxmercalsiguientecomprobar/{idjornada}
     defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguientecomprobar }
 
 mercal_seleccionajornada:

@@ -65,15 +65,22 @@ class AjaxController extends Controller
 
     }
 
-    public function ajaxmercalsiguientecomprobarAction($valor,$idjornada)
+    public function ajaxmercalsiguientecomprobarAction($idjornada)
     {
 
-        //el valor lo utilixo para consultar los registros uno por uno estilo paginación
-        $valor=$valor+1;
-        
+
         $em = $this->getDoctrine()->getManager();
 
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
+
+
+        //actualizo el campo compro del usuario
+        $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
+        $datos = json_decode($str_datos,true);
+        $valor=$datos[0]["valor"];
+
+        //el valor lo utilixo para consultar los registros uno por uno estilo paginación
+        $valor=$valor+1;
 
         //consulto datos del trabajador siguiente en la numeracion
         $dql = "select un from MercalBundle:Usernumero un where un.jornada= :jornada order by un.numero ASC ";
@@ -114,7 +121,7 @@ class AjaxController extends Controller
                 'cedula'=>'C.I. '.$cedula,
                 'tipo'=>$tipo,
                 'valor'=>$valor,
-                'compro'=>null
+                'compro'=>'na'
             );
             $jsonencoded = json_encode($json);
             $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w+');
@@ -145,7 +152,7 @@ class AjaxController extends Controller
         $entity->setUsernumero($usernumero);
         $fechahora = date_create_from_format('Y-m-d G:i:s', \date("Y-m-d G:i:s"));
         $entity->setFechahora($fechahora);
-        $entity->setValor($valor);
+        $entity->setValor($valor-1);
         $entity->setCompro($compro);
         $em->persist($entity);
         $em->flush();
@@ -198,7 +205,7 @@ class AjaxController extends Controller
                 'cedula'=>'C.I. '.$cedula,
                 'tipo'=>$tipo,
                 'valor'=>$valor,
-                'compro'=>null
+                'compro'=>'na'
             );
             $jsonencoded = json_encode($json);
             $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w+');

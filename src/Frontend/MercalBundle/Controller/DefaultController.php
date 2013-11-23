@@ -99,7 +99,7 @@ class DefaultController extends Controller
                     'cedula'=>$cedula,
                     'tipo'=>$tipo,
                     'valor'=>0,
-                    'compro'=>null
+                    'compro'=>'na'
                 );
                 $jsonencoded = json_encode($json);
                 $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w+');
@@ -114,7 +114,7 @@ class DefaultController extends Controller
                         'cedula'=>'C.I. '.$cedula,  
                         'tipo'=>$tipo,
                         'valor'=>0,
-                        'compro'=>null
+                        'compro'=>"na"
                 );
 
             } else $datos=null;
@@ -211,8 +211,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $trabajador =  $em->getRepository('UsuarioBundle:Perfil')->find($idtrabajador);
 
-        $f=new Funcion;
-        $datossf=$f->datosUsuarioSigefirrhh($trabajador->getCedula());
+        //$f=new Funcion;
+        //$datossf=$f->datosUsuarioSigefirrhh($trabajador->getCedula());
 
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
@@ -234,7 +234,7 @@ class DefaultController extends Controller
         $query->setParameter('idtrabajador', $idtrabajador);
         $numeros = $query->getResult();
 
-        return $this->render('MercalBundle:Default:asignarnumero.html.twig',array('trabajador'=>$trabajador,'datossf'=>$datossf,'numerotrabajador'=>$numerotrabajador,'jornada'=>$jornada,'numeros'=>$numeros));
+        return $this->render('MercalBundle:Default:asignarnumero.html.twig',array('trabajador'=>$trabajador,/*'datossf'=>$datossf,*/'numerotrabajador'=>$numerotrabajador,'jornada'=>$jornada,'numeros'=>$numeros));
     }
 
     public function guardaasignarnumeroAction($idtrabajador,$idjornada)
@@ -244,8 +244,8 @@ class DefaultController extends Controller
 
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
-        $f=new Funcion;
-        $datossf=$f->datosUsuarioSigefirrhh($trabajador->getCedula());
+        //$f=new Funcion;
+        //$datossf=$f->datosUsuarioSigefirrhh($trabajador->getCedula());
 
 
         $dql = "select un from MercalBundle:Usernumero un order by un.numero DESC";
@@ -382,27 +382,29 @@ class DefaultController extends Controller
         $em->remove($usernumero[0]);
         $em->flush();
 
-
-
         //actualizo los valores para que sean una secuencia en la tabla y el json
         $dql = "select n from MercalBundle:Numeracion n order by n.id ASC";
         $query = $em->createQuery($dql);
         $numeracion = $query->getResult();
         $cont=0;
         foreach ($numeracion as $v) {
-            $cont++;
+            
             $query = $em->createQuery('update MercalBundle:Numeracion n set n.valor= :valor WHERE n.id = :idnumeracion');
             $query->setParameter('valor', $cont);
             $query->setParameter('idnumeracion', $v->getId());
             $query->execute();
+
+            $cont++;
         }
 
 
         //ACTUALIZXO JSON CON EL ULTIMO REGISTRO DE numeros
+        $em = $this->getDoctrine()->getManager();
         $dql = "select n from MercalBundle:Numeracion n order by n.id DESC";
         $query = $em->createQuery($dql);
         $query ->setMaxResults(1);
         $numeracion = $query->getResult();
+
 
         if(empty($numeracion)){ unlink("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");}
         else{
@@ -425,7 +427,7 @@ class DefaultController extends Controller
                 'nombre'=>strtoupper($nomape),
                 'cedula'=>'C.I. '.$cedula,
                 'tipo'=>$tipo,
-                'valor'=>$numeracion->getValor(),
+                'valor'=>$cont-1,
                 'compro'=>$numeracion[0]->getCompro()
             );
             $jsonencoded = json_encode($json);
