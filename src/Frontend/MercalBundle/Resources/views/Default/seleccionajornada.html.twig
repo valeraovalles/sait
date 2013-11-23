@@ -28,9 +28,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nombrejornada</th>
-                <th>Fechajornada</th>
-                <th>Actions</th>
+                <th>Nombre jornada</th>
+                <th>Fechaj ornada</th>
+                <th>Accion</th>
             </tr>
         </thead>
         <tbody>
@@ -38,7 +38,7 @@
             <tr>
                 <td><a href="{{ path('jornada_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.nombrejornada }}</td>
-                <td>{% if entity.fechajornada %}{{ entity.fechajornada|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fechajornada %}{{ entity.fechajornada|date('Y-m-d') }}{% endif %}</td>
                 <td align="center">
                     <a class="label label-success" href="{{ path('mercal_listado', { 'idjornada': entity.id }) }}">Seleccionar</a>
 

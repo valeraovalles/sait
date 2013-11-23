@@ -35,7 +35,6 @@
                 
                     {{ datos.nombre }}<br><br>{{ datos.cedula }}
             </div>
-            <input id="valor" type="hidden" value="{{ datos.valor }}">
             <input type="hidden" id="usernumeroid" value="{{ datos.usernumeroid }}">
         </div>
     {% endif %}
@@ -43,9 +42,9 @@
     <input type="hidden" id="idjornada" value="{{ jornada.id }}">
 
     {% if datos!=null %}
-        {% if datos.compro=="na" %}
-            <a style="width:100px;padding:10px;" class="label label-success" href="{{ path('ajaxmercal_siguiente', {'valor': datos.valor,'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'true'}) }}">COMPRO</a> | 
-            <a style="width:100px;padding:10px;" class="label label-important" href="{{ path('ajaxmercal_siguiente', {'valor': datos.valor,'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'false'}) }}">NO COMPRO</a>
+        {% if datos.compro==null %}
+            <a style="width:100px;padding:10px;" class="label label-success" href="{{ path('ajaxmercal_siguiente', {'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'true'}) }}">COMPRO</a> | 
+            <a style="width:100px;padding:10px;" class="label label-important" href="{{ path('ajaxmercal_siguiente', {'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'false'}) }}">NO COMPRO</a>
         {% elseif datos.compro!="fin" %}
             <b class="alert alert-info">LA COLA DE USUARIOS HA CULMINADO</b><br><br>
             <a id="comprobar" style="padding:10px;" class="label label-warning" href="{{ path('ajaxmercal_siguientecomprobar', {'idjornada': jornada.id ,'usernumeroid': datos.usernumeroid }) }}">VERIFICAR COLA</a> | 

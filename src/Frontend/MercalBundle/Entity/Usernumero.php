@@ -56,9 +56,9 @@ class Usernumero
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechahora", type="datetime", nullable=false)
+     * @ORM\Column(name="fechahoraasignacion", type="datetime", nullable=false)
      */
-    private $fechahora;
+    private $fechahoraasignacion;
 
     /**
      * @var \Perfil
@@ -70,6 +70,19 @@ class Usernumero
      */
     private $familiar;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="compro", type="boolean", nullable=true)
+     */
+    private $compro;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechahoranumeracion", type="datetime", nullable=true)
+     */
+    private $fechahoranumeracion;
 
     /**
      * Get id
@@ -105,6 +118,28 @@ class Usernumero
         return $this->trabajador;
     }
 
+    /**
+     * Set user
+     *
+     * @param \Administracion\UsuarioBundle\Entity\User $user
+     * @return Tipooperador
+     */
+    public function setCompro($compro)
+    {
+        $this->compro = $compro;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Administracion\UsuarioBundle\Entity\User 
+     */
+    public function getCompro()
+    {
+        return $this->compro;
+    }
 
     /**
      * Set user
@@ -136,9 +171,9 @@ class Usernumero
      * @param \DateTime $fechasolicitud
      * @return Ticket
      */
-    public function setFechahora($fechahora)
+    public function setFechahoraasignacion($fechahoraasignacion)
     {
-        $this->fechahora = $fechahora;
+        $this->fechahoraasignacion = $fechahoraasignacion;
     
         return $this;
     }
@@ -148,9 +183,32 @@ class Usernumero
      *
      * @return \DateTime 
      */
-    public function getFechahora()
+    public function getFechahoraasignacion()
     {
-        return $this->fechahora;
+        return $this->fechahoraasignacion;
+    }
+
+    /**
+     * Set fechasolicitud
+     *
+     * @param \DateTime $fechasolicitud
+     * @return Ticket
+     */
+    public function setFechahoranumeracionn($fechahoranumeracion)
+    {
+        $this->fechahoranumeracion = $fechahoranumeracion;
+    
+        return $this;
+    }
+
+    /**
+     * Get fechasolicitud
+     *
+     * @return \DateTime 
+     */
+    public function getFechahoranumeracion()
+    {
+        return $this->fechahoranumeracion;
     }
 
     /**
