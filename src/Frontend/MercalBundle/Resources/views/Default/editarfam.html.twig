@@ -45,8 +45,7 @@
         </div>
 
         <input class="btn btn-primary" type="submit" value="Editar familiar"> | 
-        <a class="btn btn-default" href="{{ path('mercal_listadofam', {'idjornada':idjornada,'idtrabajador':entity.trabajador.id}) }}">Volver a listado</a> | 
-        <a class="btn btn-danger" href="javascript:void(0)" id="cerrar">Cerrar ventana</a>
+        <a class="btn btn-default" href="{{ path('mercal_listadofam', {'idjornada':idjornada,'idtrabajador':entity.trabajador.id}) }}">Volver a listado</a>
     </form>
 
     <form action="{{ path('mercal_borrarfam', {'idjornada':idjornada, 'idtrabajador': entity.trabajador.id,'idfamiliar': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar el familiar?')">
@@ -55,12 +54,5 @@
         <button class="btn btn-danger" type="submit">Borrar familiar</button>
     </form>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#cerrar').click(function(){
-                var rs=confirm('¿Esta seguro que desea cerrar la ventana?')
-                if(rs==true) window.close();
-            });
-        });
-    </script>
+
 {% endblock %}

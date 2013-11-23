@@ -42,25 +42,24 @@
                 <td>{{ entity.cedula }}</td>
                 <td align="center">
                     {% if arraynumerofam[entity.id] is defined %}
-
-                        {% if numeros[0] is defined %}
-                            {% if numeros[0].compro==false %}
-                                <b class="label label-success">{{ arraynumerofam[entity.id] }}</b>
-                                <b class="label label-warning">Rezagado
-                                <a href="{{ path('mercal_guardaasignarnumerofam', {'idjornada':jornada.id, 'idtrabajador': trabajador.id,'idfamiliar':entity.id }) }}"><a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerofam', {'idjornada':jornada.id,'idtrabajador':trabajador.id,'idfamiliar':entity.id}) }}" ><b class="icon-remove"></b></a></a>
-                                </b>
-                            {% else %}
+                        {% if arraynumerofam[entity.id].compro==false and arraynumerofam[entity.id].fechahoranumeracion is not null %}
+                                <b class="label label-warning"><b class="label label-important">{{ arraynumerofam[entity.id].numero }}</b> Rezagado
+                                <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerofam', {'idjornada':jornada.id,'idtrabajador':trabajador.id,'idfamiliar':entity.id}) }}" ><b class="icon-remove"></b></a></b> | 
+                        {% elseif arraynumerofam[entity.id].compro==true and arraynumerofam[entity.id].fechahoranumeracion is not null %}
                                 <b class="label label-info">Ya compró</b>
-                            {% endif %}
                         {% else %}
-                            <a href="{{ path('mercal_guardaasignarnumerofam', {'idjornada':jornada.id, 'idtrabajador': trabajador.id,'idfamiliar':entity.id }) }}"><b class="label label-success">{{ arraynumerofam[entity.id] }}</b> <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerofam', {'idjornada':jornada.id,'idtrabajador':trabajador.id,'idfamiliar':entity.id}) }}" ><b class="icon-remove"></b></a></a>                     
+                            <b class="label label-success">{{ arraynumerofam[entity.id].numero }}
+                                <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerofam', {'idjornada':jornada.id,'idtrabajador':trabajador.id,'idfamiliar':entity.id}) }}" ><b class="icon-remove"></b></a>
+                            </b>
                         {% endif %}
-
+                 
+                   
                     {% else %}
-
                         <a class="label label-important" href="{{ path('mercal_guardaasignarnumerofam', {'idjornada':jornada.id, 'idtrabajador': trabajador.id,'idfamiliar':entity.id }) }}">Asignar Numero</a> | 
-                        <a class="label label-warning" href="{{ path('mercal_editarfam', {'idjornada':jornada.id, 'idfamiliar':entity.id }) }}">Editar</a>
+
                     {% endif %}
+
+                    <a class="label label-warning" href="{{ path('mercal_editarfam', {'idjornada':jornada.id, 'idfamiliar':entity.id }) }}">Editar</a>
                 </td>
             </tr>
         {% endfor %}
