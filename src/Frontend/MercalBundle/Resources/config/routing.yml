@@ -24,11 +24,11 @@ mercal_jornadanumeracion:
     defaults: { _controller: MercalBundle:Default:jornadanumeracion }
 
 ajaxmercal_siguiente:
-    pattern:  /ajaxmercalsiguiente/{valor}/{idjornada}/{usernumeroid}/{compro}
+    pattern:  /ajaxmercalsiguiente/{idjornada}/{usernumeroid}/{compro}
     defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguiente }
 
 ajaxmercal_siguientecomprobar:
-    pattern:  /ajaxmercalsiguientecomprobar/{valor}/{idjornada}
+    pattern:  /ajaxmercalsiguientecomprobar/{idjornada}
     defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguientecomprobar }
 
 mercal_seleccionajornada:

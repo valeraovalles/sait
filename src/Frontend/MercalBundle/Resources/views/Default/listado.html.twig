@@ -45,11 +45,11 @@
                 <td>{{ entity.cedula }}</td>
                 <td align="center">
 
-                    {% if arraynumeroasignadotrab[entity.id] is defined %}
+                    {% if numeroasignadotrab[entity.id] is defined %}
                         
-                        <a class="label label-success" href="{{ path('mercal_asignarnumero', { 'idjornada':jornada.id,'idtrabajador': entity.user.id }) }}">{{ arraynumeroasignadotrab[entity.id] }}</a>
+                        <a class="label label-success" href="{{ path('mercal_asignarnumero', { 'idjornada':jornada.id,'idtrabajador': entity.user.id }) }}">Nro. {{ numeroasignadotrab[entity.id].numero }}</a>
 
-                        {% else %}
+                    {% else %}
 
                         <a class="label label-important" href="{{ path('mercal_asignarnumero', { 'idjornada':jornada.id,'idtrabajador': entity.
                         user.id }) }}">Asignar Nro.</a>
@@ -59,11 +59,11 @@
                 </td>
 
                 <td align="center">
-                    {% if arraynumeroasignadofam[entity.id] is defined %}
+                    {% if numeroasignadofam[entity.id] is defined %}
                         
-                        <a class="label label-success" href="{{ path('mercal_listadofam', {'idjornada':jornada.id, 'idtrabajador': entity.user.id }) }}">{{ arraynumeroasignadofam[entity.id] }}</a>
+                        <a class="label label-success" href="{{ path('mercal_listadofam', {'idjornada':jornada.id, 'idtrabajador': entity.user.id }) }}">Nro. {{ numeroasignadofam[entity.id].numero }}</a>
 
-                        {% else %}
+                    {% else %}
 
                         <a class="label label-important" href="{{ path('mercal_listadofam', {'idjornada':jornada.id, 'idtrabajador': entity.user.id }) }}">Asignar Nro.</a>
 

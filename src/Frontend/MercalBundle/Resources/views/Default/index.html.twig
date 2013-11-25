@@ -26,7 +26,7 @@
     {% if datos==null %}
         <div id="numeracion"> 
             <div class="numero">0</div>
-            <div class="nombre">SIN COMENZAR</div>
+            <div class="nombre">NO HA COMENZADO</div>
         </div>
     {% else %}
         <div id="numeracion"> 
@@ -35,21 +35,24 @@
                 
                     {{ datos.nombre }}<br><br>{{ datos.cedula }}
             </div>
-            <input id="valor" type="hidden" value="{{ datos.valor }}">
             <input type="hidden" id="usernumeroid" value="{{ datos.usernumeroid }}">
         </div>
     {% endif %}
-
-    {% if datos!=null and datos.compro==null and datos.compro!='fin'  %}
-        <a style="width:100px;padding:10px;" class="label label-success" href="{{ path('ajaxmercal_siguiente', {'valor': datos.valor,'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'true'}) }}">COMPRO</a> | 
-        <a style="width:100px;padding:10px;" class="label label-important" href="{{ path('ajaxmercal_siguiente', {'valor': datos.valor,'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'false'}) }}">NO COMPRO</a>
-    {% elseif datos.compro is defined and datos.compro!='fin' %}
-        <b class="alert alert-info">LA COLA DE USUARIOS HA CULMINADO</b><br><br>
-        <a id="comprobar" style="padding:10px;" class="label label-warning" href="{{ path('ajaxmercal_siguientecomprobar', {'valor':  datos.valor ,'idjornada': jornada.id ,'usernumeroid': datos.usernumeroid }) }}">VERIFICAR COLA</a> | 
-        <a onclick="return confirm('¿Está seguro que desea culminar la jornada?')" id="" style="padding:10px;" class="label label-important" href="{{ path('mercal_cerrarjornada',{'idjornada':jornada.id}) }}">CULMINAR JORNADA</a>
-    {% endif %}
-    <br>
-    
+  
     <input type="hidden" id="idjornada" value="{{ jornada.id }}">
+
+    {% if datos!=null %}
+        {% if datos.compro==null %}
+            <a style="width:100px;padding:10px;" class="label label-success" href="{{ path('ajaxmercal_siguiente', {'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'true'}) }}">COMPRO</a> | 
+            <a style="width:100px;padding:10px;" class="label label-important" href="{{ path('ajaxmercal_siguiente', {'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'false'}) }}">NO COMPRO</a><br>
+        {% elseif datos.compro=="verificar" %}
+            <b class="alert alert-info">LA COLA DE USUARIOS HA CULMINADO, VERIFIQUE MÁS TARDE SI NUEVOS USUARIOS FUERON AGREGADOS</b><br><br>
+            <a id="comprobar" style="padding:10px;" class="label label-warning" href="{{ path('ajaxmercal_siguientecomprobar', {'idjornada': jornada.id }) }}">VERIFICAR COLA</a> | 
+            <a onclick="return confirm('¿Está seguro que desea culminar la jornada?')" id="" style="padding:10px;" class="label label-important" href="{{ path('mercal_cerrarjornada',{'idjornada':jornada.id}) }}">CULMINAR JORNADA</a><br>
+        {% endif %}
+        
+    {% endif %}
+    
+    
 
 {% endblock %}

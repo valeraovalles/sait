@@ -39,6 +39,12 @@ class Jornada
      */
     private $fechajornada;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="culminada", type="boolean", nullable=true)
+     */
+    private $culminada=false;
 
     /**
      * Get id
@@ -74,6 +80,28 @@ class Jornada
         return $this->nombrejornada;
     }
 
+    /**
+     * Set user
+     *
+     * @param \Administracion\UsuarioBundle\Entity\User $user
+     * @return Tipooperador
+     */
+    public function setCulminada($culminada)
+    {
+        $this->culminada = $culminada;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Administracion\UsuarioBundle\Entity\User 
+     */
+    public function getCulminada()
+    {
+        return $this->culminada;
+    }
 
     /**
      * Set fechasolicitud
