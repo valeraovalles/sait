@@ -96,8 +96,9 @@ class DefaultController extends Controller
         //$datossf=$f->datosUsuarioSigefirrhh($trabajador->getCedula());
 
         //consulto para generar el numero que sigue en cola
-        $dql = "select un from MercalBundle:Usernumero un order by un.numero DESC";
+        $dql = "select un from MercalBundle:Usernumero un where un.jornada= :idjornada order by un.numero DESC";
         $query = $em->createQuery($dql);
+        $query->setParameter('idjornada', $jornada->getId());
         $query ->setMaxResults(1);
         $ultimonumero = $query->getResult();
         if(empty($ultimonumero))$ultimonumero=1;
