@@ -18,7 +18,7 @@ class DefaultController extends Controller
     public function seleccionajornadaAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $dql = "select j from MercalBundle:Jornada j where j.fechajornada>= :fechajornada order by j.nombrejornada, j.fechajornada ASC";
+        $dql = "select j from MercalBundle:Jornada j where j.fechajornada>= :fechajornada and j.culminada=false order by j.nombrejornada, j.fechajornada ASC";
         $query = $em->createQuery($dql);
         $query->setParameter('fechajornada', \date("Y-m-d"));
         $jornadas = $query->getResult();
@@ -68,8 +68,8 @@ class DefaultController extends Controller
 
         $trabajador =  $em->getRepository('UsuarioBundle:Perfil')->find($idtrabajador);
 
-        //$f=new Funcion;
-        //$datossf=$f->datosUsuarioSigefirrhh($trabajador->getCedula());
+        $f=new Funcion;
+        $datossf=$f->datosUsuarioSigefirrhh($trabajador->getCedula());
 
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
@@ -81,7 +81,7 @@ class DefaultController extends Controller
         $query ->setMaxResults(1);
         $usernumero = $query->getResult();
 
-        return $this->render('MercalBundle:Default:asignarnumero.html.twig',array('trabajador'=>$trabajador,/*'datossf'=>$datossf,*/'usernumero'=>$usernumero,'jornada'=>$jornada));
+        return $this->render('MercalBundle:Default:asignarnumero.html.twig',array('trabajador'=>$trabajador,'datossf'=>$datossf,'usernumero'=>$usernumero,'jornada'=>$jornada));
     }
 
     //revisado
@@ -176,7 +176,7 @@ class DefaultController extends Controller
                     'tipo'=>0,
                     'compro'=>'fin'
                 );
-            }else{
+            }else if ($usernumero[0]->getJornada()->getCulminada()==false){
                 $json[0]=array(
                     'usernumeroid'=>0,
                     'numero'=>$usernumero[0]->getNumero(),
@@ -184,6 +184,16 @@ class DefaultController extends Controller
                     'cedula'=>'',
                     'tipo'=>0,
                     'compro'=>'verificar'
+                );                
+            }
+            else if ($usernumero[0]->getJornada()->getCulminada()==true){
+                $json[0]=array(
+                    'usernumeroid'=>0,
+                    'numero'=>0,
+                    'nombre'=>'CULMINADA',
+                    'cedula'=>'',
+                    'tipo'=>0,
+                    'compro'=>'fin'
                 );                
             }
         }
@@ -221,7 +231,7 @@ class DefaultController extends Controller
     public function jornadanumeracionAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $dql = "select j from MercalBundle:Jornada j where j.fechajornada>= :fechajornada order by j.nombrejornada, j.fechajornada ASC";
+        $dql = "select j from MercalBundle:Jornada j where j.fechajornada>= :fechajornada and j.culminada=false order by j.nombrejornada, j.fechajornada ASC";
         $query = $em->createQuery($dql);
         $query->setParameter('fechajornada', \date("Y-m-d"));
         $jornadas = $query->getResult();
@@ -354,7 +364,7 @@ class DefaultController extends Controller
     public function homepagejorAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $dql = "select j from MercalBundle:Jornada j where j.fechajornada>= :fechajornada order by j.nombrejornada, j.fechajornada ASC";
+        $dql = "select j from MercalBundle:Jornada j where j.fechajornada>= :fechajornada and j.culminada=false order by j.nombrejornada, j.fechajornada ASC";
         $query = $em->createQuery($dql);
         $query->setParameter('fechajornada', \date("Y-m-d"));
         $jornadas = $query->getResult();

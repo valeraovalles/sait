@@ -40,16 +40,10 @@ class AjaxController extends Controller
 
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
-
         $this->get('session')->getFlashBag()->add('notice', 'Verificación realizada');
 
         return $this->redirect($this->generateUrl('mercal_homepage',array('idjornada'=>$jornada->getId())));
     }
-
-
-
-
-
 
 
     public function cerrarjornadaAction($idjornada)
@@ -58,20 +52,11 @@ class AjaxController extends Controller
         $em = $this->getDoctrine()->getManager();
         //consulto jornada
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
-        $json[0]=array(
-            'usernumeroid'=>0,
-            'numero'=>0,
-            'nombre'=>"JORNADA CULMINADA",
-            'cedula'=>null,
-            'tipo'=>null,
-            'valor'=>0,
-            'compro'=>'fin'
-        );        
-        $jsonencoded = json_encode($json);
-        $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json", 'w+');
-        fwrite($fh, $jsonencoded);
-        fclose($fh);
+        $query = $em->createQuery('update MercalBundle:Jornada j set j.culminada=true WHERE j.id = :idjornada');
+        $query->setParameter('idjornada', $idjornada);
+        $query->execute();
 
+        $this->get('session')->getFlashBag()->add('notice', 'Jornada culminada.');
         return $this->redirect($this->generateUrl('mercal_homepage',array('idjornada'=>$jornada->getId())));
     }
 
