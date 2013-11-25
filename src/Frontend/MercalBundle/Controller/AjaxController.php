@@ -37,7 +37,7 @@ class AjaxController extends Controller
 
         //consulto jornada
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
-
+        
         if (file_exists("uploads/jornada/".$jornada->getNombrejornada().".json")) {
             $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().".json");
             $datos = json_decode($str_datos,true);
