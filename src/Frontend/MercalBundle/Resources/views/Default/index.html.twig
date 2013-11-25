@@ -12,60 +12,47 @@
     <div class="titulojornada">JORNADA {{ jornada.nombrejornada|upper }}</div>
 
     {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
+        <br><div class="alert alert-success">
             {{ flashMessage }}
         </div>
     {% endfor %}
 
     {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
+        <br><div class="alert alert-danger">
             {{ flashMessage }}
         </div>
     {% endfor %}
 
-    {% if numeracion==null %}
+    {% if datos==null %}
         <div id="numeracion"> 
             <div class="numero">0</div>
-            <div class="nombre">JORNADA INACTIVA</div>
+            <div class="nombre">NO HA COMENZADO</div>
         </div>
     {% else %}
-    <div id="numeracion"> 
-        <div class="numero">{{ numeracion.numero }}</div>
-        <div class="nombre">
-            {% if numeracion.familiar is null %}
-                {{ numeracion.trabajador.primerNombre|upper }} {{ numeracion.trabajador.primerApellido|upper }}
-            {% else %}
-                Familiar: {{ numeracion.familiar.nombres }} {{ numeracion.familiar.apellidos }}
-            {% endif %}
+        <div id="numeracion"> 
+            <div class="numero">{{ datos.numero }}</div>
+            <div class="nombre">
+                
+                    {{ datos.nombre }}<br><br>{{ datos.cedula }}
+            </div>
+            <input type="hidden" id="usernumeroid" value="{{ datos.usernumeroid }}">
         </div>
-        <input id="valor" type="hidden" value="{{ valor }}">
-    </div>
     {% endif %}
-    {#<a href="javascript:void(0)"><img id="anterior" width="100px" src="{{ asset('images/anterior.png') }}"></a> |#}
-
-    <a href="javascript:void(0)"><img id="siguiente" width="100px" src="{{ asset('images/siguiente.png') }}"></a>
-
+  
     <input type="hidden" id="idjornada" value="{{ jornada.id }}">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#anterior').click(function(){
-                var valor = $("#valor").val();
-                var idjornada = $("#idjornada").val();
-                var ruta = "{{ path('ajaxmercal_anterior', {'valor': 'variable'}) }}";
-                ruta = ruta.replace("variable", valor);
-                $('#numeracion').load(ruta);
-            });
 
-            $('#siguiente').click(function(){
-                var valor = $("#valor").val();
-                var idjornada = $("#idjornada").val();
-                var ruta = "{{ path('ajaxmercal_siguiente', {'valor': 'numero','idjornada':'valoridjornada'}) }}";
-                ruta = ruta.replace("numero", valor);
-                ruta = ruta.replace("valoridjornada", "1");
-                $('#numeracion').load(ruta);
-            });
-        });
-    </script>
-
+    {% if datos!=null %}
+        {% if datos.compro==null %}
+            <a style="width:100px;padding:10px;" class="label label-success" href="{{ path('ajaxmercal_siguiente', {'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'true'}) }}">COMPRO</a> | 
+            <a style="width:100px;padding:10px;" class="label label-important" href="{{ path('ajaxmercal_siguiente', {'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'false'}) }}">NO COMPRO</a><br>
+        {% elseif datos.compro=="verificar" %}
+            <b class="alert alert-info">LA COLA DE USUARIOS HA CULMINADO, VERIFIQUE MÁS TARDE SI NUEVOS USUARIOS FUERON AGREGADOS</b><br><br>
+            <a id="comprobar" style="padding:10px;" class="label label-warning" href="{{ path('ajaxmercal_siguientecomprobar', {'idjornada': jornada.id }) }}">VERIFICAR COLA</a> | 
+            <a onclick="return confirm('¿Está seguro que desea culminar la jornada?')" id="" style="padding:10px;" class="label label-important" href="{{ path('mercal_cerrarjornada',{'idjornada':jornada.id}) }}">CULMINAR JORNADA</a><br>
+        {% endif %}
+        
+    {% endif %}
+    
+    
 
 {% endblock %}

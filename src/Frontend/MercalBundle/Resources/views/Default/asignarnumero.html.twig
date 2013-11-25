@@ -24,7 +24,7 @@
     {% endfor %}
 
 
-    <form action="{{ path('mercal_guardaasignarnumero', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" method="post">
+    <form id="form" action="{{ path('mercal_guardaasignarnumero', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" method="post">
         <div class="formShow" style="width:85%;">
             <div class="contenedorform">
                 <div class="labelform">Nombres:</div>
@@ -38,33 +38,57 @@
                 <div class="labelform">Cedula:</div>
                 <div class="widgetform">{{ trabajador.cedula }}</div>
             </div>
-            <div class="contenedorform">
+            {#<div class="contenedorform">
                 <div class="labelform">Dependencia:</div>
                 <div class="widgetform">{{ datossf.nombre }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Cargo:</div>
                 <div class="widgetform">{{ datossf.descripcion_cargo }}</div>
-            </div>
+            </div>#}
            
             <div class="contenedorform">
                 <div class="labelform">Número trabajador:</div>
-                <div class="widgetform">{% if numerotrabajador!=0 %}<b class="label label-success">{{ numerotrabajador}}</b> <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerotrab', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" ><b class="icon-remove"></b></a>{% else %}<b class="label label-warning">Sin asignar</b>{% endif %}</div>
+                <div class="widgetform">
+
+                    {% if usernumero[0] is defined %}
+                        <b class="label label-success">{{ usernumero[0].numero }}</b> 
+
+                        {% if usernumero[0].compro==false and usernumero[0].fechahoranumeracion is not null %}
+                            <b class="label label-warning">Rezagado
+                                <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerotrab', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" ><b class="icon-remove"></b></a>
+                            </b>
+                        {% elseif usernumero[0].compro==true and usernumero[0].fechahoranumeracion is not null %}
+                            <b class="label label-info">Ya compró</b>
+                        {% else %}
+                            <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerotrab', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" ><b class="icon-remove"></b></a>
+                        {% endif %}
+                       
+                    {% else %}
+                            <b class="label label-warning">Sin asignar</b>
+                    {% endif %}
+                </div>
             </div>
 
         </div>
-        {% if numerotrabajador==0 %}
-        <input class="btn btn-primary" type="submit" value="Asignar número a trabajador"><br><br> 
+        {% if usernumero[0] is not defined %}
+            <input id="asignar" class="btn btn-primary" type="button" value="Asignar número a trabajador"><br><br> 
         {% endif %}
 
         <a class="btn btn-default" href="{{ path('mercal_listado', {'idjornada':jornada.id}) }}">Volver al listado</a>
     </form>
 
+    <input id="envia" type="hidden" value="0">
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#cerrar').click(function(){
-                var rs=confirm('¿Esta seguro que desea cerrar la ventana?')
-                if(rs==true) window.close();
+            $('#asignar').click(function(){
+
+                var envia=$('#envia').val()
+                if(envia==0)
+                    $('#form').submit()
+
+                $('#envia').val("1")
+                    
             });
         });
     </script>

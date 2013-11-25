@@ -23,22 +23,19 @@
         </div>
     {% endfor %}
 
-    {% if numeracion==null %}
+    {% if datos==null %}
         <div id="numeracion"> 
             <div class="numero">0</div>
-            <div class="nombre">JORNADA INACTIVA</div>
+            <div class="nombre">NO HA COMENZADO</div>
         </div>
     {% else %}
-    <div id="numeracion"> 
-        <div class="numero">{{ numeracion.numero }}</div>
-        <div class="nombre">
-            {% if numeracion.familiar is null %}
-                {{ numeracion.trabajador.primerNombre|upper }} {{ numeracion.trabajador.primerApellido|upper }}
-            {% else %}
-                {{ numeracion.familiar.nombres }} {{ numeracion.trabajador.apellidos }}
-            {% endif %}
+        <div id="numeracion"> 
+            <div class="numero">{{ datos.numero }}</div>
+            <div class="nombre">
+                
+                    {{ datos.nombre }}<br><br>{{ datos.cedula }}
+            </div>
         </div>
-    </div>
     {% endif %}
 
 

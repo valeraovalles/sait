@@ -49,6 +49,13 @@ class Numeracion
      */
     private $valor;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="compro", type="boolean", nullable=false)
+     */
+    private $compro;
+
 
     /**
      * Get id
@@ -84,6 +91,28 @@ class Numeracion
         return $this->valor;
     }
 
+    /**
+     * Set user
+     *
+     * @param \Administracion\UsuarioBundle\Entity\User $user
+     * @return Tipooperador
+     */
+    public function setCompro($compro)
+    {
+        $this->compro = $compro;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Administracion\UsuarioBundle\Entity\User 
+     */
+    public function getCompro()
+    {
+        return $this->compro;
+    }
 
     /**
      * Set fechasolicitud
