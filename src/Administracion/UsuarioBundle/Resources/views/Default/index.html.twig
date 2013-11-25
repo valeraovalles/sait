@@ -111,7 +111,7 @@
             </div>
             {% endif %}
 
-            {% if is_granted('ROLE_ADMINISTRADOR') %}
+            {% if is_granted('ROLE_JORNADAS') %}
             <div class="listado_aplicaciones">
               <a href="{{ path('mercal_homepagejor')}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
