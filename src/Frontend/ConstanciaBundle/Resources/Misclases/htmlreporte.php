@@ -54,7 +54,7 @@ class htmlreporte
 
 
       //DOMINGOS DE JORNADA
-      $query="
+      /*$query="
         select sum(hq.monto_asigna) as monto_asigna from historicoquincena hq, trabajador t, conceptotipopersonal ctp 
         where hq.id_trabajador=t.id_trabajador and t.cedula='".$usuario->getCedula()."' 
         and hq.anio=(select max(anio) from historicoquincena where numero_nomina=0) 
@@ -67,11 +67,11 @@ class htmlreporte
 
       $rs = pg_query($conn, $query);
       $row = pg_fetch_array($rs);
-      if(!empty($row))$domingojornada=$row[0];else $domingojornada=0;
+      if(!empty($row))$domingojornada=$row[0];else $domingojornada=0;*/
 
 
      $s_basico=$sueldo;
-     $s_normal=$sueldo+$suma_conceptos+$domingojornada;
+     $s_normal=$sueldo+$suma_conceptos/*+$domingojornada*/;
      $s_integral=($s_normal/30)*41.25;   
      $s_anual_integral= $s_integral * 12;
      $s_anual_basico=$s_basico * 12;
