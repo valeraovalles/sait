@@ -110,7 +110,7 @@ class RolController extends Controller
             throw $this->createNotFoundException('Unable to find Rol entity.');
         }
 
-        $editForm = $this->createForm(new RolType(), $entity);
+        $editForm = $this->createForm(new RolTextType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('UsuarioBundle:Rol:edit.html.twig', array(
@@ -135,7 +135,7 @@ class RolController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new RolType(), $entity);
+        $editForm = $this->createForm(new RolTextType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
