@@ -158,9 +158,9 @@ class DefaultController extends Controller
 
             } else if ($datos['tipnom']=='a'){
 
-                $recibo['perioricidad']='Aguinaldos 2 meses';
+                $recibo['perioricidad']='Aguinaldos 3 meses';
                 $recibo['periodo_desde']="01/01/".$anio;
-                $recibo['periodo_hasta']="15/11/".$anio;
+                $recibo['periodo_hasta']="31/12/".$anio;
                 $recibo['tiponomina']='a';
                 $recibo['sueldo']=$row2['sueldo'];
 
