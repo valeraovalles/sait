@@ -159,6 +159,23 @@ class PresupuestoController extends Controller
         $monto_ant = $entity->getMontoBs();
         $disp_actual = $entity->getDisponibilidad();
 
+
+        $dolares = $entity->getMontoDolares();
+        $euros = $entity->getMontoEuros();
+
+        if($dolares != NULL and $euros == NULL)
+        {
+            $tipomoneda = 1;
+        }elseif($dolares == NULL and $euros != NULL)
+        {
+            $tipomoneda = 2;
+        }elseif($dolares == NULL and $euros == NULL)
+        {
+            $tipomoneda = 3;
+        }
+
+
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Presupuesto entity.');
         }
@@ -173,6 +190,7 @@ class PresupuestoController extends Controller
             'id_proveedor'  => $id_proveedor,
             'monto_ant'     => $monto_ant,
             'disp_actual'   => $disp_actual,
+            'tipomoneda'    => $tipomoneda,
             'edit_form'     => $editForm->createView(),
             'delete_form'   => $deleteForm->createView(),
         ));
@@ -247,29 +265,68 @@ class PresupuestoController extends Controller
     * ELIMINAR UN PRESUPUESTO TIPO N.
     *
     */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id,$id_proveedor)
     {
         $em = $this->getDoctrine()->getManager();
+        
+        $tipo = 'N';
+        //query para que muestre solo los presupuestos tipo N (no deben ser extension)
+        $dql = "select p from ContenidosBundle:Presupuesto p 
+                where p.idProveedor=:id_proveedor and p.tipo=:tipo";
+        $consulta = $em->createQuery($dql)->setParameters(
+                                                            array(
+                                                                    'id_proveedor'=> $id_proveedor, 
+                                                                    'tipo' => $tipo,
+                                                                 )
+                                                         );
+        $entities = $consulta->getResult();
 
-        //obtengo la respuesta del usuario
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
+        //obtengo datos del presupuesto
+        $entity = $em->getRepository('ContenidosBundle:Presupuesto')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Presupuesto entity.');
+        }
 
-        //verifico el formulario
-        if ($form->isValid()) {
-            
-            //obtengo datos del presupuesto
-            $entity = $em->getRepository('ContenidosBundle:Presupuesto')->find($id);
+        $dql   = "SELECT pre FROM ContenidosBundle:Presupuesto pre
+                    where pre.idPresext= :id";
+        $query = $em->createQuery($dql)->setParameter('id',$id);
+        $pr_ext=$query->getResult();
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Presupuesto entity.');
-            }
+        $dql   = "SELECT cont FROM ContenidosBundle:Contratacion cont
+                    where cont.idPresupuesto= :id";
+        $query = $em->createQuery($dql)->setParameter('id',$id);
+        $contr=$query->getResult();
 
-            //elimino el registro de la BD
+
+        if ($pr_ext == NULL and $contr == NULL)
+        {
+            //ELIMINO LOS DATOS DE LA CONTRATACION SI NO TENGO PAGOS ASOCIADOS
             $em->remove($entity);
             $em->flush();
+            
+            //envio a notificacion de que el registro fue creado
+            $this->get('session')->getFlashBag()->add('notice', ' SE ELIMINO EL PRESUPUESTO EXITOSAMENTE');
+        }elseif ($pr_ext == NULL and $contr != NULL)
+        {
+            //envio a notificacion de que el registro fue creado
+            $this->get('session')->getFlashBag()->add('alert', 'EL PRESUPUESTO TIENE CONTRATACIONES ASOCIADAS');
+        }elseif ($pr_ext != NULL and $contr == NULL)
+        {
+            //envio a notificacion de que el registro fue creado
+            $this->get('session')->getFlashBag()->add('alert', 'EL PRESUPUESTO TIENE EXTENSIONES DE PRESUPUESTO ASOCIADAS');  
+        }elseif ($pr_ext != NULL and $contr != NULL)
+        {
+            //envio a notificacion de que el registro fue creado
+            $this->get('session')->getFlashBag()->add('alert', 'EL PRESUPUESTO TIENE CONTRATACIONES Y ESTENSIONES DE PRESUPUESTO ASOCIADAS');
+ 
         }
-        return $this->redirect($this->generateUrl('presupuesto'));
+
+
+        //ENVIO A LA VISTA SHOW PARA MOSTRAR PAGO CREADO
+        return $this->redirect($this->generateUrl('presupuesto', array(
+                                                                        'entities'         => $entities,
+                                                                        'id_proveedor'     => $id_proveedor,
+                                                                        )));
     }
 
 
@@ -571,6 +628,51 @@ class PresupuestoController extends Controller
         ));
     }
 
+    /*
+    *
+    * ELIMINAR UN PRESUPUESTO TIPO E.
+    *
+    */
+    public function extensiondeleteAction($id,$id_presupuesto, $id_proveedor)
+    {
+        $em = $this->getDoctrine()->getManager();    
+
+        $entity = $em->getRepository('ContenidosBundle:Presupuesto')->find($id);
+
+        //ELIMINO LOS DATOS DE LA CONTRATACION SI NO TENGO PAGOS ASOCIADOS
+        $em->remove($entity);
+        $em->flush();
+
+        $tipo = 'E';
+
+        //query para seleccionar solo los presupuestos que estienden de otro presupuesto
+        $dql = "select p from ContenidosBundle:Presupuesto p 
+                where p.tipo=:tipo and p.idPresext=:id_presupuesto";
+        $consulta = $em->createQuery($dql)->setParameters(
+                                                            array(
+                                                                    'id_presupuesto'    => $id_presupuesto, 
+                                                                    'tipo'              => $tipo,
+                                                                 )
+
+
+
+                                                         );
+        $entities = $consulta->getResult();
+        
+        //envio a notificacion de que el registro fue creado
+        $this->get('session')->getFlashBag()->add('notice', ' SE ELIMINARON LOS DATOS DE LA EXTENSION DE PRESUPUESTO');
+            
+
+
+        //envio a la vista
+        return $this->redirect($this->generateUrl('presupuesto_extensionindex', array(
+                                                                            'entities'         => $entities,
+                                                                            'id_proveedor'     => $id_proveedor,
+                                                                            'id_presupuesto'   => $id_presupuesto,
+                                                                            )));
+
+    }
+
 #########################################################################################################
 #########################################################################################################
 #
@@ -593,6 +695,7 @@ class PresupuestoController extends Controller
                 ->add('nombre', 'entity', array(
                                                 'class'     => 'ContenidosBundle:Datosproveedor',
                                                 'property'  => 'nombre',
+                                                'empty_value' => 'Seleccione...',
                                                 'multiple'  => false,
                                                 ))
             ->getForm();

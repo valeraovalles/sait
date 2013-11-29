@@ -174,6 +174,21 @@ class Contratacion
      */
     private $idPresupuesto;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="debe_bs", type="decimal", nullable=true)
+     */
+    private $debeBs;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="debe_me", type="decimal", nullable=true)
+     */
+    private $debeMe;
+
+
 
 
     /**
@@ -622,6 +637,54 @@ class Contratacion
     {
         return $this->idPresupuesto;
     }
+
+    /**
+     * Set debeBs
+     *
+     * @param float $debeBs
+     * @return Contratacion
+     */
+    public function setDebeBs($debeBs)
+    {
+        $this->debeBs = $debeBs;
+    
+        return $this;
+    }
+
+    /**
+     * Get debeBs
+     *
+     * @return float 
+     */
+    public function getDebeBs()
+    {
+        return $this->debeBs;
+    }
+
+    /**
+     * Set debeMe
+     *
+     * @param float $debeMe
+     * @return Contratacion
+     */
+    public function setDebeMe($debeMe)
+    {
+        $this->debeMe = $debeMe;
+    
+        return $this;
+    }
+
+    /**
+     * Get debeMe
+     *
+     * @return float 
+     */
+    public function getDebeMe()
+    {
+        return $this->debeMe;
+    }
+
+
     public function __toString()
     {
         return $this->getConcepto();

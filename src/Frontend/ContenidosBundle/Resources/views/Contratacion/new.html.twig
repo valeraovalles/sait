@@ -8,7 +8,7 @@
     {{ parent() }}
     <div class="titulo">NUEVA CONTRATACION</div>
 
-    <form action="{{ path('contratacion_create',{ 'id_proveedor':id_proveedor, 'id_presupuesto': id_presupuesto }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
+    <form novalidate="novalidate" action="{{ path('contratacion_create',{ 'id_proveedor':id_proveedor, 'id_presupuesto': id_presupuesto }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
 
         <fieldset>     
             <div class="form-show_edit">

@@ -32,21 +32,24 @@
                     <div class="labels">Fecha de Fin:</div>
                     <div class="widgets">{{ form_widget(edit_form.fechaFin) }}</div>
                 </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.montoDolares) }}
-                    <div class="labels">Monto en Dolares:</div>
-                    <div class="widgets">{{ form_widget(edit_form.montoDolares) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.montoEuros) }}
-                    <div class="labels">Monto en Euros:</div>
-                    <div class="widgets">{{ form_widget(edit_form.montoEuros) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.montoBs) }}
-                    <div class="labels">Monto en Bolivares:</div>
-                    <div class="widgets">{{ form_widget(edit_form.montoBs) }}</div>
-                </div>
+                {% if tipomoneda == 1 %}
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form.montoDolares) }}
+                        <div class="labels">Monto en Dolares:</div>
+                        <div class="widgets">{{ form_widget(edit_form.montoDolares) }}</div>
+                    </div>
+                {% elseif tipomoneda == 2 %}
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form.montoEuros) }}
+                        <div class="labels">Monto en Euros:</div>
+                        <div class="widgets">{{ form_widget(edit_form.montoEuros) }}</div>
+                    </div>
+                {% endif %}
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form.montoBs) }}
+                        <div class="labels">Monto en Bolivares:</div>
+                        <div class="widgets">{{ form_widget(edit_form.montoBs) }}</div>
+                    </div>
                 
             </fieldset>
             <button type="submit" class="btn">Editar</button><br><br>

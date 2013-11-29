@@ -445,30 +445,65 @@ class DatosproveedorController extends Controller
      * FUNCION PARA ELIMINAR UN REGISTRO DE TABLA DATOSPROVEEDOR
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
+        $titulo = "COMPLETO DE PROVEEDORES";
 
-        //verifico formulario
-        if ($form->isValid()) 
-        {
-            //obtengo datos del proveedor segun ID
-            $entity = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id);
+        //OBTENGO LA INFORMACION DE TODOS LOS PROVEEDORES ACTIVOS
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Datosproveedor entity.');
-            }
+        $estatus = 'A';
+        $dql = "select d from ContenidosBundle:Datosproveedor d where d.estatus=:estatus";
+        $consulta = $em->createQuery($dql)->setParameter('estatus', $estatus);
+        $entities = $consulta->getResult();
 
-            //elimino el registro de la BD
-            $em->remove($entity);
-            $em->flush();
+
+        //obtengo datos del proveedor segun ID
+        $entity = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Datosproveedor entity.');
         }
 
-        //envio a la vista
+        $dql   = "SELECT pre FROM ContenidosBundle:Presupuesto pre
+                    where pre.idProveedor= :id";
+        $query = $em->createQuery($dql)->setParameter('id',$id);
+        $pres=$query->getResult();
+
+
+
+        $dql   = "SELECT cont FROM ContenidosBundle:Banco cont
+                    where cont.idProveedor= :id";
+        $query = $em->createQuery($dql)->setParameter('id',$id);
+        $banco=$query->getResult();
+
+
+        if ($pres == NULL and $banco == NULL)
+        {   
+            //ELIMINO LOS DATOS DE LA CONTRATACION SI NO TENGO PAGOS ASOCIADOS
+            $em->remove($entity);
+            $em->flush();
+            
+            //envio a notificacion de que el registro fue creado
+            $this->get('session')->getFlashBag()->add('notice', ' SE ELIMINO EL PROVEEDOR EXITOSAMENTE');
+        }elseif ($pres == NULL and $banco != NULL)
+        {
+            //envio a notificacion de que el registro fue creado
+            $this->get('session')->getFlashBag()->add('alert', 'EL PROVEEDOR TIENE BANCOS ASOCIADOS');
+        }elseif ($pres != NULL and $banco == NULL)
+        {
+            //envio a notificacion de que el registro fue creado
+            $this->get('session')->getFlashBag()->add('alert', 'EL PROVEEDOR TIENE PRESUPUESTOS ASOCIADOS');  
+        }elseif ($pres != NULL and $banco != NULL)
+        {
+            //envio a notificacion de que el registro fue creado
+            $this->get('session')->getFlashBag()->add('alert', 'EL PROVEEDOR TIENE BANCOS Y PRESUPUESTOS ASOCIADOS');
+        }
+
+        //ENVIO A LA VISTA SHOW PARA MOSTRAR PAGO CREADO
         return $this->redirect($this->generateUrl('datosproveedor'));
+
     }
 
     /**

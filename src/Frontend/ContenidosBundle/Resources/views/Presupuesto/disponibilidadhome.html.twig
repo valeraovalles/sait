@@ -14,19 +14,19 @@
                     <div class="labels">Proveedor:</div>
                     <div class="widgets">{{ form_widget(form.nombre) }}</div>
                 </div>
-                <div id="muestra"></div>
+                <div id="presupuesto"></div>
             </div>
         </fieldset>
         <br>
-        <button type="submit" class="btn">CONSULTAR</button> 
+        
     </form>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#form_nombre').change(function(){
                 var dato = $("#form_nombre").val();
-                var ruta = "{{ path('ajax_disponibilidad', {'datos': 'variable'}) }}";
+                var ruta = "{{ path('ajax_disponibilidad', {'datos': 'variable', 'mostrar': 'presupuesto'}) }}";
                 ruta = ruta.replace("variable", dato);
-                $('#muestra').load(ruta);
+                $('#presupuesto').load(ruta);
             });
         });
     </script>

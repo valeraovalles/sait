@@ -1,7 +1,7 @@
 {% extends '::contenidos.html.twig' %}
 
 {% block titulobanner %}
-    PAGOS
+    BANCOS
 {% endblock %}
     
 {% block body -%}
@@ -58,12 +58,12 @@
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.cuentaBenef) }}
-                    <div class="labels">Cuenta del Banco Intermediario:</div>
+                    <div class="labels">Cuenta del Banco Beneficiario:</div>
                     <div class="dato">{{ form_widget(form.cuentaBenef) }}</div>
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.direccionBancobenef) }}
-                    <div class="labels">Direcci&oacute;n del Banco Intermediario:</div>
+                    <div class="labels">Direcci&oacute;n del Banco Beneficiario:</div>
                     <div class="dato">{{ form_widget(form.direccionBancobenef) }}</div>
                 </div>
             </div>

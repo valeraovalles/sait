@@ -26,7 +26,7 @@ class Datosproveedor
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=100, nullable=true)
+     * @ORM\Column(name="nombre", type="string", length=100, nullable=false)
      * @Assert\NotBlank()
      */
     private $nombre;
@@ -34,7 +34,7 @@ class Datosproveedor
     /**
      * @var string
      *
-     * @ORM\Column(name="num_identificacionfiscal", type="string", length=30, nullable=true)
+     * @ORM\Column(name="num_identificacionfiscal", type="string", length=30, nullable=false)
      * @Assert\NotBlank()
      */
     private $numIdentificacionfiscal;
@@ -42,7 +42,7 @@ class Datosproveedor
     /**
      * @var string
      *
-     * @ORM\Column(name="direccion_empresa", type="string", length=500, nullable=true)
+     * @ORM\Column(name="direccion_empresa", type="string", length=500, nullable=false)
      * @Assert\NotBlank()
      */
     private $direccionEmpresa;
@@ -50,7 +50,7 @@ class Datosproveedor
     /**
      * @var string
      *
-     * @ORM\Column(name="oficina1", type="string", length=100, nullable=true)
+     * @ORM\Column(name="oficina1", type="string", length=100, nullable=false)
      * @Assert\NotBlank()
      */
     private $oficina1;

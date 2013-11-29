@@ -46,7 +46,6 @@ datosproveedor_update:
 datosproveedor_delete:
     pattern:  /proveedor/eliminar/{id}
     defaults: { _controller: "ContenidosBundle:Datosproveedor:delete" }
-    requirements: { _method: post|delete }
 
 ##########################################################################################################
 ##########################################################################################################
@@ -82,9 +81,8 @@ banco_update:
     requirements: { _method: post|put }
 
 banco_delete:
-    pattern:  banco/eliminar/{id}
+    pattern:  banco/eliminar/{id}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Banco:delete" }
-    requirements: { _method: post|delete }
 
 
 ##########################################################################################################
@@ -121,9 +119,8 @@ contratacion_update:
     requirements: { _method: post|put }
 
 contratacion_delete:
-    pattern:  contratacion/eliminar/{id}
+    pattern:  contratacion/eliminar/{id}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Contratacion:delete" }
-    requirements: { _method: post|delete }
 
 
 ##########################################################################################################
@@ -134,35 +131,34 @@ contratacion_delete:
 ##########################################################################################################
 ##########################################################################################################
 pago:
-    pattern:  /pago/home/{id_contratacion}
+    pattern:  /pago/home/{id_contratacion}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:index" }
 
 pago_show:
-    pattern:  pago/detalles/{id}/{id_contratacion}
+    pattern:  pago/detalles/{id}/{id_contratacion}/{id_proveedor}/{id_presupuesto}
     defaults: { _controller: "ContenidosBundle:Pago:show" }
 
 pago_new:
-    pattern:  pago/nuevo/{id_contratacion}
+    pattern:  pago/nuevo/{id_contratacion}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:new" }
 
 pago_create:
-    pattern:  pago/crear/{id_contratacion}
+    pattern:  pago/crear/{id_contratacion}/{tipomoneda}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:create" }
     requirements: { _method: post }
 
 pago_edit:
-    pattern:  pago/editar/{id}/{id_contratacion}
+    pattern:  pago/editar/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:edit" }
 
 pago_update:
-    pattern:  pago/actualizar/{id}/{id_contratacion}
+    pattern:  pago/actualizar/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:update" }
     requirements: { _method: post|put }
 
 pago_delete:
-    pattern:  pago/eliminar/{id}
+    pattern:  pago/eliminar/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:delete" }
-    requirements: { _method: post|delete }
 
 
 ##########################################################################################################
@@ -238,9 +234,8 @@ presupuesto_update:
     requirements: { _method: post|put }
 
 presupuesto_delete:
-    pattern:  presupuesto/eliminar/{id}
+    pattern:  presupuesto/eliminar/{id}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:delete" }
-    requirements: { _method: post|delete }
 
 
 ##############################
@@ -275,6 +270,10 @@ presupuesto_extensioncreate:
     pattern: presupuesto/extension/crear/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:extensioncreate"}
 
+presupuesto_extensiondelete:
+    pattern:  presupuesto/extension/eliminar/{id}/{id_proveedor}/{id_presupuesto}
+    defaults: { _controller: "ContenidosBundle:Presupuesto:extensiondelete" }
+
 
 ##########################################################################################################
 ##########################################################################################################
@@ -290,13 +289,19 @@ ajax_datossat:
     pattern: /ajax/contenidos/satelites/{sats}
     defaults: { _controller: "ContenidosBundle:Ajax:datossat"}
 ajax_disponibilidad:
-    pattern: /ajax/contenidos/disponilidad/{datos}
+    pattern: /ajax/contenidos/disponilidad/{datos}/{mostrar}
     defaults: { _controller: "ContenidosBundle:Ajax:dis"}
+ajax_pago:
+    pattern: /ajax/contenidos/pagos/dias/{dias}
+    defaults: { _controller: "ContenidosBundle:Ajax:pago"}
+ajax_fechas:
+    pattern: /ajax/contenidos/pagos/fechas/{fechas}
+    defaults: { _controller: "ContenidosBundle:Ajax:fechas"}
 
 ##########################################################################################################
 ##########################################################################################################
 #
-#                                DISPONIBILIDAD PRESUPUESTARIA
+#                                DISPONIBILIDAD PRESUPUESTARIA Y DEUDAS En CONTRATACION
 #
 ##########################################################################################################
 ##########################################################################################################

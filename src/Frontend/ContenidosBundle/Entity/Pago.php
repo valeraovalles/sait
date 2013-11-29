@@ -34,8 +34,7 @@ class Pago
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_unidadejec", type="date", nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="fecha_unidadejec", type="date", nullable=true)
      */
     private $fechaUnidadejec;
 
@@ -64,11 +63,11 @@ class Pago
     private $montoMe;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="tipo_moneda", type="boolean", nullable=true)
+     * @ORM\Column(name="tipo_moneda", type="integer", nullable=true)
      */
-    private $tipoMoneda;    
+    private $tipoMoneda;
 
     /**
      * @var float
@@ -90,6 +89,7 @@ class Pago
      * @var string
      *
      * @ORM\Column(name="num_pago", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
      */
     private $numPago;
 
@@ -97,6 +97,7 @@ class Pago
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_pago", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaPago;
 
@@ -124,6 +125,7 @@ class Pago
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_unidadejec", referencedColumnName="id")
      * })
+     * @Assert\NotBlank()
      */
     private $idUnidadejec;
 
@@ -468,8 +470,13 @@ class Pago
      *
      * @return \Frontend\ContenidosBundle\Entity\Contratacion 
      */
-    public function getIdContratacionContratacion()
+    public function getIdContratacion()
     {
         return $this->idContratacion;
+    }
+
+     public function __toString()
+    {
+        return $this->getNumFactura();
     }
 }

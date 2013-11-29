@@ -26,7 +26,7 @@ class Banco
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre_beneficiario", type="string", length=100, nullable=true)
+     * @ORM\Column(name="nombre_beneficiario", type="string", length=100, nullable=false)
      * @Assert\NotBlank()
      */
     private $nombreBeneficiario;
@@ -76,7 +76,7 @@ class Banco
     /**
      * @var string
      *
-     * @ORM\Column(name="banco_benef", type="string", length=100, nullable=true)
+     * @ORM\Column(name="banco_benef", type="string", length=100, nullable=false)
      * @Assert\NotBlank()
      */
     private $bancoBenef;
@@ -84,7 +84,7 @@ class Banco
     /**
      * @var string
      *
-     * @ORM\Column(name="cuenta_benef", type="string", length=50, nullable=true)
+     * @ORM\Column(name="cuenta_benef", type="string", length=50, nullable=false)
      * @Assert\NotBlank()
      */
     private $cuentaBenef;
@@ -92,7 +92,7 @@ class Banco
     /**
      * @var string
      *
-     * @ORM\Column(name="swift_benef", type="string", length=50, nullable=true)
+     * @ORM\Column(name="swift_benef", type="string", length=50, nullable=false)
      * @Assert\NotBlank()
      */
     private $swiftBenef;
@@ -100,7 +100,7 @@ class Banco
     /**
      * @var string
      *
-     * @ORM\Column(name="aba_benef", type="string", length=50, nullable=true)
+     * @ORM\Column(name="aba_benef", type="string", length=50, nullable=false)
      * @Assert\NotBlank()
      */
     private $abaBenef;
@@ -108,7 +108,7 @@ class Banco
     /**
      * @var string
      *
-     * @ORM\Column(name="iban_benef", type="string", length=50, nullable=true)
+     * @ORM\Column(name="iban_benef", type="string", length=50, nullable=false)
      * @Assert\NotBlank()
      */
     private $ibanBenef;
@@ -116,7 +116,7 @@ class Banco
     /**
      * @var string
      *
-     * @ORM\Column(name="direccion_bancobenef", type="string", length=500, nullable=true)
+     * @ORM\Column(name="direccion_bancobenef", type="string", length=500, nullable=false)
      * @Assert\NotBlank()
      */
     private $direccionBancobenef;
@@ -124,7 +124,7 @@ class Banco
     /**
      * @var string
      *
-     * @ORM\Column(name="direccion_beneficiario", type="string", length=500, nullable=true)
+     * @ORM\Column(name="direccion_beneficiario", type="string", length=500, nullable=false)
      * @Assert\NotBlank()
      */
     private $direccionBeneficiario;

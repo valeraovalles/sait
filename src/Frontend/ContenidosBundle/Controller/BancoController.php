@@ -62,7 +62,7 @@ class BancoController extends Controller
       if ($form->isValid()) 
       {
   
-        //OBTENGO LOS DATOS DEL PROVEEDOR
+       //OBTENGO LOS DATOS DEL PROVEEDOR
         $prove = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id_proveedor);            
         
         //INSERTO EL ID DEL PROVEEDOR EN LA ENTIDAD
@@ -74,11 +74,10 @@ class BancoController extends Controller
 
         //envio a notificacion de que el registro fue creado
         $this->get('session')->getFlashBag()->add('notice', 'SE REGISTRARON EXITOSAMENTE LOS DATOS BANCARIOS');
-
         //RETORNO A LA VISTA SHOW PARA OBSERVAR LOS DETALLES DEL BANCO CREADO
         return $this->redirect($this->generateUrl('banco_show', array('id' => $entity->getId(),
-                                                                          'id_proveedor' => $id_proveedor,
-                                                                            ))); 
+                                                                      'id_proveedor' => $id_proveedor,
+                                                                     ))); 
       }
 
       //REGRESO A LA VISTA ANTERIOR SI EL FORMULARIO NO ES VALIDO
@@ -221,28 +220,27 @@ class BancoController extends Controller
     * FUNCION PARA ELIMINAR LOS DATOS DE UN BANCO
     *
     */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id, $id_proveedor)
     {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
+      
+      //OBTENGO LOS DATOS DEL BANCO
+      $em = $this->getDoctrine()->getManager();
+      $entity = $em->getRepository('ContenidosBundle:Banco')->find($id);
+      if (!$entity) 
+      {
+        throw $this->createNotFoundException('Unable to find Banco entity.');
+      }
+      //ELIMINO LOS DATOS ASOCIADOS A ESE BANCO DE LA BASE DE DATOS
+      $em->remove($entity);
+      $em->flush();
+      
+      //envio a notificacion de que el registro fue eliminado
+      $this->get('session')->getFlashBag()->add('notice', 'SE ELIMINARON EXITOSAMENTE LOS DATOS BANCARIOS');
 
-        if ($form->isValid()) 
-        {
-
-            //OBTENGO LOS DATOS DEL BANCO
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ContenidosBundle:Banco')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Banco entity.');
-            }
-
-            //ELIMINO LOS DATOS ASOCIADOS A ESE BANCO DE LA BASE DE DATOS
-            $em->remove($entity);
-            $em->flush();
-        }
-        //RETORNO A LA VISTA DE TODOS LOS BANCOS (INDEX DE BANCOS)
-        return $this->redirect($this->generateUrl('banco'));
+      //RETORNO A LA VISTA DE TODOS LOS BANCOS (INDEX DE BANCOS)
+      return $this->redirect($this->generateUrl('banco', array('id' => $entity->getId(),
+                                                                'id_proveedor' => $id_proveedor,
+                                                              ))); 
     }
 
     /*

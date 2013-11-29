@@ -9,14 +9,26 @@
  {{ parent() }}
     <div class="titulo">DATOS BANCARIOS ASOCIADOS AL PROVEEDOR</div>
 
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
             <tr>
                 <th>Nombre del beneficiario</th>
-                <th>Nombre del Banco Intermediario</th>
-                <th>Cuenta del Banco Intermediario</th>
                 <th>Nombre del Banco Beneficiario</th>
                 <th>Cuenta del Banco Beneficiario</th>
+                <th>Swift del Banco Beneficiario</th>
+                <th>Aba/Iban del Banco Beneficiario</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -24,12 +36,13 @@
         {% for entity in entities %}
             <tr align="center">
                 <td><a href="{{ path('banco_show', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}">{{ entity.nombreBeneficiario }}</a></td>
-                <td>{{ entity.bancoInterm }}</td>
-                <td>{{ entity.cuentaInterm }}</td>
                 <td>{{ entity.bancoBenef }}</td>
                 <td>{{ entity.cuentaBenef }}</td>
+                <td>{{ entity.swiftBenef }}</td>
+                <td>{{ entity.abaBenef }}/{{ entity.ibanBenef }}</td>
                 <td>
                     <a href="{{ path('banco_edit', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+                    <a onclick="return confirm('¿Desea eliminar?')" href="{{ path('banco_delete', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/mal.jpeg')}}"></a>
                 </td>
             </tr>
         {% endfor %}

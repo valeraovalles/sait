@@ -29,9 +29,26 @@ class ContratacionController extends Controller
     public function indexAction($id_presupuesto,$id_proveedor)
     {
         $em = $this->getDoctrine()->getManager();
-       
-        //obtengo los datos del presupuesto segun el id
-        $presupuesto = $em->getRepository('ContenidosBundle:Presupuesto')->findByDescripcion($id_presupuesto);
+              
+        //obtengo la disponibilidad en bs del preseupuesto seleccionado
+        $presupuesto = $em->getRepository('ContenidosBundle:Presupuesto')->find($id_presupuesto);
+        $disponibilidad = $presupuesto->getDisponibilidad();
+        
+        //DETERMINO EL TIPO DE MONEDA
+        $dolares = $presupuesto->getMontoDolares();
+        $euros = $presupuesto->getMontoEuros();
+
+        if (($dolares == 0 || $dolares== NULL) && ($euros != 0 || $euros!=NULL))
+        {
+            $tipomoneda= '2';//moneda es EUROS
+        }elseif(($euros == 0 || $euros==NULL) && (($dolares != 0 || $dolares!= NULL)))
+        {
+            $tipomoneda = '1';//moneda es DOLARES
+        }elseif(($dolares == 0 || $dolares== NULL) && ($euros == 0 || $euros==NULL))
+        {
+            $tipomoneda = '3'; //moneda es Bs
+        }
+
 
         //obtengo los datos de la contratacion segun id
         $entities = $em->getRepository('ContenidosBundle:Contratacion')->findByidPresupuesto($id_presupuesto);
@@ -42,6 +59,7 @@ class ContratacionController extends Controller
             'id_presupuesto'    => $id_presupuesto,
             'id_proveedor'      => $id_proveedor,
             'pres'              => $presupuesto,
+            'tipomoneda'        => $tipomoneda,
         ));
     }
 
@@ -117,6 +135,9 @@ class ContratacionController extends Controller
         if ($form->isValid()) 
         {
             
+            $montobs = $entity->getMontoBs();
+            $montome = $entity->getMontoMe();
+            
             //seteo la disponibilidad, el signo en la variable presupuesto
             $presupuesto->setDisponibilidad($disponibilidad);
             $presupuesto->setSigno($signo);
@@ -124,6 +145,9 @@ class ContratacionController extends Controller
             //seteo el id del presupuesto y el tipo de moneda en la variable $entity
             $entity->setIdPresupuesto($presupuesto);
             $entity->setTipoMoneda($tipomoneda);
+            $entity->setDebeBs($montobs);
+            $entity->setdebeMe($montome);
+
 
             //inserto las variables $entity y $presupuesto en la BD
             $em->persist($entity);
@@ -146,7 +170,6 @@ class ContratacionController extends Controller
                                                                     'id_presupuesto'=>$id_presupuesto
                                                                     )));
         }
-        
         //envio a otra vista si el form no es válido
         return $this->render('ContenidosBundle:Contratacion:new.html.twig', array(
                                                                     'id'            => $entity->getId(),
@@ -270,6 +293,7 @@ class ContratacionController extends Controller
             'id_proveedor'      => $id_proveedor,
             'prov'              => $prov,
             'tipomoneda'        => $tipomoneda,
+            'tipoprov'          => $tipoprov,
             'delete_form'       => $deleteForm->createView(),  ));
     }
 
@@ -442,27 +466,79 @@ class ContratacionController extends Controller
     * ELIMINAR UNA CONTRATACION.
     *
     */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id,$id_presupuesto,$id_proveedor)
     {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
+        
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        //obtengo los datos de la contratacion segun ID
+        $entity = $em->getRepository('ContenidosBundle:Contratacion')->find($id);
 
-            //obtengo los datos de la contratacion segun ID
-            $entity = $em->getRepository('ContenidosBundle:Contratacion')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Contratacion entity.');
-            }
-
-            //elimino el registro de la BD
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Contratacion entity.');
         }
 
-        return $this->redirect($this->generateUrl('contratacion'));
+        //obtengo la disponibilidad en bs del preseupuesto seleccionado
+        $presupuesto = $em->getRepository('ContenidosBundle:Presupuesto')->find($id_presupuesto);
+        $disponibilidad = $presupuesto->getDisponibilidad();
+        
+        //DETERMINO EL TIPO DE MONEDA
+        $dolares = $presupuesto->getMontoDolares();
+        $euros = $presupuesto->getMontoEuros();
+
+        if (($dolares == 0 || $dolares== NULL) && ($euros != 0 || $euros!=NULL))
+        {
+            $tipomoneda= '2';//moneda es EUROS
+        }elseif(($euros == 0 || $euros==NULL) && (($dolares != 0 || $dolares!= NULL)))
+        {
+            $tipomoneda = '1';//moneda es DOLARES
+        }elseif(($dolares == 0 || $dolares== NULL) && ($euros == 0 || $euros==NULL))
+        {
+            $tipomoneda = '3'; //moneda es Bs
+        }
+
+
+        //obtengo los datos de la contratacion segun id
+        $entities = $em->getRepository('ContenidosBundle:Contratacion')->findByidPresupuesto($id_presupuesto);
+
+
+        $dql   = "SELECT pg FROM ContenidosBundle:Pago pg 
+                    where pg.idContratacion= :id";
+        $query = $em->createQuery($dql)->setParameter('id',$id);
+        $pago=$query->getResult();
+
+        if ($pago == NULL)
+        {
+            //ELIMINO LOS DATOS DE LA CONTRATACION SI NO TENGO PAGOS ASOCIADOS
+            $em->remove($entity);
+            $em->flush();
+            
+            //envio a notificacion de que el registro fue creado
+            $this->get('session')->getFlashBag()->add('notice', ' SE ELIMINARON LOS DATOS DE LA CONTRATACION EXITOSAMENTE');
+            
+            //ENVIO A LA VISTA SHOW PARA MOSTRAR PAGO CREADO
+            return $this->redirect($this->generateUrl('contratacion', array(
+                                                                            'entities'         => $entities,
+                                                                            'id_proveedor'     => $id_proveedor,
+                                                                            'id_presupuesto'   => $id_presupuesto,
+                                                                            'tipomoneda'       => $tipomoneda,
+                                                                            'pres'             => $presupuesto,
+                                                                            )));
+        }else
+        {
+            //envio a notificacion de que el registro fue creado
+            $this->get('session')->getFlashBag()->add('alert', 'LA CONTRATACION TIENE PAGOS ASOCIADOS');
+
+            //ENVIO A LA VISTA SHOW PARA MOSTRAR PAGO CREADO
+            return $this->redirect($this->generateUrl('contratacion', array(
+                                                                            'entities'         => $entities,
+                                                                            'id_proveedor'     => $id_proveedor,
+                                                                            'id_presupuesto'   => $id_presupuesto,
+                                                                            'tipomoneda'       => $tipomoneda,
+                                                                            'pres'             => $presupuesto,
+                                                                            )));
+        }
+
     }
 
     /*
@@ -480,4 +556,54 @@ class ContratacionController extends Controller
             ->getForm()
         ;
     }
+
+#########################################################################################################
+#########################################################################################################
+#
+#                            DISPONIBILIDAD DE CONTRATACION CON LOS PAGOS
+#
+#########################################################################################################
+#########################################################################################################
+
+    /*
+    *
+    * FORMULARIO PARA LA DISPONIBILIDAD DE CONTRATACION CON LOS PAGOS
+    *
+    */
+    public function disponibilidadpagoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        //creo el formualrio
+        $form = $this->createFormBuilder()    
+            ->add('concepto', 'entity', array(
+                                            'class'     => 'ContenidosBundle:Contratacion',
+                                            'property'  => 'concepto',
+                                            'multiple'  => false,
+                                            ))
+            ->getForm();
+
+        //envio a la vista
+        return $this->render('ContenidosBundle:Contratacion:disponibilidadpago.html.twig', array(
+            'form'   => $form->createView(),
+        ));  
+    }
+
+    /*
+    *
+    *  FUNCION PARA GENERAR EL REPORTE DE DISPONIBILIDAD DE PAGOS
+    *
+    */
+    public function disponibilidadpagoshowAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        //Obtengo los datos del formulario AJAX
+        $formulario = $request->request->all();
+        $formulario = $formulario['form'];
+        $concepto   = $formulario['concepto'];
+        $factura    = $formulario['factura'];
+         
+    }
+
 }//fin de la clase
