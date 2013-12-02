@@ -37,8 +37,7 @@ class ReporteController extends Controller
                             'expanded'=>false, 
                             'multiple'=>false,
                             'choices' => array(
-                                                "0"=> "xls", 
-                                                "1"=> "pdf"
+                                                "0"=> "pdf"
                                                   )
                                         ))
             ->add('Botones', 'submit')
@@ -53,42 +52,21 @@ class ReporteController extends Controller
 
 
 
-
-
-
-
-
     public function finalreporteAction(Request $request)
     {
-
-        //RECIBO LOS DATOS DEL FORMULARIO
         $datos=$request->request->all();
         $datos=$datos['form'];
 
-        //INSTANCIO LA CLASE PARA GENERAR EL HTML DEL REPORTE
         $em = $this->getDoctrine()->getManager();
-        $html = new htmlreporte;
-        $html = $html->visitas($em, $datos);
-        $html = $html;
 
-/*
-
-        $dql   = "SELECT v FROM FrontendVisitasBundle:Visita v join v.usuario u ";
+        $dql=    "SELECT v FROM FrontendVisitasBundle:Visita v join v.usuario u ";
         $query = $em->createQuery($dql);
         $entities = $query->getResult(); 
 
-*/
-
-        if($html==false){
-            $this->get('session')->getFlashBag()->add('notice', 'No existen datos para los parámetros seleccionados.');
-            return $this->redirect($this->generateUrl('reporteinfo'));
-        }
+        $a=new htmlreporte;
 
 
 
-echo '<link href="/sait/web/bundles/distribucion/css/reporteinformativo.css" rel="stylesheet" type="text/css" />';
-echo $html;
-die;
         if($datos['formato']=='xls'){
 
             header("Content-type: application/octet-stream");
@@ -120,5 +98,9 @@ die;
 
 
     }
+
+
+
+
 
 }

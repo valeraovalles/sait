@@ -1,0 +1,21 @@
+{% extends '::directorio.html.twig' %}
+
+{% block body -%}
+    <h1>Nueva Persona</h1>
+
+    <form action="{{ path('personalidad_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <br><br>
+        <p>
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </p>
+    </form>
+
+        <ul class="record_actions">
+                    <br><br>
+
+    <li>
+        <a class="btn" href="{{ path('personalidad') }}">Regresar </a>
+    </li>
+</ul>
+{% endblock %}
