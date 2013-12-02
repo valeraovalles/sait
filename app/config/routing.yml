@@ -1,3 +1,7 @@
+directorio:
+    resource: "@DirectorioBundle/Resources/config/routing.yml"
+    prefix:   /directorio
+
 transporte:
     resource: "@TransporteBundle/Resources/config/routing.yml"
     prefix:   /

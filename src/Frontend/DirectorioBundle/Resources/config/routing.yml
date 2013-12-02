@@ -1,0 +1,72 @@
+directorio_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: DirectorioBundle:Default:index }
+
+
+#---------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------#
+institucion:
+    pattern:  /inst
+    defaults: { _controller: "DirectorioBundle:Institucion:index" }
+
+institucion_show:
+    pattern:  /inst/{id}/show
+    defaults: { _controller: "DirectorioBundle:Institucion:show" }
+
+institucion_new:
+    pattern:  /newinst
+    defaults: { _controller: "DirectorioBundle:Institucion:new" }
+
+institucion_create:
+    pattern:  /createinst
+    defaults: { _controller: "DirectorioBundle:Institucion:create" }
+    requirements: { _method: post }
+
+institucion_edit:
+    pattern:  /inst/{id}/edit
+    defaults: { _controller: "DirectorioBundle:Institucion:edit" }
+
+institucion_update:
+    pattern:  /inst/{id}/update
+    defaults: { _controller: "DirectorioBundle:Institucion:update" }
+    requirements: { _method: post|put }
+
+institucion_delete:
+    pattern:  /inst/{id}/delete
+    defaults: { _controller: "DirectorioBundle:Institucion:delete" }
+    requirements: { _method: post|delete }
+#---------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------#
+
+personalidad:
+    pattern:  /pers
+    defaults: { _controller: "DirectorioBundle:Personalidad:index" }
+
+personalidad_show:
+    pattern:  /pers/{id}/show
+    defaults: { _controller: "DirectorioBundle:Personalidad:show" }
+
+personalidad_new:
+    pattern:  /newpers
+    defaults: { _controller: "DirectorioBundle:Personalidad:new" }
+
+personalidad_create:
+    pattern:  /createpers
+    defaults: { _controller: "DirectorioBundle:Personalidad:create" }
+    requirements: { _method: post }
+
+personalidad_edit:
+    pattern:  /pers/{id}/edit
+    defaults: { _controller: "DirectorioBundle:Personalidad:edit" }
+
+personalidad_update:
+    pattern:  /pers/{id}/update
+    defaults: { _controller: "DirectorioBundle:Personalidad:update" }
+    requirements: { _method: post|put }
+
+personalidad_delete:
+    pattern:  /pers/{id}/delete
+    defaults: { _controller: "DirectorioBundle:Personalidad:delete" }
+    requirements: { _method: post|delete }
+#---------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------#

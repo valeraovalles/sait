@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Frontend\SitBundle\SitBundle(),
             new Frontend\ContenidosBundle\ContenidosBundle(),
             new Frontend\TransporteBundle\TransporteBundle(),
+            new Frontend\DirectorioBundle\DirectorioBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

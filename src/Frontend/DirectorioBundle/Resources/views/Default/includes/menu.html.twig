@@ -1,0 +1,18 @@
+<div id='cssmenu'>
+   <ul>
+      <li class='active'><a href='{{ path('control_visitas_usuario') }}'><span>INICIO</span></a></li>
+   
+      <li class='has-sub'><a href='#'><span>ACCIONES</span></a>
+          <ul>
+            <li><a href='{{ path('institucion_new') }}'><span>REGISTRAR INSTITUCION</span></a></li>
+            <li><a href='{{ path('institucion') }}'><span>LISTAR INSTITUCION</span></a></li>
+            <li><a href='{{ path('personalidad_new') }}'><span>REGISTRAR PERSONA</span></a></li>
+            <li><a href='{{ path('personalidad') }}'><span>LISTAR PERSONA</span></a></li>
+         </ul>
+
+      </li>
+      
+      <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
+      <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
+ </ul>
+</div>

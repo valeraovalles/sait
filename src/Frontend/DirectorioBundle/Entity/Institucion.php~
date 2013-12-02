@@ -1,0 +1,75 @@
+<?php
+
+namespace Frontend\DirectorioBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Directorio.institucion
+ *
+ * @ORM\Table(name="directorio.institucion")
+ * @ORM\Entity
+ */
+class Institucion
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="directorio.institucion_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="institucion", type="string", nullable=false)
+     */
+    private $institucion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="director", type="string", nullable=false)
+     */
+    private $director;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="areainst", type="string", nullable=false)
+     */
+    private $areainst;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telfinst", type="string", nullable=false)
+     */
+    private $telfinst;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="emailinst", type="string", nullable=false)
+     */
+    private $emailinst;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", nullable=false)
+     */
+    private $direccion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pais", type="string", nullable=false)
+     */
+    private $pais;
+
+
+}
