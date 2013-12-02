@@ -119,11 +119,13 @@
 
 
             {#COLOCAR ROLE#}
+
+
+            {% if is_granted('ROLE_ADMINISTRADOR') %}
             <div class="listado_aplicaciones">
               <a href="{{ path('institucion')}}">DIRECTORIO<br><img src="{{ asset("images/agenda.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
             </div>
-
-
+            {% endif %}
 
 
 
