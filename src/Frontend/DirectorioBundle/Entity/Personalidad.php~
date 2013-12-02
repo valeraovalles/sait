@@ -1,0 +1,68 @@
+<?php
+
+namespace Frontend\DirectorioBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Directorio.personalidad
+ *
+ * @ORM\Table(name="directorio.personalidad")
+ * @ORM\Entity
+ */
+class Personalidad
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="directorio.personalidad_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apellido", type="string", nullable=false)
+     */
+    private $apellido;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="telefono", type="integer", nullable=false)
+     */
+    private $telefono;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", nullable=false)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="especialidad", type="string", nullable=false)
+     */
+    private $especialidad;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pais", type="string", nullable=false)
+     */
+    private $pais;
+
+
+}

@@ -1,0 +1,61 @@
+{% extends '::directorio.html.twig' %}
+
+{% block body -%}
+    <h1>Personalidades</h1>
+
+    <table class="records_list" id="tablalistax">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Telefono</th>
+                <th>Email</th>
+                <th>Especialidad</th>
+                <th>Pais</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <!--td><a href="{{ path('personalidad_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td-->
+                <td>{{ entity.nombre }}</td>
+                <td>{{ entity.apellido }}</td>
+                <td>{{ entity.telefono }}</td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.especialidad }}</td>
+                <td>{{ entity.pais }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('personalidad_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
+
+                    </li>
+                    <li>
+                        <a href="{{ path('personalidad_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar">poner icono</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+            $(document).ready(function(){
+               $('#tablalistax').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                    "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                    "aaSorting": [[5,'asc']],
+                } );
+            })
+    </script>
+
+        <br><br>
+        <ul>
+        <li>
+            <a class="btn btn-primary" href="{{ path('personalidad_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
