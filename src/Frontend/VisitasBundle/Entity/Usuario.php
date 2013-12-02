@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Usuario
  *
- * @ORM\Table(name="usuario")
+ * @ORM\Table(name="visita.usuario")
  * @ORM\Entity
  */
 class Usuario
@@ -20,7 +20,7 @@ class Usuario
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="usuario_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="visita.usuario_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
@@ -43,7 +43,7 @@ class Usuario
     /**
      * @var string
      *
-     * @ORM\Column(name="cedula", type="string", nullable=false)
+     * @ORM\Column(name="cedula", type="string", nullable=false, unique=true)
      * @Assert\NotBlank()
      */
     private $cedula;

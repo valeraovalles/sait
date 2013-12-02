@@ -1,0 +1,1624 @@
+1    [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ArchitectUtils  - Log4J configured successfully
+1061 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+1216 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+1216 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+1300 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+29772 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+29814 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: personalidad (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+29816 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: procedencia (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+29833 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: procedencia_personalidad_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+29982 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+29984 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: VARCHAR
+29984 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+29985 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+29985 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+29986 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+29986 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+29987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+29987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+29987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+29988 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+29988 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+29988 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+29988 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+29989 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+32169 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+32169 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: VARCHAR
+32170 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+32170 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+32170 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+32170 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+32171 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+32171 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+32171 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+32171 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+32172 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+32172 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+32172 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+32172 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+32173 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+32256 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+32257 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: VARCHAR
+32257 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+32257 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+32257 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+32258 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+32258 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+32258 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+32258 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+32259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+32259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+32259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+32259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+32259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+32260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+32773 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+32773 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: VARCHAR
+32773 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+32773 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+32773 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+32773 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+32773 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+32774 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+32774 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+32774 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+32774 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+32774 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+32774 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+32774 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+32775 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+32805 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+32805 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: VARCHAR
+32805 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+32805 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+32805 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+32805 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+32805 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+32806 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+32806 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+32806 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+32806 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+32806 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+32806 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+32806 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+32806 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+57367 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=UserDefinedSQLType Property=upstreamType oldVal=VARCHAR newVal=INTEGER selectedItems=[id: INTEGER]
+57369 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@c0da45ab, INTEGER:4007f49f-e000-4a42-9f37-5853d88464ee Property=name oldVal=UserDefinedSQLType newVal=INTEGER selectedItems=[id: INTEGER]
+57371 [AWT-EventQueue-0] WARN  ca.sqlpower.sqlobject.ForeignKeyColumnUpdaterPoolingSPListener  - Warning: unknown SQLTypePhysicalProperties property name changed while monitoring pkTable
+57372 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@c0da45ab, INTEGER:4007f49f-e000-4a42-9f37-5853d88464ee Property=precision oldVal=0 newVal=null selectedItems=[id: INTEGER]
+57374 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@92659357, UserDefinedSQLType:ea51b04c-6719-45de-a182-64c347c1eb08 Property=precision oldVal=0 newVal=null selectedItems=[]
+57376 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@c0da45ab, INTEGER:4007f49f-e000-4a42-9f37-5853d88464ee Property=scale oldVal=0 newVal=null selectedItems=[id: INTEGER]
+57378 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@92659357, UserDefinedSQLType:ea51b04c-6719-45de-a182-64c347c1eb08 Property=scale oldVal=0 newVal=null selectedItems=[]
+57381 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=UserDefinedSQLType Property=type oldVal=12 newVal=4 selectedItems=[id: INTEGER]
+57383 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=UserDefinedSQLType Property=upstreamType oldVal=VARCHAR newVal=INTEGER selectedItems=[]
+57386 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@92659357, INTEGER:ea51b04c-6719-45de-a182-64c347c1eb08 Property=name oldVal=UserDefinedSQLType newVal=INTEGER selectedItems=[]
+57388 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=UserDefinedSQLType Property=type oldVal=12 newVal=4 selectedItems=[]
+57390 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=UserDefinedSQLType Property=myNullability oldVal=0 newVal=null selectedItems=[id: INTEGER]
+57391 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=UserDefinedSQLType Property=myNullability oldVal=0 newVal=null selectedItems=[]
+57393 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@c0da45ab, INTEGER:4007f49f-e000-4a42-9f37-5853d88464ee Property=defaultValue oldVal= newVal=null selectedItems=[id: INTEGER]
+57394 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@92659357, INTEGER:ea51b04c-6719-45de-a182-64c347c1eb08 Property=defaultValue oldVal= newVal=null selectedItems=[]
+57402 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+57402 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+57402 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+57402 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+57402 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+57402 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+57402 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+57403 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+57403 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+57403 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+57403 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+57403 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+57403 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+57403 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+57404 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+63272 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+63273 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+63273 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+63273 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+63273 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+63273 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+63273 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+63273 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+63274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+63274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+63274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+63274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+63274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+63274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+63274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+63424 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+63425 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+63425 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+63425 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+63425 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+63425 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+63426 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+63426 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+63426 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+63426 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+63426 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+63426 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+63427 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+63427 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+63427 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+65286 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+65287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+65287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+65287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+65287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+65287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+65287 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+65288 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+65356 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+65356 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+65357 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+65357 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+65357 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+65357 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+65358 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+65358 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+65358 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+65359 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+65359 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+65359 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+65359 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+65360 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+65360 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+65584 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: VARCHAR
+65584 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+65585 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+65585 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+65585 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+65585 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+65585 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+65585 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+65585 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+65585 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+65585 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+65586 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+65586 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+65586 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+65586 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+75543 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=UserDefinedSQLType Property=upstreamType oldVal=VARCHAR newVal=INTEGER selectedItems=[id: INTEGER]
+75545 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@c4781df9, INTEGER:692c0f7a-2f6a-4702-be86-f980d40b9717 Property=name oldVal=UserDefinedSQLType newVal=INTEGER selectedItems=[id: INTEGER]
+75546 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@c4781df9, INTEGER:692c0f7a-2f6a-4702-be86-f980d40b9717 Property=precision oldVal=0 newVal=null selectedItems=[id: INTEGER]
+75548 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@c4781df9, INTEGER:692c0f7a-2f6a-4702-be86-f980d40b9717 Property=scale oldVal=0 newVal=null selectedItems=[id: INTEGER]
+75549 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=UserDefinedSQLType Property=type oldVal=12 newVal=4 selectedItems=[id: INTEGER]
+75550 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=UserDefinedSQLType Property=myNullability oldVal=0 newVal=null selectedItems=[id: INTEGER]
+75552 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=ca.sqlpower.sqlobject.SQLTypePhysicalProperties@c4781df9, INTEGER:692c0f7a-2f6a-4702-be86-f980d40b9717 Property=defaultValue oldVal= newVal=null selectedItems=[id: INTEGER]
+75553 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=UserDefinedSQLType Property=myAutoIncrement oldVal=false newVal=null selectedItems=[id: INTEGER]
+75560 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+75560 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+75560 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+75560 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+75560 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+75560 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+75561 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+75561 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+77259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+77259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+77259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+77259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+77260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+77260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+77260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+77260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+77261 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+77261 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+77261 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+77261 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+77262 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+77262 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+77262 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+77478 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+77478 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+77478 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+77479 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+77479 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+77479 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+77479 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+77479 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+77480 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+77480 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+77480 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+77480 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+77480 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+77480 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+77481 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+83846 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=UserDefinedSQLType Property=myAutoIncrement oldVal=null newVal=true selectedItems=[id: INTEGER]
+83855 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+83855 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+83855 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+83855 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+83855 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+83855 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+83856 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+83856 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+142856 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+CREATE SEQUENCE agend.procedencia_id_seq
+142885 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE agend.procedencia (
+                id INTEGER NOT NULL DEFAULT nextval('agend.procedencia_id_seq'),
+                institucion VARCHAR NOT NULL,
+                director VARCHAR NOT NULL,
+                areainst VARCHAR NOT NULL,
+                telfinst VARCHAR NOT NULL,
+                emailinst VARCHAR NOT NULL,
+                direccion VARCHAR NOT NULL,
+                CONSTRAINT id PRIMARY KEY (id)
+)
+142886 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE agend.procedencia_id_seq OWNED BY agend.procedencia.id
+142886 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE agend.personalidad_id_seq
+142887 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE agend.personalidad (
+                id INTEGER NOT NULL DEFAULT nextval('agend.personalidad_id_seq'),
+                procedencia_id INTEGER NOT NULL,
+                nombre VARCHAR NOT NULL,
+                apellido VARCHAR NOT NULL,
+                telefono INTEGER NOT NULL,
+                email VARCHAR NOT NULL,
+                especialidad VARCHAR NOT NULL,
+                pais VARCHAR NOT NULL,
+                CONSTRAINT id_1 PRIMARY KEY (id)
+)
+142887 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE agend.personalidad_id_seq OWNED BY agend.personalidad.id
+142888 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE agend.personalidad ADD CONSTRAINT procedencia_personalidad_fk
+FOREIGN KEY (procedencia_id)
+REFERENCES agend.procedencia (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+142906 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - The list size is :7
+144587 [Thread-6] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+144663 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+144685 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+144686 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+144688 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+144688 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Relationship conflicts are not supported yet!
+144690 [Thread-8] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+144701 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Starting DDL Generation at Wed Nov 27 14:48:58 VET 2013
+144702 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Database Target: Sait
+144702 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Playpen Dump: Sait
+144704 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+CREATE SEQUENCE agend.procedencia_id_seq
+144708 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - sql statement failed: ERROR: schema "agend" does not exist
+149166 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Export cancelled by user.
+149166 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Did not execute any out of 1 statements.
+176915 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+CREATE SEQUENCE agen.procedencia_id_seq
+176916 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE agen.procedencia (
+                id INTEGER NOT NULL DEFAULT nextval('agen.procedencia_id_seq'),
+                institucion VARCHAR NOT NULL,
+                director VARCHAR NOT NULL,
+                areainst VARCHAR NOT NULL,
+                telfinst VARCHAR NOT NULL,
+                emailinst VARCHAR NOT NULL,
+                direccion VARCHAR NOT NULL,
+                CONSTRAINT id PRIMARY KEY (id)
+)
+176916 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE agen.procedencia_id_seq OWNED BY agen.procedencia.id
+176918 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE agen.personalidad_id_seq
+176919 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE agen.personalidad (
+                id INTEGER NOT NULL DEFAULT nextval('agen.personalidad_id_seq'),
+                procedencia_id INTEGER NOT NULL,
+                nombre VARCHAR NOT NULL,
+                apellido VARCHAR NOT NULL,
+                telefono INTEGER NOT NULL,
+                email VARCHAR NOT NULL,
+                especialidad VARCHAR NOT NULL,
+                pais VARCHAR NOT NULL,
+                CONSTRAINT id_1 PRIMARY KEY (id)
+)
+176919 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE agen.personalidad_id_seq OWNED BY agen.personalidad.id
+176920 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE agen.personalidad ADD CONSTRAINT procedencia_personalidad_fk
+FOREIGN KEY (procedencia_id)
+REFERENCES agen.procedencia (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+176921 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - The list size is :7
+178092 [Thread-9] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+178098 [Thread-9] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+178103 [Thread-9] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+178104 [Thread-9] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+178106 [Thread-9] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+178106 [Thread-9] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Relationship conflicts are not supported yet!
+178108 [Thread-11] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+178112 [Thread-11] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Starting DDL Generation at Wed Nov 27 14:49:32 VET 2013
+178112 [Thread-11] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Database Target: Sait
+178112 [Thread-11] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Playpen Dump: Sait
+178114 [Thread-11] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+CREATE SEQUENCE agen.procedencia_id_seq
+178127 [Thread-11] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE TABLE agen.procedencia (
+                id INTEGER NOT NULL DEFAULT nextval('agen.procedencia_id_seq'),
+                institucion VARCHAR NOT NULL,
+                director VARCHAR NOT NULL,
+                areainst VARCHAR NOT NULL,
+                telfinst VARCHAR NOT NULL,
+                emailinst VARCHAR NOT NULL,
+                direccion VARCHAR NOT NULL,
+                CONSTRAINT id PRIMARY KEY (id)
+)
+178227 [Thread-11] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+ALTER SEQUENCE agen.procedencia_id_seq OWNED BY agen.procedencia.id
+178235 [Thread-11] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE SEQUENCE agen.personalidad_id_seq
+178244 [Thread-11] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE TABLE agen.personalidad (
+                id INTEGER NOT NULL DEFAULT nextval('agen.personalidad_id_seq'),
+                procedencia_id INTEGER NOT NULL,
+                nombre VARCHAR NOT NULL,
+                apellido VARCHAR NOT NULL,
+                telefono INTEGER NOT NULL,
+                email VARCHAR NOT NULL,
+                especialidad VARCHAR NOT NULL,
+                pais VARCHAR NOT NULL,
+                CONSTRAINT id_1 PRIMARY KEY (id)
+)
+178327 [Thread-11] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+ALTER SEQUENCE agen.personalidad_id_seq OWNED BY agen.personalidad.id
+178336 [Thread-11] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+ALTER TABLE agen.personalidad ADD CONSTRAINT procedencia_personalidad_fk
+FOREIGN KEY (procedencia_id)
+REFERENCES agen.procedencia (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+178344 [Thread-11] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Successfully executed 7 out of 7 statements.
+0    [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ArchitectUtils  - Log4J configured successfully
+373  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+494  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+494  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+562  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+6339 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+6366 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: personalidad (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+6368 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: procedencia (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+6379 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: procedencia_personalidad_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+6451 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+6452 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+6452 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+6453 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+6453 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+6453 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+6454 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+6454 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+6454 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+6454 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+6455 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+6455 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+6455 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+6455 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+6455 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+0    [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ArchitectUtils  - Log4J configured successfully
+372  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+489  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+490  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+556  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+5552 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.dbtree.DBTreeModel  - Changing a UUID. This should only be done during load.
+5578 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: personalidad (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5580 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: procedencia (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5591 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - Relationship: procedencia_personalidad_fk is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+5664 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+5665 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+5665 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+5666 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+5666 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+5666 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+5666 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+5666 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+5667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+5667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+5667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+5667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+5667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+5668 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+5668 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+7085 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+7085 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+7085 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+7085 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+7086 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+7086 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+7086 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+7086 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+7087 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+7087 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+7087 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+7087 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+7088 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+7088 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+7088 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+7172 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+7172 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column procedencia_id: INTEGER
+7172 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+7172 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+7172 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+7172 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+7172 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+7173 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+7173 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+7173 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+7173 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+7173 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+7173 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+7173 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+7173 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+8234 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Column removed. Syncing select/highlight lists. Removed index=1
+8234 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Not remembering as recent selection. Selected items: []
+8248 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+8248 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+8248 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+8248 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+8249 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+8249 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+8249 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+8249 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+8250 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+8250 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+8250 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+8250 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+8250 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+8251 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15521 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15521 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+15521 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+15522 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+15522 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+15522 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+15522 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+15523 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15523 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15523 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15523 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15524 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15524 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15524 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15563 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15564 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15564 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15564 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15564 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15564 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15565 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15571 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15571 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15572 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15572 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15572 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15572 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15572 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15579 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15579 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15579 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15579 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15579 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15580 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15580 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15586 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15587 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15587 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15587 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15587 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15588 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15588 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15594 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15595 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15595 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15595 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15595 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15595 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15595 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15602 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15603 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15603 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15603 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15603 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15603 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15604 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15611 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15612 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15619 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15619 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15619 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15619 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15619 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15620 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15620 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15626 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15627 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15627 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15627 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15627 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15628 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15628 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15634 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15635 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15635 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15635 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15635 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15636 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15636 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15642 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15643 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15643 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15643 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15643 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15643 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15644 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15650 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15651 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15651 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15651 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15651 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15652 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15652 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15659 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15659 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15659 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15659 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15659 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15659 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15660 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15668 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15668 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15668 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15674 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15674 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15674 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15674 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15675 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15675 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15675 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15682 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15683 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15683 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15683 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15683 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15684 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15684 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15690 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15691 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15691 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15691 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15691 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15691 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15691 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15698 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15699 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15699 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15699 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15699 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15700 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15700 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15707 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15707 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15707 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15707 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15707 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15707 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15708 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15715 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15715 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15715 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15715 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15715 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15715 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15715 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15722 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15722 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15723 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15723 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15723 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15723 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15723 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15730 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15732 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15738 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15739 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15739 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15739 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15739 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15739 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15740 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15746 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15747 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15747 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15747 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15747 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15748 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15748 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15754 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15755 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15755 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15755 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15755 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15755 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15755 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15787 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15787 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15788 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15788 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15788 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15788 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15788 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15947 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15947 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15947 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15948 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15948 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15948 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15948 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15954 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15955 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15955 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15955 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15955 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15956 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15956 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15962 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15963 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15963 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15963 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15963 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15964 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15964 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15970 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15971 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15971 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15971 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15971 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15972 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15972 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15978 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15979 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15979 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15979 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15979 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15979 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15980 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15986 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+15995 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+15995 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+15995 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+15995 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+15995 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+15995 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+15996 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+16003 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+16003 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+16003 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+16003 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+16003 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+16004 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+16004 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+16010 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+16011 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+16011 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+16011 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+16011 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+16012 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+16012 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+16018 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+16019 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+16019 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+16019 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+16019 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+16019 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+16019 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+16186 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+16186 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+16187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+16187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+16187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+16187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+16187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+16188 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+16188 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+16188 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+16188 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+16189 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+16189 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+16189 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+16984 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+16985 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+16985 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+16985 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+16985 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+16986 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+16986 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+16986 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+16986 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+16987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+16987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+16987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+16987 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+16988 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+28958 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+28958 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+28958 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+28959 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+28959 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+28959 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+28959 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+28960 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+28960 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+28960 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+28960 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+28960 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+28961 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+28961 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+29173 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+29173 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+29174 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+29174 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+29174 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+29174 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+29175 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+29175 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+29175 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+29176 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+29176 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+29176 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+29176 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+29176 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+46971 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Column inserted. Syncing select/highlight lists. New index=7
+46971 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Was not the most recent selection; not restoring
+46978 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=New Column: VARCHAR Property=physicalName oldVal= newVal=pais selectedItems=[New Column: VARCHAR]
+46980 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=pais: VARCHAR Property=name oldVal=New Column newVal=pais selectedItems=[pais: VARCHAR]
+46983 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=pais: VARCHAR Property=autoIncrementSequenceName oldVal=procedencia_New Column_seq newVal=procedencia_pais_seq selectedItems=[pais: VARCHAR]
+47000 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+47001 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+47001 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+47001 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+47001 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+47001 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+47001 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+47002 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+47920 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+47921 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+47921 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+47921 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+47921 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+47921 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+47922 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+47922 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+47922 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+47922 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+47923 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+47923 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+47923 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+47923 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+47923 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+48003 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+48003 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+48003 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+48003 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+48004 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+48004 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+48004 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+48004 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+48005 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+48005 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+48005 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+48005 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+48006 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+48006 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+48006 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+51658 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+51658 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+51658 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+51659 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+51659 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+51659 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+51659 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+51660 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+51660 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+51660 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+51660 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+51661 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+51661 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+51661 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+51661 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+51731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+51731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+51731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+51731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+51731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+51732 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+51732 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+51732 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+51732 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+51733 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+51733 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+51733 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+51733 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+51734 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+51734 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108110 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108110 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108110 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108110 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108110 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108110 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108111 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108111 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108111 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+108111 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+108111 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+108111 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+108112 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+108112 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+108112 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108155 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108155 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108155 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108155 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108155 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108155 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108156 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108162 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108163 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108163 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108163 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108163 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108163 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108164 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108170 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108170 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108171 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108171 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108171 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108171 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108171 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108178 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108178 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108179 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108179 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108179 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108179 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108180 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108186 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108188 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108194 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108195 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108195 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108195 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108195 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108195 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108196 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108202 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108203 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108203 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108203 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108203 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108203 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108203 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108210 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108211 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108211 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108212 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108212 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108212 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108212 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108218 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108219 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108219 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108219 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108219 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108219 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108220 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108226 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108226 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108226 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108226 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108226 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108226 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108226 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108234 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108235 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108235 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108235 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108235 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108235 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108235 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108242 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108243 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108243 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108243 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108243 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108243 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108244 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108250 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108250 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108251 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108251 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108251 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108251 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108251 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108266 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108267 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108267 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108267 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108267 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108267 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108267 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108274 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108275 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108275 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108275 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108282 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108283 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108283 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108283 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108283 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108283 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108283 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108290 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108291 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108291 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108291 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108291 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108292 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108292 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108298 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108298 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108298 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108298 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108298 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108298 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108298 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108306 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108306 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108306 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108306 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108306 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108306 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108306 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108410 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108411 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108411 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108411 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108411 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108411 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108412 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108418 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108418 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108418 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108419 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108419 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108419 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108419 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108426 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108426 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108426 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108427 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108427 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108427 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108427 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108434 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108434 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108434 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108435 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108435 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108435 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108435 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108442 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108442 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108442 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108443 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108443 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108443 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108443 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108450 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108450 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108450 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108451 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108451 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108451 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108451 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108458 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108458 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108458 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108458 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108458 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108458 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108459 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108466 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108466 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108467 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108467 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108467 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108467 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108467 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108474 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108474 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108474 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108474 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108474 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108475 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108475 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108482 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108482 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108483 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108483 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108483 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108483 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108483 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108490 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108490 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108490 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108491 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108491 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108491 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108491 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108498 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108498 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108498 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108499 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108499 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108499 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108499 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108506 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108506 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108506 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108506 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108507 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108507 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108507 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108586 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108587 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108587 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108587 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108587 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108587 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108588 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108602 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108602 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108603 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108603 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108603 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108603 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108604 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108666 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108666 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108667 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108668 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108674 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108674 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108674 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108675 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108675 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108675 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108675 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108690 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108690 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108691 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108691 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108691 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108691 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108691 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108698 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108698 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108699 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108699 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108699 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108699 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108699 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108706 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108706 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108706 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108707 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108707 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108707 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108707 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108722 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108722 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108722 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108722 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108722 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108722 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108722 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108730 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108730 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108730 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108730 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108731 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108746 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108746 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108746 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108746 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108747 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108747 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108747 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+108778 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+108779 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+108779 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+108779 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+108779 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+108779 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+108780 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+109549 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+109549 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+109549 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+109550 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+109550 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+109550 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+109550 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+109551 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+109551 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+109551 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+109551 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+109552 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+109552 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+109552 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+109552 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+110991 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+110991 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+110992 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+110992 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+110992 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+110992 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+110993 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+110993 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+110993 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+110994 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+110994 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+110994 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+110994 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+110994 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+110995 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+111075 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+111075 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+111075 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+111075 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+111075 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+111076 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+111076 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+111076 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+111076 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+111077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+111077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+111077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+111077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+111077 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+111078 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+115410 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+115410 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+115410 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+115411 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+115411 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+115411 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+115411 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+115412 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+115412 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+115412 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+115413 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+115413 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+115413 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+115413 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+115414 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+115530 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+115530 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+115530 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+115530 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+115530 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+115530 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+115531 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+115531 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+115531 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+115531 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+115531 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+115531 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+115531 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+115531 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+115531 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+121462 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+CREATE SEQUENCE agen.procedencia_id_seq
+121467 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE agen.procedencia (
+                id INTEGER NOT NULL DEFAULT nextval('agen.procedencia_id_seq'),
+                institucion VARCHAR NOT NULL,
+                director VARCHAR NOT NULL,
+                areainst VARCHAR NOT NULL,
+                telfinst VARCHAR NOT NULL,
+                emailinst VARCHAR NOT NULL,
+                direccion VARCHAR NOT NULL,
+                pais VARCHAR NOT NULL,
+                CONSTRAINT id PRIMARY KEY (id)
+)
+121467 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE agen.procedencia_id_seq OWNED BY agen.procedencia.id
+121468 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE agen.personalidad_id_seq
+121468 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE agen.personalidad (
+                id INTEGER NOT NULL DEFAULT nextval('agen.personalidad_id_seq'),
+                nombre VARCHAR NOT NULL,
+                apellido VARCHAR NOT NULL,
+                telefono INTEGER NOT NULL,
+                email VARCHAR NOT NULL,
+                especialidad VARCHAR NOT NULL,
+                pais VARCHAR NOT NULL,
+                CONSTRAINT id_1 PRIMARY KEY (id)
+)
+121469 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE agen.personalidad_id_seq OWNED BY agen.personalidad.id
+121473 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - The list size is :6
+136948 [Thread-6] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+137002 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+137028 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+137029 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+137031 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+137033 [Thread-8] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+137045 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Starting DDL Generation at Mon Dec 02 09:32:33 VET 2013
+137046 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Database Target: PlayPen Database
+137046 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Playpen Dump: PlayPen Database
+137047 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+CREATE SEQUENCE agen.procedencia_id_seq
+137065 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE TABLE agen.procedencia (
+                id INTEGER NOT NULL DEFAULT nextval('agen.procedencia_id_seq'),
+                institucion VARCHAR NOT NULL,
+                director VARCHAR NOT NULL,
+                areainst VARCHAR NOT NULL,
+                telfinst VARCHAR NOT NULL,
+                emailinst VARCHAR NOT NULL,
+                direccion VARCHAR NOT NULL,
+                pais VARCHAR NOT NULL,
+                CONSTRAINT id PRIMARY KEY (id)
+)
+137165 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+ALTER SEQUENCE agen.procedencia_id_seq OWNED BY agen.procedencia.id
+137173 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE SEQUENCE agen.personalidad_id_seq
+137182 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE TABLE agen.personalidad (
+                id INTEGER NOT NULL DEFAULT nextval('agen.personalidad_id_seq'),
+                nombre VARCHAR NOT NULL,
+                apellido VARCHAR NOT NULL,
+                telefono INTEGER NOT NULL,
+                email VARCHAR NOT NULL,
+                especialidad VARCHAR NOT NULL,
+                pais VARCHAR NOT NULL,
+                CONSTRAINT id_1 PRIMARY KEY (id)
+)
+137274 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+ALTER SEQUENCE agen.personalidad_id_seq OWNED BY agen.personalidad.id
+137282 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Successfully executed 6 out of 6 statements.
+220259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+220259 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+220260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+220260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+220260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+220260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+220260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+220260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+220260 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+220261 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+220261 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+220261 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+220261 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+220261 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+220261 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+0    [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ArchitectUtils  - Log4J configured successfully
+369  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+491  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+491  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+562  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+6646 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: personalidad (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+6648 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.PlayPenComponent  - TablePane: procedencia (TABLE) is adding ca.sqlpower.architect.swingui.PlayPen[Play Pen,0,0,0x0,invalid,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=java.awt.Dimension[width=1,height=1],preferredSize=]
+6718 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+6719 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+6719 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+6719 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+6720 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+6720 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+6720 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+6720 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+6720 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+6721 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+6721 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+6721 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+6721 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+6721 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+6721 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+7975 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+7975 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+7976 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+7976 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+7976 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+7976 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+7977 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+7977 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+7977 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+7977 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+7978 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+7978 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+7978 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+7978 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+7979 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+8097 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+8097 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+8097 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+8098 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+8098 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+8098 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+8101 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+8101 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+8101 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+8101 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+8101 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+8101 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+8101 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+8101 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+8102 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+9174 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+9174 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+9174 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+9174 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+9175 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+9175 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+9175 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+9175 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+9176 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+9176 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+9176 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+9176 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+9176 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+9177 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+9177 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+9275 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+9276 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+9276 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+9276 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+9276 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+9277 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+9277 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+9277 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+9277 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+9278 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+9278 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+9278 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+9278 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+9278 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+9279 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+9465 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+9465 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+9465 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+9465 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+9465 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+9466 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+9466 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+9466 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+9466 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+9466 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+9467 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+9467 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+9467 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+9467 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+9467 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+26171 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=procedencia (TABLE) Property=physicalName oldVal=procedencia newVal=Institucion selectedItems=[]
+26175 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=id: INTEGER Property=autoIncrementSequenceName oldVal=procedencia_id_seq newVal=Institucion_id_seq selectedItems=[]
+26177 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=institucion: VARCHAR Property=autoIncrementSequenceName oldVal=procedencia_institucion_seq newVal=Institucion_institucion_seq selectedItems=[]
+26179 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=director: VARCHAR Property=autoIncrementSequenceName oldVal=procedencia_director_seq newVal=Institucion_director_seq selectedItems=[]
+26181 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=areainst: VARCHAR Property=autoIncrementSequenceName oldVal=procedencia_areainst_seq newVal=Institucion_areainst_seq selectedItems=[]
+26182 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=telfinst: VARCHAR Property=autoIncrementSequenceName oldVal=procedencia_telfinst_seq newVal=Institucion_telfinst_seq selectedItems=[]
+26183 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=emailinst: VARCHAR Property=autoIncrementSequenceName oldVal=procedencia_emailinst_seq newVal=Institucion_emailinst_seq selectedItems=[]
+26185 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=direccion: VARCHAR Property=autoIncrementSequenceName oldVal=procedencia_direccion_seq newVal=Institucion_direccion_seq selectedItems=[]
+26186 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=pais: VARCHAR Property=autoIncrementSequenceName oldVal=procedencia_pais_seq newVal=Institucion_pais_seq selectedItems=[]
+26187 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - TablePane got object changed event.  Source=Institucion (TABLE) Property=name oldVal=procedencia newVal=Institucion selectedItems=[]
+26195 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+26195 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+26195 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+26195 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+26196 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+26196 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+26196 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+26196 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+27045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+27045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+27045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+27045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+27045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+27045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+27045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+27045 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+27046 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+27046 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+27046 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+27046 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+27046 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+27046 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+27046 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+27133 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+27133 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column nombre: VARCHAR
+27134 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column apellido: VARCHAR
+27134 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telefono: INTEGER
+27134 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column email: VARCHAR
+27134 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column especialidad: VARCHAR
+27135 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+27135 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column id: INTEGER
+27135 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column institucion: VARCHAR
+27135 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column director: VARCHAR
+27136 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column areainst: VARCHAR
+27136 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column telfinst: VARCHAR
+27136 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column emailinst: VARCHAR
+27136 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column direccion: VARCHAR
+27136 [AWT-EventQueue-0] DEBUG ca.sqlpower.architect.swingui.TablePane  - Checking column pais: VARCHAR
+40843 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+CREATE SEQUENCE directorio.institucion_id_seq
+40849 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE directorio.Institucion (
+                id INTEGER NOT NULL DEFAULT nextval('directorio.institucion_id_seq'),
+                institucion VARCHAR NOT NULL,
+                director VARCHAR NOT NULL,
+                areainst VARCHAR NOT NULL,
+                telfinst VARCHAR NOT NULL,
+                emailinst VARCHAR NOT NULL,
+                direccion VARCHAR NOT NULL,
+                pais VARCHAR NOT NULL,
+                CONSTRAINT id PRIMARY KEY (id)
+)
+40849 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE directorio.institucion_id_seq OWNED BY directorio.Institucion.id
+40850 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE directorio.personalidad_id_seq
+40850 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE directorio.personalidad (
+                id INTEGER NOT NULL DEFAULT nextval('directorio.personalidad_id_seq'),
+                nombre VARCHAR NOT NULL,
+                apellido VARCHAR NOT NULL,
+                telefono INTEGER NOT NULL,
+                email VARCHAR NOT NULL,
+                especialidad VARCHAR NOT NULL,
+                pais VARCHAR NOT NULL,
+                CONSTRAINT id_1 PRIMARY KEY (id)
+)
+40851 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE directorio.personalidad_id_seq OWNED BY directorio.personalidad.id
+40856 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - The list size is :6
+42205 [Thread-6] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+42254 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+42278 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+42278 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+42280 [Thread-6] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+42282 [Thread-8] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+42293 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Starting DDL Generation at Mon Dec 02 10:17:05 VET 2013
+42293 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Database Target: PlayPen Database
+42293 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Playpen Dump: PlayPen Database
+42295 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+CREATE SEQUENCE directorio.institucion_id_seq
+42309 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE TABLE directorio.Institucion (
+                id INTEGER NOT NULL DEFAULT nextval('directorio.institucion_id_seq'),
+                institucion VARCHAR NOT NULL,
+                director VARCHAR NOT NULL,
+                areainst VARCHAR NOT NULL,
+                telfinst VARCHAR NOT NULL,
+                emailinst VARCHAR NOT NULL,
+                direccion VARCHAR NOT NULL,
+                pais VARCHAR NOT NULL,
+                CONSTRAINT id PRIMARY KEY (id)
+)
+42418 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+ALTER SEQUENCE directorio.institucion_id_seq OWNED BY directorio.Institucion.id
+42427 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE SEQUENCE directorio.personalidad_id_seq
+42435 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE TABLE directorio.personalidad (
+                id INTEGER NOT NULL DEFAULT nextval('directorio.personalidad_id_seq'),
+                nombre VARCHAR NOT NULL,
+                apellido VARCHAR NOT NULL,
+                telefono INTEGER NOT NULL,
+                email VARCHAR NOT NULL,
+                especialidad VARCHAR NOT NULL,
+                pais VARCHAR NOT NULL,
+                CONSTRAINT id_1 PRIMARY KEY (id)
+)
+42518 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+ALTER SEQUENCE directorio.personalidad_id_seq OWNED BY directorio.personalidad.id
+42527 [Thread-8] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Successfully executed 6 out of 6 statements.

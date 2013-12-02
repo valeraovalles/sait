@@ -1,0 +1,45 @@
+
+
+{% block body -%}
+
+
+<br>
+    <h2>Reporte</h2>
+
+    <table class="records_list" id="tablalistax">
+        <thead>
+            <tr>
+                <th>Cedula</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Fecha Entrada</th>
+                <th>Hora Entrada</th>
+                <th>Fecha Salida</th>
+                <th>Hora Salida</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.usuario.cedula }}</td>
+                <td>{{ entity.usuario.nombres }}</td>
+                <td>{{ entity.usuario.apellidos }}</td>
+                <td>{{ entity.fechaentrada | date('Y-m-d') }}</td>
+                <td>{{ entity.horaentrada  | date('H:i:s') }}</td>
+                <td>{{ entity.fechasalida  | date('Y-m-d') }}</td>
+                <td>{{ entity.horasalida   | date('H:i:s') }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>                   
+
+
+    {% endblock %}
+
+
+
+
+
+       
