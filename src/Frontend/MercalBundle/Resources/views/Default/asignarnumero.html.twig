@@ -38,6 +38,7 @@
                 <div class="labelform">Cedula:</div>
                 <div class="widgetform">{{ trabajador.cedula }}</div>
             </div>
+            {% if datossf!=null %}
             <div class="contenedorform">
                 <div class="labelform">Dependencia:</div>
                 <div class="widgetform">{{ datossf.nombre }}</div>
@@ -46,6 +47,7 @@
                 <div class="labelform">Cargo:</div>
                 <div class="widgetform">{{ datossf.descripcion_cargo }}</div>
             </div>
+            {% endif %}
            
             <div class="contenedorform">
                 <div class="labelform">Número trabajador:</div>
