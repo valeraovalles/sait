@@ -71,7 +71,7 @@ class DefaultController extends Controller
                 AND j.id_dependencia = b.id_dependencia AND k.id_cargo = b.id_cargo 
                 AND f.id_concepto_tipo_personal = a.id_concepto_tipo_personal 
                 AND c.id_concepto = f.id_concepto AND a.id_frecuencia_tipo_personal = ftp.id_frecuencia_tipo_personal 
-                AND ftp.id_frecuencia_pago = fp.id_frecuencia_pago and c.cod_concepto <> '5000' and fp.id_frecuencia_pago=3
+                AND ftp.id_frecuencia_pago = fp.id_frecuencia_pago and a.numero_nomina=0
                 group by d.cod_tipo_personal,b.codigo_nomina,e.cedula, e.primer_nombre, 
                 e.segundo_nombre, e.primer_apellido, e.segundo_apellido,k.cod_cargo, 
                 k.descripcion_cargo, j.cod_dependencia, j.nombre, c.cod_concepto, c.descripcion, 
@@ -82,6 +82,7 @@ class DefaultController extends Controller
 
             ";
         } //fin if tipnom es n
+
         else if ($datos['tipnom']=='a'){
             $anio=$datos['aniosaguinaldos'];
             $query="
@@ -117,7 +118,6 @@ class DefaultController extends Controller
 
 
             ";
-
             $query2="
                 select cf.monto as sueldo from conceptotipopersonal ctp, concepto c, trabajador t,conceptofijo cf 
                 where ctp.id_concepto=c.id_concepto 
@@ -129,7 +129,6 @@ class DefaultController extends Controller
             $rs2 = pg_query($conn, $query2);
             $row2 = pg_fetch_array($rs2);
         }
-
 
         $rs = pg_query($conn, $query);
 
