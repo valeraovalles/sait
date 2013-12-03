@@ -3,6 +3,9 @@
 namespace Frontend\DirectorioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * Directorio.personalidad
@@ -57,12 +60,25 @@ class Personalidad
      */
     private $especialidad;
 
+
     /**
-     * @var string
+     * @var \Pais
      *
-     * @ORM\Column(name="pais", type="string", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Frontend\DistribucionBundle\Entity\Pais")
+     * 
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pais", referencedColumnName="id")
+     * })
+     * @Assert\NotBlank()
      */
     private $pais;
+
+
+
+
+
+
+
 
 
 
@@ -191,13 +207,22 @@ class Personalidad
         return $this->especialidad;
     }
 
+
+
+
+
+
+
+
+
+
     /**
      * Set pais
      *
-     * @param string $pais
+     * @param \Frontend\DistribucionBundle\Entity\Pais $pais
      * @return Personalidad
      */
-    public function setPais($pais)
+    public function setPais(\Frontend\DistribucionBundle\Entity\Pais $pais = null)
     {
         $this->pais = $pais;
     
@@ -207,10 +232,18 @@ class Personalidad
     /**
      * Get pais
      *
-     * @return string 
+     * @return \Frontend\DistribucionBundle\Entity\Pais 
      */
     public function getPais()
     {
         return $this->pais;
     }
+
+
+
+
+
+
+
+
 }

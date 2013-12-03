@@ -15,43 +15,41 @@ class PersonalidadType extends AbstractType
             ->add('apellido')
             ->add('telefono', 'text')
             ->add('email')
+            ->add('pais',null,array( 'empty_value' => 'Seleccione...'))
             ->add('especialidad','choice', array(
                                             'expanded'=>false, 
                                             'multiple'=>false,
-                                            'choices' => array(
-                                                                    "0"=> "", 
-                                                                    "Economista"=> "Economista",
-                                                                    "2"=> "Historiador", 
-                                                                    "3"=> "Novelista",
-                                                                    "4"=> "Poeta", 
-                                                                    "5"=> "Escritor",
-                                                                    "6"=> "Teológo", 
-                                                                    "7"=> "Dirigente político",
-                                                                    "8"=> "Líder social", 
-                                                                    "9"=> "Biólogo",
-                                                                    "10"=> "Físico", 
-                                                                    "11"=> "Químico",
-                                                                    "12"=> "Ecologista", 
-                                                                    "13"=> "Petróleo",
-                                                                    "14"=> "Derechos Humanos", 
-                                                                    "15"=> "Cineasta",
-                                                                    "16"=> "Documentalista", 
-                                                                    "17"=> "Músico",
-                                                                    "18"=> "Cantante",
-                                                                    "19"=> "Compositor",
-                                                                    "20"=> "Artista",
-                                                                    "21"=> "Artista Plástico",
-                                                                    "22"=> "Escultor",
-                                                                    "23"=> "Pintor",
-                                                                    "23"=> "Politólogo",
-                                                                    
+                                            'empty_value' => 'Seleccione...',
+                                            'choices'=>array(
+                                                                "Artista"=> "Artista",  
+                                                                "Artista Plástico"=> "Artista Plástico",  
+                                                                "Biólogo"=> "Biólogo",  
+                                                                "Cantante"=> "Cantante",  
+                                                                "Cineasta"=> "Cineasta",  
+                                                                "Compositor"=> "Compositor",  
+                                                                "Derechos Humanos"=> "Derechos Humanos",   
+                                                                "Dirigente político"=> "Dirigente político",  
+                                                                "Documentalista"=> "Documentalista",  
+                                                                "Ecologista"=> "Ecologista",   
+                                                                "Economista"=> "Economista",      
+                                                                "Escritor"=> "Escritor",  
+                                                                "Escultor"=> "Escultor",  
+                                                                "Físico"=> "Físico",   
+                                                                "Historiador"=> "Historiador",   
+                                                                "Líder social"=> "Líder social",   
+                                                                "Músico"=> "Músico",  
+                                                                "Novelista"=> "Novelista",  
+                                                                "Petróleo"=> "Petróleo",  
+                                                                "Pintor"=> "Pintor",  
+                                                                "Poeta"=> "Poeta",   
+                                                                "Politólogo"=> "Politólogo",  
+                                                                "Químico"=> "Químico",  
+                                                                "Teológo"=> "Teológo"
                                                                   )
-                                        ))
 
-
-            ->add('pais')
-        ;
+                                        ));
     }
+
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
@@ -60,8 +58,12 @@ class PersonalidadType extends AbstractType
         ));
     }
 
+
     public function getName()
     {
         return 'frontend_directoriobundle_personalidadtype';
     }
+
+
 }
+

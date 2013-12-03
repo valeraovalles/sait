@@ -2,20 +2,52 @@
 
 {% block body -%}
     <h1>Nueva Persona</h1>
+    <br><br>
 
-    <form action="{{ path('personalidad_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
-        <br><br>
-        <p>
-            <button type="submit" class="btn btn-primary">Crear</button>
-        </p>
+    <form action="{{ path('personalidad_create') }}" method="post" {{ form_enctype(form) }} novalidate>
+        {{ form_widget(form._token) }}
+            <div id="operador">
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.nombre) }}</div>
+                    <div class="labels">Nombre:</div>
+                    <div class="widgets">{{ form_widget(form.nombre) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.apellido) }}</div>
+                    <div class="labels">Apellido:</div>
+                    <div class="widgets">{{ form_widget(form.apellido) }}</div>
+                </div>
+  
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.telefono) }}</div>
+                    <div class="labels">Telefono:</div>
+                    <div class="widgets">{{ form_widget(form.telefono) }}</div>
+                </div>
+                
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.email) }}</div>
+                    <div class="labels">Email:</div>
+                    <div class="widgets">{{ form_widget(form.email) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.especialidad) }}</div>
+                    <div class="labels">Especialidad:</div>
+                    <div class="widgets">{{ form_widget(form.especialidad) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.pais) }}</div>
+                    <div class="labels">Pais:</div>
+                    <div class="widgets">{{ form_widget(form.pais) }}</div>
+                </div>
+                <br><br>
+
+        <button type="submit" class="btn btn-primary">Crear</button>
+
     </form>
 
-        <ul class="record_actions">
-                    <br><br>
-
-    <li>
         <a class="btn" href="{{ path('personalidad') }}">Regresar </a>
-    </li>
-</ul>
+
 {% endblock %}
