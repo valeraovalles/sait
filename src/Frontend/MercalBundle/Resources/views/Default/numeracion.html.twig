@@ -1,0 +1,59 @@
+{% extends '::mercal.html.twig' %}
+ 
+{% block title %}Jornadas{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/mercal/numeracion.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block titulobanner %}
+    JORNADAS
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <TABLE border=0 id="table">
+        <tr align="center">
+            <td valign="top">
+                <div class="titulojornadax">JORNADA {{ jornada1.nombrejornada|upper }}</div>
+                <div id="numeracion1" class="numeracionx"> 
+                    <div class="numero">{{ datos1.numero }}</div>
+                    <div class="nombre">{{ datos1.nombre }}</div>
+                    <div class="cedula">{{ datos1.cedula }}</div>
+                </div>
+            </td>
+
+            <td valign="top">
+                <div class="titulojornadax">JORNADA {{ jornada2.nombrejornada|upper }}</div>
+                <div id="numeracion2" class="numeracionx">  
+                    <div class="numero">{{ datos2.numero }}</div>
+                    <div class="nombre">{{ datos2.nombre }}</div>
+                    <div class="cedula">{{ datos2.cedula }}</div>
+                </div>
+            </td>
+    </TABLE>
+
+    <input type="hidden" id="idjornada1" value="{{ jornada1.id }}">
+    <input type="hidden" id="idjornada2" value="{{ jornada2.id }}">
+    <script type="text/javascript">
+            function consultaAjax(){
+                var idjornada1 = $("#idjornada1").val();
+                var idjornada2 = $("#idjornada2").val();
+
+                //1
+                var ruta = "{{ path('ajaxmercal_siguienteautomatico', {'idjornada':'valoridjornada'}) }}";
+                ruta = ruta.replace("valoridjornada", idjornada1);
+                $('#numeracion1').load(ruta);
+
+                //2
+                var ruta = "{{ path('ajaxmercal_siguienteautomatico', {'idjornada':'valoridjornada'}) }}";
+                ruta = ruta.replace("valoridjornada", idjornada2);
+                $('#numeracion2').load(ruta);
+            };
+            setInterval(consultaAjax, 1000 );
+    </script>
+
+
+{% endblock %}

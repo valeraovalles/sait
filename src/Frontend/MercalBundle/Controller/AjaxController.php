@@ -73,20 +73,11 @@ class AjaxController extends Controller
             $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
             $datos = json_decode($str_datos,true);
 
-
             echo'
-                <div id="numeracion"> 
                     <div class="numero">'.$datos[0]['numero'].'</div>
-                    <div class="nombre">'.$datos[0]['nombre'].'<br><br>'.$datos[0]['cedula'].'</div>
-                </div>
+                    <div class="nombre">'.$datos[0]['nombre'].'</div>
+                    <div class="cedula">'.$datos[0]['cedula'].'</div>
             ';
-        } else{
-
-            echo'
-                <div id="numeracion"> 
-                    <div class="numero">0</div>
-                    <div class="nombre">NO HA COMENZADO</div>
-                </div>';
         }
            
         die;

@@ -10,6 +10,9 @@ ajaxmercal_siguienteautomatico:
     pattern:  /ajaxmercalsiguienteautomatico/{idjornada}
     defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguienteautomatico }
 
+mercal_numeracion:
+    pattern:  /numeracion
+    defaults: { _controller: MercalBundle:Default:numeracion }
 
 mercal_homepage:
     pattern:  /num/numeracion/{idjornada}

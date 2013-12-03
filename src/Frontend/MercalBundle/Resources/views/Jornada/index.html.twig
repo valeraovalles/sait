@@ -29,6 +29,7 @@
                 <th>Id</th>
                 <th>Nombrejornada</th>
                 <th>Fechajornada</th>
+                <th>Estatus</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -38,6 +39,13 @@
                 <td><a href="{{ path('jornada_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.nombrejornada }}</td>
                 <td>{% if entity.fechajornada %}{{ entity.fechajornada|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    {% if entity.culminada==true %}
+                        Culminada
+                    {% else %}
+                        Activa
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('jornada_show', { 'id': entity.id }) }}">Ver</a> | 
                     <a href="{{ path('jornada_edit', { 'id': entity.id }) }}">Editar</a>

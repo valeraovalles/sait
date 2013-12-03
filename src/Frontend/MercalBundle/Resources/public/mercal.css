@@ -1,19 +1,21 @@
 #numeracion .numero{
-	padding-top: 100px;
+	padding-top: 110px;
 	padding-bottom: 60px;
 	font-size: 180px;
-
 }
 
-#numeracion .nombre{
+#numeracion .nombre {
 	padding-top: 60px;
-	padding-bottom: 40px;
+	padding-bottom: 20px;
 	font-size: 40px;
+}
 
+#numeracion .cedula {
+	font-size: 30px;
 }
 
 .titulojornada{
-	padding-top: 60px;
+	padding-top: 40px;
 	font-size: 50px;
 
 }

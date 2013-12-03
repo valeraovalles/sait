@@ -71,6 +71,14 @@ security:
 
         - { path: ^/visita, roles: ROLE_VISITAS }
 
+        - { path: ^/jornada/numeracion, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/jornada/ajaxmercalsiguienteautomatico, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/jornada/homepagejor, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/jornada/homepagenum, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+
+
+        
+
         - { path: ^/jornada/jornada, roles: ROLE_JORNADA}
         - { path: ^/jornada/asignum, roles: ROLE_JORNADA_ASIGNUM}
         - { path: ^/jornada/num, roles: ROLE_JORNADA_NUM}
