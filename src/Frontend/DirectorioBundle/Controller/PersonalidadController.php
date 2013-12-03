@@ -8,6 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\DirectorioBundle\Entity\Personalidad;
 use Frontend\DirectorioBundle\Form\PersonalidadType;
 
+use Frontend\DistribucionBundle\Entity\Pais;
+use Frontend\DistribucionBundle\Entity\Representante;
+
+
+
 /**
  * Personalidad controller.
  *
@@ -63,9 +68,10 @@ class PersonalidadController extends Controller
         $form   = $this->createForm(new PersonalidadType(), $entity);
 
         return $this->render('DirectorioBundle:Personalidad:new.html.twig', array(
+            'form'=>$form->createView(),
             'entity' => $entity,
-            'form'   => $form->createView(),
         ));
+
     }
 
     /**

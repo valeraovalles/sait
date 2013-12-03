@@ -2,6 +2,7 @@
 
 namespace Frontend\DirectorioBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,7 +47,7 @@ class Institucion
     /**
      * @var string
      *
-     * @ORM\Column(name="telfinst", type="string", nullable=false)
+     * @ORM\Column(name="telfinst", type="string", length=10, nullable=false)
      */
     private $telfinst;
 
@@ -64,12 +65,29 @@ class Institucion
      */
     private $direccion;
 
+
     /**
-     * @var string
+     * @var \Pais
      *
-     * @ORM\Column(name="pais", type="string", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Frontend\DistribucionBundle\Entity\Pais")
+     * 
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pais", referencedColumnName="id")
+     * })
+     * @Assert\NotBlank()
      */
     private $pais;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -221,13 +239,14 @@ class Institucion
         return $this->direccion;
     }
 
+
     /**
      * Set pais
      *
-     * @param string $pais
+     * @param \Frontend\DistribucionBundle\Entity\Pais $pais
      * @return Institucion
      */
-    public function setPais($pais)
+    public function setPais(\Frontend\DistribucionBundle\Entity\Pais $pais = null)
     {
         $this->pais = $pais;
     
@@ -237,10 +256,17 @@ class Institucion
     /**
      * Get pais
      *
-     * @return string 
+     * @return \Frontend\DistribucionBundle\Entity\Pais 
      */
     public function getPais()
     {
         return $this->pais;
     }
+
+
+
+
+
+
+
 }

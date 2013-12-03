@@ -31,9 +31,7 @@
                 <ul>
                     <li>
                         <a href="{{ path('institucion_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
-                    </li>
-                    <li>
-                        <a href="{{ path('institucion_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('institucion_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
                     </li>
                 </ul>
                 </td>
@@ -56,7 +54,7 @@ $(document).ready(function(){
         <ul>
         <li>
             <a class="btn btn-primary" href="{{ path('institucion_new') }}">
-                Create a new entry
+                Nueva Institucion
             </a>
         </li>
     </ul>
