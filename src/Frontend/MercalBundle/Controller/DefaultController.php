@@ -119,7 +119,7 @@ class DefaultController extends Controller
             ->setSubject('Jornada-'.$jornada->getNombrejornada())   
             ->setFrom('aplicaciones@telesurtv.net')    
             ->setTo(array($trabajador->getUser()->getUsername().'@telesurtv.net'))  
-            ->setBody("<div align='center'><h1>JORNADA - ".strtoupper($jornada->getNombrejornada())."</h1><br>El número que tienes asignado para la jornada de ".$jornada->getNombrejornada()." es <b>(".$ultimonumero.")</b>. Debes estar atento a la numeración, accediendo a la aplicación de jornadas ubicada en el siguiente link http://www.aplicaciones.telesurtv.net</div>", 'text/html');
+            ->setBody("<div align='center'><h1>JORNADA - ".strtoupper($jornada->getNombrejornada())."</h1><br>El número que tienes asignado para la jornada de ".$jornada->getNombrejornada()." es <b>(".$ultimonumero.")</b>. Debes estar atento a la numeración, accediendo a la aplicación de jornadas ubicada en el siguiente link http://www.aplicaciones.telesurtv.net o a través del canal interno.</div>", 'text/html');
             //$this->get('mailer')->send($message);    
         //FIN CORREO
 
@@ -394,6 +394,34 @@ class DefaultController extends Controller
     }
 
 
+
+    public function numeracionAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        //consulto jornada
+        $jornada1 =  $em->getRepository('MercalBundle:Jornada')->find(9);
+        $jornada2 =  $em->getRepository('MercalBundle:Jornada')->find(10);
+
+        $this->actualizajson($jornada1);
+        $this->actualizajson($jornada2);
+
+        if (file_exists("uploads/jornada/".$jornada1->getNombrejornada().$jornada1->getFechajornada()->format("dmY").".json")) {
+            $str_datos = file_get_contents("uploads/jornada/".$jornada1->getNombrejornada().$jornada1->getFechajornada()->format("dmY").".json");
+            $datos = json_decode($str_datos,true);
+            $datos1=$datos[0];
+
+        } 
+        if (file_exists("uploads/jornada/".$jornada2->getNombrejornada().$jornada2->getFechajornada()->format("dmY").".json")) {
+            $str_datos = file_get_contents("uploads/jornada/".$jornada2->getNombrejornada().$jornada2->getFechajornada()->format("dmY").".json");
+            $datos = json_decode($str_datos,true);
+            $datos2=$datos[0];
+
+        }
+
+
+        return $this->render('MercalBundle:Default:numeracion.html.twig',array('datos1'=>$datos1,'datos2'=>$datos2,'jornada1'=>$jornada1,'jornada2'=>$jornada2));
+    }
 
 
 

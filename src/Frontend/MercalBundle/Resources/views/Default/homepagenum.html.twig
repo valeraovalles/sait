@@ -11,32 +11,11 @@
     
     <div class="titulojornada">JORNADA {{ jornada.nombrejornada|upper }}</div>
 
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% if datos==null %}
-        <div id="numeracion"> 
-            <div class="numero">0</div>
-            <div class="nombre">NO HA COMENZADO</div>
-        </div>
-    {% else %}
-        <div id="numeracion"> 
-            <div class="numero">{{ datos.numero }}</div>
-            <div class="nombre">
-                
-                    {{ datos.nombre }}<br><br>{{ datos.cedula }}
-            </div>
-        </div>
-    {% endif %}
+    <div id="numeracion"> 
+        <div class="numero">{{ datos.numero }}</div>
+        <div class="nombre">{{ datos.nombre }}</div>
+        <div class="cedula">{{ datos.cedula }}</div>
+    </div>
 
 
     <input type="hidden" id="idjornada" value="{{ jornada.id }}">
