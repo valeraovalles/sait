@@ -395,13 +395,14 @@ class DefaultController extends Controller
 
 
 
-    public function numeracionAction()
+    public function numeracionAction($idjornada1,$idjornada2)
     {
         $em = $this->getDoctrine()->getManager();
 
+
         //consulto jornada
-        $jornada1 =  $em->getRepository('MercalBundle:Jornada')->find(9);
-        $jornada2 =  $em->getRepository('MercalBundle:Jornada')->find(10);
+        $jornada1 =  $em->getRepository('MercalBundle:Jornada')->find($idjornada1);
+        $jornada2 =  $em->getRepository('MercalBundle:Jornada')->find($idjornada2);
 
         $this->actualizajson($jornada1);
         $this->actualizajson($jornada2);
