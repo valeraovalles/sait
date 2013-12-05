@@ -1,0 +1,33 @@
+<?php
+
+namespace Frontend\ContratosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Direccionsolicitante
+ *
+ * @ORM\Table(name="contratos.direccionsolicitante")
+ * @ORM\Entity
+ */
+class Direccionsolicitante
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="contratos.direccionsolicitante_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=100, nullable=false)
+     */
+    private $nombre;
+
+
+}
