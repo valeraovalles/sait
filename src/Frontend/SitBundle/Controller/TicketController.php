@@ -274,6 +274,7 @@ class TicketController extends Controller
 
             //echo $user->getUser()->getUsername();
 
+
             //CORREO
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Asignado')     // we configure the title

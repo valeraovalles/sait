@@ -26,14 +26,14 @@ class Visita
     /**
      * @var \DateTime
      * 
-     * @ORM\Column(name="fechaentrada", type="date", nullable=false)
+     * @ORM\Column(name="fechaentrada", type="date")
      */
     private $fechaentrada;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="horaentrada", type="time", nullable=false)
+     * @ORM\Column(name="horaentrada", type="time")
      */
     private $horaentrada;
 
