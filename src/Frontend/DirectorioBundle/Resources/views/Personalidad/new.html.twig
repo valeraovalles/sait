@@ -39,15 +39,30 @@
 
                 <div class="form-contenedor">
                     <div class="text-warning">{{ form_errors(form.pais) }}</div>
-                    <div class="labels">Pais:</div>
+                    <div class="labels">Pais Nacimiento:</div>
                     <div class="widgets">{{ form_widget(form.pais) }}</div>
                 </div>
+
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.paisprocedencia) }}</div>
+                    <div class="labels">Pais Residencia:</div>
+                    <div class="widgets">{{ form_widget(form.paisprocedencia) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.ciudad) }}</div>
+                    <div class="labels">Ciudad:</div>
+                    <div class="widgets">{{ form_widget(form.ciudad) }}</div>
+                </div>
+
                 <br><br>
 
         <button type="submit" class="btn btn-primary">Crear</button>
 
     </form>
 
-        <a class="btn" href="{{ path('personalidad') }}">Regresar </a>
+        <a class="btn" href="{{ path('personalidad') }}">Listado </a>
 
 {% endblock %}
+
+

@@ -47,7 +47,7 @@ class Institucion
     /**
      * @var string
      *
-     * @ORM\Column(name="telfinst", type="string", length=10, nullable=false)
+     * @ORM\Column(name="telfinst", type="string", length=30, nullable=false)
      */
     private $telfinst;
 
@@ -77,17 +77,6 @@ class Institucion
      * @Assert\NotBlank()
      */
     private $pais;
-
-
-
-
-
-
-
-
-
-
-
 
 
 

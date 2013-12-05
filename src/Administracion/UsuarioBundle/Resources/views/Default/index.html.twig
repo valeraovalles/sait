@@ -118,9 +118,9 @@
             {% endif %}
 
 
-            {% if is_granted('ROLE_ADMINISTRADOR') %}
+            {% if is_granted('ROLE_DIRECTORIO') %}
             <div class="listado_aplicaciones">
-              <a href="{{ path('institucion')}}">DIRECTORIO<br><img src="{{ asset("images/agenda.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
+              <a href="{{ path('directorio_homepage')}}">DIRECTORIO<br><img src="{{ asset("images/directorio.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
             </div>
             {% endif %}
 

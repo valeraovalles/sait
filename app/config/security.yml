@@ -70,3 +70,5 @@ security:
         - { path: ^/neto, roles: ROLE_USER }
 
         - { path: ^/visita, roles: ROLE_VISITAS }
+
+        - { path: ^/directorio, roles: ROLE_DIRECTORIO }

@@ -14,8 +14,10 @@ class PersonalidadType extends AbstractType
             ->add('nombre')
             ->add('apellido')
             ->add('telefono', 'text')
+            ->add('ciudad', 'text')
             ->add('email')
             ->add('pais',null,array( 'empty_value' => 'Seleccione...'))
+            ->add('paisprocedencia',null,array( 'empty_value' => 'Seleccione...'))
             ->add('especialidad','choice', array(
                                             'expanded'=>false, 
                                             'multiple'=>false,
