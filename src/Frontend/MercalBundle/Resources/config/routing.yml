@@ -1,18 +1,25 @@
-mercal_homepagejor:
-    pattern:  /homepagejor
-    defaults: { _controller: MercalBundle:Default:homepagejor }
 
+#dos jornadas
+mercal_numeracion:
+    pattern:  /numeracion/{idjornada1}/{idjornada2}
+    defaults: { _controller: MercalBundle:Default:numeracion }
+
+#una jornada
 mercal_homepagenum:
     pattern:  /homepagenum/{idjornada}
     defaults: { _controller: MercalBundle:Default:homepagenum }
+
+
+
+mercal_homepagejor:
+    pattern:  /homepagejor
+    defaults: { _controller: MercalBundle:Default:homepagejor }
 
 ajaxmercal_siguienteautomatico:
     pattern:  /ajaxmercalsiguienteautomatico/{idjornada}
     defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguienteautomatico }
 
-mercal_numeracion:
-    pattern:  /numeracion/{idjornada1}/{idjornada2}
-    defaults: { _controller: MercalBundle:Default:numeracion }
+
 
 mercal_homepage:
     pattern:  /num/numeracion/{idjornada}

@@ -1,7 +1,7 @@
 # This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_pgsql
-    database_host: 127.0.0.1
+    database_host: 10.10.0.149
     database_port: null
     database_name: sait
     database_user: postgres
