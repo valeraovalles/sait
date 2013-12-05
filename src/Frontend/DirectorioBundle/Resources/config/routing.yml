@@ -1,6 +1,6 @@
 directorio_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: DirectorioBundle:Default:index }
+    pattern:  /inicio
+    defaults: { _controller: DirectorioBundle:Default:inicio }
 
 
 #---------------------------------------------------------------------------------#

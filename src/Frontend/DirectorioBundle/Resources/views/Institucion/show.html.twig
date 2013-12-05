@@ -40,23 +40,17 @@
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('institucion') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('institucion_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
+        <br><br>
+        <a class="btn" href="{{ path('institucion') }}"> Listado </a>
+ 
+        <a class="btn btn-primary"href="{{ path('institucion_edit', { 'id': entity.id }) }}">Editar</a>
+        <br><br>
+
         <form action="{{ path('institucion_delete', { 'id': entity.id }) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
         </form>
-    </li>
-</ul>
+
 {% endblock %}
+

@@ -12,6 +12,7 @@
                 <th>Email</th>
                 <th>Especialidad</th>
                 <th>Pais</th>
+                <th>Procedencia</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,6 +26,7 @@
                 <td>{{ entity.email }}</td>
                 <td>{{ entity.especialidad }}</td>
                 <td>{{ entity.pais }}</td>
+                <td>{{ entity.paisprocedencia }}</td>
                 <td>
                 <ul>
                     <li>
@@ -51,7 +53,7 @@
         <ul>
         <li>
             <a class="btn btn-primary" href="{{ path('personalidad_new') }}">
-                Create a new entry
+                Nueva Persona
             </a>
         </li>
     </ul>
