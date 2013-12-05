@@ -404,7 +404,7 @@ class UsuarioController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-
+        
         $dql = "select v from FrontendVisitasBundle:Visita v where v.usuario= :id order by v.id DESC";
         $query = $em->createQuery($dql);
         $query->setParameter('id',$id);

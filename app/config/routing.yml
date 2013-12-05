@@ -1,3 +1,11 @@
+contratos:
+    resource: "@ContratosBundle/Resources/config/routing.yml"
+    prefix:   /contratos
+
+frontend_agenda:
+    resource: "@FrontendAgendaBundle/Resources/config/routing.yml"
+    prefix:   /agenda
+
 transporte:
     resource: "@TransporteBundle/Resources/config/routing.yml"
     prefix:   /

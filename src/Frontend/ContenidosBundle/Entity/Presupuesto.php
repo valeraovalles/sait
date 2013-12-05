@@ -108,11 +108,19 @@ class Presupuesto
     private $disponibilidad;
 
     /**
-     * @var boolean
+     * @var float
      *
-     * @ORM\Column(name="signo", type="boolean", nullable=true)
+     * @ORM\Column(name="disponibilidad_dolares", type="decimal", nullable=true)
      */
-    private $signo;
+    private $disponibilidadDolares;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="disponibilidad_euros", type="decimal", nullable=true)
+     */
+    private $disponibilidadEuros;
+
 
 
     /**
@@ -380,27 +388,51 @@ class Presupuesto
     }
     
     /**
-     * Set signo
+     * Set disponibilidadDolares
      *
-     * @param boolean $signo
-     * @return Contratacion
+     * @param float $disponibilidadDolares
+     * @return Presupuesto
      */
-    public function setSigno($signo)
+    public function setDisponibilidadDolares($disponibilidadDolares)
     {
-        $this->signo = $signo;
+        $this->disponibilidadDolares = $disponibilidadDolares;
     
         return $this;
     }
 
     /**
-     * Get signo
+     * Get disponibilidadDolares
      *
-     * @return boolean 
+     * @return float 
      */
-    public function getSigno()
+    public function getDisponibilidadDolares()
     {
-        return $this->signo;
+        return $this->disponibilidadDolares;
     }
+
+    /**
+     * Set disponibilidadEuros
+     *
+     * @param float $disponibilidadEuros
+     * @return Presupuesto
+     */
+    public function setDisponibilidadEuros($disponibilidadEuros)
+    {
+        $this->disponibilidadEuros = $disponibilidadEuros;
+    
+        return $this;
+    }
+
+    /**
+     * Get disponibilidadEuros
+     *
+     * @return float 
+     */
+    public function getDisponibilidadEuros()
+    {
+        return $this->disponibilidadEuros;
+    }
+
 
     public function __toString()
     {

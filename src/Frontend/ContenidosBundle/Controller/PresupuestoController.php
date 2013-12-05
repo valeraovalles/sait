@@ -68,7 +68,13 @@ class PresupuestoController extends Controller
             //obtengo disponibilidad y la seteo
             $disponibilidad = $entity->getMontoBs();
             $entity->setDisponibilidad($disponibilidad);
-            
+
+            $disponibilidad_dolares = $entity->getMontoDolares();
+            $entity->setDisponibilidadDolares($disponibilidad_dolares);
+
+            $disponibilidad_euros = $entity->getMontoEuros();
+            $entity->setDisponibilidadEuros($disponibilidad_euros);
+
             //seteo el tipo de moneda
             $tipo = 'N';
             $entity->setTipo($tipo);
@@ -155,11 +161,6 @@ class PresupuestoController extends Controller
         //obtengo los datos del presupuesto segun su ID
         $entity = $em->getRepository('ContenidosBundle:Presupuesto')->find($id);
 
-        //obtengo el monto actual y la disponibilidad antes de editar
-        $monto_ant = $entity->getMontoBs();
-        $disp_actual = $entity->getDisponibilidad();
-
-
         $dolares = $entity->getMontoDolares();
         $euros = $entity->getMontoEuros();
 
@@ -174,8 +175,6 @@ class PresupuestoController extends Controller
             $tipomoneda = 3;
         }
 
-
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Presupuesto entity.');
         }
@@ -188,8 +187,6 @@ class PresupuestoController extends Controller
         return $this->render('ContenidosBundle:Presupuesto:edit.html.twig', array(
             'entity'        => $entity,
             'id_proveedor'  => $id_proveedor,
-            'monto_ant'     => $monto_ant,
-            'disp_actual'   => $disp_actual,
             'tipomoneda'    => $tipomoneda,
             'edit_form'     => $editForm->createView(),
             'delete_form'   => $deleteForm->createView(),
@@ -201,12 +198,21 @@ class PresupuestoController extends Controller
     * ACTUALIZAR UN PRESUPUESTO TIPO N.
     *
     */
-    public function updateAction(Request $request,$id,$id_proveedor,$monto_ant,$disp_actual)
+    public function updateAction(Request $request,$id,$id_proveedor)
     {
         $em = $this->getDoctrine()->getManager();
 
         //obtengo los datos del Presupuesto segun ID
         $entity = $em->getRepository('ContenidosBundle:Presupuesto')->find($id);
+
+        //obtengo el monto actual y la disponibilidad antes de editar
+        $monto_ant[0] = $entity->getMontoBs();
+        $monto_ant[1] = $entity->getMontoDolares();
+        $monto_ant[2] = $entity->getMontoEuros();
+
+        $disp_ant[0] = $entity->getDisponibilidad();
+        $disp_ant[1] = $entity->getDisponibilidadDolares();
+        $disp_ant[2] = $entity->getDisponibilidadEuros();
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Presupuesto entity.');
@@ -222,14 +228,20 @@ class PresupuestoController extends Controller
         if ($editForm->isValid())
         {
             //obtengo el monto actual
-            $monto_act = $entity->getMontoBs();
+            $monto_act[0] = $entity->getMontoBs();
+            $monto_act[1] = $entity->getMontoDolares();
+            $monto_act[2] = $entity->getMontoEuros();
 
             //calculo la diferencia del monto actual y del monto anterior
-            $dife = $monto_act - $monto_ant;
-
+            $dife[0] = $monto_act[0] - $monto_ant[0];
+            $dife[1] = $monto_act[1] - $monto_ant[1];
+            $dife[2] = $monto_act[2] - $monto_ant[2];
+            
             //calculo la nueva disponibilidad tomando en consideracion la diferencia
-            $disp_actual = $disp_actual + $dife;
-                        
+            $disp_actual[0] = $disp_ant[0] + $dife[0];
+            $disp_actual[1] = $disp_ant[1] + $dife[1];
+            $disp_actual[2] = $disp_ant[2] + $dife[2];
+                       
             //obtengo los datos del proveedor para setearlo xq es una clave foranea
             $id_prov = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id_proveedor);
             $entity->setIdProveedor($id_prov);
@@ -238,7 +250,10 @@ class PresupuestoController extends Controller
             $entity->setTipo($tipo);
 
             //seteo la disponibilidad
-            $entity->setDisponibilidad($disp_actual);
+            $entity->setDisponibilidad($disp_actual[0]);
+            $entity->setDisponibilidadDolares($disp_actual[1]);
+            $entity->setDisponibilidadEuros($disp_actual[2]);
+
 
             //inserto la info en la BD
             $em->persist($entity);
@@ -426,9 +441,6 @@ class PresupuestoController extends Controller
         $dolares=$entity1->getMontoDolares();
         $euros=$entity1->getMontoEuros();
 
-        //obtengo el monto anterior
-        $monto_ant= $entity->getMontoBs();
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Presupuesto entity.');
         }
@@ -442,7 +454,6 @@ class PresupuestoController extends Controller
             'entity'        => $entity,
             'id_proveedor'  =>$id_proveedor,
             'id_presupuesto'=> $id_presupuesto,
-            'monto_ant'     => $monto_ant,
             'dolares'       => $dolares,
             'euros'         => $euros,
             'edit_form'     => $editForm->createView(),
@@ -466,7 +477,10 @@ class PresupuestoController extends Controller
         $entity = $em->getRepository('ContenidosBundle:Presupuesto')->find($id);
 
         //tengo el monto antes de actualizarse
-        $monto_ant= $entity->getMontoBs();
+        $monto_ant[0]= $entity->getMontoBs();
+        $monto_ant[1]= $entity->getMontoDolares();
+        $monto_ant[2]= $entity->getMontoEuros();
+
    
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Presupuesto entity.');
@@ -478,16 +492,26 @@ class PresupuestoController extends Controller
         $editForm->bind($request);
 
         //tengo el monto actual
-        $monto_act= $entity->getMontoBs();
+        $monto_act[0]= $entity->getMontoBs();
+        $monto_act[1]= $entity->getMontoDolares();
+        $monto_act[2]= $entity->getMontoEuros();
         
         //calculo la diferencia
-        $dife = $monto_act - $monto_ant;
+        $dife[0] = $monto_act[0] - $monto_ant[0];
+        $dife[1] = $monto_act[1] - $monto_ant[1];
+        $dife[2] = $monto_act[2] - $monto_ant[2];
 
         //traigo la disponibilidad que se encuentra en el presupuesto del que extiende
-        $disp_actual= $entity1->getDisponibilidad();
+        $disp_act[0]= $entity1->getDisponibilidad();
+        $disp_act[1]= $entity1->getDisponibilidadDolares();
+        $disp_act[2]= $entity1->getDisponibilidadEuros();
+
 
         //calculo la disponibilidad actual
-        $disp_actual = $disp_actual + $dife;
+        $disp_act[0] = $disp_act[0] + $dife[0];
+        $disp_act[1] = $disp_act[1] + $dife[1];
+        $disp_act[2] = $disp_act[2] + $dife[2];
+
         
         //verifico el formulario
         if($editForm->isValid())
@@ -498,7 +522,9 @@ class PresupuestoController extends Controller
             $id_prov = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id_proveedor);
 
             //seteo la disponibilidad
-            $entity1->setDisponibilidad($disp_actual);
+            $entity1->setDisponibilidad($disp_act[0]);
+            $entity1->setDisponibilidadDolares($disp_act[1]);
+            $entity1->setDisponibilidadEuros($disp_act[2]);
 
             //seteo el tipo de presupuesto
             $entity->setTipo($tipo);
@@ -582,18 +608,27 @@ class PresupuestoController extends Controller
 
         //verifico el formulario
         if ($form->isValid()) 
-        {
-         
+        {         
             //obtengo los datos del presupuesto al que extiende
             $entity1 = $em->getRepository('ContenidosBundle:Presupuesto')->find($id_presupuesto);
-            $disp_actual= $entity1->getDisponibilidad();
+            $disp_act[0]= $entity1->getDisponibilidad();
+            $disp_act[1]= $entity1->getDisponibilidadDolares();
+            $disp_act[2]= $entity1->getDisponibilidadEuros();
 
             //obtengo el monto
-            $monto = $entity->getMontoBs();
+            $monto[0] = $entity->getMontoBs();
+            $monto[1] = $entity->getMontoDolares();
+            $monto[2] = $entity->getMontoEuros();           
             
             //calculo la disponibilidad y la seteo
-            $disp_actual = $disp_actual + $monto;
-            $entity1->setDisponibilidad($disp_actual);
+            $disp_act[0] = $disp_act[0] + $monto[0];
+            $disp_act[1] = $disp_act[1] + $monto[1];
+            $disp_act[2] = $disp_act[2] + $monto[2];
+
+
+            $entity1->setDisponibilidad($disp_act[0]);
+            $entity1->setDisponibilidadDolares($disp_act[1]);
+            $entity1->setDisponibilidadEuros($disp_act[2]);
 
             $tipo = 'E';
             //seteo el tipo de presupuesto y el id del presupuesto al que extiende
@@ -610,7 +645,6 @@ class PresupuestoController extends Controller
 
             //envio a notificacion de que el registro fue creado
             $this->get('session')->getFlashBag()->add('notice', 'SE REGISTRO EXITOSAMENTE LA EXTENSION DE PRESUPUESTO');
-
             //envio a la vista
             return $this->redirect($this->generateUrl('presupuesto_extensionshow', array(
                                                 'id'            => $entity->getId(), 
@@ -637,7 +671,27 @@ class PresupuestoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();    
 
+        //obtengo los datos del presupuesto tipo E
         $entity = $em->getRepository('ContenidosBundle:Presupuesto')->find($id);
+
+        //obtengo los datos del presupuesto tipo N
+        $entity1 = $em->getRepository('ContenidosBundle:Presupuesto')->find($id_presupuesto);
+        $disp_ant[0]= $entity1->getDisponibilidad();
+        $disp_ant[1]= $entity1->getDisponibilidadDolares();
+        $disp_ant[2]= $entity1->getDisponibilidadEuros();
+
+        //obtengo el monto
+        $monto[0] = $entity->getMontoBs();
+        $monto[1] = $entity->getMontoDolares();
+        $monto[2] = $entity->getMontoEuros();        
+
+        $disp_act[0] = $disp_ant[0] - $monto[0];
+        $disp_act[1] = $disp_ant[1] - $monto[1];
+        $disp_act[2] = $disp_ant[2] - $monto[2];
+
+        $entity1->setDisponibilidad($disp_act[0]);
+        $entity1->setDisponibilidadDolares($disp_act[1]);
+        $entity1->setDisponibilidadEuros($disp_act[2]);
 
         //ELIMINO LOS DATOS DE LA CONTRATACION SI NO TENGO PAGOS ASOCIADOS
         $em->remove($entity);

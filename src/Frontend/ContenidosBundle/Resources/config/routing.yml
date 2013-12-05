@@ -229,7 +229,7 @@ presupuesto_edit:
     defaults: { _controller: "ContenidosBundle:Presupuesto:edit" }
 
 presupuesto_update:
-    pattern:  presupuesto/actualizar/{id}/{id_proveedor}/{monto_ant}/{disp_actual}
+    pattern:  presupuesto/actualizar/{id}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:update" }
     requirements: { _method: post|put }
 

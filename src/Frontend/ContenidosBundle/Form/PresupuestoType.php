@@ -37,7 +37,6 @@ class PresupuestoType extends AbstractType
             ->add('idPresext')
             ->add('idProveedor')
             ->add('disponibilidad')
-            ->add('signo')
         ;
     }
 

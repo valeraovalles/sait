@@ -70,8 +70,6 @@ class ContratacionController extends Controller
     */
     public function createAction(Request $request,$id_presupuesto,$id_proveedor)
     {
-
-
         $em = $this->getDoctrine()->getManager();
 
         //instancio la clase
@@ -85,7 +83,9 @@ class ContratacionController extends Controller
 
         //obtengo la disponibilidad en bs del preseupuesto seleccionado
         $presupuesto = $em->getRepository('ContenidosBundle:Presupuesto')->find($id_presupuesto);
-        $disponibilidad = $presupuesto->getDisponibilidad();
+        $disp_ant[0] = $presupuesto->getDisponibilidad();
+        $disp_ant[1] = $presupuesto->getDisponibilidadDolares();
+        $disp_ant[2] = $presupuesto->getDisponibilidadEuros();
         
         //DETERMINO EL TIPO DE MONEDA
         $dolares = $presupuesto->getMontoDolares();
@@ -102,32 +102,28 @@ class ContratacionController extends Controller
             $tipomoneda = '3'; //moneda es Bs
         }
 
-        //obtengo el signo de la disponibilidad (TRUE si es negativo)
-        $signo_act = $presupuesto->getSigno();
+        $monto[0]=$entity->getMontoBs();
+        $monto[1]=$entity->getMontoMe();
 
-        //obtengo el monto de la disponibilidad
-        $monto=$entity->getMontoBs();
-
-        //segun el signo determino la disponibilidad
-        if ($signo_act == TRUE)
-        {
-            $disponibilidad = $monto - $disponibilidad;
-        }else
-        {
-            $disponibilidad = $disponibilidad - $monto;
-        }
-
-        $signo = FALSE;
-
+        
+            $disp_act[0] = $disp_ant[0] - $monto[0];
+            if($tipomoneda == 1)
+            {
+                $disp_act[1] = $disp_ant[1] - $monto[1];    
+                $disp_act[2] = 0;
+            }elseif($tipomoneda == 2)
+            {
+                $disp_act[1] = 0;    
+                $disp_act[2] = $disp_ant[2] - $monto[1];
+            }
+            
         $alert = 0;
-        if($disponibilidad < 0)
+        if(($disp_act[0] < 0) or ($disp_act[1] < 0) or ($disp_act[2] < 0) )
         {
             $alert= 1;
-            $signo = TRUE;
-            $disponibilidad = -1 * $disponibilidad;
         }
-    
-         //obtengo el tipo de proveedor del proveedor de acuerdo a un ID
+        
+        //obtengo el tipo de proveedor del proveedor de acuerdo a un ID
         $entity1 = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id_proveedor);
         $tipoprov= $entity1->getIdTipoprov();
 
@@ -139,8 +135,11 @@ class ContratacionController extends Controller
             $montome = $entity->getMontoMe();
             
             //seteo la disponibilidad, el signo en la variable presupuesto
-            $presupuesto->setDisponibilidad($disponibilidad);
-            $presupuesto->setSigno($signo);
+            $presupuesto->setDisponibilidad($disp_act[0]);
+            $presupuesto->setDisponibilidadDolares($disp_act[1]);
+            $presupuesto->setDisponibilidadEuros($disp_act[2]);
+
+           // $presupuesto->setSigno($signo);
 
             //seteo el id del presupuesto y el tipo de moneda en la variable $entity
             $entity->setIdPresupuesto($presupuesto);
@@ -377,8 +376,6 @@ class ContratacionController extends Controller
         $entity3 = $em->getRepository('ContenidosBundle:Datosproveedor')->find($prov);
         $tipoprov= $entity3->getIdTipoprov();
 
-
-
         //DETERMINO EL TIPO DE MONEDA (DOLARES O EUROS)
         $dolares = $presupuesto->getMontoDolares();
         $euros = $presupuesto->getMontoEuros();
@@ -395,17 +392,22 @@ class ContratacionController extends Controller
         }
 
         //OBTENGO LA DISPONIBILIDAD Y EL MONTO ANTERIOR
-        $disp_ant = $presupuesto->getDisponibilidad();
-        $monto_ant = $entity->getMontoBs();
+        $disp_ant[0] = $presupuesto->getDisponibilidad();
+        $disp_ant[1] = $presupuesto->getDisponibilidadDolares();
+        $disp_ant[2] = $presupuesto->getDisponibilidadEuros();
 
-        $disp_act = $disp_ant - $monto_ant;
-
-        //DETERMINO EL SIGNO Y LA DISPONIBILIDAD ACTUAL
-        $signo = FALSE;
-        if ($disp_act < 0)
+        $monto_ant[0] = $entity->getMontoBs();
+        if ($tipomoneda == 1)
         {
-            $disp_act = $disp_act * -1;
-            $signo = TRUE;
+            $monto_ant[1] = $entity->getMontoMe();
+            $monto_ant[2] = 0;
+        }elseif ($tipomoneda == 2)
+        {
+            $monto_ant[1] = 0;
+            $monto_ant[2] = $entity->getMontoMe();
+        }else {
+            $monto_ant[1] = 0;
+            $monto_ant[2] = 0;
         }
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Contratacion entity.');
@@ -416,19 +418,40 @@ class ContratacionController extends Controller
         $editForm->bind($request);
 
         //OBTENGO EL MONTO ACTUAL
-        $monto_desp= $entity->getMontoBs();
+        $monto_act[0]= $entity->getMontoBs();
+        if($tipomoneda == 1)
+        {
+            $monto_act[1]= $entity->getMontoMe();
+            $monto_act[2]= 0;
+        }elseif($tipomoneda == 2)
+        {
+            $monto_act[1]= 0;
+            $monto_act[2]= $entity->getMontoMe();
+        }else
+        {
+            $monto_act[1]= 0;
+            $monto_act[2]= 0;
+        }
+
+        $dife[0] = $monto_ant[0] - $monto_act[0];
+        $dife[1] = $monto_ant[1] - $monto_act[1];
+        $dife[2] = $monto_ant[2] - $monto_act[2];
+
+        $disp_actual[0] = $disp_ant[0] + $dife[0];
+        $disp_actual[1] = $disp_ant[1] + $dife[1];
+        $disp_actual[2] = $disp_ant[2] + $dife[2];
 
         //verifico el formulario
         if ($editForm->isValid())
         {
             //seteo el id del presupuesto
             $entity-> setIdPresupuesto($presupuesto);
-            if($monto_desp!=$monto_ant)
-            {
-                //seteo el signo y la disponibilidad actual
-                $presupuesto->setSigno($signo);
-                $presupuesto->setDisponibilidad($disp_act);
-            }
+            
+            //seteo la disponibilidad
+            $presupuesto->setDisponibilidad($disp_actual[0]);
+            $presupuesto->setDisponibilidadDolares($disp_actual[1]);
+            $presupuesto->setDisponibilidadEuros($disp_actual[2]);
+
             //seteo el tipo de moneda (DOLARES O EUROS)
             $entity->setTipoMoneda($tipomoneda);
 
@@ -480,7 +503,9 @@ class ContratacionController extends Controller
 
         //obtengo la disponibilidad en bs del preseupuesto seleccionado
         $presupuesto = $em->getRepository('ContenidosBundle:Presupuesto')->find($id_presupuesto);
-        $disponibilidad = $presupuesto->getDisponibilidad();
+        $disp_ant[0] = $presupuesto->getDisponibilidad();
+        $disp_ant[1] = $presupuesto->getDisponibilidadDolares();
+        $disp_ant[2] = $presupuesto->getDisponibilidadEuros();
         
         //DETERMINO EL TIPO DE MONEDA
         $dolares = $presupuesto->getMontoDolares();
@@ -497,6 +522,28 @@ class ContratacionController extends Controller
             $tipomoneda = '3'; //moneda es Bs
         }
 
+        $monto[0] = $entity->getMontoBs();
+        $monto[1] = $entity->getMontoMe();
+
+
+        $disp_act[0] = $disp_ant[0] + $monto[0];
+        if ($tipomoneda == 1)
+        {
+            $disp_act[1] = $disp_ant[1] + $monto[1];
+            $disp_act[2] = 0;
+        }elseif($tipomoneda == 2)
+        {
+            $disp_act[1] = 0;
+            $disp_act[2] = $disp_ant[2] + $monto[1];
+        }else
+        {
+            $disp_act[1] = 0;
+            $disp_act[2] = 0;
+        }
+
+        $presupuesto->setDisponibilidad($disp_act[0]);
+        $presupuesto->setDisponibilidadDolares($disp_act[1]);
+        $presupuesto->setDisponibilidadEuros($disp_act[2]);
 
         //obtengo los datos de la contratacion segun id
         $entities = $em->getRepository('ContenidosBundle:Contratacion')->findByidPresupuesto($id_presupuesto);
