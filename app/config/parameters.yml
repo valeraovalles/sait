@@ -5,7 +5,7 @@ parameters:
     database_port: null
     database_name: sait
     database_user: postgres
-    database_password: ..*t3l35ur*..
+    database_password: postgers
 
     mailer_transport: smtp
     mailer_host: correo.telesurtv.net
