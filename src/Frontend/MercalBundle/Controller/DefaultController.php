@@ -178,7 +178,7 @@ class DefaultController extends Controller
                 $json[0]=array(
                     'usernumeroid'=>0,
                     'numero'=>$usernumero[0]->getNumero(),
-                    'nombre'=>'COLA EN ESPERA',
+                    'nombre'=>'PRONTO CULMINARÁ',
                     'cedula'=>'',
                     'tipo'=>0,
                     'compro'=>'verificar'
