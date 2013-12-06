@@ -1,0 +1,60 @@
+    resource: "@MercalBundle/Resources/config/routing.yml"
+    prefix:   /mercal
+directorio:
+    resource: "@DirectorioBundle/Resources/config/routing.yml"
+    prefix:   /directorio
+=======
+    prefix:   /jornada
+>>>>>>> 9ee9e56c3f1f03b09bb3b59aadca0bfcb606fda0
+
+transporte:
+    resource: "@TransporteBundle/Resources/config/routing.yml"
+    prefix:   /
+
+contenidos:
+    resource: "@ContenidosBundle/Resources/config/routing.yml"
+    prefix:   /contenidos
+
+sit:
+    resource: "@SitBundle/Resources/config/routing.yml"
+    prefix:   /sit
+
+constancia:
+    resource: "@ConstanciaBundle/Resources/config/routing.yml"
+    prefix:   /constancia
+
+neto:
+    resource: "@NetoBundle/Resources/config/routing.yml"
+    prefix:   /neto
+
+nomina:
+    resource: "@NominaBundle/Resources/config/routing.yml"
+    prefix:   /nomina
+
+licencias:
+    resource: "@LicenciasBundle/Resources/config/routing.yml"
+    prefix:   /licencias
+
+frontend_visitas:
+    resource: "@FrontendVisitasBundle/Resources/config/routing.yml"
+    prefix:   /usuario_control
+
+distribucion:
+    resource: "@DistribucionBundle/Resources/config/routing.yml"
+    prefix:   /distribucion
+
+videoteca:
+    resource: "@VideotecaBundle/Resources/config/routing.yml"
+    prefix:   /videoteca
+
+usuario:
+    resource: "@UsuarioBundle/Resources/config/routing.yml"
+    prefix:   /usuario
+
+login:
+    pattern:  /
+    defaults: { _controller: UsuarioBundle:Default:index }
+
+visitas:
+    resource: "@FrontendVisitasBundle/Resources/config/routing.yml"
+    prefix:   /visitas
