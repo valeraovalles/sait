@@ -59,9 +59,14 @@
                         {% if usernumero[0].compro==false and usernumero[0].fechahoranumeracion is not null %}
                             <b class="label label-warning">Rezagado
                                 <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerotrab', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" ><b class="icon-remove"></b></a>
-                            </b>
+                            </b> | 
+
+                            <a onclick="return confirm('¿Está seguro que desea cambiar el estatus de rezagado a compro?')" class="label label-important" href="{{ path('mercal_compronocomprotrabajador', {'idjornada':jornada.id,'idtrabajador':trabajador.id,'compro':'true'}) }}">Cambiar a compró</a>
+
                         {% elseif usernumero[0].compro==true and usernumero[0].fechahoranumeracion is not null %}
-                            <b class="label label-info">Ya compró</b>
+                            <b class="label label-info">Ya compró</b> | 
+
+                            <a onclick="return confirm('¿Está seguro que desea cambiar el estatus de rezagado a compro?')" class="label label-important" href="{{ path('mercal_compronocomprotrabajador', {'idjornada':jornada.id,'idtrabajador':trabajador.id,'compro':'false'}) }}">Cambiar a rezagado</a>
                         {% else %}
                             <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerotrab', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" ><b class="icon-remove"></b></a>
                         {% endif %}
