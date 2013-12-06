@@ -92,9 +92,6 @@ class DefaultController extends Controller
 
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
-        //$f=new Funcion;
-        //$datossf=$f->datosUsuarioSigefirrhh($trabajador->getCedula());
-
         //consulto para generar el numero que sigue en cola
         $dql = "select un from MercalBundle:Usernumero un where un.jornada= :idjornada order by un.numero DESC";
         $query = $em->createQuery($dql);
@@ -336,7 +333,7 @@ class DefaultController extends Controller
 
 
         $this->get('session')->getFlashBag()->add('notice', 'SE HA ASIGNADO EL NUMERO AL FAMILIAR DEL TRABAJADOR');
-         return $this->redirect($this->generateUrl('mercal_listadofam',array('idjornada'=>$idjornada,'idtrabajador'=>$idtrabajador)));
+        return $this->redirect($this->generateUrl('mercal_listadofam',array('idjornada'=>$idjornada,'idtrabajador'=>$idtrabajador)));
 
     }
 
@@ -558,4 +555,34 @@ class DefaultController extends Controller
         $this->get('session')->getFlashBag()->add('notice', 'El familiar se eliminó exitosamente.');
         return $this->redirect($this->generateUrl('mercal_listadofam',array('idjornada'=>$idjornada,'idtrabajador'=>$idtrabajador)));
     }
+
+    public function compronocomprotrabajadorAction($idjornada,$idtrabajador,$compro)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        //consulto jornada
+        $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
+
+        //buscar el id de la tabla usernumero
+        $dql = "select un from MercalBundle:Usernumero un where un.trabajador= :idtrabajador and un.jornada= :idjornada and un.familiar is null";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idtrabajador', $idtrabajador);
+        $query->setParameter('idjornada', $idjornada);
+        $query ->setMaxResults(1);
+        $usernumero = $query->getResult();
+        
+
+        $fechahora = date_create_from_format('Y-m-d G:i:s', \date("Y-m-d G:i:s"));
+        $query = $em->createQuery('update MercalBundle:Usernumero un set un.fechahoranumeracion= :fechahoranumeracion, un.compro= :compro WHERE un.id = :id and un.jornada= :idjornada');
+        $query->setParameter('fechahoranumeracion', $fechahora);
+        $query->setParameter('compro', $compro);
+        $query->setParameter('id', $usernumero[0]->getId());
+        $query->setParameter('idjornada', $idjornada);
+        $query->execute();
+
+        $this->get('session')->getFlashBag()->add('notice', 'El estatus fue cambiado exitosamente.');
+        return $this->redirect($this->generateUrl('mercal_asignarnumero',array('idtrabajador'=>$idtrabajador,'idjornada'=>$jornada->getId())));
+
+    }
+
 }

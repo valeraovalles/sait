@@ -9,8 +9,6 @@ mercal_homepagenum:
     pattern:  /homepagenum/{idjornada}
     defaults: { _controller: MercalBundle:Default:homepagenum }
 
-
-
 mercal_homepagejor:
     pattern:  /homepagejor
     defaults: { _controller: MercalBundle:Default:homepagejor }
@@ -20,6 +18,9 @@ ajaxmercal_siguienteautomatico:
     defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguienteautomatico }
 
 
+mercal_compronocomprotrabajador:
+    pattern:  /compronocomprotrabajador/{idjornada}/{idtrabajador}/{compro}
+    defaults: { _controller: MercalBundle:Default:compronocomprotrabajador }
 
 mercal_homepage:
     pattern:  /num/numeracion/{idjornada}
