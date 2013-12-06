@@ -9,8 +9,8 @@ parameters:
 
     mailer_transport: smtp
     mailer_host: correo.telesurtv.net
-    mailer_user: aplicaciones@telesurtv.net
-    mailer_password: '4pl1c4c10n35'
+    mailer_user: jvalera@telesurtv.net
+    mailer_password: '#v4l3r4*..'
     mailer_port: 25
 
     locale: es
