@@ -1,7 +1,7 @@
 # This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_pgsql
-    database_host: 10.10.0.149
+    database_host: localhost
     database_port: null
     database_name: sait
     database_user: postgres
@@ -9,8 +9,8 @@ parameters:
 
     mailer_transport: smtp
     mailer_host: correo.telesurtv.net
-    mailer_user: aplicaciones@telesurtv.net
-    mailer_password: '4pl1c4c10n35'
+    mailer_user: jvalera@telesurtv.net
+    mailer_password: '#v4l3r4*..'
     mailer_port: 25
 
     locale: es
