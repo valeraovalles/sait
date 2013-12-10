@@ -7,7 +7,17 @@
 {% block body -%}
     {{ parent() }}
     <div class="titulo">NUEVO CONTRATO </div>
+   {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
 
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
     <form novalidate="novalidate" action="{{ path('contratos_pasados_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
         <fieldset>       
             <div id="descripcion" class="form-show_edit">
@@ -62,6 +72,11 @@
                     <div class="labels">Monto en Euros:</div>
                     <div class="dato">{{ form_widget(form.montoEuros) }}</div>
                 </div>
+                <div class=class="form-contenedor">
+                    {{ form_errors(form.file) }}
+                    <div class="labels">Archivo:</div>
+                    <div class="dato">{{ form_widget(form.file) }}</div>
+                </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.idDireccion) }}
                     <div class="labels">Direccion Solicitante:</div>
@@ -71,7 +86,7 @@
                     {{ form_errors(form.idAbogado) }}
                     <div class="labels">Elaborado por:</div>
                     <div class="dato">{{ form_widget(form.idAbogado) }}</div>
-                </div>
+                </div>     
                 <button type="submit" class="btn">Registrar</button><br><br>
             </div>
         </fieldset>

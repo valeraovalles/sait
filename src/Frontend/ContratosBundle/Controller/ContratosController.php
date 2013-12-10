@@ -51,7 +51,7 @@ class ContratosController extends Controller
             $cont = $cont+1;
         }
         $cont = $cont + 1;
-        $anio_actual =  date("Y");
+        $anio_actual =  date("y");
         $direccion = $entity->getIdDireccion();
 
         if($cont < 10 )
@@ -62,14 +62,53 @@ class ContratosController extends Controller
             $codigo = "CJ/".$cont."/".$anio_actual."/".$direccion;
         }
 
-        
-
         $entity->setCodigo($codigo);
 
         $hoy = date_create_from_format('Y-m-d', \date("Y-m-d"));
         $entity->setFechaRegistro($hoy);
 
         if ($form->isValid()) {
+
+            if($form['file']->getData())
+            {
+
+                $file=$form['file']->getData();
+
+                $tamaño=number_format($file->getClientSize(),0, ',', '')/1000;
+                $extension = $file->guessExtension();
+                $nombre=$file->getClientOriginalName();
+                $nombre=explode(".", $nombre);
+                $nombre=$nombre[0];
+
+                //valido tamaño
+                if ($tamaño>2000) {
+                    $this->get('session')->getFlashBag()->add('alert', 'El archivo no puede ser mayor a 2MB.');
+
+                    return $this->render('ContratosBundle:Contratos:new.html.twig', array(
+                        'entity' => $entity,
+                        'form'   => $form->createView(),
+                    ));
+
+                }
+                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf');
+                //valido las extensiones
+                if (!array_search($extension,$extensiones)) {
+                    $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
+
+                    return $this->render('ContratosBundle:Contratos:new.html.twig', array(
+                        'entity' => $entity,
+                        'form'   => $form->createView(),
+                    ));
+                }
+                
+                $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre));
+
+                //GUARDO EL ARCHIVO
+                if($file->move('uploads/contratos/',$nombre.'_'.\date("Gis").'.'.$extension) )
+                {
+                     $entity->setArchivo($nombre.'_'.\date("Gis").'.'.$extension);
+                }
+            }
 
             $em->persist($entity);
             $em->flush();
@@ -161,11 +200,54 @@ class ContratosController extends Controller
         $codigo = $entity->getCodigo();
         $fechareg = $entity->getFechaRegistro();
 
+        $archivo = $entity->getArchivo();
+
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new ContratosType(), $entity);
         $editForm->bind($request);
 
-        if ($editForm->isValid()) {
+        if ($editForm->isValid()) 
+        {
+            if($editForm['file']->getData())
+            {
+                $file=$editForm['file']->getData();
+
+                $tamaño=number_format($file->getClientSize(),0, ',', '')/1000;
+                $extension = $file->guessExtension();
+                $nombre=$file->getClientOriginalName();
+                $nombre=explode(".", $nombre);
+                $nombre=$nombre[0];
+
+                //valido tamaño
+                if ($tamaño>2000) {
+                    $this->get('session')->getFlashBag()->add('alert', 'El archivo no puede ser mayor a 2MB.');
+
+                    return $this->render('ContratosBundle:Contratos:edit.html.twig', array(
+                        'entity'      => $entity,
+                        'edit_form'   => $editForm->createView(),
+                        'delete_form' => $deleteForm->createView(),
+                    ));
+                }
+                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf');
+                //valido las extensiones
+                if (!array_search($extension,$extensiones)) {
+                    $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
+
+                    return $this->render('ContratosBundle:Contratos:edit.html.twig', array(
+                        'entity'      => $entity,
+                        'edit_form'   => $editForm->createView(),
+                        'delete_form' => $deleteForm->createView(),
+                    ));
+                }
+                
+                $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre));
+
+                //GUARDO EL ARCHIVO
+                if($file->move('uploads/contratos/',$nombre.'_'.\date("Gis").'.'.$extension) )
+                {
+                     $entity->setArchivo($nombre.'_'.\date("Gis").'.'.$extension);
+                }
+            }
 
             $entity->setCodigo($codigo);
             $entity->setFechaRegistro($fechareg);
@@ -183,26 +265,94 @@ class ContratosController extends Controller
         ));
     }
 
-        /**
-     * Creates a new Contratos entity.
+    /**
+     * Creates a new Contratos años anteriores entity.
      *
      */
     public function createpasadosAction(Request $request)
     {
+
         $em = $this->getDoctrine()->getManager();
 
         $entity  = new Contratos();
         $form = $this->createForm(new ContratosType(), $entity);
         $form->bind($request);
 
-        if ($form->isValid()) 
-        {
-            $em->persist($entity);
-            $em->flush();
-            return $this->redirect($this->generateUrl('contratos_show', array('id' => $entity->getId())));
+        $codigo = $entity->getCodigo();
+        $cod_repetido = $em->getRepository('ContratosBundle:Contratos')->findByCodigo($codigo);
+        
+        $codig = 0; 
+        foreach ($cod_repetido as $key) {
+            $codigo_rep =  $key->getCodigo();
+
+            
+            if (!empty($codigo_rep))
+            {
+                $codig = $codig + 1 ;
+            }
+           
         }
 
-        return $this->render('ContratosBundle:Contratos:new.html.twig', array(
+        if($codig == 1)
+        {            
+            $this->get('session')->getFlashBag()->add('alert', 'EL CODIGO YA EXISTE');
+            return $this->render('ContratosBundle:Contratos:newpasados.html.twig', array(
+                                                                        'entity' => $entity,
+                                                                        'form'   => $form->createView(),
+                                                                    ));
+        }else
+        {
+            if ($form->isValid()) 
+            {
+                if($form['file']->getData())
+                {
+
+                    $file=$form['file']->getData();
+
+                    $tamaño=number_format($file->getClientSize(),0, ',', '')/1000;
+                    $extension = $file->guessExtension();
+                    $nombre=$file->getClientOriginalName();
+                    $nombre=explode(".", $nombre);
+                    $nombre=$nombre[0];
+
+                    //valido tamaño
+                    if ($tamaño>2000) {
+                        $this->get('session')->getFlashBag()->add('alert', 'El archivo no puede ser mayor a 2MB.');
+
+                        return $this->render('ContratosBundle:Contratos:newpasados.html.twig', array(
+                            'entity' => $entity,
+                            'form'   => $form->createView(),
+                        ));
+
+                    }
+                    $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf');
+                    //valido las extensiones
+                    if (!array_search($extension,$extensiones)) {
+                        $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
+
+                        return $this->render('ContratosBundle:Contratos:newpasados.html.twig', array(
+                            'entity' => $entity,
+                            'form'   => $form->createView(),
+                        ));
+                    }
+                    
+                    $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre));
+
+                    //GUARDO EL ARCHIVO
+                    if($file->move('uploads/contratos/',$nombre.'_'.\date("Gis").'.'.$extension) )
+                    {
+                         $entity->setArchivo($nombre.'_'.\date("Gis").'.'.$extension);
+                    }
+                }
+        
+                $em->persist($entity);
+                $em->flush();
+                return $this->redirect($this->generateUrl('contratos_show', array('id' => $entity->getId())));
+            }
+
+        }            
+
+        return $this->render('ContratosBundle:Contratos:newpasados.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -223,10 +373,6 @@ class ContratosController extends Controller
             'form'   => $form->createView(),
         ));
     }
-
-
-
-
 
     /**
      * Deletes a Contratos entity.

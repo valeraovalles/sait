@@ -117,7 +117,7 @@
             </div>
             {% endif %}
 
-            {% if is_granted('ROLE_ADMINISTRADOR') %}
+            {% if is_granted('ROLE_CONTRATOS')%}
             <div class="listado_aplicaciones">
               <a href="{{ path('contratos') }}">CONTRATOS<br><img  src="{{ asset("images/contratos.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>

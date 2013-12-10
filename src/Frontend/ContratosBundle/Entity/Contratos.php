@@ -4,6 +4,7 @@ namespace Frontend\ContratosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Contratos
@@ -117,6 +118,19 @@ class Contratos
      */
     private $idAbogado;
 
+    /**
+     * @Assert\File(maxSize="5000000", maxSizeMessage="El archivo que intenta subir es demasiado grande.")
+     *  
+     */
+    private $file;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="archivo", type="string", length=500, nullable=true)
+     */
+    private $archivo;
+
 
 
     /**
@@ -128,6 +142,51 @@ class Contratos
     {
         return $this->id;
     }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Set archivo
+     *
+     * @param string $archivo
+     * @return Ticket
+     */
+    public function setArchivo($archivo)
+    {
+        $this->archivo = $archivo;
+    
+        return $this;
+    }
+
+    /**
+     * Get archivo
+     *
+     * @return string 
+     */
+    public function getArchivo()
+    {
+        return $this->archivo;
+    }
+
+
 
     /**
      * Set fechaRegistro
