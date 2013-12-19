@@ -8,14 +8,18 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class EspecialidadType extends AbstractType
 {
+
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('area')
-            ->add('area',null,array( 'empty_value' => 'Seleccione...'))
+            //->add('area','choice',array( 'empty_value' => 'Seleccione...'))
 
-;
+        ;
     }
+
+
 
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

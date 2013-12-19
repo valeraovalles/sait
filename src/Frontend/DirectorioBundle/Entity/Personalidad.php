@@ -56,7 +56,12 @@ class Personalidad
     /**
      * @var string
      *
-     * @ORM\Column(name="especialidad", type="string", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Frontend\DirectorioBundle\Entity\Especialidad")
+     * 
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="area", referencedColumnName="id")
+     * })
+     * @Assert\NotBlank()
      */
     private $especialidad;
 

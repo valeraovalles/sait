@@ -11,6 +11,8 @@ use Frontend\DirectorioBundle\Form\PersonalidadType;
 use Frontend\DistribucionBundle\Entity\Pais;
 use Frontend\DistribucionBundle\Entity\Representante;
 
+use Frontend\DirectorioBundle\Entity\Especialidad;
+use Frontend\DirectorioBundle\Form\EspecialidadType;
 
 
 /**

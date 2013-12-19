@@ -29,9 +29,9 @@ class Especialidad
     /**
      * @var string
      *
-     * @ORM\Column(name="area", type="string", nullable=false)
+     * @ORM\Column(name="especialidad", type="string", nullable=false)
      */
-    private $area;
+    private $especialidad;
 
 
 
@@ -46,27 +46,35 @@ class Especialidad
     }
 
     /**
-     * Set area
+     * Set especialidad
      *
-     * @param string $area
+     * @param string $especialidad
      * @return Especialidad
      */
-    public function setArea($area)
+    public function setEspecialidad($especialidad)
     {
-        $this->area = $area;
+        $this->especialidad = $especialidad;
     
         return $this;
     }
 
     /**
-     * Get area
+     * Get especialidad
      *
      * @return string 
      */
-    public function getArea()
+    public function getEspecialidad()
     {
-        return $this->area;
+        return $this->especialidad;
     }
 
+
+
+    public function __toString()
+    {
+        return $this->getEspecialidad();
+    
+
+    }
 
 }
