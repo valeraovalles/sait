@@ -3,6 +3,7 @@
 namespace Frontend\ContenidosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Analista
@@ -26,6 +27,7 @@ class Analista
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=60, nullable=false)
+     * @Assert\NotBlank()
      */
     private $nombre;
 

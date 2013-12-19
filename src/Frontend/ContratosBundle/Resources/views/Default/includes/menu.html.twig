@@ -1,0 +1,21 @@
+<div id='cssmenu'>
+   <ul>   
+      <li class='active'><a href='{{ path('contratos') }}'><span>INICIO</span></a></li>
+         
+      <li class='has-sub'><a href='#'><span>OTROS DATOS</span></a>
+         <ul>
+            <li class='has-sub'><a href='{{ path('abogados') }}'><span>ABOGADOS</span></a></li>
+            <li class='has-sub'><a href='{{ path('Direccionsolicitante') }}'><span>DIRRECCIONES SOLICTANTES</span></a></li>
+         </ul>
+      </li> 
+
+      <li class='has-sub'><a href= '#' ><span>AÑOS ANTERIORES</span></a>
+         <ul>
+            <li><a href='{{ path('contratos_pasados_new') }}'><span>CARGAR CONTRATO</span></a></li>
+         </ul>
+      </li>
+
+      <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
+      <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
+   </ul>
+</div>

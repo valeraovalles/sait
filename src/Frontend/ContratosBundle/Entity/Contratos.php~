@@ -1,0 +1,116 @@
+<?php
+
+namespace Frontend\ContratosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Contratos
+ *
+ * @ORM\Table(name="contratos.contratos")
+ * @ORM\Entity
+ */
+class Contratos
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="contratos.contratos_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_registro", type="date", nullable=false)
+     */
+    private $fechaRegistro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo", type="string", length=20, nullable=false)
+     */
+    private $codigo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="empresa", type="string", length=200, nullable=false)
+     */
+    private $empresa;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_inicio", type="date", nullable=false)
+     */
+    private $fechaInicio;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_fin", type="date", nullable=true)
+     */
+    private $fechaFin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="duracion", type="string", length=100, nullable=true)
+     */
+    private $duracion;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="monto_bs", type="decimal", nullable=true)
+     */
+    private $montoBs;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="monto_dolares", type="decimal", nullable=true)
+     */
+    private $montoDolares;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="monto_euros", type="decimal", nullable=true)
+     */
+    private $montoEuros;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="obra", type="string", length=200, nullable=true)
+     */
+    private $obra;
+
+    /**
+     * @var \Contratos.direccionsolicitante
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\ContratosBundle\Entity\Direccionsolicitante")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_direccion", referencedColumnName="id")
+     * })
+     */
+    private $idDireccion;
+
+    /**
+     * @var \Contratos.abogados
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\ContratosBundle\Entity\Abogados")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_abogado", referencedColumnName="id")
+     * })
+     */
+    private $idAbogado;
+
+
+}

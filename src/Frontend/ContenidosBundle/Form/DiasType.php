@@ -12,7 +12,11 @@ class diasType extends AbstractType
     {
         $builder
             //->add('id')
-            ->add('nombre')
+            ->add('nombre', 'choice',array( 'empty_value' => 'Seleccione...',
+                                            'expanded'=>false, 
+                                            'multiple'=>false,
+                                          ))
+                
        ;
     }
 

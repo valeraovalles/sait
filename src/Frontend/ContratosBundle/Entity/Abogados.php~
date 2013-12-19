@@ -1,0 +1,33 @@
+<?php
+
+namespace Frontend\ContratosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Abogados
+ *
+ * @ORM\Table(name="contratos.abogados")
+ * @ORM\Entity
+ */
+class Abogados
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="contratos.abogados_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=100, nullable=true)
+     */
+    private $nombre;
+
+
+}

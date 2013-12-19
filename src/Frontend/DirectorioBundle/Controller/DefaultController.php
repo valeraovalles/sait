@@ -6,8 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+    public function inicioAction()
     {
-        return $this->render('DirectorioBundle:Default:index.html.twig', array('name' => $name));
+        return $this->render('DirectorioBundle:Default:inicio.html.twig', array());
     }
+
+
+
+
+
 }

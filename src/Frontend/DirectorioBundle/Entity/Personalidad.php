@@ -3,6 +3,9 @@
 namespace Frontend\DirectorioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * Directorio.personalidad
@@ -37,9 +40,9 @@ class Personalidad
     private $apellido;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="telefono", type="integer", nullable=false)
+     * @ORM\Column(name="telefono", type="string", length=30, nullable=false)
      */
     private $telefono;
 
@@ -53,16 +56,51 @@ class Personalidad
     /**
      * @var string
      *
-     * @ORM\Column(name="especialidad", type="string", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Frontend\DirectorioBundle\Entity\Especialidad")
+     * 
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="area", referencedColumnName="id")
+     * })
+     * @Assert\NotBlank()
      */
     private $especialidad;
+
+
+    /**
+     * @var \Pais
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\DistribucionBundle\Entity\Pais")
+     * 
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pais", referencedColumnName="id")
+     * })
+     * @Assert\NotBlank()
+     */
+    private $pais;
+
+
+    /**
+     * @var \Pais
+     *
+     * @ORM\ManyToOne(targetEntity="Frontend\DistribucionBundle\Entity\Pais")
+     * 
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="paisprocedencia", referencedColumnName="id")
+     * })
+     * @Assert\NotBlank()
+     */
+    private $paisprocedencia;
+
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pais", type="string", nullable=false)
+     * @ORM\Column(name="ciudad", type="string", nullable=false)
      */
-    private $pais;
+    private $ciudad;
+
+
+
 
 
 
@@ -194,10 +232,10 @@ class Personalidad
     /**
      * Set pais
      *
-     * @param string $pais
+     * @param \Frontend\DistribucionBundle\Entity\Pais $pais
      * @return Personalidad
      */
-    public function setPais($pais)
+    public function setPais(\Frontend\DistribucionBundle\Entity\Pais $pais = null)
     {
         $this->pais = $pais;
     
@@ -207,10 +245,61 @@ class Personalidad
     /**
      * Get pais
      *
-     * @return string 
+     * @return \Frontend\DistribucionBundle\Entity\Pais 
      */
     public function getPais()
     {
         return $this->pais;
     }
+
+
+    /**
+     * Set paisprocedencia
+     *
+     * @param \Frontend\DistribucionBundle\Entity\Pais $pais
+     * @return Personalidad
+     */
+    public function setPaisprocedencia(\Frontend\DistribucionBundle\Entity\Pais $pais = null)
+    {
+        $this->paisprocedencia = $pais;
+    
+        return $this;
+    }
+
+    /**
+     * Get paisprocedencia
+     *
+     * @return \Frontend\DistribucionBundle\Entity\Pais 
+     */
+    public function getPaisprocedencia()
+    {
+        return $this->paisprocedencia;
+    }
+
+
+    /**
+     * Set ciudad
+     *
+     * @param string $ciudad
+     * @return Personalidad
+     */
+    public function setCiudad($ciudad)
+    {
+        $this->ciudad = $ciudad;
+    
+        return $this;
+    }
+
+    /**
+     * Get ciudad
+     *
+     * @return string 
+     */
+    public function getCiudad()
+    {
+        return $this->ciudad;
+    }
+
+
+
 }

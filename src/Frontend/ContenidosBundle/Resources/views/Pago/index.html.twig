@@ -2,7 +2,18 @@
 
 {% block body -%}
  {{ parent() }}
-    <div class="titulo">PAGOS ASOCIADOS AL PROVEEDOR</div>
+    <div class="titulo">PAGOS ASOCIADOS A LA CONTRATACION </div>
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
 
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
@@ -18,9 +29,13 @@
         <tbody>
         {% for entity in entities %}
             <tr align="center">
-                <td><a href="{{ path('pago_show', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}">{{ entity.numMemo }}</a></td>    
+                <td><a href="{{ path('pago_show', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}">{{ entity.numMemo }}</a></td>    
                 <td>{{ entity.numFactura }}</td>
-                <td>{{ entity.montoMe }}</td>
+                {% if entity.montoMe != NULL %}
+                    <td>{{ entity.montoMe }}</td>
+                {% else  %}
+                    <td>NO APLICA</td>
+                {% endif %}
                 <td>{{ entity.montoBs }}</td>
                 {% if entity.tipoPago == 0 %}
                     <td>Cheque</td>
@@ -28,14 +43,19 @@
                     <td>Transferencia</td>
                 {% endif %}
                 <td>
-                    <a href="{{ path('pago_edit', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
-                    <a href="{{ path('pago_edit', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="control de pagos"><img width="20px" src="{{ asset('images/dinero.jpg')}}"></a>
+                    <a href="{{ path('pago_edit', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="22px" src="{{ asset('images/edit.png')}}"></a>
+                    
+                    <a onclick="return confirm('¿Desea eliminar?')" href="{{ path('pago_delete', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="eliminar pago"><img width="18px" src="{{ asset('images/mal.jpeg')}}"></a>                    
+
+                    <a href="{{ path('pago_edit', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="control de pagos"><img width="22px" src="{{ asset('images/dinero.jpg')}}"></a>
+
                 </td>
             </tr>
         {% endfor %}
         </tbody>
-    </table><br>
-    <a class="btn btn-primary dropdown-toggle" href="{{ path( 'pago_new', {'id_proveedor': id_proveedor} ) }}">Registrar Nuevo Pago</a>
+    </table><br><br>
+    <a class="btn btn-primary dropdown-toggle" href="{{ path( 'pago_new', {'id_contratacion': id_contratacion, 'id_presupuesto': id_presupuesto, 'id_proveedor':id_proveedor} ) }}">Registrar Nuevo Pago</a>
+    <a href="{{ path('contratacion' , { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
         
     <br><br>
     {% endblock %}

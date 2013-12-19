@@ -1,20 +1,64 @@
 {% extends '::directorio.html.twig' %}
 
 {% block body -%}
-    <h1>Institucion creation</h1>
+    <h1>Crear Institucion </h1>
+    <br><br>
 
-    <form action="{{ path('institucion_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
-        <p>
-            <button type="submit">Create</button>
-        </p>
+    <form action="{{ path('institucion_create') }}" method="post" {{ form_enctype(form) }} novalidate>
+        {{ form_widget(form._token) }}
+            <div id="operador">
+                <div class="form-contenedor">
+                    <div>{{ form_errors(form.institucion) }}</div>
+                    <div class="labels">Institucion:</div>
+                    <div class="widgets">{{ form_widget(form.institucion) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.director) }}</div>
+                    <div class="labels">Director:</div>
+                    <div class="widgets">{{ form_widget(form.director) }}</div>
+                </div>
+  
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.areainst) }}</div>
+                    <div class="labels">Area:</div>
+                    <div class="widgets">{{ form_widget(form.areainst) }}</div>
+                </div>
+                
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.telfinst) }}</div>
+                    <div class="labels">Telefono:</div>
+                    <div class="widgets">{{ form_widget(form.telfinst) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.emailinst) }}</div>
+                    <div class="labels">Email:</div>
+                    <div class="widgets">{{ form_widget(form.emailinst) }}</div>
+                </div>
+                
+
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.direccion) }}</div>
+                    <div class="labels">Direccion:</div>
+                    <div class="widgets">{{ form_widget(form.direccion) }}</div>
+                </div>
+
+                <div class="form-contenedor">
+                    <div class="text-warning">{{ form_errors(form.pais) }}</div>
+                    <div class="labels">Pais:</div>
+                    <div class="widgets">{{ form_widget(form.pais) }}</div>
+                </div>
+                <br><br>
+
+        <button type="submit" class="btn btn-primary">Crear</button>
+
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('institucion') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+
+
+        <a class="btn"href="{{ path('institucion') }}">Listado</a>
+
+
+
 {% endblock %}

@@ -19,6 +19,7 @@ pais_estado_ciudad:
     pattern:  /paisestadociudad/{id}/{mostrar}
     defaults: { _controller: "DistribucionBundle:Operador:paisestadociudad" }  
 
+
 xx:
     pattern: /xx
     defaults:

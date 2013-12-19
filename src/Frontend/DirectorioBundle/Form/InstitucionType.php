@@ -17,7 +17,8 @@ class InstitucionType extends AbstractType
             ->add('telfinst')
             ->add('emailinst')
             ->add('direccion')
-            ->add('pais')
+            ->add('pais',null,array( 'empty_value' => 'Seleccione...'))
+
         ;
     }
 

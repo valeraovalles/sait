@@ -1,0 +1,53 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block body -%}
+ {{ parent() }}
+    <div class="titulo">NUEVA EXTENSION DE PRESUPUESTO</div>
+
+    <form novalidate="novalidate" action="{{ path('presupuesto_extensioncreate', { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
+        <fieldset>
+            <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
+            <div id="descripcion" class="form-show_edit">
+                <br>
+                <div class="form-contenedor">
+                    {{ form_errors(form.descripcion) }}
+                    <div class="labels">Descripcion:</div>
+                    <div class="widgets">{{ form_widget(form.descripcion) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaInicio) }}
+                    <div class="labels">Fecha de Inicio:</div>
+                    <div class="widgets">{{ form_widget(form.fechaInicio) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(form.fechaFin) }}
+                    <div class="labels">Fecha de Fin:</div>
+                    <div class="widgets">{{ form_widget(form.fechaFin) }}</div>
+                </div>
+                {% if dolares != NULL or dolares != 0 %}
+                    <div class="form-contenedor">
+                        {{ form_errors(form.montoDolares) }}
+                        <div class="labels">Monto en Dolares:</div>
+                        <div class="widgets">{{ form_widget(form.montoDolares) }}</div>
+                    </div>
+                {% endif %}
+                {% if euros != NULL or euros != 0 %}
+                    <div class="form-contenedor">
+                        {{ form_errors(form.montoEuros) }}
+                        <div class="labels">Monto en Euros:</div>
+                        <div class="widgets">{{ form_widget(form.montoEuros) }}</div>
+                    </div>
+                {% endif %}
+                <div class="form-contenedor">
+                    {{ form_errors(form.montoBs) }}
+                    <div class="labels">Monto en Bs:</div>
+                    <div class="widgets">{{ form_widget(form.montoBs) }}</div>
+                </div>
+                <button type="submit" class="btn">CREAR</button>
+                <br><br>
+            </div>
+        </fieldset>         
+    </form>
+
+    <a href="{{ path('presupuesto_extensionindex' , { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+{% endblock %}

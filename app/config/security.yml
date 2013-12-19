@@ -50,9 +50,11 @@ security:
 
         - { path: ^/constancia/inicio, roles: ROLE_CONSTANCIA_ADMINISTRADOR}
         - { path: ^/constancia/edit, roles: ROLE_CONSTANCIA_ADMINISTRADOR}
+
+
+
         - { path: ^/constancia, roles: ROLE_USER}
 
-        
         - { path: ^/sit/inicio, roles: ROLE_USER}
         - { path: ^/sit/ticket/create, roles: ROLE_USER}
         - { path: ^/sit/ticketgeneral, roles: ROLE_SIT_GENERAL}
@@ -62,15 +64,19 @@ security:
         - { path: ^/sit/categoria, roles: ROLE_SIT_ADMINISTRADOR}
         - { path: ^/sit/subcategoria, roles: ROLE_SIT_ADMINISTRADOR}
 
-        - { path:  ^/licencias/reportes, roles:[ROLE_LICENCIAS , ROLE_LICADMIN] }
+
+        - { path: ^/licencias/reportes, roles:[ROLE_LICENCIAS , ROLE_LICADMIN] }
         - { path: ^/licencias/modif, roles:ROLE_LICADMIN }
 
-        - { path: ^/contenidos, roles:ROLE_CONTENIDOS }
+        - { path: ^/contenidos, roles:[ROLE_CONTENIDOS_ADMIN , ROLE_CONTENIDOS_CONTENIDOS, ROLE_CONTENIDOS_EQUIPOS, ROLE_CONTENIDOS_COMPRAS] }
+
+        - { path: ^/contratos, roles:ROLE_CONTRATOS }
 
         - { path: ^/neto, roles: ROLE_USER }
 
         - { path: ^/visita, roles: ROLE_VISITAS }
 
+        - { path: ^/directorio, roles: ROLE_DIRECTORIO }
         - { path: ^/jornada/numeracion, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/jornada/homepagenum, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/jornada/ajaxmercalsiguienteautomatico, roles: IS_AUTHENTICATED_ANONYMOUSLY}

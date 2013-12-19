@@ -1,0 +1,26 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+{% if mostrar == 'presupuesto' %}
+	<div class="form-contenedor">
+        <div class="labels">Descripci&oacute;n del Presupuesto:</div>
+		<div class="widgets">{{ form_widget(form.descripcion) }}</div>
+    </div>
+    <div id="contratacion"></div>
+{% elseif mostrar == 'contratacion'%}
+    <div class="form-contenedor">
+        <div class="labels">Contratacion:</div>
+        <div class="widgets">{{ form_widget(form.contratacion) }}</div>
+    </div>    
+{% endif %}
+
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_descripcion').change(function(){
+                var dato = $("#form_descripcion").val();
+                var ruta = "{{ path('ajax_disponibilidad', {'datos': 'variable','mostrar': 'contratacion'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#contratacion').load(ruta);
+            });
+        });
+</script>

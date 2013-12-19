@@ -3,6 +3,7 @@
 namespace Frontend\ContenidosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Unidadsolicitante
@@ -26,6 +27,7 @@ class Unidadsolicitante
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=100, nullable=true)
+     * @Assert\NotBlank()
      */
     private $nombre;
 
@@ -36,6 +38,7 @@ class Unidadsolicitante
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_tipoproveedor", referencedColumnName="id")
      * })
+     * @Assert\NotBlank()
      */
     private $idTipoproveedor;
 

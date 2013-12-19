@@ -1,94 +1,177 @@
 {% extends '::contenidos.html.twig' %}
-{% block title %}Licencia - Nueva{% endblock %}
 
 {% block titulobanner %}
-    LICENCIAS
+    PAGOS
 {% endblock %}
     
 {% block body -%}
     {{ parent() }}
     <div class="titulo">NUEVO REGISTRO</div>
-    <form action="{{ path('pago_create', {'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(form) }}>
+
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('alert') %}
+            <div class="alert alert-danger">
+                {{ flashMessage }}
+            </div>
+       {% endfor %}
+
+
+    <form id="pagonew" novalidate="novalidate" action="{{ path('pago_create', {'id_contratacion':id_contratacion, 'tipomoneda': tipomoneda, 'id_proveedor':id_proveedor, 'id_presupuesto':id_presupuesto }) }}" method="post" {{ form_enctype(form) }} {{ form_enctype(form1) }}>{{ form_widget(form._token) }} {{ form_widget(form1._token) }}
         <fieldset>   
-            <legend id="a"><div class="divisor">DATOS DEL PAGO</div> </legend>
-            <div id="descripcion" class="form-show">
-                <br>
-                <div class="contenedor">
-                    {{ form_errors(form.numMemo) }}
-                    <div class="labels">N&uacute;mero del Memorandum:</div>
-                    <div class="widgets">{{ form_widget(form.numMemo) }}</div>
-                </div>
+            
+            <div id="descripcion" class="form-show_edit">
+
+                <legend id="b"><div class="divisor">DATOS DE UNIDAD EJECUTORA</div> </legend>
                 <div class="form-contenedor">
                     {{ form_errors(form.idUnidadejec) }}
-                    <div class="label">Unidad Ejecutora:</div>
-                    <div class="widgets">{{ form_widget(form.idUnidadejec) }}</div>
+                    <div class="labels">Unidad Ejecutora:</div>
+                    <div class="dato">{{ form_widget(form.idUnidadejec) }}</div>
                 </div>
+{# DGE #}
+                <div id="dge" style="display:none;">
+                    <div class="form-contenedor">
+                        <div class="labelss">Fecha de Recepcion en Oficina Directora:</div>
+                        <div class="datos">{{ form_widget(form1.fechaUnidaduno) }}</div>
+                    </div>
+                    <div class="form-contenedor">
+                        <div class="labelss">Fecha de Recepcion en Presupuesto:</div>
+                        <div class="datos">{{ form_widget(form1.fechaUnidaddos) }}</div>
+                    </div>
+                    <div class="form-contenedor">
+                        <div class="labelss">Fecha de Recepcion en Compras:</div>
+                        <div class="datos">{{ form_widget(form1.fechaUnidadtres) }}</div>
+                    </div>
+                    <div class="form-contenedor">
+                        <div class="labelss">Fecha de Recepcion en Finanzas:</div>
+                        <div class="datos">{{ form_widget(form1.fechaUnidadcuatro) }}</div>
+                    </div>
+                    <div class="form-contenedor">
+                        <div class="labelss">Fecha de Recepcion en Tesorería:</div>
+                        <div class="datos">{{ form_widget(form1.fechaUnidadcinco) }}</div>
+                    </div>
+                </div>
+
+{# RRHH #}
+                <div id="rrhh" style="display:none;">    
+                    <div class="form-contenedor">
+                        <div class="labelss">Fecha de Recepcion en RRHH:</div>
+                        <div class="datos">{{ form_widget(form.fechaUnidadejec) }}</div>
+                    </div>             
+                </div>
+
+{# DIAS DE ENTREGA #}
+                {% if compras == 1 %}
+                    <legend id="b"><div class="divisor">CONDICIONES DEL PAGO</div> </legend>
+                    <div class="form-contenedor">
+                        {{ form_errors(form.contraEntrega) }}
+                        <div class="labels">Pago Contra Entrega:</div>
+                        <div class="dato">{{ form_widget(form.contraEntrega) }}</div>
+                    </div>
+                {% endif %}
+
+
+
+                <div id="vista"></div>
+                <legend id="a"><div class="divisor">DATOS DEL PAGO</div> </legend>
                 <div class="form-contenedor">
-                    {{ form_errors(form.fechaUnidadejec) }}
-                    <div class="label">Fecha de Recepción Unid. Ejec.:</div>
-                    <div class="widgets">{{ form_widget(form.fechaUnidadejec) }}</div>
-                </div>
+                    {{ form_errors(form.numMemo) }}
+                    <div class="labels">N&uacute;mero del Memorandum:</div>
+                    <div class="dato">{{ form_widget(form.numMemo) }}</div>
+                </div>                
                 <div class="form-contenedor">
                     {{ form_errors(form.numFactura) }}
-                    <div class="label">N&uacute;mero de factura:</div>
-                    <div class="widgets">{{ form_widget(form.numFactura) }}</div>
+                    <div class="labels">N&uacute;mero de factura:</div>
+                    <div class="dato">{{ form_widget(form.numFactura) }}</div>
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaFactura) }}
-                    <div class="label">Fecha de factura:</div>
-                    <div class="widgets">{{ form_widget(form.fechaFactura) }}</div>
+                    <div class="labels">Fecha de factura:</div>
+                    <div class="dato">{{ form_widget(form.fechaFactura) }}</div>
                 </div>
-                <div class="form-contenedor">
-                    {{ form_errors(form.tipoMoneda) }}
-                    <div class="label">Tipo de Moneda:</div>
-                    <div class="widgets">{{ form_widget(form.tipoMoneda) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(form.montoMe) }}
-                    <div class="label">Monto en $/€:</div>
-                    <div class="widgets">{{ form_widget(form.montoMe) }}</div>
-                </div>
+
+                {% if tipomoneda == 1 %}
+                    <div class="form-contenedor">
+                        {{ form_errors(form.montoMe) }}
+                        <div class="labels">Monto en $:</div>
+                        <div class="dato">{{ form_widget(form.montoMe) }}</div>
+                    </div> 
+                {% elseif tipomoneda == 2 %}
+                    <div class="form-contenedor">
+                        {{ form_errors(form.montoMe) }}
+                        <div class="labels">Monto en €:</div>
+                        <div class="dato">{{ form_widget(form.montoMe) }}</div>
+                    </div>                   
+                {% endif %}
+        
                 <div class="form-contenedor">
                     {{ form_errors(form.montoBs) }}
-                    <div class="label">Monto en Bs:</div>
-                    <div class="widgets">{{ form_widget(form.montoBs) }}</div>
+                    <div class="labels">Monto en Bs:</div>
+                    <div class="dato">{{ form_widget(form.montoBs) }}</div>
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.tipoPago) }}
-                    <div class="label">Tipo de Pago:</div>
-                    <div class="widgets">{{ form_widget(form.tipoPago) }}</div>
+                    <div class="labels">Tipo de Pago:</div>
+                    <div class="dato">{{ form_widget(form.tipoPago) }}</div>
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.numPago) }}
-                    <div class="label">N&uacute;mero del Pago:</div>
-                    <div class="widgets">{{ form_widget(form.numPago) }}</div>
+                    <div class="labels">N&uacute;mero del Pago:</div>
+                    <div class="dato">{{ form_widget(form.numPago) }}</div>
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaPago) }}
-                    <div class="label">Fecha del Pago:</div>
-                    <div class="widgets">{{ form_widget(form.fechaPago) }}</div>
+                    <div class="labels">Fecha del Pago:</div>
+                    <div class="dato">{{ form_widget(form.fechaPago) }}</div>
                 </div>
-            </div>
-        </fieldset>
-        <br>
-        <fieldset>
-            <legend id="b"><div class="divisor">CONDICIONES DEL PAGO</div> </legend>
-            <div id="detalles" class="form-show">
-                <div class="form-contenedor">
-                    {{ form_errors(form.contraEntrega) }}
-                    <div class="labels">Pago Contra Entrega:</div>
-                    <div class="widgets">{{ form_widget(form.contraEntrega) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(form.diasEntrega) }}
-                    <div class="labels">D&iacute;as de Entrega:</div>
-                    <div class="widgets">{{ form_widget(form.diasEntrega) }}</div>
-                </div>
+
+
+                <button type="submit" class="btn btn-primary dropdown-toggle">Registrar Pago</button><br><br>
             </div>    
         </fieldset>
        <br>
-       <a class="btn" href="{{ path( 'pago', {'id_proveedor':id_proveedor }  ) }}">Listado de Pagos</a>
-        <button type="submit" class="btn">Registrar Pago</button> 
+        <a href="{{ path('pago' , { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto, 'id_contratacion':id_contratacion } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
     </form>
-<script src="{{ asset('js/contenidos/efecto.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#frontend_contenidosbundle_pagotype_contraEntrega').change(function(){
+                var dia = $("#frontend_contenidosbundle_pagotype_contraEntrega").val();
+                var ruta = "{{ path('ajax_pago', {'dias': 'variable'}) }}";
+                ruta = ruta.replace("variable", dia);
+                $('#vista').load(ruta);
+            });
+
+            $('#frontend_contenidosbundle_pagotype_idUnidadejec').change(function(){
+                if($("#frontend_contenidosbundle_pagotype_idUnidadejec").val()=='1'){
+                        $("#rrhh").show();
+                        $("#dge").hide();
+                }
+
+                if($("#frontend_contenidosbundle_pagotype_idUnidadejec").val()=='2'){
+                        $("#dge").show();
+                        $("#rrhh").hide();
+                }                           
+            });
+
+            if($("#frontend_contenidosbundle_pagotype_idUnidadejec").val()=='1'){
+                        $("#rrhh").show();
+                        $("#dge").hide();
+            }
+
+            if($("#frontend_contenidosbundle_pagotype_idUnidadejec").val()=='2'){
+                        $("#dge").show();
+                        $("#rrhh").hide();
+            }
+
+
+        });
+    </script>
+
 {% endblock %}
+
+

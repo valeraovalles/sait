@@ -14,44 +14,14 @@ class PersonalidadType extends AbstractType
             ->add('nombre')
             ->add('apellido')
             ->add('telefono', 'text')
+            ->add('ciudad', 'text')
             ->add('email')
-            ->add('especialidad','choice', array(
-                                            'expanded'=>false, 
-                                            'multiple'=>false,
-                                            'choices' => array(
-                                                                    "0"=> "", 
-                                                                    "Economista"=> "Economista",
-                                                                    "2"=> "Historiador", 
-                                                                    "3"=> "Novelista",
-                                                                    "4"=> "Poeta", 
-                                                                    "5"=> "Escritor",
-                                                                    "6"=> "Teológo", 
-                                                                    "7"=> "Dirigente político",
-                                                                    "8"=> "Líder social", 
-                                                                    "9"=> "Biólogo",
-                                                                    "10"=> "Físico", 
-                                                                    "11"=> "Químico",
-                                                                    "12"=> "Ecologista", 
-                                                                    "13"=> "Petróleo",
-                                                                    "14"=> "Derechos Humanos", 
-                                                                    "15"=> "Cineasta",
-                                                                    "16"=> "Documentalista", 
-                                                                    "17"=> "Músico",
-                                                                    "18"=> "Cantante",
-                                                                    "19"=> "Compositor",
-                                                                    "20"=> "Artista",
-                                                                    "21"=> "Artista Plástico",
-                                                                    "22"=> "Escultor",
-                                                                    "23"=> "Pintor",
-                                                                    "23"=> "Politólogo",
-                                                                    
-                                                                  )
-                                        ))
-
-
-            ->add('pais')
-        ;
+            ->add('especialidad',null,array( 'empty_value' => 'Seleccione...'))
+            ->add('pais',null,array( 'empty_value' => 'Seleccione...'))
+            ->add('paisprocedencia',null,array( 'empty_value' => 'Seleccione...'))
+;
     }
+
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
@@ -60,8 +30,12 @@ class PersonalidadType extends AbstractType
         ));
     }
 
+
     public function getName()
     {
         return 'frontend_directoriobundle_personalidadtype';
     }
+
+
 }
+

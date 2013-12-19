@@ -8,7 +8,19 @@
  {{ parent() }}
     <div class="titulo">EDITAR DATOS DE ANALISTA</div>
 
-    <form novalidate action="{{ path('updateanalista', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+    
+    <form novalidate="novalidate" action="{{ path('updateanalista', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
         <input type="hidden" name="_method" value="PUT" />
         <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
             <div id="descripcion" class="form-show_edit">

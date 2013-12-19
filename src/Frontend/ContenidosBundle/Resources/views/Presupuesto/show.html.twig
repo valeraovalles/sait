@@ -9,6 +9,17 @@
 {{ parent() }}
     <div class="titulo">DETALLES PRESUPUESTO</div>
 
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
 
     {% if entity.tipo == 1 %}
         <div class="activo">EXTENSION DE PRESUPUESTO</div>
@@ -17,6 +28,10 @@
     <div class="form-show_edit">
         <fieldset>
             <legend id="a"><div class="divisor">DATOS DEL PRESUPUESTO</div> </legend>
+            <div class="contenedor">
+                    <div class="labels">Descripci&oacute;n:</div>
+                    <div class="dato">{{ entity.descripcion }}</div>
+                </div>
             <div class="contenedor">
                 <div class="labels">Fecha de Inicio:</div>
                 <div class="dato">{{ entity.fechaInicio|date('Y-m-d') }}</div>
