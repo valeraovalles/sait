@@ -10,7 +10,7 @@
 
      <div class="titulo">EDITAR DATOS DEL PRESUPUESTO</div>
 
-    <form novalidate="novalidate" action="{{ path('presupuesto_update', { 'id': entity.id, 'id_proveedor': id_proveedor  }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <form novalidate="novalidate" action="{{ path('presupuesto_update', { 'id': entity.id, 'id_proveedor': id_proveedor}) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
         <input type="hidden" name="_method" value="PUT" />
         
         <div id="descripcion" class="form-show_edit">
@@ -32,21 +32,24 @@
                     <div class="labels">Fecha de Fin:</div>
                     <div class="widgets">{{ form_widget(edit_form.fechaFin) }}</div>
                 </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.montoDolares) }}
-                    <div class="labels">Monto en Dolares:</div>
-                    <div class="widgets">{{ form_widget(edit_form.montoDolares) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.montoEuros) }}
-                    <div class="labels">Monto en Euros:</div>
-                    <div class="widgets">{{ form_widget(edit_form.montoEuros) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.montoBs) }}
-                    <div class="labels">Monto en Bolivares:</div>
-                    <div class="widgets">{{ form_widget(edit_form.montoBs) }}</div>
-                </div>
+                {% if tipomoneda == 1 %}
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form.montoDolares) }}
+                        <div class="labels">Monto en Dolares:</div>
+                        <div class="widgets">{{ form_widget(edit_form.montoDolares) }}</div>
+                    </div>
+                {% elseif tipomoneda == 2 %}
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form.montoEuros) }}
+                        <div class="labels">Monto en Euros:</div>
+                        <div class="widgets">{{ form_widget(edit_form.montoEuros) }}</div>
+                    </div>
+                {% endif %}
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form.montoBs) }}
+                        <div class="labels">Monto en Bolivares:</div>
+                        <div class="widgets">{{ form_widget(edit_form.montoBs) }}</div>
+                    </div>
                 
             </fieldset>
             <button type="submit" class="btn">Editar</button><br><br>

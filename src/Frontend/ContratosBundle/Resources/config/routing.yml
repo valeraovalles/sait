@@ -1,0 +1,112 @@
+##########################
+#   CONTRATOS
+##########################
+
+contratos:
+    pattern:  /inicio
+    defaults: { _controller: "ContratosBundle:Contratos:index" }
+
+contratos_show:
+    pattern:  /detalle/{id}
+    defaults: { _controller: "ContratosBundle:Contratos:show" }
+
+contratos_new:
+    pattern:  /nuevo
+    defaults: { _controller: "ContratosBundle:Contratos:new" }
+
+contratos_create:
+    pattern:  /crear
+    defaults: { _controller: "ContratosBundle:Contratos:create" }
+    requirements: { _method: post }
+
+contratos_edit:
+    pattern:  /editar/{id}
+    defaults: { _controller: "ContratosBundle:Contratos:edit" }
+
+contratos_update:
+    pattern:  /actualizar/{id}
+    defaults: { _controller: "ContratosBundle:Contratos:update" }
+    requirements: { _method: post|put }
+
+contratos_delete:
+    pattern:  /eliminar/{id}
+    defaults: { _controller: "ContratosBundle:Contratos:delete" }
+
+contratos_pasados_new:
+    pattern:  /nuevo/años_anteriores
+    defaults: { _controller: "ContratosBundle:Contratos:newpasados" }
+
+contratos_pasados_create:
+    pattern:  /crear/años_anteriores
+    defaults: { _controller: "ContratosBundle:Contratos:createpasados" }
+    requirements: { _method: post }
+
+
+##########################
+#   ABOGADOS
+##########################
+
+abogados:
+    pattern:  /abogados/inicio
+    defaults: { _controller: "ContratosBundle:Abogados:index" }
+
+abogados_show:
+    pattern:  /abogados/detalles/{id}
+    defaults: { _controller: "ContratosBundle:Abogados:show" }
+
+abogados_new:
+    pattern:  /abogados/nuevo
+    defaults: { _controller: "ContratosBundle:Abogados:new" }
+
+abogados_create:
+    pattern:  /abogados/crear
+    defaults: { _controller: "ContratosBundle:Abogados:create" }
+    requirements: { _method: post }
+
+abogados_edit:
+    pattern:  /abogados/editar/{id}
+    defaults: { _controller: "ContratosBundle:Abogados:edit" }
+
+abogados_update:
+    pattern:  /abogados/actualizar/{id}
+    defaults: { _controller: "ContratosBundle:Abogados:update" }
+    requirements: { _method: post|put }
+
+abogados_delete:
+    pattern:  /abogados/eliminar/{id}
+    defaults: { _controller: "ContratosBundle:Abogados:delete" }
+
+
+##########################
+#   DIRECCION SOLICITANTE
+##########################
+
+Direccionsolicitante:
+    pattern:  /direccion/solicitante/
+    defaults: { _controller: "ContratosBundle:Direccionsolicitante:index" }
+
+Direccionsolicitante_show:
+    pattern:  /direccion/solicitante/detalles/{id}
+    defaults: { _controller: "ContratosBundle:Direccionsolicitante:show" }
+
+Direccionsolicitante_new:
+    pattern:  /direccion/solicitante/nuevo
+    defaults: { _controller: "ContratosBundle:Direccionsolicitante:new" }
+
+Direccionsolicitante_create:
+    pattern:  /direccion/solicitante/crear
+    defaults: { _controller: "ContratosBundle:Direccionsolicitante:create" }
+    requirements: { _method: post }
+
+Direccionsolicitante_edit:
+    pattern:  /direccion/solicitante/editar/{id}
+    defaults: { _controller: "ContratosBundle:Direccionsolicitante:edit" }
+
+Direccionsolicitante_update:
+    pattern:  /direccion/solicitante/actualizar/{id}
+    defaults: { _controller: "ContratosBundle:Direccionsolicitante:update" }
+    requirements: { _method: post|put }
+
+Direccionsolicitante_delete:
+    pattern:  /direccion/solicitante/eliminar/{id}
+    defaults: { _controller: "ContratosBundle:Direccionsolicitante:delete" }

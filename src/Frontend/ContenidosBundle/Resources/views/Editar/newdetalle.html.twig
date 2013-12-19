@@ -8,7 +8,7 @@
     {{ parent() }}
     <div class="titulo">Detalle Tipo Proveedor</div>
 
-    <form action="{{ path('createdetalle') }}" method="post" {{ form_enctype(form) }}>
+    <form novalidate="novalidate" action="{{ path('createdetalle') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
        
         <div id="descripcion" class="form-show_edit">
             <div class="contenedor">

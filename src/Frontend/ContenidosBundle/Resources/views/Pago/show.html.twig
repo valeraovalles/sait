@@ -2,18 +2,200 @@
 
 {% block body -%}
  {{ parent() }}
-    <div class="titulo">DETALLES</div>
+    <div class="titulo">DETALLES DEL PAGO</div>
 
-    <div id="descripcion" class="form-show_edit">
+     {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+
+    <div class="form-show_edit">
+        <legend id="b"><div class="divisor">DATOS DE UNIDAD EJECUTORA</div> </legend>
             <div class="contenedor">
-                <br>
+                <div class="labels">Unidad Ejecutora:</div>
+                <div class="dato">{{ entity.idUnidadejec }}</div>
+            </div>
+            <div class="contenedor">
+                <div class="labels">Fecha de Entrega a la Unidad Ejecutora:</div>
+                <div class="dato">{{ entity.fechaUnidadejec|date('Y-m-d') }}</div>
+            </div>
+            {% if entity.idUnidadejec.id == 2 %}
+                <div class="contenedor">
+                    <div class="labels">Estatus del Pago:</div>
+                    <div class="dato">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <th>Unidad</th>
+                                    <th>Fecha de Recepcion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if estatus == 1 %}
+                                    <tr align="center">
+                                        <td>Oficina Directora</td> 
+                                        {% if entity1.0.fechaUnidaduno == NULL %}
+                                            <td> NO POSEE FECHA </td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidaduno|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>
+                                {% elseif estatus == 2 %}
+                                    <tr align="center">
+                                        <td>Oficina Directora</td> 
+                                        {% if entity1.0.fechaUnidaduno == NULL %}
+                                            <td> NO POSEE FECHA </td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidaduno|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>
+                                    <tr align="center">
+                                        <td>Presupuesto</td> 
+                                        {% if entity1.0.fechaUnidaddos == NULL %}
+                                            <td> NO POSEE FECHA </td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidaddos|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>                                        
+                                {% elseif estatus == 3 %}
+                                    <tr align="center">
+                                        <td>Oficina Directora</td> 
+                                        {% if entity1.0.fechaUnidaduno == NULL %}
+                                            <td> NO POSEE FECHA </td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidaduno|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>
+                                    <tr align="center">
+                                        <td>Presupuesto</td> 
+                                        {% if entity1.0.fechaUnidaddos == NULL %}
+                                            <td> NO POSEE FECHA</td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidaddos|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>
+                                    <tr align="center">
+                                        <td>Compras</td> 
+                                        {% if entity1.0.fechaUnidadtres == NULL %}
+                                            <td> NO POSEE FECHA</td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidadtres|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>
+                                {% elseif estatus == 4 %}
+                                    <tr align="center">
+                                        <td>Oficina Directora</td> 
+                                        {% if entity1.0.fechaUnidaduno == NULL %}
+                                            <td> NO POSEE FECHA</td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidaduno|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>
+                                    <tr align="center">
+                                        <td>Presupuesto</td> 
+                                        {% if entity1.0.fechaUnidaddos == NULL %}
+                                            <td> NO POSEE FECHA</td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidaddos|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>
+                                    <tr align="center">
+                                        <td>Compras</td> 
+                                        {% if entity1.0.fechaUnidadtres == NULL %}
+                                            <td> NO POSEE FECHA</td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidadtres|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>
+                                    <tr align="center">
+                                        <td>Finanzas</td> 
+                                        {% if entity1.0.fechaUnidadcuatro == NULL %}
+                                            <td> NO POSEE FECHA</td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidadcuatro|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>                                                            
+                                {% elseif estatus == 5 %}
+                                    <tr align="center">
+                                        <td>Oficina Directora</td> 
+                                        {% if entity1.0.fechaUnidaduno == NULL %}
+                                            <td> NO POSEE FECHA</td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidaduno|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>
+                                    <tr align="center">
+                                        <td>Presupuesto</td> 
+                                        {% if entity1.0.fechaUnidaddos == NULL %}
+                                            <td> NO POSEE FECHA</td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidaddos|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>
+                                    <tr align="center">
+                                        <td>Compras</td> 
+                                        {% if entity1.0.fechaUnidadtres == NULL %}
+                                            <td> NO POSEE FECHA</td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidadtres|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>
+                                    <tr align="center">
+                                        <td>Finanzas</td> 
+                                        {% if entity1.0.fechaUnidadcuatro == NULL %}
+                                            <td> NO POSEE FECHA</td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidadcuatro|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>
+                                    <tr align="center">
+                                        <td>Tesorería</td> 
+                                        {% if entity1.0.fechaUnidadcinco == NULL %}
+                                            <td> NO POSEE FECHA</td>
+                                        {% else %}
+                                            <td>{{ entity1.0.fechaUnidadcinco|date('Y-m-d') }}</td>
+                                        {% endif %}                                                                  
+                                    </tr>                                  
+                                {% endif %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if compras == 1 %}
+                <legend id="b"><div class="divisor">CONDICIONES DEL PAGO</div> </legend>
+                {% if entity.contraEntrega == 1 %}
+                    <div class="contenedor">
+                        <div class="labels">Pago Contra Entrega:</div>
+                        <div class="dato">SI</div>
+                    </div>
+                {% elseif entity.contraEntrega == 0 %}
+                    <div class="contenedor">
+                        <div class="labels">Pago Contra Entrega:</div>
+                        <div class="dato">NO</div>
+                    </div>
+                    <div class="contenedor">
+                        <div class="labels">Dias de Entrega:</div>
+                        <div class="dato">{{ entity.diasEntrega }}</div>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            <legend id="a"><div class="divisor">DATOS DEL PAGO</div> </legend>
+            <div class="contenedor">
                 <div class="labels">N&uacute;mero del Memorandum:</div>
                 <div class="dato">{{ entity.numMemo }}</div>
             </div>
-            <div class="contenedor">
-                <div class="labels">Fecha de Entrega Unid. Ejec.:</div>
-                <div class="dato">{{ entity.fechaUnidadejec|date('Y-m-d') }}</div>
-            </div>
+            
             <div class="contenedor">
                 <div class="labels">N&uacute;mero de la Factura:</div>
                 <div class="dato">{{ entity.numFactura }}</div>
@@ -23,7 +205,7 @@
                 <div class="dato">{{ entity.fechaFactura|date('Y-m-d') }}</div>
             </div>
              
-            {% if entity.tipoMoneda == 0 %}
+            {% if entity.tipoMoneda == 1 %}
                 <div class="contenedor">
                     <div class="labels">Tipo de Moneda:</div>
                     <div class="dato">DOLARES</div>
@@ -32,7 +214,7 @@
                     <div class="labels">Monto en $:</div>
                     <div class="dato">{{ entity.montoMe }}</div>
                 </div>
-            {% elseif entity.tipoMoneda == 1 %}
+            {% elseif entity.tipoMoneda == 2 %}
                 <div class="contenedor">
                     <div class="labels">Tipo de Moneda:</div>
                     <div class="dato">EUROS</div>
@@ -62,15 +244,12 @@
             <div class="contenedor">
                 <div class="labels">Fecha del Pago:</div>
                 <div class="dato">{{ entity.fechaPago|date('Y-m-d') }}</div>
+                
             </div>
-            <div class="contenedor">
-                <div class="labels">Pago Contra Entrega:</div>
-                <div class="dato">{{ entity.contraEntrega }}</div>
-            <br>
-            </div>
+            
     </div>
 <br>
-<a href="{{ path('pago', {'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
-<br><br> 
-<script src="{{ asset('js/contenidos/efecto.js') }}"></script>
+<a href="{{ path('pago' , { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto, 'id_contratacion':id_contratacion } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+<br>
+
 {% endblock %}

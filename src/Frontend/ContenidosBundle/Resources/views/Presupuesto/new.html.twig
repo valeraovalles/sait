@@ -4,11 +4,16 @@
  {{ parent() }}
     <div class="titulo">NUEVO PRESUPUESTO</div>
 
-    <form action="{{ path('presupuesto_create', { 'id_proveedor': id_proveedor }) }}" method="post" {{ form_enctype(form) }}>
+    <form novalidate="novalidate" action="{{ path('presupuesto_create', { 'id_proveedor': id_proveedor }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
         <fieldset>
             <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
             <div id="descripcion" class="form-show_edit">
                 <br>
+                <div class="form-contenedor">
+                    {{ form_errors(form.descripcion) }}
+                    <div class="labels">Descripcion:</div>
+                    <div class="widgets">{{ form_widget(form.descripcion) }}</div>
+                </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaInicio) }}
                     <div class="labels">Fecha de Inicio:</div>
@@ -33,16 +38,15 @@
                     {{ form_errors(form.montoBs) }}
                     <div class="labels">Monto en Bs:</div>
                     <div class="widgets">{{ form_widget(form.montoBs) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    {{ form_errors(form.tipo) }}
-                    <div class="labels">Tipo de Presupuesto:</div>
-                    <div class="widgets">{{ form_widget(form.tipo) }}</div>
-                </div>
+                </div> 
+                <button type="submit" class="btn">CREAR</button> 
+                <br><br>
             </div>
+            
         </fieldset>
 
-        <br>
-        <button type="submit" class="btn">CREAR</button> 
+        
     </form>
+
+    <a href="{{ path('presupuesto' , { 'id_proveedor': id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
 {% endblock %}

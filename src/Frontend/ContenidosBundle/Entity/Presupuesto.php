@@ -3,6 +3,7 @@
 namespace Frontend\ContenidosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Presupuesto
@@ -26,6 +27,7 @@ class Presupuesto
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=100, nullable=true)
+     * @Assert\NotBlank()
      */
     private $descripcion;
 
@@ -40,6 +42,7 @@ class Presupuesto
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_inicio", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaInicio;
 
@@ -47,6 +50,7 @@ class Presupuesto
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_fin", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaFin;
 
@@ -68,6 +72,7 @@ class Presupuesto
      * @var float
      *
      * @ORM\Column(name="monto_bs", type="decimal", nullable=false)
+     * @Assert\NotBlank()
      */
     private $montoBs;
 
@@ -95,7 +100,26 @@ class Presupuesto
      */
     private $idProveedor;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="disponibilidad", type="decimal", nullable=true)
+     */
+    private $disponibilidad;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="disponibilidad_dolares", type="decimal", nullable=true)
+     */
+    private $disponibilidadDolares;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="disponibilidad_euros", type="decimal", nullable=true)
+     */
+    private $disponibilidadEuros;
 
 
 
@@ -340,8 +364,80 @@ class Presupuesto
         return $this->idProveedor;
     }
 
+    /**
+     * Set disponibilidad
+     *
+     * @param float $disponibilidad
+     * @return Presupuesto
+     */
+    public function setDisponibilidad($disponibilidad)
+    {
+        $this->disponibilidad = $disponibilidad;
+    
+        return $this;
+    }
+
+    /**
+     * Get disponibilidad
+     *
+     * @return float 
+     */
+    public function getDisponibilidad()
+    {
+        return $this->disponibilidad;
+    }
+    
+    /**
+     * Set disponibilidadDolares
+     *
+     * @param float $disponibilidadDolares
+     * @return Presupuesto
+     */
+    public function setDisponibilidadDolares($disponibilidadDolares)
+    {
+        $this->disponibilidadDolares = $disponibilidadDolares;
+    
+        return $this;
+    }
+
+    /**
+     * Get disponibilidadDolares
+     *
+     * @return float 
+     */
+    public function getDisponibilidadDolares()
+    {
+        return $this->disponibilidadDolares;
+    }
+
+    /**
+     * Set disponibilidadEuros
+     *
+     * @param float $disponibilidadEuros
+     * @return Presupuesto
+     */
+    public function setDisponibilidadEuros($disponibilidadEuros)
+    {
+        $this->disponibilidadEuros = $disponibilidadEuros;
+    
+        return $this;
+    }
+
+    /**
+     * Get disponibilidadEuros
+     *
+     * @return float 
+     */
+    public function getDisponibilidadEuros()
+    {
+        return $this->disponibilidadEuros;
+    }
+
+
     public function __toString()
     {
         return $this->getDescripcion();
     }
+
+
 }

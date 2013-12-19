@@ -4,6 +4,17 @@
  {{ parent() }}
     <div class="titulo">DETALLES "{{ entity.nombre }}" </div>
     
+     {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
     
         {% if entity.estatus == 'I' %}
             <div class="inactivo">PROVEEDOR INACTIVO</div>
@@ -36,50 +47,112 @@
                 <div class="labels">Tel&eacute;fono de Oficina 1:</div>
                 <div class="dato">{{ entity.oficina1 }}</div>
             </div>
-            <div class="contenedor">
-                <div class="labels">Tel&eacute;fono de Oficina 2:</div>
-                <div class="dato">{{ entity.oficina2 }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">Tel&eacute;fono de Oficina 3:</div>
-                <div class="dato">{{ entity.movil }}</div>
-            </div>
+            {% if entity.oficina2 != NULL %}
+                <div class="contenedor">
+                    <div class="labels">Tel&eacute;fono de Oficina 2:</div>
+                    <div class="dato">{{ entity.oficina2 }}</div>
+                </div>
+            {% else %}
+                <div class="contenedor">
+                    <div class="labels">Tel&eacute;fono de Oficina 2:</div>
+                    <div class="dato">NO POSEE DESCRIPCION</div>
+                </div>
+            {% endif %}
+            {% if entity.movil != NULL %}
+                <div class="contenedor">
+                    <div class="labels">Tel&eacute;fono de Oficina 3:</div>
+                    <div class="dato">{{ entity.movil }}</div>
+                </div>
+            {% else %}
+                <div class="contenedor">
+                    <div class="labels">Tel&eacute;fono de Oficina 3:</div>
+                    <div class="dato">NO POSEE DESCRIPCION</div>
+                </div>
+            {% endif %}
             <div class="contenedor">
                 <div class="labels">Direcci&oacute;n de Correo:</div>
                 <div class="dato">{{ entity.correoEmpresa }}</div>
             </div>
-            <div class="contenedor">
-                <div class="labels">Direcci&oacute;n de Skype:</div>
-                <div class="dato">{{ entity.skypeEmpresa }}</div>
-            </div>
+            {% if entity.skypeEmpresa != NULL %}
+                <div class="contenedor">
+                    <div class="labels">Direcci&oacute;n de Skype:</div>
+                    <div class="dato">{{ entity.skypeEmpresa }}</div>
+                </div>
+            {% else %}
+                <div class="contenedor">
+                    <div class="labels">Direcci&oacute;n de Skype:</div>
+                    <div class="dato">NO POSEE DESCRIPCION</div>
+                </div>
+            {% endif %}
     </fieldset>
-    
     <fieldset>       
         <legend id="b"><div class="divisor">DATOS DEL REPRESENTANTE</div> </legend>
-            <div class="contenedor">
-                <div class="labels">Nombre del Representante:</div>
-                <div class="dato">{{ entity.nombreRepr }} {{ entity.apellidoRepr }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">Cargo:</div>
-                <div class="dato">{{ entity.cargo }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">Tel&eacute;fono de habitaci&oacute;n:</div>
-                <div class="dato">{{ entity.telfhab }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">Tel&eacute;fono Movil:</div>
-                <div class="dato">{{ entity.movil2 }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">Correo:</div>
-                <div class="dato">{{ entity.correoRepr }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">Skype:</div>
-                <div class="dato">{{ entity.skypeRepr }}</div>
-            </div>
+            {% if entity.nombreRepr != NULL and entity.apellidoRepr %}
+                <div class="contenedor">
+                    <div class="labels">Nombre del Representante:</div>
+                    <div class="dato">{{ entity.nombreRepr }} {{ entity.apellidoRepr }}</div>
+                </div>
+            {% else %}
+                <div class="contenedor">
+                    <div class="labels">Nombre del Representante:</div>
+                    <div class="dato">NO POSEE DESCRIPCION</div>
+                </div>
+            {% endif %}
+            {% if entity.cargo != NULL %}
+                <div class="contenedor">
+                    <div class="labels">Cargo:</div>
+                    <div class="dato">{{ entity.cargo }}</div>
+                </div>
+            {% else %}
+                <div class="contenedor">
+                    <div class="labels">Cargo:</div>
+                    <div class="dato">NO POSEE DESCRIPCION</div>
+                </div>
+            {% endif %} 
+            {% if entity.telfhab  != NULL %}
+                <div class="contenedor">
+                    <div class="labels">Tel&eacute;fono de habitaci&oacute;n:</div>
+                    <div class="dato">{{ entity.telfhab }}</div>
+                </div>
+            {% else %}
+                <div class="contenedor">
+                    <div class="labels">Tel&eacute;fono de habitaci&oacute;n:</div>
+                    <div class="dato">NO POSEE DECRIPCION</div>
+                </div>
+            {% endif %}
+            {% if entity.movil2 != NULL %}
+                <div class="contenedor">
+                    <div class="labels">Tel&eacute;fono Movil:</div>
+                    <div class="dato">{{ entity.movil2 }}</div>
+                </div>
+            {% else %}
+                <div class="contenedor">
+                    <div class="labels">Tel&eacute;fono Movil:</div>
+                    <div class="dato">NO POSEE DESCRIPCION</div>
+                </div>
+            {% endif %}
+            {% if entity.correoRepr != NULL %}
+                <div class="contenedor">
+                    <div class="labels">Correo:</div>
+                    <div class="dato">{{ entity.correoRepr }}</div>
+                </div>
+            {% else %}
+                <div class="contenedor">
+                    <div class="labels">Correo:</div>
+                    <div class="dato">NO POSEE DESCRIPCION</div>
+                </div>
+            {% endif %}
+            {% if entity.skypeRepr %}
+                <div class="contenedor">
+                    <div class="labels">Skype:</div>
+                    <div class="dato">{{ entity.skypeRepr }}</div>
+                </div>
+            {% else %}
+                <div class="contenedor">
+                    <div class="labels">Skype:</div>
+                    <div class="dato">NO POSEE DESCRIPCION</div>
+                </div>
+            {% endif %}
     </fieldset>
     <fieldset>       
         <legend id="c"><div class="divisor">DETALLES DEL PROVEEDOR</div> </legend>
@@ -113,6 +186,9 @@
 </div>
 </div>
     <a href="{{ path('datosproveedor', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    
+    <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="70px" src="{{ asset('images/edit.png')}}"></a>
+
 <br>
 
 {% endblock %}

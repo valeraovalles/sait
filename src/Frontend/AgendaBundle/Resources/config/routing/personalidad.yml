@@ -1,0 +1,30 @@
+personalidad:
+    pattern:  /
+    defaults: { _controller: "FrontendAgendaBundle:Personalidad:index" }
+
+personalidad_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "FrontendAgendaBundle:Personalidad:show" }
+
+personalidad_new:
+    pattern:  /new
+    defaults: { _controller: "FrontendAgendaBundle:Personalidad:new" }
+
+personalidad_create:
+    pattern:  /create
+    defaults: { _controller: "FrontendAgendaBundle:Personalidad:create" }
+    requirements: { _method: post }
+
+personalidad_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "FrontendAgendaBundle:Personalidad:edit" }
+
+personalidad_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "FrontendAgendaBundle:Personalidad:update" }
+    requirements: { _method: post|put }
+
+personalidad_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "FrontendAgendaBundle:Personalidad:delete" }
+    requirements: { _method: post|delete }
