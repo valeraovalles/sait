@@ -40,9 +40,12 @@
                     {% endif %}     
                     <td>{{entity.idTipoprov.nombre }}</td>                
                     <td>
-                        <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
-
-                        <a onclick="return confirm('¿Desea eliminar?')" href="{{ path('datosproveedor_delete', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="eliminar proveedor"><img width="16px" src="{{ asset('images/mal.jpeg')}}"></a>
+                        {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
+                            <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+                            {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}
+                                <a onclick="return confirm('¿Desea eliminar?')" href="{{ path('datosproveedor_delete', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="eliminar proveedor"><img width="16px" src="{{ asset('images/mal.jpeg')}}"></a>
+                            {% endif %}
+                        {% endif %}
 
                         <a href="{{ path('banco', { 'id_proveedor': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="datos bancarios"><img width="20px" src="{{ asset('images/banco.jpg')}}"></a>
 
@@ -53,7 +56,8 @@
         </tbody>
     </table>
     <br><br>
-
-    <a class="btn btn-primary dropdown-toggle" href='{{ path('datosproveedor_new') }}'>Crear Proveedor</a>
+    {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
+        <a class="btn btn-primary dropdown-toggle" href='{{ path('datosproveedor_new') }}'>Crear Proveedor</a>
+    {% endif %}
     <br>
 {% endblock %}

@@ -247,6 +247,9 @@ class ContratosController extends Controller
                 {
                      $entity->setArchivo($nombre.'_'.\date("Gis").'.'.$extension);
                 }
+            }else
+            {
+               $entity->setArchivo($archivo); 
             }
 
             $entity->setCodigo($codigo);

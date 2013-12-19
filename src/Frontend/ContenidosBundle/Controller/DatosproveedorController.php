@@ -30,19 +30,79 @@ class DatosproveedorController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $titulo = "COMPLETO DE PROVEEDORES";
+        if ($this->get('security.context')->isGranted('ROLE_CONTENIDOS_ADMIN'))
+        {
+            //OBTENGO LA INFORMACION DE TODOS LOS PROVEEDORES ACTIVOS
+            $titulo = "COMPLETO DE PROVEEDORES";
+            $estatus = 'A';
 
-        //OBTENGO LA INFORMACION DE TODOS LOS PROVEEDORES ACTIVOS
+            $dql = "select d from ContenidosBundle:Datosproveedor d where d.estatus=:estatus";
+            $consulta = $em->createQuery($dql)->setParameter('estatus', $estatus);
+            $entities = $consulta->getResult();
 
-        $estatus = 'A';
-        $dql = "select d from ContenidosBundle:Datosproveedor d where d.estatus=:estatus";
-        $consulta = $em->createQuery($dql)->setParameter('estatus', $estatus);
-        $entities = $consulta->getResult();
+        }elseif($this->get('security.context')->isGranted('ROLE_CONTENIDOS_COMPRAS'))
+        {
+            //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE COMPRAS QUE ESTEN ACTIVOS
+            $titulo = "PROVEEDORES (COMPRAS)";            
+            $id_tipoproveedor = 1;
+            $estatus = 'A';
+
+            $dql = "select d from ContenidosBundle:Datosproveedor d 
+                    where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
+            $consulta = $em->createQuery($dql)->setParameters(
+                                                                array(
+                                                                        'id_tipoproveedor'=> $id_tipoproveedor, 
+                                                                        'estatus' => $estatus,
+                                                                     )
+
+
+                                                             );
+            $entities = $consulta->getResult();
+
+        }elseif($this->get('security.context')->isGranted('ROLE_CONTENIDOS_EQUIPOS'))
+        {
+            //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE EQUIPOS QUE ESTEN ACTIVOS
+            $id_tipoproveedor = 4;
+            $estatus = 'A';
+            $titulo = "DE EQUIPOS TELESUR";
+
+            $dql = "select d from ContenidosBundle:Datosproveedor d 
+                    where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
+            $consulta = $em->createQuery($dql)->setParameters(
+                                                                array(
+                                                                        'id_tipoproveedor'=> $id_tipoproveedor, 
+                                                                        'estatus' => $estatus,
+                                                                     )
+
+
+                                                             );
+            $entities = $consulta->getResult();
+
+        }elseif($this->get('security.context')->isGranted('ROLE_CONTENIDOS_CONTENIDOS'))
+        {
+            //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE INFORMACION QUE ESTEN ACTIVOS
+            $id_tipoproveedor = 2;
+            $estatus = 'A';
+            $titulo = "PROVEEDORES (VP DE CONTENIDOS)";
+
+            $dql = "select d from ContenidosBundle:Datosproveedor d 
+                    where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
+            $consulta = $em->createQuery($dql)->setParameters(
+                                                                array(
+                                                                        'id_tipoproveedor'=> $id_tipoproveedor, 
+                                                                        'estatus' => $estatus,
+                                                                     )
+
+
+                                                             );
+
+            $entities = $consulta->getResult();
+        }
 
         return $this->render('ContenidosBundle:Datosproveedor:index.html.twig', array(
             'entities' => $entities,
             'titulo' => $titulo,
-        ));
+        )); 
     }
 
     /**
@@ -54,9 +114,7 @@ class DatosproveedorController extends Controller
         $em = $this->getDoctrine()->getManager();
         $titulo = "PROVEEDORES (COMPRAS)";
 
-
         //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE COMPRAS QUE ESTEN ACTIVOS
-
         $id_tipoproveedor = 1;
         $estatus = 'A';
 
@@ -86,7 +144,6 @@ class DatosproveedorController extends Controller
     public function informacionAction()
     {
         $em = $this->getDoctrine()->getManager();
-
 
         //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE INFORMACION QUE ESTEN ACTIVOS
         $id_tipoproveedor = 2;
@@ -150,13 +207,75 @@ class DatosproveedorController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        //OBTENGO LA INFORMACION  DE LOS PROVEEDORES QUE ESTEN INACTIVOS
+        if ($this->get('security.context')->isGranted('ROLE_CONTENIDOS_ADMIN'))
+        {
+            //OBTENGO LA INFORMACION  DE LOS PROVEEDORES QUE ESTEN INACTIVOS
+            $estatus = 'I';
+            $titulo = "PROVEEDORES INACTIVOS";
+            $dql = "select d from ContenidosBundle:Datosproveedor d where d.estatus=:estatus";
+            $consulta = $em->createQuery($dql)->setParameter('estatus', $estatus);
+            $entities = $consulta->getResult();
+        }
+        elseif($this->get('security.context')->isGranted('ROLE_CONTENIDOS_COMPRAS'))
+        {
+            //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE COMPRAS QUE ESTEN INACTIVOS
+            $titulo = "PROVEEDORES INACTIVOS (COMPRAS)";            
+            $id_tipoproveedor = 1;
+            $estatus = 'I';
 
-        $estatus = 'I';
-        $titulo = "PROVEEDORES INACTIVOS";
-        $dql = "select d from ContenidosBundle:Datosproveedor d where d.estatus=:estatus";
-        $consulta = $em->createQuery($dql)->setParameter('estatus', $estatus);
-        $entities = $consulta->getResult();
+            $dql = "select d from ContenidosBundle:Datosproveedor d 
+                    where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
+            $consulta = $em->createQuery($dql)->setParameters(
+                                                                array(
+                                                                        'id_tipoproveedor'=> $id_tipoproveedor, 
+                                                                        'estatus' => $estatus,
+                                                                     )
+
+
+                                                             );
+            $entities = $consulta->getResult();
+
+        }elseif($this->get('security.context')->isGranted('ROLE_CONTENIDOS_EQUIPOS'))
+        {
+            //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE EQUIPOS QUE ESTEN INACTIVOS
+            $id_tipoproveedor = 4;
+            $estatus = 'I';
+            $titulo = "DE EQUIPOS TELESUR (INACTIVOS)";
+
+            $dql = "select d from ContenidosBundle:Datosproveedor d 
+                    where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
+            $consulta = $em->createQuery($dql)->setParameters(
+                                                                array(
+                                                                        'id_tipoproveedor'=> $id_tipoproveedor, 
+                                                                        'estatus' => $estatus,
+                                                                     )
+
+
+                                                             );
+            $entities = $consulta->getResult();
+
+        }elseif($this->get('security.context')->isGranted('ROLE_CONTENIDOS_CONTENIDOS'))
+        {
+            //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE INFORMACION QUE ESTEN INACTIVOS
+            $id_tipoproveedor = 2;
+            $estatus = 'I';
+            $titulo = "PROVEEDORES INACTIVOS (VP DE CONTENIDOS)";
+
+            $dql = "select d from ContenidosBundle:Datosproveedor d 
+                    where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
+            $consulta = $em->createQuery($dql)->setParameters(
+                                                                array(
+                                                                        'id_tipoproveedor'=> $id_tipoproveedor, 
+                                                                        'estatus' => $estatus,
+                                                                     )
+
+
+                                                             );
+
+            $entities = $consulta->getResult();
+        }
+
+
         return $this->render('ContenidosBundle:Datosproveedor:index.html.twig', array(
             'entities' => $entities,
             'titulo' => $titulo,
@@ -339,12 +458,10 @@ class DatosproveedorController extends Controller
     */
     public function updateAction(Request $request, $id)
     {
-
         $em = $this->getDoctrine()->getManager();
 
         //obtengo datos del proveedor segun ID
         $entity = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id);
-
 
         // OBTENGO LOS DATOS DEL FORMULARIO AJAX
         $datosform = $request->request->all();
@@ -352,7 +469,6 @@ class DatosproveedorController extends Controller
         $cont = 0;
         if (!empty($datosform))
         {
-
            // hace un bucle con variable $datosform porque si el contador es mayor a 2 quiere decir que
            // entro al ajax pero si es menor los datos quedaron iguales
             foreach ($datosform as $key) {
@@ -362,7 +478,7 @@ class DatosproveedorController extends Controller
             {
                 //obtengo datos
                 $datosform = $datosform['form'];
-       
+
                 //asocio los datos traidos a variable unidad
                 $unid = $datosform['unidadsolicitante'];
                 $unidad = $em->getRepository('ContenidosBundle:Unidadsolicitante')->find($unid);
@@ -390,13 +506,11 @@ class DatosproveedorController extends Controller
 
             }
         }
-                       
 
         // OBTENGO LA FECHA EN LA QUE SE CREO EL REGISTRO Y EL USUARIO QUE LO CREO
         $fecha= $entity->getFechaRegistro();
         $usuario=$entity->getUsuario(); 
         $usuarioss = $em->getRepository('UsuarioBundle:User')->find($usuario);
-
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Datosproveedor entity.');
@@ -430,7 +544,6 @@ class DatosproveedorController extends Controller
 
             //envio a la plantilla
             return $this->redirect($this->generateUrl('datosproveedor_show', array('id' => $id)));
-        
         }
 
        //envio a otra plantilla si formaulario no es valido

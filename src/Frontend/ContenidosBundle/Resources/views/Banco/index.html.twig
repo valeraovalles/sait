@@ -29,7 +29,9 @@
                 <th>Cuenta del Banco Beneficiario</th>
                 <th>Swift del Banco Beneficiario</th>
                 <th>Aba/Iban del Banco Beneficiario</th>
-                <th>Acciones</th>
+                {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}
+                    <th>Acciones</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -40,16 +42,22 @@
                 <td>{{ entity.cuentaBenef }}</td>
                 <td>{{ entity.swiftBenef }}</td>
                 <td>{{ entity.abaBenef }}/{{ entity.ibanBenef }}</td>
-                <td>
-                    <a href="{{ path('banco_edit', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
-                    <a onclick="return confirm('¿Desea eliminar?')" href="{{ path('banco_delete', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/mal.jpeg')}}"></a>
-                </td>
+                {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
+                    <td>
+                        <a href="{{ path('banco_edit', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar banco"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+                        {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}
+                            <a onclick="return confirm('¿Desea eliminar?')" href="{{ path('banco_delete', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="eliminar banco"><img width="20px" src="{{ asset('images/mal.jpeg')}}"></a>
+                        {% endif %}
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
     </table>
         <br><br>
-       <a class="btn btn-primary dropdown-toggle" href="{{ path( 'banco_new',{ 'id_proveedor':id_proveedor } ) }}">Registrar Datos Bancarios </a>
+        {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
+            <a class="btn btn-primary dropdown-toggle" href="{{ path( 'banco_new',{ 'id_proveedor':id_proveedor } ) }}">Registrar Datos Bancarios </a>
+        {% endif %}
        <a href="{{ path('datosproveedor') }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
         
     <br><br>

@@ -68,7 +68,7 @@ security:
         - { path: ^/licencias/reportes, roles:[ROLE_LICENCIAS , ROLE_LICADMIN] }
         - { path: ^/licencias/modif, roles:ROLE_LICADMIN }
 
-        - { path: ^/contenidos, roles:ROLE_CONTENIDOS }
+        - { path: ^/contenidos, roles:[ROLE_CONTENIDOS_ADMIN , ROLE_CONTENIDOS_CONTENIDOS, ROLE_CONTENIDOS_EQUIPOS, ROLE_CONTENIDOS_COMPRAS] }
 
         - { path: ^/contratos, roles:ROLE_CONTRATOS }
 

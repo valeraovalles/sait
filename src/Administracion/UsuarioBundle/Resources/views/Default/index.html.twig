@@ -84,7 +84,7 @@
               <a href="{{ path('sit_homepage')}}">SIT<br><img id="licencias" src="{{ asset("images/sit.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
 
-            {% if is_granted('ROLE_CONTENIDOS') %}
+            {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_CONTENIDOS') or is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_EQUIPOS') %}
                 <div class="listado_aplicaciones">
                   <a href="{{ path('datosproveedor')}}">CONTENIDOS<br><img id="licencias" src="{{ asset("images/dinero.jpg") }}" data-placement="bottom" title="CONTROL DE PAGOS" data-trigger="hover"></a>
                 </div>

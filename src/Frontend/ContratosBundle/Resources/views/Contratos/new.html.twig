@@ -8,6 +8,19 @@
     {{ parent() }}
     <div class="titulo">NUEVO ABOGADO</div>
 
+        
+     {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+
     <form novalidate="novalidate" action="{{ path('contratos_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
         <fieldset>       
             <div id="descripcion" class="form-show_edit">
