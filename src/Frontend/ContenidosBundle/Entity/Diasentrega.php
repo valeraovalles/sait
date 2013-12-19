@@ -3,6 +3,7 @@
 namespace Frontend\ContenidosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Diasentrega
@@ -26,6 +27,7 @@ class Diasentrega
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=50, nullable=false)
+     * @Assert\NotBlank()
      */
     private $nombre;
 

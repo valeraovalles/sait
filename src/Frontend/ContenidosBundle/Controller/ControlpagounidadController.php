@@ -182,4 +182,4 @@ class ControlpagounidadController extends Controller
             ->getForm()
         ;
     }
-}
+}//fin de la clase

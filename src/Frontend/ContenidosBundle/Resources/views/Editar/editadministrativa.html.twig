@@ -8,7 +8,7 @@
  {{ parent() }}
     <div class="titulo">EDITAR DATOS DE UNIDAD ADMINISTRATIVA</div>
 
-    <form novalidate action="{{ path('updateadministrativa', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <form novalidate="novalidate" action="{{ path('updateadministrativa', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
         <input type="hidden" name="_method" value="PUT" />
         <legend id="a"><div class="divisor">DATOS</div> </legend>
             <div id="descripcion" class="form-show_edit">
@@ -23,8 +23,8 @@
                     <div class="labels">Nombre de la Unidad Administrativa:</div>
                     <div class="widgets">{{ form_widget(edit_form.nombre) }}</div>
                 </div>
-
-        <p>
+            </div>
+       <p>
             <button onclick="return confirm('¿Seguro que desea Editar?')" type="submit" class="btn">Editar</button><br><br>
         </p>
     </form>

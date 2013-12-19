@@ -14,6 +14,27 @@ class ControlpagounidadType extends AbstractType
             ->add('status')
             ->add('idEjecutora')
             ->add('idPago')
+            ->add('fechaUnidaduno','date',array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+                    )) 
+            ->add('fechaUnidaddos','date',array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+                    )) 
+            ->add('fechaUnidadtres','date',array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+                    )) 
+            ->add('fechaUnidadcuatro','date',array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+                    )) 
+            ->add('fechaUnidadcinco','date',array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+                    )) 
+
         ;
     }
 

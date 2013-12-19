@@ -9,34 +9,55 @@
  {{ parent() }}
     <div class="titulo">DATOS BANCARIOS ASOCIADOS AL PROVEEDOR</div>
 
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
             <tr>
                 <th>Nombre del beneficiario</th>
-                <th>Nombre del Banco Intermediario</th>
-                <th>Cuenta del Banco Intermediario</th>
                 <th>Nombre del Banco Beneficiario</th>
                 <th>Cuenta del Banco Beneficiario</th>
-                <th>Acciones</th>
+                <th>Swift del Banco Beneficiario</th>
+                <th>Aba/Iban del Banco Beneficiario</th>
+                {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}
+                    <th>Acciones</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr align="center">
-                <td><a href="{{ path('banco_show', { 'id': entity.id, 'id_proveedor':entity.idProveedor.id }) }}">{{ entity.nombreBeneficiario }}</a></td>
-                <td>{{ entity.bancoInterm }}</td>
-                <td>{{ entity.cuentaInterm }}</td>
+                <td><a href="{{ path('banco_show', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}">{{ entity.nombreBeneficiario }}</a></td>
                 <td>{{ entity.bancoBenef }}</td>
                 <td>{{ entity.cuentaBenef }}</td>
-                <td>
-                    <a href="{{ path('banco_edit', { 'id': entity.id, 'id_proveedor':entity.idProveedor.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
-                </td>
+                <td>{{ entity.swiftBenef }}</td>
+                <td>{{ entity.abaBenef }}/{{ entity.ibanBenef }}</td>
+                {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
+                    <td>
+                        <a href="{{ path('banco_edit', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar banco"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+                        {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}
+                            <a onclick="return confirm('¿Desea eliminar?')" href="{{ path('banco_delete', { 'id': entity.id, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="eliminar banco"><img width="20px" src="{{ asset('images/mal.jpeg')}}"></a>
+                        {% endif %}
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
     </table>
         <br><br>
-       <a class="btn btn-primary dropdown-toggle" href="{{ path( 'banco_new',{ 'id_proveedor':id_proveedor } ) }}">Registrar Datos Bancarios </a>
+        {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
+            <a class="btn btn-primary dropdown-toggle" href="{{ path( 'banco_new',{ 'id_proveedor':id_proveedor } ) }}">Registrar Datos Bancarios </a>
+        {% endif %}
        <a href="{{ path('datosproveedor') }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
         
     <br><br>

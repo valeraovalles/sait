@@ -4,21 +4,16 @@
 {% block titulobanner %}
     LICENCIAS
 {% endblock %}
-    
+   
+ 
 {% block body -%}
     {{ parent() }}
     <div class="titulo">NUEVO REGISTRO</div>
 
-    <form action="{{ path('datosproveedor_create') }}" method="post" {{ form_enctype(form) }}>
-        <fieldset>       
-            <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
+    <form novalidate="novalidate" action="{{ path('datosproveedor_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
+        <fieldset>            
             <div id="descripcion" class="form-show_edit">
-                <br>
-                <div class="form-contenedor">
-                    {{ form_errors(form.estatus) }}
-                    <div class="labels">Estatus:</div>
-                    <div class="widgets">{{ form_widget(form.estatus) }}</div>
-                </div>
+                <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
                 <div class="form-contenedor">
                     {{ form_errors(form.nombre) }}
                     <div class="labels">Nombre:</div>
@@ -64,13 +59,8 @@
                     <div class="labels">Pa&iacute;s:</div>
                     <div class="widgets">{{ form_widget(form.pais) }}</div>
                 </div>
-            </div>
-        </fieldset>    
-        <br>
-        <fieldset>       
+            <br>           
             <legend id="b"><div class="divisor">DATOS DEL REPRESENTANTE</div> </legend>
-            <div id="detalles" class="form-show_edit">
-                <br>
                 <div class="form-contenedor">
                     {{ form_errors(form.nombreRepr) }}
                     <div class="labels">Nombre:</div>
@@ -106,24 +96,22 @@
                     <div class="labels">Dirrecci&oacute;n de Skype:</div>
                     <div class="widgets">{{ form_widget(form.skypeRepr) }}</div>
                 </div>       
-            </div>
-        </fieldset>
-        <br>
-        <fieldset>       
+            <br>
             <legend id="c"><div class="divisor">DATOS DEL REPRESENTANTE</div> </legend>
-            <div id="aprobacion" class="form-show_edit">
-                <br>
                 <div class="form-contenedor">
                     {{ form_errors(form.idTipoprov) }}
                     <div class="labels">Tipo de Proveedor:</div>
                     <div class="widgets">{{ form_widget(form.idTipoprov) }}</div>
                 </div>
                 <div id="muestra"></div>
+                <button type="submit" class="btn">CREAR</button>
+                <br><br>
             </div>
-        </fieldset>
-        <br>
-        <button type="submit" class="btn">CREAR</button> 
+        </fieldset>        
+        <a href="{{ path('datosproveedor', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a> 
+        
     </form>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#form_datosproveedor_idTipoprov').change(function(){
@@ -134,4 +122,5 @@
             });
         });
     </script>
+
 {% endblock %}

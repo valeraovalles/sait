@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}				
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/contenidos.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block menu %}
+    {% include 'ContratosBundle:Default:includes/menu.html.twig' %}
+{% endblock %}

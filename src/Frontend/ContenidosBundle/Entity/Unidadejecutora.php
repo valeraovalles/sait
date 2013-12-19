@@ -3,6 +3,7 @@
 namespace Frontend\ContenidosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Unidadejecutora
@@ -26,6 +27,7 @@ class Unidadejecutora
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=100, nullable=true)
+     * @Assert\NotBlank()
      */
     private $nombre;
 

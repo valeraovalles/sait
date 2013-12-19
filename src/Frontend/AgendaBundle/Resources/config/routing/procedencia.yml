@@ -1,0 +1,30 @@
+procedencia:
+    pattern:  /
+    defaults: { _controller: "FrontendAgendaBundle:Procedencia:index" }
+
+procedencia_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "FrontendAgendaBundle:Procedencia:show" }
+
+procedencia_new:
+    pattern:  /new
+    defaults: { _controller: "FrontendAgendaBundle:Procedencia:new" }
+
+procedencia_create:
+    pattern:  /create
+    defaults: { _controller: "FrontendAgendaBundle:Procedencia:create" }
+    requirements: { _method: post }
+
+procedencia_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "FrontendAgendaBundle:Procedencia:edit" }
+
+procedencia_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "FrontendAgendaBundle:Procedencia:update" }
+    requirements: { _method: post|put }
+
+procedencia_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "FrontendAgendaBundle:Procedencia:delete" }
+    requirements: { _method: post|delete }

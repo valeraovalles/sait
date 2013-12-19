@@ -1,0 +1,26 @@
+{% extends '::contratos.html.twig' %}
+
+{% block titulobanner %}
+    DIRECCION SOLICITANTE - NUEVO REGISTRO
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">NUEVA DIRECCIÓN SOLICITANTE</div>
+
+    <form novalidate="novalidate" action="{{ path('Direccionsolicitante_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
+        <fieldset>       
+            <div id="descripcion" class="form-show_edit">
+                <br>
+                <div class="form-contenedor">
+                    {{ form_errors(form.nombre) }}
+                    <div class="labels">Nombre del Abogado:</div>
+                    <div class="dato">{{ form_widget(form.nombre) }}</div>
+                </div>
+                <button type="submit" class="btn">Registrar</button><br><br>
+            </div>
+        </fieldset>
+        <br>
+       <a href="{{ path( 'Direccionsolicitante') }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    </form>
+{% endblock %}

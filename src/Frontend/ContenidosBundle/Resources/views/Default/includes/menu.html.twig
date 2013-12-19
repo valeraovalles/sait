@@ -1,8 +1,14 @@
 <div id='cssmenu'>
-   <ul>
-      
+   <ul>   
       <li class='active'><a href='{{ path('datosproveedor') }}'><span>INICIO</span></a></li>
-            
+   
+
+      {% if is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_CONTENIDOS') or  is_granted('ROLE_CONTENIDOS_EQUIPOS') %}
+         <li class='has-sub'><a href='{{ path('datosinactivos') }}'><span>INACTIVOS</span></a></li>
+
+      {% endif %}
+
+      {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}  
          <li class='has-sub'><a href= '#' ><span>PROVEEDORES</span></a>
             <ul>
                <li><a href='{{ path('datosinactivos') }}'><span>INACTIVOS</span></a></li>
@@ -11,19 +17,29 @@
                <li><a href='{{ path('datosequipos') }}'><span>EQUIPOS TELESUR</span></a></li>
             </ul>
          </li>
-         <li class='has-sub'><a href='{{ path('datosproveedor_new') }}'><span>NUEVO REGISTRO</span></a></li>
+         <li class='has-sub'><a href='#'><span>CONSULTAR</span></a>
+            <ul>
+               <li class='has-sub'><a href='{{ path('disponibilidad_home') }}'><span>DISPONIBILIDAD</span></a></li>
+            </ul>
+         </li> 
+      {% endif %}
+
+      {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
          <li class='has-sub'><a href='#'><span>EDITAR DATOS</span></a>
             <ul>
                <li class='has-sub'><a href='#'><span>COMPRAS</span></a>
                   <ul>
                      <li><a href='{{ path('indexanalista') }}'><span>ANALISTAS</span></a></li>
                      <li><a href='{{ path('indexdias') }}'><span>DIAS DE ENTREGA</span></a></li>
-                     
                   </ul>
                </li>
-               <li class='has-sub'><a href='{{ path('indexsolicitante') }}'><span>UNIDAD SOLICITANTE</span></a></li>
+               <li class='has-sub'>
+                  <a href='{{ path('indexsolicitante') }}'><span>UNIDAD SOLICITANTE</span></a>
+               </li>
             </ul>
          </li>
+      {% endif %}
+
       <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
       <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
    </ul>

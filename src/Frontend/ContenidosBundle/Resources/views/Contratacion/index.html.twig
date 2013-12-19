@@ -3,31 +3,48 @@
 {% block body -%}
    {{ parent() }}
     <div class="titulo">CONTRATACIONES</div>
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
 
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+   
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
             <tr align="center">
-                <th width="23%">Concepto</th>
-                <th width="11%">Monto <br> ($ / €):</th>
-                <th width="11%">Monto <br> (Bs)</th>
-                <th width="17%">N&uacute;mero del <br> punto de cuenta</th>
-                <th width="17%">N&uacute;mero de Alcance <br> (punto de cuenta)</th>
-                <th width="17%">N&uacute;mero de <br> Contrato</th>
-                <th width="4%">Acciones</th>
+                <th width="30%">Concepto</th>
+                <th width="15%">Monto <br> (Bs)</th>
+                <th width="15%">Monto <br> ($/€)</th>                
+                <th width="20%">N&uacute;mero de <br> Contrato</th>
+                <th width="20%">Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr align="center">
                 <td width="23%"><a href="{{ path('contratacion_show', { 'id': entity.id, 'id_presupuesto': id_presupuesto, 'id_proveedor': id_proveedor }) }}">{{ entity.concepto }}</a></td>
-                <td width="11%">{{ entity.montoMe }}</td>
                 <td width="11%">{{ entity.montoBs }}</td>
-                <td width="17%">{{ entity.numPuntocuenta }}</td>
-                <td width="17%">{{ entity.numAlcance }}</td>
+                {% if tipomoneda == 1 %}
+                    <td width="11%">{{ entity.montoMe }} $</td>
+                {% elseif tipomoneda == 2 %}
+                    <td width="11%">{{ entity.montoMe }} €</td>
+                {% elseif tipomoneda == 3 %}
+                    <td width="11%">NO APLICA</td>
+                {% endif %}                
                 <td width="17%">{{ entity.numContrato }}</td>
                 <td width="4%">
-                        <a href="{{ path('contratacion_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
-                        <a href="{{ path('pago', { 'id_contratacion': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="pagos asociados"><img width="20px" src="{{ asset('images/dinero.jpg')}}"></a>
+                        <a href="{{ path('contratacion_edit', { 'id': entity.id,'id_presupuesto': id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="20px" src="{{ asset('images/edit.png')}}"></a>
+
+                        <a onclick="return confirm('¿Desea eliminar?')" href="{{ path('contratacion_delete', { 'id': entity.id, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="eliminar contratacion"><img width="16px" src="{{ asset('images/mal.jpeg')}}"></a>
+
+
+                        <a href="{{ path('pago', { 'id_contratacion': entity.id, 'id_presupuesto':id_presupuesto, 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="pagos asociados"><img width="20px" src="{{ asset('images/dinero.jpg')}}"></a>
                 </td>
             </tr>
         {% endfor %}

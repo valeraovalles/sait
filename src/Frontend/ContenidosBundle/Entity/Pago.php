@@ -3,6 +3,7 @@
 namespace Frontend\ContenidosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Pago
@@ -26,13 +27,14 @@ class Pago
      * @var string
      *
      * @ORM\Column(name="num_memo", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
      */
     private $numMemo;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_unidadejec", type="date", nullable=false)
+     * @ORM\Column(name="fecha_unidadejec", type="date", nullable=true)
      */
     private $fechaUnidadejec;
 
@@ -40,6 +42,7 @@ class Pago
      * @var string
      *
      * @ORM\Column(name="num_factura", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
      */
     private $numFactura;
 
@@ -47,6 +50,7 @@ class Pago
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_factura", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaFactura;
 
@@ -59,16 +63,17 @@ class Pago
     private $montoMe;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="tipo_moneda", type="boolean", nullable=true)
+     * @ORM\Column(name="tipo_moneda", type="integer", nullable=true)
      */
-    private $tipoMoneda;    
+    private $tipoMoneda;
 
     /**
      * @var float
      *
      * @ORM\Column(name="monto_bs", type="decimal", nullable=false)
+     * @Assert\NotBlank()
      */
     private $montoBs;
 
@@ -76,6 +81,7 @@ class Pago
      * @var boolean
      *
      * @ORM\Column(name="tipo_pago", type="boolean", nullable=true)
+     * @Assert\NotBlank()
      */
     private $tipoPago;
 
@@ -83,6 +89,7 @@ class Pago
      * @var string
      *
      * @ORM\Column(name="num_pago", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
      */
     private $numPago;
 
@@ -90,6 +97,7 @@ class Pago
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_pago", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaPago;
 
@@ -117,6 +125,7 @@ class Pago
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_unidadejec", referencedColumnName="id")
      * })
+     * @Assert\NotBlank()
      */
     private $idUnidadejec;
 
@@ -461,8 +470,13 @@ class Pago
      *
      * @return \Frontend\ContenidosBundle\Entity\Contratacion 
      */
-    public function getIdContratacionContratacion()
+    public function getIdContratacion()
     {
         return $this->idContratacion;
+    }
+
+     public function __toString()
+    {
+        return $this->getNumFactura();
     }
 }

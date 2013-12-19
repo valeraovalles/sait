@@ -8,11 +8,7 @@
     {{ parent() }}
     <div class="titulo">NUEVA CONTRATACION</div>
 
-
-
-
-    <form action="{{ path('contratacion_create',{ 'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(form) }}>
-
+    <form novalidate="novalidate" action="{{ path('contratacion_create',{ 'id_proveedor':id_proveedor, 'id_presupuesto': id_presupuesto }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
 
         <fieldset>     
             <div class="form-show_edit">
@@ -22,17 +18,20 @@
                     <div class="labels">Concepto:</div>
                     <div class="dato">{{ form_widget(form.concepto) }}</div>
                 </div>
-                <div class="form-contenedor">
-                    {{ form_errors(form.tipoMoneda) }}
-                    <div class="labels">Moneda:</div>
-                    <div class="dato">{{ form_widget(form.tipoMoneda) }}</div>
-                </div>
+                {% if tipomoneda == 1 %}
+                    <div class="form-contenedor">
+                        {{ form_errors(form.montoMe) }}
+                        <div class="labels">Monto en $:</div>
+                        <div class="dato">{{ form_widget(form.montoMe) }}</div>
+                    </div>
+                {% elseif tipomoneda == 2 %}
+                    <div class="form-contenedor">
+                        {{ form_errors(form.montoMe) }}
+                        <div class="labels">Monto en €:</div>
+                        <div class="dato">{{ form_widget(form.montoMe) }}</div>
+                    </div>
+                {% endif %}
 
-                <div class="form-contenedor">
-                    {{ form_errors(form.montoMe) }}
-                    <div class="labels">Monto en $/€:</div>
-                    <div class="dato">{{ form_widget(form.montoMe) }}</div>
-                </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.montoBs) }}
                     <div class="labels">Monto en Bs:</div>
@@ -107,7 +106,18 @@
                     <div class="labels">Fecha del Addendum:</div>
                     <div class="dato">{{ form_widget(form.fechaAddendum) }}</div>
                 </div>
-                
+                {% if tipoprov == 'COMPRAS' %}
+                    <div class="form-contenedor">
+                        {{ form_errors(form.analistaCompras) }}
+                        <div class="labels">Analísta:</div>
+                        <div class="dato">{{ form_widget(form.analistaCompras) }}</div>
+                    </div>
+                    <div class="form-contenedor">
+                        {{ form_errors(form.observacionesCompras) }}
+                        <div class="labels">Observaciones:</div>
+                        <div class="dato">{{ form_widget(form.observacionesCompras) }}</div>
+                    </div>          
+                {% endif %}            
                 
                 <button type="submit">Crear</button>
                 <br><br>
@@ -115,6 +125,7 @@
         </fieldset>
     </form>
 
-    <a href="{{ path('contratacion', { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto, 't':t }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    <a href="{{ path('contratacion', { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
 
+    </script>
 {% endblock %}

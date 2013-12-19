@@ -1,0 +1,26 @@
+{% extends '::contratos.html.twig' %}
+
+{% block titulobanner %}
+    ABOGADOS -  NUEVO REGISTRO
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+    <div class="titulo">NUEVO ABOGADO</div>
+
+    <form action="{{ path('abogados_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
+        <fieldset>       
+            <div id="descripcion" class="form-show_edit">
+                <br>
+                <div class="form-contenedor">
+                    {{ form_errors(form.nombre) }}
+                    <div class="labels">Nombre del Abogado:</div>
+                    <div class="dato">{{ form_widget(form.nombre) }}</div>
+                </div>
+                <button type="submit" class="btn">Registrar</button><br><br>
+            </div>
+        </fieldset>
+        <br>
+       <a href="{{ path( 'abogados') }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    </form>
+{% endblock %}

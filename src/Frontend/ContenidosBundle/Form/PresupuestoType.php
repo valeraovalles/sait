@@ -29,13 +29,14 @@ class PresupuestoType extends AbstractType
                                             'multiple'=>false,
                                             'empty_value' => 'Seleccione...',
                                             'choices' => array(
-                                                                    "0" =>"Normal", 
-                                                                    "1" =>"Extension"
+                                                                    "N" =>"Normal", 
+                                                                    "E" =>"Extension"
                                                                   )
                                         )
                 )
             ->add('idPresext')
             ->add('idProveedor')
+            ->add('disponibilidad')
         ;
     }
 

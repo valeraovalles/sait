@@ -18,6 +18,13 @@
 	color: #0fa1e0;
 }
 
+.form-show
+{
+    width: 700px;
+    font-weight: bold;  
+
+}
+
 .form-show_edit
 {
     width: 600px;
@@ -30,11 +37,23 @@
 border-radius: 20px; /* CSS3 (Opera 10.5, IE 9 y estándar a ser soportado por todos los futuros */
 }
 
-.form-show_edit .contenedor
-{
-    width: 600px;
-    color: #000; 
-}
+.form-show_edit .contenedor input[type="text"]{
+        width: 200px;
+    }
+.form-show_edit .contenedor input[type="checkbox"]{
+        margin-bottom: 1px;
+        margin-left: 50px;
+    }
+.form-show_edit .contenedor{
+        margin-bottom:5px;
+        padding: 5px;
+        height: auto;
+        overflow: visible;
+        width: 600px;
+        color: #000; 
+
+    }
+
 
 .form-show_edit .labels
 {
@@ -53,7 +72,28 @@ border-radius: 20px; /* CSS3 (Opera 10.5, IE 9 y estándar a ser soportado por t
         padding-bottom: 7px;
         overflow: hidden;
         margin-left: 0%;
+        text-align: justify;
 }
+
+
+.form-show_edit .labelss
+{
+        float: left;
+        width: 40%;
+        padding-right: 10px;
+        padding-bottom: 7px;
+        font-weight: bold;  
+        text-align: right;
+
+}
+
+.form-show_edit .datos
+{
+        
+        overflow: hidden;
+        text-align: justify;
+}
+
 
 .divisor{
     padding-top: 5px;

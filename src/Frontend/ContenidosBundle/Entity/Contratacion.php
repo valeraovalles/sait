@@ -3,6 +3,7 @@
 namespace Frontend\ContenidosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Contratacion
@@ -26,20 +27,22 @@ class Contratacion
      * @var string
      *
      * @ORM\Column(name="concepto", type="string", length=300, nullable=false)
+     * @Assert\NotBlank()
      */
     private $concepto;
 
+
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="tipo_moneda", type="boolean", nullable=false)
+     * @ORM\Column(name="tipo_moneda", type="integer", nullable=false)
      */
     private $tipoMoneda;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="monto_me", type="decimal", nullable=false)
+     * @ORM\Column(name="monto_me", type="decimal", nullable=true)
      */
     private $montoMe;
 
@@ -47,6 +50,7 @@ class Contratacion
      * @var float
      *
      * @ORM\Column(name="monto_bs", type="decimal", nullable=false)
+     * @Assert\NotBlank()
      */
     private $montoBs;
 
@@ -54,6 +58,7 @@ class Contratacion
      * @var string
      *
      * @ORM\Column(name="num_solicitud", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
      */
     private $numSolicitud;
 
@@ -68,6 +73,7 @@ class Contratacion
      * @var string
      *
      * @ORM\Column(name="num_puntocuenta", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
      */
     private $numPuntocuenta;
 
@@ -75,6 +81,7 @@ class Contratacion
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_punto", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaPunto;
 
@@ -82,6 +89,7 @@ class Contratacion
      * @var string
      *
      * @ORM\Column(name="num_alcance", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
      */
     private $numAlcance;
 
@@ -89,6 +97,7 @@ class Contratacion
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_alcance", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaAlcance;
 
@@ -96,6 +105,7 @@ class Contratacion
      * @var string
      *
      * @ORM\Column(name="num_contrato", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
      */
     private $numContrato;
 
@@ -103,6 +113,7 @@ class Contratacion
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_contrato", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaContrato;
 
@@ -124,6 +135,7 @@ class Contratacion
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_inicio", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaInicio;
 
@@ -131,6 +143,7 @@ class Contratacion
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_fin", type="date", nullable=false)
+     * @Assert\NotBlank()
      */
     private $fechaFin;
 
@@ -146,7 +159,7 @@ class Contratacion
      *
      * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Analista")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="analista_compras", referencedColumnName="id")
+     * @ORM\JoinColumn(name="analista_compras", referencedColumnName="id")
      * })
      */
     private $analistaCompras;
@@ -156,10 +169,25 @@ class Contratacion
      *
      * @ORM\ManyToOne(targetEntity="Frontend\ContenidosBundle\Entity\Presupuesto")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_presupuesto", referencedColumnName="id")
+     * @ORM\JoinColumn(name="id_presupuesto", referencedColumnName="id")
      * })
      */
     private $idPresupuesto;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="debe_bs", type="decimal", nullable=true)
+     */
+    private $debeBs;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="debe_me", type="decimal", nullable=true)
+     */
+    private $debeMe;
+
 
 
 
@@ -608,5 +636,57 @@ class Contratacion
     public function getIdPresupuesto()
     {
         return $this->idPresupuesto;
+    }
+
+    /**
+     * Set debeBs
+     *
+     * @param float $debeBs
+     * @return Contratacion
+     */
+    public function setDebeBs($debeBs)
+    {
+        $this->debeBs = $debeBs;
+    
+        return $this;
+    }
+
+    /**
+     * Get debeBs
+     *
+     * @return float 
+     */
+    public function getDebeBs()
+    {
+        return $this->debeBs;
+    }
+
+    /**
+     * Set debeMe
+     *
+     * @param float $debeMe
+     * @return Contratacion
+     */
+    public function setDebeMe($debeMe)
+    {
+        $this->debeMe = $debeMe;
+    
+        return $this;
+    }
+
+    /**
+     * Get debeMe
+     *
+     * @return float 
+     */
+    public function getDebeMe()
+    {
+        return $this->debeMe;
+    }
+
+
+    public function __toString()
+    {
+        return $this->getConcepto();
     }
 }

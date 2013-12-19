@@ -2,7 +2,7 @@
 <ul>
    <li class='active'><a href='{{ path('sit_homepage') }}'><span>INICIO</span></a></li>
    
-   {% if is_granted('ROLE_SIT_ADMINISTRADOR') %}
+   {% if is_granted('ROLE_SIT_ADMINISTRADOR')%}
    <li class='has-sub'><a href='#'><span>SIT</span></a>
       <ul>
          <li><a href='{{ path('ticket') }}'><span>GESTIONAR</span></a></li>
@@ -24,4 +24,3 @@
    <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
 </ul>
 </div>
-
