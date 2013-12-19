@@ -1,0 +1,86 @@
+{% extends '::mercal.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+{% block titulobanner %}
+    MERCAL
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">FAMILIARES DE {{ trabajador.primerNombre }} {{ trabajador.primerApellido }}<br><h4>JORNADA {{ jornada.nombrejornada|upper }} {{ jornada.fechajornada|date('d/m/Y') }}</h4></div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    <br>
+   <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalistaespecial">
+        <thead>
+            <tr>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Cedula</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in famtrabajador %}
+            <tr>
+
+                <td>{{ entity.nombres }}</td>
+                <td>{{ entity.apellidos }}</td>
+                <td>{{ entity.cedula }}</td>
+                <td align="center">
+                    {% if arraynumerofam[entity.id] is defined %}
+                        {% if arraynumerofam[entity.id].compro==false and arraynumerofam[entity.id].fechahoranumeracion is not null %}
+                                <b class="label label-warning"><b class="label label-important">{{ arraynumerofam[entity.id].numero }}</b> Rezagado
+                                <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerofam', {'idjornada':jornada.id,'idtrabajador':trabajador.id,'idfamiliar':entity.id}) }}" ><b class="icon-remove"></b></a></b> | 
+                        {% elseif arraynumerofam[entity.id].compro==true and arraynumerofam[entity.id].fechahoranumeracion is not null %}
+                                <b class="label label-info">Ya compró</b>
+                        {% else %}
+                            <b class="label label-success">{{ arraynumerofam[entity.id].numero }}
+                                <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerofam', {'idjornada':jornada.id,'idtrabajador':trabajador.id,'idfamiliar':entity.id}) }}" ><b class="icon-remove"></b></a>
+                            </b>
+                        {% endif %}
+                 
+                   
+                    {% else %}
+                        <a class="label label-important" href="{{ path('mercal_guardaasignarnumerofam', {'idjornada':jornada.id, 'idtrabajador': trabajador.id,'idfamiliar':entity.id }) }}">Asignar Numero</a> | 
+
+                    {% endif %}
+
+                    <a class="label label-warning" href="{{ path('mercal_editarfam', {'idjornada':jornada.id, 'idfamiliar':entity.id }) }}">Editar</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br><br>
+
+
+
+    <a class="btn btn-primary" href="{{ path('mercal_nuevofam',{'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}">Nuevo familiar</a> | 
+    <a class="btn btn-default" href="{{ path('mercal_listado',{'idjornada':jornada.id}) }}">Volver al listado</a> | 
+    <a class="btn btn-default" href="{{ path('mercal_asignarnumero', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}">Volver a trabajador</a>
+
+    <br><br>
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tablalistaespecial').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'asc'],[1,'asc']],
+            } );
+        })
+    </script>
+
+{% endblock %}

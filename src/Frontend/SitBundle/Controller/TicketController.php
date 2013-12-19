@@ -68,10 +68,12 @@ class TicketController extends Controller
             "buenos días","gracias","la presente es para","la presente es","por medio de la presente se","Buenas noches,",
             "Buenas noches","el presente es para","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
             "urgente","esto con caracter de urgencia","con caracter de urgencia","Se agradece su valiosa colaboracion","carmen",
-            "buenas tardes el motivo es para","el motivo es para","el motivo es para","por su colaboracion","por su colaboración","buen dia"
+            "buenas tardes el motivo es para","el motivo es para","el motivo es para","por su colaboracion","por su colaboración","buen dia","Buenos tardes","camaradas","los molesto para",
+            "por el presente","estimados"
         );
 
         $solicitud=str_replace($eliminar, array(), $solicitud);
+        $solicitud=str_replace(array("Á","É","Í","Ó","Ú"), array("á","é","í","ó","ú"), $solicitud);
         return $solicitud;
     }
     function filtrarsms($palabrotas) 
@@ -186,7 +188,7 @@ class TicketController extends Controller
 
         //traigo los datos del usuario conectado
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $datosusuario = $em->getRepository('UsuarioBundle:User')->datosusuario($idusuario);
+        $datossolicitante= $em->getRepository('UsuarioBundle:User')->datosusuario($ticket->getSolicitante()->getId());
         //busco si el usuario ya posee una unidad asignada para eliminarla
         $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
         $usuariosunidad =  $em->getRepository('SitBundle:Unidad')->usuariosunidad($usuariounidad[0]->getId());
@@ -215,7 +217,7 @@ class TicketController extends Controller
         return $this->render('SitBundle:Ticket:showasignado.html.twig', array(
             'entity'      => $ticket,
             'delete_form' => $deleteForm->createView(),
-            'datosusuario'=>$datosusuario,
+            'datossolicitante'=>$datossolicitante,
             'unidad'=>$unidad,
             'usuariosunidad'=>$usuariosunidad,
             'usuarioticket'=>$usuarioticket,
@@ -273,7 +275,6 @@ class TicketController extends Controller
             $query->execute();
 
             //echo $user->getUser()->getUsername();
-
 
             //CORREO
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
@@ -539,6 +540,7 @@ class TicketController extends Controller
             $solicitud=ucfirst(trim($solicitud));
             $entity->setSolicitud($solicitud);
 
+
             //GUARDO EL ARCHIVO
             if($form['file']->getData()){
       
@@ -574,6 +576,8 @@ class TicketController extends Controller
                         'datosusuario'=>$datosusuario
                     ));
                 }
+                
+                $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre));
 
                 //GUARDO EL ARCHIVO
                 if($file->move('uploads/sit/',$nombre.'_'.\date("Gis").'.'.$extension) )
@@ -615,11 +619,11 @@ class TicketController extends Controller
             //fin enviar correo
 
 
-            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-            ->setSubject('telesurweb.imk:*t3l3SURcl4v3* @Sit:'.substr(ucfirst($this->filtrarsms($solicitud)),0,150))    // we configure the title
+           /* $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            ->setSubject('telesurwebimk:*t3l3SURcl4v32013/.* @SitTelesur:'.substr(ucfirst($this->filtrarsms($solicitud)),0,145))    // we configure the title
             ->setFrom('contactenos@telesurtv.net')
             ->setTo($unidad->getSms());
-            $this->get('mailer')->send($message);     // then we send the message.
+            $this->get('mailer')->send($message); */    // then we send the message.
             //fin enviar correo
 
             $this->get('session')->getFlashBag()->add('notice', 'TU SOLICITUD SE HA REALIZADO EXITOSAMENTE');
@@ -746,8 +750,8 @@ class TicketController extends Controller
 
         //traigo los datos del usuario conectado
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $datosusuario = $em->getRepository('UsuarioBundle:User')->datosusuario($idusuario);
-        //busco si el usuario ya posee una unidad asignada para eliminarla
+        $datossolicitante = $em->getRepository('UsuarioBundle:User')->datosusuario($ticket ->getSolicitante()->getId());
+        //busco si el usuario ya posee una unidad asignada 
         $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
         $usuariosunidad =  $em->getRepository('SitBundle:Unidad')->usuariosunidad($usuariounidad[0]->getId());
 
@@ -769,7 +773,7 @@ class TicketController extends Controller
         return $this->render('SitBundle:Ticket:show.html.twig', array(
             'entity'      => $ticket,
             'delete_form' => $deleteForm->createView(),
-            'datosusuario'=>$datosusuario,
+            'datossolicitante'=>$datossolicitante,
             'unidad'=>$unidad,
             'usuariosunidad'=>$usuariosunidad,
             'usuarioticket'=>$usuarioticket,

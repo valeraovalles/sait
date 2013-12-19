@@ -1,16 +1,16 @@
 # This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_pgsql
-    database_host: 127.0.0.1
+    database_host: localhost
     database_port: null
     database_name: sait
-    database_user: jeff
-    database_password: 123456
+    database_user: postgres
+    database_password: postgres
 
     mailer_transport: smtp
     mailer_host: correo.telesurtv.net
-    mailer_user: webtelesur@telesurtv.net
-    mailer_password: '/W3b-Tele$ur..'
+    mailer_user: aplicaciones@telesurtv.net
+    mailer_password: '4pl1c4c10n35'
     mailer_port: 25
 
     locale: es

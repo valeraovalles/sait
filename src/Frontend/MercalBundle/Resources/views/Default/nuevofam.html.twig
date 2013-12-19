@@ -1,0 +1,60 @@
+{% extends '::mercal.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+{% block titulobanner %}
+    MERCAL
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">AGREGAR FAMILIAR DE {{ trabajador.primerNombre }} {{ trabajador.primerApellido }}<br></div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+    <form novalidate action="{{ path('mercal_guardanuevofam', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}" method="post">
+        {{ form_widget(form._token) }}
+        <div class="formShow" style="width:85%;">
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(form.nombres) }}</div>
+                <div class="labelform">Nombres:</div>
+                <div class="widgetform">{{ form_widget(form.nombres) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(form.apellidos) }}</div>
+                <div class="labelform">Apellidos:</div>
+                <div class="widgetform">{{ form_widget(form.apellidos) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(form.cedula) }}</div>
+                <div class="labelform">Cedula:</div>
+                <div class="widgetform">{{ form_widget(form.cedula) }}</div>
+            </div>
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Guardar familiar"><br><br>
+        <a class="btn btn-default" href="{{ path('mercal_listadofam',{'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}">Volver a listado</a> |
+        <a class="btn btn-default" href="{{ path('mercal_asignarnumero', {'idjornada':jornada.id,'idtrabajador':trabajador.id}) }}">Volver a trabajador</a>
+    </form>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#cerrar').click(function(){
+                var rs=confirm('¿Esta seguro que desea cerrar la ventana?')
+                if(rs==true) window.close();
+            });
+        });
+    </script>
+{% endblock %}

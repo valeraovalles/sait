@@ -1,0 +1,208 @@
+{% extends '::sit.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+
+{% block titulobanner %}
+    GESTIONAR TICKET
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">GESTIONAR TICKET
+        {% if usuarioticket %}
+        <br>
+
+        <h5>{% if entity.estatus!=4 %}ASIGNADO A{% else %}CERRADO POR{% endif %} {{ usuarioticket.primernombre|upper }} {{ usuarioticket.primerapellido|upper }}</h5>
+        {% endif %}
+
+    </div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+{% if entity.estatus!=4 %}
+<form action="{{ path('ticket_asigreasig',{'id':entity.id}) }}" method="post">
+<div class="row-fluid">
+  <div class="span7">
+{% endif %}
+    <div class="formShow" style="width:85%;">
+        {% if reasignado %}
+        <div class="contenedorform">
+            <div class="labelform">Reasignado por:</div>
+            <div class="widgetform"><span class="label label-warning">{{ reasignado[0].user.primernombre }} {{ reasignado[0].user.primerapellido }}</span></div>
+        </div>
+        {% endif %}
+        <div class="contenedorform">
+            <div class="labelform">Solicitante:</div>
+            <div class="widgetform">{{ entity.solicitante.primernombre }} {{ entity.solicitante.primerapellido }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Extensión:</div>
+            <div class="widgetform">{{ datosusuario.extension }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha solicitud:</div>
+            <div class="widgetform">{{ entity.fechasolicitud|date("d-m-Y") }}</div>
+        </div>
+
+        <div class="contenedorform">
+            <div class="labelform">Hora solicitud:</div>
+            <div class="widgetform">{{ entity.horasolicitud|date("G:i:s") }}</div>
+        </div>
+
+        {% if entity.estatus==4 %}
+            <div class="contenedorform">
+                <div class="labelform">Fecha solución:</div>
+                <div class="widgetform">{{ entity.fechasolucion|date("d-m-Y") }}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Hora solución:</div>
+                <div class="widgetform">{{ entity.horasolucion|date("G:i:s") }}</div>
+            </div>
+        {% endif %}
+
+        <div class="contenedorform">
+            <div class="labelform">Solicitud:</div>
+            <div class="widgetform">{{ entity.solicitud}}</div>
+        </div>
+
+        {% if entity.estatus==4 %}
+            <div class="contenedorform">
+                <div class="labelform">Solución:</div>
+                <div class="widgetform">{{ entity.solucion}}</div>
+            </div>
+        {% endif %}
+
+        <div class="contenedorform">
+            <div class="labelform">Categoria:</div>
+            <div class="widgetform">{{ entity.categoria.categoria|upper }}{% if entity.estatus!=4 %}<a href="{{ path('ticket_asignarcatsub',{'id':entity.id}) }}"> <span class="icon-edit"></span></a>{% endif %}</div>
+        </div>
+
+        <div class="contenedorform">
+            <div class="labelform">Subcategoria:</div>
+            <div class="widgetform">{{ entity.subcategoria.subcategoria|upper }}</div>
+        </div>
+
+        {% if entity.archivo %}
+        <div class="contenedorform">
+            <div class="labelform">Archivo:</div>
+            <div class="widgetform">
+
+                {% set extension =  entity.archivo|split(".") %}
+
+                {% if extension[1]=='jpg' or extension[1]=='jpeg' or extension[1]=='png' or extension[1]=='gif'  %}
+                    
+	<img class="img-rounded" src="{{ asset('uploads/sit/') }}{{ entity.archivo }}" width="150px">                    
+                {% else %}
+                    <a href="{{ asset('uploads/sit/') }}/{{ entity.archivo }}">DESCARGA ARCHIVO {{ extension[1]|upper }}</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% if entity.estatus!=4 %}
+  </div>
+  <div class="span5">
+        <div class="contenedorcatsub">
+        <div class="accordion" id="accordion2">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                ASIGNAR TICKET
+              </a>
+            </div>
+            <div id="collapseOne" class="accordion-body collapse in">
+              <div class="accordion-inner">
+                {% for usu in usuariosunidad %}
+                    {% if usuarioticket %}
+                        {% for usuarios in usu.user if usuarios.id!= usuarioticket.id %}
+                            <div class="situnidad"><input type="radio" name="datos" value="asignar-{{usuarios.id}}"> 
+                            {{ usuarios.primernombre|title }} {{ usuarios.primerapellido|title }}</div>
+                        {% endfor %}
+                    {% else %}
+                        {% for usuarios in usu.user %}
+                            <div class="situnidad"><input type="radio" name="datos" value="asignar-{{usuarios.id}}"> 
+                            {{ usuarios.primernombre|title }} {{ usuarios.primerapellido|title }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                REASIGNAR TICKET
+              </a>
+            </div>
+            <div id="collapseTwo" class="accordion-body collapse in">
+              <div class="accordion-inner">
+                {% for uni in unidad if uni.id!=idunidad %}
+                <div class="situnidad"><input type="radio" name="datos" value="reasignar-{{ uni.id }}"> {{ uni.descripcion }}</div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Asignar o Reasignar">
+  </div>
+</div>
+</form>
+{% endif %}
+
+
+    <div style="width:800px;left:44%;" id="myModal" class="modal hide fade" tabindex="5" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-body">
+            <a href="/sait/web/libs/scripts/forzardescarga.php?archivo={{ entity.archivo }}&ruta=../../uploads/sit/"><img class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ entity.archivo }}"></a>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal">Cerrar</button>
+        </div>
+    </div>
+
+
+<a class="btn btn-defaul" href="{{ path('ticket') }}">Ir a la lista</a>
+
+
+
+{#
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('ticket') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('ticket_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('ticket_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+#}
+
+<br><br>
+{% endblock %}

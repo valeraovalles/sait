@@ -28,6 +28,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UsuarioBundle:Perfil')->find($IdUsuario);
 
+
         $f=new Funcion;
         $datos_usuario=$f->datosUsuarioSigefirrhh($entity->getCedula());
         
