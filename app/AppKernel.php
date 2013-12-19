@@ -29,7 +29,6 @@ class AppKernel extends Kernel
             new Frontend\TransporteBundle\TransporteBundle(),
             new Frontend\MercalBundle\MercalBundle(),
             new Frontend\DirectorioBundle\DirectorioBundle(),
-            new Frontend\AgendaBundle\FrontendAgendaBundle(),
             new Frontend\ContratosBundle\ContratosBundle(),
         );
 
