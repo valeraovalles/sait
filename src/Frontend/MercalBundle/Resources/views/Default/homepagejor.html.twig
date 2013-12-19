@@ -1,0 +1,53 @@
+{% extends '::mercal.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+{% block titulobanner %}
+    MERCAL
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">SELECCIONE UNA JORNADA PARA CONTINUAR</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    <table cellpadding="0" cellspacing="0" border="1" class="table table-condensed" style="width:500px;">
+        <thead>
+            <tr>
+                <th>Jornada</th>
+                <th>Fecha</th>
+                <th>Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if jornadas %}
+            {% for entity in jornadas %}
+                <tr class="info">
+                    <td>{{ entity.nombrejornada }}</td>
+                    <td>{% if entity.fechajornada %}{{ entity.fechajornada|date('Y-m-d') }}{% endif %}</td>
+                    <td align="center">
+                        <a class="label label-success" href="{{ path('mercal_homepagenum', { 'idjornada': entity.id }) }}">Seleccionar</a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr class="info"><td colspan="3" style="text-align:center">NO EXISTEN NUEVAS JORNADAS</td></tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+    <br><br>
+{% endblock %}

@@ -111,6 +111,10 @@
             </div>
             {% endif %}
 
+            <div class="listado_aplicaciones">
+              <a href="{{ path('mercal_homepagenum',{'idjornada':3})}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            </div>
+
             {% if is_granted('ROLE_ADMINISTRADOR') %}
             <div class="listado_aplicaciones">
               <a href="{{ path('transporte_homepage') }}">TRANSPORTE NUEVO<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>

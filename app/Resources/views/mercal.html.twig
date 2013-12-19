@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/mercal/mercal.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block menu %}
+    {% include 'MercalBundle:Default:includes/menu.html.twig' %}
+{% endblock %}

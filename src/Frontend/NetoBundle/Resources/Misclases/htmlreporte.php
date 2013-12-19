@@ -8,15 +8,19 @@ class htmlreporte
     public function recibo($em,$datos)
     {
 
-    	foreach ($datos['concepto'] as $value) {
-    		
-    		if($value['descripcion']=="SUELDO BASICO"){
-    			$sueldo=$value['asigna']*2;
-    			$sueldo=number_format($sueldo, 2,',','.');
-    			break;
-    		}
-    	}
-
+    	if($datos['tiponomina']=='n'){
+	    	foreach ($datos['concepto'] as $value) {
+	    		
+		    		if($value['descripcion']=="SUELDO BASICO"){
+		    			$sueldo=$value['asigna']*2;
+		    			$sueldo=number_format($sueldo, 2,',','.');
+		    			break;
+		    		}
+	    	}
+	    } else if ($datos['tiponomina']=='a'){
+	    	$sueldo=$datos['sueldo']*2;
+		    $sueldo=number_format($sueldo, 2,',','.');
+	    }
 
     	$html ="<div style='text-align:center;'><h1>RECIBO DE PAGO</h1></div><div align='center'><link href='/sait/web/bundles/neto/reporte.css' rel='stylesheet' type='text/css'/><meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />";
     	$html .="
@@ -77,7 +81,7 @@ class htmlreporte
 
     	$totalasigna=0;$totaldeduce=0;
     	foreach ($datos['concepto'] as $value) {
-    		
+
     		$html .= '<tr><td>'.$value['descripcion'].'</td>';
     		$html .= '<td>'.$value['asigna'].'</td>';
     		$html .= '<td>'.$value['deduce'].'</td></tr>';

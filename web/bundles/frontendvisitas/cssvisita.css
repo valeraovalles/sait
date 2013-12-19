@@ -1,0 +1,25 @@
+/*.inputhora{
+float                  :left;
+height                 :auto;
+width                  :10px;
+text-align             :right;
+padding-right          :10px;
+font-weight            :bold;
+}*/
+
+#frontend_visitasbundle_visitatype_horaentrada_hour{
+	width                  :70px;
+}
+
+#frontend_visitasbundle_visitatype_horaentrada_minute{
+	width                  :70px;
+}
+
+
+#frontend_visitasbundle_visitatype_horasalida_hour{
+	width                  :110px;
+}
+
+#frontend_visitasbundle_visitatype_horasalida_minute{
+	width                  :110px;
+}

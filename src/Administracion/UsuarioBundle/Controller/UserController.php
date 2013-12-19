@@ -261,9 +261,14 @@ class UserController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+
+        $datos=$request->request->all();
+        $datos=$datos['administracion_usuariobundle_usertype'];
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('UsuarioBundle:User')->find($id);
+        $passviejo=$entity->getPassword();
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -282,11 +287,16 @@ class UserController extends Controller
 
         if ($editForm->isValid() && $editFormPerfil->isValid()) {
             
-            //CODIFICO LA CONTRASEÑA
-            /*$factory = $this->get('security.encoder_factory');
-            $encoder = $factory->getEncoder($entity);
-            $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
-            $entity->setPassword($password);*/
+             if(!empty($datos['password'])){
+                //CODIFICO LA CONTRASEÑA
+                $factory = $this->get('security.encoder_factory');
+                $encoder = $factory->getEncoder($entity);
+                $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
+                $entity->setPassword($password);
+            } else{
+
+                $entity->setPassword($passviejo);
+            }
             
             $em->persist($entity);
             $em->persist($entity_perfil);

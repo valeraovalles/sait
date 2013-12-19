@@ -1,0 +1,52 @@
+{% extends '::mercal.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+{% block titulobanner %}
+    MERCAL
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">SELECCIONE UNA JORNADA Y PRESIONE CONTINUAR</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre jornada</th>
+                <th>Fechaj ornada</th>
+                <th>Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in jornadas %}
+            <tr>
+                <td><a href="{{ path('jornada_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.nombrejornada }}</td>
+                <td>{% if entity.fechajornada %}{{ entity.fechajornada|date('Y-m-d') }}{% endif %}</td>
+                <td align="center">
+                    <a class="label label-success" href="{{ path('mercal_listado', { 'idjornada': entity.id }) }}">Seleccionar</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br><br>
+{% endblock %}

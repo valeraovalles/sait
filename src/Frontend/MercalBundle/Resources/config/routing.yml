@@ -1,0 +1,129 @@
+
+#dos jornadas
+mercal_numeracion:
+    pattern:  /numeracion/{idjornada1}/{idjornada2}
+    defaults: { _controller: MercalBundle:Default:numeracion }
+
+#una jornada
+mercal_homepagenum:
+    pattern:  /homepagenum/{idjornada}
+    defaults: { _controller: MercalBundle:Default:homepagenum }
+
+mercal_homepagejor:
+    pattern:  /homepagejor
+    defaults: { _controller: MercalBundle:Default:homepagejor }
+
+ajaxmercal_siguienteautomatico:
+    pattern:  /ajaxmercalsiguienteautomatico/{idjornada}
+    defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguienteautomatico }
+
+
+mercal_compronocomprotrabajador:
+    pattern:  /compronocomprotrabajador/{idjornada}/{idtrabajador}/{compro}
+    defaults: { _controller: MercalBundle:Default:compronocomprotrabajador }
+
+mercal_homepage:
+    pattern:  /num/numeracion/{idjornada}
+    defaults: { _controller: MercalBundle:Default:index }
+
+mercal_cerrarjornada:
+    pattern:  /cerrarjornada/{idjornada}
+    defaults: { _controller: MercalBundle:Ajax:cerrarjornada }
+
+mercal_jornadanumeracion:
+    pattern:  /num/jornadanumeracion
+    defaults: { _controller: MercalBundle:Default:jornadanumeracion }
+
+ajaxmercal_siguiente:
+    pattern:  /ajaxmercalsiguiente/{idjornada}/{usernumeroid}/{compro}
+    defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguiente }
+
+ajaxmercal_siguientecomprobar:
+    pattern:  /ajaxmercalsiguientecomprobar/{idjornada}
+    defaults: { _controller: MercalBundle:Ajax:ajaxmercalsiguientecomprobar }
+
+mercal_seleccionajornada:
+    pattern:  /asignum/seleccionajornada
+    defaults: { _controller: MercalBundle:Default:seleccionajornada }
+
+
+mercal_listado:
+    pattern:  /asignum/listado/{idjornada}
+    defaults: { _controller: MercalBundle:Default:listado }
+
+mercal_listadofam:
+    pattern:  /asignum/listadofam/{idtrabajador}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:listadofam }
+
+mercal_asignarnumero:
+    pattern:  /asignum/asignarnumero/{idtrabajador}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:asignarnumero }
+
+mercal_eliminarnumerotrab:
+    pattern:  /asignum/eliminarnumerotrab/{idtrabajador}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:eliminarnumerotrab }
+
+mercal_eliminarnumerofam:
+    pattern:  /asignum/eliminarnumerofam/{idtrabajador}/{idfamiliar}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:eliminarnumerofam }
+
+mercal_guardaasignarnumero:
+    pattern:  /asignum/guardaasignarnumero/{idtrabajador}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:guardaasignarnumero }
+
+mercal_nuevofam:
+    pattern:  /asignum/nuevofam/{idtrabajador}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:nuevofam }
+
+mercal_guardanuevofam:
+    pattern:  /asignum/guardanuevofam/{idtrabajador}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:guardanuevofam }
+
+mercal_guardaasignarnumerofam:
+    pattern:  /asignum/guardaasignarnumerofam/{idtrabajador}/{idfamiliar}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:guardaasignarnumerofam }
+
+mercal_editarfam:
+    pattern:  /asignum/editarfam/{idfamiliar}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:editarfam }
+
+mercal_actualizaeditarfam:
+    pattern:  /asignum/actualizaeditarfam/{idfamiliar}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:actualizaeditarfam }
+
+mercal_borrarfam:
+    pattern:  /asignum/borrarfam/{idtrabajador}/{idfamiliar}/{idjornada}
+    defaults: { _controller: MercalBundle:Default:borrarfam }
+
+
+
+jornada:
+    pattern:  /jornada/lista
+    defaults: { _controller: "MercalBundle:Jornada:index" }
+
+jornada_show:
+    pattern:  /jornada/{id}/show
+    defaults: { _controller: "MercalBundle:Jornada:show" }
+
+jornada_new:
+    pattern:  /jornada/new
+    defaults: { _controller: "MercalBundle:Jornada:new" }
+
+jornada_create:
+    pattern:  /jornada/create
+    defaults: { _controller: "MercalBundle:Jornada:create" }
+    requirements: { _method: post }
+
+jornada_edit:
+    pattern:  /jornada/{id}/edit
+    defaults: { _controller: "MercalBundle:Jornada:edit" }
+
+jornada_update:
+    pattern:  /jornada/{id}/update
+    defaults: { _controller: "MercalBundle:Jornada:update" }
+    requirements: { _method: post|put }
+
+jornada_delete:
+    pattern:  /jornada/{id}/delete
+    defaults: { _controller: "MercalBundle:Jornada:delete" }
+    requirements: { _method: post|delete }

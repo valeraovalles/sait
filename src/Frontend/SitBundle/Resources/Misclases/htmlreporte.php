@@ -41,9 +41,11 @@ class htmlreporte
         	$info .="<div class='subcat'>".ucfirst($value->getSubcategoria()->getSubcategoria())."</div>";
 
 
-
-        	$info .="<div class='solicitud'>".$cont.".- <b>Solicitud (".$value->getFechasolicitud()->format("d-m-Y")." ".$value->getHorasolicitud()->format("G:i:s")."):</b> ".ucfirst($value->getSolicitud())."</div>";
-        	$info .="<div class='solucion'><b>Solución (".ucfirst(strtolower($value->getSolicitante()->getPrimernombre()))." ".ucfirst(strtolower($value->getSolicitante()->getPrimerapellido()))."):</b> ".ucfirst($value->getSolucion())."</div>";
+            $usuariocierraticket=$value->getUser();
+            
+        	$info .="<div style='margin-bottom:5px;text-align:justify;' class='solicitud'>".$cont.".- <b>Solicitud (".$value->getFechasolicitud()->format("d-m-Y")." ".$value->getHorasolicitud()->format("G:i:s")."):</b> ".ucfirst($value->getSolicitud())."</div>";
+        	//$info .="<div class='solucion'><b>Solución (".ucfirst(strtolower($usuariocierraticket[0]->getPrimernombre()))." ".ucfirst(strtolower($usuariocierraticket[0]->getPrimerapellido()))."):</b> ".ucfirst($value->getSolucion())."</div>";
+            $info .="<div style='margin-bottom:15px;text-align:justify;' class='solucion'><b>Solución (".$value->getFechasolucion()->format("d-m-Y")." ".$value->getHorasolucion()->format("G:i:s")."):</b> ".ucfirst($value->getSolucion())."</div>";
 
         	$ultimacategoria=$value->getCategoria();
         	$ultimasubcategoria=$value->getSubcategoria()->getSubcategoria();

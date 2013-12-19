@@ -6,7 +6,7 @@
 
 
 <br>
-    <h2>Listado de visitdantes</h2>
+    <h2>Listado de visitantes</h2>
 
 
     <table class="records_list" id="tablalistax">
@@ -46,8 +46,7 @@
                         <a href="{{ path('usuario_show_control', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
                         
                         {#<a href="{{ path('usu', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Nueva Visita"><i class="icon-edit"></i></a>#}
-                         <a href="{{ path('usuario_edit_control', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
-
+                        <a href="{{ path('usu', { 'id': entity.usuario.id }) }}" data-toggle="tooltip" data-placement="top" title="Nueva Visita"><i class="icon-edit"></i></a>
                         {% if entity.fechasalida=='' %}
                         <a href="{{ path('salida', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Salida"><i class="icon-user icon-eject"></i></a>
                         {% endif %}

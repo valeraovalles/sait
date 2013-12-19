@@ -34,48 +34,102 @@ class DefaultController extends Controller
         $datos=$request->request->all();
         $datos=$datos['form'];
 
+
         $em = $this->getDoctrine()->getManager();
         $usuario = $em->getRepository('UsuarioBundle:Perfil')->find($this->get('security.context')->getToken()->getUser()->getId());
 
         $a=new Conexion;
         $conn=$a->postgresql_sigefirrhh();
 
-        $anio=$datos['anios'];
-        $mes=$datos['meses'];
-        $quincena=$datos['periodo'];
 
-        $query="
 
-            SELECT max(g.periodicidad) as periodicidad, a.semana_quincena,
-            max(d.nombre) as tipopersonal, 
-            max(tr.fecha_ingreso) as ingresoorganismo, 
-            max(b.estatus) as estatus, max(b.forma_pago) as formapago, 
-            max(b.cuenta_nomina) as cuenta_nomina, max(e.cedula) as codtra, 
-            e.primer_nombre as primer_nombre, e.segundo_nombre as segundo_nombre, 
-            e.primer_apellido as primer_apellido, e.segundo_apellido as segundo_apellido, 
-            k.descripcion_cargo as cargo, 
-            j.nombre as nombreunidad, c.descripcion as descon, 
-            a.id_historico_quincena as id_contador, a.unidades as unidades, a.monto_asigna as asigna, 
-            a.monto_deduce as deduce FROM historicoquincena a, historiconomina b, 
-            trabajador tr,concepto c, tipoPersonal d, personal e, conceptoTipoPersonal f, 
-            grupoNomina g, dependencia j, cargo k, frecuenciaTipoPersonal ftp, frecuenciaPago fp 
-            WHERE a.anio = ".$anio." AND a.mes = ".$mes." AND a.semana_quincena = ".$quincena." AND e.cedula = ".$usuario->getCedula()." 
-            AND a.numero_nomina = 0 AND g.id_grupo_nomina = a.id_grupo_nomina 
-            AND d.id_tipo_personal = a.id_tipo_personal AND b.id_tipo_personal = d.id_tipo_personal 
-            AND b.id_trabajador = a.id_trabajador AND a.id_historico_nomina=b.id_historico_nomina 
-            AND b.id_trabajador=tr.id_trabajador AND e.id_personal = tr.id_personal 
-            AND j.id_dependencia = b.id_dependencia AND k.id_cargo = b.id_cargo 
-            AND f.id_concepto_tipo_personal = a.id_concepto_tipo_personal 
-            AND c.id_concepto = f.id_concepto AND a.id_frecuencia_tipo_personal = ftp.id_frecuencia_tipo_personal 
-            AND ftp.id_frecuencia_pago = fp.id_frecuencia_pago and c.cod_concepto <> '5000' 
-            group by d.cod_tipo_personal,b.codigo_nomina,e.cedula, e.primer_nombre, 
-            e.segundo_nombre, e.primer_apellido, e.segundo_apellido,k.cod_cargo, 
-            k.descripcion_cargo, j.cod_dependencia, j.nombre, c.cod_concepto, c.descripcion, 
-            a.id_historico_quincena, a.unidades, a.monto_asigna, a.monto_deduce,a.documento_soporte, 
-            k.grado, fp.cod_frecuencia_pago,a.semana_quincena order by d.cod_tipo_personal, j.cod_dependencia,
-            b.codigo_nomina, e.cedula, c.cod_concepto,a.semana_quincena
+        if($datos['tipnom']=='n'){
+            $anio=$datos['anios'];
+            $mes=$datos['meses'];
+            $quincena=$datos['periodo'];
 
-        ";
+            $query="
+
+                SELECT max(g.periodicidad) as periodicidad, a.semana_quincena,
+                max(d.nombre) as tipopersonal, 
+                max(tr.fecha_ingreso) as ingresoorganismo, 
+                max(b.estatus) as estatus, max(b.forma_pago) as formapago, 
+                max(b.cuenta_nomina) as cuenta_nomina, max(e.cedula) as codtra, 
+                e.primer_nombre as primer_nombre, e.segundo_nombre as segundo_nombre, 
+                e.primer_apellido as primer_apellido, e.segundo_apellido as segundo_apellido, 
+                k.descripcion_cargo as cargo, 
+                j.nombre as nombreunidad, c.descripcion as descon, 
+                a.id_historico_quincena as id_contador, a.unidades as unidades, a.monto_asigna as asigna, 
+                a.monto_deduce as deduce FROM historicoquincena a, historiconomina b, 
+                trabajador tr,concepto c, tipoPersonal d, personal e, conceptoTipoPersonal f, 
+                grupoNomina g, dependencia j, cargo k, frecuenciaTipoPersonal ftp, frecuenciaPago fp 
+                WHERE a.anio = ".$anio." AND a.mes = ".$mes." AND a.semana_quincena = ".$quincena." AND e.cedula = ".$usuario->getCedula()." 
+                AND g.id_grupo_nomina = a.id_grupo_nomina 
+                AND d.id_tipo_personal = a.id_tipo_personal AND b.id_tipo_personal = d.id_tipo_personal 
+                AND b.id_trabajador = a.id_trabajador AND a.id_historico_nomina=b.id_historico_nomina 
+                AND b.id_trabajador=tr.id_trabajador AND e.id_personal = tr.id_personal 
+                AND j.id_dependencia = b.id_dependencia AND k.id_cargo = b.id_cargo 
+                AND f.id_concepto_tipo_personal = a.id_concepto_tipo_personal 
+                AND c.id_concepto = f.id_concepto AND a.id_frecuencia_tipo_personal = ftp.id_frecuencia_tipo_personal 
+                AND ftp.id_frecuencia_pago = fp.id_frecuencia_pago and a.numero_nomina=0
+                group by d.cod_tipo_personal,b.codigo_nomina,e.cedula, e.primer_nombre, 
+                e.segundo_nombre, e.primer_apellido, e.segundo_apellido,k.cod_cargo, 
+                k.descripcion_cargo, j.cod_dependencia, j.nombre, c.cod_concepto, c.descripcion, 
+                a.id_historico_quincena, a.unidades, a.monto_asigna, a.monto_deduce,a.documento_soporte, 
+                k.grado, fp.cod_frecuencia_pago,a.semana_quincena order by d.cod_tipo_personal, j.cod_dependencia,
+                b.codigo_nomina, e.cedula, c.cod_concepto,a.semana_quincena
+
+
+            ";
+        } //fin if tipnom es n
+
+        else if ($datos['tipnom']=='a'){
+            $anio=$datos['aniosaguinaldos'];
+            $query="
+
+                SELECT max(g.periodicidad) as periodicidad, a.semana_quincena,
+                max(d.nombre) as tipopersonal, 
+                max(tr.fecha_ingreso) as ingresoorganismo, 
+                max(b.estatus) as estatus, max(b.forma_pago) as formapago, 
+                max(b.cuenta_nomina) as cuenta_nomina, max(e.cedula) as codtra, 
+                e.primer_nombre as primer_nombre, e.segundo_nombre as segundo_nombre, 
+                e.primer_apellido as primer_apellido, e.segundo_apellido as segundo_apellido, 
+                k.descripcion_cargo as cargo, 
+                j.nombre as nombreunidad, c.descripcion as descon, 
+                a.id_historico_quincena as id_contador, a.unidades as unidades, a.monto_asigna as asigna, 
+                a.monto_deduce as deduce FROM historicoquincena a, historiconomina b, 
+                trabajador tr,concepto c, tipoPersonal d, personal e, conceptoTipoPersonal f, 
+                grupoNomina g, dependencia j, cargo k, frecuenciaTipoPersonal ftp, frecuenciaPago fp 
+                WHERE a.anio = ".$anio." AND e.cedula = ".$usuario->getCedula()." AND a.semana_quincena = 1 
+                AND g.id_grupo_nomina = a.id_grupo_nomina 
+                AND d.id_tipo_personal = a.id_tipo_personal AND b.id_tipo_personal = d.id_tipo_personal 
+                AND b.id_trabajador = a.id_trabajador AND a.id_historico_nomina=b.id_historico_nomina 
+                AND b.id_trabajador=tr.id_trabajador AND e.id_personal = tr.id_personal 
+                AND j.id_dependencia = b.id_dependencia AND k.id_cargo = b.id_cargo 
+                AND f.id_concepto_tipo_personal = a.id_concepto_tipo_personal 
+                AND c.id_concepto = f.id_concepto AND a.id_frecuencia_tipo_personal = ftp.id_frecuencia_tipo_personal 
+                AND ftp.id_frecuencia_pago = fp.id_frecuencia_pago and c.cod_concepto <> '5000' and fp.id_frecuencia_pago=45
+                group by d.cod_tipo_personal,b.codigo_nomina,e.cedula, e.primer_nombre, 
+                e.segundo_nombre, e.primer_apellido, e.segundo_apellido,k.cod_cargo, 
+                k.descripcion_cargo, j.cod_dependencia, j.nombre, c.cod_concepto, c.descripcion, 
+                a.id_historico_quincena, a.unidades, a.monto_asigna, a.monto_deduce,a.documento_soporte, 
+                k.grado, fp.cod_frecuencia_pago,a.semana_quincena order by d.cod_tipo_personal, j.cod_dependencia,
+                b.codigo_nomina, e.cedula, c.cod_concepto,a.semana_quincena
+
+
+            ";
+            $query2="
+                select cf.monto as sueldo from conceptotipopersonal ctp, concepto c, trabajador t,conceptofijo cf 
+                where ctp.id_concepto=c.id_concepto 
+                and ctp.id_concepto_tipo_personal=cf.id_concepto_tipo_personal and
+                t.id_trabajador=cf.id_trabajador and
+                c.cod_concepto='0001'
+                and t.cedula=".$usuario->getCedula()."  and t.estatus='A'
+            ";
+            $rs2 = pg_query($conn, $query2);
+            $row2 = pg_fetch_array($rs2);
+        }
+
         $rs = pg_query($conn, $query);
 
         $existe=0;
@@ -83,19 +137,36 @@ class DefaultController extends Controller
 
             //empresa
             $recibo['empresa']='La Nueva TelevisiÓn del Sur.';
-            //perioricidad
-            if($row['semana_quincena']==1) $recibo['perioricidad']='Primera Quincena'; else $recibo['perioricidad']='Segunda Quincena';
-            //periodo desde
-            if($row['semana_quincena']==1)
-            $recibo['periodo_desde']='01/'.$mes.'/'.$anio;
-            else
-            $recibo['periodo_desde']='16/'.$mes.'/'.$anio;
-            //periodo hasta
-            $numerodiasmes = intval(date("t",$mes));
-            if($row['semana_quincena']==1)
-            $recibo['periodo_hasta']='15/'.$mes.'/'.$anio;
-            else
-            $recibo['periodo_hasta']=$numerodiasmes.'/'.$mes.'/'.$anio;
+
+            if ($datos['tipnom']=='n'){
+                //perioricidad
+                if($row['semana_quincena']==1) $recibo['perioricidad']='Primera Quincena'; else $recibo['perioricidad']='Segunda Quincena';
+                //periodo desde
+                if($row['semana_quincena']==1)
+                $recibo['periodo_desde']='01/'.$mes.'/'.$anio;
+                else
+                $recibo['periodo_desde']='16/'.$mes.'/'.$anio;
+                //periodo hasta
+                $numerodiasmes = intval(date("t",$mes));
+                if($row['semana_quincena']==1)
+                $recibo['periodo_hasta']='15/'.$mes.'/'.$anio;
+                else
+                $recibo['periodo_hasta']=$numerodiasmes.'/'.$mes.'/'.$anio;
+
+                $recibo['tiponomina']='n';
+
+            } else if ($datos['tipnom']=='a'){
+
+                $recibo['perioricidad']='Aguinaldos 3 meses';
+                $recibo['periodo_desde']="01/01/".$anio;
+                $recibo['periodo_hasta']="31/12/".$anio;
+                $recibo['tiponomina']='a';
+                $recibo['sueldo']=$row2['sueldo'];
+
+            }
+
+
+
             //primer nombre
             $recibo['primernombre']=$row['primer_nombre'];
             //segundo nombre
@@ -115,6 +186,8 @@ class DefaultController extends Controller
             $recibo['fechaingreso']=$fechaingreso[2].'/'.$fechaingreso[1].'/'.$fechaingreso[0];
             //concepto
             $recibo['concepto'][]=array('descripcion'=>$row['descon'],'asigna'=>$row['asigna'],'deduce'=>$row['deduce']);
+           
+
             //cuenta
             if($row['cuenta_nomina']=='')
             $recibo['cuenta']='N/A';
@@ -127,78 +200,48 @@ class DefaultController extends Controller
             $existe=1;
         }
 
-        //valido la fecha de activación del neto
-        if($anio==date('Y'))
-            //mes
-            if($mes==date('n'))
-                //quicena
-                if($quincena==1){
+        //valido cuando se muestra el recibo
+        if($datos['tipnom']=='n'){
 
-                    $diasemana=date("w", mktime(0, 0, 0, $mes, 14, $anio));
+            //valido la fecha de activación del neto
+            if($anio==date('Y'))
+                //mes
+                if($mes==date('n'))
+                    //quicena
+                    if($quincena==1){
 
-                    //dia de la semana
-                    if($diasemana==0)$diaactivacion=12;
-                    else if($diasemana==1)$diaactivacion=11;
-                    else if($diasemana==6)$diaactivacion=13;
+                        $diasemana=date("w", mktime(0, 0, 0, $mes, 14, $anio));
 
-                    if(date('j')>=$diaactivacion)$existe=$existe; else $existe=0;
+                        //dia de la semana
+                        if($diasemana==0)$diaactivacion=12;
+                        else if($diasemana==1)$diaactivacion=11;
+                        else if($diasemana==6)$diaactivacion=13;
+                        else $diaactivacion=14;
 
-                }
+                        if(date('j')>=$diaactivacion)$existe=$existe; else $existe=0;
 
-                else if($quincena==2){
+                    }
 
-                    $ultimodia=date('t');
-                    if($ultimodia==31)$ultimodia=30;
-                    $diasemana=date("w", mktime(0, 0, 0, $mes, $ultimodia, $anio));
+                    else if($quincena==2){
 
-                    //dia de la semana
-                    if($diasemana==0)$diaactivacion=$ultimodia-2;
-                    else if($diasemana==1)$diaactivacion=$ultimodia-3;
-                    else if($diasemana==6)$diaactivacion=$ultimodia-1;
+                        $ultimodia=date('t');
+                        if($ultimodia==31)$ultimodia=29;
+                        $diasemana=date("w", mktime(0, 0, 0, $mes, $ultimodia, $anio));
 
-                    if(date('j')>=$diaactivacion)$existe=$existe; else $existe=0;
-          
-                }
+                        //dia de la semana
+                        if($diasemana==0)$diaactivacion=$ultimodia-1;
+                        else if($diasemana==1)$diaactivacion=$ultimodia-2;
+                        else if($diasemana==6)$diaactivacion=$ultimodia;
+                        else $diaactivacion=$ultimodia;
 
-;
-        //valido la fecha de activación del neto
-        if($anio==date('Y')){
-            //mes
-            if($mes==date('n'))
-                //quicena
-                if($quincena==1){
-
-                    $diasemana=date("w", mktime(0, 0, 0, $mes, 14, $anio));
-
-                    //dia de la semana
-                    if($diasemana==0)$diaactivacion=12;
-                    else if($diasemana==1)$diaactivacion=11;
-                    else if($diasemana==6)$diaactivacion=13;
-
-                    if(date('j')>=$diaactivacion)$existe=$existe; else $existe=0;
-
-                }
-
-                else if($quincena==2){
-
-                    $ultimodia=date('t');
-                    if($ultimodia==31)$ultimodia=30;
-                    $diasemana=date("w", mktime(0, 0, 0, $mes, $ultimodia, $anio));
-
-                    //dia de la semana
-                    if($diasemana==0)$diaactivacion=$ultimodia-2;
-                    else if($diasemana==1)$diaactivacion=$ultimodia-3;
-                    else if($diasemana==6)$diaactivacion=$ultimodia-1;
-
-                    if(date('j')>=$diaactivacion)$existe=$existe; else $existe=0;
-                }
+                        if(date('j')>=$diaactivacion)$existe=$existe; else $existe=0;
+              
+                    }
         }
-          
 
         if($existe==0){
              $this->get('session')->getFlashBag()->add('alert', 'No existen datos para los parámetros seleccionados.');
              return $this->redirect($this->generateUrl('neto_homepage'));
-
         }
 
         $a=new htmlreporte;
