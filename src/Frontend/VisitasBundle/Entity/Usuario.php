@@ -43,7 +43,7 @@ class Usuario
     /**
      * @var string
      *
-     * @ORM\Column(name="cedula", type="string", nullable=false, unique=true)
+     * @ORM\Column(name="cedula", type="string", nullable=false)
      * @Assert\NotBlank()
      */
     private $cedula;
