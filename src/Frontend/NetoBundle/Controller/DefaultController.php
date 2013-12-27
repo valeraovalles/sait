@@ -158,6 +158,8 @@ class DefaultController extends Controller
                     else if($diasemana==1)$diaactivacion=$ultimodia-3;
                     else if($diasemana==6)$diaactivacion=$ultimodia-1;
                     else $diaactivacion=$ultimodia;
+
+                    if(date('j')>=$diaactivacion)$existe=$existe; else $existe=0;
                 }   
         
 
