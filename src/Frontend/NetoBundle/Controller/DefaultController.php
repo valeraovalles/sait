@@ -229,9 +229,9 @@ class DefaultController extends Controller
                         $diasemana=date("w", mktime(0, 0, 0, $mes, $ultimodia, $anio));
 
                         //dia de la semana
-                        if($diasemana==0)$diaactivacion=$ultimodia-1;
-                        else if($diasemana==1)$diaactivacion=$ultimodia-2;
-                        else if($diasemana==6)$diaactivacion=$ultimodia;
+                        if($diasemana==0)$diaactivacion=$ultimodia-2;
+                        else if($diasemana==1)$diaactivacion=$ultimodia-3;
+                        else if($diasemana==6)$diaactivacion=$ultimodia-1;
                         else $diaactivacion=$ultimodia;
 
                         if(date('j')>=$diaactivacion)$existe=$existe; else $existe=0;
