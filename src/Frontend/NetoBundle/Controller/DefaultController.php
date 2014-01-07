@@ -144,7 +144,6 @@ class DefaultController extends Controller
                     else $diaactivacion=14;
 
                     if(date('j')>=$diaactivacion)$existe=$existe; else $existe=0;
-
                 }
 
                 else if($quincena==2){
