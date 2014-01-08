@@ -1,15 +1,12 @@
 <?php
 
 namespace Frontend\SitBundle\Controller;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Frontend\SitBundle\Entity\Ticket;
 use Frontend\SitBundle\Entity\Reasignado;
 use Frontend\SitBundle\Entity\Unidad;
 use Frontend\SitBundle\Form\TicketType;
-
 use Administracion\UsuarioBundle\Entity\Perfil;
 use Administracion\UsuarioBundle\Form\PerfilType;
 use Administracion\UsuarioBundle\Entity\Extension;
