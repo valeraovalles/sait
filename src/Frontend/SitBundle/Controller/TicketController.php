@@ -1,15 +1,12 @@
 <?php
 
 namespace Frontend\SitBundle\Controller;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Frontend\SitBundle\Entity\Ticket;
 use Frontend\SitBundle\Entity\Reasignado;
 use Frontend\SitBundle\Entity\Unidad;
 use Frontend\SitBundle\Form\TicketType;
-
 use Administracion\UsuarioBundle\Entity\Perfil;
 use Administracion\UsuarioBundle\Form\PerfilType;
 use Administracion\UsuarioBundle\Entity\Extension;
@@ -69,7 +66,7 @@ class TicketController extends Controller
             "Buenas noches","el presente es para","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
             "urgente","esto con caracter de urgencia","con caracter de urgencia","Se agradece su valiosa colaboracion","carmen",
             "buenas tardes el motivo es para","el motivo es para","el motivo es para","por su colaboracion","por su colaboración","buen dia","Buenos tardes","camaradas","los molesto para",
-            "por el presente","estimados"
+            "por el presente","estimados","...."
         );
 
         $solicitud=str_replace($eliminar, array(), $solicitud);

@@ -12,8 +12,8 @@
     /* Array of database columns which should be read and sent back to DataTables. Use a space where
      * you want to insert a non-database field (for example a counter or static image)
      */
-    $aColumns = array( 'ubicacion_cinta', 'serial_cinta', 'titulo', 'formato', 'evento', 'servicio' );
-    $bColumns = array( 'c.cota', 'c.id', 'p.titulo', 'f.formato', 'e.evento', 'se.servicio' );
+    $aColumns = array( 'ubicacion_cinta', 'serial_cinta', 'titulo', 'formato', 'evento', 'servicio','id_segmento', 'contenido_segmento','titulo_complementario' );
+    $bColumns = array( 'c.cota', 'c.id', 'p.titulo', 'f.formato', 'e.evento', 'se.servicio','s.alias','s.contenido','p.tcc');
      
     /* Indexed column (used for fast and accurate table cardinality) */
     $sIndexColumn = "c.cota";
@@ -122,7 +122,7 @@
 
      
     $sQuery = "
-        SELECT c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio
+        SELECT c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio,s.contenido as contenido_segmento,s.alias as id_segmento,p.tcc as titulo_complementario
         FROM   $sTable
         $sWhere
         $sOrder
@@ -134,7 +134,7 @@
      
 
     $sQuery = "
-        SELECT c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio
+        SELECT c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio,s.contenido as contenido_segmento,s.alias as id_segmento,p.tcc as titulo_complementario
         FROM   $sTable
         $sWhere
     ";
@@ -146,7 +146,7 @@
     if ( $sWhere != "" )
     {
         $sQuery = "
-            SELECT c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio
+            SELECT c.cota as ubicacion_cinta, c.id as serial_cinta, p.titulo, f.formato, e.evento, se.servicio,s.contenido as contenido_segmento,s.alias as id_segmento,p.tcc as titulo_complementario
             FROM   $sTable
             $sWhere
         ";
@@ -190,7 +190,7 @@
 
                     $row[] = $aRow[ $aColumns[$i] ];
 
-                    if($i==5)
+                    if($i==8)
                     $row[] = "<a href='consulta/".$id."'><span class='icon-search'></span></a>";    
             }
         }
