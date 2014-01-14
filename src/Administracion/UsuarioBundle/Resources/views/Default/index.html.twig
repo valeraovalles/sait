@@ -111,9 +111,17 @@
             </div>
             {% endif %}
 
+            {# UNA SOLA JORNADA#}
             <div class="listado_aplicaciones">
               <a href="{{ path('mercal_homepagenum',{'idjornada':3})}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
+        
+            {# DOS JORNADAS #}
+            {#
+            <div class="listado_aplicaciones">
+              <a href="{{ path('mercal_numeracion',{'idjornada1':1,'idjornada2':2})}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            </div>
+            #}
 
             {% if is_granted('ROLE_ADMINISTRADOR') %}
             <div class="listado_aplicaciones">
