@@ -53,6 +53,7 @@ class Personalidad
      */
     private $email;
 
+  
     /**
      * @var string
      *
