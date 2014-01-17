@@ -208,50 +208,8 @@ class ContratosController extends Controller
 
         if ($editForm->isValid()) 
         {
-            if($editForm['file']->getData())
-            {
-                $file=$editForm['file']->getData();
-
-                $tamaño=number_format($file->getClientSize(),0, ',', '')/1000;
-                $extension = $file->guessExtension();
-                $nombre=$file->getClientOriginalName();
-                $nombre=explode(".", $nombre);
-                $nombre=$nombre[0];
-
-                //valido tamaño
-                if ($tamaño>2000) {
-                    $this->get('session')->getFlashBag()->add('alert', 'El archivo no puede ser mayor a 2MB.');
-
-                    return $this->render('ContratosBundle:Contratos:edit.html.twig', array(
-                        'entity'      => $entity,
-                        'edit_form'   => $editForm->createView(),
-                        'delete_form' => $deleteForm->createView(),
-                    ));
-                }
-                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf');
-                //valido las extensiones
-                if (!array_search($extension,$extensiones)) {
-                    $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
-
-                    return $this->render('ContratosBundle:Contratos:edit.html.twig', array(
-                        'entity'      => $entity,
-                        'edit_form'   => $editForm->createView(),
-                        'delete_form' => $deleteForm->createView(),
-                    ));
-                }
-                
-                $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre));
-
-                //GUARDO EL ARCHIVO
-                if($file->move('uploads/contratos/',$nombre.'_'.\date("Gis").'.'.$extension) )
-                {
-                     $entity->setArchivo($nombre.'_'.\date("Gis").'.'.$extension);
-                }
-            }else
-            {
-               $entity->setArchivo($archivo); 
-            }
-
+            
+            $entity->setArchivo($archivo); 
             $entity->setCodigo($codigo);
             $entity->setFechaRegistro($fechareg);
 
@@ -390,6 +348,9 @@ class ContratosController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Contratos entity.');
         }
+
+        $nombre = $entity->getArchivo();
+        unlink('uploads/contratos/'.$nombre.'');
 
         $em->remove($entity);
         $em->flush();

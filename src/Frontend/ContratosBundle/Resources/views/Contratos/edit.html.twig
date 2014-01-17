@@ -66,17 +66,6 @@
                     <div class="labels">Monto en Euros:</div>
                     <div class="widgets">{{ form_widget(edit_form.montoEuros) }}</div>
                 </div>
-                {% if edit_form.archivo == NULL  %}
-                    <div class=class="form-contenedor">
-                        <div class="labels">Archivo:</div>
-                        <div class="dato">{{ form_widget(edit_form.file) }}</div>
-                    </div>
-                {% else %}
-                    <div class=class="form-contenedor">
-                        <div class="labels">Reemplazar archivo existente:</div>
-                        <div class="dato">{{ form_widget(edit_form.file) }}</div>
-                    </div>
-                {% endif %}
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.idDireccion) }}
                     <div class="labels">Direcci&oacute;n Solicitante:</div>
