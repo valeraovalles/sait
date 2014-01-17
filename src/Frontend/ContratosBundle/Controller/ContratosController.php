@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Frontend\ContratosBundle\Entity\Contratos;
+use Frontend\ContratosBundle\Entity\Contratosanteriores;
 use Frontend\ContratosBundle\Form\ContratosType;
 
 /**
@@ -237,12 +238,12 @@ class ContratosController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity  = new Contratos();
+        $entity  = new Contratosanteriores();
         $form = $this->createForm(new ContratosType(), $entity);
         $form->bind($request);
 
         $codigo = $entity->getCodigo();
-        $cod_repetido = $em->getRepository('ContratosBundle:Contratos')->findByCodigo($codigo);
+        $cod_repetido = $em->getRepository('ContratosBundle:Contratosanteriores')->findByCodigo($codigo);
         
         $codig = 0; 
         foreach ($cod_repetido as $key) {
