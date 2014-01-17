@@ -52,6 +52,8 @@ class ContratosController extends Controller
         }
         $cont = $cont + 1;
         $anio_actual =  date("y");
+
+        
         $direccion = $entity->getIdDireccion();
 
         if($cont < 10 )
