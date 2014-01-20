@@ -175,6 +175,7 @@ class Contratosanteriores
         return $this;
     }
 
+
     /**
      * Get archivo
      *
