@@ -6,7 +6,7 @@
 
 {% block body -%}
     {{ parent() }}
-    <div class="titulo">NUEVO ABOGADO</div>
+    <div class="titulo">NUEVO CONTRATO</div>
 
         
      {% for flashMessage in app.session.flashbag.get('notice') %}
@@ -65,7 +65,7 @@
                     <div class="labels">Monto en Euros:</div>
                     <div class="dato">{{ form_widget(form.montoEuros) }}</div>
                 </div>
-                <div class=class="form-contenedor">
+                <div class="form-contenedor">
                     <div class="labels">Archivo:</div>
                     <div class="dato">{{ form_widget(form.file) }}</div>
                 </div>

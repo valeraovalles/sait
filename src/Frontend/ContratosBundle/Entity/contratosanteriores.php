@@ -9,10 +9,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * Contratos
  *
- * @ORM\Table(name="contratos.contratos")
+ * @ORM\Table(name="contratos.contratosanteriores")
  * @ORM\Entity
  */
-class Contratos
+class Contratosanteriores
 {
     /**
      * @var integer
@@ -20,7 +20,7 @@ class Contratos
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="contratos.contratos_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="contratos.contratosanteriores_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
