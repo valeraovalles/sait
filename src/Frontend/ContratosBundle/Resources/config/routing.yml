@@ -1,5 +1,9 @@
 ##########################
-#   CONTRATOS
+##########################
+#
+#   CONTRATOS AÑO ACTUAL
+#
+##########################
 ##########################
 
 contratos:
@@ -32,6 +36,31 @@ contratos_delete:
     pattern:  /eliminar/{id}
     defaults: { _controller: "ContratosBundle:Contratos:delete" }
 
+
+##############################
+##############################
+#
+#   CONTRATOS AÑOS ANTERIORES
+#
+##############################
+##############################
+contratos_pasados:
+    pattern:  /inicio/años_anteriores
+    defaults: { _controller: "ContratosBundle:Contratos:indexpasados" }
+
+contratos_pasados_show:
+    pattern:  /detalle/años_anteriores/{id}
+    defaults: { _controller: "ContratosBundle:Contratos:showpasados" }
+
+contratos_pasados_edit:
+    pattern:  /editar/años_anteriores/{id}
+    defaults: { _controller: "ContratosBundle:Contratos:editpasados" }
+
+contratos_pasados_update:
+    pattern:  /actualizar/años_anteriores/{id}
+    defaults: { _controller: "ContratosBundle:Contratos:updatepasados" }
+    requirements: { _method: post|put }
+
 contratos_pasados_new:
     pattern:  /nuevo/años_anteriores
     defaults: { _controller: "ContratosBundle:Contratos:newpasados" }
@@ -41,9 +70,17 @@ contratos_pasados_create:
     defaults: { _controller: "ContratosBundle:Contratos:createpasados" }
     requirements: { _method: post }
 
+contratos_pasados_delete:
+    pattern:  /eliminar/años_anteriores/{id}
+    defaults: { _controller: "ContratosBundle:Contratos:deletepasados" }
+
 
 ##########################
+##########################
+#
 #   ABOGADOS
+#
+##########################
 ##########################
 
 abogados:
@@ -78,7 +115,11 @@ abogados_delete:
 
 
 ##########################
+##########################
+#
 #   DIRECCION SOLICITANTE
+#
+##########################
 ##########################
 
 Direccionsolicitante:

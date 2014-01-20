@@ -49,8 +49,7 @@ class Contratos
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_inicio", type="date", nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="fecha_inicio", type="date", nullable=true)
      */
     private $fechaInicio;
 
