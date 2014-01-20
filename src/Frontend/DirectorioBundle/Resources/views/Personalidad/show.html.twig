@@ -1,6 +1,7 @@
 {% extends '::directorio.html.twig' %}
 
 {% block body -%}
+<br>
     <h1>Personalidad</h1>
 
     <table class="record_properties">
@@ -49,6 +50,8 @@
             {{ form_widget(delete_form) }}
             <button type="submit" class="btn btn-danger">Eliminar</button>
         </form>
+                {% else %}
+        <br><br>
         {% endif %}
 
 {% endblock %}
