@@ -38,8 +38,9 @@
 
         <br><br>
         <a class="btn" href="{{ path('personalidad') }}"> Listado </a>
-
+        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
         <a class="btn btn-primary" href="{{ path('personalidad_edit', { 'id': entity.id }) }}"> Editar </a>
+        
 
         <br><br>
 
@@ -48,5 +49,6 @@
             {{ form_widget(delete_form) }}
             <button type="submit" class="btn btn-danger">Eliminar</button>
         </form>
+        {% endif %}
 
 {% endblock %}
