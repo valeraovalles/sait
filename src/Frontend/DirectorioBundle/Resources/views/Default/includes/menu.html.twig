@@ -2,6 +2,7 @@
    <ul>
       <li class='active'><a href='{{ path('directorio_homepage') }}'><span>INICIO</span></a></li>
    
+      {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
       <li class='has-sub'><a href='#'><span>ACCIONES</span></a>
           <ul>
             <li><a href='{{ path('institucion_new') }}'><span>REGISTRAR INSTITUCION</span></a></li>
@@ -11,6 +12,7 @@
          </ul>
 
       </li>
+      {% endif %}
       
       <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
       <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
