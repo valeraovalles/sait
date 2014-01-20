@@ -1,3 +1,7 @@
+incidencia:
+    resource: "@IncidenciaBundle/Resources/config/routing.yml"
+    prefix:   /
+
 mercal:
     resource: "@MercalBundle/Resources/config/routing.yml"
     prefix:   /jornada
