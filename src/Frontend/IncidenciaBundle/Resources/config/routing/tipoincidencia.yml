@@ -1,0 +1,30 @@
+tipoincidencia:
+    pattern:  /
+    defaults: { _controller: "IncidenciaBundle:Tipoincidencia:index" }
+
+tipoincidencia_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "IncidenciaBundle:Tipoincidencia:show" }
+
+tipoincidencia_new:
+    pattern:  /new
+    defaults: { _controller: "IncidenciaBundle:Tipoincidencia:new" }
+
+tipoincidencia_create:
+    pattern:  /create
+    defaults: { _controller: "IncidenciaBundle:Tipoincidencia:create" }
+    requirements: { _method: post }
+
+tipoincidencia_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "IncidenciaBundle:Tipoincidencia:edit" }
+
+tipoincidencia_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "IncidenciaBundle:Tipoincidencia:update" }
+    requirements: { _method: post|put }
+
+tipoincidencia_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "IncidenciaBundle:Tipoincidencia:delete" }
+    requirements: { _method: post|delete }

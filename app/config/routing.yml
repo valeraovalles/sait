@@ -1,3 +1,7 @@
+incidencia:
+    resource: "@IncidenciaBundle/Resources/config/routing.yml"
+    prefix:   /
+
 mercal:
     resource: "@MercalBundle/Resources/config/routing.yml"
     prefix:   /jornada
@@ -8,9 +12,6 @@ contratos:
     resource: "@ContratosBundle/Resources/config/routing.yml"
     prefix:   /contratos
 
-frontend_agenda:
-    resource: "@FrontendAgendaBundle/Resources/config/routing.yml"
-    prefix:   /agenda
 
 transporte:
     resource: "@TransporteBundle/Resources/config/routing.yml"

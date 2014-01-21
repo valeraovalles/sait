@@ -6,7 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Frontend\ContratosBundle\Entity\Contratos;
+use Frontend\ContratosBundle\Entity\Contratosanteriores;
 use Frontend\ContratosBundle\Form\ContratosType;
+use Frontend\ContratosBundle\Form\ContratosanterioresType;
 
 /**
  * Contratos controller.
@@ -52,6 +54,8 @@ class ContratosController extends Controller
         }
         $cont = $cont + 1;
         $anio_actual =  date("y");
+
+        
         $direccion = $entity->getIdDireccion();
 
         if($cont < 10 )
@@ -208,50 +212,8 @@ class ContratosController extends Controller
 
         if ($editForm->isValid()) 
         {
-            if($editForm['file']->getData())
-            {
-                $file=$editForm['file']->getData();
-
-                $tamaño=number_format($file->getClientSize(),0, ',', '')/1000;
-                $extension = $file->guessExtension();
-                $nombre=$file->getClientOriginalName();
-                $nombre=explode(".", $nombre);
-                $nombre=$nombre[0];
-
-                //valido tamaño
-                if ($tamaño>2000) {
-                    $this->get('session')->getFlashBag()->add('alert', 'El archivo no puede ser mayor a 2MB.');
-
-                    return $this->render('ContratosBundle:Contratos:edit.html.twig', array(
-                        'entity'      => $entity,
-                        'edit_form'   => $editForm->createView(),
-                        'delete_form' => $deleteForm->createView(),
-                    ));
-                }
-                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf');
-                //valido las extensiones
-                if (!array_search($extension,$extensiones)) {
-                    $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
-
-                    return $this->render('ContratosBundle:Contratos:edit.html.twig', array(
-                        'entity'      => $entity,
-                        'edit_form'   => $editForm->createView(),
-                        'delete_form' => $deleteForm->createView(),
-                    ));
-                }
-                
-                $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre));
-
-                //GUARDO EL ARCHIVO
-                if($file->move('uploads/contratos/',$nombre.'_'.\date("Gis").'.'.$extension) )
-                {
-                     $entity->setArchivo($nombre.'_'.\date("Gis").'.'.$extension);
-                }
-            }else
-            {
-               $entity->setArchivo($archivo); 
-            }
-
+            
+            $entity->setArchivo($archivo); 
             $entity->setCodigo($codigo);
             $entity->setFechaRegistro($fechareg);
 
@@ -268,6 +230,146 @@ class ContratosController extends Controller
         ));
     }
 
+
+
+    /**
+     * Deletes a Contratos entity.
+     *
+     */
+    public function deleteAction($id)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('ContratosBundle:Contratos')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Contratos entity.');
+        }
+
+        $nombre = $entity->getArchivo();
+        unlink('uploads/contratos/'.$nombre.'');
+
+        $em->remove($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('contratos'));
+    }
+
+
+#######################################################################################################
+#######################################################################################################
+##
+##                          FUNCIONES PARA AÑOS ANTERIORES
+##
+#######################################################################################################
+#######################################################################################################
+
+   
+    /**
+     * Lists all Contratos entities.
+     *
+     */
+    public function indexpasadosAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('ContratosBundle:Contratosanteriores')->findAll();
+
+        return $this->render('ContratosBundle:Contratospasados:index.html.twig', array(
+            'entities' => $entities,
+        ));
+    }
+
+    /**
+     * Finds and displays a Contratos entity.
+     *
+     */
+    public function showpasadosAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ContratosBundle:Contratosanteriores')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Contratospasados entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return $this->render('ContratosBundle:Contratospasados:show.html.twig', array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),        ));
+    }
+
+    /**
+     * Displays a form to edit an existing Contratos entity.
+     *
+     */
+    public function editpasadosAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ContratosBundle:Contratosanteriores')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Contratosanteriores entity.');
+        }
+
+        $editForm = $this->createForm(new ContratosanterioresType(), $entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        return $this->render('ContratosBundle:Contratospasados:edit.html.twig', array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Edits an existing Contratos entity.
+     *
+     */
+    public function updatepasadosAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ContratosBundle:Contratosanteriores')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Contratosanteriores entity.');
+        }
+
+
+        $codigo = $entity->getCodigo();
+        $fechareg = $entity->getFechaRegistro();
+
+        $archivo = $entity->getArchivo();
+
+        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createForm(new ContratosanterioresType(), $entity);
+        $editForm->bind($request);
+
+        if ($editForm->isValid()) 
+        {
+            
+            $entity->setArchivo($archivo); 
+            $entity->setCodigo($codigo);
+            $entity->setFechaRegistro($fechareg);
+
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('contratos_pasados_show', array('id' => $entity->getId())));
+        }
+
+        return $this->render('ContratosBundle:Contratospasados:edit.html.twig', array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+
     /**
      * Creates a new Contratos años anteriores entity.
      *
@@ -277,12 +379,14 @@ class ContratosController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity  = new Contratos();
-        $form = $this->createForm(new ContratosType(), $entity);
+        $entity  = new Contratosanteriores();
+
+        $form = $this->createForm(new ContratosanterioresType(), $entity);
+
         $form->bind($request);
 
         $codigo = $entity->getCodigo();
-        $cod_repetido = $em->getRepository('ContratosBundle:Contratos')->findByCodigo($codigo);
+        $cod_repetido = $em->getRepository('ContratosBundle:Contratosanteriores')->findByCodigo($codigo);
         
         $codig = 0; 
         foreach ($cod_repetido as $key) {
@@ -299,7 +403,7 @@ class ContratosController extends Controller
         if($codig == 1)
         {            
             $this->get('session')->getFlashBag()->add('alert', 'EL CODIGO YA EXISTE');
-            return $this->render('ContratosBundle:Contratos:newpasados.html.twig', array(
+            return $this->render('ContratosBundle:Contratospasados:new.html.twig', array(
                                                                         'entity' => $entity,
                                                                         'form'   => $form->createView(),
                                                                     ));
@@ -322,7 +426,7 @@ class ContratosController extends Controller
                     if ($tamaño>2000) {
                         $this->get('session')->getFlashBag()->add('alert', 'El archivo no puede ser mayor a 2MB.');
 
-                        return $this->render('ContratosBundle:Contratos:newpasados.html.twig', array(
+                        return $this->render('ContratosBundle:Contratospasados:new.html.twig', array(
                             'entity' => $entity,
                             'form'   => $form->createView(),
                         ));
@@ -333,7 +437,7 @@ class ContratosController extends Controller
                     if (!array_search($extension,$extensiones)) {
                         $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
 
-                        return $this->render('ContratosBundle:Contratos:newpasados.html.twig', array(
+                        return $this->render('ContratosBundle:Contratospasados:new.html.twig', array(
                             'entity' => $entity,
                             'form'   => $form->createView(),
                         ));
@@ -350,12 +454,12 @@ class ContratosController extends Controller
         
                 $em->persist($entity);
                 $em->flush();
-                return $this->redirect($this->generateUrl('contratos_show', array('id' => $entity->getId())));
+                return $this->redirect($this->generateUrl('contratos_pasados_show', array('id' => $entity->getId())));
             }
 
         }            
 
-        return $this->render('ContratosBundle:Contratos:newpasados.html.twig', array(
+        return $this->render('ContratosBundle:Contratospasados:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -368,10 +472,10 @@ class ContratosController extends Controller
     public function newpasadosAction()
     {
 
-        $entity = new Contratos();
-        $form   = $this->createForm(new ContratosType(), $entity);
+        $entity = new Contratosanteriores();
+        $form   = $this->createForm(new ContratosanterioresType(), $entity);
 
-        return $this->render('ContratosBundle:Contratos:newpasados.html.twig', array(
+        return $this->render('ContratosBundle:Contratospasados:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -381,21 +485,33 @@ class ContratosController extends Controller
      * Deletes a Contratos entity.
      *
      */
-    public function deleteAction($id)
+    public function deletepasadosAction($id)
     {
         
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('ContratosBundle:Contratos')->find($id);
+        $entity = $em->getRepository('ContratosBundle:Contratospasados')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Contratos entity.');
+            throw $this->createNotFoundException('Unable to find Contratospasados entity.');
         }
+
+        $nombre = $entity->getArchivo();
+        unlink('uploads/contratos/'.$nombre.'');
 
         $em->remove($entity);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('contratos'));
+        return $this->redirect($this->generateUrl('contratos_pasados'));
     }
+
+#######################################################################################################
+#######################################################################################################
+##
+##                          FUNCION CREATE DELETE
+##
+#######################################################################################################
+#######################################################################################################
+
 
     /**
      * Creates a form to delete a Contratos entity by id.
