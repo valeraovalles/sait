@@ -1,6 +1,8 @@
 {% extends '::directorio.html.twig' %}
 
 {% block body -%}
+
+<br>
     <h1>Personalidades</h1>
 
     <table class="records_list" id="tablalistax">
@@ -31,7 +33,9 @@
                 <ul>
                     <li>
                         <a href="{{ path('personalidad_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
+                        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
                         <a href="{{ path('personalidad_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
+                        {% endif %}
                     </li>
                 </ul>
                 </td>
@@ -48,8 +52,9 @@
                 } );
             })
     </script>
-
-        <br><br>
+    <br><br>
+        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+        
         <ul>
         <li>
             <a class="btn btn-primary" href="{{ path('personalidad_new') }}">
@@ -57,4 +62,5 @@
             </a>
         </li>
     </ul>
+        {% endif %}
     {% endblock %}

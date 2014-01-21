@@ -1,6 +1,7 @@
 {% extends '::directorio.html.twig' %}
 
 {% block body -%}
+<br>
     <h1>Listado de Instituciones</h1>
 
     <table class="records_list" id="tablalistax">
@@ -31,7 +32,9 @@
                 <ul>
                     <li>
                         <a href="{{ path('institucion_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
+                        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
                         <a href="{{ path('institucion_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
+                        {% endif %}
                     </li>
                 </ul>
                 </td>
@@ -49,8 +52,9 @@ $(document).ready(function(){
     } );
 })
 </script>
-
-        <br><br>
+<br><br>
+        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+        
         <ul>
         <li>
             <a class="btn btn-primary" href="{{ path('institucion_new') }}">
@@ -58,4 +62,5 @@ $(document).ready(function(){
             </a>
         </li>
     </ul>
+        {% endif %}
     {% endblock %}

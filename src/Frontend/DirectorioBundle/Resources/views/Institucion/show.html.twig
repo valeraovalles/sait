@@ -1,6 +1,7 @@
 {% extends '::directorio.html.twig' %}
 
 {% block body -%}
+<br>
     <h1>Institucion</h1>
 
     <table class="record_properties" border="2            ">
@@ -42,7 +43,7 @@
 
         <br><br>
         <a class="btn" href="{{ path('institucion') }}"> Listado </a>
- 
+        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
         <a class="btn btn-primary"href="{{ path('institucion_edit', { 'id': entity.id }) }}">Editar</a>
         <br><br>
 
@@ -51,6 +52,9 @@
             {{ form_widget(delete_form) }}
             <button type="submit" class="btn btn-danger">Eliminar</button>
         </form>
+        {% else %}
+        <br><br>
+        {% endif %}
 
 {% endblock %}
 
