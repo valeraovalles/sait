@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Contratos
+ * Contratosanteriores
  *
  * @ORM\Table(name="contratos.contratosanteriores")
  * @ORM\Entity
