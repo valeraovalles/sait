@@ -49,7 +49,8 @@
                         <div class="labels">Fecha de Fin de Contrato:</div>
                         <div class="dato">{{ entity.fechaFin|date('Y-m-d') }}</div>
                     </div>
-                {% elseif entity.duracion != NULL  %}
+               {% endif %}
+                {% if entity.duracion != NULL  %}
                     <div class="contenedor">
                         <div class="labels">Duraci&oacute;n:</div>
                         <div class="dato">{{ entity.duracion }}</div>
