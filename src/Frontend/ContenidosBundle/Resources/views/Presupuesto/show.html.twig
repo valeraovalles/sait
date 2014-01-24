@@ -21,10 +21,6 @@
         </div>
    {% endfor %}
 
-    {% if entity.tipo == 1 %}
-        <div class="activo">EXTENSION DE PRESUPUESTO</div>
-    {% endif %}
-
     <div class="form-show_edit">
         <fieldset>
             <legend id="a"><div class="divisor">DATOS DEL PRESUPUESTO</div> </legend>
@@ -40,15 +36,16 @@
                 <div class="labels">Fecha de Fin:</div>
                 <div class="dato">{{ entity.fechaFin|date('Y-m-d') }}</div>
             </div>
+
+            <div class="contenedor">
+                <div class="labels">Monto en Bolivares:</div>
+                <div class="dato">{{ entity.montoBs }}</div>
+            </div>
+
             {% if entity.montoDolares != NULL %}
                 <div class="contenedor">
                     <div class="labels">Monto en Dolares:</div>
                     <div class="dato">{{ entity.montoDolares }}</div>
-                </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Monto en Dolares:</div>
-                    <div class="dato">NO TIENE DESCRIPCION</div>
                 </div>
             {% endif %}
 
@@ -57,20 +54,29 @@
                     <div class="labels">Monto en Euros:</div>
                     <div class="dato">{{ entity.montoEuros }}</div>
                 </div>
-            {% else %}
+            {% endif %}
+            
+            <legend id="a"><div class="divisor">DISPONIBILIDAD</div> </legend>
+            <div class="contenedor">
+                <div class="labels">Bolivares:</div>
+                <div class="dato">{{ entity.disponibilidad }}</div>
+            </div>
+            {% if tipomoneda == 1 %}
                 <div class="contenedor">
-                    <div class="labels">Monto en Euros:</div>
-                    <div class="dato">NO TIENE DESCRIPCION</div>
+                    <div class="labels">Dolares:</div>
+                    <div class="dato">{{ entity.disponibilidadDolares }}</div>
+                </div>
+            {% elseif tipomoneda == 2 %}
+                <div class="contenedor">
+                    <div class="labels">Euros:</div>
+                    <div class="dato">{{ entity.disponibilidadEuros }}</div>
                 </div>
             {% endif %}
             
-            <div class="contenedor">
-                <div class="labels">Monto en Bolivares:</div>
-                <div class="dato">{{ entity.montoBs }}</div>
-            </div>
         </fieldset>
     </div>
     <a href="{{ path('presupuesto', { 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Volver al Listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
-    <a href="{{ path('presupuesto_edit', { 'id': entity.id, 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Editar Presupuesto"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
-
+    {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
+        <a href="{{ path('presupuesto_edit', { 'id': entity.id, 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Editar Presupuesto"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
+    {% endif %}
 {% endblock %}

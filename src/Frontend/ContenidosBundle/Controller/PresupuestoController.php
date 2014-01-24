@@ -141,10 +141,26 @@ class PresupuestoController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
+    
+        $monto[1] = $entity->getMontoDolares();
+        $monto[2] = $entity->getMontoEuros();
+
+        if($monto[1] != NULL and $monto[2] == NULL)
+        {
+            $tipomoneda = 1;
+        }elseif($monto[1] == NULL and $monto[2] != NULL)
+        {
+            $tipomoneda = 2;
+        }elseif($monto[1] == NULL and $monto[2] == NULL)
+        {
+            $tipomoneda = 3;
+        }
+
 
         //envio a la vista
         return $this->render('ContenidosBundle:Presupuesto:show.html.twig', array(
             'entity'        => $entity,
+            'tipomoneda'    => $tipomoneda,
             'id_proveedor'  => $id_proveedor,
             'delete_form'   => $deleteForm->createView(),        ));
     }

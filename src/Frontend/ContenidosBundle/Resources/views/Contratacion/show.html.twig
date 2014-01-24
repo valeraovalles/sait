@@ -18,17 +18,18 @@
             {{ flashMessage }}
         </div>
    {% endfor %}
-
-
-        <fieldset> 
-            <div class="form-show_edit">
-               
-                    <div class="divisor">DATOS DE LA CONTRATACI&Oacute;N</div> 
+        <div class="form-show_edit">
+            <fieldset> 
+                <legend id="a"><div class="divisor">DATOS DE LA CONTRATACI&Oacute;N</div> </legend>
                     <div class="contenedor">
                         <div class="labels">Concepto:</div>
                         <div class="dato">{{ entity.concepto }}</div>
                     </div>
-                    
+
+                    <div class="contenedor">
+                        <div class="labels">Monto en Bs:</div>
+                        <div class="dato">{{ entity.montoBs }}</div>
+                    </div>                    
                     {% if tipomoneda == 1 %}
                         <div class="contenedor">
                             <div class="labels">Monto en $:</div>
@@ -40,12 +41,8 @@
                             <div class="dato">{{ entity.montoMe }}</div>
                         </div>
                     {% endif %}
-
                     
-                    <div class="contenedor">
-                        <div class="labels">Monto en Bs:</div>
-                        <div class="dato">{{ entity.montoBs }}</div>
-                    </div>
+                    
                     <div class="contenedor">
                         <div class="labels">Fecha de Inicio:</div>
                         <div class="dato">{{ entity.fechaInicio|date('Y-m-d') }}</div>
@@ -55,10 +52,7 @@
                         <div class="dato">{{ entity.fechaFin|date('Y-m-d') }}</div>
                     </div>
          
-           
-               
                     <div class="divisor">DATOS DE LA SOLICITUD</div>
-
                     <div class="contenedor">
                         <div class="labels">N&uacute;mero de la Solicitud:</div>
                         <div class="dato">{{ entity.numSolicitud }}</div>
@@ -91,8 +85,6 @@
                         <div class="dato">{{ entity.fechaAlcance|date('Y-m-d') }}</div>
                     </div>
       
-            
-
                 <div class="divisor">DETALLES DE LA CONTRATACI&Oacute;N</div>
 
                     <div class="contenedor">
@@ -131,14 +123,27 @@
                         <div class="dato">{{ entity.observacionesCompras }}</div>
                     </div>
                 {% endif %}
-                    
-            </div>
-        </fieldset>
-  
-  
+
+                <div class="divisor">DEUDA</div>
+                    <div class="contenedor">
+                        <div class="labels">Bolivares:</div>
+                        <div class="dato">{{ entity.debeBs }}</div>
+                    </div>
+                    {% if tipomoneda == 1 %}
+                        <div class="contenedor">
+                            <div class="labels">Dolares:</div>
+                            <div class="dato">{{ entity.debeMe }}</div>
+                        </div>
+                    {% elseif tipomoneda == 2 %}
+                        <div class="contenedor">
+                            <div class="labels">Euros:</div>
+                            <div class="dato">{{ entity.debeMe }}</div>
+                        </div>
+                    {% endif %}
+            </fieldset>       
+        </div>
         <a href="{{ path('contratacion' , { 'id_presupuesto': id_presupuesto,'id_proveedor': id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
-        <a href="{{ path('contratacion_edit', { 'id': entity.id,'id_presupuesto': id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
-    
-    
-  
+        {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
+            <a href="{{ path('contratacion_edit', { 'id': entity.id,'id_presupuesto': id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
+        {% endif %}
 {% endblock %}
