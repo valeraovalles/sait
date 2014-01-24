@@ -135,6 +135,8 @@ class PresupuestoController extends Controller
 
         //obtengo todos los datos de un presupuesto segun su iD
         $entity = $em->getRepository('ContenidosBundle:Presupuesto')->find($id);
+        $entity1 = $em->getRepository('ContenidosBundle:Presupuesto')->findByIdPresext($id);
+
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Presupuesto entity.');
@@ -142,6 +144,7 @@ class PresupuestoController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
     
+        $monto[0] = $entity->getMontoBs();
         $monto[1] = $entity->getMontoDolares();
         $monto[2] = $entity->getMontoEuros();
 
@@ -156,11 +159,31 @@ class PresupuestoController extends Controller
             $tipomoneda = 3;
         }
 
+        $subtotal[0] = 0;
+        $subtotal[1] = 0;
+        $subtotal[2] = 0;
+
+        foreach ($entity1 as $key) 
+        {
+            $subtot_bs[$key->getId()]=$key->getMontoBs();
+            $subtot_dolares[$key->getId()]=$key->getMontoDolares();
+            $subtot_euros[$key->getId()]=$key->getMontoEuros();
+            
+            $subtotal[0] = $subtotal[0] + $subtot_bs[$key->getId()];
+            $subtotal[1] = $subtotal[1] + $subtot_dolares[$key->getId()];
+            $subtotal[2] = $subtotal[2] + $subtot_euros[$key->getId()];   
+        }
+
+        $total[0] = $monto[0] + $subtotal[0];
+        $total[1] = $monto[1] + $subtotal[1];
+        $total[2] = $monto[2] + $subtotal[2];
 
         //envio a la vista
         return $this->render('ContenidosBundle:Presupuesto:show.html.twig', array(
             'entity'        => $entity,
             'tipomoneda'    => $tipomoneda,
+            'subtotal'      => $subtotal,
+            'total'         => $total,
             'id_proveedor'  => $id_proveedor,
             'delete_form'   => $deleteForm->createView(),        ));
     }

@@ -493,7 +493,7 @@ class PagoController extends Controller
             $entity1->setStatus($status);
             $entity1->setIdPago($entity);
 
-            $em->persist($entity);
+            $em->persist($entityfore);
             $em->persist($entity1);
             $em->flush();
 

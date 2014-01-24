@@ -42,7 +42,6 @@
                         </div>
                     {% endif %}
                     
-                    
                     <div class="contenedor">
                         <div class="labels">Fecha de Inicio:</div>
                         <div class="dato">{{ entity.fechaInicio|date('Y-m-d') }}</div>
@@ -76,14 +75,25 @@
                         <div class="labels">Fecha del Punto de Cuenta:</div>
                         <div class="dato">{{ entity.fechaPunto|date('Y-m-d') }}</div>
                     </div>
-                    <div class="contenedor">
-                        <div class="labels">N&uacute;mero de Alcance (Punto de Cuenta):</div>
-                        <div class="dato">{{ entity.numAlcance }}</div>
-                    </div>
-                    <div class="contenedor">
-                        <div class="labels">Fecha de Alcance (Punto de Cuenta):</div>
-                        <div class="dato">{{ entity.fechaAlcance|date('Y-m-d') }}</div>
-                    </div>
+                    {% if entity.numAlcance != NULL %}
+                        <div class="contenedor">
+                            <div class="labels">N&uacute;mero de Alcance (Punto de Cuenta):</div>
+                            <div class="dato">{{ entity.numAlcance }}</div>
+                        </div>
+                        <div class="contenedor">
+                            <div class="labels">Fecha de Alcance (Punto de Cuenta):</div>
+                            <div class="dato">{{ entity.fechaAlcance|date('Y-m-d') }}</div>
+                        </div>
+                    {% else %}
+                        <div class="contenedor">
+                            <div class="labels">N&uacute;mero de Alcance (Punto de Cuenta):</div>
+                            <div class="dato">NO HAY DESCRPCION</div>
+                        </div>
+                        <div class="contenedor">
+                            <div class="labels">Fecha de Alcance (Punto de Cuenta):</div>
+                            <div class="dato">NO HAY DESCRIPCION</div>
+                        </div>
+                    {% endif %}
       
                 <div class="divisor">DETALLES DE LA CONTRATACI&Oacute;N</div>
 
@@ -104,7 +114,7 @@
                         <div class="contenedor">
                             <div class="labels">N&uacute;mero del Addendum:</div>
                             <div class="dato"> NO HAY DESCRIPCION</div>
-                        </div>>
+                        </div>
                     {% endif %}
                     {% if entity.fechaAddendum != NULL %}
                         <div class="contenedor">

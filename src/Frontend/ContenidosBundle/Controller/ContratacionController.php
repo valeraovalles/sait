@@ -71,6 +71,7 @@ class ContratacionController extends Controller
     public function createAction(Request $request,$id_presupuesto,$id_proveedor)
     {
         $em = $this->getDoctrine()->getManager();
+        $alert = 0;
 
         //instancio la clase
         $entity  = new Contratacion();
@@ -109,65 +110,78 @@ class ContratacionController extends Controller
             $disp_act[0] = $disp_ant[0] - $monto[0];
             if($tipomoneda == 1)
             {
-                $disp_act[1] = $disp_ant[1] - $monto[1];    
-                $disp_act[2] = 0;
+                if($monto[1] == 0 or $monto[1] == NULL )
+                {
+                    $alert = 1;
+                    $mensaje = "INSERTE EL MONTO EN DOLARES";
+                }else
+                {
+                    $disp_act[1] = $disp_ant[1] - $monto[1]; 
+                    $disp_act[2] = 0;  
+                }
+                
             }elseif($tipomoneda == 2)
             {
-                $disp_act[1] = 0;    
-                $disp_act[2] = $disp_ant[2] - $monto[1];
+                if($monto[1] == 0 or $monto[1] == NULL )
+                {
+                    $alert = 1;
+                    $mensaje = "INSERTE EL MONTO EN EUROS";
+                }else
+                {
+                    $disp_act[1] = 0;    
+                    $disp_act[2] = $disp_ant[2] - $monto[1];
+                }  
+            }elseif(($disp_act[0] < 0) or ($disp_act[1] < 0) or ($disp_act[2] < 0) )
+            {
+                $alert= 1;
+                $mensaje = "NO EXISTE DISPONIBILIDAD PRESUPUESTARIA";
             }
-            
-        $alert = 0;
-        if(($disp_act[0] < 0) or ($disp_act[1] < 0) or ($disp_act[2] < 0) )
-        {
-            $alert= 1;
-        }
+        
         
         //obtengo el tipo de proveedor del proveedor de acuerdo a un ID
         $entity1 = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id_proveedor);
         $tipoprov= $entity1->getIdTipoprov();
 
-        //verifico el formulario
-        if ($form->isValid()) 
+        if ($alert == 1)
         {
-            
-            $montobs = $entity->getMontoBs();
-            $montome = $entity->getMontoMe();
-            
-            //seteo la disponibilidad, el signo en la variable presupuesto
-            $presupuesto->setDisponibilidad($disp_act[0]);
-            $presupuesto->setDisponibilidadDolares($disp_act[1]);
-            $presupuesto->setDisponibilidadEuros($disp_act[2]);
-
-           // $presupuesto->setSigno($signo);
-
-            //seteo el id del presupuesto y el tipo de moneda en la variable $entity
-            $entity->setIdPresupuesto($presupuesto);
-            $entity->setTipoMoneda($tipomoneda);
-            $entity->setDebeBs($montobs);
-            $entity->setdebeMe($montome);
-
-
-            //inserto las variables $entity y $presupuesto en la BD
-            $em->persist($entity);
-            $em->persist($presupuesto);
-            $em->flush();
-
-            if ($alert == 0)
+            $this->get('session')->getFlashBag()->add('alert', $mensaje); 
+        }else
+        {
+           //verifico el formulario
+            if ($form->isValid()) 
             {
+                $montobs = $entity->getMontoBs();
+                $montome = $entity->getMontoMe();
+                
+                //seteo la disponibilidad, el signo en la variable presupuesto
+                $presupuesto->setDisponibilidad($disp_act[0]);
+                $presupuesto->setDisponibilidadDolares($disp_act[1]);
+                $presupuesto->setDisponibilidadEuros($disp_act[2]);
+
+               // $presupuesto->setSigno($signo);
+
+                //seteo el id del presupuesto y el tipo de moneda en la variable $entity
+                $entity->setIdPresupuesto($presupuesto);
+                $entity->setTipoMoneda($tipomoneda);
+                $entity->setDebeBs($montobs);
+                $entity->setdebeMe($montome);
+
+
+                //inserto las variables $entity y $presupuesto en la BD
+                $em->persist($entity);
+                $em->persist($presupuesto);
+                $em->flush();
+
                 //envio a notificacion de que el registro fue creado
                 $this->get('session')->getFlashBag()->add('notice', 'SE REGISTRO EXITOSAMENTE LA CONTRATACION');
-            }elseif ($alert == 1)
-            {
-                //envio a notificacion de que el registro fue creado
-                $this->get('session')->getFlashBag()->add('alert', 'SE REGISTRO EXITOSAMENTE LA CONTRATACION PERO NO EXISTE DISPONIBILIDAD PRESUPUESTARIA');
+                
+                //envio a la vista
+                return $this->redirect($this->generateUrl('contratacion_show', array(
+                                                                        'id'            => $entity->getId(),
+                                                                        'id_proveedor'  => $id_proveedor,
+                                                                        'id_presupuesto'=>$id_presupuesto
+                                                                        )));
             }
-            //envio a la vista
-            return $this->redirect($this->generateUrl('contratacion_show', array(
-                                                                    'id'            => $entity->getId(),
-                                                                    'id_proveedor'  => $id_proveedor,
-                                                                    'id_presupuesto'=>$id_presupuesto
-                                                                    )));
         }
         //envio a otra vista si el form no es válido
         return $this->render('ContenidosBundle:Contratacion:new.html.twig', array(
@@ -181,6 +195,9 @@ class ContratacionController extends Controller
                                                                     'dolares'       => $dolares,
                                                                     'euros'         => $euros,
                                                                     ));
+
+            
+        
     }
 
     /*

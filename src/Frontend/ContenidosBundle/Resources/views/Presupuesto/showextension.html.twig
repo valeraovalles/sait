@@ -40,22 +40,33 @@
                 <div class="labels">Fecha de Fin:</div>
                 <div class="dato">{{ entity.fechaFin|date('Y-m-d') }}</div>
             </div>
-            {% if dolares != NULL or dolares != 0 %}
-                <div class="contenedor">
-                    <div class="labels">Monto en Dolares:</div>
-                    <div class="dato">{{ entity.montoDolares }}</div>
-                </div>
-            {% endif %}
-            {% if euros != NULL or euros != 0 %}
-                <div class="contenedor">
-                    <div class="labels">Monto en Euros:</div>
-                    <div class="dato">{{ entity.montoEuros }}</div>
-                </div>
-            {% endif %}
-            <div class="contenedor">
-                <div class="labels">Monto en Bolivares:</div>
-                <div class="dato">{{ entity.montoBs }}</div>
-            </div>
+
+            <legend id="a"><div class="divisor">MONTOS</div> </legend>
+            <table cellpadding="10" cellspacing="0" border="1">
+                <thead>
+                    <tr>
+                        <th>BOLIVARES</th>
+                        <th>DOLARES</th>
+                        <th>EUROS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr align="center" bgcolor= "#9cf" >
+                        <td>{{ entity.montoBs }}</td>
+                        {% if dolares != NULL or dolares != 0 %}
+                            <td>{{ entity.montoDolares }}</td>
+                        {% else %}
+                            <td>0</td>
+                        {% endif %}
+                        {% if euros != NULL or euros != 0 %}
+                            <td>{{ entity.montoEuros }}</td>
+                        {% else %}
+                            <td>0</td>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+            <br>
         </fieldset>
     </div>
     <a href="{{ path('presupuesto_extensionindex', { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto }) }}" data-toggle="tooltip" data-placement="top" title="Volver al Listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>

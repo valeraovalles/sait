@@ -36,43 +36,99 @@
                 <div class="labels">Fecha de Fin:</div>
                 <div class="dato">{{ entity.fechaFin|date('Y-m-d') }}</div>
             </div>
+            <table cellpadding="10" cellspacing="0" border="1">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>BOLIVARES</th>
+                        <th>DOLARES</th>
+                        <th>EUROS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr align="center">
+                        <td>Base</td> 
+                        <td> {{ entity.montoBs }} </td>
+                        {% if entity.montoDolares != NULL %}
+                            <td>{{ entity.montoDolares }}</td>
+                        {% else %}
+                            <td>0</td>
+                        {% endif %}
+                        {% if entity.montoEuros != NULL %}
+                            <td>{{ entity.montoEuros }}</td>
+                        {% else %}
+                            <td>0</td>
+                        {% endif %}                            
+                    </tr>
+                    <tr align="center">
+                        <td>Extensiones</td> 
+                        <td> {{ subtotal.0 }} </td>
+                        {% if subtotal.1 != NULL  %}
+                            <td> {{ subtotal.1 }} </td>
+                        {% else %}
+                            <td>0</td>
+                        {% endif %}
+                        {% if subtotal.2 != NULL %}
+                            <td> {{ subtotal.2 }} </td>
+                        {% else %}
+                            <td>0</td>
+                        {% endif %}
+                    </tr>
+                    <tr align="center" bgcolor= "#9cf">
+                        <td>TOTAL</td> 
+                        <td>{{ total.0 }}</td>
+                        {% if total.1 != NULL %}
+                            <td>{{ total.1 }}</td>
+                        {% else %}
+                            <td>0</td>
+                        {% endif %}
+                        {% if total.2 != NULL %}
+                            <td>{{ total.2 }}</td>
+                        {% else %}
+                            <td>0</td>
+                        {% endif %}                                       
+                    </tr>
 
-            <div class="contenedor">
-                <div class="labels">Monto en Bolivares:</div>
-                <div class="dato">{{ entity.montoBs }}</div>
-            </div>
-
-            {% if entity.montoDolares != NULL %}
-                <div class="contenedor">
-                    <div class="labels">Monto en Dolares:</div>
-                    <div class="dato">{{ entity.montoDolares }}</div>
-                </div>
-            {% endif %}
-
-            {% if entity.montoEuros != NULL %}
-                <div class="contenedor">
-                    <div class="labels">Monto en Euros:</div>
-                    <div class="dato">{{ entity.montoEuros }}</div>
-                </div>
-            {% endif %}
+                </tbody>
+            </table>
             
             <legend id="a"><div class="divisor">DISPONIBILIDAD</div> </legend>
-            <div class="contenedor">
-                <div class="labels">Bolivares:</div>
-                <div class="dato">{{ entity.disponibilidad }}</div>
-            </div>
-            {% if tipomoneda == 1 %}
-                <div class="contenedor">
-                    <div class="labels">Dolares:</div>
-                    <div class="dato">{{ entity.disponibilidadDolares }}</div>
-                </div>
-            {% elseif tipomoneda == 2 %}
-                <div class="contenedor">
-                    <div class="labels">Euros:</div>
-                    <div class="dato">{{ entity.disponibilidadEuros }}</div>
-                </div>
-            {% endif %}
-            
+            <table cellpadding="10" cellspacing="0" border="1">
+                <thead>
+                    <tr>
+                        <th>BOLIVARES</th>
+                        <th>DOLARES</th>
+                        <th>EUROS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if entity.disponibilidad > 0 %}
+                        <tr align="center" bgcolor= "#9cf" >
+                            <td  >{{ entity.disponibilidad }}</td>
+                            {% if tipomoneda == 1 %}
+                                <td>{{ entity.disponibilidadDolares }}</td>
+                                <td>0</td>
+                            {% elseif tipomoneda == 2 %}
+                                <td>0</td>
+                                <td>{{ entity.disponibilidadEuros }}</td>
+                            {% endif %}
+                        </tr>
+                    {% else %}
+                        <tr align="center" bgcolor= "#c33" >
+                            <td  >{{ entity.disponibilidad }}</td>
+                            {% if tipomoneda == 1 %}
+                                <td>{{ entity.disponibilidadDolares }}</td>
+                                <td>0</td>
+                            {% elseif tipomoneda == 2 %}
+                                <td>0</td>
+                                <td>{{ entity.disponibilidadEuros }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                    </tr>
+                </tbody>
+            </table>  
+            <br>          
         </fieldset>
     </div>
     <a href="{{ path('presupuesto', { 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Volver al Listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
