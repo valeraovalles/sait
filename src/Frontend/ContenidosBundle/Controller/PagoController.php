@@ -50,6 +50,38 @@ class PagoController extends Controller
     
     /*
     *
+    * FUNCION PARA REGISTRAR EL SEGUIMIENTO DEL PAGO
+    *
+    */
+    public function controlAction($id_contratacion,$id_presupuesto,$id_proveedor, $id)
+    {
+        $em = $this->getDoctrine()->getManager();  
+
+        $entity = $em->getRepository('ContenidosBundle:Pago')->find($id);
+        $entity1 = $em->getRepository('ContenidosBundle:Controlpagounidad')->find($id);
+
+        foreach ($entity1 as $key) 
+        {
+            $est[$key->getId()]=$key->getStatus();
+            $estatus = $est[$key->getId()];
+
+        }
+
+        //RETORNO A LA VISTA PARA MOSTRAR LISTADO
+        return $this->render('ContenidosBundle:Pago:control.html.twig', array(
+            'entity'            => $entity,
+            'entity1'           => $entity1,
+            'estatus'           => $estatus,
+            'id_contratacion'   => $id_contratacion,
+            'id_presupuesto'    => $id_presupuesto,
+            'id_proveedor'      => $id_proveedor,
+        )); 
+
+    }
+
+
+    /*
+    *
     * FUNCION PARA CREAR UN NUEVO PAGO
     *
     */

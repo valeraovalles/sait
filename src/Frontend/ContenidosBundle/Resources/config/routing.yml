@@ -160,6 +160,16 @@ pago_delete:
     pattern:  pago/eliminar/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:delete" }
 
+pago_control:
+    pattern:  pago/control/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
+    defaults: { _controller: "ContenidosBundle:Pago:control" }
+
+pago_controlupdate:
+    pattern:  pago/control/actualizar/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
+    defaults: { _controller: "ContenidosBundle:Pago:controlupdate" }
+    requirements: { _method: post|put }
+
+
 
 ##########################################################################################################
 ##########################################################################################################

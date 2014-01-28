@@ -1,8 +1,9 @@
 {% extends '::contenidos.html.twig' %}
 
 {% block titulobanner %}
-    PAGOS
+  BANCO - DETALLES
 {% endblock %}
+
 
 
 {% block body -%}
@@ -14,6 +15,12 @@
             {{ flashMessage }}
         </div>
     {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
 
     <div class="form-show_edit">
     <fieldset>       
