@@ -1,10 +1,10 @@
 
 {% extends '::administracion.html.twig' %}
-{% block title %}Inicio - Telesur{% endblock %}
 
+{% block title %}Corresponsalía - Nuevo Usuario{% endblock %}
 
 {% block titulobanner %}
-    ADMINISTRACIÓN DE USUARIOS
+    NUEVO USUARIO
 {% endblock %}
 
 
@@ -75,11 +75,10 @@
         </div>
     </div>
 
+    <br>
 
-<br>
-
-    <button class="btn btn-primary" type="submit">Crear</button> | 
-    <a class="btn btn-default"  href="{{ path('user') }}">Ir a la lista</a>
+    <button class="btn btn-primary" type="submit">GUARDAR</button> | 
+    <a class="btn btn-default"  href="{{ path('user') }}">IR AL LISTADO</a>
 </form>
 
 <br>

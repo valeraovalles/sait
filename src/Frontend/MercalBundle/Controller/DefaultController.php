@@ -64,6 +64,7 @@ class DefaultController extends Controller
     //revisado
     public function asignarnumeroAction($idtrabajador,$idjornada)
     {
+
         $em = $this->getDoctrine()->getManager();
 
         $trabajador =  $em->getRepository('UsuarioBundle:Perfil')->find($idtrabajador);
@@ -90,7 +91,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $trabajador =  $em->getRepository('UsuarioBundle:Perfil')->find($idtrabajador);
 
-        $jornada =  $em->getRepository('MercalBundle:Jornada')->find(1);
+        $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
         //consulto para generar el numero que sigue en cola
         $dql = "select un from MercalBundle:Usernumero un where un.jornada= :idjornada order by un.numero DESC";
@@ -101,10 +102,11 @@ class DefaultController extends Controller
         if(empty($ultimonumero))$ultimonumero=1;
         else $ultimonumero=$ultimonumero[0]->getNumero()+1;
 
+
         //guardo el numero asignado al trabajdor
         $entity=new Usernumero;
         $entity->setTrabajador($trabajador);
-        $entity->setNumero(1);
+        $entity->setNumero($ultimonumero);
         $fechahora = date_create_from_format('Y-m-d G:i:s', \date("Y-m-d G:i:s"));
         $entity->setFechahoraasignacion($fechahora);
         $entity->setJornada($jornada);
