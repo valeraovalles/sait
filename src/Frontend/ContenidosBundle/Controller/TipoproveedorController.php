@@ -53,7 +53,7 @@ class TipoproveedorController extends Controller
         $form->bind($request);
 
         //VERIFICO SI EL FORMULARIO ES VALIDO
-        if($form->isValid()
+        if($form->isValid())
         {
             //INSERTO LOS DATOS EN LA BASE DE DATOS            
             $em->persist($entity);

@@ -90,7 +90,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $trabajador =  $em->getRepository('UsuarioBundle:Perfil')->find($idtrabajador);
 
-        $jornada =  $em->getRepository('MercalBundle:Jornada')->find(1);
+        $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
         //consulto para generar el numero que sigue en cola
         $dql = "select un from MercalBundle:Usernumero un where un.jornada= :idjornada order by un.numero DESC";
@@ -104,7 +104,7 @@ class DefaultController extends Controller
         //guardo el numero asignado al trabajdor
         $entity=new Usernumero;
         $entity->setTrabajador($trabajador);
-        $entity->setNumero(1);
+        $entity->setNumero($ultimonumero);
         $fechahora = date_create_from_format('Y-m-d G:i:s', \date("Y-m-d G:i:s"));
         $entity->setFechahoraasignacion($fechahora);
         $entity->setJornada($jornada);
@@ -117,7 +117,7 @@ class DefaultController extends Controller
             ->setFrom('aplicaciones@telesurtv.net')    
             ->setTo(array($trabajador->getUser()->getUsername().'@telesurtv.net'))  
             ->setBody("<div align='center'><h1>JORNADA - ".strtoupper($jornada->getNombrejornada())."</h1><br>El número que tienes asignado para la jornada de ".$jornada->getNombrejornada()." es <b>(".$ultimonumero.")</b>. Debes estar atento a la numeración, accediendo a la aplicación de jornadas ubicada en el siguiente link http://aplicaciones.telesurtv.net/sait/web/app.php/jornada/homepagenum/3 o a través del canal interno.</div>", 'text/html');
-            //$this->get('mailer')->send($message);    
+            $this->get('mailer')->send($message);    
         //FIN CORREO
 
         $this->get('session')->getFlashBag()->add('notice', 'SE HA ASIGNADO EL NUMERO '.$ultimonumero.' AL TRABAJADOR');
