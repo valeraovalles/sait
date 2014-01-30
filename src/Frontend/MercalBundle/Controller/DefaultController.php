@@ -116,7 +116,7 @@ class DefaultController extends Controller
             ->setSubject('Jornada-'.$jornada->getNombrejornada())   
             ->setFrom('aplicaciones@telesurtv.net')    
             ->setTo(array($trabajador->getUser()->getUsername().'@telesurtv.net'))  
-            ->setBody("<div align='center'><h1>JORNADA - ".strtoupper($jornada->getNombrejornada())."</h1><br>El número que tienes asignado para la jornada de ".$jornada->getNombrejornada()." es <b>(".$ultimonumero.")</b>. Debes estar atento a la numeración, accediendo a la aplicación de jornadas ubicada en el siguiente link http://aplicaciones.telesurtv.net/sait/web/app.php/jornada/homepagenum/3 o a través del canal interno.</div>", 'text/html');
+            ->setBody("<div align='center'><h1>JORNADA - ".strtoupper($jornada->getNombrejornada())."</h1><br>El número que tienes asignado para la jornada de ".$jornada->getNombrejornada()." es <b>(".$ultimonumero.")</b>. Debes estar atento a la numeración, accediendo a la aplicación de jornadas ubicada en el siguiente link http://aplicaciones.telesurtv.net/sait/web/app.php/jornada/homepagenum/".$idjornada." o a través del canal interno.</div>", 'text/html');
             $this->get('mailer')->send($message);    
         //FIN CORREO
 
