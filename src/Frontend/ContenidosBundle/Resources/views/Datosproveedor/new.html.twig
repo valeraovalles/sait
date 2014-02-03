@@ -1,14 +1,25 @@
 {% extends '::contenidos.html.twig' %}
-{% block title %}Licencia - Nueva{% endblock %}
 
 {% block titulobanner %}
-    LICENCIAS
+   PROVEEDOR - NUEVO REGISTRO
 {% endblock %}
    
  
 {% block body -%}
     {{ parent() }}
     <div class="titulo">NUEVO REGISTRO</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
 
     <form novalidate="novalidate" action="{{ path('datosproveedor_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
         <fieldset>            

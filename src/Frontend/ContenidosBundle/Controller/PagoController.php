@@ -16,7 +16,6 @@ use Frontend\ContenidosBundle\Entity\Controlpagounidad;
 use Frontend\ContenidosBundle\Entity\Diasentrega;
 use Frontend\ContenidosBundle\Entity\Tipoproveedor;
 
-
 //ASOCIO LOS FORMULARIOS QUE SE UTILIZARAN
 use Frontend\ContenidosBundle\Form\PagoType;
 use Frontend\ContenidosBundle\Form\ControlpagounidadType;
@@ -28,7 +27,6 @@ use Frontend\ContenidosBundle\Form\DiasType;
  */
 class PagoController extends Controller
 {
-
     /*
     *
     * LISTA DE TODOS LOS PAGOS 
@@ -52,26 +50,62 @@ class PagoController extends Controller
     
     /*
     *
+    * FUNCION PARA REGISTRAR EL SEGUIMIENTO DEL PAGO
+    *
+    */
+    public function controlAction($id_contratacion,$id_presupuesto,$id_proveedor, $id)
+    {
+        $em = $this->getDoctrine()->getManager();  
+
+        $entity = $em->getRepository('ContenidosBundle:Pago')->find($id);
+        $entity1 = $em->getRepository('ContenidosBundle:Controlpagounidad')->find($id);
+
+        foreach ($entity1 as $key) 
+        {
+            $est[$key->getId()]=$key->getStatus();
+            $estatus = $est[$key->getId()];
+
+        }
+
+        //RETORNO A LA VISTA PARA MOSTRAR LISTADO
+        return $this->render('ContenidosBundle:Pago:control.html.twig', array(
+            'entity'            => $entity,
+            'entity1'           => $entity1,
+            'estatus'           => $estatus,
+            'id_contratacion'   => $id_contratacion,
+            'id_presupuesto'    => $id_presupuesto,
+            'id_proveedor'      => $id_proveedor,
+        )); 
+
+    }
+
+
+    /*
+    *
     * FUNCION PARA CREAR UN NUEVO PAGO
     *
     */
     public function createAction(Request $request,$id_contratacion,$id_presupuesto,$id_proveedor, $tipomoneda)
     {
+        $alert = 0;
 
         $em = $this->getDoctrine()->getManager();
 
         //OBTENGO EL TIPO DE PROVEEDOR
-         $pres = $em->getRepository('ContenidosBundle:Presupuesto')->find($id_presupuesto);
-         $prov = $pres->getIdProveedor();
+        $pres = $em->getRepository('ContenidosBundle:Presupuesto')->find($id_presupuesto);
+        $prov = $pres->getIdProveedor();
 
-         $prove = $em->getRepository('ContenidosBundle:Datosproveedor')->find($prov);
-         $id_prov = $prove->getIdTipoprov();
+        $prove = $em->getRepository('ContenidosBundle:Datosproveedor')->find($prov);
+        $id_prov = $prove->getIdTipoprov();
 
-         $compras = 0;
-         if($id_prov == 'COMPRAS')
-         {
-            $compras=1;
-         }
+        $compras = 0;
+        if($id_prov == 'COMPRAS')
+        {
+           $compras=1;
+        }
+
+        //OBTENGO LOS DATOS DE LA CONTRATACION
+        $contrat = $em->getRepository('ContenidosBundle:Contratacion')->find($id_contratacion);
 
         //OBTENGO LOS DATOS DEL PROVEEDOR DE ACUERDO A UNA CONTRATACION 
         $entities = $em->getRepository('ContenidosBundle:Datosproveedor')->findBynombre($id_contratacion);
@@ -80,7 +114,6 @@ class PagoController extends Controller
         $entity  = new Pago();
         $entity1 = new Controlpagounidad();
         
-        //ASOCIO LOS CAMPOS DEL FORMULARIO A LA VARIABLE ENTITY
         $form   = $this->createForm(new PagoType(), $entity);
         $form1  = $this->createForm(new ControlpagounidadType(), $entity1);
 
@@ -106,98 +139,174 @@ class PagoController extends Controller
         {
             $diasentrega = 0;
         }
-        //Obtengo la unidad ejecutora
+
+        //OBTENGO LA UNIDAD EJECUTORA
         $ejec= $entity->getIdUnidadejec();
         $ejecu = $em->getRepository('ContenidosBundle:Unidadejecutora')->find($ejec);
         $unidadejecutora = $ejecu->getId();
 
-        if ($unidadejecutora == '1')
-        {
-            $status = 6;  //porque no tiene unidad administrativa
-        }
-
-        //tomo este campo como referencia, para traer los datos del pago
+        //TOMO ESTE CAMPO COMO REFERENCIA, PARA TRAER LOS DATOS DEL PAGO
         $numerofactura= $entity->getNumFactura();        
 
-        //VERIFICO SI EL  FORMULARIO ES VALIDO
-        if($form->isValid()) 
-        { 
+        //BLOQUE PARA DETERMINAR SI EL NUM DE LA FACTURA ES UNICO
+        $pago_repetido = $em->getRepository('ContenidosBundle:Pago')->findBynumFactura($numerofactura);
+        $cont = 0;
+        
+        foreach ($pago_repetido as $key ) {
+            $cont ++; 
+        }
+        if ($cont != 0)
+        {
+            $alert = 1;
+            $mensaje = "EL NUMERO DE LA FACTURA ESTA REPETIDO";
+        }
 
-            $cont = $em->getRepository('ContenidosBundle:Contratacion')->find($id_contratacion);
-            $dias = $em->getRepository('ContenidosBundle:Diasentrega')->find($diasentrega);
-            
-            //SETEO VALORES EN LA ENTIDAD PAGO
-            $entity->setidContratacion($cont);
-            $entity->setDiasEntrega($dias);
-            $entity->setTipoMoneda($tipomoneda); 
+        //BLOQUE PARA DETERMINAR SI SE INGRESARON LOS MONTOS DE ACUERDO AL TIPO DE MONEDA
+        $monto[0] = $entity->getMontoBs();
+        $monto[1] = $entity->getMontoMe();
 
-            if($tipomoneda == 3)
+        if ($monto[0] != NULL or $monto[0] != 0)
+        {
+            if ($tipomoneda == 1)
             {
-                $monto = 0;
-                $entity->setMontoMe($monto);
-            }
-
-            //INSERTO LOS VALORES EN LA TABLA PAGO
-            $em->persist($entity);
-            $em->flush();
-
-            $pago = $em->getRepository('ContenidosBundle:Pago')->findBynumFactura($numerofactura);        
-                
-            if($unidadejecutora == '2')
-            {
-                $fecha[4] = $entity1->getFechaUnidadcinco();
-                $fecha[3] = $entity1->getFechaUnidadcuatro();
-                $fecha[2] = $entity1->getFechaUnidadtres();
-                $fecha[1] = $entity1->getFechaUnidaddos();
-                $fecha[0] = $entity1->getFechaUnidaduno();
-
-                if (!empty($fecha[4]))
+                if ($monto[1] == NULL or $monto[1] == 0 )
                 {
-                    $status = 5;
-                }elseif (!empty($fecha[3])) 
-                {
-                    $status = 4;
-                }elseif(!empty($fecha[2]))
-                {
-                    $status = 3;
-                }elseif(!empty($fecha[1]))
-                {
-                    $status = 2;
-                }elseif(!empty($fecha[0]))
-                {
-                    $status = 1;
+                    $alert= 1;
+                    $mensaje = "DEBE INGRESAR EL MONTO EN DOLARES";
                 }
-                
-            }
-
-            foreach ($pago as $key) 
+            }elseif($tipomoneda == 2)
             {
+                if ($monto[1] == NULL or $monto[1] == 0 )
+                {
+                    $alert= 1;
+                    $mensaje = "DEBE INGRESAR EL MONTO EN EUROS";
+                }
+            }
+        }else
+        {
+            $alert= 1;
+            $mensaje = "DEBE INGRESAR EL MONTO EN BOLIVARES";
+        }
+
+        //BLOQUE PARA DETERMINAR SI EL PAGO ES VÁLIDO
+        $debe[0] = $contrat->getDebeBs();
+        $debe[1] = $contrat->getDebeMe();
+        
+        //CALCULO LA DEUDA ACTUAL
+        $debe_act[0] = $debe[0] - $monto[0];
+        if ($tipomoneda == 1 or $tipomoneda == 2)
+        {
+            $debe_act[1] = $debe[1] - $monto[1]; 
+        }else
+        {
+            $debe_act[1] = NULL;
+        }        
+
+        if (($debe[0]== 0))
+        {
+            $alert = 1;
+            $mensaje = "LA CONTRATACION YA SE PAGO COMPLETAMENTE";
+        }else
+        {
+            if (($debe_act[0]< 0))
+            {
+                $alert = 1;
+                $mensaje = "EL PAGO EXCEDE EL MONTO DE LA DEUDA";
+            }else
+            {
+                $contrat->setDebeBs($debe_act[0]);
+                $contrat->setDebeMe($debe_act[1]);
+            }
+        }
+
+        $fecha[1] = $entity1->getFechaUnidaduno();
+        $fecha[2] = $entity1->getFechaUnidaddos();
+        $fecha[3] = $entity1->getFechaUnidadtres(); 
+
+        if(!empty($fecha[3]) and (empty($fecha[2])) and (empty($fecha[1])))
+        {
+            $status = 3;
+        }elseif(empty($fecha[3]) and (!empty($fecha[2])) and (empty($fecha[1])))
+        {
+            $status = 2;
+        }elseif(empty($fecha[3]) and (empty($fecha[2])) and (!empty($fecha[1])))
+        {
+            $status = 1;
+        }elseif (!empty($fecha[3]) and (!empty($fecha[2])) and (!empty($fecha[1])))
+        {
+            $alert = 1; //genera un error porque tiene mas de un fecha de entrega
+            $mensaje = "INGRESE SOLO UNA FECHA DE ENTREGA";
+        }elseif (!empty($fecha[3]) and (!empty($fecha[2])) and (empty($fecha[1])))
+        {
+            $alert = 1; //genera un error porque tiene mas de un fecha de entrega
+            $mensaje = "INGRESE SOLO UNA FECHA DE ENTREGA";
+        }elseif (!empty($fecha[3]) and (empty($fecha[2])) and (!empty($fecha[1])))
+        {
+            $alert = 1; //genera un error porque tiene mas de un fecha de entrega
+            $mensaje = "INGRESE SOLO UNA FECHA DE ENTREGA";
+        }elseif (empty($fecha[3]) and (!empty($fecha[2])) and (!empty($fecha[1])))
+        {
+            $alert = 1; //genera un error porque tiene mas de un fecha de entrega
+            $mensaje = "INGRESE SOLO UNA FECHA DE ENTREGA";
+        }else
+        {
+            $alert = 1; //genera un error porque no tiene ninguna fecha de entrega
+            $mensaje = "INGRESE AL MENOS UNA FECHA DE ENTREGA";
+        }
+
+        if ($alert == 0 )
+        {
+            //VERIFICO SI EL  FORMULARIO ES VALIDO
+            if($form->isValid()) 
+            { 
+
+                $cont = $em->getRepository('ContenidosBundle:Contratacion')->find($id_contratacion);
+                $dias = $em->getRepository('ContenidosBundle:Diasentrega')->find($diasentrega);
+                
+                //SETEO VALORES EN LA ENTIDAD PAGO
+                $entity->setidContratacion($cont);
+                $entity->setDiasEntrega($dias);
+                $entity->setTipoMoneda($tipomoneda); 
+
+                if($tipomoneda == 3)
+                {
+                    $monto = NULL;
+                    $entity->setMontoMe($monto);
+                }      
+
                 $entity1->setIdEjecutora($ejecu);
                 $entity1->setIdContratacion($cont);
+                $entity1->setStatus($status);  
 
-                $pagos[$key->getId()]=$key->getId();
-                $idpago = $pagos[$key->getId()];
+                $em->persist($entity);
 
-                $pagooo = $em->getRepository('ContenidosBundle:Pago')->find($idpago);
+                $id_pago = $entity->getId();
+
+                $pagooo = $em->getRepository('ContenidosBundle:Pago')->find($id_pago);
                 $entity1->setIdPago($pagooo);
 
-                $entity1->setStatus($status);
-
+                //INSERTO LOS VALORES EN LA TABLA PAGO Y CONTROLPAGOUNIDAD
+                
                 $em->persist($entity1);
                 $em->flush();
-            }
-
-            //envio a notificacion de que el registro fue creado
-            $this->get('session')->getFlashBag()->add('notice', ' SE REGISTRO EXITOSAMENTE EL PAGO');
-
-            //ENVIO A LA VISTA SHOW PARA MOSTRAR PAGO CREADO
-            return $this->redirect($this->generateUrl('pago_show', array(
-                                                                         'id'               => $entity->getId(),
-                                                                         'id_contratacion'  => $id_contratacion,
-                                                                         'id_proveedor'     => $id_proveedor,
-                                                                         'id_presupuesto'   => $id_presupuesto,
-                                                                        )));
             
+
+                //envio a notificacion de que el registro fue creado
+                $this->get('session')->getFlashBag()->add('notice', ' SE REGISTRO EXITOSAMENTE EL PAGO');
+
+                //ENVIO A LA VISTA SHOW PARA MOSTRAR PAGO CREADO
+                return $this->redirect($this->generateUrl('pago_show', array(
+                                                                             'id'               => $entity->getId(),
+                                                                             'id_contratacion'  => $id_contratacion,
+                                                                             'id_proveedor'     => $id_proveedor,
+                                                                             'id_presupuesto'   => $id_presupuesto,
+                                                                            )));
+                
+            }
+        }else
+        {
+            //envio a alerta
+            $this->get('session')->getFlashBag()->add('alert', $mensaje);
         }
         //ENVIO A LA VISTA NEW PARA MOSTRAR FORMULARIO DE PAGO
         return $this->render('ContenidosBundle:Pago:new.html.twig', array(
@@ -220,6 +329,7 @@ class PagoController extends Controller
     */
     public function newAction($id_contratacion,$id_presupuesto,$id_proveedor)
     {
+
         $em = $this->getDoctrine()->getManager();
      
         //OBTENGO EL TIPO DE PROVEEDOR
@@ -285,11 +395,14 @@ class PagoController extends Controller
 
         //OBTENGO LOS DATOS DEL PAGO DE ACUERDO AL ID ENVIADO
         $entity = $em->getRepository('ContenidosBundle:Pago')->find($id);
+        $idpago = $entity->getId();
+        $entity1 = $em->getRepository('ContenidosBundle:Controlpagounidad')->findByIdPago($idpago);
 
         foreach ($entity1 as $key) 
         {
             $est[$key->getId()]=$key->getStatus();
             $estatus = $est[$key->getId()];
+
             $entity2 = $em->getRepository('ContenidosBundle:Unidadadministrativa')->find($estatus);
             $unidad = $entity2->getNombre();
         }
@@ -401,6 +514,8 @@ class PagoController extends Controller
             throw $this->createNotFoundException('Unable to find Pago entity.');
         }
 
+        $status = $entity1->getStatus();
+
         $deleteForm = $this->createDeleteForm($id);
 
         //ASOCIO LOS CAMPOS DEL FORMULARIO A LA VARIABLE ENTITY
@@ -423,109 +538,12 @@ class PagoController extends Controller
             $entity->setTipoMoneda($tipomoneda);
             $entity->setIdContratacion($entities);
             
-            if($uniejec == 1)
-            {
-                $status = 6;
-            }elseif($uniejec == 2)
-            {
-                $fecha[5] = $datos['fechaUnidadcinco'];
-                $fecha[4] = $datos['fechaUnidadcuatro'];
-                $fecha[3] = $datos['fechaUnidadtres'];
-                $fecha[2] = $datos['fechaUnidaddos'];
-                $fecha[1] = $datos['fechaUnidaduno'];
-                
-
-                if (!empty($fecha[5]))
-                {
-                    $status = 5;
-
-                    $fecha5 = date_create_from_format('Y-m-d', $fecha[5]);
-                    $fecha4 = date_create_from_format('Y-m-d', $fecha[4]);
-                    $fecha3 = date_create_from_format('Y-m-d', $fecha[3]);
-                    $fecha2 = date_create_from_format('Y-m-d', $fecha[2]);
-                    $fecha1 = date_create_from_format('Y-m-d', $fecha[1]);
-                    $entity1->setFechaUnidadcinco($fecha5);
-                    if($fecha4 != NULL)
-                    {
-                        $entity1->setFechaUnidadcuatro($fecha4);
-                    }
-                    if($fecha3 != NULL)
-                    {
-                        $entity1->setFechaUnidadtres($fecha3);
-                    }
-                    if($fecha2 != NULL)
-                    {
-                        $entity1->setFechaUnidaddos($fecha2);
-                    }
-                    if($fecha1 != NULL)
-                    {
-                        $entity1->setFechaUnidaduno($fecha1);
-                    }
-                }elseif (!empty($fecha[4])) 
-                {                    
-                    $status = 4;
-                    
-
-                    $fecha4 = date_create_from_format('Y-m-d', $fecha[4]);
-                    $fecha3 = date_create_from_format('Y-m-d', $fecha[3]);
-                    $fecha2 = date_create_from_format('Y-m-d', $fecha[2]);
-                    $fecha1 = date_create_from_format('Y-m-d', $fecha[1]);
-                    $entity1->setFechaUnidadcuatro($fecha4);
-                    if($fecha3 != NULL)
-                    {
-                        $entity1->setFechaUnidadtres($fecha3);
-                    }
-                    if($fecha2 != NULL)
-                    {
-                        $entity1->setFechaUnidaddos($fecha2);    
-                    }
-                    if($fecha1 != NULL)
-                    {
-                        $entity1->setFechaUnidaduno($fecha1);    
-                    }
-                }elseif(!empty($fecha[3]))
-                {                    
-                    $status = 3;
-
-                    $fecha3 = date_create_from_format('Y-m-d', $fecha[3]);
-                    $fecha2 = date_create_from_format('Y-m-d', $fecha[2]);
-                    $fecha1 = date_create_from_format('Y-m-d', $fecha[1]);
-                    $entity1->setFechaUnidadtres($fecha3);
-                    if ($fecha2 != NULL)
-                    {
-                        $entity1->setFechaUnidaddos($fecha2);
-                    }
-                    if ($fecha1 != NULL)
-                    {
-                        $entity1->setFechaUnidaduno($fecha1);
-                    }                 
-
-                }elseif(!empty($fecha[2]))
-                {                                      
-                    $status = 2;
-
-                    $fecha2 = date_create_from_format('Y-m-d', $fecha[2]);
-                    $fecha1 = date_create_from_format('Y-m-d', $fecha[1]);
-                    $entity1->setFechaUnidaddos($fecha2);
-                    if ($fecha1 != NULL)
-                    {
-                        $entity1->setFechaUnidaduno($fecha1);
-                    }
-                }elseif(!empty($fecha[1]))
-                {
-                    $status = 1;
-
-                    $fecha1 = date_create_from_format('Y-m-d', $fecha[1]);
-                    $entity1->setFechaUnidaduno($fecha1);
-                }
-            }
             $ejecutora = $em->getRepository('ContenidosBundle:Unidadejecutora')->find($uniejec);
 
-            $entity1->setStatus($status);
             $entity1->setIdEjecutora($ejecutora);
             $entity1->setIdContratacion($entities);
+            $entity1->setStatus($status);
             $entity1->setIdPago($entity);
-
 
             $em->persist($entity);
             $em->persist($entity1);
@@ -557,20 +575,27 @@ class PagoController extends Controller
     */
     public function deleteAction($id, $id_contratacion, $id_presupuesto, $id_proveedor)
     {
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('ContenidosBundle:Pago')->find($id);
 
         $Contratacion= $entity->getIdContratacion();
 
-        echo $Contratacion;
-        die;
-        $entity = $em->getRepository('ContenidosBundle:Contratacion')->find($id);
+        $entity2 = $em->getRepository('ContenidosBundle:Contratacion')->find($id_contratacion);
 
+        $monto[0] = $entity->getmontoMe();
+        $monto[1] = $entity->getmontoBs();
+
+        $debe_ant[0] = $entity2->getDebeMe();
+        $debe_ant[1] = $entity2->getDebeBs();
+
+        $debe_act[0] = $debe_ant[0] + $monto[0];
+        $debe_act[1] = $debe_ant[1] + $monto[1];
 
         if (!$entity) 
         {
-            throw $this->createNotFoundException('Unable to find Banco entity.');
+            throw $this->createNotFoundException('Unable to find Pago entity.');
         }
 
         $dql   = "SELECT cpg FROM ContenidosBundle:Controlpagounidad cpg 
@@ -592,11 +617,15 @@ class PagoController extends Controller
                 $em->flush();
         }
 
-
         //AHORA ELIMINO LOS DATOS DEL PAGO
             $em->remove($entity);
-            $em->flush();
+            
+        //REVERSO LA DEUDA EN LA CONTRATACION
+            
+            $entity2->setDebeMe($debe_act[0]);
+            $entity2->setDebeBs($debe_act[1]);
      
+            $em->flush();
         //OBTENGO LOS DATOS DE LOS PAGOS ASOCIADOS A UNA CONTRATACION
         $entities = $em->getRepository('ContenidosBundle:Pago')->findByIdContratacion($id_contratacion);
 

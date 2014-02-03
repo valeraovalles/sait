@@ -17,11 +17,6 @@
                <li><a href='{{ path('datosequipos') }}'><span>EQUIPOS TELESUR</span></a></li>
             </ul>
          </li>
-         <li class='has-sub'><a href='#'><span>CONSULTAR</span></a>
-            <ul>
-               <li class='has-sub'><a href='{{ path('disponibilidad_home') }}'><span>DISPONIBILIDAD</span></a></li>
-            </ul>
-         </li> 
       {% endif %}
 
       {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}

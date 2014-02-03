@@ -2,12 +2,24 @@
 {% block title %}Contenidos-Contratacion- Editar{% endblock %}
 
 {% block titulobanner %}
-    CONTRATACION
+   CONTRATACION - EDITAR
 {% endblock %}
     
 {% block body -%}
     {{ parent() }}
     <div class="titulo">EDITAR DATOS DE LA CONTRATACI&Oacute;N</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
 
     <form novalidate="novalidate" action="{{ path('contratacion_update', { 'id': entity.id, 'id_presupuesto': id_presupuesto, 'id_proveedor': id_proveedor }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
         <input type="hidden" name="_method" value="PUT" />
@@ -20,21 +32,17 @@
                     <div class="labels">Concepto:</div>
                     <div class="widgets">{{ form_widget(edit_form.concepto) }}</div>
                 </div>
-                {% if tipomoneda == 1  %}
-                    <div class="form-contenedor">
-                        {{ form_errors(edit_form.montoMe) }}
-                        <div class="labels">Monto en $:</div>
-                        <div class="widgets">{{ form_widget(edit_form.montoMe) }}</div>
-                    </div>
-                {% endif %}
-                {% if tipomoneda == 2 %}
-                    <div class="form-contenedor">
-                        {{ form_errors(edit_form.montoMe) }}
-                        <div class="labels">Monto en €:</div>
-                        <div class="widgets">{{ form_widget(edit_form.montoMe) }}</div>
-                    </div>
-                {% endif %}
-                <div class="form-contenedor">
+                <div class="form-contenedor" style="display:none">
+                    {{ form_errors(edit_form.montoMe) }}
+                    <div class="labels">Monto en $:</div>
+                    <div class="widgets">{{ form_widget(edit_form.montoMe) }}</div>
+                </div>
+                <div class="form-contenedor" style="display:none">
+                    {{ form_errors(edit_form.montoMe) }}
+                    <div class="labels">Monto en €:</div>
+                    <div class="widgets">{{ form_widget(edit_form.montoMe) }}</div>
+                </div>               
+                <div class="form-contenedor" style="display:none">
                     {{ form_errors(edit_form.montoBs) }}
                     <div class="labels">Monto en Bs:</div>
                     <div class="widgets">{{ form_widget(edit_form.montoBs) }}</div>
