@@ -1,0 +1,152 @@
+{% extends '::contenidos.html.twig' %}
+{% block title %}CONTENIDOS-PAGOS{% endblock %}
+
+{% block titulobanner %}
+   PAGO - CONTROL DE PAGO
+{% endblock %}
+
+    
+{% block body -%}
+    {{ parent() }}
+
+    <div class="titulo">CONTROL PAGO</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+
+    <form novalidate="novalidate" action="{{ path('pago_controlupdate', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(edit_form) }} {{ form_enctype(edit_form1) }}>{{ form_widget(edit_form._token) }}{{ form_widget(edit_form1._token) }}
+        <input type="hidden" name="_method" value="PUT" />
+        <div id="descripcion" class="form-show_edit">
+  
+{# A MODO DE CONSULTA SE COLOCA LA UNIDAD EJECUTORA #}           
+            <legend id="b"><div class="divisor">DATOS DE UNIDAD EJECUTORA</div> </legend>
+            
+            {# ENVIO OCULTO EL ID DE LA UNIDAD EJECUTORA #}
+            <div class="form-contenedor" style="display:none">
+                {{ form_errors(edit_form.idUnidadejec) }}
+                <div class="dato">{{ form_widget(edit_form.idUnidadejec) }}</div>
+            </div>
+
+            {% if uniejec == 1 %}
+                <div class="form-contenedor">
+                    <div class="labels">Unidad Ejecutora:</div>
+                    <div class="dato">RECURSOS HUMANOS</div>
+                </div>
+            {% elseif uniejec == 2 %}
+                <div class="form-contenedor">
+                    <div class="labels">Unidad Ejecutora:</div>
+                    <div class="dato">DIRECCIÓN GENERAL EJECUTIVA</div>
+                </div>
+            {% endif %}
+
+            {# ENVIO OCULTO LAS FECHAS DE ENTREGA EN LAS UNIDADES #}
+            <div class="form-contenedor" style="display:none">
+                {{ form_errors(edit_form1.fechaUnidaduno) }}
+                <div class="dato">{{ form_widget(edit_form1.fechaUnidaduno) }}</div>
+            </div>
+            <div class="form-contenedor" style="display:none">
+                {{ form_errors(edit_form1.fechaUnidaddos) }}
+                <div class="dato">{{ form_widget(edit_form1.fechaUnidaddos) }}</div>
+            </div>
+            <div class="form-contenedor" style="display:none">
+                {{ form_errors(edit_form1.fechaUnidadtres) }}
+                <div class="dato">{{ form_widget(edit_form1.fechaUnidadtres) }}</div>
+            </div>
+            <div class="form-contenedor" style="display:none">
+                {{ form_errors(edit_form1.fechaUnidadcuatro) }}
+                <div class="dato">{{ form_widget(edit_form1.fechaUnidadcuatro) }}</div>
+            </div>
+            <div class="form-contenedor" style="display:none">
+                {{ form_errors(edit_form1.fechaUnidadcinco) }}
+                <div class="dato">{{ form_widget(edit_form1.fechaUnidadcinco) }}</div>
+            </div>
+            <div class="form-contenedor" style="display:none">
+                {{ form_errors(edit_form1.fechaUnidadseis) }}
+                <div class="dato">{{ form_widget(edit_form1.fechaUnidadseis) }}</div>
+            </div>
+
+
+{# DATOS DE LAS CONDICIONES DEL PAGO #}
+            {% if compras == 1 %}
+                <legend id="b"><div class="divisor">CONDICIONES DEL PAGO</div> </legend>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.contraEntrega) }}
+                    <div class="labels">Pago Contra Entrega:</div>
+                    <div class="dato">{{ form_widget(edit_form.contraEntrega) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.diasEntrega) }}
+                    <div class="labels">D&iacute;as de Entrega:</div>
+                    <div class="dato">{{ form_widget(edit_form.diasEntrega) }}</div>
+                </div>
+            {% endif %}
+
+{# DATOS DEL PAGO #}
+                <legend id="a"><div class="divisor">DATOS DEL PAGO</div> </legend>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.numMemo) }}
+                    <div class="labels">N&uacute;mero del Memorandum:</div>
+                    <div class="dato">{{ form_widget(edit_form.numMemo) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.numFactura) }}
+                    <div class="labels">N&uacute;mero de Factura:</div>
+                    <div class="dato">{{ form_widget(edit_form.numFactura) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.fechaFactura) }}
+                    <div class="labels">Fecha de la Factura:</div>
+                    <div class="dato">{{ form_widget(edit_form.fechaFactura) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.tipoPago) }}
+                    <div class="labels">Tipo del Pago:</div>
+                    <div class="dato">{{ form_widget(edit_form.tipoPago) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.numPago) }}
+                    <div class="labels">N&uacute;mero del Pago:</div>
+                    <div class="dato">{{ form_widget(edit_form.numPago) }}</div>
+                </div>
+                <div class="form-contenedor">
+                    {{ form_errors(edit_form.fechaPago) }}
+                    <div class="labels">Fecha del Pago:</div>
+                    <div class="dato">{{ form_widget(edit_form.fechaPago) }}</div>
+                </div>
+                
+
+                {# SE ENVIAN LOS MONTOS OCULTOS #}
+                <div class="form-contenedor" style= "display:none">
+                    {{ form_errors(edit_form.montoBs) }}
+                    <div class="dato">{{ form_widget(edit_form.montoBs) }}</div>
+                </div>
+
+                {% if tipomoneda == 1 %}
+                    <div class="form-contenedor" style= "display:none">
+                        {{ form_errors(edit_form.montoMe) }}
+                        <div class="dato">{{ form_widget(edit_form.montoMe) }}</div>
+                    </div> 
+                {% elseif tipomoneda == 2 %}
+                    <div class="form-contenedor" style= "display:none">
+                        {{ form_errors(edit_form.montoMe) }}
+                        <div class="dato">{{ form_widget(edit_form.montoMe) }}</div>
+                    </div>
+                {% endif %}
+                
+                <button type="submit" class="btn">Editar</button><br><br>
+        </div>     
+        <br>       
+        <a href="{{ path('pago', {'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+          
+
+    </form>
+{% endblock %}
