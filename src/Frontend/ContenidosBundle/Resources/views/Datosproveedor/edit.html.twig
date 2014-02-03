@@ -2,7 +2,7 @@
 {% block title %}Contenidos-Proveedor- Editar{% endblock %}
 
 {% block titulobanner %}
-    LICENCIAS CONTENIDOS
+   PROVEEDOR - EDITAR
 {% endblock %}
 
     
@@ -10,6 +10,18 @@
     {{ parent() }}
 
     <div class="titulo">EDITAR PROVEEDOR</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
     <form novalidate="novalidate" action="{{ path('datosproveedor_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
         <input type="hidden" name="_method" value="PUT" />
         <fieldset> 

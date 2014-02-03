@@ -1,5 +1,9 @@
 {% extends '::contenidos.html.twig' %}
 
+{% block titulobanner %}
+   PROVEEDOR - DETALLES
+{% endblock %}
+
 {% block body -%}
  {{ parent() }}
     <div class="titulo">DETALLES "{{ entity.nombre }}" </div>

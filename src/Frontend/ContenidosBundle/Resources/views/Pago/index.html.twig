@@ -1,5 +1,9 @@
 {% extends '::contenidos.html.twig' %}
 
+{% block titulobanner %}
+   PAGO - PRINCIPAL
+{% endblock %}
+
 {% block body -%}
  {{ parent() }}
     <div class="titulo">PAGOS ASOCIADOS A LA CONTRATACION </div>
@@ -43,11 +47,11 @@
                     <td>Transferencia</td>
                 {% endif %}
                 <td>
-                    <a href="{{ path('pago_edit', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="22px" src="{{ asset('images/edit.png')}}"></a>
+                    <a href="{{ path('pago_edit', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar pago"><img width="22px" src="{{ asset('images/edit.png')}}"></a>
                     
                     <a onclick="return confirm('¿Desea eliminar?')" href="{{ path('pago_delete', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="eliminar pago"><img width="18px" src="{{ asset('images/mal.jpeg')}}"></a>                    
 
-                    <a href="{{ path('pago_edit', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="control de pagos"><img width="22px" src="{{ asset('images/dinero.jpg')}}"></a>
+                    <a href="{{ path('pago_control', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="control del pago"><img width="22px" src="{{ asset('images/dinero.jpg')}}"></a>
 
                 </td>
             </tr>
@@ -55,7 +59,7 @@
         </tbody>
     </table><br><br>
     <a class="btn btn-primary dropdown-toggle" href="{{ path( 'pago_new', {'id_contratacion': id_contratacion, 'id_presupuesto': id_presupuesto, 'id_proveedor':id_proveedor} ) }}">Registrar Nuevo Pago</a>
-    <a href="{{ path('contratacion' , { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    <a href="{{ path('contratacion' , { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto } ) }}" data-toggle="tooltip" data-placement="top" title="Listado de Contratacione"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
         
     <br><br>
     {% endblock %}

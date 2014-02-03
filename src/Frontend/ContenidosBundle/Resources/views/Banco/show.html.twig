@@ -1,8 +1,9 @@
 {% extends '::contenidos.html.twig' %}
 
 {% block titulobanner %}
-    PAGOS
+  BANCO - DETALLES
 {% endblock %}
+
 
 
 {% block body -%}
@@ -14,6 +15,12 @@
             {{ flashMessage }}
         </div>
     {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
 
     <div class="form-show_edit">
     <fieldset>       
@@ -63,82 +70,35 @@
         
     </fieldset>
 
-    <fieldset>    
-        <legend id="b"><div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div> </legend>
-            {% if entity.bancoInterm != NULL %} 
+    {% if entity.bancoInterm != NULL %} 
+        <fieldset>    
+            <legend id="b"><div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div> </legend>
                 <div class="contenedor">
                     <div class="labels">Banco Intermediario:</div>
                     <div class="dato">{{ entity.bancoInterm }}</div>
                 </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Banco Intermediario:</div>
-                    <div class="dato">NO HAY DESCRPCION</div>
-                </div>
-            {% endif %}
-
-            {% if entity.cuentaInterm != NULL %}
                 <div class="contenedor">
                     <div class="labels">Cuenta Banco Intermediario:</div>
                     <div class="dato">{{ entity.cuentaInterm }}</div>
                 </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Cuenta Banco Intermediario:</div>
-                    <div class="dato">NO HAY DESCRPCION</div>
-                </div>
-            {% endif %}
-
-            {% if entity.swiftInterm != NULL %}
                 <div class="contenedor">
                     <div class="labels">SWIFT Banco Intermediario:</div>
                     <div class="dato">{{ entity.swiftInterm }}</div>
                 </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">SWIFT Banco Intermediario:</div>
-                    <div class="dato">NO HAY DESCRPCION</div>
-                </div>
-            {% endif %}
-
-            {% if entity.abaInterm != NULL %}
                 <div class="contenedor">
                     <div class="labels">ABA Banco Intermediario:</div>
                     <div class="dato">{{ entity.abaInterm }}</div>
                 </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">ABA Banco Intermediario:</div>
-                    <div class="dato">NO HAY DESCRPCION</div>
-                </div>
-            {% endif %}
-
-            {% if entity.ibanInterm != NULL %}
                 <div class="contenedor">
                     <div class="labels">IBAN Banco Intermediario:</div>
                     <div class="dato">{{ entity.ibanInterm }}</div>
                 </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">IBAN Banco Intermediario:</div>
-                    <div class="dato">NO HAY DESCRPCION</div>
-                </div>
-            {% endif %} 
-
-            {% if entity.direccionBancointerm != NULL %}
                 <div class="contenedor">
                     <div class="labels">Direcci&oacute;n del Banco Intermediario:</div>
                     <div class="dato">{{ entity.direccionBancointerm }}</div>
-                </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Direcci&oacute;n del Banco Intermediario:</div>
-                    <div class="dato">NO HAY DESCRPCION</div>
-                </div>
-            {% endif %} 
-        
-    </fieldset>
-    
+                </div>    
+        </fieldset>
+    {% endif %}
     
     </div>
     <br>
