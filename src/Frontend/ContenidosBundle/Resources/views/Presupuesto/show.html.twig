@@ -52,40 +52,44 @@
                         {% if entity.montoDolares != NULL %}
                             <td>{{ entity.montoDolares }}</td>
                         {% else %}
-                            <td>0</td>
+                            <td>NA</td>
                         {% endif %}
                         {% if entity.montoEuros != NULL %}
                             <td>{{ entity.montoEuros }}</td>
                         {% else %}
-                            <td>0</td>
+                            <td>NA</td>
                         {% endif %}                            
                     </tr>
                     <tr align="center">
                         <td>Extensiones</td> 
-                        <td> {{ subtotal.0 }} </td>
+                        {% if subtotal.0 != NULL  %}
+                            <td> {{ subtotal.0 }}</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
                         {% if subtotal.1 != NULL  %}
                             <td> {{ subtotal.1 }} </td>
                         {% else %}
-                            <td>0</td>
+                            <td>NA</td>
                         {% endif %}
                         {% if subtotal.2 != NULL %}
                             <td> {{ subtotal.2 }} </td>
                         {% else %}
-                            <td>0</td>
+                            <td>NA</td>
                         {% endif %}
                     </tr>
                     <tr align="center" bgcolor= "#9cf">
                         <td>TOTAL</td> 
-                        <td>{{ total.0 }}</td>
+                        <td>{{ total.0 }}.00</td>
                         {% if total.1 != NULL %}
-                            <td>{{ total.1 }}</td>
+                            <td>{{ total.1 }}.00</td>
                         {% else %}
-                            <td>0</td>
+                            <td>NA</td>
                         {% endif %}
                         {% if total.2 != NULL %}
-                            <td>{{ total.2 }}</td>
+                            <td>{{ total.2 }}.00</td>
                         {% else %}
-                            <td>0</td>
+                            <td>NA</td>
                         {% endif %}                                       
                     </tr>
 
@@ -107,10 +111,13 @@
                             <td  >{{ entity.disponibilidad }}</td>
                             {% if tipomoneda == 1 %}
                                 <td>{{ entity.disponibilidadDolares }}</td>
-                                <td>0</td>
+                                <td>NA</td>
                             {% elseif tipomoneda == 2 %}
-                                <td>0</td>
+                                <td>NA</td>
                                 <td>{{ entity.disponibilidadEuros }}</td>
+                            {% else %}
+                                <td>NA</td>
+                                <td>NA</td>
                             {% endif %}
                         </tr>
                     {% else %}
@@ -118,10 +125,13 @@
                             <td  >{{ entity.disponibilidad }}</td>
                             {% if tipomoneda == 1 %}
                                 <td>{{ entity.disponibilidadDolares }}</td>
-                                <td>0</td>
+                                <td>NA</td>
                             {% elseif tipomoneda == 2 %}
-                                <td>0</td>
+                                <td>NA</td>
                                 <td>{{ entity.disponibilidadEuros }}</td>
+                            {% else %}
+                                <td>NA</td>
+                                <td>NA</td>
                             {% endif %}
                         </tr>
                     {% endif %}

@@ -114,7 +114,6 @@ class PagoController extends Controller
         $entity  = new Pago();
         $entity1 = new Controlpagounidad();
         
-        //ASOCIO LOS CAMPOS DEL FORMULARIO A LA VARIABLE ENTITY
         $form   = $this->createForm(new PagoType(), $entity);
         $form1  = $this->createForm(new ControlpagounidadType(), $entity1);
 
@@ -166,27 +165,27 @@ class PagoController extends Controller
         $monto[0] = $entity->getMontoBs();
         $monto[1] = $entity->getMontoMe();
 
-        if ($tipomoneda == 1)
+        if ($monto[0] != NULL or $monto[0] != 0)
         {
-            if ($monto[1] == NULL or $monto[1] == 0 )
+            if ($tipomoneda == 1)
             {
-                $alert= 1;
-                $mensaje = "DEBE INGRESAR EL MONTO EN DOLARES";
+                if ($monto[1] == NULL or $monto[1] == 0 )
+                {
+                    $alert= 1;
+                    $mensaje = "DEBE INGRESAR EL MONTO EN DOLARES";
+                }
+            }elseif($tipomoneda == 2)
+            {
+                if ($monto[1] == NULL or $monto[1] == 0 )
+                {
+                    $alert= 1;
+                    $mensaje = "DEBE INGRESAR EL MONTO EN EUROS";
+                }
             }
-        }elseif($tipomoneda == 2)
+        }else
         {
-            if ($monto[1] == NULL or $monto[1] == 0 )
-            {
-                $alert= 1;
-                $mensaje = "DEBE INGRESAR EL MONTO EN EUROS";
-            }
-        }elseif ($tipomoneda == 3) 
-        {
-            if ($monto[0] == NULL or $monto[0] == 0 )
-            {
-                $alert= 1;
-                $mensaje = "DEBE INGRESAR EL MONTO EN BOLIVARES";
-            }
+            $alert= 1;
+            $mensaje = "DEBE INGRESAR EL MONTO EN BOLIVARES";
         }
 
         //BLOQUE PARA DETERMINAR SI EL PAGO ES VÁLIDO
@@ -195,15 +194,21 @@ class PagoController extends Controller
         
         //CALCULO LA DEUDA ACTUAL
         $debe_act[0] = $debe[0] - $monto[0];
-        $debe_act[1] = $debe[1] - $monto[1];
+        if ($tipomoneda == 1 or $tipomoneda == 2)
+        {
+            $debe_act[1] = $debe[1] - $monto[1]; 
+        }else
+        {
+            $debe_act[1] = NULL;
+        }        
 
-        if (($debe[0]== 0) or ($debe[1] == 0 ))
+        if (($debe[0]== 0))
         {
             $alert = 1;
             $mensaje = "LA CONTRATACION YA SE PAGO COMPLETAMENTE";
         }else
         {
-            if (($debe_act[0]< 0) or ($debe_act[1]< 0))
+            if (($debe_act[0]< 0))
             {
                 $alert = 1;
                 $mensaje = "EL PAGO EXCEDE EL MONTO DE LA DEUDA";
@@ -212,6 +217,41 @@ class PagoController extends Controller
                 $contrat->setDebeBs($debe_act[0]);
                 $contrat->setDebeMe($debe_act[1]);
             }
+        }
+
+        $fecha[1] = $entity1->getFechaUnidaduno();
+        $fecha[2] = $entity1->getFechaUnidaddos();
+        $fecha[3] = $entity1->getFechaUnidadtres(); 
+
+        if(!empty($fecha[3]) and (empty($fecha[2])) and (empty($fecha[1])))
+        {
+            $status = 3;
+        }elseif(empty($fecha[3]) and (!empty($fecha[2])) and (empty($fecha[1])))
+        {
+            $status = 2;
+        }elseif(empty($fecha[3]) and (empty($fecha[2])) and (!empty($fecha[1])))
+        {
+            $status = 1;
+        }elseif (!empty($fecha[3]) and (!empty($fecha[2])) and (!empty($fecha[1])))
+        {
+            $alert = 1; //genera un error porque tiene mas de un fecha de entrega
+            $mensaje = "INGRESE SOLO UNA FECHA DE ENTREGA";
+        }elseif (!empty($fecha[3]) and (!empty($fecha[2])) and (empty($fecha[1])))
+        {
+            $alert = 1; //genera un error porque tiene mas de un fecha de entrega
+            $mensaje = "INGRESE SOLO UNA FECHA DE ENTREGA";
+        }elseif (!empty($fecha[3]) and (empty($fecha[2])) and (!empty($fecha[1])))
+        {
+            $alert = 1; //genera un error porque tiene mas de un fecha de entrega
+            $mensaje = "INGRESE SOLO UNA FECHA DE ENTREGA";
+        }elseif (empty($fecha[3]) and (!empty($fecha[2])) and (!empty($fecha[1])))
+        {
+            $alert = 1; //genera un error porque tiene mas de un fecha de entrega
+            $mensaje = "INGRESE SOLO UNA FECHA DE ENTREGA";
+        }else
+        {
+            $alert = 1; //genera un error porque no tiene ninguna fecha de entrega
+            $mensaje = "INGRESE AL MENOS UNA FECHA DE ENTREGA";
         }
 
         if ($alert == 0 )
@@ -230,30 +270,10 @@ class PagoController extends Controller
 
                 if($tipomoneda == 3)
                 {
-                    $monto = 0;
+                    $monto = NULL;
                     $entity->setMontoMe($monto);
                 }      
-                
-                $alert = 0;
 
-                $fecha[1] = $entity1->getFechaUnidaduno();
-                $fecha[2] = $entity1->getFechaUnidaddos();
-                $fecha[3] = $entity1->getFechaUnidadtres(); 
-
-                if(!empty($fecha[3]))
-                {
-                    $status = 3;
-                }elseif(!empty($fecha[2]))
-                {
-                    $status = 2;
-                }elseif(!empty($fecha[1]))
-                {
-                    $status = 1;
-                }else
-                {
-                    $status = 7; //no tiene ninguna fecha de entrega
-                }
-                 
                 $entity1->setIdEjecutora($ejecu);
                 $entity1->setIdContratacion($cont);
                 $entity1->setStatus($status);  
@@ -525,7 +545,7 @@ class PagoController extends Controller
             $entity1->setStatus($status);
             $entity1->setIdPago($entity);
 
-            $em->persist($entityfore);
+            $em->persist($entity);
             $em->persist($entity1);
             $em->flush();
 

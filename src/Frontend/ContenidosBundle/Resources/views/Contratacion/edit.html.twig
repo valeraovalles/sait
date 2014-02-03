@@ -32,21 +32,17 @@
                     <div class="labels">Concepto:</div>
                     <div class="widgets">{{ form_widget(edit_form.concepto) }}</div>
                 </div>
-                {% if tipomoneda == 1  %}
-                    <div class="form-contenedor">
-                        {{ form_errors(edit_form.montoMe) }}
-                        <div class="labels">Monto en $:</div>
-                        <div class="widgets">{{ form_widget(edit_form.montoMe) }}</div>
-                    </div>
-                {% endif %}
-                {% if tipomoneda == 2 %}
-                    <div class="form-contenedor">
-                        {{ form_errors(edit_form.montoMe) }}
-                        <div class="labels">Monto en €:</div>
-                        <div class="widgets">{{ form_widget(edit_form.montoMe) }}</div>
-                    </div>
-                {% endif %}
-                <div class="form-contenedor">
+                <div class="form-contenedor" style="display:none">
+                    {{ form_errors(edit_form.montoMe) }}
+                    <div class="labels">Monto en $:</div>
+                    <div class="widgets">{{ form_widget(edit_form.montoMe) }}</div>
+                </div>
+                <div class="form-contenedor" style="display:none">
+                    {{ form_errors(edit_form.montoMe) }}
+                    <div class="labels">Monto en €:</div>
+                    <div class="widgets">{{ form_widget(edit_form.montoMe) }}</div>
+                </div>               
+                <div class="form-contenedor" style="display:none">
                     {{ form_errors(edit_form.montoBs) }}
                     <div class="labels">Monto en Bs:</div>
                     <div class="widgets">{{ form_widget(edit_form.montoBs) }}</div>

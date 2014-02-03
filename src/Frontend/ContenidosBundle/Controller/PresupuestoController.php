@@ -62,40 +62,51 @@ class PresupuestoController extends Controller
         $form = $this->createForm(new PresupuestoType(), $entity);
         $form->bind($request);  
        
+        $bolivares = $entity->getMontoBs();
+        
+        $alert = 0;
+        if($bolivares == NULL or $bolivares == 0)
+        {
+            $alert = 1;
+        }
+
         //verifico el formulario
         if ($form->isValid()) 
         {
-            //obtengo disponibilidad y la seteo
-            $disponibilidad = $entity->getMontoBs();
-            $entity->setDisponibilidad($disponibilidad);
+            if($alert == 0)
+            {
+                $tipo = 'N';
 
-            $disponibilidad_dolares = $entity->getMontoDolares();
-            $entity->setDisponibilidadDolares($disponibilidad_dolares);
+                //obtengo la disponibilidad en las diferentes monedas
+                $disponibilidad = $entity->getMontoBs();
+                $disponibilidad_dolares = $entity->getMontoDolares();
+                $disponibilidad_euros = $entity->getMontoEuros();
+                $id_prov = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id_proveedor);
 
-            $disponibilidad_euros = $entity->getMontoEuros();
-            $entity->setDisponibilidadEuros($disponibilidad_euros);
+                //seteo los valores
+                $entity->setTipo($tipo);
+                $entity->setIdProveedor($id_prov);
+                $entity->setDisponibilidad($disponibilidad);
+                $entity->setDisponibilidadDolares($disponibilidad_dolares);
+                $entity->setDisponibilidadEuros($disponibilidad_euros);
 
-            //seteo el tipo de moneda
-            $tipo = 'N';
-            $entity->setTipo($tipo);
+                //inserto los datos en la BD
+                $em->persist($entity);
+                $em->flush();
 
-            //seteo el id del proveedor
-            $id_prov = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id_proveedor);
-            $entity->setIdProveedor($id_prov);
+                //envio a notificacion de que el registro fue creado
+                $this->get('session')->getFlashBag()->add('notice', 'SE REGISTRO EXITOSAMENTE EL PRESUPUESTO');
 
-            //inserto los datos en la BD
-            $em->persist($entity);
-            $em->flush();
-
-            //envio a notificacion de que el registro fue creado
-            $this->get('session')->getFlashBag()->add('notice', 'SE REGISTRO EXITOSAMENTE EL PRESUPUESTO');
-
-            //envio a la vista
-            return $this->redirect($this->generateUrl('presupuesto_show', array(
+                //envio a la vista
+                return $this->redirect($this->generateUrl('presupuesto_show', array(
                                                 'id' => $entity->getId(), 
                                                 'id_proveedor' => $id_proveedor,)));
-        }
-
+            }else
+            {
+                //envio la alerta de que no se creo el presupuesto
+                $this->get('session')->getFlashBag()->add('alert', 'FORMULARIO NO VALIDO'); 
+            }
+        }    
         //envio a otra vista si el form no es válido
         return $this->render('ContenidosBundle:Presupuesto:new.html.twig', array(
             'entity'        => $entity,
@@ -244,15 +255,6 @@ class PresupuestoController extends Controller
         //obtengo los datos del Presupuesto segun ID
         $entity = $em->getRepository('ContenidosBundle:Presupuesto')->find($id);
 
-        //obtengo el monto actual y la disponibilidad antes de editar
-        $monto_ant[0] = $entity->getMontoBs();
-        $monto_ant[1] = $entity->getMontoDolares();
-        $monto_ant[2] = $entity->getMontoEuros();
-
-        $disp_ant[0] = $entity->getDisponibilidad();
-        $disp_ant[1] = $entity->getDisponibilidadDolares();
-        $disp_ant[2] = $entity->getDisponibilidadEuros();
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Presupuesto entity.');
         }
@@ -263,13 +265,22 @@ class PresupuestoController extends Controller
         if($dolares != NULL and $euros == NULL)
         {
             $tipomoneda = 1;
+            $disponibilidad[0] = $entity->getDisponibilidad();
+            $disponibilidad[1] = $entity->getDisponibilidadDolares();
+            $disponibilidad[2] = NULL;
         }elseif($dolares == NULL and $euros != NULL)
         {
             $tipomoneda = 2;
+            $disponibilidad[0] = $entity->getDisponibilidad();
+            $disponibilidad[1] = NULL;
+            $disponibilidad[2] = $entity->getDisponibilidadEuros();
         }elseif($dolares == NULL and $euros == NULL)
         {
             $tipomoneda = 3;
-        }
+            $disponibilidad[0] = $entity->getDisponibilidad();
+            $disponibilidad[1] = NULL;
+            $disponibilidad[2] = NULL;
+        }     
 
         $tipo = 'N';
         //asocio $entity con el formulario y obtengo los datos enviados
@@ -277,56 +288,9 @@ class PresupuestoController extends Controller
         $editForm = $this->createForm(new PresupuestoType(), $entity);
         $editForm->bind($request);
 
-        $dolares_act = $entity->getMontoDolares();
-        $euros_act = $entity->getMontoEuros();
-        $bolivares = $entity->getMontoBs();
-
-        $alert = 0;
-        if ($bolivares != NULL or $bolivares != 0)
-        {
-            
-            if ($tipomoneda == 1)
-            {
-                if ($dolares_act == NULL or $dolares_act == 0)
-                {
-                    $alert = 1;
-                    $mensaje = "INGRESE EL MONTO EN DOLARES";
-                }
-            }elseif($tipomoneda == 2)
-            {
-                if ($euros_act == NULL or $euros_act == 0)
-                {
-                    $alert = 1;
-                    $mensaje = "INGRESE EL MONTO EN EUROS";
-                }
-            }
-        }else
-        {
-            $alert = 1;
-            $mensaje = "INGRESE EL MONTO EN BOLIVARES";
-        }
-
-        if ($alert == 0)
-        {
-            echo "aquiiiii";
             //verifico el formulario
             if ($editForm->isValid())
-            {
-                //obtengo el monto actual
-                $monto_act[0] = $entity->getMontoBs();
-                $monto_act[1] = $entity->getMontoDolares();
-                $monto_act[2] = $entity->getMontoEuros();
-
-                //calculo la diferencia del monto actual y del monto anterior
-                $dife[0] = $monto_act[0] - $monto_ant[0];
-                $dife[1] = $monto_act[1] - $monto_ant[1];
-                $dife[2] = $monto_act[2] - $monto_ant[2];
-                
-                //calculo la nueva disponibilidad tomando en consideracion la diferencia
-                $disp_actual[0] = $disp_ant[0] + $dife[0];
-                $disp_actual[1] = $disp_ant[1] + $dife[1];
-                $disp_actual[2] = $disp_ant[2] + $dife[2];
-                           
+            {                           
                 //obtengo los datos del proveedor para setearlo xq es una clave foranea
                 $id_prov = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id_proveedor);
                 $entity->setIdProveedor($id_prov);
@@ -334,11 +298,10 @@ class PresupuestoController extends Controller
                 //seteo el tipo de presupuesto "N"
                 $entity->setTipo($tipo);
 
-                //seteo la disponibilidad
-                $entity->setDisponibilidad($disp_actual[0]);
-                $entity->setDisponibilidadDolares($disp_actual[1]);
-                $entity->setDisponibilidadEuros($disp_actual[2]);
-
+                //seteo la disponibilidad que se tenia
+                $entity->setDisponibilidad($disponibilidad[0]);
+                $entity->setDisponibilidadDolares($disponibilidad[1]);
+                $entity->setDisponibilidadEuros($disponibilidad[2]);
 
                 //inserto la info en la BD
                 $em->persist($entity);
@@ -351,13 +314,7 @@ class PresupuestoController extends Controller
                 return $this->redirect($this->generateUrl('presupuesto_show', array(
                                                     'id'           => $id,
                                                     'id_proveedor' => $id_proveedor,)));
-            }
-        }else
-        {
-            //envio a notificacion de que el registro fue creado
-            $this->get('session')->getFlashBag()->add('alert', $mensaje);
-
-        }
+            }   
 
         return $this->render('ContenidosBundle:Presupuesto:edit.html.twig', array(
                                                                 'entity'        => $entity,
@@ -530,9 +487,6 @@ class PresupuestoController extends Controller
         //obtengo los datos del presupuesto al que el presupuesto editado extiende
         $entity1 = $em->getRepository('ContenidosBundle:Presupuesto')->find($id_presupuesto);
 
-        $dolares=$entity1->getMontoDolares();
-        $euros=$entity1->getMontoEuros();
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Presupuesto entity.');
         }
@@ -546,8 +500,6 @@ class PresupuestoController extends Controller
             'entity'        => $entity,
             'id_proveedor'  =>$id_proveedor,
             'id_presupuesto'=> $id_presupuesto,
-            'dolares'       => $dolares,
-            'euros'         => $euros,
             'edit_form'     => $editForm->createView(),
             'delete_form'   => $deleteForm->createView(),
         ));
@@ -567,110 +519,27 @@ class PresupuestoController extends Controller
 
         //obtengo los datos del presupuesto editado
         $entity = $em->getRepository('ContenidosBundle:Presupuesto')->find($id);
-
-        //tengo el monto antes de actualizarse
-        $monto_ant[0]= $entity->getMontoBs();
-        $monto_ant[1]= $entity->getMontoDolares();
-        $monto_ant[2]= $entity->getMontoEuros();
-
    
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Presupuesto entity.');
         }
-
-
-        $dolares = $entity->getMontoDolares();
-        $euros = $entity->getMontoEuros();
-
-        if($dolares != NULL and $euros == NULL)
-        {
-            $tipomoneda = 1;
-        }elseif($dolares == NULL and $euros != NULL)
-        {
-            $tipomoneda = 2;
-        }elseif($dolares == NULL and $euros == NULL)
-        {
-            $tipomoneda = 3;
-        }
-
 
         //obtengo los datos que se enviaron a traves del formulario
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new PresupuestoType(), $entity);
         $editForm->bind($request);
 
-        //tengo el monto actual
-        $monto_act[0]= $entity->getMontoBs();
-        $monto_act[1]= $entity->getMontoDolares();
-        $monto_act[2]= $entity->getMontoEuros();
         
-        //calculo la diferencia
-        $dife[0] = $monto_act[0] - $monto_ant[0];
-        $dife[1] = $monto_act[1] - $monto_ant[1];
-        $dife[2] = $monto_act[2] - $monto_ant[2];
-
-        //traigo la disponibilidad que se encuentra en el presupuesto del que extiende
-        $disp_act[0]= $entity1->getDisponibilidad();
-        $disp_act[1]= $entity1->getDisponibilidadDolares();
-        $disp_act[2]= $entity1->getDisponibilidadEuros();
-
-
-        //calculo la disponibilidad actual
-        $disp_act[0] = $disp_act[0] + $dife[0];
-        $disp_act[1] = $disp_act[1] + $dife[1];
-        $disp_act[2] = $disp_act[2] + $dife[2];
-
-        $dolares_act = $entity->getMontoDolares();
-        $euros_act = $entity->getMontoEuros();
-        $bolivares = $entity->getMontoBs();
-
-        $alert = 0;
-        if ($bolivares != NULL or $bolivares != 0)
-        {
-            
-            if ($tipomoneda == 1)
-            {
-                if ($dolares_act == NULL or $dolares_act == 0)
-                {
-                    $alert = 1;
-                    $mensaje = "INGRESE EL MONTO EN DOLARES";
-                }
-            }elseif($tipomoneda == 2)
-            {
-                if ($euros_act == NULL or $euros_act == 0)
-                {
-                    $alert = 1;
-                    $mensaje = "INGRESE EL MONTO EN EUROS";
-                }
-            }
-        }else
-        {
-            $alert = 1;
-            $mensaje = "INGRESE EL MONTO EN BOLIVARES";
-        }
-
-        if($alert == 0)
-        {
             //verifico el formulario
             if($editForm->isValid())
             {
-                
                 $tipo= 'E';
                 //obtengo los datos del proveedor
                 $id_prov = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id_proveedor);
 
-                //seteo la disponibilidad
-                $entity1->setDisponibilidad($disp_act[0]);
-                $entity1->setDisponibilidadDolares($disp_act[1]);
-                $entity1->setDisponibilidadEuros($disp_act[2]);
-
-                //seteo el tipo de presupuesto
+                //seteo los valores
                 $entity->setTipo($tipo);
-
-                //seteo el id del presupuesto al que extiende
                 $entity->setIdPresext($id_presupuesto);
-
-                //seteo el id del proveedor
                 $entity->setIdProveedor($id_prov);
                 
                 //inserto los datos en la BD
@@ -688,19 +557,11 @@ class PresupuestoController extends Controller
                                                     )));
 
             }
-        }else
-        {
-          //envio a notificacion de que el registro fue creado
-            $this->get('session')->getFlashBag()->add('alert', $mensaje);
-        }
-
         //envio a la vista
         return $this->render('ContenidosBundle:Presupuesto:editextension.html.twig', array(
             'entity'        => $entity,
             'id_proveedor'  =>$id_proveedor,
             'id_presupuesto'=> $id_presupuesto,
-            'dolares'       => $dolares,
-            'euros'         => $euros,
             'edit_form'     => $editForm->createView(),
             'delete_form'   => $deleteForm->createView(),
         ));
@@ -752,33 +613,35 @@ class PresupuestoController extends Controller
         $form = $this->createForm(new PresupuestoType(), $entity);
         $form->bind($request);
 
-        $dolares = $entity->getMontoDolares();
-        $euros = $entity->getMontoEuros();
+        $monto[0] = $entity->getMontoBs();
+        $monto[1] = $entity->getMontoDolares();
+        $monto[2] = $entity->getMontoEuros();
 
-        if($dolares != NULL and $euros == NULL)
+        if($monto[1] != NULL and $monto[2] == NULL)
         {
             $tipomoneda = 1;
-        }elseif($dolares == NULL and $euros != NULL)
+        }elseif($monto[1] == NULL and $monto[2] != NULL)
         {
             $tipomoneda = 2;
-        }elseif($dolares == NULL and $euros == NULL)
+        }elseif($monto[1] == NULL and $monto[2] == NULL)
         {
             $tipomoneda = 3;
         }
-$alert = 0;
-        if ($bolivares != NULL or $bolivares != 0)
+
+
+        $alert = 0;
+        if ($monto[0] != NULL or $monto[0] != 0)
         {
-            
             if ($tipomoneda == 1)
             {
-                if ($dolares == NULL or $dolares == 0)
+                if ($monto[1] == NULL or $monto[1] == 0)
                 {
                     $alert = 1;
                     $mensaje = "INGRESE EL MONTO EN DOLARES";
                 }
             }elseif($tipomoneda == 2)
             {
-                if ($euros == NULL or $euros == 0)
+                if ($monto[2] == NULL or $monto[2] == 0)
                 {
                     $alert = 1;
                     $mensaje = "INGRESE EL MONTO EN EUROS";
@@ -799,18 +662,12 @@ $alert = 0;
                 $entity1 = $em->getRepository('ContenidosBundle:Presupuesto')->find($id_presupuesto);
                 $disp_act[0]= $entity1->getDisponibilidad();
                 $disp_act[1]= $entity1->getDisponibilidadDolares();
-                $disp_act[2]= $entity1->getDisponibilidadEuros();
-
-                //obtengo el monto
-                $monto[0] = $entity->getMontoBs();
-                $monto[1] = $entity->getMontoDolares();
-                $monto[2] = $entity->getMontoEuros();           
+                $disp_act[2]= $entity1->getDisponibilidadEuros();         
                 
                 //calculo la disponibilidad y la seteo
                 $disp_act[0] = $disp_act[0] + $monto[0];
                 $disp_act[1] = $disp_act[1] + $monto[1];
                 $disp_act[2] = $disp_act[2] + $monto[2];
-
 
                 $entity1->setDisponibilidad($disp_act[0]);
                 $entity1->setDisponibilidadDolares($disp_act[1]);
@@ -885,12 +742,11 @@ $alert = 0;
         $entity1->setDisponibilidadDolares($disp_act[1]);
         $entity1->setDisponibilidadEuros($disp_act[2]);
 
-        //ELIMINO LOS DATOS DE LA CONTRATACION SI NO TENGO PAGOS ASOCIADOS
+        //ELIMINO EL PRESUPUESTO
         $em->remove($entity);
         $em->flush();
 
         $tipo = 'E';
-
         //query para seleccionar solo los presupuestos que estienden de otro presupuesto
         $dql = "select p from ContenidosBundle:Presupuesto p 
                 where p.tipo=:tipo and p.idPresext=:id_presupuesto";
@@ -913,7 +769,6 @@ $alert = 0;
                                                                             'id_proveedor'     => $id_proveedor,
                                                                             'id_presupuesto'   => $id_presupuesto,
                                                                             )));
-
     }
 
 #########################################################################################################
