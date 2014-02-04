@@ -28,14 +28,10 @@
                 <td>{{ entity.pais }}</td>
                 <td>{{ entity.paisprocedencia }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('personalidad_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
-                        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+                    <a href="{{ path('personalidad_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
+                    {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
                         <a href="{{ path('personalidad_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
-                        {% endif %}
-                    </li>
-                </ul>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
