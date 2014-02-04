@@ -88,16 +88,14 @@ class Contratacion
     /**
      * @var string
      *
-     * @ORM\Column(name="num_alcance", type="string", length=30, nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="num_alcance", type="string", length=30, nullable=true)
      */
     private $numAlcance;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_alcance", type="date", nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="fecha_alcance", type="date", nullable=true)
      */
     private $fechaAlcance;
 
@@ -120,14 +118,14 @@ class Contratacion
     /**
      * @var string
      *
-     * @ORM\Column(name="num_addendum", type="string", length=30, nullable=false)
+     * @ORM\Column(name="num_addendum", type="string", length=30, nullable=true)
      */
     private $numAddendum;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_addendum", type="date", nullable=false)
+     * @ORM\Column(name="fecha_addendum", type="date", nullable=true)
      */
     private $fechaAddendum;
 

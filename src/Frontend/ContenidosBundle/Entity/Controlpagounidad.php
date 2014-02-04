@@ -95,6 +95,13 @@ class Controlpagounidad
      */
     private $fechaUnidadcinco;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_unidadseis", type="date", nullable=true)
+     */
+    private $fechaUnidadseis;    
+
 
 
     /**
@@ -313,6 +320,32 @@ class Controlpagounidad
     {
         return $this->fechaUnidadcinco;
     }
+
+
+    /**
+     * Set fechaUnidadseis
+     *
+     * @param \DateTime $fechaUnidadseis
+     * @return Controlpagounidad
+     */
+    public function setFechaUnidadseis($fechaUnidadseis)
+    {
+        $this->fechaUnidadseis = $fechaUnidadseis;
+    
+        return $this;
+    }
+
+    /**
+     * Get fechaUnidadseis
+     *
+     * @return \DateTime 
+     */
+    public function getFechaUnidadseis()
+    {
+        return $this->fechaUnidadseis;
+    }
+
+
 
     public function __toString()
     {
