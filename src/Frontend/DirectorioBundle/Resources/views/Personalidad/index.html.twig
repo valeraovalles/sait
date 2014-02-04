@@ -43,22 +43,6 @@
         {% endfor %}
         </tbody>
     </table>
-<<<<<<< HEAD
-
-    <script type="text/javascript">
-            $(document).ready(function(){
-               $('#tablalistax').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-                    "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-                    "aaSorting": [[5,'asc']],
-                } );
-            })
-    </script>
-    <br><br>
-        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
-        
-=======
-        <br><br>
->>>>>>> lyzmar
         <ul>
         <li>
             <a class="btn btn-primary" href="{{ path('personalidad_new') }}">
