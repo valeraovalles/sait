@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Listado de Instituciones</h1>
 
-    <table class="records_list" id="tablalistax">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
             <tr>
                 <th>Institucion</th>
@@ -41,14 +41,6 @@
     </table>
 
 
-<script type="text/javascript">
-$(document).ready(function(){
-   $('#tablalistax').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-        "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-        "aaSorting": [[5,'asc']],
-    } );
-})
-</script>
 
         <br><br>
         <ul>
