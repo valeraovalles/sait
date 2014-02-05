@@ -15,9 +15,7 @@
                 <th>Especialidad</th>
                 <th>Pais</th>
                 <th>Procedencia</th>
-                {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
-                    <th>Actiones</th>
-                {% endif %}
+                <th>Actiones</th>
             </tr>
         </thead>
         <tbody>
@@ -30,19 +28,22 @@
                 <td>{{ entity.especialidad }}</td>
                 <td>{{ entity.pais }}</td>
                 <td>{{ entity.paisprocedencia }}</td>
-                {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+               
                     <td>
+                        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
                         <a href="{{ path('personalidad_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
+                        {% endif %}
+                        <a href="{{ path('personalidad_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-show"></i></a>
                     </td>
-                {% endif %}
+                
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <br><br><br>
+    {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}<br><br><br>
 
     <a class="btn btn-primary" href="{{ path('personalidad_new') }}">
         NUEVA PERSONALIDAD
-    </a><br><br>
+    </a>{% endif %}<br><br>
 
     {% endblock %}

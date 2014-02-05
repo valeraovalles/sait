@@ -34,8 +34,7 @@
 
 
         <br><br>
-        <a class="btn" href="{{ path('personalidad') }}"> LISTADO </a> | 
-        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+        <a class="btn" href="{{ path('personalidad') }}"> LISTADO </a>{% if is_granted('ROLE_DIRECTORIO_ADMIN') %} | 
         <a class="btn btn-primary" href="{{ path('personalidad_edit', { 'id': entity.id }) }}"> EDITAR </a>
         
 
