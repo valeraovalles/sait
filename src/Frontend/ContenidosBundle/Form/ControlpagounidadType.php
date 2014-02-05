@@ -33,6 +33,10 @@ class ControlpagounidadType extends AbstractType
             ->add('fechaUnidadcinco','date',array(
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd',
+                    ))
+            ->add('fechaUnidadseis','date',array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
                     )) 
 
         ;

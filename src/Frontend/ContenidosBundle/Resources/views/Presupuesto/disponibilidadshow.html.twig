@@ -8,6 +8,18 @@
 {% block body -%}
 {{ parent() }}
     <div class="titulo">DISPONIBILIDAD DEL PROVEEDOR <br> ({{ nombre }})</div>
+{% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+    
     <div class="form-show">
         <legend id="a"><div class="divisor">PRESUPUESTOS</div> </legend>
         <table cellpadding="1" cellspacing="1" border="1" class="display" id="tabla">

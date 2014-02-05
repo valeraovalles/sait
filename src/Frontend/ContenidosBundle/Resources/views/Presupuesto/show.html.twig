@@ -1,7 +1,7 @@
 {% extends '::contenidos.html.twig' %}
 
 {% block titulobanner %}
-    PAGOS
+   PRESUPUESTO - DETALLES
 {% endblock %}
 
 
@@ -21,10 +21,6 @@
         </div>
    {% endfor %}
 
-    {% if entity.tipo == 1 %}
-        <div class="activo">EXTENSION DE PRESUPUESTO</div>
-    {% endif %}
-
     <div class="form-show_edit">
         <fieldset>
             <legend id="a"><div class="divisor">DATOS DEL PRESUPUESTO</div> </legend>
@@ -40,37 +36,113 @@
                 <div class="labels">Fecha de Fin:</div>
                 <div class="dato">{{ entity.fechaFin|date('Y-m-d') }}</div>
             </div>
-            {% if entity.montoDolares != NULL %}
-                <div class="contenedor">
-                    <div class="labels">Monto en Dolares:</div>
-                    <div class="dato">{{ entity.montoDolares }}</div>
-                </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Monto en Dolares:</div>
-                    <div class="dato">NO TIENE DESCRIPCION</div>
-                </div>
-            {% endif %}
+            <table cellpadding="10" cellspacing="0" border="1">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>BOLIVARES</th>
+                        <th>DOLARES</th>
+                        <th>EUROS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr align="center">
+                        <td>Base</td> 
+                        <td> {{ entity.montoBs }} </td>
+                        {% if entity.montoDolares != NULL %}
+                            <td>{{ entity.montoDolares }}</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                        {% if entity.montoEuros != NULL %}
+                            <td>{{ entity.montoEuros }}</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}                            
+                    </tr>
+                    <tr align="center">
+                        <td>Extensiones</td> 
+                        {% if subtotal.0 != NULL  %}
+                            <td> {{ subtotal.0 }}</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                        {% if subtotal.1 != NULL  %}
+                            <td> {{ subtotal.1 }} </td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                        {% if subtotal.2 != NULL %}
+                            <td> {{ subtotal.2 }} </td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                    </tr>
+                    <tr align="center" bgcolor= "#9cf">
+                        <td>TOTAL</td> 
+                        <td>{{ total.0 }}.00</td>
+                        {% if total.1 != NULL %}
+                            <td>{{ total.1 }}.00</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}
+                        {% if total.2 != NULL %}
+                            <td>{{ total.2 }}.00</td>
+                        {% else %}
+                            <td>NA</td>
+                        {% endif %}                                       
+                    </tr>
 
-            {% if entity.montoEuros != NULL %}
-                <div class="contenedor">
-                    <div class="labels">Monto en Euros:</div>
-                    <div class="dato">{{ entity.montoEuros }}</div>
-                </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Monto en Euros:</div>
-                    <div class="dato">NO TIENE DESCRIPCION</div>
-                </div>
-            {% endif %}
+                </tbody>
+            </table>
             
-            <div class="contenedor">
-                <div class="labels">Monto en Bolivares:</div>
-                <div class="dato">{{ entity.montoBs }}</div>
-            </div>
+            <legend id="a"><div class="divisor">DISPONIBILIDAD</div> </legend>
+            <table cellpadding="10" cellspacing="0" border="1">
+                <thead>
+                    <tr>
+                        <th>BOLIVARES</th>
+                        <th>DOLARES</th>
+                        <th>EUROS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if entity.disponibilidad > 0 %}
+                        <tr align="center" bgcolor= "#9cf" >
+                            <td  >{{ entity.disponibilidad }}</td>
+                            {% if tipomoneda == 1 %}
+                                <td>{{ entity.disponibilidadDolares }}</td>
+                                <td>NA</td>
+                            {% elseif tipomoneda == 2 %}
+                                <td>NA</td>
+                                <td>{{ entity.disponibilidadEuros }}</td>
+                            {% else %}
+                                <td>NA</td>
+                                <td>NA</td>
+                            {% endif %}
+                        </tr>
+                    {% else %}
+                        <tr align="center" bgcolor= "#c33" >
+                            <td  >{{ entity.disponibilidad }}</td>
+                            {% if tipomoneda == 1 %}
+                                <td>{{ entity.disponibilidadDolares }}</td>
+                                <td>NA</td>
+                            {% elseif tipomoneda == 2 %}
+                                <td>NA</td>
+                                <td>{{ entity.disponibilidadEuros }}</td>
+                            {% else %}
+                                <td>NA</td>
+                                <td>NA</td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                    </tr>
+                </tbody>
+            </table>  
+            <br>          
         </fieldset>
     </div>
     <a href="{{ path('presupuesto', { 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Volver al Listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
-    <a href="{{ path('presupuesto_edit', { 'id': entity.id, 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Editar Presupuesto"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
-
+    {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
+        <a href="{{ path('presupuesto_edit', { 'id': entity.id, 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Editar Presupuesto"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
+    {% endif %}
 {% endblock %}

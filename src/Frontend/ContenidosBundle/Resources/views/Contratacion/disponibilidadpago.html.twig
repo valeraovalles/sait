@@ -4,6 +4,18 @@
  {{ parent() }}
     <div class="titulo">NUEVO PRESUPUESTO</div>
 
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+
     <form action="{{ path('disponibilidad_pagoshow') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
         <fieldset>       
             <legend id="c"><div class="divisor">DATOS (CONTRATACION - PAGOS)</div> </legend>

@@ -31,12 +31,6 @@ class Pago
      */
     private $numMemo;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fecha_unidadejec", type="date", nullable=true)
-     */
-    private $fechaUnidadejec;
 
     /**
      * @var string
@@ -172,29 +166,6 @@ class Pago
     public function getNumMemo()
     {
         return $this->numMemo;
-    }
-
-    /**
-     * Set fechaUnidadejec
-     *
-     * @param \DateTime $fechaUnidadejec
-     * @return Pago
-     */
-    public function setFechaUnidadejec($fechaUnidadejec)
-    {
-        $this->fechaUnidadejec = $fechaUnidadejec;
-    
-        return $this;
-    }
-
-    /**
-     * Get fechaUnidadejec
-     *
-     * @return \DateTime 
-     */
-    public function getFechaUnidadejec()
-    {
-        return $this->fechaUnidadejec;
     }
 
     /**

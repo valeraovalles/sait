@@ -381,8 +381,6 @@ class ContratosController extends Controller
 
         $entity  = new Contratosanteriores();
 
-        $form = $this->createForm(new ContratosType(), $entity);
-
         $form = $this->createForm(new ContratosanterioresType(), $entity);
 
         $form->bind($request);

@@ -13,10 +13,6 @@ class PagoType extends AbstractType
         $builder
             //->add('id')
             ->add('numMemo')
-            ->add('fechaUnidadejec','date',array(
-                    'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd',
-                )) 
             ->add('numFactura')
             ->add('fechaFactura','date',array(
                     'widget' => 'single_text',

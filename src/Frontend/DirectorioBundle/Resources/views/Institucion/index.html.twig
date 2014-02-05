@@ -4,23 +4,26 @@
 <br>
     <h1>Listado de Instituciones</h1>
 
-    <table class="records_list" id="tablalistax">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Institucion</th>
                 <th>Director</th>
-                <th>Areainst</th>
-                <th>Telfinst</th>
-                <th>Emailinst</th>
+                <th>Area</th>
+                <th>Telefono</th>
+                <th>Email</th>
                 <th>Direccion</th>
                 <th>Pais</th>
-                <th>Actions</th>
+                {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+                    <th>Actiones</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <!--td><a href="{{ path('institucion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td-->
+                <td><a href="{{ path('institucion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.institucion }}</td>
                 <td>{{ entity.director }}</td>
                 <td>{{ entity.areainst }}</td>
@@ -28,33 +31,20 @@
                 <td>{{ entity.emailinst }}</td>
                 <td>{{ entity.direccion }}</td>
                 <td>{{ entity.pais }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('institucion_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
-                        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+                {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+                    <td>
                         <a href="{{ path('institucion_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
-                        {% endif %}
-                    </li>
-                </ul>
-                </td>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
 
-<script type="text/javascript">
-$(document).ready(function(){
-   $('#tablalistax').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-        "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-        "aaSorting": [[5,'asc']],
-    } );
-})
-</script>
-<br><br>
-        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
-        
+
+        <br><br>
+
         <ul>
         <li>
             <a class="btn btn-primary" href="{{ path('institucion_new') }}">
@@ -62,5 +52,4 @@ $(document).ready(function(){
             </a>
         </li>
     </ul>
-        {% endif %}
     {% endblock %}

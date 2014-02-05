@@ -1,5 +1,9 @@
 {% extends '::contenidos.html.twig' %}
 
+{% block titulobanner %}
+   PAGO - DETALLES
+{% endblock %}
+
 {% block body -%}
  {{ parent() }}
     <div class="titulo">DETALLES DEL PAGO</div>
@@ -22,154 +26,25 @@
                 <div class="labels">Unidad Ejecutora:</div>
                 <div class="dato">{{ entity.idUnidadejec }}</div>
             </div>
+                
             <div class="contenedor">
-                <div class="labels">Fecha de Entrega a la Unidad Ejecutora:</div>
-                <div class="dato">{{ entity.fechaUnidadejec|date('Y-m-d') }}</div>
-            </div>
-            {% if entity.idUnidadejec.id == 2 %}
-                <div class="contenedor">
-                    <div class="labels">Estatus del Pago:</div>
-                    <div class="dato">
-                        <table cellpadding="0" cellspacing="0" border="0">
-                            <thead>
-                                <tr>
-                                    <th>Unidad</th>
-                                    <th>Fecha de Recepcion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% if estatus == 1 %}
-                                    <tr align="center">
-                                        <td>Oficina Directora</td> 
-                                        {% if entity1.0.fechaUnidaduno == NULL %}
-                                            <td> NO POSEE FECHA </td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidaduno|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>
-                                {% elseif estatus == 2 %}
-                                    <tr align="center">
-                                        <td>Oficina Directora</td> 
-                                        {% if entity1.0.fechaUnidaduno == NULL %}
-                                            <td> NO POSEE FECHA </td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidaduno|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>
-                                    <tr align="center">
-                                        <td>Presupuesto</td> 
-                                        {% if entity1.0.fechaUnidaddos == NULL %}
-                                            <td> NO POSEE FECHA </td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidaddos|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>                                        
-                                {% elseif estatus == 3 %}
-                                    <tr align="center">
-                                        <td>Oficina Directora</td> 
-                                        {% if entity1.0.fechaUnidaduno == NULL %}
-                                            <td> NO POSEE FECHA </td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidaduno|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>
-                                    <tr align="center">
-                                        <td>Presupuesto</td> 
-                                        {% if entity1.0.fechaUnidaddos == NULL %}
-                                            <td> NO POSEE FECHA</td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidaddos|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>
-                                    <tr align="center">
-                                        <td>Compras</td> 
-                                        {% if entity1.0.fechaUnidadtres == NULL %}
-                                            <td> NO POSEE FECHA</td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidadtres|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>
-                                {% elseif estatus == 4 %}
-                                    <tr align="center">
-                                        <td>Oficina Directora</td> 
-                                        {% if entity1.0.fechaUnidaduno == NULL %}
-                                            <td> NO POSEE FECHA</td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidaduno|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>
-                                    <tr align="center">
-                                        <td>Presupuesto</td> 
-                                        {% if entity1.0.fechaUnidaddos == NULL %}
-                                            <td> NO POSEE FECHA</td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidaddos|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>
-                                    <tr align="center">
-                                        <td>Compras</td> 
-                                        {% if entity1.0.fechaUnidadtres == NULL %}
-                                            <td> NO POSEE FECHA</td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidadtres|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>
-                                    <tr align="center">
-                                        <td>Finanzas</td> 
-                                        {% if entity1.0.fechaUnidadcuatro == NULL %}
-                                            <td> NO POSEE FECHA</td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidadcuatro|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>                                                            
-                                {% elseif estatus == 5 %}
-                                    <tr align="center">
-                                        <td>Oficina Directora</td> 
-                                        {% if entity1.0.fechaUnidaduno == NULL %}
-                                            <td> NO POSEE FECHA</td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidaduno|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>
-                                    <tr align="center">
-                                        <td>Presupuesto</td> 
-                                        {% if entity1.0.fechaUnidaddos == NULL %}
-                                            <td> NO POSEE FECHA</td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidaddos|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>
-                                    <tr align="center">
-                                        <td>Compras</td> 
-                                        {% if entity1.0.fechaUnidadtres == NULL %}
-                                            <td> NO POSEE FECHA</td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidadtres|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>
-                                    <tr align="center">
-                                        <td>Finanzas</td> 
-                                        {% if entity1.0.fechaUnidadcuatro == NULL %}
-                                            <td> NO POSEE FECHA</td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidadcuatro|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>
-                                    <tr align="center">
-                                        <td>Tesorería</td> 
-                                        {% if entity1.0.fechaUnidadcinco == NULL %}
-                                            <td> NO POSEE FECHA</td>
-                                        {% else %}
-                                            <td>{{ entity1.0.fechaUnidadcinco|date('Y-m-d') }}</td>
-                                        {% endif %}                                                                  
-                                    </tr>                                  
-                                {% endif %}
-                            </tbody>
-                        </table>
-
-                    </div>
+                <div class="labels">Estatus del Pago:</div>
+                <div class="dato" style="fontcolor:#333">
+                    {% if entity1.0.fechaUnidadseis != NULL %}
+                            TESORERÍA                  
+                    {% elseif entity1.0.fechaUnidadcinco != NULL %}
+                            FINANZAS           
+                    {% elseif entity1.0.fechaUnidadcuatro != NULL %}
+                            PRESUPUESTO                 
+                    {% elseif entity1.0.fechaUnidadtres != NULL %}
+                            OFICINA DIRECTORA          
+                    {% elseif entity1.0.fechaUnidaddos != NULL %}
+                            COMPRAS                  
+                    {% elseif entity1.0.fechaUnidaduno != NULL %}
+                            RECURSOS HUMANOS        
+                    {% endif %}  
                 </div>
-            {% endif %}
+            </div>            
 
             {% if compras == 1 %}
                 <legend id="b"><div class="divisor">CONDICIONES DEL PAGO</div> </legend>
@@ -250,6 +125,7 @@
     </div>
 <br>
 <a href="{{ path('pago' , { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto, 'id_contratacion':id_contratacion } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+<a href="{{ path('pago_edit', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="control de pagos"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
 <br>
 
 {% endblock %}

@@ -1,12 +1,25 @@
 {% extends '::contenidos.html.twig' %}
 
 {% block titulobanner %}
-    BANCOS
+   BANCO - NUEVO REGISTRO
 {% endblock %}
+
     
 {% block body -%}
     {{ parent() }}
     <div class="titulo">NUEVO REGISTRO</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
 
     <form novalidate="novalidate" action="{{ path('banco_create',{ 'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
 
