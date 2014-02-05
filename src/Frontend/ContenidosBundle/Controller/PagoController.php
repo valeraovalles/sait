@@ -90,6 +90,43 @@ class PagoController extends Controller
 
     }
 
+    /*
+    *
+    * FUNCION PARA ACTUALIZAR EL SEGUIMIENTO DEL PAGO
+    *
+    */
+    public function pagocontrolAction($id_contratacion,$id_presupuesto,$id_proveedor, $id)
+    {
+        $em = $this->getDoctrine()->getManager();  
+
+        //INSTANCIO LAS VARIABLES ENTITY Y ENTITY1
+        $entity  = new Pago();
+        $entity1 = new Controlpagounidad();
+        
+        $form   = $this->createForm(new PagoType(), $entity);
+        $form1  = $this->createForm(new ControlpagounidadType(), $entity1);
+
+        //OBTENGO LOS DATOS QUE ENVIO EL USUARIO A TRAVES DEL FORMULARIO $form
+        $form->bind($request);
+        $form1->bind($request);
+
+        $em->persist($entity);
+        $em->persist($entity1);
+        $em->flush();
+
+        //OBTENGO LOS DATOS DE LOS PAGOS ASOCIADOS A UNA CONTRATACION
+        $entities = $em->getRepository('ContenidosBundle:Pago')->findByIdContratacion($id_contratacion);
+
+        //RETORNO A LA VISTA PARA MOSTRAR LISTADO
+        return $this->render('ContenidosBundle:Pago:index.html.twig', array(
+            'entities'          => $entities,
+            'id_contratacion'   => $id_contratacion,
+            'id_presupuesto'    => $id_presupuesto,
+            'id_proveedor'      => $id_proveedor,
+        ));
+
+    }
+
 
     /*
     *
