@@ -134,8 +134,8 @@ class InstitucionController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('institucion_edit', array('id' => $id)));
+            $this->get('session')->getFlashBag()->add('notice', 'La actualización de realizó correctamente.');
+            return $this->redirect($this->generateUrl('institucion_show', array('id' => $id)));
         }
 
         return $this->render('DirectorioBundle:Institucion:edit.html.twig', array(

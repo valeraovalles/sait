@@ -1,56 +1,51 @@
 {% extends '::directorio.html.twig' %}
 
 {% block body -%}
+    {{ parent() }}
 <br>
-    <h1>Institucion</h1>
+<h2>CONSULTAR INSTITUCIÓN</h2><br>
 
-    <table class="record_properties" border="2            ">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Institucion</th>
-                <td>{{ entity.institucion }}</td>
-            </tr>
-            <tr>
-                <th>Director</th>
-                <td>{{ entity.director }}</td>
-            </tr>
-            <tr>
-                <th>Areainst</th>
-                <td>{{ entity.areainst }}</td>
-            </tr>
-            <tr>
-                <th>Telfinst</th>
-                <td>{{ entity.telfinst }}</td>
-            </tr>
-            <tr>
-                <th>Emailinst</th>
-                <td>{{ entity.emailinst }}</td>
-            </tr>
-            <tr>
-                <th>Direccion</th>
-                <td>{{ entity.direccion }}</td>
-            </tr>
-            <tr>
-                <th>Pais</th>
-                <td>{{ entity.pais }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+        <div class="formShow" style="width:70%;">
+        <div class="contenedorform">
+            <div class="labelform">Institucion:</div>
+            <div class="widgetform">{{ entity.institucion|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Director:</div>
+            <div class="widgetform">{{ entity.director|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Area:</div>
+            <div class="widgetform">{{ entity.areainst|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Teléfono:</div>
+            <div class="widgetform">{{ entity.Telfinst|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Emai:</div>
+            <div class="widgetform">{{ entity.emailinst|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Dirección:</div>
+            <div class="widgetform">{{ entity.direccion|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">País:</div>
+            <div class="widgetform">{{ entity.pais|capitalize }}</div>
+        </div>
+    </div>
+    
         <br><br>
-        <a class="btn" href="{{ path('institucion') }}"> Listado </a>
+        <a class="btn" href="{{ path('institucion') }}"> IR AL LISTADO </a> | 
         {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
-        <a class="btn btn-primary"href="{{ path('institucion_edit', { 'id': entity.id }) }}">Editar</a>
+        <a class="btn btn-primary"href="{{ path('institucion_edit', { 'id': entity.id }) }}">IR A EDITAR</a>
         <br><br>
 
         <form action="{{ path('institucion_delete', { 'id': entity.id }) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
-            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <button type="submit" class="btn btn-danger">ELIMINAR</button>
         </form>
         {% else %}
         <br><br>
