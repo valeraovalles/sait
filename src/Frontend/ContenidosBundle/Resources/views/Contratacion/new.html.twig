@@ -25,7 +25,7 @@
 
         <fieldset>     
             <div class="form-show_edit">
-                <legend id="a"><div class="divisor">DATOS DE LA CONTRATACI&Oacute;N</div> </legend>
+                <div class="divisor">DATOS DE LA CONTRATACI&Oacute;N</div>
                 <div class="form-contenedor">
                     {{ form_errors(form.concepto) }}
                     <div class="labels">Concepto:</div>
@@ -60,9 +60,8 @@
                     <div class="labels">Fecha de Fin:</div>
                     <div class="dato">{{ form_widget(form.fechaFin) }}</div>
                 </div>
-            </div><br>
-            <div class="form-show_edit">
-                <legend id="a"><div class="divisor">DATOS DE LA SOLICITUD</div> </legend>
+                
+                <div class="divisor">DATOS DE LA SOLICITUD</div>
                 <div class="form-contenedor">
                     {{ form_errors(form.numSolicitud) }}
                     <div class="labels">N&uacute;mero de la Solictud:</div>
@@ -85,19 +84,16 @@
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.numAlcance) }}
-                    <div class="labels">N&uacute;mero Alcance (Punto de Cuenta):</div>
+                    <div class="labels">N&uacute;mero Alcance:</div>
                     <div class="dato">{{ form_widget(form.numAlcance) }}</div>
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaAlcance) }}
-                    <div class="labels">Fecha de Alcance (Punto de Cuenta):</div>
+                    <div class="labels">Fecha de Alcance:</div>
                     <div class="dato">{{ form_widget(form.fechaAlcance) }}</div>
                 </div>
-            </div><br>
-            <div class="form-show_edit">
-                <legend id="a"><div class="divisor">DETALLES DE LA CONTRATACI&Oacute;N</div> </legend>
 
-
+                <div class="divisor">DETALLES DE LA CONTRATACI&Oacute;N</div> 
                 <div class="form-contenedor">
                     {{ form_errors(form.numContrato) }}
                     <div class="labels">N&uacute;mero de Contrato:</div>

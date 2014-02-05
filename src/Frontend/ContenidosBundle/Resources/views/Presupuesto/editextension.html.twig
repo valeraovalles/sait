@@ -25,9 +25,8 @@
     <form novalidate="novalidate" action="{{ path('presupuesto_extensionupdate', { 'id': entity.id, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
         <input type="hidden" name="_method" value="PUT" />
         
-        <div id="descripcion" class="form-show_edit">
-            <br>
-            <fieldset>       
+        <fieldset>  
+            <div id="descripcion" class="form-show_edit">     
                 <legend id="a"><div class="divisor">DATOS DEL PRESUPUESTO</div> </legend>
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.descripcion) }}
@@ -58,10 +57,12 @@
                     {{ form_errors(edit_form.montoBs) }}
                     <div class="labels">Monto en Bolivares:</div>
                     <div class="widgets">{{ form_widget(edit_form.montoBs) }}</div>
-                </div>                
-            </fieldset>
-            <button type="submit" class="btn">Editar</button><br><br>
-        </div>
+                </div>
+                <button type="submit" class="btn">Editar</button><br><br>
+            </div>                
+        </fieldset>
+            
+        
         <br>       
         <a href="{{ path('presupuesto_extensionindex' , { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
     </form>

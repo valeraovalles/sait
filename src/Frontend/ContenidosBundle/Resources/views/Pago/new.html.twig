@@ -26,13 +26,12 @@
             
             <div id="descripcion" class="form-show_edit">
 
-                <legend id="b"><div class="divisor">DATOS DE UNIDAD EJECUTORA</div> </legend>
+                <div class="divisor">DATOS DE UNIDAD EJECUTORA</div>
                 <div class="form-contenedor">
                     {{ form_errors(form.idUnidadejec) }}
                     <div class="labels">Unidad Ejecutora:</div>
                     <div class="dato">{{ form_widget(form.idUnidadejec) }}</div>
                 </div>
-
                 <div class="form-contenedor">
                     <div class="labelss">Fecha de Entrega en RRHH:</div>
                     <div class="datos">{{ form_widget(form1.fechaUnidaduno) }}</div>
@@ -48,7 +47,7 @@
                                 
 {# DIAS DE ENTREGA #}
                 {% if compras == 1 %}
-                    <legend id="b"><div class="divisor">CONDICIONES DEL PAGO</div> </legend>
+                    <div class="divisor">CONDICIONES DEL PAGO</div>
                     <div class="form-contenedor">
                         {{ form_errors(form.contraEntrega) }}
                         <div class="labels">Pago Contra Entrega:</div>
@@ -57,7 +56,7 @@
                 {% endif %}
 
                 <div id="vista"></div>
-                <legend id="a"><div class="divisor">DATOS DEL PAGO</div> </legend>
+                <div class="divisor">DATOS DEL PAGO</div>
                 <div class="form-contenedor">
                     {{ form_errors(form.numMemo) }}
                     <div class="labels">N&uacute;mero del Memorandum:</div>

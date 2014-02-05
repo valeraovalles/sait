@@ -22,8 +22,9 @@
 
     <form novalidate="novalidate" action="{{ path('presupuesto_create', { 'id_proveedor': id_proveedor }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
         <fieldset>
-            <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
+            
             <div id="descripcion" class="form-show_edit">
+                <div class="divisor">DATOS DEL PRESUPUESTO</div>
                 <br>
                 <div class="form-contenedor">
                     {{ form_errors(form.descripcion) }}

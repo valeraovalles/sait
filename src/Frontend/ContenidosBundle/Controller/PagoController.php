@@ -58,20 +58,31 @@ class PagoController extends Controller
         $em = $this->getDoctrine()->getManager();  
 
         $entity = $em->getRepository('ContenidosBundle:Pago')->find($id);
-        $entity1 = $em->getRepository('ContenidosBundle:Controlpagounidad')->find($id);
+        $entity1 = $em->getRepository('ContenidosBundle:Controlpagounidad')->findByIdPago($id);
 
         foreach ($entity1 as $key) 
         {
             $est[$key->getId()]=$key->getStatus();
             $estatus = $est[$key->getId()];
-
         }
+
+            //ASOCIO LOS CAMPOS DEL FORMULARIO A LA VARIABLE ENTITY
+            $editForm = $this->createForm(new PagoType(), $entity);
+            $deleteForm = $this->createDeleteForm($id);
+
+            $editForm1 = $this->createForm(new ControlpagounidadType(), $entity1[0]);      
+            $deleteForm1 = $this->createDeleteForm($entity1);
+
 
         //RETORNO A LA VISTA PARA MOSTRAR LISTADO
         return $this->render('ContenidosBundle:Pago:control.html.twig', array(
             'entity'            => $entity,
             'entity1'           => $entity1,
             'estatus'           => $estatus,
+            'edit_form'         => $editForm->createView(),
+            'delete_form'       => $deleteForm->createView(),
+            'edit_form1'        => $editForm1->createView(),
+            'delete_form1'      => $deleteForm1->createView(),
             'id_contratacion'   => $id_contratacion,
             'id_presupuesto'    => $id_presupuesto,
             'id_proveedor'      => $id_proveedor,
