@@ -5,34 +5,34 @@
 
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
         <thead>
-            <tr>
+            <tr align= "center">
+                <th>Id</th>
                 <th>Nombre</th>
-                <th>Apellido</th>
                 <th>Telefono</th>
                 <th>Email</th>
                 <th>Especialidad</th>
                 <th>Pais</th>
                 <th>Procedencia</th>
-                <th>Actions</th>
+                {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+                    <th>Actiones</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
-            <tr>
-                <!--td><a href="{{ path('personalidad_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td-->
-                <td>{{ entity.nombre }}</td>
-                <td>{{ entity.apellido }}</td>
+            <tr align="center">
+                <td><a href="{{ path('personalidad_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.nombre }} {{ entity.apellido }}</td>
                 <td>{{ entity.telefono }}</td>
                 <td>{{ entity.email }}</td>
                 <td>{{ entity.especialidad }}</td>
                 <td>{{ entity.pais }}</td>
                 <td>{{ entity.paisprocedencia }}</td>
-                <td>
-                    <a href="{{ path('personalidad_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
-                    {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+                {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+                    <td>
                         <a href="{{ path('personalidad_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
-                    {% endif %}
-                </td>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
