@@ -13,9 +13,7 @@
                 <th>Area</th>
                 <th>Email</th>
                 <th>Pais</th>
-                {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
-                    <th>Actiones</th>
-                {% endif %}
+                <th>Actiones</th>
             </tr>
         </thead>
         <tbody>
@@ -38,11 +36,11 @@
         {% endfor %}
         </tbody>
     </table>
-
+    {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
     <br><br><br><br>
 
     <a class="btn btn-primary" href="{{ path('institucion_new') }}">
         NUEVA INSTITUCIÓN
-    </a><br><br>
+    </a>{% endif %}<br><br>
 
     {% endblock %}

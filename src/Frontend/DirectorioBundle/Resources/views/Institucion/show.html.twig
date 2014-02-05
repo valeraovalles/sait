@@ -41,9 +41,9 @@
     </div>
     
         <br><br>
-        <a class="btn" href="{{ path('institucion') }}"> IR AL LISTADO </a> | 
+        <a class="btn" href="{{ path('institucion') }}"> IR AL LISTADO </a> 
         {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
-        <a class="btn btn-primary"href="{{ path('institucion_edit', { 'id': entity.id }) }}">IR A EDITAR</a>
+         | <a class="btn btn-primary"href="{{ path('institucion_edit', { 'id': entity.id }) }}">IR A EDITAR</a>
         <br><br>
 
         <form action="{{ path('institucion_delete', { 'id': entity.id }) }}" method="post">
