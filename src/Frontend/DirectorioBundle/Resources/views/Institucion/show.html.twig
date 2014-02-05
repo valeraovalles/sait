@@ -10,10 +10,12 @@
             <div class="labelform">Institucion:</div>
             <div class="widgetform">{{ entity.institucion|capitalize }}</div>
         </div>
+        {% if entity.director %}
         <div class="contenedorform">
             <div class="labelform">Director:</div>
             <div class="widgetform">{{ entity.director|capitalize }}</div>
         </div>
+        {% endif %}
         <div class="contenedorform">
             <div class="labelform">Area:</div>
             <div class="widgetform">{{ entity.areainst|capitalize }}</div>
@@ -26,10 +28,12 @@
             <div class="labelform">Emai:</div>
             <div class="widgetform">{{ entity.emailinst|capitalize }}</div>
         </div>
+        {% if entity.direccion %}
         <div class="contenedorform">
             <div class="labelform">Dirección:</div>
             <div class="widgetform">{{ entity.direccion|capitalize }}</div>
         </div>
+        {% endif %}
         <div class="contenedorform">
             <div class="labelform">País:</div>
             <div class="widgetform">{{ entity.pais|capitalize }}</div>
