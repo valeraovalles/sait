@@ -14,8 +14,8 @@
                 <th>Email</th>
                 <th>Especialidad</th>
                 <th>Pais</th>
-                <th>Procedencia</th>
-                <th>Actiones</th>
+                <th>Proc.</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -33,7 +33,7 @@
                         {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
                         <a href="{{ path('personalidad_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
                         {% endif %}
-                        <a href="{{ path('personalidad_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-show"></i></a>
+                        <a href="{{ path('personalidad_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-search"></i></a>
                     </td>
                 
             </tr>
