@@ -1,7 +1,7 @@
 {% extends '::contenidos.html.twig' %}
 
 {% block titulobanner %}
-    PAGOS
+   PAGO - NUEVO REGISTRO
 {% endblock %}
     
 {% block body -%}
@@ -32,38 +32,20 @@
                     <div class="labels">Unidad Ejecutora:</div>
                     <div class="dato">{{ form_widget(form.idUnidadejec) }}</div>
                 </div>
-{# DGE #}
-                <div id="dge" style="display:none;">
-                    <div class="form-contenedor">
-                        <div class="labelss">Fecha de Recepcion en Oficina Directora:</div>
-                        <div class="datos">{{ form_widget(form1.fechaUnidaduno) }}</div>
-                    </div>
-                    <div class="form-contenedor">
-                        <div class="labelss">Fecha de Recepcion en Presupuesto:</div>
-                        <div class="datos">{{ form_widget(form1.fechaUnidaddos) }}</div>
-                    </div>
-                    <div class="form-contenedor">
-                        <div class="labelss">Fecha de Recepcion en Compras:</div>
-                        <div class="datos">{{ form_widget(form1.fechaUnidadtres) }}</div>
-                    </div>
-                    <div class="form-contenedor">
-                        <div class="labelss">Fecha de Recepcion en Finanzas:</div>
-                        <div class="datos">{{ form_widget(form1.fechaUnidadcuatro) }}</div>
-                    </div>
-                    <div class="form-contenedor">
-                        <div class="labelss">Fecha de Recepcion en Tesorería:</div>
-                        <div class="datos">{{ form_widget(form1.fechaUnidadcinco) }}</div>
-                    </div>
-                </div>
 
-{# RRHH #}
-                <div id="rrhh" style="display:none;">    
-                    <div class="form-contenedor">
-                        <div class="labelss">Fecha de Recepcion en RRHH:</div>
-                        <div class="datos">{{ form_widget(form.fechaUnidadejec) }}</div>
-                    </div>             
+                <div class="form-contenedor">
+                    <div class="labelss">Fecha de Entrega en RRHH:</div>
+                    <div class="datos">{{ form_widget(form1.fechaUnidaduno) }}</div>
+                </div> 
+                <div class="form-contenedor">
+                    <div class="labelss">Fecha de Entrega en Compras:</div>
+                    <div class="datos">{{ form_widget(form1.fechaUnidaddos) }}</div>
                 </div>
-
+                <div class="form-contenedor">
+                    <div class="labelss">Fecha de Entrega en Oficina Directora:</div>
+                    <div class="datos">{{ form_widget(form1.fechaUnidadtres) }}</div>
+                </div>
+                                
 {# DIAS DE ENTREGA #}
                 {% if compras == 1 %}
                     <legend id="b"><div class="divisor">CONDICIONES DEL PAGO</div> </legend>
@@ -73,8 +55,6 @@
                         <div class="dato">{{ form_widget(form.contraEntrega) }}</div>
                     </div>
                 {% endif %}
-
-
 
                 <div id="vista"></div>
                 <legend id="a"><div class="divisor">DATOS DEL PAGO</div> </legend>
@@ -145,30 +125,6 @@
                 ruta = ruta.replace("variable", dia);
                 $('#vista').load(ruta);
             });
-
-            $('#frontend_contenidosbundle_pagotype_idUnidadejec').change(function(){
-                if($("#frontend_contenidosbundle_pagotype_idUnidadejec").val()=='1'){
-                        $("#rrhh").show();
-                        $("#dge").hide();
-                }
-
-                if($("#frontend_contenidosbundle_pagotype_idUnidadejec").val()=='2'){
-                        $("#dge").show();
-                        $("#rrhh").hide();
-                }                           
-            });
-
-            if($("#frontend_contenidosbundle_pagotype_idUnidadejec").val()=='1'){
-                        $("#rrhh").show();
-                        $("#dge").hide();
-            }
-
-            if($("#frontend_contenidosbundle_pagotype_idUnidadejec").val()=='2'){
-                        $("#dge").show();
-                        $("#rrhh").hide();
-            }
-
-
         });
     </script>
 

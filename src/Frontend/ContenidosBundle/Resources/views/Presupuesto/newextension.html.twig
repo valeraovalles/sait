@@ -1,8 +1,24 @@
 {% extends '::contenidos.html.twig' %}
 
+{% block titulobanner %}
+   EXT. PRESUPUESTO - NUEVO REGISTRO
+{% endblock %}
+
 {% block body -%}
  {{ parent() }}
     <div class="titulo">NUEVA EXTENSION DE PRESUPUESTO</div>
+
+{% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
 
     <form novalidate="novalidate" action="{{ path('presupuesto_extensioncreate', { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
         <fieldset>

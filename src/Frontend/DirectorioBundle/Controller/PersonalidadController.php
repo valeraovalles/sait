@@ -143,6 +143,7 @@ class PersonalidadController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('notice', 'La actualización de realizó correctamente.');
             return $this->redirect($this->generateUrl('personalidad_edit', array('id' => $id)));
         }
 

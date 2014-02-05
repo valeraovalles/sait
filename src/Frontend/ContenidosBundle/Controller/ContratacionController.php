@@ -71,6 +71,7 @@ class ContratacionController extends Controller
     public function createAction(Request $request,$id_presupuesto,$id_proveedor)
     {
         $em = $this->getDoctrine()->getManager();
+        $alert = 0;
 
         //instancio la clase
         $entity  = new Contratacion();
@@ -105,69 +106,97 @@ class ContratacionController extends Controller
         $monto[0]=$entity->getMontoBs();
         $monto[1]=$entity->getMontoMe();
 
-        
+
+        if ($monto[0] != 0 or $monto[0] != NULL)
+        {
             $disp_act[0] = $disp_ant[0] - $monto[0];
             if($tipomoneda == 1)
             {
-                $disp_act[1] = $disp_ant[1] - $monto[1];    
-                $disp_act[2] = 0;
+                if($monto[1] == 0 or $monto[1] == NULL )
+                {
+                    $alert = 1;
+                    $mensaje = "INSERTE EL MONTO EN DOLARES";
+                }else
+                {
+                    $disp_act[1] = $disp_ant[1] - $monto[1]; 
+                    $disp_act[2] = NULL;  
+                }
+                
             }elseif($tipomoneda == 2)
             {
-                $disp_act[1] = 0;    
-                $disp_act[2] = $disp_ant[2] - $monto[1];
+                if($monto[1] == 0 or $monto[1] == NULL )
+                {
+                    $alert = 1;
+                    $mensaje = "INSERTE EL MONTO EN EUROS";
+                }else
+                {
+                    $disp_act[1] = NULL;    
+                    $disp_act[2] = $disp_ant[2] - $monto[1];
+                }  
+            }else
+            {
+                $disp_act[1] = NULL;
+                $disp_act[2] = NULL;
             }
-            
-        $alert = 0;
-        if(($disp_act[0] < 0) or ($disp_act[1] < 0) or ($disp_act[2] < 0) )
+        }else
         {
             $alert= 1;
+            $mensaje = "INGRESE EL MONTO EN BOLIVARES";
         }
+
+        if ($alert == 0 )
+        {
+            if(($disp_act[0] < 0) or ($disp_act[1] < 0) or ($disp_act[2] < 0) )
+            {
+                $alert= 1;
+                $mensaje = "NO EXISTE DISPONIBILIDAD PRESUPUESTARIA";
+            } 
+        }
+            
+        
         
         //obtengo el tipo de proveedor del proveedor de acuerdo a un ID
         $entity1 = $em->getRepository('ContenidosBundle:Datosproveedor')->find($id_proveedor);
         $tipoprov= $entity1->getIdTipoprov();
-
-        //verifico el formulario
-        if ($form->isValid()) 
+        
+        if ($alert == 0)
         {
-            
-            $montobs = $entity->getMontoBs();
-            $montome = $entity->getMontoMe();
-            
-            //seteo la disponibilidad, el signo en la variable presupuesto
-            $presupuesto->setDisponibilidad($disp_act[0]);
-            $presupuesto->setDisponibilidadDolares($disp_act[1]);
-            $presupuesto->setDisponibilidadEuros($disp_act[2]);
-
-           // $presupuesto->setSigno($signo);
-
-            //seteo el id del presupuesto y el tipo de moneda en la variable $entity
-            $entity->setIdPresupuesto($presupuesto);
-            $entity->setTipoMoneda($tipomoneda);
-            $entity->setDebeBs($montobs);
-            $entity->setdebeMe($montome);
-
-
-            //inserto las variables $entity y $presupuesto en la BD
-            $em->persist($entity);
-            $em->persist($presupuesto);
-            $em->flush();
-
-            if ($alert == 0)
+           //verifico el formulario
+            if ($form->isValid()) 
             {
+                
+                //seteo la disponibilidad, el signo en la variable presupuesto
+                $presupuesto->setDisponibilidad($disp_act[0]);
+                $presupuesto->setDisponibilidadDolares($disp_act[1]);
+                $presupuesto->setDisponibilidadEuros($disp_act[2]);
+
+               // $presupuesto->setSigno($signo);
+
+                //seteo el id del presupuesto y el tipo de moneda en la variable $entity
+                $entity->setIdPresupuesto($presupuesto);
+                $entity->setTipoMoneda($tipomoneda);
+                $entity->setDebeBs($monto[0]);
+                $entity->setdebeMe($monto[1]);
+
+
+                //inserto las variables $entity y $presupuesto en la BD
+                $em->persist($entity);
+                $em->persist($presupuesto);
+                $em->flush();
+
                 //envio a notificacion de que el registro fue creado
                 $this->get('session')->getFlashBag()->add('notice', 'SE REGISTRO EXITOSAMENTE LA CONTRATACION');
-            }elseif ($alert == 1)
-            {
-                //envio a notificacion de que el registro fue creado
-                $this->get('session')->getFlashBag()->add('alert', 'SE REGISTRO EXITOSAMENTE LA CONTRATACION PERO NO EXISTE DISPONIBILIDAD PRESUPUESTARIA');
+                
+                //envio a la vista
+                return $this->redirect($this->generateUrl('contratacion_show', array(
+                                                                        'id'            => $entity->getId(),
+                                                                        'id_proveedor'  => $id_proveedor,
+                                                                        'id_presupuesto'=>$id_presupuesto
+                                                                        )));
             }
-            //envio a la vista
-            return $this->redirect($this->generateUrl('contratacion_show', array(
-                                                                    'id'            => $entity->getId(),
-                                                                    'id_proveedor'  => $id_proveedor,
-                                                                    'id_presupuesto'=>$id_presupuesto
-                                                                    )));
+        }else
+        {
+            $this->get('session')->getFlashBag()->add('alert', $mensaje); 
         }
         //envio a otra vista si el form no es válido
         return $this->render('ContenidosBundle:Contratacion:new.html.twig', array(
@@ -181,6 +210,9 @@ class ContratacionController extends Controller
                                                                     'dolares'       => $dolares,
                                                                     'euros'         => $euros,
                                                                     ));
+
+            
+        
     }
 
     /*
@@ -211,7 +243,6 @@ class ContratacionController extends Controller
         {
             $tipomoneda = '3'; //moneda es Bs
         }
-
 
         //instancio la clase Contratacion
         $entity = new Contratacion();
@@ -313,22 +344,6 @@ class ContratacionController extends Controller
         $entity2 = $em->getRepository('ContenidosBundle:Presupuesto')->find($pres);
         $prov = $entity2-> getIdProveedor();
 
-        //DETERMINO EL TIPO DE MONEDA (DOLARES O EUROS)
-        $dolares = $entity2->getMontoDolares();
-        $euros = $entity2->getMontoEuros();
-        
-        if (($dolares == 0 || $dolares== NULL) && ($euros != 0 || $euros!=NULL))
-        {
-            $tipomoneda= '2';//moneda es EUROS
-        }elseif(($euros == 0 || $euros==NULL) && (($dolares != 0 || $dolares!= NULL)))
-        {
-            $tipomoneda = '1';//moneda es DOLARES
-        }elseif(($dolares == 0 || $dolares== NULL) && ($euros == 0 || $euros==NULL))
-        {
-            $tipomoneda = '3'; //moneda es Bs
-        }
-
-
         //obtengo el id del tipo del proveedor desde los datos del proveedor
         $entity3 = $em->getRepository('ContenidosBundle:Datosproveedor')->find($prov);
         $tipoprov= $entity3->getIdTipoprov();
@@ -349,7 +364,6 @@ class ContratacionController extends Controller
             'pres'          => $pres,
             'id_proveedor'  => $id_proveedor,
             'id_presupuesto'=> $id_presupuesto,
-            'tipomoneda'    => $tipomoneda,
             'edit_form'     => $editForm->createView(),
             'delete_form'   => $deleteForm->createView(),
         ));
@@ -391,24 +405,9 @@ class ContratacionController extends Controller
             $tipomoneda = '3'; //moneda es Bs
         }
 
-        //OBTENGO LA DISPONIBILIDAD Y EL MONTO ANTERIOR
-        $disp_ant[0] = $presupuesto->getDisponibilidad();
-        $disp_ant[1] = $presupuesto->getDisponibilidadDolares();
-        $disp_ant[2] = $presupuesto->getDisponibilidadEuros();
+        $deuda[0] = $entity->getDebeBs();
+        $deuda[1] = $entity->getDebeMe();
 
-        $monto_ant[0] = $entity->getMontoBs();
-        if ($tipomoneda == 1)
-        {
-            $monto_ant[1] = $entity->getMontoMe();
-            $monto_ant[2] = 0;
-        }elseif ($tipomoneda == 2)
-        {
-            $monto_ant[1] = 0;
-            $monto_ant[2] = $entity->getMontoMe();
-        }else {
-            $monto_ant[1] = 0;
-            $monto_ant[2] = 0;
-        }
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Contratacion entity.');
         }
@@ -417,43 +416,14 @@ class ContratacionController extends Controller
         $editForm = $this->createForm(new ContratacionType(), $entity);
         $editForm->bind($request);
 
-        //OBTENGO EL MONTO ACTUAL
-        $monto_act[0]= $entity->getMontoBs();
-        if($tipomoneda == 1)
-        {
-            $monto_act[1]= $entity->getMontoMe();
-            $monto_act[2]= 0;
-        }elseif($tipomoneda == 2)
-        {
-            $monto_act[1]= 0;
-            $monto_act[2]= $entity->getMontoMe();
-        }else
-        {
-            $monto_act[1]= 0;
-            $monto_act[2]= 0;
-        }
-
-        $dife[0] = $monto_ant[0] - $monto_act[0];
-        $dife[1] = $monto_ant[1] - $monto_act[1];
-        $dife[2] = $monto_ant[2] - $monto_act[2];
-
-        $disp_actual[0] = $disp_ant[0] + $dife[0];
-        $disp_actual[1] = $disp_ant[1] + $dife[1];
-        $disp_actual[2] = $disp_ant[2] + $dife[2];
-
         //verifico el formulario
         if ($editForm->isValid())
         {
             //seteo el id del presupuesto
             $entity-> setIdPresupuesto($presupuesto);
-            
-            //seteo la disponibilidad
-            $presupuesto->setDisponibilidad($disp_actual[0]);
-            $presupuesto->setDisponibilidadDolares($disp_actual[1]);
-            $presupuesto->setDisponibilidadEuros($disp_actual[2]);
-
-            //seteo el tipo de moneda (DOLARES O EUROS)
             $entity->setTipoMoneda($tipomoneda);
+            $entity->setDebeBs($deuda[0]);
+            $entity->setdebeMe($deuda[1]);
 
             //inserto en la BD
             $em->persist($entity);
@@ -525,20 +495,19 @@ class ContratacionController extends Controller
         $monto[0] = $entity->getMontoBs();
         $monto[1] = $entity->getMontoMe();
 
-
         $disp_act[0] = $disp_ant[0] + $monto[0];
         if ($tipomoneda == 1)
         {
             $disp_act[1] = $disp_ant[1] + $monto[1];
-            $disp_act[2] = 0;
+            $disp_act[2] = NULL;
         }elseif($tipomoneda == 2)
         {
-            $disp_act[1] = 0;
+            $disp_act[1] = NULL;
             $disp_act[2] = $disp_ant[2] + $monto[1];
         }else
         {
-            $disp_act[1] = 0;
-            $disp_act[2] = 0;
+            $disp_act[1] = NULL;
+            $disp_act[2] = NULL;
         }
 
         $presupuesto->setDisponibilidad($disp_act[0]);
@@ -603,54 +572,4 @@ class ContratacionController extends Controller
             ->getForm()
         ;
     }
-
-#########################################################################################################
-#########################################################################################################
-#
-#                            DISPONIBILIDAD DE CONTRATACION CON LOS PAGOS
-#
-#########################################################################################################
-#########################################################################################################
-
-    /*
-    *
-    * FORMULARIO PARA LA DISPONIBILIDAD DE CONTRATACION CON LOS PAGOS
-    *
-    */
-    public function disponibilidadpagoAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        //creo el formualrio
-        $form = $this->createFormBuilder()    
-            ->add('concepto', 'entity', array(
-                                            'class'     => 'ContenidosBundle:Contratacion',
-                                            'property'  => 'concepto',
-                                            'multiple'  => false,
-                                            ))
-            ->getForm();
-
-        //envio a la vista
-        return $this->render('ContenidosBundle:Contratacion:disponibilidadpago.html.twig', array(
-            'form'   => $form->createView(),
-        ));  
-    }
-
-    /*
-    *
-    *  FUNCION PARA GENERAR EL REPORTE DE DISPONIBILIDAD DE PAGOS
-    *
-    */
-    public function disponibilidadpagoshowAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        //Obtengo los datos del formulario AJAX
-        $formulario = $request->request->all();
-        $formulario = $formulario['form'];
-        $concepto   = $formulario['concepto'];
-        $factura    = $formulario['factura'];
-         
-    }
-
 }//fin de la clase

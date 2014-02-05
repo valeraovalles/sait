@@ -1,67 +1,71 @@
 {% extends '::directorio.html.twig' %}
 
 {% block body -%}
-    <h1>Nueva Persona</h1>
+    {{parent()}}
+<BR><BR>
+    <h1>NUEVA PERSONALIDAD</h1>
     <br><br>
 
     <form action="{{ path('personalidad_create') }}" method="post" {{ form_enctype(form) }} novalidate>
         {{ form_widget(form._token) }}
-            <div id="operador">
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form.nombre) }}</div>
-                    <div class="labels">Nombre:</div>
-                    <div class="widgets">{{ form_widget(form.nombre) }}</div>
+            <div class="formShow">
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(form.nombre) }}</div>
+                    <div class="labelform">Nombre:</div>
+                    <div class="widgetform">{{ form_widget(form.nombre) }}</div>
                 </div>
 
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.apellido) }}</div>
-                    <div class="labels">Apellido:</div>
-                    <div class="widgets">{{ form_widget(form.apellido) }}</div>
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(form.apellido) }}</div>
+                    <div class="labelform">Apellido:</div>
+                    <div class="widgetform">{{ form_widget(form.apellido) }}</div>
                 </div>
   
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.telefono) }}</div>
-                    <div class="labels">Telefono:</div>
-                    <div class="widgets">{{ form_widget(form.telefono) }}</div>
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(form.telefono) }}</div>
+                    <div class="labelform">Telefono:</div>
+                    <div class="widgetform">{{ form_widget(form.telefono) }}</div>
                 </div>
                 
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.email) }}</div>
-                    <div class="labels">Email:</div>
-                    <div class="widgets">{{ form_widget(form.email) }}</div>
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(form.email) }}</div>
+                    <div class="labelform">Email:</div>
+                    <div class="widgetform">{{ form_widget(form.email) }}</div>
                 </div>
 
-                <div class="form-contenedor" id="especial">
-                    <div class="text-warning">{{ form_errors(form.especialidad) }}</div>
-                    <div class="labels">Especialidad:</div>
-                    <div class="widgets">{{ form_widget(form.especialidad) }}</div>
+                <div class="contenedorform" id="especial">
+                    <div class="text-error">{{ form_errors(form.especialidad) }}</div>
+                    <div class="labelform">Especialidad:</div>
+                    <div class="widgetform">{{ form_widget(form.especialidad) }}</div>
                 </div>
 
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.pais) }}</div>
-                    <div class="labels">Pais Nacimiento:</div>
-                    <div class="widgets">{{ form_widget(form.pais) }}</div>
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(form.pais) }}</div>
+                    <div class="labelform">Pais Nacimiento:</div>
+                    <div class="widgetform">{{ form_widget(form.pais) }}</div>
                 </div>
 
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.paisprocedencia) }}</div>
-                    <div class="labels">Pais Residencia:</div>
-                    <div class="widgets">{{ form_widget(form.paisprocedencia) }}</div>
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(form.paisprocedencia) }}</div>
+                    <div class="labelform">Pais Residencia:</div>
+                    <div class="widgetform">{{ form_widget(form.paisprocedencia) }}</div>
                 </div>
 
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.ciudad) }}</div>
-                    <div class="labels">Ciudad:</div>
-                    <div class="widgets">{{ form_widget(form.ciudad) }}</div>
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(form.ciudad) }}</div>
+                    <div class="labelform">Ciudad:</div>
+                    <div class="widgetform">{{ form_widget(form.ciudad) }}</div>
                 </div>
+            </div>
 
                 <br><br>
 
-        <button type="submit" class="btn btn-primary">Crear</button>
+        <button type="submit" class="btn btn-primary">CREAR PERSONALIDAD</button> | 
+        <a class="btn" href="{{ path('personalidad') }}">IR AL LISTADO</a>
 
     </form>
 
-        <a class="btn" href="{{ path('personalidad') }}">Listado </a>
+        
 
 {% endblock %}
 
