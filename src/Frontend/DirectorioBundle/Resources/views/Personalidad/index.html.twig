@@ -1,9 +1,11 @@
 {% extends '::directorio.html.twig' %}
 
 {% block body %}
-    <h1>Personalidades</h1>
-
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    {{parent()}}
+<br>
+    <h2>LISTADO DE PERSONALIDADES</h2><br><br>
+    
+    <table id="tablalista" style="width: 97%;">
         <thead>
             <tr align= "center">
                 <th>Id</th>
@@ -41,7 +43,7 @@
         <ul>
         <li>
             <a class="btn btn-primary" href="{{ path('personalidad_new') }}">
-                Nueva Persona
+                NUEVA PERSONALIDAD
             </a>
         </li>
     </ul>

@@ -30,6 +30,23 @@
  * DataTables features
  */
 
+.dataTables_length {
+	width: 40%;
+        height: 50px;
+	float: left;
+	text-align: left;
+	padding-left: 15px;
+        margin-right: 20%;
+}
+
+.dataTables_filter {
+	width: 98%;
+        height: 50px;
+	text-align: right;
+	padding-right: 15px;
+}
+
+
 .dataTables_wrapper {
 	position: relative;
 /*	min-height: 302px;*/
@@ -54,19 +71,9 @@
 	background-color: white;
 }
 
-.dataTables_length {
-	width: 40%;
-	float: left;
-	text-align: left;
-	padding-left: 15px;
-}
 
-.dataTables_filter {
-	width: 50%;
-	float: right;
-	text-align: right;
-	padding-right: 10px;
-}
+
+
 
 .dataTables_info {
 	width: 53%;
@@ -75,6 +82,7 @@
 	padding-left: 15px;
 	font-weight: bold;
 	padding-bottom: 5px;
+        margin-top: 15px;
 }
 
 .dataTables_paginate {
@@ -124,6 +132,7 @@ table.display {
 	width: 100%;
         color:#084B8A;
         font-size: 12px;
+        font-family: Verdana;
 	
 	/* Note Firefox 3.5 and before have a bug with border-collapse
 	 * ( https://bugzilla.mozilla.org/show%5Fbug.cgi?id=155955 ) 
@@ -143,14 +152,15 @@ table.display thead th {
 	padding: 3px 18px 3px 10px;
 	font-weight: bold;
 	cursor: pointer;
-	* cursor: hand;
-	color:black;
+	*cursor: hand;
+	//color:black;
 }
 
 table.display tfoot th {
 	padding: 3px 18px 3px 10px;
 	border-top: 1px solid black;
 	font-weight: bold;
+        font-size: 10px
 }
 
 table.display tr.heading2 td {
@@ -172,27 +182,34 @@ table.display td.center {
  */
 
 .sorting_asc {
-	background: #85c7f9 url('../images/sort_asc.png') no-repeat center right;
+	background: dodgerblue url('../images/sort_asc.png') no-repeat center right;
+         color:white;
 }
 
 .sorting_desc {
-	background:#85c7f9 url('../images/sort_desc.png') no-repeat center right;
+	background:dodgerblue url('../images/sort_desc.png') no-repeat center right;
+         color:white;
 }
 
 .sorting {
-	background: #85c7f9 url('../images/sort_both.png') no-repeat center right;
+	background: dodgerblue url('../images/sort_both.png') no-repeat center right;
+        color:white;
 }
 
 .sorting_asc_disabled {
 	background: url('../images/sort_asc_disabled.png') no-repeat center right;
+         color:white;
 }
 
 .sorting_desc_disabled {
 	background: url('../images/sort_desc_disabled.png') no-repeat center right;
+         color:white;
 }
 
 
-
+#tablalista{
+    font-size: 13px;
+}
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -300,9 +317,10 @@ td.details {
 }
 
 .paging_full_numbers {
-	width: 400px;
+	width:44%;
 	height: 22px;
 	line-height: 22px;
+        margin-top: 15px;
 }
 
 .paging_full_numbers span.paginate_button,
