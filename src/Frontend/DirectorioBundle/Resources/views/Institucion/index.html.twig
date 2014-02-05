@@ -10,11 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>Institucion</th>
-                <th>Director</th>
                 <th>Area</th>
-                <th>Telefono</th>
                 <th>Email</th>
-                <th>Direccion</th>
                 <th>Pais</th>
                 {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
                     <th>Actiones</th>
@@ -26,17 +23,17 @@
             <tr>
                 <td><a href="{{ path('institucion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.institucion }}</td>
-                <td>{{ entity.director }}</td>
                 <td>{{ entity.areainst }}</td>
-                <td>{{ entity.telfinst }}</td>
                 <td>{{ entity.emailinst }}</td>
-                <td>{{ entity.direccion }}</td>
                 <td>{{ entity.pais }}</td>
-                {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+                
                     <td>
+                        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
                         <a href="{{ path('institucion_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
+                        {% endif %}
+                        <a href="{{ path('institucion_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-search"></i></a>
                     </td>
-                {% endif %}
+                
             </tr>
         {% endfor %}
         </tbody>
