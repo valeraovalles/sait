@@ -1,16 +1,83 @@
 {% extends '::directorio.html.twig' %}
 
 {% block body -%}
-    <h1>Personalidad edit</h1>
+    {{ parent() }}
+<BR><h2>EDITAR PERSONALIDAD</h2><BR>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
 
     <form action="{{ path('personalidad_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
+        {{ form_widget(edit_form._token) }}
+
+        <div class="formShow">
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(edit_form.nombre) }}</div>
+                    <div class="labelform">Nombre:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.nombre) }}</div>
+                </div>
+
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(edit_form.apellido) }}</div>
+                    <div class="labelform">Apellido:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.apellido) }}</div>
+                </div>
+  
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(edit_form.telefono) }}</div>
+                    <div class="labelform">Telefono:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.telefono) }}</div>
+                </div>
+                
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(edit_form.email) }}</div>
+                    <div class="labelform">Email:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.email) }}</div>
+                </div>
+
+                <div class="contenedorform" id="especial">
+                    <div class="text-error">{{ form_errors(edit_form.especialidad) }}</div>
+                    <div class="labelform">Especialidad:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.especialidad) }}</div>
+                </div>
+
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(edit_form.pais) }}</div>
+                    <div class="labelform">Pais Nacimiento:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.pais) }}</div>
+                </div>
+
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(edit_form.paisprocedencia) }}</div>
+                    <div class="labelform">Pais Residencia:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.paisprocedencia) }}</div>
+                </div>
+
+                <div class="contenedorform">
+                    <div class="text-error">{{ form_errors(edit_form.ciudad) }}</div>
+                    <div class="labelform">Ciudad:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.ciudad) }}</div>
+                </div>
+            </div>
+        
         {{ form_widget(edit_form) }}
 
-            <button class="btn btn-primary" type="submit">Editar</button>
+            <br><button class="btn btn-primary" type="submit">EDITAR</button> | 
+            <a class="btn" href="{{ path('personalidad') }}">IR AL LISTADO</a>
 
     </form>
-        <a class="btn" href="{{ path('personalidad') }}"> Listado </a>
+        
  <br>
 
 {% endblock %}
