@@ -169,6 +169,10 @@ pago_controlupdate:
     defaults: { _controller: "ContenidosBundle:Pago:controlupdate" }
     requirements: { _method: post|put }
 
+pago_control_ruta:
+    pattern:  pago/control/ruta/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
+    defaults: { _controller: "ContenidosBundle:Pago:controlruta" }
+
 
 
 ##########################################################################################################

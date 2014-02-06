@@ -222,7 +222,7 @@
                     </div>
                     <button type="submit" class="btn">Editar</button><br><br>
 
-                {% elseif estatus == 7 %}
+                {% elseif estatus == 7 and is_granted('ROLE_CONTENIDOS_ADMIN') %}
                     <br>
                     <div class="form-contenedor">
                         {{ form_errors(edit_form1.fechaUnidadseis) }}
@@ -237,7 +237,7 @@
             </div>
         </fieldset>
       
-        <br>       
+        <br>     
         <a href="{{ path('pago', {'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>          
     </form>
 {% endblock %}
