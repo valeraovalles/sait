@@ -99,7 +99,10 @@
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.fechaFactura) }}
                     <div class="labels">Fecha de la Factura:</div>
-                    <div class="dato">{{ form_widget(edit_form.fechaFactura) }}</div>
+                    <div class="dato">{{ form_widget(edit_form.fechaFactura, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.tipoPago) }}
@@ -114,7 +117,10 @@
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.fechaPago) }}
                     <div class="labels">Fecha del Pago:</div>
-                    <div class="dato">{{ form_widget(edit_form.fechaPago) }}</div>
+                    <div class="dato">{{ form_widget(edit_form.fechaPago, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
 
                {# SE ENVIAN LOS MONTOS OCULTOS #}
@@ -143,4 +149,15 @@
           
 
     </form>
+    <script type="text/javascript">
+        $(function () {
+            $(".fecha").datepicker(
+            {
+                firstDay: 1,
+                showButtonPanel: true,
+                changeYear: true,
+            }
+            );
+        });
+    </script>
 {% endblock %}

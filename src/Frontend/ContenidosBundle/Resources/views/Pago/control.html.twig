@@ -37,7 +37,11 @@
                     <div class="form-contenedor">
                         {{ form_errors(edit_form1.fechaUnidadtres) }}
                         <div class="labels">Fecha de Entrega en Oficina Directora:</div>
-                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadtres) }}</div>
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadtres, 
+                                            {'attr': 
+                                                {'class': "fecha"}
+                                            }) 
+                                        }}</div>
                     </div>
                     <div class="form-contenedor" style="display:none">
                         {{ form_errors(edit_form1.fechaUnidadcuatro) }}
@@ -70,7 +74,11 @@
                     <div class="form-contenedor">
                         {{ form_errors(edit_form1.fechaUnidadtres) }}
                         <div class="labels">Fecha de Entrega en Oficina Directora:</div>
-                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadtres) }}</div>
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadtres, 
+                                            {'attr': 
+                                                {'class': "fecha"}
+                                            }) 
+                                        }}</div>
                     </div>
                     <div class="form-contenedor" style="display:none">
                         {{ form_errors(edit_form1.fechaUnidadcuatro) }}
@@ -107,7 +115,12 @@
                     <div class="form-contenedor">
                         {{ form_errors(edit_form1.fechaUnidadcuatro) }}
                         <div class="labels">Fecha de Entrega en Presupuesto:</div>
-                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcuatro) }}</div>
+                        <div class="dato">{{ form_widget(
+                                    edit_form1.fechaUnidadcuatro, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }
+                            ) }}</div>
                     </div>
                     <div class="form-contenedor" style="display:none">
                         {{ form_errors(edit_form1.fechaUnidadcinco) }}
@@ -144,7 +157,10 @@
                     <div class="form-contenedor">
                         {{ form_errors(edit_form1.fechaUnidadcinco) }}
                         <div class="labels">Fecha de Entrega en Finanzas:</div>
-                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcinco) }}</div>
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcinco, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                     </div>
                     <div class="form-contenedor" style="display:none">
                         {{ form_errors(edit_form1.fechaUnidadseis) }}
@@ -181,7 +197,10 @@
                     <div class="form-contenedor">
                         {{ form_errors(edit_form1.fechaUnidadseis) }}
                         <div class="labels">Fecha de Entrega en Tesorería:</div>
-                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadseis) }}</div>
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadseis, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                     </div>
                     <div class="form-contenedor" style="display:none">
                         {{ form_errors(edit_form1.fechaUnidadsiete) }}
@@ -218,7 +237,10 @@
                     <div class="form-contenedor">
                         {{ form_errors(edit_form1.fechaUnidadseis) }}
                         <div class="labels">Fecha de Entrega al Proveedor:</div>
-                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadsiete) }}</div>
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadsiete, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                     </div>
                     <button type="submit" class="btn">Editar</button><br><br>
 
@@ -229,10 +251,12 @@
                         <div class="labels">Estatus del Pago:</div>
                         <div class="dato">ENTREGADO AL BENEFICIARIO</div>
                     </div>
+                    {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}
+                        <a href="{{ path('pago_control_ruta', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="ruta del pago"><img width="50px" src="{{ asset('images/ruta.jpg')}}"></a>
+                    {% endif %}
                 {% else %}
                     <div class="divisor">NO TIENE CREDENCIALES PARA VER EL CONTROL DEL PAGO</div>
                 {% endif %}
- 
                 
             </div>
         </fieldset>
@@ -240,4 +264,16 @@
         <br>     
         <a href="{{ path('pago', {'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>          
     </form>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".fecha").datepicker(
+            {
+                firstDay: 1,
+                showButtonPanel: true,
+                changeYear: true,
+            }
+            );
+        });
+    </script>
 {% endblock %}

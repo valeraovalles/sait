@@ -34,15 +34,24 @@
                 </div>
                 <div class="form-contenedor">
                     <div class="labelss">Fecha de Entrega en RRHH:</div>
-                    <div class="datos">{{ form_widget(form1.fechaUnidaduno) }}</div>
+                    <div class="datos">{{ form_widget(form1.fechaUnidaduno, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div> 
                 <div class="form-contenedor">
                     <div class="labelss">Fecha de Entrega en Compras:</div>
-                    <div class="datos">{{ form_widget(form1.fechaUnidaddos) }}</div>
+                    <div class="datos">{{ form_widget(form1.fechaUnidaddos, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                 <div class="form-contenedor">
                     <div class="labelss">Fecha de Entrega en Oficina Directora:</div>
-                    <div class="datos">{{ form_widget(form1.fechaUnidadtres) }}</div>
+                    <div class="datos">{{ form_widget(form1.fechaUnidadtres, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                                 
 {# DIAS DE ENTREGA #}
@@ -70,7 +79,10 @@
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaFactura) }}
                     <div class="labels">Fecha de factura:</div>
-                    <div class="dato">{{ form_widget(form.fechaFactura) }}</div>
+                    <div class="dato">{{ form_widget(form.fechaFactura, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
 
                 {% if tipomoneda == 1 %}
@@ -105,7 +117,10 @@
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaPago) }}
                     <div class="labels">Fecha del Pago:</div>
-                    <div class="dato">{{ form_widget(form.fechaPago) }}</div>
+                    <div class="dato">{{ form_widget(form.fechaPago, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
 
 
@@ -124,6 +139,15 @@
                 ruta = ruta.replace("variable", dia);
                 $('#vista').load(ruta);
             });
+        });
+        $(function () {
+            $(".fecha").datepicker(
+            {
+                firstDay: 1,
+                showButtonPanel: true,
+                changeYear: true,
+            }
+            );
         });
     </script>
 

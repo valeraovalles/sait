@@ -52,13 +52,11 @@ class PagoController extends Controller
     //calcula los dias entre dos fechas
     public function dias($fecha1, $fecha2){
 
-
             $timestamp1 = mktime(0,0,0,$fecha2[0],$fecha2[1],$fecha2[2]);
             $timestamp2 = mktime(0,0,0,$fecha1[0],$fecha1[1],$fecha1[2]);
             $segundos_diferencia = $timestamp1 - $timestamp2; 
             $dias_diferencia = $segundos_diferencia / (60 * 60 * 24);
             return $dias_diferencia; 
-
     }
 
     /*

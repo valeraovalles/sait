@@ -34,12 +34,18 @@
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaInicio) }}
                     <div class="labels">Fecha de Inicio:</div>
-                    <div class="widgets">{{ form_widget(form.fechaInicio) }}</div>
+                    <div class="widgets">{{ form_widget(form.fechaInicio, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaFin) }}
                     <div class="labels">Fecha de Fin:</div>
-                    <div class="widgets">{{ form_widget(form.fechaFin) }}</div>
+                    <div class="widgets">{{ form_widget(form.fechaFin, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(form.montoDolares) }}
@@ -61,9 +67,18 @@
             </div>
             
         </fieldset>
-
-        
     </form>
 
     <a href="{{ path('presupuesto' , { 'id_proveedor': id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    <script type="text/javascript">
+        $(function () {
+            $(".fecha").datepicker(
+            {
+                firstDay: 1,
+                showButtonPanel: true,
+                changeYear: true,
+            }
+            );
+        });
+    </script>
 {% endblock %}

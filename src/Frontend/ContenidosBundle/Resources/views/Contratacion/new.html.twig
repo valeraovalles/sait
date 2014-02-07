@@ -53,12 +53,18 @@
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaInicio) }}
                     <div class="labels">Fecha de Inicio:</div>
-                    <div class="dato">{{ form_widget(form.fechaInicio) }}</div>
+                    <div class="widgets">{{ form_widget(form.fechaInicio, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                 <div class="form-contenedor">
-                    {{ form_errors(form.fechaFin) }}
-                    <div class="labels">Fecha de Fin:</div>
-                    <div class="dato">{{ form_widget(form.fechaFin) }}</div>
+                    {{ form_errors(form.fechaInicio) }}
+                    <div class="labels">Fecha Fin:</div>
+                    <div class="widgets">{{ form_widget(form.fechaFin, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                 
                 <div class="divisor">DATOS DE LA SOLICITUD</div>
@@ -80,8 +86,12 @@
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaPunto) }}
                     <div class="labels">Fecha del Punto de Cuenta:</div>
-                    <div class="dato">{{ form_widget(form.fechaPunto) }}</div>
+                    <div class="dato">{{ form_widget(form.fechaPunto, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
+
                 <div class="form-contenedor">
                     {{ form_errors(form.numAlcance) }}
                     <div class="labels">N&uacute;mero Alcance:</div>
@@ -90,7 +100,10 @@
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaAlcance) }}
                     <div class="labels">Fecha de Alcance:</div>
-                    <div class="dato">{{ form_widget(form.fechaAlcance) }}</div>
+                    <div class="dato">{{ form_widget(form.fechaAlcance, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
 
                 <div class="divisor">DETALLES DE LA CONTRATACI&Oacute;N</div> 
@@ -102,7 +115,10 @@
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaContrato) }}
                     <div class="labels">Fecha del Contrato:</div>
-                    <div class="dato">{{ form_widget(form.fechaContrato) }}</div>
+                    <div class="dato">{{ form_widget(form.fechaContrato, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
 
                 <div class="form-contenedor">
@@ -113,7 +129,10 @@
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaAddendum) }}
                     <div class="labels">Fecha del Addendum:</div>
-                    <div class="dato">{{ form_widget(form.fechaAddendum) }}</div>
+                    <div class="dato">{{ form_widget(form.fechaAddendum, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                 {% if tipoprov == 'COMPRAS' %}
                     <div class="form-contenedor">
@@ -136,5 +155,16 @@
 
     <a href="{{ path('contratacion', { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
 
+    
+    <script type="text/javascript">
+        $(function () {
+            $(".fecha").datepicker(
+            {
+                firstDay: 1,
+                showButtonPanel: true,
+                changeYear: true,
+            }
+            );
+        });
     </script>
 {% endblock %}
