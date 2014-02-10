@@ -5,26 +5,28 @@
         <title>{% block title %}Telesur{% endblock %}</title>
         {% block javascripts %}
 
+            <script src="{{ asset('libs/datepiker/js/jquery-1.10.2.js') }}"></script>
+            <script src="{{ asset('libs/datepiker/js/jquery-ui-1.10.4.custom.js') }}"></script>
+            <script src="{{ asset('libs/datepiker/js/jquery-ui-1.10.4.custom.min.js') }}"></script>
+            <script src="{{ asset('libs/js/jquery-1.10.2.js') }}"></script>
+            <script src="{{ asset('libs/datepiker/js/jquery-ui-datepicker-es.js') }}"></script>
 
-        
-            <script src="{{ asset('js/jquery.js') }}"></script>
-            <script src="{{ asset('js/jquery-1.10.2.js') }}"></script>
-            <script src="{{ asset('js/jquery-ui-1.10.4.custom.js') }}"></script>
-            <script src="{{ asset('js/jquery-ui-1.10.4.custom.min.js') }}"></script>
+            
             <script src="{{ asset('js/datatable.js') }}"></script>
-            <script src="{{ asset('js/jquery-ui-datepicker-es.js') }}"></script>
             <script src="{{ asset('js/general.js') }}"></script>
             <script src="{{ asset('libs/twitter-bootstrap/docs/assets/js/bootstrap.js') }}"></script>
 
         {% endblock %}
 
         {% block stylesheets %}
+
             <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css" />
             <link href="{{ asset('libs/menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('css/datatable.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('css/jquery-ui-1.10.4.custom.css') }}" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('css/jquery-ui-1.10.4.custom.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('css/datatable.css') }}" rel="stylesheet" type="text/css"/>            
             <link rel="stylesheet" href="{{ asset('libs/twitter-bootstrap/docs/assets/css/bootstrap.css') }}">
+            <link rel="stylesheet" href="{{ asset('libs/datepiker/css/redmond/jquery-ui-1.10.4.custom.css') }}">
+            <link rel="stylesheet" href="{{ asset('libs/datepiker/css/redmond/jquery-ui-1.10.4.custom.min.css') }}">
+
         {% endblock %}
     </head>
 

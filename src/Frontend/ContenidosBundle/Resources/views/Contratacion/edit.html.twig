@@ -117,7 +117,7 @@
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.numAddendum) }}
-                    <div class="labels">N&uacute;mero del Addendum:</div>
+        <div class="labels">N&uacute;mero del Addendum:</div>
                     <div class="widgets">{{ form_widget(edit_form.numAddendum) }}</div>
                 </div>
                 <div class="form-contenedor">
@@ -149,13 +149,7 @@
     </form>
     <script type="text/javascript">
         $(function () {
-            $(".fecha").datepicker(
-            {
-                firstDay: 1,
-                showButtonPanel: true,
-                changeYear: true,
-            }
-            );
+            $(".fecha").datepicker();
         });
     </script>
 {% endblock %}

@@ -72,13 +72,7 @@
     <a href="{{ path('presupuesto' , { 'id_proveedor': id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
     <script type="text/javascript">
         $(function () {
-            $(".fecha").datepicker(
-            {
-                firstDay: 1,
-                showButtonPanel: true,
-                changeYear: true,
-            }
-            );
+            $(".fecha").datepicker();
         });
     </script>
 {% endblock %}
