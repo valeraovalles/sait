@@ -161,7 +161,8 @@
         </div>
         </div>
 
-        <input type="submit" class="btn btn-primary" value="Asignar o Reasignar">
+        <input type="submit" class="btn btn-primary" value="ASIGNAR O REASIGNAR">
+        <a href="{{ path('sit_seguimiento',{'idticket':entity.id}) }}" class="btn btn-danger">SEGUIMIENTO</a>
   </div>
 </div>
 </form>
@@ -179,31 +180,6 @@
 
 
 <a class="btn btn-defaul" href="{{ path('ticket') }}">Ir a la lista</a>
-
-
-
-{#
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('ticket') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('ticket_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('ticket_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
-#}
 
 <br><br>
 {% endblock %}

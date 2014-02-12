@@ -66,7 +66,7 @@ class TicketController extends Controller
             "Buenas noches","el presente es para","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
             "urgente","esto con caracter de urgencia","con caracter de urgencia","Se agradece su valiosa colaboracion","carmen",
             "buenas tardes el motivo es para","el motivo es para","el motivo es para","por su colaboracion","por su colaboración","buen dia","Buenos tardes","camaradas","los molesto para",
-            "por el presente","estimados","...."
+            "por el presente","estimados","....","Buenas tardes:"
         );
 
         $solicitud=str_replace($eliminar, array(), $solicitud);
@@ -533,7 +533,7 @@ class TicketController extends Controller
             $entity->setEstatus(1);
 
             //GUARDO LA SOLICITUD FILTRANDO LO ESCRITO POR EL USUARIO
-            $solicitud=$this->filtrarsolicitud(strtolower($solicitud));
+            $solicitud=$this->filtrarsolicitud($solicitud);
             $solicitud=ucfirst(trim($solicitud));
             $entity->setSolicitud($solicitud);
 
