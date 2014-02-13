@@ -34,8 +34,8 @@
 
 {% if entity.estatus!=4 %}
 <form action="{{ path('ticket_asigreasig',{'id':entity.id}) }}" method="post">
-<div class="row">
-  <div class="col-md-7">
+<div class="row-fluid">
+  <div class="span7">
 {% endif %}
     <div class="formShow" style="width:85%;">
         {% if reasignado %}
@@ -116,7 +116,7 @@
     </div>
 {% if entity.estatus!=4 %}
   </div>
-  <div class="col-md-5">
+  <div class="span5">
         <div class="contenedorcatsub">
         <div class="accordion" id="accordion2">
           <div class="accordion-group">
@@ -161,8 +161,7 @@
         </div>
         </div>
 
-        <input type="submit" class="btn btn-primary" value="ASIGNAR O REASIGNAR">
-        <a href="{{ path('sit_seguimiento',{'idticket':entity.id}) }}" class="btn btn-danger">SEGUIMIENTO</a>
+        <input type="submit" class="btn btn-primary" value="Asignar o Reasignar">
   </div>
 </div>
 </form>
@@ -179,8 +178,32 @@
     </div>
 
 
-<a class="btn btn-default" href="{{ path('ticket') }}">Ir a la lista</a>
+<a class="btn btn-defaul" href="{{ path('ticket') }}">Ir a la lista</a>
 
+
+
+{#
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('ticket') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('ticket_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('ticket_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+#}
 
 <br><br>
 {% endblock %}
