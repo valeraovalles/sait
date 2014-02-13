@@ -1,0 +1,56 @@
+<table cellpadding="0" class="table table-bordered" style="font-size: 12px;">
+        <tr>
+            <th>Solicitud:</th>
+            <td colspan="3">{{ ticket.solicitud}}</td>
+        </tr>
+        {% if ticket.estatus==4 %}
+            <tr>
+                <th>Solución:</th>
+                <td>{{ ticket.solucion}}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <th>Solicitante:</th>
+            <td>{{ ticket.solicitante.primernombre }} {{ ticket.solicitante.primerapellido }}</td>
+            <th>Extensión</th>
+            <td>{{ ticket.solicitante.extension }}</td>
+        </tr>
+        <tr>
+            <th>Fecha solicitud:</th>
+            <td>{{ ticket.fechasolicitud|date("d-m-Y") }}</td>
+            <th>Hora solicitud:</th>
+            <td>{{ ticket.horasolicitud|date("G:i:s") }}</td>
+        </tr>
+        <tr>
+            <th>Categoria: </th>
+            <td>{{ ticket.categoria.categoria|upper }}{% if ticket.estatus!=4 %}<a href="{{ path('ticket_asignarcatsub',{'id':ticket.id}) }}"> <span class="icon-edit"></span></a>{% endif %}</td>
+            <th>Subcategoria:</th>
+            <td>{{ ticket.subcategoria.subcategoria|upper }}</td>
+        </tr>
+        {% if ticket.estatus==4 %}
+            <tr>
+                <th>Fecha solución:</th>
+                <td>{{ ticket.fechasolucion|date("d-m-Y") }}</td>
+                <th>Hora solución:</th>
+                <td>{{ ticket.horasolucion|date("G:i:s") }}</td>
+            </tr>
+        {% endif %}
+            
+        {% if ticket.archivo %}
+            <tr>
+                <th>Archivo:</th>
+                <td>
+                    {% set extension =  ticket.archivo|split(".") %}
+
+                    {% if extension[1]=='jpg' or extension[1]=='jpeg' or extension[1]=='png' or extension[1]=='gif'  %}
+                        <a data-toggle="modal" href="#myModal">
+                            <img class="img-rounded" src="{{ asset('uploads/sit/') }}{{ ticket.archivo }}" width="150px">
+                        </a>
+                    {% else %}
+                        <a href="{{ asset('uploads/sit/') }}/{{ ticket.archivo }}">DESCARGA ARCHIVO {{ extension[1]|upper }}</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endif %}
+
+    </table>
