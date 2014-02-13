@@ -34,6 +34,11 @@ class SeguimientoController extends Controller
     public function seguimientoprincipalAction($idticket)
     {
         $em = $this->getDoctrine()->getManager();
+        
+        $consulta = $em->createQuery('update SitBundle:Ticket t set t.estatus= 5 WHERE t.id = :id');
+        $consulta->setParameter('id', $idticket);
+        $consulta->execute();
+
         $ticket =  $em->getRepository('SitBundle:Ticket')->find($idticket);
         return $this->render('SitBundle:Seguimiento:principal.html.twig',array('ticket'=>$ticket));
         
