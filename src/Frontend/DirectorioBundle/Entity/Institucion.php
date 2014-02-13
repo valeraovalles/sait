@@ -47,7 +47,7 @@ class Institucion
     /**
      * @var string
      *
-     * @ORM\Column(name="telfinst", type="string", length=30, nullable=false)
+     * @ORM\Column(name="telfinst", type="string", length=100, nullable=false)
      */
     private $telfinst;
 
