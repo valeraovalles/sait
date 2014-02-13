@@ -1,3 +1,13 @@
+################################################################################
+sit_seguimiento:
+    pattern:  /seguimiento/{idticket}
+    defaults: { _controller: SitBundle:Seguimiento:inicio }
+    
+sit_seguimientoprincipal:
+    pattern:  /seguimientoprincipal/{idticket}
+    defaults: { _controller: SitBundle:Seguimiento:seguimientoprincipal }
+
+################################################################################
 sit_homepage:
     pattern:  /inicio
     defaults: { _controller: SitBundle:Default:index }
