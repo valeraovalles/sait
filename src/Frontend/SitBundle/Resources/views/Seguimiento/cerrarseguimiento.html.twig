@@ -1,0 +1,56 @@
+{% extends '::sit.html.twig' %}
+ 
+{% block title %}Sit{% endblock %}
+
+
+{% block titulobanner %}
+    SEGUIMIENTO
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+
+    <div class="titulo">CERRAR SEGUIMIENTO</div>
+  
+    {% if error!=null %}
+    <div class="alert alert-danger errores" style="width:80%; text-align: left;">
+        <div><b>Alerta! Ha ocurrido un error en al enviar el correo:</b><br><br></div>
+        {% for e in error %}<div><ul><li>{{ e }}</li></ul></div>{% endfor %}
+    </div>
+    {% endif %}
+    <form novalidate method="post" action="{{ path('sit_guardacerrarseguimiento',{'idticket':ticket.id}) }}">
+    <div class="formShow" style="width:85%;">
+        <div class="contenedorform">
+            <div class="labelform">Solicitante:</div>
+            <div class="widgetform">{{ ticket.solicitante.primernombre }} {{ ticket.solicitante.primerapellido }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Solicitud:</div>
+            <div class="widgetform">{{ ticket.solicitud}}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Extensión:</div>
+            <div class="widgetform">{{ ticket.solicitante.extension }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha solicitud:</div>
+            <div class="widgetform">{{ ticket.fechasolicitud|date("d-m-Y") }}</div>
+        </div>
+
+        <div class="contenedorform">
+            <div class="labelform">Hora solicitud:</div>
+            <div class="widgetform">{{ ticket.horasolicitud|date("G:i:s") }}</div>
+        </div>
+        
+            <div class="contenedorform">
+                <div class="labelform">Solución: </div>
+                <div class="widgetform"><textarea name='solucion'></textarea></div>
+            </div>
+    </div>
+     <br>
+        <a href="{{ path('sit_seguimientoprincipal',{'idticket':ticket.id}) }}" class="btn btn-primary">VOLVER</a> | 
+        <input type='submit' class="btn btn-danger" onclick="return confirm('¿Desea continuar?')" value='CERRAR'>
+    </form>
+    
+{% endblock %}

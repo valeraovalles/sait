@@ -171,11 +171,11 @@ table.display td.center {
 
 
 #tablalista{
-    font-size: 13px;
+    font-size: 12px;
 }
 
-#tablalistaespecial{
-    font-size: 13px;
+#tablalista th{
+    text-align: center;
 }
 
 #tablalistaespecial th{

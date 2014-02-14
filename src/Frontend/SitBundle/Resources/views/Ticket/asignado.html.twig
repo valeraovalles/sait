@@ -26,7 +26,7 @@
     {% endfor %}
 
 
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table class="table table-striped" id="tablalista">
         <thead>
             <tr>
                 <th>Id</th>
@@ -56,7 +56,7 @@
                 </td>
                 <td>
  
-                    <a href="{{ path('ticket_showasignado', { 'id': entity.id }) }}"><span class="icon-search"></span></a>
+                    <a href="{{ path('ticket_showasignado', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
 
                 </td>
             </tr>

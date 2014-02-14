@@ -50,7 +50,7 @@ class Seguimiento
     /**
      * @var string
      *
-     * @ORM\Column(name="correo", type="datetime", nullable=false)
+     * @ORM\Column(name="fecha", type="datetime", nullable=false)
      */
     private $fecha;
 
@@ -64,7 +64,12 @@ class Seguimiento
      */
     private $responsable;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="archivo", type="string", length=100, nullable=true)
+     */
+    private $archivo; 
     /**
      * Get id
      *
@@ -104,7 +109,7 @@ class Seguimiento
      * @param \Administracion\UsuarioBundle\Entity\Perfil $ticket
      * @return Operador
      */
-    public function setTicket(\Administracion\UsuarioBundle\Entity\Perfil $ticket = null)
+    public function setTicket(\Frontend\SitBundle\Entity\Ticket $ticket = null)
     {
         $this->ticket = $ticket;
     
@@ -189,6 +194,29 @@ class Seguimiento
     public function getFecha()
     {
         return $this->fecha;
-    }    
+    }  
+    
+    /**
+     * Set archivo
+     *
+     * @param string $archivo
+     * @return Ticket
+     */
+    public function setArchivo($archivo)
+    {
+        $this->archivo = $archivo;
+    
+        return $this;
+    }
+
+    /**
+     * Get archivo
+     *
+     * @return string 
+     */
+    public function getArchivo()
+    {
+        return $this->archivo;
+    }
 }
 
