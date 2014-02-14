@@ -175,14 +175,24 @@
 {% endif %}
 
 
-    <div style="width:800px;left:44%;" id="myModal" class="modal hide fade" tabindex="5" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-body">
-            <a href="/sait/web/libs/scripts/forzardescarga.php?archivo={{ entity.archivo }}&ruta=../../uploads/sit/"><img class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ entity.archivo }}"></a>
-        </div>
-        <div class="modal-footer">
-          <button class="btn" data-dismiss="modal">Cerrar</button>
-        </div>
+<div  class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width:800px">
+    <div class="modal-content" style="width:800px">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">DESCARGA IMAGEN</h4>
+      </div>
+      <div class="modal-body">
+        <a href="/sait/web/libs/scripts/forzardescarga.php?archivo={{ entity.archivo }}&ruta=../../uploads/sit/"><img width="400px" class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ entity.archivo }}"></a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+      </div>
     </div>
+  </div>
+</div>
+    
+    
+
 
     <br>
 <a class="btn btn-default" href="{{ path('ticket') }}">IR A LA LISTA</a>{% if entity.estatus==6 %} 

@@ -549,23 +549,13 @@ class TicketController extends Controller
                 $extension = $file->guessExtension();
                 $nombre=$file->getClientOriginalName();
                 $nombre=explode(".", $nombre);
+                $extension=$nombre[1];
                 $nombre=$nombre[0];
 
-                //valido tamaño
-                if ($tamaño>2000) {
-                    $this->get('session')->getFlashBag()->add('alert', 'El archivo no puede ser mayor a 2MB.');
-
-                    return $this->render('SitBundle:Default:index.html.twig', array(
-                        'form'   => $form->createView(),
-                        'form2'   => $form2->createView(),
-                        'ticketusuario'=>$ticketusuario,
-                        'datosusuario'=>$datosusuario
-                    ));
-
-                }
-                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf');
+                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf','zip','rar','JPG','PNG');
+         
                 //valido las extensiones
-                if (!array_search($extension,$extensiones)) {
+                if (in_array($extension,$extensiones)==false) {
                     $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
 
                     return $this->render('SitBundle:Default:index.html.twig', array(
