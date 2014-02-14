@@ -450,20 +450,22 @@ class TicketController extends Controller
 
         //cuento la cantidad de tickets por unidad
         $tickets = $em->getRepository('SitBundle:Ticket')->findAll();
-        $contador[1]['nuevo']=0;$contador[1]['asignado']=0;$contador[1]['cerrado']=0;
-        $contador[2]['nuevo']=0;$contador[2]['asignado']=0;$contador[2]['cerrado']=0;
-        $contador[3]['nuevo']=0;$contador[3]['asignado']=0;$contador[3]['cerrado']=0;
-        $contador[4]['nuevo']=0;$contador[4]['asignado']=0;$contador[4]['cerrado']=0;
+        $contador[1]['nuevo']=0;$contador[1]['asignado']=0;$contador[1]['cerrado']=0;$contador[1]['seguimiento']=0;
+        $contador[2]['nuevo']=0;$contador[2]['asignado']=0;$contador[2]['cerrado']=0;$contador[2]['seguimiento']=0;
+        $contador[3]['nuevo']=0;$contador[3]['asignado']=0;$contador[3]['cerrado']=0;$contador[3]['seguimiento']=0;
+        $contador[4]['nuevo']=0;$contador[4]['asignado']=0;$contador[4]['cerrado']=0;$contador[4]['seguimiento']=0;
+        
 
         foreach ($tickets as $t){ 
             if($t->getEstatus()!='3'){
-
                 if($t->getEstatus()=='1')
                     $contador[$t->getUnidad()->getId()]['nuevo']=$contador[$t->getUnidad()->getId()]['nuevo']+1;
                 else if($t->getEstatus()=='2')
                     $contador[$t->getUnidad()->getId()]['asignado']=$contador[$t->getUnidad()->getId()]['asignado']+1;
-                else if($t->getEstatus()=='4')
+                else if($t->getEstatus()=='4' or $t->getEstatus()=='6')
                     $contador[$t->getUnidad()->getId()]['cerrado']=$contador[$t->getUnidad()->getId()]['cerrado']+1;
+                else if($t->getEstatus()=='5')
+                    $contador[$t->getUnidad()->getId()]['seguimiento']=$contador[$t->getUnidad()->getId()]['seguimiento']+1;
             }
             
         }
@@ -701,14 +703,14 @@ class TicketController extends Controller
     {
 
         $datos=$request->request->all();
-        $datos=$datos['subcat'];
-        $ids=explode("-", $datos);
-
-        if(empty($datos)){
+        if(isset($datos['subcat'])){
+            $datos=$datos['subcat'];
+            $ids=explode("-", $datos);
+        }
+        else{
             $this->get('session')->getFlashBag()->add('alert', 'Debe seleccionar una subcategoria.');
             return $this->redirect($this->generateUrl('ticket_asignarcatsub', array('id' => $id)));
         }
-
 
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery('update SitBundle:Ticket t set t.categoria= :idcat, t.subcategoria= :idsub WHERE t.id = :id');

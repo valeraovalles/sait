@@ -15,7 +15,7 @@
         {% if usuarioticket %}
         <br>
 
-        <h5>{% if entity.estatus!=4 %}ASIGNADO A{% else %}CERRADO POR{% endif %} {{ usuarioticket.primernombre|upper }} {{ usuarioticket.primerapellido|upper }}</h5>
+        <h5>{% if entity.estatus!=4 and entity.estatus!=6 %}ASIGNADO A{% else %}CERRADO POR{% endif %} {{ usuarioticket.primernombre|upper }} {{ usuarioticket.primerapellido|upper }}</h5>
         {% endif %}
 
     </div>
@@ -32,12 +32,12 @@
         </div>
     {% endfor %}
 
-{% if entity.estatus!=4 %}
+{% if entity.estatus!=4 and entity.estatus!=6 %}
 <form action="{{ path('ticket_asigreasig',{'id':entity.id}) }}" method="post">
-<div class="row-fluid">
-  <div class="span7">
+<div class="row">
+  <div class="col-md-7">
 {% endif %}
-    <div class="formShow" style="width:85%;">
+    <div class="formShow" style="width:90%;">
         {% if reasignado %}
         <div class="contenedorform">
             <div class="labelform">Reasignado por:</div>
@@ -62,7 +62,7 @@
             <div class="widgetform">{{ entity.horasolicitud|date("G:i:s") }}</div>
         </div>
 
-        {% if entity.estatus==4 %}
+        {% if entity.estatus==4 and entity.estatus!=6 %}
             <div class="contenedorform">
                 <div class="labelform">Fecha solución:</div>
                 <div class="widgetform">{{ entity.fechasolucion|date("d-m-Y") }}</div>
@@ -114,19 +114,23 @@
         </div>
         {% endif %}
     </div>
-{% if entity.estatus!=4 %}
+{% if entity.estatus!=4 and entity.estatus!=6 %}
   </div>
-  <div class="span5">
+  <div class="col-md-5">
         <div class="contenedorcatsub">
         <div class="accordion" id="accordion2">
-          <div class="accordion-group">
+            
+          <div class="panel-group" id="accordion">
             <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                ASIGNAR TICKET
-              </a>
-            </div>
-            <div id="collapseOne" class="accordion-body collapse in">
-              <div class="accordion-inner">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        ASIGNAR TICKET
+                      </a>
+                    </h4>
+                  </div>
+                   <div id="collapseOne" class="panel-collapse collapse in" style="padding-left: 10px;">
                 {% for usu in usuariosunidad %}
                     {% if usuarioticket %}
                         {% for usuarios in usu.user if usuarios.id!= usuarioticket.id %}
@@ -140,18 +144,20 @@
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
-              </div>
             </div>
           </div>
+        </div>
           <br><br>
-          <div class="accordion-group">
             <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                REASIGNAR TICKET
-              </a>
-            </div>
-            <div id="collapseTwo" class="accordion-body collapse in">
-              <div class="accordion-inner">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        REASIGNAR TICKET
+                      </a>
+                    </h4>
+                  </div>
+                   <div id="collapseTwo" class="panel-collapse collapse in" style="padding-left: 10px;">
                 {% for uni in unidad if uni.id!=idunidad %}
                 <div class="situnidad"><input type="radio" name="datos" value="reasignar-{{ uni.id }}"> {{ uni.descripcion }}</div>
                 {% endfor %}
@@ -159,10 +165,11 @@
             </div>
           </div>
         </div>
-        </div>
 
-        <input type="submit" class="btn btn-primary" value="Asignar o Reasignar">
-  </div>
+            <br><input type="submit" class="btn btn-primary" value="ASIGNAR O REASIGNAR">
+        </div>
+      </div>
+</div>
 </div>
 </form>
 {% endif %}
@@ -177,8 +184,12 @@
         </div>
     </div>
 
-
-<a class="btn btn-defaul" href="{{ path('ticket') }}">Ir a la lista</a>
+    <br>
+<a class="btn btn-default" href="{{ path('ticket') }}">IR A LA LISTA</a>{% if entity.estatus==6 %} 
+ | <a class="btn btn-primary" href="{{ path('sit_seguimientoprincipal',{'idticket':entity.id}) }}">IR AL HISTÓRICO DE SEGUIMIENTO</a>
+{% elseif entity.estatus==1 %}
+ | <a class="btn btn-danger" href="{{ path('sit_seguimiento',{'idticket':entity.id}) }}">INICIAR SEGUIMIENTO</a>
+{% endif %}
 
 
 
