@@ -219,7 +219,7 @@ class SeguimientoController extends Controller
         $horaactual=new \DateTime(\date("G:i:s"));
 
         //actualizo campos en ticket
-        $query = $em->createQuery('update SitBundle:Ticket t set t.solucion= :solucion, t.fechasolucion= :fechasolucion, t.horasolucion= :horasolucion, t.estatus=4 WHERE t.id = :idticket');
+        $query = $em->createQuery('update SitBundle:Ticket t set t.solucion= :solucion, t.fechasolucion= :fechasolucion, t.horasolucion= :horasolucion, t.estatus=6 WHERE t.id = :idticket');
         $query->setParameter('fechasolucion', $fechactual);
         $query->setParameter('horasolucion', $horaactual);
         $query->setParameter('solucion', $datos['solucion']);
