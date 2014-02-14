@@ -34,7 +34,7 @@
 	        {{ form_widget(form._token) }}
 	        {{ form_widget(form2._token) }}
 
-			<div class="formShowSit">
+		<div class="formShowSit">
 	            <div class="contenedorformSit">
           		    <div class="text-danger"><li>{{ form_errors(form.unidad) }}</li></div>
 	                <div class="labelformSit">Unidad:</div>
@@ -49,13 +49,12 @@
 	            	<div class="text-danger"><li>{{ form_errors(form2.extension) }}</li></div>
 	                <div class="labelformSit">Ext. Solicitante:</div>
 	                <div class="widgetformSit">{{ form_widget(form2.extension, { 'attr': {'value': datosusuario.extension} }) }}</div>
-	            </div>
+                    </div><br>
 	   	        <div class="contenedorformSit">
 	   	        	<div class="text-danger"><li>{{ form_errors(form.file) }}</li></div>
-	                <div class="labelformSit">Archivo:</div>
-	                <div class="widgetformSit">{{ form_widget(form.file) }}</div>
-	            </div>
-			</div>
+                                <div style="text-align:center;padding-left: 120px;">{{ form_widget(form.file) }}</div>
+                        </div>
+		</div>
 
             <button class="btn btn-large btn-primary" type="submit">Solicitar</button>
 	    </form>
