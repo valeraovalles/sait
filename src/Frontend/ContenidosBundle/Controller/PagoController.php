@@ -48,7 +48,7 @@ class PagoController extends Controller
         ));
     }
 
-
+ 
     //calcula los dias entre dos fechas
     public function dias($fecha1, $fecha2){
 
@@ -57,6 +57,32 @@ class PagoController extends Controller
             $segundos_diferencia = $timestamp1 - $timestamp2; 
             $dias_diferencia = $segundos_diferencia / (60 * 60 * 24);
             return $dias_diferencia; 
+    }
+
+    /*
+    *
+    * FUNCION PARA VER EL DETALLE  DEL SEGUIMIENTO DEL PAGO (RUTA Y TIEMPOS)
+    *
+    */
+    public function rutapagoAction()
+    {          
+        $id_tipoproveedor = 1;
+        $estatus = 'A';
+
+        $dql = "select d from ContenidosBundle:Datosproveedor d 
+                where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
+        $consulta = $em->createQuery($dql)->setParameters(
+                                                            array(
+                                                                    'id_tipoproveedor'=> $id_tipoproveedor, 
+                                                                    'estatus' => $estatus,
+                                                                 )
+
+
+                                                         );
+        $entities = $consulta->getResult();
+        return $this->render('ContenidosBundle:Pago:rutapago.html.twig', array(
+            'entities' => $entities
+        ));
     }
 
     /*
@@ -367,7 +393,6 @@ class PagoController extends Controller
 
         $editForm1 = $this->createForm(new ControlpagounidadType(), $entity1[0]);      
         $deleteForm1 = $this->createDeleteForm($entity1);
-
 
         //RETORNO A LA VISTA
         return $this->render('ContenidosBundle:Pago:control.html.twig', array(

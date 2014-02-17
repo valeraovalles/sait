@@ -2,7 +2,7 @@
    <ul>   
       <li class='active'><a href='{{ path('datosproveedor') }}'><span>INICIO</span></a></li>
    
-
+{# PROVEEDORES SEGUN ROLES #}
       {% if is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_CONTENIDOS') or  is_granted('ROLE_CONTENIDOS_EQUIPOS') %}
          <li class='has-sub'><a href='{{ path('datosinactivos') }}'><span>INACTIVOS</span></a></li>
 
@@ -19,6 +19,41 @@
          </li>
       {% endif %}
 
+{# CREAR CONTRATACION #}
+      {% if is_granted('ROLE_CONTENIDOS_CONTRATACION') or is_granted('ROLE_CONTENIDOS_ADMIN') %}
+         <li class='has-sub'><a href= '#' ><span>CONTRATACIONES</span></a>
+            <ul>
+               <li><a href='{{ path('datosinactivos') }}'><span>VER CONTRATACION</span></a></li>
+               <li><a href='{{ path('datosinactivos') }}'><span>CREAR CONTRATACION</span></a></li>
+            </ul>
+         </li>
+      {% endif %}
+
+{# PAGOS Y CONTROL DEL PAGO SEGUN ROLES #}
+      {% if is_granted('ROLE_CONTENIDOS_PAGOS') %}
+         <li class='has-sub'><a href= '#' ><span>PAGOS</span></a>
+            <ul>
+               <li><a href='{{ path('datosinactivos') }}'><span>RUTA DEL PAGO</span></a></li>
+            </ul>
+         </li>
+      {% endif %}
+      {% if is_granted('ROLE_CONTENIDOS_RRHH') or is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_DIRECTORA') or is_granted('ROLE_CONTENIDOS_PRESUPUESTO') or is_granted('ROLE_CONTENIDOS_FINANZAS') or is_granted('ROLE_CONTENIDOS_TESORERIA') %}
+         <li class='has-sub'><a href= '#' ><span> CONTROL DE PAGOS</span></a>
+            <ul>
+               <li><a href='{{ path('datosinactivos') }}'><span>VER RUTA</span></a></li>
+            </ul>
+         </li>
+      {% endif %}
+      {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}
+         <li class='has-sub'><a href= '#' ><span>PAGOS</span></a>
+            <ul>
+               <li><a href='{{ path('datosinactivos') }}'><span>VER RUTA</span></a></li>
+               <li><a href='{{ path('datosinactivos') }}'><span>AÑADIR FECHA A LA RUTA</span></a></li>
+            </ul>
+         </li>
+      {% endif %}
+
+{# EDITAR DATOS SEGUN ROLES #}
       {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
          <li class='has-sub'><a href='#'><span>EDITAR DATOS</span></a>
             <ul>

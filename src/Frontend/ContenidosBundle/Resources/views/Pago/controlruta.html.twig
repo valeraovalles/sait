@@ -4,7 +4,7 @@
 {% block titulobanner %}
    PAGO - CONTROL
 {% endblock %}
-    
+
 {% block body -%}
     {{ parent() }}
 
@@ -25,47 +25,53 @@
                 {% if estatus == 1 and is_granted('ROLE_CONTENIDOS_ADMIN') %}
                
                     <div class="form-contenedor">
-                        <div class="labels">Días en RRHH:</div>
-                        <div class="dato">{{ dias_diferencia.1 }}</div>
+                        <div class="labels">RRHH:</div>
+                        <div class="dato">{{ dias_diferencia.1 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">TOTAL DIAS:</div>
-                        <div class="dato">{{ dias_diferencia.8 }}</div>
+                        <div class="labels">TOTAL:</div>
+                        <div class= "dato">
+                            <span class="label label-info">{{ dias_diferencia.8 }} D&iacute;as</span>
+                        </div>                        
                     </div>
 
                 {% elseif estatus == 2 and is_granted('ROLE_CONTENIDOS_ADMIN') %}
 
                     <div class="form-contenedor">
-                        <div class="labels">Días en Unidad de COMPRAS:</div>
-                        <div class="dato">{{ dias_diferencia.2 }}</div>
+                        <div class="labels">COMPRAS:</div>
+                        <div class="dato">{{ dias_diferencia.2 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">TOTAL DIAS:</div>
-                        <div class="dato">{{ dias_diferencia.8 }}</div>
+                        <div class="labels">TOTAL:</div>
+                        <div class= "dato">
+                            <span class="label label-info">{{ dias_diferencia.8 }} D&iacute;as</span>
+                        </div>                        
                     </div>
 
                 {% elseif estatus == 3 and is_granted('ROLE_CONTENIDOS_ADMIN') %}
                     {% if fecha.1 != NULL %}
                         <br>
                         <div class="form-contenedor">
-                            <div class="labels">Días en RRHH:</div>
-                            <div class="dato">{{ dias_diferencia.1 }}</div>
+                            <div class="labels">RRHH:</div>
+                            <div class="dato">{{ dias_diferencia.1 }} D&iacute;as</div>
                         </div>
                     {% elseif fecha.2 != NULL %}
                         <br>
                         <div class="form-contenedor">
-                            <div class="labels">Días en COMPRAS:</div>
-                            <div class="dato">{{ dias_diferencia.2 }}</div>
+                            <div class="labels">COMPRAS:</div>
+                            <div class="dato">{{ dias_diferencia.2 }} D&iacute;as</div>
                         </div>
                     {% endif %}
                     <div class="form-contenedor">
-                        <div class="labels">Días en OFICINA DIRECTORA:</div>
-                        <div class="dato">{{ dias_diferencia.3 }}</div>
+                        <div class="labels">OFICINA DIRECTORA:</div>
+                        <div class="dato">{{ dias_diferencia.3 }} D&iacute;as</div>
                     </div>
 
                     <div class="form-contenedor">
-                        <div class="labels">TOTAL DIAS:</div>
-                        <div class="dato">{{ dias_diferencia.8 }}</div>
+                        <div class="labels">TOTAL:</div>
+                        <div class= "dato">
+                            <span class="label label-info">{{ dias_diferencia.8 }} D&iacute;as</span>
+                        </div>                        
                     </div>
 
                 {% elseif estatus == 4 and is_granted('ROLE_CONTENIDOS_ADMIN') %}
@@ -73,27 +79,29 @@
                     {% if fecha.1 != NULL %}
                         <br>
                         <div class="form-contenedor">
-                            <div class="labels">Días en RRHH:</div>
-                            <div class="dato">{{ dias_diferencia.1 }}</div>
+                            <div class="labels">RRHH:</div>
+                            <div class="dato">{{ dias_diferencia.1 }} D&iacute;as</div>
                         </div>
                     {% elseif fecha.2 != NULL %}
                         <br>
                         <div class="form-contenedor">
-                            <div class="labels">Días en COMPRAS:</div>
-                            <div class="dato">{{ dias_diferencia.2 }}</div>
+                            <div class="labels">COMPRAS:</div>
+                            <div class="dato">{{ dias_diferencia.2 }} D&iacute;as</div>
                         </div>
                     {% endif %}
                     <div class="form-contenedor">
-                        <div class="labels">Días en OFICINA DIRECTORA:</div>
-                        <div class="dato">{{ dias_diferencia.3 }}</div>
+                        <div class="labels">OFICINA DIRECTORA:</div>
+                        <div class="dato">{{ dias_diferencia.3 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">Días en Unidad de PRESUPUESTO:</div>
-                        <div class="dato">{{ dias_diferencia.4 }}</div>
+                        <div class="labels">PRESUPUESTO:</div>
+                        <div class="dato">{{ dias_diferencia.4 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">TOTAL DIAS:</div>
-                        <div class="dato">{{ dias_diferencia.8 }}</div>
+                        <div class="labels">TOTAL:</div>
+                        <div class= "dato">
+                            <span class="label label-info">{{ dias_diferencia.8 }} D&iacute;as</span>
+                        </div>                        
                     </div>
 
                 {% elseif estatus == 5 and is_granted('ROLE_CONTENIDOS_ADMIN') %}
@@ -101,31 +109,33 @@
                     {% if fecha.1 != NULL %}
                         <br>
                         <div class="form-contenedor">
-                            <div class="labels">Días en RRHH:</div>
-                            <div class="dato">{{ dias_diferencia.1 }}</div>
+                            <div class="labels">RRHH:</div>
+                            <div class="dato">{{ dias_diferencia.1 }} D&iacute;as</div>
                         </div>
                     {% elseif fecha.2 != NULL %}
                         <br>
                         <div class="form-contenedor">
-                            <div class="labels">Días en COMPRAS:</div>
-                            <div class="dato">{{ dias_diferencia.2 }}</div>
+                            <div class="labels">COMPRAS:</div>
+                            <div class="dato">{{ dias_diferencia.2 }} D&iacute;as</div>
                         </div>
                     {% endif %}
                     <div class="form-contenedor">
-                        <div class="labels">Días en OFICINA DIRECTORA:</div>
-                        <div class="dato">{{ dias_diferencia.3 }}</div>
+                        <div class="labels">OFICINA DIRECTORA:</div>
+                        <div class="dato">{{ dias_diferencia.3 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">Días en Unidad de PRESUPUESTO:</div>
-                        <div class="dato">{{ dias_diferencia.4 }}</div>
+                        <div class="labels">PRESUPUESTO:</div>
+                        <div class="dato">{{ dias_diferencia.4 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">Días en Unidad de FINANZAS:</div>
-                        <div class="dato">{{ dias_diferencia.5 }}</div>
+                        <div class="labels">FINANZAS:</div>
+                        <div class="dato">{{ dias_diferencia.5 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">TOTAL DIAS:</div>
-                        <div class="dato">{{ dias_diferencia.8 }}</div>
+                        <div class="labels">TOTAL:</div>
+                        <div class= "dato">
+                            <span class="label label-info">{{ dias_diferencia.8 }} D&iacute;as</span>
+                        </div>                        
                     </div>
 
                 {% elseif estatus == 6 and is_granted('ROLE_CONTENIDOS_ADMIN') %}
@@ -133,31 +143,37 @@
                     {% if fecha.1 != NULL %}
                         <br>
                         <div class="form-contenedor">
-                            <div class="labels">Días en RRHH:</div>
-                            <div class="dato">{{ dias_diferencia.1 }}</div>
+                            <div class="labels">RRHH:</div>
+                            <div class="dato">{{ dias_diferencia.1 }} D&iacute;as</div>
                         </div>
                     {% elseif fecha.2 != NULL %}
                         <br>
                         <div class="form-contenedor">
-                            <div class="labels">Días en COMPRAS:</div>
-                            <div class="dato">{{ dias_diferencia.2 }}</div>
+                            <div class="labels">COMPRAS:</div>
+                            <div class="dato">{{ dias_diferencia.2 }} D&iacute;as</div>
                         </div>
                     {% endif %}
                     <div class="form-contenedor">
-                        <div class="labels">Días en OFICINA DIRECTORA:</div>
-                        <div class="dato">{{ dias_diferencia.3 }}</div>
+                        <div class="labels">OFICINA DIRECTORA:</div>
+                        <div class="dato">{{ dias_diferencia.3 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">Días en Unidad de PRESUPUESTO:</div>
-                        <div class="dato">{{ dias_diferencia.4 }}</div>
+                        <div class="labels">PRESUPUESTO:</div>
+                        <div class="dato">{{ dias_diferencia.4 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">Días en Unidad de FINANZAS:</div>
-                        <div class="dato">{{ dias_diferencia.5 }}</div>
+                        <div class="labels">FINANZAS:</div>
+                        <div class="dato">{{ dias_diferencia.5 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">TOTAL DIAS:</div>
-                        <div class="dato">{{ dias_diferencia.8 }}</div>
+                        <div class="labels">TESORERÍA:</div>
+                        <div class="dato">{{ dias_diferencia.6 }} D&iacute;as</div>
+                    </div>
+                    <div class="form-contenedor">
+                        <div class="labels">TOTAL:</div>
+                        <div class= "dato">
+                            <span class="label label-info">{{ dias_diferencia.8 }} D&iacute;as</span>
+                        </div>                        
                     </div>
 
                 {% elseif estatus == 7 and is_granted('ROLE_CONTENIDOS_ADMIN') %}
@@ -165,39 +181,43 @@
                     {% if fecha.1 != NULL %}
                         <br>
                         <div class="form-contenedor">
-                            <div class="labels">Días en RRHH:</div>
-                            <div class="dato">{{ dias_diferencia.1 }}</div>
+                            <div class="labels">RRHH:</div>
+                            <div class="dato">{{ dias_diferencia.1 }} D&iacute;as</div>
                         </div>
                     {% elseif fecha.2 != NULL %}
                         <br>
                         <div class="form-contenedor">
-                            <div class="labels">Días en COMPRAS:</div>
-                            <div class="dato">{{ dias_diferencia.2 }}</div>
+                            <div class="labels">COMPRAS:</div>
+                            <div class="dato">{{ dias_diferencia.2 }} D&iacute;as</div>
                         </div>
                     {% endif %}
                     <div class="form-contenedor">
-                        <div class="labels">Días en OFICINA DIRECTORA:</div>
-                        <div class="dato">{{ dias_diferencia.3 }}</div>
+                        <div class="labels">OFICINA DIRECTORA:</div>
+                        <div class="dato">{{ dias_diferencia.3 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">Días en Unidad de PRESUPUESTO:</div>
-                        <div class="dato">{{ dias_diferencia.4 }}</div>
+                        <div class="labels">PRESUPUESTO:</div>
+                        <div class="dato">{{ dias_diferencia.4 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">Días en Unidad de FINANZAS:</div>
-                        <div class="dato">{{ dias_diferencia.5 }}</div>
+                        <div class="labels">FINANZAS:</div>
+                        <div class="dato">{{ dias_diferencia.5 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">Días en Unidad de TESORERÍA:</div>
-                        <div class="dato">{{ dias_diferencia.6 }}</div>
+                        <div class="labels">TESORERÍA:</div>
+                        <div class="dato">{{ dias_diferencia.6 }} D&iacute;as</div>
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">TOTAL DIAS:</div>
-                        <div class="dato">{{ dias_diferencia.8 }}</div>
+                        <div class="labels">TOTAL:</div>
+                        <div class= "dato">
+                            <span class="label label-info">{{ dias_diferencia.8 }} D&iacute;as</span>
+                        </div>                        
                     </div>
                     <div class="form-contenedor">
-                        <div class="labels">Días Entregado al Beneficiario:</div>
-                        <div class="dato">{{ dias_diferencia.7 }}</div>
+                        <div class="labels">Entregado al Beneficiario hace:</div>
+                        <div class= "dato">
+                            <span class="label label-warning">{{ dias_diferencia.7 }} D&iacute;as</span>
+                        </div
                     </div>                   
 
                 {% endif %}         

@@ -6,13 +6,13 @@
 ##########################################################################################################
 ##########################################################################################################
 datosproveedor:
-    pattern:  /proveedor/home
+    pattern:  /proveedor/show/home
     defaults: { _controller: "ContenidosBundle:Datosproveedor:index" }
 datoscompras:
     pattern: /compras/home
     defaults: { _controller: "ContenidosBundle:Datosproveedor:compras"}
 datosinformacion:
-    pattern: /informacio&nacute;n/home
+    pattern: /informacion/home
     defaults: { _controller: "ContenidosBundle:Datosproveedor:informacion" }
 datosequipos:
     pattern: /equipostelesur/home
@@ -22,29 +22,29 @@ datosinactivos:
     defaults: { _controller: "ContenidosBundle:Datosproveedor:inactivos"}
 
 datosproveedor_show:
-    pattern:  /proveedor/detalles/{id}
+    pattern:  /proveedor/show/detalles/{id}
     defaults: { _controller: "ContenidosBundle:Datosproveedor:show" }
 
 datosproveedor_new:
-    pattern:  /proveedor/nuevo
+    pattern:  /proveedor/edit/nuevo
     defaults: { _controller: "ContenidosBundle:Datosproveedor:new" }
 
 datosproveedor_create:
-    pattern:  /proveedor/crear
+    pattern:  /proveedor/edit/crear
     defaults: { _controller: "ContenidosBundle:Datosproveedor:create" }
     requirements: { _method: post }
 
 datosproveedor_edit:
-    pattern:  /proveedor/editar/{id}
+    pattern:  /proveedor/edit/editar/{id}
     defaults: { _controller: "ContenidosBundle:Datosproveedor:edit" }
 
 datosproveedor_update:
-    pattern:  /proveedor/actualizar/{id}
+    pattern:  /proveedor/edit/actualizar/{id}
     defaults: { _controller: "ContenidosBundle:Datosproveedor:update" }
     requirements: { _method: post|put }
 
 datosproveedor_delete:
-    pattern:  /proveedor/eliminar/{id}
+    pattern:  /proveedor/edit/eliminar/{id}
     defaults: { _controller: "ContenidosBundle:Datosproveedor:delete" }
 
 ##########################################################################################################
@@ -55,33 +55,33 @@ datosproveedor_delete:
 ##########################################################################################################
 ##########################################################################################################
 banco:
-    pattern:  banco/home/{id_proveedor}
+    pattern:  banco/show/home/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Banco:index" }
 
 banco_show:
-    pattern:  banco/detalles/{id_proveedor}/{id}
+    pattern:  banco/show/detalles/{id_proveedor}/{id}
     defaults: { _controller: "ContenidosBundle:Banco:show" }
 
 banco_new:
-    pattern:  banco/nuevo/{id_proveedor}
+    pattern:  banco/edit/nuevo/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Banco:new" }
 
 banco_create:
-    pattern:  banco/crear/{id_proveedor}
+    pattern:  banco/edit/crear/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Banco:create" }
     requirements: { _method: post }
 
 banco_edit:
-    pattern:  banco/editar/{id}/prueba/{id_proveedor}
+    pattern:  banco/edit/editar/{id}/prueba/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Banco:edit" }
 
 banco_update:
-    pattern:  banco/actualizar/{id}/{id_proveedor}
+    pattern:  banco/edit/actualizar/{id}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Banco:update" }
     requirements: { _method: post|put }
 
 banco_delete:
-    pattern:  banco/eliminar/{id}/{id_proveedor}
+    pattern:  banco/edit/eliminar/{id}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Banco:delete" }
 
 
@@ -93,33 +93,33 @@ banco_delete:
 ##########################################################################################################
 ##########################################################################################################
 contratacion:
-    pattern:  contratacion/home/{id_presupuesto}/{id_proveedor}
+    pattern:  contratacion/show/home/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Contratacion:index" }
 
 contratacion_show:
-    pattern:  contratacion/detalles/{id}/{id_presupuesto}/{id_proveedor}
+    pattern:  contratacion/show/detalles/{id}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Contratacion:show" }
 
 contratacion_new:
-    pattern:  contratacion/nuevo/{id_presupuesto}/{id_proveedor}
+    pattern:  contratacion/edit/nuevo/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Contratacion:new" }
 
 contratacion_create:
-    pattern:  contratacion/crear/{id_proveedor}/{id_presupuesto}
+    pattern:  contratacion/edit/crear/{id_proveedor}/{id_presupuesto}
     defaults: { _controller: "ContenidosBundle:Contratacion:create" }
     requirements: { _method: post }
 
 contratacion_edit:
-    pattern:  contratacion/editar/{id}/{id_proveedor}/{id_presupuesto}
+    pattern:  contratacion/edit/editar/{id}/{id_proveedor}/{id_presupuesto}
     defaults: { _controller: "ContenidosBundle:Contratacion:edit" }
 
 contratacion_update:
-    pattern:  contratacion/actualizar/{id}/{id_presupuesto}/{id_proveedor}
+    pattern:  contratacion/edit/actualizar/{id}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Contratacion:update" }
     requirements: { _method: post|put }
 
 contratacion_delete:
-    pattern:  contratacion/eliminar/{id}/{id_presupuesto}/{id_proveedor}
+    pattern:  contratacion/edit/eliminar/{id}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Contratacion:delete" }
 
 
@@ -131,33 +131,33 @@ contratacion_delete:
 ##########################################################################################################
 ##########################################################################################################
 pago:
-    pattern:  /pago/home/{id_contratacion}/{id_presupuesto}/{id_proveedor}
+    pattern:  pago/show/home/{id_contratacion}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:index" }
 
 pago_show:
-    pattern:  pago/detalles/{id}/{id_contratacion}/{id_proveedor}/{id_presupuesto}
+    pattern:  pago/show/detalles/{id}/{id_contratacion}/{id_proveedor}/{id_presupuesto}
     defaults: { _controller: "ContenidosBundle:Pago:show" }
 
 pago_new:
-    pattern:  pago/nuevo/{id_contratacion}/{id_presupuesto}/{id_proveedor}
+    pattern:  pago/edit/nuevo/{id_contratacion}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:new" }
 
 pago_create:
-    pattern:  pago/crear/{id_contratacion}/{tipomoneda}/{id_presupuesto}/{id_proveedor}
+    pattern:  pago/edit/crear/{id_contratacion}/{tipomoneda}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:create" }
     requirements: { _method: post }
 
 pago_edit:
-    pattern:  pago/editar/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
+    pattern:  pago/edit/editar/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:edit" }
 
 pago_update:
-    pattern:  pago/actualizar/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
+    pattern:  pago/edit/actualizar/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:update" }
     requirements: { _method: post|put }
 
 pago_delete:
-    pattern:  pago/eliminar/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
+    pattern:  pago/edit/eliminar/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:delete" }
 
 pago_control:
@@ -222,33 +222,33 @@ controlpagounidad_delete:
 ##########################################################################################################
 ##########################################################################################################
 presupuesto:
-    pattern:  /presupuesto/home/{id_proveedor}
+    pattern:  /presupuesto/show/home/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:index" }
 
 presupuesto_show:
-    pattern:  presupuesto/detalles/{id}/{id_proveedor}
+    pattern:  presupuesto/show/detalles/{id}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:show" }
 
 presupuesto_new:
-    pattern:  presupuesto/nuevo/{id_proveedor}
+    pattern:  presupuesto/edit/nuevo/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:new" }
 
 presupuesto_create:
-    pattern:  presupuesto/crear/{id_proveedor}
+    pattern:  presupuesto/edit/crear/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:create" }
     requirements: { _method: post }
 
 presupuesto_edit:
-    pattern:  presupuesto/editar/{id}/{id_proveedor}
+    pattern:  presupuesto/edit/editar/{id}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:edit" }
 
 presupuesto_update:
-    pattern:  presupuesto/actualizar/{id}/{id_proveedor}
+    pattern:  presupuesto/edit/actualizar/{id}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:update" }
     requirements: { _method: post|put }
 
 presupuesto_delete:
-    pattern:  presupuesto/eliminar/{id}/{id_proveedor}
+    pattern:  presupuesto/edit/eliminar/{id}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:delete" }
 
 
@@ -260,32 +260,32 @@ presupuesto_delete:
 ##############################
 ##############################
 presupuesto_extensionindex:
-    pattern: presupuesto/extension/home/{id_presupuesto}/{id_proveedor}
+    pattern: presupuesto/show/extension/home/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:extensionindex"}
 
 presupuesto_extensionshow:
-    pattern: presupuesto/extension/detalle/{id}/{id_presupuesto}/{id_proveedor}
+    pattern: presupuesto/show/extension/detalle/{id}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:extensionshow"}
 
 presupuesto_extensionedit:
-    pattern: presupuesto/extension/editar/{id}/{id_presupuesto}/{id_proveedor}
+    pattern: presupuesto/edit/extension/editar/{id}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:extensionedit"}
 
 presupuesto_extensionupdate:
-    pattern:  presupuesto/extension/actualizar/{id}/{id_presupuesto}/{id_proveedor}
+    pattern:  presupuesto/edit/extension/actualizar/{id}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:extensionupdate" }
     requirements: { _method: post|put }
 
 presupuesto_extensionnew:
-    pattern: presupuesto/extension/nuevo/{id_presupuesto}/{id_proveedor}
+    pattern: presupuesto/edit/extension/nuevo/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:extensionnew"}
 
 presupuesto_extensioncreate:
-    pattern: presupuesto/extension/crear/{id_presupuesto}/{id_proveedor}
+    pattern: presupuesto/edit/extension/crear/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Presupuesto:extensioncreate"}
 
 presupuesto_extensiondelete:
-    pattern:  presupuesto/extension/eliminar/{id}/{id_proveedor}/{id_presupuesto}
+    pattern:  presupuesto/edit/extension/eliminar/{id}/{id_proveedor}/{id_presupuesto}
     defaults: { _controller: "ContenidosBundle:Presupuesto:extensiondelete" }
 
 
@@ -312,16 +312,17 @@ ajax_fechas:
     pattern: /ajax/contenidos/pagos/fechas/{fechas}
     defaults: { _controller: "ContenidosBundle:Ajax:fechas"}
 
+
 ##########################################################################################################
 ##########################################################################################################
 #
-#                                DISPONIBILIDAD PRESUPUESTARIA Y DEUDAS EN CONTRATACION
+#            RUTA PARA CREAR CONTRATACIONES Y VER RUTA DE UN PAGO DE FORMA DIRECTA
 #
 ##########################################################################################################
 ##########################################################################################################
-disponibilidad_home:
-    pattern: disponibilidad/home
-    defaults: { _controller:"ContenidosBundle:Presupuesto:disponibilidadhome"}
+rutapago_formulario:
+    pattern: rutapago_formulario
+    defaults: { _controller:"ContenidosBundle:Pago:rutahome"}
 disponibilidad_show:
     pattern: disponibilidad/show
     defaults: { _controller:"ContenidosBundle:Presupuesto:disponibilidadshow"}

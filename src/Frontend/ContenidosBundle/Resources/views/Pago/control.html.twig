@@ -243,17 +243,14 @@
                                     }) }}</div>
                     </div>
                     <button type="submit" class="btn">Editar</button><br><br>
-
+                    
                 {% elseif estatus == 7 and is_granted('ROLE_CONTENIDOS_ADMIN') %}
                     <br>
                     <div class="form-contenedor">
                         {{ form_errors(edit_form1.fechaUnidadseis) }}
                         <div class="labels">Estatus del Pago:</div>
                         <div class="dato">ENTREGADO AL BENEFICIARIO</div>
-                    </div>
-                    {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}
-                        <a href="{{ path('pago_control_ruta', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="ruta del pago"><img width="50px" src="{{ asset('images/ruta.jpg')}}"></a>
-                    {% endif %}
+                    </div>                    
                 {% else %}
                     <div class="divisor">NO TIENE CREDENCIALES PARA VER EL CONTROL DEL PAGO</div>
                 {% endif %}
@@ -262,7 +259,10 @@
         </fieldset>
       
         <br>     
-        <a href="{{ path('pago', {'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>          
+        <a href="{{ path('pago', {'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+        {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}
+            <a href="{{ path('pago_control_ruta', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="ruta del pago"><img width="80px" src="{{ asset('images/ruta.jpg')}}"></a>
+        {% endif %}          
     </form>
 
     <script type="text/javascript">
