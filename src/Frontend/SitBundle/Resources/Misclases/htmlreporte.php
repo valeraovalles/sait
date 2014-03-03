@@ -201,10 +201,11 @@ class htmlreporte
         $seg = ($conta -1)-$contador ;
         $total=$cont-1;
         $seg_cerrado = $contador;
+        $seg_totales = $seg + $seg_cerrado;
 
 
         $html .="
-            <div align='center'><h4>TICKETS DE SEGUIMIENTO: Pendientes:".$seg." | Cerrados:".$seg_cerrado." </h4></div>
+            <div align='center'><h4>TICKETS DE SEGUIMIENTO: ".$seg_totales." (Pendientes:".$seg." | Cerrados:".$seg_cerrado.") </h4></div>
 
             <div align='center'><h4>TICKETS ATENDIDOS: ".$total."</h4></div>
             <div align='center' style='color:red;'>IMAGEN GRÁFICO AQUÍ</div>
