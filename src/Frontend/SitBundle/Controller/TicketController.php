@@ -32,7 +32,7 @@ class TicketController extends Controller
 
         $tickets = $em->getRepository('SitBundle:Ticket')->tickets();
 
-        $dql = "select t from SitBundle:Ticket t where t.estatus!=4 and t.estatus!=3 order by  t.estatus ASC, t.fechasolicitud DESC, t.horasolicitud DESC";
+        $dql = "select t from SitBundle:Ticket t where t.estatus!=6 and t.estatus!=4 and t.estatus!=3 order by  t.estatus ASC, t.fechasolicitud DESC, t.horasolicitud DESC";
         $query = $em->createQuery($dql);
         $tickets = $query->getResult();
 
