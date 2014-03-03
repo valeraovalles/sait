@@ -109,7 +109,7 @@ class htmlreporte
                         <b>Responsable: </b>".$value2->getresponsable()."<br>
                         <b>Tipo: </b>".$tipo."<br>
                         <b>Descripcion: </b>".ucfirst($value2->getEvento())."
-                            </div></div>";
+                            </div></div><br>";
                         $conta1++ ;
                     }
                 }
