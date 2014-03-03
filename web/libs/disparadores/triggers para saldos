@@ -1,0 +1,47 @@
+--actualiza saldo y pago al realizar modificaciones en la rendicion y guarda en auditoria
+
+	CREATE TRIGGER insdelupdaud_actualiza_saldopago_estadofondo
+	  AFTER INSERT OR UPDATE OR DELETE
+	  ON relaciongasto
+	  FOR EACH ROW
+	  EXECUTE PROCEDURE insdelupdaud_actualiza_saldopago_estadofondo();
+
+
+
+	CREATE OR REPLACE FUNCTION insdelupdaud_actualiza_saldopago_estadofondo()
+	  RETURNS trigger AS
+	$BODY$
+	BEGIN
+		IF (TG_OP = 'INSERT') THEN	
+			UPDATE estadofondo set pagos = pagos+new.montodolar, saldofinal= (saldoinicial+recursorecibido)-(pagos+new.montodolar) where periodorendicion_id=new.periodorendicion_id;
+
+			INSERT INTO auditoria.relaciongasto(idtabla,descripciongasto_id, responsable_id, numerocomprobante, imputacionpresupuestaria, fechafactura, nombrerazonsocial, identificacionfiscal, numerofactura, montomonnac, montodolar, periodorendicion_id,fechaproceso,horaproceso, operacion) VALUES (new.id,new.descripciongasto_id, new.responsable_id, new.numerocomprobante, new.imputacionpresupuestaria, new.fechafactura, new.nombrerazonsocial, new.identificacionfiscal, new.numerofactura, new.montomonnac, new.montodolar, new.periodorendicion_id,current_date,current_time, TG_OP);
+
+			RETURN NEW;
+		ELSIF (TG_OP = 'UPDATE') THEN
+			if(old.montodolar<>new.montodolar) then	
+				UPDATE estadofondo set pagos = (pagos-old.montodolar)+new.montodolar, saldofinal= (saldoinicial+recursorecibido)-((pagos-old.montodolar)+new.montodolar) where periodorendicion_id=new.periodorendicion_id;
+			end if;
+
+			INSERT INTO auditoria.relaciongasto(idtabla,descripciongasto_id, responsable_id, numerocomprobante, imputacionpresupuestaria, fechafactura, nombrerazonsocial, identificacionfiscal, numerofactura, montomonnac, montodolar, periodorendicion_id,fechaproceso,horaproceso, operacion) VALUES (new.id,new.descripciongasto_id, new.responsable_id, new.numerocomprobante, new.imputacionpresupuestaria, new.fechafactura, new.nombrerazonsocial, new.identificacionfiscal, new.numerofactura, new.montomonnac, new.montodolar, new.periodorendicion_id,current_date,current_time, TG_OP);
+			RETURN NEW;
+		ELSIF (TG_OP = 'DELETE') THEN
+			UPDATE estadofondo set pagos = pagos-old.montodolar, saldofinal= (saldoinicial+recursorecibido)-(pagos-old.montodolar)  where periodorendicion_id=old.periodorendicion_id;
+
+			INSERT INTO auditoria.relaciongasto (idtabla,descripciongasto_id, responsable_id, numerocomprobante, imputacionpresupuestaria, fechafactura, nombrerazonsocial, identificacionfiscal, numerofactura, montomonnac, montodolar, periodorendicion_id,fechaproceso,horaproceso, operacion) VALUES (old.id,old.descripciongasto_id, old.responsable_id, old.numerocomprobante, old.imputacionpresupuestaria, old.fechafactura,old.nombrerazonsocial, old.identificacionfiscal, old.numerofactura, old.montomonnac, old.montodolar, old.periodorendicion_id,current_date,current_time, TG_OP);
+			RETURN NULL;
+		END IF;
+	END;
+	$BODY$
+	  LANGUAGE plpgsql VOLATILE
+	  COST 100;
+	ALTER FUNCTION insdelupdaud_actualiza_saldopago_estadofondo()
+	  OWNER TO postgres;
+
+
+
+
+
+
+
+

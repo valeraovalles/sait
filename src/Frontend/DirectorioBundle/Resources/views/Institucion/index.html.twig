@@ -1,23 +1,19 @@
 {% extends '::directorio.html.twig' %}
 
 {% block body -%}
+    {{parent()}}
 <br>
-    <h1>Listado de Instituciones</h1>
+    <h2>LISTADO DE INSTITUCIONES</h2><br><br>
 
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table id="tablalista" style="width: 97%;">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Institucion</th>
-                <th>Director</th>
                 <th>Area</th>
-                <th>Telefono</th>
                 <th>Email</th>
-                <th>Direccion</th>
                 <th>Pais</th>
-                {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
-                    <th>Actiones</th>
-                {% endif %}
+                <th>Actiones</th>
             </tr>
         </thead>
         <tbody>
@@ -25,31 +21,26 @@
             <tr>
                 <td><a href="{{ path('institucion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.institucion }}</td>
-                <td>{{ entity.director }}</td>
                 <td>{{ entity.areainst }}</td>
-                <td>{{ entity.telfinst }}</td>
                 <td>{{ entity.emailinst }}</td>
-                <td>{{ entity.direccion }}</td>
                 <td>{{ entity.pais }}</td>
-                {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+                
                     <td>
+                        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
                         <a href="{{ path('institucion_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
+                        {% endif %}
+                        <a href="{{ path('institucion_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-search"></i></a>
                     </td>
-                {% endif %}
+                
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+    <br><br><br><br>
 
+    <a class="btn btn-primary" href="{{ path('institucion_new') }}">
+        NUEVA INSTITUCIÓN
+    </a>{% endif %}<br><br>
 
-
-        <br><br>
-
-        <ul>
-        <li>
-            <a class="btn btn-primary" href="{{ path('institucion_new') }}">
-                Nueva Institucion
-            </a>
-        </li>
-    </ul>
     {% endblock %}

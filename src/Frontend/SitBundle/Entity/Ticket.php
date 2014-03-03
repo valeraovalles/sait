@@ -138,7 +138,7 @@ class Ticket
     private $unidad;
 
      /**
-     * @Assert\File(maxSize="5000000", maxSizeMessage="El archivo que intenta subir es demasiado grande.")
+     * @Assert\File(maxSize="5000000", maxSizeMessage="El archivo que intenta subir debe ser menos 5Mb")
      *  
      */
     private $file;
