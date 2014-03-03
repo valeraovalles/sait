@@ -22,7 +22,16 @@ class htmlreporte
         $dias=cal_days_in_month(CAL_GREGORIAN, $datos['meses'], $datos['anios']);
         $fechahasta=$dias."-".$datos['meses']."-".$datos['anios'];
 
-        $dql = "select t from SitBundle:Ticket t join t.subcategoria s join s.categoria c join t.user us where t.unidad= :idunidad and (t.estatus=4 or t.estatus=6 or t.estatus = 5) and t.fechasolicitud BETWEEN ?1 AND ?2 order by t.categoria,t.subcategoria,t.fechasolicitud, t.horasolicitud ASC";
+        $dql = "select t from SitBundle:Ticket t, SitBundle:categoria c, SitBundle:subcategoria s 
+
+        where 
+        t.categoria = c.id and 
+        t.subcategoria = s.id and
+        t.unidad= :idunidad and (t.estatus=4 or t.estatus=6 or t.estatus = 5) 
+        and t.fechasolicitud BETWEEN ?1 AND ?2 
+        order by t.categoria,t.subcategoria,t.fechasolicitud, t.horasolicitud ASC";
+        
+        
         $query = $em->createQuery($dql);
         $query->setParameter('idunidad',$datos['unidad']);
         $query->setParameter(1, $fechadesde);
@@ -30,7 +39,6 @@ class htmlreporte
         $ticket = $query->getResult();
 
         if(empty($ticket))return null;
-
         $ultimacategoria=null;$ultimasubcategoria=null;$info=null;$cont=1;
         foreach ($ticket as $value) {
         	
@@ -42,12 +50,11 @@ class htmlreporte
 
 
             $usuariocierraticket=$value->getUser();
-            
             if ($value->getEstatus() == 5)
             {
                 $info .="<div style='margin-bottom:5px;text-align:justify;' class='solicitud'>".$cont.".- <b>Solicitud (".$value->getFechasolicitud()->format("d-m-Y")." ".$value->getHorasolicitud()->format("G:i:s")."):</b> ".ucfirst($value->getSolicitud())."</div>";
                 //$info .="<div class='solucion'><b>Solución (".ucfirst(strtolower($usuariocierraticket[0]->getPrimernombre()))." ".ucfirst(strtolower($usuariocierraticket[0]->getPrimerapellido()))."):</b> ".ucfirst($value->getSolucion())."</div>";
-                $info .="<div style='margin-bottom:15px;text-align:justify;' class='solucion'><b>EL TICKECT ESTA EN SEGUIMIENTO</div>";
+                $info .="<div style='margin-bottom:15px;text-align:justify;color:green;class='solucion'><b>EL TICKECT ESTA EN SEGUIMIENTO</div>";
   
             }else
             {
