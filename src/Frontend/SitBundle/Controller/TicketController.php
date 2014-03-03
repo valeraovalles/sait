@@ -45,6 +45,8 @@ class TicketController extends Controller
                     $nuevos=$nuevos+1;
                 else if($t->getEstatus()=='2')
                     $asignados=$asignados+1;
+                else if ($t->getEstatus() == '5')
+                    $seguimiento=$seguimiento+1;
             
         }
         //FIN
@@ -52,7 +54,8 @@ class TicketController extends Controller
         return $this->render('SitBundle:Ticket:general.html.twig', array(
             'entities' => $tickets,
             'nuevos'=> $nuevos,
-            'asignados'=> $asignados
+            'asignados'=> $asignados,
+            'seguimiento' => $seguimiento
         ));
     }
 
