@@ -1,66 +1,46 @@
 {% extends '::directorio.html.twig' %}
 
 {% block body -%}
+    {{parent()}}
 <br>
-    <h1>Listado de Instituciones</h1>
+    <h2>LISTADO DE INSTITUCIONES</h2><br><br>
 
-    <table class="records_list" id="tablalistax">
+    <table id="tablalista" style="width: 97%;">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Institucion</th>
-                <th>Director</th>
-                <th>Areainst</th>
-                <th>Telfinst</th>
-                <th>Emailinst</th>
-                <th>Direccion</th>
+                <th>Area</th>
+                <th>Email</th>
                 <th>Pais</th>
-                <th>Actions</th>
+                <th>Actiones</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <!--td><a href="{{ path('institucion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td-->
+                <td><a href="{{ path('institucion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.institucion }}</td>
-                <td>{{ entity.director }}</td>
                 <td>{{ entity.areainst }}</td>
-                <td>{{ entity.telfinst }}</td>
                 <td>{{ entity.emailinst }}</td>
-                <td>{{ entity.direccion }}</td>
                 <td>{{ entity.pais }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('institucion_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
+                
+                    <td>
                         {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
                         <a href="{{ path('institucion_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
                         {% endif %}
-                    </li>
-                </ul>
-                </td>
+                        <a href="{{ path('institucion_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-search"></i></a>
+                    </td>
+                
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+    <br><br><br><br>
 
+    <a class="btn btn-primary" href="{{ path('institucion_new') }}">
+        NUEVA INSTITUCIÓN
+    </a>{% endif %}<br><br>
 
-<script type="text/javascript">
-$(document).ready(function(){
-   $('#tablalistax').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-        "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-        "aaSorting": [[5,'asc']],
-    } );
-})
-</script>
-<br><br>
-        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
-        
-        <ul>
-        <li>
-            <a class="btn btn-primary" href="{{ path('institucion_new') }}">
-                Nueva Institucion
-            </a>
-        </li>
-    </ul>
-        {% endif %}
     {% endblock %}

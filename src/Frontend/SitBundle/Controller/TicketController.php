@@ -66,7 +66,7 @@ class TicketController extends Controller
             "Buenas noches","el presente es para","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
             "urgente","esto con caracter de urgencia","con caracter de urgencia","Se agradece su valiosa colaboracion","carmen",
             "buenas tardes el motivo es para","el motivo es para","el motivo es para","por su colaboracion","por su colaboración","buen dia","Buenos tardes","camaradas","los molesto para",
-            "por el presente","estimados","...."
+            "por el presente","estimados","....","Buenas tardes:"
         );
 
         $solicitud=str_replace($eliminar, array(), $solicitud);
@@ -450,20 +450,22 @@ class TicketController extends Controller
 
         //cuento la cantidad de tickets por unidad
         $tickets = $em->getRepository('SitBundle:Ticket')->findAll();
-        $contador[1]['nuevo']=0;$contador[1]['asignado']=0;$contador[1]['cerrado']=0;
-        $contador[2]['nuevo']=0;$contador[2]['asignado']=0;$contador[2]['cerrado']=0;
-        $contador[3]['nuevo']=0;$contador[3]['asignado']=0;$contador[3]['cerrado']=0;
-        $contador[4]['nuevo']=0;$contador[4]['asignado']=0;$contador[4]['cerrado']=0;
+        $contador[1]['nuevo']=0;$contador[1]['asignado']=0;$contador[1]['cerrado']=0;$contador[1]['seguimiento']=0;
+        $contador[2]['nuevo']=0;$contador[2]['asignado']=0;$contador[2]['cerrado']=0;$contador[2]['seguimiento']=0;
+        $contador[3]['nuevo']=0;$contador[3]['asignado']=0;$contador[3]['cerrado']=0;$contador[3]['seguimiento']=0;
+        $contador[4]['nuevo']=0;$contador[4]['asignado']=0;$contador[4]['cerrado']=0;$contador[4]['seguimiento']=0;
+        
 
         foreach ($tickets as $t){ 
             if($t->getEstatus()!='3'){
-
                 if($t->getEstatus()=='1')
                     $contador[$t->getUnidad()->getId()]['nuevo']=$contador[$t->getUnidad()->getId()]['nuevo']+1;
                 else if($t->getEstatus()=='2')
                     $contador[$t->getUnidad()->getId()]['asignado']=$contador[$t->getUnidad()->getId()]['asignado']+1;
-                else if($t->getEstatus()=='4')
+                else if($t->getEstatus()=='4' or $t->getEstatus()=='6')
                     $contador[$t->getUnidad()->getId()]['cerrado']=$contador[$t->getUnidad()->getId()]['cerrado']+1;
+                else if($t->getEstatus()=='5')
+                    $contador[$t->getUnidad()->getId()]['seguimiento']=$contador[$t->getUnidad()->getId()]['seguimiento']+1;
             }
             
         }
@@ -533,7 +535,7 @@ class TicketController extends Controller
             $entity->setEstatus(1);
 
             //GUARDO LA SOLICITUD FILTRANDO LO ESCRITO POR EL USUARIO
-            $solicitud=$this->filtrarsolicitud(strtolower($solicitud));
+            $solicitud=$this->filtrarsolicitud($solicitud);
             $solicitud=ucfirst(trim($solicitud));
             $entity->setSolicitud($solicitud);
 
@@ -547,23 +549,13 @@ class TicketController extends Controller
                 $extension = $file->guessExtension();
                 $nombre=$file->getClientOriginalName();
                 $nombre=explode(".", $nombre);
+                $extension=$nombre[1];
                 $nombre=$nombre[0];
 
-                //valido tamaño
-                if ($tamaño>2000) {
-                    $this->get('session')->getFlashBag()->add('alert', 'El archivo no puede ser mayor a 2MB.');
-
-                    return $this->render('SitBundle:Default:index.html.twig', array(
-                        'form'   => $form->createView(),
-                        'form2'   => $form2->createView(),
-                        'ticketusuario'=>$ticketusuario,
-                        'datosusuario'=>$datosusuario
-                    ));
-
-                }
-                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf');
+                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf','zip','rar','JPG','PNG');
+         
                 //valido las extensiones
-                if (!array_search($extension,$extensiones)) {
+                if (in_array($extension,$extensiones)==false) {
                     $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
 
                     return $this->render('SitBundle:Default:index.html.twig', array(
@@ -701,14 +693,14 @@ class TicketController extends Controller
     {
 
         $datos=$request->request->all();
-        $datos=$datos['subcat'];
-        $ids=explode("-", $datos);
-
-        if(empty($datos)){
+        if(isset($datos['subcat'])){
+            $datos=$datos['subcat'];
+            $ids=explode("-", $datos);
+        }
+        else{
             $this->get('session')->getFlashBag()->add('alert', 'Debe seleccionar una subcategoria.');
             return $this->redirect($this->generateUrl('ticket_asignarcatsub', array('id' => $id)));
         }
-
 
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery('update SitBundle:Ticket t set t.categoria= :idcat, t.subcategoria= :idsub WHERE t.id = :id');

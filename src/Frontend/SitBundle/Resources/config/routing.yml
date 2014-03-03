@@ -1,3 +1,29 @@
+################################################################################
+sit_seguimiento:
+    pattern:  /seguimiento/{idticket}
+    defaults: { _controller: SitBundle:Seguimiento:inicio }
+    
+sit_seguimientoprincipal:
+    pattern:  /seguimientoprincipal/{idticket}
+    defaults: { _controller: SitBundle:Seguimiento:seguimientoprincipal }
+    
+sit_guardacorreo:
+    pattern:  /guardacorreo/{idticket}
+    defaults: { _controller: SitBundle:Seguimiento:guardacorreo }
+    
+sit_guardacomentario:
+    pattern:  /guardacomentario/{idticket}
+    defaults: { _controller: SitBundle:Seguimiento:guardacomentario }
+    
+sit_cerrarseguimiento:
+    pattern:  /cerrarseguimiento/{idticket}
+    defaults: { _controller: SitBundle:Seguimiento:cerrarseguimiento }
+    
+sit_guardacerrarseguimiento:
+    pattern:  /guardacerrarseguimiento/{idticket}
+    defaults: { _controller: SitBundle:Seguimiento:guardacerrarseguimiento }
+
+################################################################################
 sit_homepage:
     pattern:  /inicio
     defaults: { _controller: SitBundle:Default:index }

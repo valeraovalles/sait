@@ -1,0 +1,30 @@
+--auditoria estado fondo (PERTENECE A LA TABLA ESTADO FONDO)
+	DROP TRIGGER auditoria_estadofondo ON estadofondo;
+	CREATE TRIGGER auditoria_estadofondo
+	after INSERT OR UPDATE OR DELETE ON estadofondo
+	    FOR EACH ROW EXECUTE PROCEDURE auditoria_estadofondo();
+
+
+
+	CREATE OR REPLACE FUNCTION auditoria_estadofondo() 
+	  RETURNS trigger AS
+	$BODY$
+	BEGIN
+		IF (TG_OP = 'INSERT' OR TG_OP = 'UPDATE') THEN		
+			INSERT into auditoria.estadofondo (idtabla,responsable_id, fechaasignacion, saldoinicial, recursorecibido, periodorendicion_id,observacion,fechaproceso,horaproceso, operacion)VALUES (new.id,new.responsable_id, new.fechaasignacion, new.saldoinicial, new.recursorecibido, new.periodorendicion_id,new.observacion,current_date,current_time, TG_OP);
+			RETURN NEW;
+		ELSIF (TG_OP = 'DELETE') THEN
+			INSERT into auditoria.estadofondo (idtabla,responsable_id, fechaasignacion, saldoinicial, recursorecibido, periodorendicion_id,observacion,fechaproceso,horaproceso, operacion)VALUES (new.id,old.responsable_id, old.fechaasignacion, old.saldoinicial,old.recursorecibido, old.periodorendicion_id,old.observacion,current_date,current_time, TG_OP);
+			RETURN NULL;
+		END IF;
+	END;
+	$BODY$
+	  LANGUAGE plpgsql VOLATILE
+	  COST 100;
+	ALTER FUNCTION auditoria_estadofondo()
+	  OWNER TO postgres;
+
+
+
+
+

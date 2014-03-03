@@ -112,9 +112,11 @@
             {% endif %}
 
             {# UNA SOLA JORNADA#}
+            
             <div class="listado_aplicaciones">
-              <a href="{{ path('mercal_homepagenum',{'idjornada':3})}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+              <a href="{{ path('mercal_homepagenum',{'idjornada':4})}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
+            
         
             {# DOS JORNADAS #}
             {#
@@ -123,11 +125,13 @@
             </div>
             #}
 
+            {#
             {% if is_granted('ROLE_ADMINISTRADOR') %}
             <div class="listado_aplicaciones">
               <a href="{{ path('transporte_homepage') }}">TRANSPORTE NUEVO<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
             {% endif %}
+            #}
 
             {% if is_granted('ROLE_CONTRATOS')%}
             <div class="listado_aplicaciones">

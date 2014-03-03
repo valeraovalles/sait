@@ -26,7 +26,7 @@
     {% endfor %}
 
 
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table class="table table-striped" id="tablalista">
         <thead>
             <tr>
                 <th>Id</th>
@@ -45,14 +45,14 @@
                 <td>{{ entity.cedula }}</td>
                 <td>
  
-                    <a href="{{ path('ticket_usuariounidad', { 'id': entity.id }) }}"><span class="icon-edit"></span></a>
+                    <a href="{{ path('ticket_usuariounidad', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
 
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <br><br>
-    <a class="btn btn-primary" href="{{ path('ticket') }}">Ir a la lista</a>
+    <br><br><br><br>
+    <a class="btn btn-primary" href="{{ path('ticket') }}">IR A LA LISTA</a>
     <br>
     {% endblock %}
