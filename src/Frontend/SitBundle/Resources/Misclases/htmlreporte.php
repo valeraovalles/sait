@@ -22,7 +22,7 @@ class htmlreporte
         $dias=cal_days_in_month(CAL_GREGORIAN, $datos['meses'], $datos['anios']);
         $fechahasta=$dias."-".$datos['meses']."-".$datos['anios'];
 
-        $dql = "select t from SitBundle:Ticket t join t.subcategoria s join s.categoria c join t.user us where t.unidad= :idunidad and (t.estatus=4 or t.estatus=6) and t.fechasolicitud BETWEEN ?1 AND ?2 order by t.categoria,t.subcategoria,t.fechasolicitud, t.horasolicitud ASC";
+        $dql = "select t from SitBundle:Ticket t join t.subcategoria s join s.categoria c join t.user us where t.unidad= :idunidad and (t.estatus=4 or t.estatus=6 or t.estatus = 5) and t.fechasolicitud BETWEEN ?1 AND ?2 order by t.categoria,t.subcategoria,t.fechasolicitud, t.horasolicitud ASC";
         $query = $em->createQuery($dql);
         $query->setParameter('idunidad',$datos['unidad']);
         $query->setParameter(1, $fechadesde);
@@ -43,9 +43,18 @@ class htmlreporte
 
             $usuariocierraticket=$value->getUser();
             
-        	$info .="<div style='margin-bottom:5px;text-align:justify;' class='solicitud'>".$cont.".- <b>Solicitud (".$value->getFechasolicitud()->format("d-m-Y")." ".$value->getHorasolicitud()->format("G:i:s")."):</b> ".ucfirst($value->getSolicitud())."</div>";
-        	//$info .="<div class='solucion'><b>Solución (".ucfirst(strtolower($usuariocierraticket[0]->getPrimernombre()))." ".ucfirst(strtolower($usuariocierraticket[0]->getPrimerapellido()))."):</b> ".ucfirst($value->getSolucion())."</div>";
-            $info .="<div style='margin-bottom:15px;text-align:justify;' class='solucion'><b>Solución (".$value->getFechasolucion()->format("d-m-Y")." ".$value->getHorasolucion()->format("G:i:s")."):</b> ".ucfirst($value->getSolucion())."</div>";
+            if ($value->getEstatus() == 5)
+            {
+                $info .="<div style='margin-bottom:5px;text-align:justify;' class='solicitud'>".$cont.".- <b>Solicitud (".$value->getFechasolicitud()->format("d-m-Y")." ".$value->getHorasolicitud()->format("G:i:s")."):</b> ".ucfirst($value->getSolicitud())."</div>";
+                //$info .="<div class='solucion'><b>Solución (".ucfirst(strtolower($usuariocierraticket[0]->getPrimernombre()))." ".ucfirst(strtolower($usuariocierraticket[0]->getPrimerapellido()))."):</b> ".ucfirst($value->getSolucion())."</div>";
+                $info .="<div style='margin-bottom:15px;text-align:justify;' class='solucion'><b>EL TICKECT ESTA EN SEGUIMIENTO</div>";
+  
+            }else
+            {
+                $info .="<div style='margin-bottom:5px;text-align:justify;' class='solicitud'>".$cont.".- <b>Solicitud (".$value->getFechasolicitud()->format("d-m-Y")." ".$value->getHorasolicitud()->format("G:i:s")."):</b> ".ucfirst($value->getSolicitud())."</div>";
+                //$info .="<div class='solucion'><b>Solución (".ucfirst(strtolower($usuariocierraticket[0]->getPrimernombre()))." ".ucfirst(strtolower($usuariocierraticket[0]->getPrimerapellido()))."):</b> ".ucfirst($value->getSolucion())."</div>";
+                $info .="<div style='margin-bottom:15px;text-align:justify;' class='solucion'><b>Solución (".$value->getFechasolucion()->format("d-m-Y")." ".$value->getHorasolucion()->format("G:i:s")."):</b> ".ucfirst($value->getSolucion())."</div>";
+            }
 
         	$ultimacategoria=$value->getCategoria();
         	$ultimasubcategoria=$value->getSubcategoria()->getSubcategoria();
