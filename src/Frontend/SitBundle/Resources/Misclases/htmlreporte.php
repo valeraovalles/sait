@@ -57,7 +57,7 @@ class htmlreporte
         
         //ciclo para ticket cerrados sin seguimiento
         foreach ($ticket as $value) {
-            
+            $info .= "<div align='justify' style='font-weight:bold;color:blue;'>TICKETS SIN SEGUIMIENTO</div>";
             if($ultimacategoria!=$value->getCategoria())
             $info .="<div class='cat'>".strtoupper($value->getCategoria())."</div>";
             
@@ -78,7 +78,7 @@ class htmlreporte
 
         if(!empty($ticket1))
         {            
-            $info = "<div align='justify' style='font-weight:bold;color:blue;'>TICKETS CON SEGUIMIENTO</div>";
+            $info .= "<div align='justify' style='font-weight:bold;color:blue;'>TICKETS CON SEGUIMIENTO</div>";
         
             //ciclo para tickets con seguimiento
             foreach ($ticket1 as $value1) {
@@ -112,6 +112,9 @@ class htmlreporte
                             </div></div><br>";
                         $conta1++ ;
                     }
+                }else
+                {
+                   $info .="<div style='margin-bottom:5px;margin-left:35px;text-align:justify;' class='solicitud'>No existen comentarios ni correos de seguimiento</div>"; 
                 }
 
                 //$usuariocierraticket=$value1->getUser();
