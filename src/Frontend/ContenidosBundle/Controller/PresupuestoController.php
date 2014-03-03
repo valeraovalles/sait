@@ -924,7 +924,6 @@ class PresupuestoController extends Controller
             'dispeuros'         => $dispeuros,
 
         ));        
-
     }
 
 #########################################################################################################

@@ -1,14 +1,16 @@
 {% extends '::contenidos.html.twig' %}
-{% block title %}Contenidos-Pagos- Control{% endblock %}
+
+{% block title %}CONTENIDOS-PAGOS{% endblock %}
 
 {% block titulobanner %}
-   PAGO - CONTROL
+   PAGO - CONTROL DE PAGO
 {% endblock %}
-    
+   
 {% block body -%}
     {{ parent() }}
 
     <div class="titulo">CONTROL DEL PAGO</div>
+
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="alert alert-success">
             {{ flashMessage }}
@@ -41,7 +43,8 @@
                                             {'attr': 
                                                 {'class': "fecha"}
                                             }) 
-                                        }}</div>
+                                        }}
+                        </div>
                     </div>
                     <div class="form-contenedor" style="display:none">
                         {{ form_errors(edit_form1.fechaUnidadcuatro) }}
@@ -78,7 +81,8 @@
                                             {'attr': 
                                                 {'class': "fecha"}
                                             }) 
-                                        }}</div>
+                                        }}
+                        </div>
                     </div>
                     <div class="form-contenedor" style="display:none">
                         {{ form_errors(edit_form1.fechaUnidadcuatro) }}
@@ -120,7 +124,8 @@
                                     {'attr': 
                                         {'class': "fecha"}
                                     }
-                            ) }}</div>
+                            ) }}
+                        </div>
                     </div>
                     <div class="form-contenedor" style="display:none">
                         {{ form_errors(edit_form1.fechaUnidadcinco) }}
@@ -160,7 +165,8 @@
                         <div class="dato">{{ form_widget(edit_form1.fechaUnidadcinco, 
                                     {'attr': 
                                         {'class': "fecha"}
-                                    }) }}</div>
+                                    }) }}
+                        </div>
                     </div>
                     <div class="form-contenedor" style="display:none">
                         {{ form_errors(edit_form1.fechaUnidadseis) }}
@@ -200,7 +206,8 @@
                         <div class="dato">{{ form_widget(edit_form1.fechaUnidadseis, 
                                     {'attr': 
                                         {'class': "fecha"}
-                                    }) }}</div>
+                                    }) }}
+                        </div>
                     </div>
                     <div class="form-contenedor" style="display:none">
                         {{ form_errors(edit_form1.fechaUnidadsiete) }}
@@ -240,7 +247,8 @@
                         <div class="dato">{{ form_widget(edit_form1.fechaUnidadsiete, 
                                     {'attr': 
                                         {'class': "fecha"}
-                                    }) }}</div>
+                                    }) }}
+                        </div>
                     </div>
                     <button type="submit" class="btn">Editar</button><br><br>
                     

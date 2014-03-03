@@ -7,6 +7,7 @@ parameters:
     database_user: postgres
     database_password: postgres
 
+
     mailer_transport: smtp
     mailer_host: correo.telesurtv.net
     mailer_user: aplicaciones@telesurtv.net
