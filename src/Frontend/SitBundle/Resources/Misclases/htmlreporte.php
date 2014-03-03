@@ -56,24 +56,27 @@ class htmlreporte
         $ultimacategoria=null;$ultimasubcategoria=null;$info=null;$cont=1;$conta = 1;$contador = 0;
         
         //ciclo para ticket cerrados sin seguimiento
-        foreach ($ticket as $value) {
+        if(!empty($ticket))
+        {
             $info .= "<div align='justify' style='font-weight:bold;color:blue;'>TICKETS SIN SEGUIMIENTO</div>";
-            if($ultimacategoria!=$value->getCategoria())
-            $info .="<div class='cat'>".strtoupper($value->getCategoria())."</div>";
-            
-            if($ultimasubcategoria!=$value->getSubcategoria()->getSubcategoria())
-            $info .="<div class='subcat'>".ucfirst($value->getSubcategoria()->getSubcategoria())."</div>";
+            foreach ($ticket as $value) {                
+                if($ultimacategoria!=$value->getCategoria())
+                $info .="<div class='cat'>".strtoupper($value->getCategoria())."</div>";
+                
+                if($ultimasubcategoria!=$value->getSubcategoria()->getSubcategoria())
+                $info .="<div class='subcat'>".ucfirst($value->getSubcategoria()->getSubcategoria())."</div>";
 
-            $usuariocierraticket=$value->getUser();
+                $usuariocierraticket=$value->getUser();
 
-            $info .="<div style='margin-bottom:5px;text-align:justify;' class='solicitud'>".$cont.".- <b>Solicitud (".$value->getFechasolicitud()->format("d-m-Y")." ".$value->getHorasolicitud()->format("G:i:s")."):</b> ".ucfirst($value->getSolicitud())."</div>";
-            //$info .="<div class='solucion'><b>Solución (".ucfirst(strtolower($usuariocierraticket[0]->getPrimernombre()))." ".ucfirst(strtolower($usuariocierraticket[0]->getPrimerapellido()))."):</b> ".ucfirst($value->getSolucion())."</div>";
-            $info .="<div style='margin-bottom:15px;text-align:justify;' class='solucion'><b>Solución (".$value->getFechasolucion()->format("d-m-Y")." ".$value->getHorasolucion()->format("G:i:s")."):</b> ".ucfirst($value->getSolucion())."</div>";
-            
+                $info .="<div style='margin-bottom:5px;text-align:justify;' class='solicitud'>".$cont.".- <b>Solicitud (".$value->getFechasolicitud()->format("d-m-Y")." ".$value->getHorasolicitud()->format("G:i:s")."):</b> ".ucfirst($value->getSolicitud())."</div>";
+                //$info .="<div class='solucion'><b>Solución (".ucfirst(strtolower($usuariocierraticket[0]->getPrimernombre()))." ".ucfirst(strtolower($usuariocierraticket[0]->getPrimerapellido()))."):</b> ".ucfirst($value->getSolucion())."</div>";
+                $info .="<div style='margin-bottom:15px;text-align:justify;' class='solucion'><b>Solución (".$value->getFechasolucion()->format("d-m-Y")." ".$value->getHorasolucion()->format("G:i:s")."):</b> ".ucfirst($value->getSolucion())."</div>";
+                
 
-            $ultimacategoria=$value->getCategoria();
-            $ultimasubcategoria=$value->getSubcategoria()->getSubcategoria();
-            $cont++;
+                $ultimacategoria=$value->getCategoria();
+                $ultimasubcategoria=$value->getSubcategoria()->getSubcategoria();
+                $cont++;
+            }
         }
 
         if(!empty($ticket1))
