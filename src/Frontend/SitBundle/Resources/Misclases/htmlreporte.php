@@ -22,7 +22,7 @@ class htmlreporte
         $dias=cal_days_in_month(CAL_GREGORIAN, $datos['meses'], $datos['anios']);
         $fechahasta=$dias."-".$datos['meses']."-".$datos['anios'];
 
-        $dql = "select t from SitBundle:Ticket t join t.subcategoria s join s.categoria c join t.user us where t.unidad= :idunidad and t.estatus=4 and t.fechasolicitud BETWEEN ?1 AND ?2 order by t.categoria,t.subcategoria,t.fechasolicitud, t.horasolicitud ASC";
+        $dql = "select t from SitBundle:Ticket t join t.subcategoria s join s.categoria c join t.user us where t.unidad= :idunidad and (t.estatus=4 or t.estatus=6) and t.fechasolicitud BETWEEN ?1 AND ?2 order by t.categoria,t.subcategoria,t.fechasolicitud, t.horasolicitud ASC";
         $query = $em->createQuery($dql);
         $query->setParameter('idunidad',$datos['unidad']);
         $query->setParameter(1, $fechadesde);
