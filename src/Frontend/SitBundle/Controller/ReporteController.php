@@ -85,11 +85,11 @@ class ReporteController extends Controller
     }
     public function generarinformeAction(Request $request)
     {
-        /*header('Content-type: application/vnd.ms-word');
+        header('Content-type: application/vnd.ms-word');
         header("Content-Disposition: attachment; filename=informe.doc");
         header("Pragma: no-cache");
         header("Expires: 0");
-*/
+
         $datos=$request->request->all();
         $datos=$datos['form'];
         $em = $this->getDoctrine()->getManager();
