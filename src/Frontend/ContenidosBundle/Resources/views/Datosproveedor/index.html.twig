@@ -34,7 +34,11 @@
         <tbody>
             {% for entity in entities %}
                 <tr align="center">
-                    <td><a href="{{ path('datosproveedor_show', { 'id': entity.id }) }}">{{ entity.numIdentificacionfiscal }}</a></td>
+                    {% if is_granted('ROLE_CONTENIDOS_DIRECTORLINEA') %}
+                        <td><a href="{{ path('datosproveedor_show', { 'id': entity.id }) }}">{{ entity.numIdentificacionfiscal }}</a></td>
+                    {% else %}
+                        <td>{{ entity.numIdentificacionfiscal }}</td>
+                    {% endif %}
                     <td>{{ entity.nombre }}</td>
                     <td>{{ entity.oficina1 }}</td>
                     {% if entity.nombreRepr != NULL and entity.apellidoRepr != NULL %}

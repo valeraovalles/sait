@@ -189,7 +189,9 @@
     </div>
     <a href="{{ path('datosproveedor', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
     
-    <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="70px" src="{{ asset('images/edit.png')}}"></a>
+    {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_ASISTENTES') or is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_APOYO') or is_granted('ROLE_CONTENIDOS_ADMIN') %}
+        <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="70px" src="{{ asset('images/edit.png')}}"></a>
+    {% endif %}
 
 <br>
 

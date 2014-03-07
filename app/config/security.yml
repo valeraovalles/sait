@@ -69,7 +69,6 @@ security:
         - { path: ^/licencias/modif, roles:ROLE_LICADMIN }
     
     #ROLES DE CONTENIDOS
-        - { path: ^/contenidos, roles: ROLE_CONTENIDOS_ADMIN }
         - { path: ^/compras, roles: ROLE_CONTENIDOS_ADMIN}
         - { path: ^/informacion, roles: ROLE_CONTENIDOS_ADMIN}
         - { path: ^/equipostelesur, roles: ROLE_CONTENIDOS_ADMIN}
