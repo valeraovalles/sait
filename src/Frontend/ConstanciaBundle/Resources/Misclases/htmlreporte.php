@@ -46,11 +46,10 @@ class htmlreporte
       while ($row = pg_fetch_array($rs)){
           $tipo_nomina = $row['tipo_nomina'];
             if($row['cod_concepto']=='0001') $sueldo = $row['monto_asigna']*2;
-            else{
+            elseif($row['cod_concepto']!='0620'){
                 $suma_conceptos += $row['monto_asigna']*2;            
             }
       }
-
 
 
       //DOMINGOS DE JORNADA

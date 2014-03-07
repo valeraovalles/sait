@@ -1,54 +1,33 @@
 <div id='cssmenu'>
+   
    <ul>   
       <li class='active'><a href='{{ path('datosproveedor') }}'><span>INICIO</span></a></li>
-   
-{# PROVEEDORES SEGUN ROLES #}
-      {% if is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_CONTENIDOS') or  is_granted('ROLE_CONTENIDOS_EQUIPOS') %}
-         <li class='has-sub'><a href='{{ path('datosinactivos') }}'><span>INACTIVOS</span></a></li>
+      <li class='has-sub'><a href='{{ path('datosinactivos') }}'><span>INACTIVOS</span></a></li>
 
-      {% endif %}
-
-      {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}  
-         <li class='has-sub'><a href= '#' ><span>PROVEEDORES</span></a>
-            <ul>
-               <li><a href='{{ path('datosinactivos') }}'><span>INACTIVOS</span></a></li>
-               <li><a href='{{ path('datoscompras') }}'><span>COMPRAS</span></a></li>            
-               <li><a href='{{ path('datosinformacion') }}'><span>VP CONTENIDOS</span></a></li>
-               <li><a href='{{ path('datosequipos') }}'><span>EQUIPOS TELESUR</span></a></li>
-            </ul>
-         </li>
-      {% endif %}
-
-{# CREAR CONTRATACION #}
-      {% if is_granted('ROLE_CONTENIDOS_CONTRATACION') or is_granted('ROLE_CONTENIDOS_ADMIN') %}
-         <li class='has-sub'><a href= '#' ><span>CONTRATACIONES</span></a>
-            <ul>
-               <li><a href='{{ path('datosinactivos') }}'><span>VER CONTRATACION</span></a></li>
-               <li><a href='{{ path('datosinactivos') }}'><span>CREAR CONTRATACION</span></a></li>
-            </ul>
-         </li>
+{# CONTRATACION #}
+      {% if is_granted('ROLE_CONTENIDOS_DIRECTORLINEA') or is_granted('ROLE_CONTENIDOS_ADMIN') %}
+         <li class='has-sub'><a href= '{{ path('datosinactivos') }}' ><span>CONTRATACIONES</span></a></li>
       {% endif %}
 
 {# PAGOS Y CONTROL DEL PAGO SEGUN ROLES #}
-      {% if is_granted('ROLE_CONTENIDOS_PAGOS') %}
+      {% if is_granted('ROLE_CONTENIDOS_DIRECTORLINEA') or is_granted('ROLE_CONTENIDOS_DGE') %}
          <li class='has-sub'><a href= '#' ><span>PAGOS</span></a>
             <ul>
+               {% if is_granted('ROLE_CONTENIDOS_DIRECTORLINEA') or is_granted('ROLE_CONTENIDOS_ADMIN') %}
+                  <li><a href='{{ path('datosinactivos') }}'><span>DETALLES DEL PAGO</span></a></li>
+               {% endif %}
                <li><a href='{{ path('datosinactivos') }}'><span>RUTA DEL PAGO</span></a></li>
             </ul>
          </li>
       {% endif %}
-      {% if is_granted('ROLE_CONTENIDOS_RRHH') or is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_DIRECTORA') or is_granted('ROLE_CONTENIDOS_PRESUPUESTO') or is_granted('ROLE_CONTENIDOS_FINANZAS') or is_granted('ROLE_CONTENIDOS_TESORERIA') %}
+
+      {% if is_granted('ROLE_CONTENIDOS_RRHH') or is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_DGE') or is_granted('ROLE_CONTENIDOS_PTTO') or is_granted('ROLE_CONTENIDOS_FINANZAS') or is_granted('ROLE_CONTENIDOS_TESORERIA') or is_granted('ROLE_CONTENIDOS_ADMIN') %}
          <li class='has-sub'><a href= '#' ><span> CONTROL DE PAGOS</span></a>
             <ul>
-               <li><a href='{{ path('datosinactivos') }}'><span>VER RUTA</span></a></li>
-            </ul>
-         </li>
-      {% endif %}
-      {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}
-         <li class='has-sub'><a href= '#' ><span>PAGOS</span></a>
-            <ul>
-               <li><a href='{{ path('datosinactivos') }}'><span>VER RUTA</span></a></li>
-               <li><a href='{{ path('datosinactivos') }}'><span>AÑADIR FECHA A LA RUTA</span></a></li>
+               {% if is_granted('ROLE_CONTENIDOS_TESORERIA') or is_granted('ROLE_CONTENIDOS_ADMIN') %}
+                  <li><a href='{{ path('datosinactivos') }}'><span>AGREGAR DETALLES DEL PAGO</span></a></li>
+               {% endif %}
+               <li><a href='{{ path('datosinactivos') }}'><span>AÑADIR FECHA DE ENTREGA</span></a></li>
             </ul>
          </li>
       {% endif %}

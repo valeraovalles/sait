@@ -26,11 +26,11 @@ datosproveedor_show:
     defaults: { _controller: "ContenidosBundle:Datosproveedor:show" }
 
 datosproveedor_new:
-    pattern:  /proveedor/edit/nuevo
+    pattern:  /proveedor/creaelimina/nuevo
     defaults: { _controller: "ContenidosBundle:Datosproveedor:new" }
 
 datosproveedor_create:
-    pattern:  /proveedor/edit/crear
+    pattern:  /proveedor/creaelimina/crear
     defaults: { _controller: "ContenidosBundle:Datosproveedor:create" }
     requirements: { _method: post }
 
@@ -44,7 +44,7 @@ datosproveedor_update:
     requirements: { _method: post|put }
 
 datosproveedor_delete:
-    pattern:  /proveedor/edit/eliminar/{id}
+    pattern:  /proveedor/creaelimina/eliminar/{id}
     defaults: { _controller: "ContenidosBundle:Datosproveedor:delete" }
 
 ##########################################################################################################
@@ -170,7 +170,7 @@ pago_controlupdate:
     requirements: { _method: post|put }
 
 pago_control_ruta:
-    pattern:  pago/control/ruta/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
+    pattern:  pago/ruta/{id}/{id_contratacion}/{id_presupuesto}/{id_proveedor}
     defaults: { _controller: "ContenidosBundle:Pago:controlruta" }
 
 
