@@ -24,8 +24,8 @@
     {% endfor %}
 
 
-<div class="row-fluid">
-  <div class="span6">
+<div class="row">
+  <div class="col-md-6">
   	<div class="tickettitulo alert alert-info"><h5>SOLICITAR SOPORTE TÉCNICO</h5></div>
   	<div class="ticketsoporte">
 
@@ -34,35 +34,34 @@
 	        {{ form_widget(form._token) }}
 	        {{ form_widget(form2._token) }}
 
-			<div class="formShowSit">
+		<div class="formShowSit">
 	            <div class="contenedorformSit">
-          		    <div class="text-error siterror"><li>{{ form_errors(form.unidad) }}</li></div>
+          		    <div class="text-danger"><li>{{ form_errors(form.unidad) }}</li></div>
 	                <div class="labelformSit">Unidad:</div>
 	                <div class="widgetformSit">{{ form_widget(form.unidad) }}</div>
 	            </div>
 	        	<div class="contenedorformSit">
-	        		<div class="text-error siterror"><li>{{ form_errors(form.solicitud) }}</li></div>
+	        		<div class="text-danger"><li>{{ form_errors(form.solicitud) }}</li></div>
 	                <div class="labelformSit">Solicitud:</div>
 	                <div class="widgetformSit">{{ form_widget(form.solicitud) }}</div>
 	            </div>
 	            <div class="contenedorformSit">
-	            	<div class="text-error siterror"><li>{{ form_errors(form2.extension) }}</li></div>
+	            	<div class="text-danger"><li>{{ form_errors(form2.extension) }}</li></div>
 	                <div class="labelformSit">Ext. Solicitante:</div>
 	                <div class="widgetformSit">{{ form_widget(form2.extension, { 'attr': {'value': datosusuario.extension} }) }}</div>
-	            </div>
+                    </div><br>
 	   	        <div class="contenedorformSit">
-	   	        	<div class="text-error siterror"><li>{{ form_errors(form.file) }}</li></div>
-	                <div class="labelformSit">Archivo:</div>
-	                <div class="widgetformSit">{{ form_widget(form.file) }}</div>
-	            </div>
-			</div>
+	   	        	<div class="text-danger"><li>{{ form_errors(form.file) }}</li></div>
+                                <div style="text-align:center;padding-left: 120px;">{{ form_widget(form.file) }}</div>
+                        </div>
+		</div>
 
             <button class="btn btn-large btn-primary" type="submit">Solicitar</button>
 	    </form>
   	</div>
   </div>
   
-  <div class="span6">
+  <div class="col-md-6">
   	<div class="tickettitulo alert alert-info"><h5>ESTATUS DE TICKETS</h5></div>
 	<div class="ticketespera">
 		
@@ -70,9 +69,9 @@
 		{% for tu in ticketusuario %}
 			{% if tu.estatus==1 %}
 				{% set nuevo=nuevo+1 %}
-			{% elseif tu.estatus==2 %}
+			{% elseif tu.estatus==2 or tu.estatus==5 %}
 				{% set asignado=asignado+1 %}
-			{% elseif tu.estatus==4 %}
+			{% elseif tu.estatus==4 or tu.estatus==6 %}
 				{% set culminado=culminado+1 %}
 			{% endif %}
 		{% endfor %}
@@ -89,41 +88,40 @@
 				<tr><th>Solicitud</th><th>Fecha/Hora</th><th>Accion</th></tr>
 				{% for tu in ticketusuario %}
 				
-					<tr {% if tu.estatus==1 %}style="color:red;"{% elseif tu.estatus==2 %}style="color:steelblue;"style="color:red;"{% elseif tu.estatus==4 %}style="color:green;"{% endif %}>
-
+					<tr {% if tu.estatus==1 %}style="color:red;"{% elseif tu.estatus==2 or tu.estatus==5 %}style="color:steelblue;"style="color:red;"{% elseif tu.estatus==4 or tu.estatus==6 %}style="color:green;"{% endif %}>
 						<td>{{ tu.solicitud|slice(0,20) }}</td>
 						<td>{{ tu.fechasolicitud|date("d-m-Y") }} {{ tu.horasolicitud|date("G:i:s") }}</td>
-						<td><a data-toggle="modal" href="#myModal{{ tu.id }}"><span class="icon-search"></span></a></td>
-
+						<td><a data-toggle="modal" href="#myModal{{ tu.id }}"><span class="glyphicon glyphicon-search"></span></a></td>
 					</tr>
-					
+                                        
+                                        <div class="modal fade" id="myModal{{ tu.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel">ESTATUS DE TICKET</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                        <b>Solicitud:</b> {{ tu.solicitud }} <br> <br>
+
+                                                        {% if tu.estatus==1 %}
+                                                                <p class="text-error">El ticket aún no se ha asignado a un técnico.</p>
+                                                        {% elseif tu.estatus==2 or tu.estatus==5 %}
+                                                                <p class="text-info">El ticket fue asignado a un técnico de la unidad de {{ tu.unidad.descripcion }}.</p>
+                                                        {% elseif tu.estatus==3 %}
+                                                                <p class="text-error">Haz envíado el ticket a la unidad equivocada por lo que fue reasignado a la unidad de {{ tu.unidad.descripcion }}.</p>
+                                                        {% elseif tu.estatus==4 or tu.estatus==6 %}
+                                                                <p class="text-success">Tu ticket fue cerrado el {{ tu.fechasolucion|date('d-m-Y') }} a las {{ tu.horasolucion|date('G:i:s') }} y la solucion fue la siguiente: "<b>{{ tu.solucion }}</b>".</p>
+                                                        {% endif %}
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
 
 
-				    <div style="width:500px;left:52%;" id="myModal{{ tu.id }}" class="modal hide fade" tabindex="5" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				    	<div class="modal-header">
-				              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				              <h3 id="myModalLabel">ESTATUS DE TICKET</h3>
-				         </div>
-				        <div class="modal-body">
-				            
-				            <b>Solicitud:</b> {{ tu.solicitud }} <br> <br>
-
-
-				        	{% if tu.estatus==1 %}
-				        		<p class="text-error">El ticket aún no se ha asignado a un técnico.</p>
-				        	{% elseif tu.estatus==2 %}
-				        		<p class="text-info">El ticket fue asignado a un técnico de la unidad de {{ tu.unidad.descripcion }}.</p>
-				        	{% elseif tu.estatus==3 %}
-				        		<p class="text-error">Haz envíado el ticket a la unidad equivocada por lo que fue reasignado a la unidad de {{ tu.unidad.descripcion }}.</p>
-				        	{% elseif tu.estatus==4 %}
-				        		<p class="text-success">Tu ticket fue cerrado el {{ tu.fechasolucion|date('d-m-Y') }} a las {{ tu.horasolucion|date('G:i:s') }} y la solucion fue la siguiente: "<b>{{ tu.solucion }}</b>".</p>
-				        	{% endif %}
-				            
-				        </div>
-				        <div class="modal-footer">
-				          <button class="btn" data-dismiss="modal">Cerrar</button>
-				        </div>
-				    </div>
 
 				{% endfor %}
 			</table>

@@ -116,28 +116,6 @@
 
 <a class="btn btn-primary" href="{{ path('ticket') }}">Ir a la lista</a>
 
-{#
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('ticket') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('ticket_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('ticket_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
-#}
 
 <br><br>
 {% endblock %}

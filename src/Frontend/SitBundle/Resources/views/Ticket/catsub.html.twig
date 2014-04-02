@@ -28,55 +28,61 @@
     
 
 
-	<div class="row-fluid">
-	 	<div class="span6">
+	<div class="row">
+	 	<div class="col-md-6">
 			<form novalidate action="{{ path('ticket_guardacatsub', { 'id': id }) }}" method="post">
 			    <div class="contenedorcatsub">
-			  		<div class="accordion" id="accordion2">
-						{% for categoria, catsub in arraycatsub %}
-							<div class="accordion-group">
-								<div class="accordion-heading">
-								    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{ loop.index }}">
-											<div class="SITcategoria">{{ categoria }}</div>
-									</a>
-								</div>
+                                <div class="panel-group" id="accordion">
+                                    {% for categoria, catsub in arraycatsub %}
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}">
+                                                        <div class="SITcategoria">{{ categoria }}</div>
+                                                    </a>
+                                                </h4>
+                                            </div>
 
-							    <div id="collapse{{ loop.index }}" class="accordion-body collapse">
-							    	<div class="accordion-inner">
-										{% for subcategoria in catsub %}	
-											<div class="SITsubcategoria"><input type="radio" name="subcat" value="{{ subcategoria.idcat }}-{{ subcategoria.idsub }}"> {{ subcategoria.subcategoria }}</div>
-										{% endfor %}
-									</div>
-								</div>
-							</div>
-						{% endfor %}
-					</div>
+                                                <div id="collapse{{ loop.index }}" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% for subcategoria in catsub %}	
+                                                            <div class="SITsubcategoria"><input type="radio" name="subcat" value="{{ subcategoria.idcat }}-{{ subcategoria.idsub }}"> {{ subcategoria.subcategoria }}</div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    {% endfor %}
 				</div>
-				<input type="submit" class="btn btn-primary" value="Asociar categoria">
+                            </div>
+                            <br><input type="submit" class="btn btn-primary" value="ASOCIAR CATEGORIA"><br><br>
 			</form>
 		</div>
-		<div class="span6" style="text-align:justify;padding-right:10px;">
-			<div style="width:400px;"><b>Solicitud: </b>{{ ticket.solicitud }}</div>
+		<div class="col-md-6" style="text-align:justify;padding-right:10px;">
+                    <div style="width:400px;"><b>Solicitud: </b>{{ ticket.solicitud }}</div>
+                    <br>
+                    <form action="{{ path('ticket_asigreasig',{'id':id}) }}" method="post" style="width:80%;">
+                        <div class="panel-group" id="accordion">
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                              <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    REASIGNAR TICKET
+                                </a>
+                              </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                              <div class="panel-body">
+                                    {% for uni in unidad if uni.id!=idunidad %}
+                                    <div class="situnidad"><input type="radio" name="datos" value="reasignar-{{ uni.id }}"> {{ uni.descripcion }}</div>
+                                    {% endfor %}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <br><input type="submit" class="btn btn-warning" value="REASIGNAR TICKET">
+                    </form>
+                </div>
+	
 
-			<br>
-			<form action="{{ path('ticket_asigreasig',{'id':id}) }}" method="post">
-			<div class="accordion-group">
-	            <div class="accordion-heading">
-	              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-	                REASIGNAR TICKET
-	              </a>
-	            </div>
-	            <div id="collapseTwo" class="accordion-body collapse in">
-	              <div class="accordion-inner">
-	                {% for uni in unidad if uni.id!=idunidad %}
-	                <div class="situnidad"><input type="radio" name="datos" value="reasignar-{{ uni.id }}"> {{ uni.descripcion }}</div>
-	                {% endfor %}
-	              </div>
-	            </div>
-	          </div>
-			</div>
-
-			<input type="submit" class="btn btn-primary" value="Reasignar ticket">
-			</form>
-	</div>
 {% endblock %}
