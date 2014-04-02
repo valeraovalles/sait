@@ -84,9 +84,9 @@
               <a href="{{ path('sit_homepage')}}">SIT<br><img id="licencias" src="{{ asset("images/sit.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
 
-            {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_CONTENIDOS') or is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_EQUIPOS') %}
+            {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_DGE') or is_granted('ROLE_CONTENIDOS_TESORERIA') or is_granted('ROLE_CONTENIDOS_FINANZAS') or is_granted('ROLE_CONTENIDOS_RRHH') or is_granted('ROLE_CONTENIDOS_PTTO') or is_granted('ROLE_CONTENIDOS_APOYO') or is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_ASISTENTES') or is_granted('ROLE_CONTENIDOS_DIRECTORLINEA') %}
                 <div class="listado_aplicaciones">
-                  <a href="{{ path('datosproveedor')}}">CONTENIDOS<br><img id="licencias" src="{{ asset("images/dinero.jpg") }}" data-placement="bottom" title="CONTROL DE PAGOS" data-trigger="hover"></a>
+                  <a href="{{ path('datosproveedor')}}">CONTROL DE PAGOS<br><img id="licencias" src="{{ asset("images/dinero.jpg") }}" data-placement="bottom" title="CONTROL DE PAGOS" data-trigger="hover"></a>
                 </div>
             {% endif %}
 

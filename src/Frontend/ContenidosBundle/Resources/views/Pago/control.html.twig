@@ -1,0 +1,281 @@
+{% extends '::contenidos.html.twig' %}
+
+{% block title %}CONTENIDOS-PAGOS{% endblock %}
+
+{% block titulobanner %}
+   PAGO - CONTROL DE PAGO
+{% endblock %}
+   
+{% block body -%}
+    {{ parent() }}
+
+    <div class="titulo">CONTROL DEL PAGO</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+   {% endfor %}
+
+    <form novalidate="novalidate" action="{{ path('pago_controlupdate', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(edit_form) }} {{ form_enctype(edit_form1) }}>{{ form_widget(edit_form._token) }}{{ form_widget(edit_form1._token) }}
+        <input type="hidden" name="_method" value="PUT" />
+        <fieldset>
+            <div class="form-show_edit"> 
+                {% if estatus == 1 and (is_granted('ROLE_CONTENIDOS_RRHH') or is_granted('ROLE_CONTENIDOS_ADMIN')) %}
+                    <br>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidaduno) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidaduno) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidaddos) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidaddos) }}</div>
+                    </div>
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form1.fechaUnidadtres) }}
+                        <div class="labels">Fecha de Entrega en Oficina Directora:</div>
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadtres, 
+                                            {'attr': 
+                                                {'class': "fecha"}
+                                            }) 
+                                        }}
+                        </div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadcuatro) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcuatro) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadcinco) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcinco) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadseis) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadseis) }}</div>
+                    </div>   
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadsiete) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadsiete) }}</div>
+                    </div> 
+                    <button type="submit" class="btn">Editar</button><br><br>
+
+                {% elseif estatus == 2 and (is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_ADMIN')) %}
+                    <br>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidaduno) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidaduno) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidaddos) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidaddos) }}</div>
+                    </div>
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form1.fechaUnidadtres) }}
+                        <div class="labels">Fecha de Entrega en Oficina Directora:</div>
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadtres, 
+                                            {'attr': 
+                                                {'class': "fecha"}
+                                            }) 
+                                        }}
+                        </div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadcuatro) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcuatro) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadcinco) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcinco) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadseis) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadseis) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadsiete) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadsiete) }}</div>
+                    </div> 
+                    <button type="submit" class="btn">Editar</button><br><br> 
+
+                {% elseif estatus == 3 and (is_granted('ROLE_CONTENIDOS_DIRECTORA') or is_granted('ROLE_CONTENIDOS_ADMIN')) %}
+                    <br>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidaduno) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidaduno) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidaddos) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidaddos) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadtres) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadtres) }}</div>
+                    </div>
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form1.fechaUnidadcuatro) }}
+                        <div class="labels">Fecha de Entrega en Presupuesto:</div>
+                        <div class="dato">{{ form_widget(
+                                    edit_form1.fechaUnidadcuatro, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }
+                            ) }}
+                        </div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadcinco) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcinco) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadseis) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadseis) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadsiete) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadsiete) }}</div>
+                    </div>
+                    <button type="submit" class="btn">Editar</button><br><br>
+
+                {% elseif estatus == 4 and (is_granted('ROLE_CONTENIDOS_PTTO') or is_granted('ROLE_CONTENIDOS_ADMIN')) %}
+                    <br>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidaduno) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidaduno) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidaddos) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidaddos) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadtres) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadtres) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadcuatro) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcuatro) }}</div>
+                    </div>
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form1.fechaUnidadcinco) }}
+                        <div class="labels">Fecha de Entrega en Finanzas:</div>
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcinco, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}
+                        </div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadseis) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadseis) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadsiete) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadsiete) }}</div>
+                    </div>
+                    <button type="submit" class="btn">Editar</button><br><br>
+
+                {% elseif estatus == 5 and (is_granted('ROLE_CONTENIDOS_FINANZAS') or is_granted('ROLE_CONTENIDOS_ADMIN')) %}
+                    <br>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidaduno) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidaduno) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidaddos) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidaddos) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadtres) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadtres) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadcuatro) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcuatro) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadcinco) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcinco) }}</div>
+                    </div>
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form1.fechaUnidadseis) }}
+                        <div class="labels">Fecha de Entrega en Tesorería:</div>
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadseis, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}
+                        </div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadsiete) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadsiete) }}</div>
+                    </div>
+                    <button type="submit" class="btn">Editar</button><br><br>
+
+                {% elseif estatus == 6 and (is_granted('ROLE_CONTENIDOS_TESORERIA') or is_granted('ROLE_CONTENIDOS_ADMIN')) %}
+                    <br>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidaduno) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidaduno) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidaddos) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidaddos) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadtres) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadtres) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadcuatro) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcuatro) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadcinco) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadcinco) }}</div>
+                    </div>
+                    <div class="form-contenedor" style="display:none">
+                        {{ form_errors(edit_form1.fechaUnidadseis) }}
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadseis) }}</div>
+                    </div>
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form1.fechaUnidadseis) }}
+                        <div class="labels">Fecha de Entrega al Proveedor:</div>
+                        <div class="dato">{{ form_widget(edit_form1.fechaUnidadsiete, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Editar</button><br><br>
+                    
+                {% elseif estatus == 7 and is_granted('ROLE_CONTENIDOS_ADMIN') %}
+                    <br>
+                    <div class="form-contenedor">
+                        {{ form_errors(edit_form1.fechaUnidadseis) }}
+                        <div class="labels">Estatus del Pago:</div>
+                        <div class="dato">ENTREGADO AL BENEFICIARIO</div>
+                    </div>                    
+                {% else %}
+                    <div class="divisor">NO TIENE CREDENCIALES PARA VER EL CONTROL DEL PAGO</div>
+                {% endif %}
+                
+            </div>
+        </fieldset>
+      
+        <br>     
+        <a href="{{ path('pago', {'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+        {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}
+            <a href="{{ path('pago_control_ruta', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="ruta del pago"><img width="80px" src="{{ asset('images/ruta.jpg')}}"></a>
+        {% endif %}          
+    </form>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".fecha").datepicker();
+        });
+    </script>
+{% endblock %}

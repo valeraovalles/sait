@@ -23,9 +23,10 @@
 
     <form novalidate="novalidate" action="{{ path('banco_create',{ 'id_proveedor':id_proveedor }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
 
-        <fieldset>       
-            <legend id="a"><div class="divisor">DATOS DEL BENEFICIARIO</div> </legend>
-            <div id="descripcion" class="form-show_edit">
+
+        <fieldset>
+            <div id="descripcion" class="form-show_edit">       
+                <div class="divisor">DATOS DEL BENEFICIARIO</div>
                 <br>
                 <div class="form-contenedor">
                     {{ form_errors(form.nombreBeneficiario) }}
@@ -42,12 +43,8 @@
                     <div class="labels">Pa&iacute;s del Beneficiario:</div>
                     <div class="dato">{{ form_widget(form.pais) }}</div>
                 </div>
-            </div>
-        </fieldset>
-        <br>
-        <fieldset>       
-            <legend id="b"><div class="divisor">DATOS DEL BANCO BENEFICIARIO</div> </legend>
-            <div id="detalles" class="form-show_edit">
+             
+                <div class="divisor">DATOS DEL BANCO BENEFICIARIO</div>
                 <br>
                 <div class="form-contenedor">
                     {{ form_errors(form.bancoBenef) }}
@@ -79,12 +76,8 @@
                     <div class="labels">Direcci&oacute;n del Banco Beneficiario:</div>
                     <div class="dato">{{ form_widget(form.direccionBancobenef) }}</div>
                 </div>
-            </div>
-        </fieldset>
-        <br>
-         <fieldset>       
-            <legend id="b"><div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div> </legend>
-            <div id="detalles" class="form-show_edit">
+                 
+                <div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div>
                 <br>
                 <div class="form-contenedor">
                     {{ form_errors(form.bancoInterm) }}

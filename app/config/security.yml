@@ -35,7 +35,8 @@ security:
         - { path: ^/usuario/contacto, roles: ROLE_USER }
         - { path: ^/usuario/cambioclave, roles: ROLE_USER }
         - { path: ^/usuario, roles: ROLE_ADMINISTRADOR }
-
+    
+    #ROLES DE DISTRIBUCION
         - { path: ^/distribucion/operador/new, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
         - { path: ^/distribucion/operador/edit, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
         - { path: ^/distribucion/tipooperador/new, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
@@ -48,13 +49,12 @@ security:
         - { path: ^/distribucion/zona/edit, roles: ROLE_DISTRIBUCION_ADMINISTRADOR }
         - { path: ^/distribucion, roles: ROLE_DISTRIBUCION }
 
+    #ROLES DE CONSTANCIAS
+        - { path: ^/constancia, roles: ROLE_USER }
         - { path: ^/constancia/inicio, roles: ROLE_CONSTANCIA_ADMINISTRADOR}
         - { path: ^/constancia/edit, roles: ROLE_CONSTANCIA_ADMINISTRADOR}
 
-
-
-        - { path: ^/constancia, roles: ROLE_USER}
-
+    #ROLES DE SIT
         - { path: ^/sit/inicio, roles: ROLE_USER}
         - { path: ^/sit/ticket/create, roles: ROLE_USER}
         - { path: ^/sit/ticketgeneral, roles: ROLE_SIT_GENERAL}
@@ -64,31 +64,52 @@ security:
         - { path: ^/sit/categoria, roles: ROLE_SIT_ADMINISTRADOR}
         - { path: ^/sit/subcategoria, roles: ROLE_SIT_ADMINISTRADOR}
 
-
+    #ROLES DE LICENCIAS
         - { path: ^/licencias/reportes, roles:[ROLE_LICENCIAS , ROLE_LICADMIN] }
         - { path: ^/licencias/modif, roles:ROLE_LICADMIN }
+    
+    #ROLES DE CONTENIDOS
+        - { path: ^/compras, roles: ROLE_CONTENIDOS_ADMIN}
+        - { path: ^/informacion, roles: ROLE_CONTENIDOS_ADMIN}
+        - { path: ^/equipostelesur, roles: ROLE_CONTENIDOS_ADMIN}
+        - { path: ^/inactivos, roles:ROLE_CONTENIDOS_ADMIN}
 
-        - { path: ^/contenidos, roles:[ROLE_CONTENIDOS_ADMIN , ROLE_CONTENIDOS_CONTENIDOS, ROLE_CONTENIDOS_EQUIPOS, ROLE_CONTENIDOS_COMPRAS] }
+        - { path: ^/proveedor/show, roles:[ROLE_CONTENIDOS_DIRECTORLINEA, ROLE_CONTENIDOS_ASISTENTES, ROLE_CONTENIDOS_COMPRAS, ROLE_CONTENIDOS_DGE, ROLE_CONTENIDOS_ADMIN]}
+        - { path: ^/proveedor/edit, roles:[ROLE_CONTENIDOS_ASISTENTES, ROLE_CONTENIDOS_COMPRAS, ROLE_CONTENIDOS_ADMIN]}
+        - { path: ^/proveedor/creaelimina, roles:[ROLE_CONTENIDOS_ASISTENTES, ROLE_CONTENIDOS_COMPRAS, ROLE_CONTENIDOS_APOYO, ROLE_CONTENIDOS_ADMIN]}
 
+        - { path: ^/banco/show, roles: [ROLE_CONTENIDOS_ASISTENTES, ROLE_CONTENIDOS_COMPRAS, ROLE_CONTENIDOS_APOYO, ROLE_CONTENIDOS_DGE, ROLE_CONTENIDOS_ADMIN]}
+        - { path: ^/banco/edit, roles: [ROLE_CONTENIDOS_ASISTENTES, ROLE_CONTENIDOS_COMPRAS, ROLE_CONTENIDOS_APOYO, ROLE_CONTENIDOS_ADMIN]}
+
+        - { path: ^/presupuesto/show, roles: [ROLE_CONTENIDOS_ASISTENTES, ROLE_CONTENIDOS_COMPRAS, ROLE_CONTENIDOS_APOYO, ROLE_CONTENIDOS_DGE, ROLE_CONTENIDOS_ADMIN]}
+        - { path: ^/presupuesto/edit, roles: [ROLE_CONTENIDOS_ASISTENTES, ROLE_CONTENIDOS_COMPRAS, ROLE_CONTENIDOS_APOYO, ROLE_CONTENIDOS_ADMIN]}
+
+        - { path: ^/contratacion/show, roles: [ROLE_CONTENIDOS_DIRECTORLINEA, ROLE_CONTENIDOS_ASISTENTES, ROLE_CONTENIDOS_COMPRAS, ROLE_CONTENIDOS_APOYO, ROLE_CONTENIDOS_DGE, ROLE_CONTENIDOS_ADMIN]}
+        - { path: ^/contratacion/edit, roles: [ROLE_CONTENIDOS_ASISTENTES, ROLE_CONTENIDOS_COMPRAS, ROLE_CONTENIDOS_APOYO, ROLE_CONTENIDOS_ADMIN]}
+
+        - { path: ^/pago/show, roles:[ROLE_CONTENIDOS_DIRECTORLINEA, ROLE_CONTENIDOS_ASISTENTES, ROLE_CONTENIDOS_ADMIN]}
+        - { path: ^/pago/edit, roles:[ROLE_CONTENIDOS_ASISTENTES, ROLE_CONTENIDOS_TESORERIA, ROLE_CONTENIDOS_ADMIN]}
+        - { path: ^/pago/control, roles:[ROLE_CONTENIDOS_COMPRAS, ROLE_CONTENIDOS_PTTO, ROLE_CONTENIDOS_RRHH, ROLE_CONTENIDOS_FINANZAS, ROLE_CONTENIDOS_TESORERIA, ROLE_CONTENIDOS_DGE, ROLE_CONTENIDOS_ADMIN]}
+        - { path: ^/pago/ruta, roles:[ROLE_CONTENIDOS_DIRECTORLINEA, ROLE_CONTENIDOS_DGE, ROLE_CONTENIDOS_ADMIN]}
+        
+    #ROLES DE CONTRATOS
         - { path: ^/contratos, roles:ROLE_CONTRATOS }
 
+    #NETO
         - { path: ^/neto, roles: ROLE_USER }
 
+    #VISITAS
         - { path: ^/visita, roles: ROLE_VISITAS }
-
+    #DIRECTORIO
         - { path: ^/directorio, roles: ROLE_DIRECTORIO }
+
+    #JORNADAS
         - { path: ^/jornada/numeracion, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/jornada/homepagenum, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/jornada/ajaxmercalsiguienteautomatico, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/jornada/homepagejor, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/jornada/homepagenum, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-
-
-        
-
         - { path: ^/jornada/jornada, roles: ROLE_JORNADA}
         - { path: ^/jornada/asignum, roles: ROLE_JORNADA_ASIGNUM}
         - { path: ^/jornada/num, roles: ROLE_JORNADA_NUM}
-        
         - { path: ^/jornada, roles: ROLE_USER}
-

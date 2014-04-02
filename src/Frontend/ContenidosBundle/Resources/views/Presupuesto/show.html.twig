@@ -21,9 +21,9 @@
         </div>
    {% endfor %}
 
-    <div class="form-show_edit">
-        <fieldset>
-            <legend id="a"><div class="divisor">DATOS DEL PRESUPUESTO</div> </legend>
+    <fieldset>
+        <div class="form-show_edit">
+            <div class="divisor">DATOS DEL PRESUPUESTO</div>
             <div class="contenedor">
                     <div class="labels">Descripci&oacute;n:</div>
                     <div class="dato">{{ entity.descripcion }}</div>
@@ -96,7 +96,7 @@
                 </tbody>
             </table>
             
-            <legend id="a"><div class="divisor">DISPONIBILIDAD</div> </legend>
+            <div class="divisor">DISPONIBILIDAD</div>
             <table cellpadding="10" cellspacing="0" border="1">
                 <thead>
                     <tr>
@@ -138,9 +138,9 @@
                     </tr>
                 </tbody>
             </table>  
-            <br>          
-        </fieldset>
-    </div>
+            <br>
+        </div>
+    </fieldset>
     <a href="{{ path('presupuesto', { 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Volver al Listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
     {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
         <a href="{{ path('presupuesto_edit', { 'id': entity.id, 'id_proveedor': id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="Editar Presupuesto"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
