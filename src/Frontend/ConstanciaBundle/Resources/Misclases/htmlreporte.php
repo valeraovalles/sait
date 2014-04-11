@@ -30,14 +30,16 @@ class htmlreporte
         c.id_concepto=ctp.id_concepto and
         ctp.id_concepto_tipo_personal = hq.id_concepto_tipo_personal and
 
-        hq.id_grupo_nomina=gn.id_grupo_nomina 
+        hq.id_grupo_nomina=gn.id_grupo_nomina and
 
-        and hq.anio=(select max(anio) from historicoquincena where numero_nomina=0) 
+        hq.anio=(select max(anio) from historicoquincena where numero_nomina=0 and id_tipo_personal<>41) and 
+        hq.mes=(select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena where numero_nomina=0 and id_tipo_personal<>41) and numero_nomina=0 and id_tipo_personal<>41) and 
 
-        and hq.mes=(select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena where numero_nomina=0) and numero_nomina=0) 
+        hq.semana_quincena=(select max(semana_quincena) from historicoquincena where 
+        (anio=(select max(anio) from historicoquincena where numero_nomina=0) and 
+        mes = (select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena where numero_nomina=0) and numero_nomina=0)) and numero_nomina=0 and id_tipo_personal<>41) 
 
-        and hq.semana_quincena=(select max(semana_quincena) from historicoquincena where anio=(select max(anio) from historicoquincena where numero_nomina=0) 
-        and mes = (select max(mes) from historicoquincena where anio = (select max(anio) from historicoquincena where numero_nomina=0) and numero_nomina=0) and numero_nomina=0) and hq.numero_nomina=0
+
 ";
 
       $rs = pg_query($conn, $query);

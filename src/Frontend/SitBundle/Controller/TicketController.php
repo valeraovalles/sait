@@ -67,7 +67,7 @@ class TicketController extends Controller
             "Buenas noches","el presente es para","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
             "urgente","esto con caracter de urgencia","con caracter de urgencia","Se agradece su valiosa colaboracion","carmen",
             "buenas tardes el motivo es para","el motivo es para","el motivo es para","por su colaboracion","por su colaboración","buen dia","Buenos tardes","camaradas","los molesto para",
-            "por el presente","estimados","....","Buenas tardes:"
+            "por el presente","estimados","....","Buenas tardes:","Hola Johan", "Mil Gracias por tu colaboración", "Mil Gracias por tu colaboración."
         );
 
         $solicitud=str_replace($eliminar, array(), $solicitud);
