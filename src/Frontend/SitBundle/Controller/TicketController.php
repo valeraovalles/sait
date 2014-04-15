@@ -601,7 +601,7 @@ class TicketController extends Controller
 
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Solicitud')     // we configure the title
-            ->setFrom('aplicaciones@telesurtv.net')     // we configure the sender
+            ->setFrom($datosusuario->getUser()->getUsername().'@telesurtv.net')     // we configure the sender
             ->setTo($unidad->getCorreo())     // we configure the recipient
             ->setBody( $this->renderView(
                     'SitBundle:Correo:solicitud.html.twig',

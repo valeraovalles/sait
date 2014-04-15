@@ -33,9 +33,17 @@ class SeguimientoController extends Controller
         $errorc=null;
         $errore=null;
         $em = $this->getDoctrine()->getManager();
-
-        
         $ticket =  $em->getRepository('SitBundle:Ticket')->find($idticket);
+
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+
+        if($ticket->getEstatus()!='5' and $ticket->getUnidad()->getId()!=$usuariounidad[0]->getId() or $ticket->getEstatus()=='5' and $ticket->getUnidad()->getId()!=$usuariounidad[0]->getId()){
+            $this->get('session')->getFlashBag()->add('alert', 'DEJA DE ESTAR INVENTANDO VAINAS');
+            return $this->redirect($this->generateUrl('sit_homepage'));
+        }
+
         $seguimiento =  $em->getRepository('SitBundle:Seguimiento')->findByTicket($idticket);
         
         if($ticket->getEstatus()!=6){
@@ -43,7 +51,6 @@ class SeguimientoController extends Controller
             $consulta->setParameter('id', $idticket);
             $consulta->execute();
         }
-
 
         
         $cs = new Correoseguimiento();
@@ -133,7 +140,7 @@ class SeguimientoController extends Controller
             ->setSubject($formcs->getData()->getAsunto())  
             ->setFrom('aplicaciones@telesurtv.net')     
             ->setTo($email)
-            ->setBody($formcs->getData()->getCuerpo(), 'text/html');
+            ->setBody($formcs->getData()->getCuerpo().'<br><b>Nota: Puedes responder este correo directamente desde el Sit haciendo clic en tu solicitud marcada de color naranja así como ver el seguimiento de la misma.</b>', 'text/html');
             
             if(isset($nombre))
                 $message->attach(\Swift_Attachment::fromPath('uploads/sit/'.$nombre));
@@ -193,7 +200,7 @@ class SeguimientoController extends Controller
         ->setSubject('Sit-Comentario')     // we configure the title
         ->setFrom($perfil->getUser()->getUsername().'@telesurtv.net')     // we configure the sender
         ->setTo('aplicaciones@telesurtv.net')    // we configure the recipient
-        ->setBody($datos.'<br><br><b>Comentario de la solicitud:</b> '.$ticket->getSolicitud().'<br><br><b>ID:</b> '.$ticket->getId(), 'text/html');
+        ->setBody($datos.'<br><b>Comentario de la solicitud:</b> '.$ticket->getSolicitud().'<br><br><b>ID:</b> '.$ticket->getId(), 'text/html');
 
         $this->get('mailer')->send($message);    // then we send the message.
         //FIN CORREO

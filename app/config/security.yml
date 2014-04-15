@@ -64,6 +64,7 @@ security:
         - { path: ^/sit/categoria, roles: ROLE_SIT_ADMINISTRADOR}
         - { path: ^/sit/subcategoria, roles: ROLE_SIT_ADMINISTRADOR}
 
+
     #ROLES DE LICENCIAS
         - { path: ^/licencias/reportes, roles:[ROLE_LICENCIAS , ROLE_LICADMIN] }
         - { path: ^/licencias/modif, roles:ROLE_LICADMIN }
