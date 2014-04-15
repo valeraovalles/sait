@@ -145,7 +145,7 @@ class TicketController extends Controller
         //$ticket->getSolicitante()->getUser()->getUsername();
         $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
         ->setSubject('Sit-Cerrado')     // we configure the title
-        ->setFrom('sit@telesurtv.net')     // we configure the sender
+        ->setFrom('aplicaciones@telesurtv.net')     // we configure the sender
         ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
         ->setBody( $this->renderView(
                 'SitBundle:Correo:solucion.html.twig',
@@ -274,7 +274,7 @@ class TicketController extends Controller
             //CORREO
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Asignado')     // we configure the title
-            ->setFrom('sit@telesurtv.net')     // we configure the sender
+            ->setFrom('aplicaciones@telesurtv.net')     // we configure the sender
             ->setTo($user->getUser()->getUsername().'@telesurtv.net')     // we configure the recipient
             ->setBody( $this->renderView(
                     'SitBundle:Correo:asignado.html.twig',
@@ -331,7 +331,7 @@ class TicketController extends Controller
 
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Reasignado')     // we configure the title
-            ->setFrom('sit@telesurtv.net')     // we configure the sender
+            ->setFrom('aplicaciones@telesurtv.net')     // we configure the sender
             ->setTo($unidad->getCorreo())     // we configure the recipient
             ->setBody( $this->renderView(
                     'SitBundle:Correo:reasignado.html.twig',
@@ -598,7 +598,7 @@ class TicketController extends Controller
 
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Solicitud')     // we configure the title
-            ->setFrom('sit@telesurtv.net')     // we configure the sender
+            ->setFrom('aplicaciones@telesurtv.net')     // we configure the sender
             ->setTo($unidad->getCorreo())     // we configure the recipient
             ->setBody( $this->renderView(
                     'SitBundle:Correo:solicitud.html.twig',
