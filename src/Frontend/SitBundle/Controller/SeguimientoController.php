@@ -187,6 +187,18 @@ class SeguimientoController extends Controller
         $em->persist($entity);
         $em->flush();  
         
+
+        //CORREO
+        $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+        ->setSubject('Sit-Comentario')     // we configure the title
+        ->setFrom($perfil->getUser()->getUsername().'@telesurtv.net')     // we configure the sender
+        ->setTo('aplicaciones@telesurtv.net')    // we configure the recipient
+        ->setBody($datos.'<br><br><b>Comentario de la solicitud:</b> '.$ticket->getSolicitud().'<br><br><b>ID:</b> '.$ticket->getId(), 'text/html');
+
+        $this->get('mailer')->send($message);    // then we send the message.
+        //FIN CORREO
+
+
         $this->get('session')->getFlashBag()->add('notice', 'Se ha enviado el comentario exitosamente!');
         return $this->redirect($this->generateUrl('sit_seguimientoprincipal', array('idticket' => $idticket)));
     }
