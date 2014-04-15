@@ -126,7 +126,8 @@ class SeguimientoController extends Controller
             foreach ($a as $p) {
                 $email[]=$p;
             }
-
+            $email[]='aplicaciones@telesurtv.net';
+            
             //CORREO
             $message = \Swift_Message::newInstance()  
             ->setSubject($formcs->getData()->getAsunto())  
