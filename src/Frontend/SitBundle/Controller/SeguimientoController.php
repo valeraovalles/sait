@@ -130,7 +130,7 @@ class SeguimientoController extends Controller
             //CORREO
             $message = \Swift_Message::newInstance()  
             ->setSubject($formcs->getData()->getAsunto())  
-            ->setFrom('sit@telesurtv.net')     
+            ->setFrom('aplicaciones@telesurtv.net')     
             ->setTo($email)
             ->setBody($formcs->getData()->getCuerpo(), 'text/html');
             
