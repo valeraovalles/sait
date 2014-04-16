@@ -61,8 +61,6 @@ class TicketController extends Controller
 
     public function filtrarsolicitud($solicitud){
 
-        $solicitud=strtolower($solicitud);
-
         $eliminar=array(
             "hola","muchas gracias","buenos dias,","buenos dias","buenos días,","buenos días","buen día","buenas tardes,","buenas tardes","saludos","chicos:",
             "buenos días","gracias","la presente es para","la presente es","por medio de la presente se","Buenas noches,",
@@ -488,6 +486,8 @@ class TicketController extends Controller
      */
     public function createAction(Request $request)
     {
+
+
         $datos=$request->request->all();
         //RECIBO LOS DATOS QUE SE ENVIAN DESDE EL FORMULARIO
         $solicitud=$datos['frontend_sitbundle_tickettype']['solicitud'];
@@ -539,7 +539,7 @@ class TicketController extends Controller
 
             //GUARDO LA SOLICITUD FILTRANDO LO ESCRITO POR EL USUARIO
             $solicitud=$this->filtrarsolicitud($solicitud);
-            $solicitud=ucfirst(trim($solicitud));
+            $solicitud=trim($solicitud);
             $entity->setSolicitud($solicitud);
 
 

@@ -39,12 +39,12 @@
         {% if ticket.archivo %}
             <tr>
                 <th>Archivo:</th>
-                <td>
+                <td colspan="3">
                     {% set extension =  ticket.archivo|split(".") %}
 
                     {% if extension[1]=='jpg' or extension[1]=='jpeg' or extension[1]=='png' or extension[1]=='gif'  %}
                         <a data-toggle="modal" href="#myModal">
-                            <img class="img-rounded" src="{{ asset('uploads/sit/') }}{{ ticket.archivo }}" width="150px">
+                            <img id="im" class="img-rounded" src="{{ asset('uploads/sit/') }}{{ ticket.archivo }}" width="50px">
                         </a>
                     {% else %}
                         <a href="{{ asset('uploads/sit/') }}/{{ ticket.archivo }}">DESCARGA ARCHIVO {{ extension[1]|upper }}</a>

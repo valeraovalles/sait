@@ -130,6 +130,13 @@ class Contratos
      */
     private $archivo;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="personal", type="boolean", nullable=true)
+     */
+    private $personal;
+
 
 
     /**
@@ -461,5 +468,28 @@ class Contratos
     public function getIdAbogado()
     {
         return $this->idAbogado;
+    }
+
+    /**
+     * Set personal
+     *
+     * @param boolean $personal
+     * @return User
+     */
+    public function setPersonal($personal)
+    {
+        $this->personal = $personal;
+    
+        return $this;
+    }
+
+    /**
+     * Get personal
+     *
+     * @return boolean 
+     */
+    public function getPersonal()
+    {
+        return $this->personal;
     }
 }
