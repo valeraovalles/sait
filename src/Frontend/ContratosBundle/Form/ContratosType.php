@@ -34,6 +34,7 @@ class ContratosType extends AbstractType
             ->add('idAbogado')
             ->add('file','file')
             ->add('archivo')
+            ->add('personal')
         ;
     }
 
