@@ -1,17 +1,23 @@
 {% extends '::cumpleanios.html.twig' %}
 
-{% block body -%}
-<br>
-    <h1>Personal list</h1>
+{% block title %}CUMPLEAÑOS - LISTADO{% endblock %}
 
-    <table class="records_list">
+{% block titulobanner %}
+    CUMPLEAÑOS - LISTADO
+{% endblock %}
+
+{% block body -%}
+
+    {{ parent() }}
+
+    <div class="titulo">LISTADO DE PERSONAL EXTRANJERO</div>
+
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalistaX">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Cedpas</th>
-                <th>Correo</th>
                 <th>Ubicacion</th>
                 <th>Fechanac</th>
                 <th>Sexo</th>
@@ -21,21 +27,19 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('personal_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.id }}</td>
                 <td>{{ entity.nombre }}</td>
                 <td>{{ entity.apellido }}</td>
-                <td>{{ entity.cedpas }}</td>
-                <td>{{ entity.correo }}</td>
                 <td>{{ entity.ubicacion }}</td>
-                <td>{{ entity.fechanac }}</td>
+                <td>{{ entity.fechanac|date("Y-m-d") }}</td>
                 <td>{{ entity.sexo }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('personal_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('cumpleanios_personal_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('personal_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('cumpleanios_personal_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -44,11 +48,18 @@
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('cumpleanios_personal_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+    <br><br><br>
+    <a class="btn btn-primary" href="{{ path('cumpleanios_personal_new') }}">
+        NUEVO PERSONAL
+    </a>
+    <br>
+
+    <script>
+        $(document).ready(function(){
+            $('#tablalistaX').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                 "aaSorting": [[0,'desc']],
+             } );
+         })
+    </script>
     {% endblock %}

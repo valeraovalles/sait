@@ -44,7 +44,7 @@ class PersonalController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('personal_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('cumpleanios_personal_show', array('id' => $entity->getId())));
         }
 
         return $this->render('CumpleaniosBundle:Personal:new.html.twig', array(
@@ -135,7 +135,7 @@ class PersonalController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('personal_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('cumpleanios_personal_edit', array('id' => $id)));
         }
 
         return $this->render('CumpleaniosBundle:Personal:edit.html.twig', array(
@@ -165,7 +165,7 @@ class PersonalController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('personal'));
+        return $this->redirect($this->generateUrl('cumpleanios_personal'));
     }
 
     /**

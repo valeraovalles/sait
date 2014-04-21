@@ -16,7 +16,9 @@ class PersonalType extends AbstractType
             ->add('cedpas')
             ->add('correo')
             ->add('ubicacion')
-            ->add('fechanac')
+            ->add('fechanac', 'date',array(
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd'))
             ->add('sexo')
         ;
     }

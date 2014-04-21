@@ -114,3 +114,6 @@ security:
         - { path: ^/jornada/asignum, roles: ROLE_JORNADA_ASIGNUM}
         - { path: ^/jornada/num, roles: ROLE_JORNADA_NUM}
         - { path: ^/jornada, roles: ROLE_USER}
+
+    #ROLES DE CUMPLEANIOS
+        - { path: ^/cumpleanios, roles: ROLE_CUMPLEANIOS}
