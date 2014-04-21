@@ -1,3 +1,7 @@
+cumpleanios:
+    resource: "@CumpleaniosBundle/Resources/config/routing.yml"
+    prefix:   /cumpleanios
+
 incidencia:
     resource: "@IncidenciaBundle/Resources/config/routing.yml"
     prefix:   /
