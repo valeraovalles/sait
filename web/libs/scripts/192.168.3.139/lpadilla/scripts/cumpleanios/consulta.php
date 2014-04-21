@@ -96,7 +96,7 @@ $html ="<html><head><meta http-equiv='Content-Type' content='text/html; charset=
     $mail->setHtml($html); 
     $mail->setSMTPParams('correo.telesurtv.net', 25, null, true,'aplicaciones@telesurtv.net', '4pl1c4c10n35');
     $mail->setBCC('distribucion-todostelesur2013@telesurtv.net');
-    $mail->setBCC('jvalera@telesurtv.net');
+    //$mail->setBCC('jvalera@telesurtv.net');
     $em='';
     $mail->send(array($em), 'smtp');
  //CORREO GENERAL FIN
@@ -118,8 +118,10 @@ $html ="<html><head><meta http-equiv='Content-Type' content='text/html; charset=
 $dia=$dia+1;
 if($dia>date('t')){
 	$dia=1;
-	if($mes==12)$mes=1; else $mes+1;
+	$mes=$mes+1;
+	if($mes==12)$mes=1;
 }
+
 
 //$imgind = "http://192.168.3.139/cumple/individual.jpg";  //ruta imagen
 $imgind = "http://exwebserv.telesurtv.net/Tarjetas/individual.jpg"; //ruta imagen
