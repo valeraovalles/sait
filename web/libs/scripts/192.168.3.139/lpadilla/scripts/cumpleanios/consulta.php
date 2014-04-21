@@ -25,7 +25,7 @@ $resultsige = pg_query($sige, $conssige) or die('La consulta fallo: ' . pg_last_
 $conssait="
     SELECT cedpas, nombre, apellido, date_part('day',fechanac) as dia, 
     date_part('month',fechanac) as mes, ubicacion from cumpleanios.personal 
-    where date_part('day',fechanac) ='23' and date_part('month',fechanac) ='05' 
+    where date_part('day',fechanac) ='".$dia."'  and date_part('month',fechanac) ='".$mes."'
     ";
 $resultsait = pg_query($local, $conssait) or die('La consulta fallo: ' . pg_last_error());
 
@@ -166,7 +166,7 @@ $resultsige = pg_query($sige, $conssige) or die('La consulta fallo: ' . pg_last_
 $conssait="
     SELECT cedpas, nombre, apellido, date_part('day',fechanac) as dia, 
     date_part('month',fechanac) as mes, ubicacion from cumpleanios.personal 
-    where date_part('day',fechanac) ='23' and date_part('month',fechanac) ='05' 
+    where date_part('day',fechanac) ='".$dia."'  and date_part('month',fechanac) ='".$mes."'
     ";
 $resultsait = pg_query($local, $conssait) or die('La consulta fallo: ' . pg_last_error());
 
