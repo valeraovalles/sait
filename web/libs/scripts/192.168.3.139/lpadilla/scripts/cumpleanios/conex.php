@@ -17,6 +17,7 @@
 
 		$use  = 'postgres';
 		$passw = '..*t3l35ur*..';
+		#$passw = 'postgres';
 		$d = 'sait';
 		$por = 5432;
 		$hos = 'localhost';
