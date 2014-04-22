@@ -36,6 +36,11 @@
                     <div class="dato">{{ form_widget(form.obra) }}</div>
                 </div>
                 <div class="form-contenedor">
+                    {{ form_errors(form.obra) }}
+                    <div class="labels">¿Personal de Corresponsal&iacute;a?</div>
+                    <div class="dato">{{ form_widget(form.personal) }}</div>
+                </div>
+                <div class="form-contenedor">
                     {{ form_errors(form.fechaInicio) }}
                     <div class="labels">Fecha de Inicio:</div>
                     <div class="dato">{{ form_widget(form.fechaInicio) }}</div>
