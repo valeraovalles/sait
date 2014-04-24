@@ -51,9 +51,15 @@
 	                <div class="widgetformSit">{{ form_widget(form2.extension, { 'attr': {'value': datosusuario.extension} }) }}</div>
                     </div><br>
 	   	        <div class="contenedorformSit">
-	   	        	<div class="text-danger"><li>{{ form_errors(form.file) }}</li></div>
-                                <div style="text-align:center;padding-left: 120px;">{{ form_widget(form.file) }}</div>
-                        </div>
+	   	        	<div class="text-danger">
+	   	        		<li>
+	   	        			{{ form_errors(form.file) }}
+	   	        		</li>
+	   	        	</div>
+                    <div style="text-align:center;padding-left: 120px;">
+                       	{{ form_widget(form.file) }}
+                    </div>
+                </div>
 		</div>
 
             <button class="btn btn-large btn-primary" type="submit">Solicitar</button>

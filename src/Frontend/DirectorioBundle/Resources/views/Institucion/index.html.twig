@@ -10,8 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Institucion</th>
-                <th>Area</th>
-                <th>Email</th>
+                <th>Area</th> 
                 <th>Pais</th>
                 <th>Actiones</th>
             </tr>
@@ -22,8 +21,7 @@
                 <td><a href="{{ path('institucion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.institucion }}</td>
                 <td>{{ entity.areainst }}</td>
-                <td>{{ entity.emailinst }}</td>
-                <td>{{ entity.pais }}</td>
+                 <td>{{ entity.pais }}</td>
                 
                     <td>
                         {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}

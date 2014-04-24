@@ -32,6 +32,11 @@
                     <div class="widgets">{{ form_widget(edit_form.empresa) }}</div>
                 </div>
                 <div class="form-contenedor">
+                    {{ form_errors(edit_form.empresa) }}
+                    <div class="labels">¿Personal de Corresponsal&iacute;a?</div>
+                    <div class="widgets">{{ form_widget(edit_form.personal) }}</div>
+                </div><br>
+                <div class="form-contenedor">
                     {{ form_errors(edit_form.obra) }}
                     <div class="labels">Obra:</div>
                     <div class="widgets">{{ form_widget(edit_form.obra) }}</div>

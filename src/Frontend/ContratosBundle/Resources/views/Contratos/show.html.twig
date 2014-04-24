@@ -7,6 +7,9 @@
 {% block body -%}
  {{ parent() }}
     <div class="titulo"> DETALLE DEL CONTRATO {{ entity.codigo }} </div>
+    {% if entity.personal == TRUE %}
+        <h5 style="color:#f80;">CONTRATO DE PERSONAL EN CORRESPONSAL&Iacute;A</h5>             
+    {% endif %}
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="alert alert-success">
             {{ flashMessage }}
@@ -30,6 +33,7 @@
                     <div class="labels">C&oacute;digo:</div>
                     <div class="dato">{{ entity.codigo }}</div>
                 </div>
+                
                 <div class="contenedor">
                     <div class="labels">Empresa:</div>
                     <div class="dato">{{ entity.empresa }}</div>

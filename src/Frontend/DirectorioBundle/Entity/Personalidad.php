@@ -101,7 +101,18 @@ class Personalidad
     private $ciudad;
 
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="archivo", type="string", length=500, nullable=true)
+     */
+    private $archivo;
+    
 
+    /**
+    * @Assert\File(maxSize="1M", mimeTypes={"image/png", "image/jpeg","image/jpg", "image/gif"})
+    */
+    private $file;
 
 
 
@@ -302,5 +313,45 @@ class Personalidad
     }
 
 
+    /**
+     * Set archivo
+     *
+     * @param string $archivo
+     * @return string
+     */
+    public function setArchivo($archivo)
+    {
+        $this->archivo = $archivo;
+    
+        return $this;
+    }
+
+    /**
+     * Get archivo
+     *
+     * @return string 
+     */
+    public function getArchivo()
+    {
+        return $this->archivo;
+    }
+
+      
+    public function setFile($file)
+    {
+        $this->file = $file;
+    
+        return $this;
+    }
+
+    /**
+     * Get archivo
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
 
 }
