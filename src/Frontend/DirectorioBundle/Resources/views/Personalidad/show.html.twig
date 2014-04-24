@@ -6,6 +6,11 @@
 <h2>CONSULTAR PERSONALIDAD</h2><br>
 
         <div class="formShow" style="width:70%;">
+        {% if entity.archivo %}
+        <div align="center">
+            <img src="{{asset('uploads/directorio/')}}{{entity.archivo}}" alt="Imagen {{entity.archivo}}no encontrada" />
+        </div>
+        {% endif %}
         <div class="contenedorform">
             <div class="labelform">Nombre:</div>
             <div class="widgetform">{{ entity.nombre|capitalize }}</div>
@@ -30,6 +35,7 @@
             <div class="labelform">Pais:</div>
             <div class="widgetform">{{ entity.pais|capitalize }}</div>
         </div>
+
     </div>
 
 
