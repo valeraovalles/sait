@@ -148,7 +148,7 @@ class TicketController extends Controller
         //$ticket->getSolicitante()->getUser()->getUsername();
         $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
         ->setSubject('Sit-Cerrado')     // we configure the title
-        ->setFrom('aplicaciones@telesurtv.net')     // we configure the sender
+        ->setFrom($ticket->getUnidad()->getCorreo())     // we configure the sender
         ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
         ->setBody( $this->renderView(
                 'SitBundle:Correo:solucion.html.twig',
