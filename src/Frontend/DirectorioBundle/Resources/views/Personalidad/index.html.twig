@@ -9,12 +9,9 @@
         <thead>
             <tr align= "center">
                 <th>Id</th>
-                <th>Nombre</th>
-                <th>Telefono</th>
-                <th>Email</th>
+                <th>Nombre</th>                     
                 <th>Especialidad</th>
-                <th>Pais</th>
-                <th>Proc.</th>
+                <th>Pais</th>                
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -22,12 +19,9 @@
         {% for entity in entities %}
             <tr align="center">
                 <td><a href="{{ path('personalidad_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.nombre }} {{ entity.apellido }}</td>
-                <td>{{ entity.telefono }}</td>
-                <td>{{ entity.email }}</td>
+                <td align=left>{{ entity.nombre }} {{ entity.apellido }}</td>
                 <td>{{ entity.especialidad }}</td>
-                <td>{{ entity.pais }}</td>
-                <td>{{ entity.paisprocedencia }}</td>
+                <td>{{ entity.pais }}</td>                
                
                     <td>
                         {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
