@@ -1,3 +1,21 @@
 transporte_homepage:
-    pattern:  /hello
+    pattern:  /inicio
     defaults: { _controller: TransporteBundle:Default:index }
+    
+transporte_veh_new:
+    pattern:  /vehiculo_new
+    defaults: { _controller: TransporteBundle:Default:index }    
+
+transporte_externo_new:
+    pattern:  /externo_new
+    defaults: { _controller: TransporteBundle:Default:index }
+
+transporte_tr_new:
+    pattern:  /tr_lista
+    defaults: { _controller: TransporteBundle:Default:index }
+
+transporte_co_new:
+    pattern:  /co_lista
+    defaults: { _controller: TransporteBundle:Default:index }
+
+

@@ -19,7 +19,7 @@ contratos:
 
 transporte:
     resource: "@TransporteBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /transporte
 
 contenidos:
     resource: "@ContenidosBundle/Resources/config/routing.yml"

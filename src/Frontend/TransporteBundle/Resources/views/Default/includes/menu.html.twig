@@ -1,0 +1,24 @@
+<div id='cssmenu'>
+<ul>
+   <li class='active'><a href='{{ path('transporte_homepage') }}'><span>INICIO</span></a></li>
+   
+   <li class='has-sub'><a href='#'><span>ADMINISTRACION</span></a>
+      <ul>
+         
+         {# {% if is_granted('ROLE_TRANSPORTE_ADMINISTRADOR') %} #}
+         
+         <li><a href='{{ path('transporte_veh_new') }}'><span>NUEVO VEHICULO</span></a></li>
+         {# {% endif %} #}
+         <li><a href='{{ path('transporte_externo_new') }}'><span>EXTERNOS</span></a></li>
+         <li><a href='{{ path('transporte_tr_new') }}'><span>TRANSPORTE TR</span></a></li>
+         <li><a href='{{ path('transporte_co_new') }}'><span>TRANSPORTE CO</span></a></li>
+         
+      </ul>
+   </li>
+   
+     
+   <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
+   <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
+</ul>
+</div>
+
