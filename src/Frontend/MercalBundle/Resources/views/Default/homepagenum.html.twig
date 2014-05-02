@@ -13,12 +13,20 @@
 
     <div id="numeracion"> 
         <div class="numero">{{ datos.numero }}</div>
+        <div class="nombre">SUSPENDIDA</div>
+        <div class="cedula">HASTA LA SEMANA DEL 05/05/2014</div>
+    </div>
+    {#
+    <div id="numeracion"> 
+        <div class="numero">{{ datos.numero }}</div>
         <div class="nombre">{{ datos.nombre }}</div>
         <div class="cedula">{{ datos.cedula }}</div>
     </div>
 
-
     <input type="hidden" id="idjornada" value="{{ jornada.id }}">
+
+
+    
     <script type="text/javascript">
             function consultaAjax(){
                 var idjornada = $("#idjornada").val();
@@ -28,6 +36,6 @@
             };
             setInterval(consultaAjax, 3000 );
     </script>
-
+    #}
 
 {% endblock %}
