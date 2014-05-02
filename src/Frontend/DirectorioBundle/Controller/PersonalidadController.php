@@ -48,6 +48,31 @@ class PersonalidadController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+          //GUARDO EL ARCHIVO
+            if($form['file']->getData()){
+      
+                $file=$form['file']->getData();
+
+                $tamaño=number_format($file->getClientSize(),0, ',', '')/1000;
+                $extension = $file->guessExtension();
+                $nombre=$file->getClientOriginalName();
+                $nombre=explode(".", $nombre);
+                $extension=$nombre[1];
+                $nombre=$nombre[0];
+
+                $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre));
+
+                //GUARDO EL ARCHIVO
+                if($file->move('uploads/directorio/',$nombre.'_'.\date("Gis").'.'.$extension) )
+                {
+                     $entity->setArchivo($nombre.'_'.\date("Gis").'.'.$extension);
+                }
+
+            }
+            //fin archivo
+
+
             $em->persist($entity);
             $em->flush();
 
@@ -140,8 +165,39 @@ class PersonalidadController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+            $delfile=$editForm['archivo']->getData();
+            $subio="false";
+
+          //GUARDO EL ARCHIVO
+            if($editForm['file']->getData()){
+      
+                $file=$editForm['file']->getData();
+              
+                $tamaño=number_format($file->getClientSize(),0, ',', '')/1000;
+                $extension = $file->guessExtension();
+                $nombre=$file->getClientOriginalName();
+                $nombre=explode(".", $nombre);
+                $extension=$nombre[1];
+                $nombre=$nombre[0];
+               
+                
+                $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre));
+        
+                //GUARDO EL ARCHIVO
+                if($file->move('uploads/directorio/',$nombre.'_'.\date("Gis").'.'.$extension) )
+                {
+                    $entity->setArchivo($nombre.'_'.\date("Gis").'.'.$extension);
+                    $subio="true";
+                }
+
+            }
+            //fin archivo
+
             $em->persist($entity);
             $em->flush();
+            if ($delfile && $subio=="true"){                        
+                unlink('uploads/directorio/'.$delfile);
+            }
 
             $this->get('session')->getFlashBag()->add('notice', 'La actualización de realizó correctamente.');
             return $this->redirect($this->generateUrl('personalidad_edit', array('id' => $id)));
@@ -163,15 +219,21 @@ class PersonalidadController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
+            
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('DirectorioBundle:Personalidad')->find($id);
-
+            
+            $delfile=$entity->getArchivo();
+            
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Personalidad entity.');
             }
 
             $em->remove($entity);
             $em->flush();
+            if ($delfile){                        
+                unlink('uploads/directorio/'.$delfile);
+            }
         }
 
         return $this->redirect($this->generateUrl('personalidad'));
@@ -188,6 +250,7 @@ class PersonalidadController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
+            ->add('archivo', 'hidden')
             ->getForm()
         ;
     }
