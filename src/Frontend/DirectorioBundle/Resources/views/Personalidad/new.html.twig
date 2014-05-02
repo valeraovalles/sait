@@ -3,7 +3,7 @@
 {% block body -%}
     {{parent()}}
 <BR><BR>
-    <h1>NUEVA PERSONALIDAD</h1>
+    <h2>NUEVA PERSONALIDAD</h2>
     <br><br>
 
     <form action="{{ path('personalidad_create') }}" method="post" {{ form_enctype(form) }} novalidate>
@@ -56,6 +56,20 @@
                     <div class="labelform">Ciudad:</div>
                     <div class="widgetform">{{ form_widget(form.ciudad) }}</div>
                 </div>
+
+
+                <div class="contenedorform">
+                    <div class="text-danger">
+                        <li>
+                            {{ form_errors(form.file) }}
+                        </li>
+                    </div>
+                    <div class="labelform">Archivo:</div>
+                    <div class="widgetform">
+                        {{ form_widget(form.file) }}
+                    </div>
+                </div>
+
             </div>
 
                 <br><br>

@@ -29,7 +29,7 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         directorio_imagenes: '/uploads/images/'
-
+        
 
 # Assetic Configuration
 assetic:
