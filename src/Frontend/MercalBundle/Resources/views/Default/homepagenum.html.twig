@@ -9,6 +9,7 @@
 {% block body -%}
     {{ parent() }}
     
+    {#
     <div class="titulojornada">JORNADA {{ jornada.nombrejornada|upper }}</div>
 
     <div id="numeracion"> 
@@ -16,7 +17,8 @@
         <div class="nombre">SUSPENDIDA</div>
         <div class="cedula">HASTA LA SEMANA DEL 05/05/2014</div>
     </div>
-    {#
+    #}
+    
     <div id="numeracion"> 
         <div class="numero">{{ datos.numero }}</div>
         <div class="nombre">{{ datos.nombre }}</div>
@@ -36,6 +38,5 @@
             };
             setInterval(consultaAjax, 3000 );
     </script>
-    #}
 
 {% endblock %}
