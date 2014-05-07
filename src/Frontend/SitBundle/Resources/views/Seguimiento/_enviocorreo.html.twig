@@ -70,7 +70,7 @@
                             <th>Para: </th>
                             <td>
                                 <input type="text" id="buscar" placeholder="Buscar">
-                                {{ form_widget(formcs.para,{'attr':{'autocomplete':'off'}}) }}
+                                {{ form_widget(formcs.para,{'attr':{'autocomplete':'off','style':'display:none;'}}) }}
                                 <div id="loading" style="display:none;"><img src="{{ asset('images/cargando.gif') }}"></div>
                                 <div id="ajaxlistado"></div>
                                 <div id="tags"></div>
@@ -140,29 +140,41 @@
 
         listaoculta = $('#correo_para').val()
 
+        //valido que no se agregue dos veces el mismo usuario
+        listaarray=listaoculta.split(",");
+        if(jQuery.inArray(correo, listaarray)!=-1){$('#ajaxlistausuario').hide();$('#buscar').val('');return;}
+
+
         if(listaoculta=='')
             listaoculta=correo
         else
             listaoculta=listaoculta+','+correo
 
-        //transformo la lista en un array
-        listaarray=listaoculta.split(",")
-        for(var i=0;i<listaarray.length;i++){
-        }
-
-
-        user=correo.replace("@telesurtv.net","")
-        tags='<div class="tags" id="'+user+'" onclick="eliminartag(\''+user+'\')">'+correo+'</div>';
-
         $('#correo_para').val(listaoculta)
-        $('#tags').append(tags)
         $('#ajaxlistausuario').hide()
         $('#buscar').val('')
+
+        tags()
     }
 
+    //agrego las etiquetas
+    function tags(){
+
+        $('#tags').html('');
+        listaoculta = $('#correo_para').val()
+
+        //transformo la lista en un array
+        listaarray=listaoculta.split(",");tag="";
+        for(var i=0;i<listaarray.length;i++){
+            user=listaarray[i].replace("@telesurtv.net","")
+            tag='<div class="tags" id="'+user+'" onclick="eliminartag(\''+user+'\')">'+user+'@telesurtv.net</div>';
+            $('#tags').append(tag)
+        }
+    }
 
     //eliminar usuarios
     function eliminartag(user){
+        $('#'+user).remove()
         $('#'+user).remove()
 
         listaoculta = $('#correo_para').val()
@@ -170,8 +182,11 @@
         listaoculta=listaoculta.replace(user+"@telesurtv.net,","")
         listaoculta=listaoculta.replace(user+"@telesurtv.net","")
         $('#correo_para').val(listaoculta)
-
     }
 
+    //
+    if($('#correo_para').val()!=''){
+        tags()
+    }
 
 </script>
