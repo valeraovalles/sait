@@ -13,7 +13,7 @@ class CorreoseguimientoType extends AbstractType
     {
         $builder
             ->add('cuerpo','textarea')
-            ->add('para')
+            ->add('para','hidden')
             ->add('asunto')
             ->add('file','file')
         ;

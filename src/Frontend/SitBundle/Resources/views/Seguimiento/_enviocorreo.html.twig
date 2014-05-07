@@ -68,7 +68,13 @@
                         </tr>
                         <tr>
                             <th>Para: </th>
-                            <td>{{ form_widget(formcs.para) }}</td>
+                            <td>
+                                <input type="text" id="buscar" placeholder="Buscar">
+                                {{ form_widget(formcs.para,{'attr':{'autocomplete':'off'}}) }}
+                                <div id="loading" style="display:none;"><img src="{{ asset('images/cargando.gif') }}"></div>
+                                <div id="ajaxlistado"></div>
+                                <div id="tags"></div>
+                            </td>
                         </tr>
                         <tr>
                             <th>Asunto: </th>
@@ -93,3 +99,45 @@
     </div>
   </div>
 </div>
+
+
+
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+      $('#buscar').keyup(function(){
+
+        if($('#buscar').val()==''){
+            $('#ajaxlistado').html("");
+        }
+        else {
+             var ruta= "{{ path('ajax_listadocorreo',{'letra':'letra'}) }}";
+             ruta = ruta.replace("letra",  $('#buscar').val());
+
+             $.ajax({
+               url: ruta,
+               type : 'POST',
+               beforeSend: function(){
+                $("#loading").show();
+               },
+               complete: function(){
+                 $("#loading").hide();
+               },
+               success: function(data){
+                $('#ajaxlistado').html(data);
+               }
+             });
+        }
+      });
+
+
+    });
+
+
+
+
+</script>
+
+
+

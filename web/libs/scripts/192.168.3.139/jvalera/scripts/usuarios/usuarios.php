@@ -106,7 +106,7 @@
 				$rs1 = pg_query($postgresql_local, $query1);
 				$row1 = pg_fetch_array($rs1);
 				//ACTUALIZO EN perfil
-	   			$query="update usuarios.user set username='".$userldap."' where id=".$row1['iduser'];
+	   			$query="update usuarios.user set username='".$userldap."', password='', salt='' where id=".$row1['iduser'];
 	   			if(pg_query($postgresql_local,$query))$contusernameactualizado++;	
 
 	    	}

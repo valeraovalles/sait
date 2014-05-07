@@ -5,6 +5,10 @@ namespace Frontend\SitBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Administracion\UsuarioBundle\Entity\User;
+
+
+
 
 /**
  * Categoria controller.
@@ -13,6 +17,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class AjaxController extends Controller
 {
 
+    //ajax para mostrar listado de correos en sit seguimiento
+    public function listadocorreoAction($letra)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dql = "select u from UsuarioBundle:User u where u.username like :username and u.password is null";
+        $query = $em->createQuery($dql);
+        $query->setParameter('username','%'.strtolower($letra).'%');
+        $query->setMaxResults(10);
+        $username = $query->getResult();
+        
+
+        
+        return $this->render('SitBundle:Ajax:listacorreo.html.twig',array('username'=>$username));
+
+    }
     /**
      * Lists all Categoria entities.
      *

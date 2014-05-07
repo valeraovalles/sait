@@ -140,7 +140,7 @@ class SeguimientoController extends Controller
             ->setSubject($formcs->getData()->getAsunto())  
             ->setFrom('aplicaciones@telesurtv.net')     
             ->setTo($email)
-            ->setBody($formcs->getData()->getCuerpo().'<br><b>Nota: Puedes responder este correo directamente desde el Sit haciendo clic en tu solicitud marcada de color naranja así como ver el seguimiento de la misma.</b>', 'text/html');
+            ->setBody($formcs->getData()->getCuerpo().'<br><b>Comentario de la solicitud:</b> '.$ticket->getSolicitud().'<br><b>Nota: Puedes responder este correo directamente desde el Sit haciendo clic en tu solicitud marcada de color naranja así como ver el seguimiento de la misma.</b>', 'text/html');
             
             if(isset($nombre))
                 $message->attach(\Swift_Attachment::fromPath('uploads/sit/'.$nombre));
