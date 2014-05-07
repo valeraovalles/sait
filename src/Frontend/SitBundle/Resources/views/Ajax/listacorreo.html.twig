@@ -1,37 +1,4 @@
-<script type="text/javascript">
-    
-    function armarlista(correo){
 
-        listaoculta = $('#correo_para').val()
-
-        if(listaoculta=='')
-            listaoculta=correo
-        else
-            listaoculta=listaoculta+','+correo
-
-
-        user=correo.replace("@telesurtv.net","")
-        tags='<div class="tags" id="'+user+'" onclick="eliminartag(\''+user+'\')">'+correo+'</div>';
-
-        $('#correo_para').val(listaoculta)
-        $('#tags').append(tags)
-        $('#ajaxlistausuario').hide()
-        $('#buscar').val('')
-    }
-
-    function eliminartag(user){
-        $('#'+user).remove()
-
-        listaoculta = $('#correo_para').val()
-        listaoculta=listaoculta.replace(","+user+"@telesurtv.net","")
-        listaoculta=listaoculta.replace(user+"@telesurtv.net,","")
-        listaoculta=listaoculta.replace(user+"@telesurtv.net","")
-        $('#correo_para').val(listaoculta)
-
-
-    }
-
-</script>
 
 
 <div id="ajaxlistausuario">

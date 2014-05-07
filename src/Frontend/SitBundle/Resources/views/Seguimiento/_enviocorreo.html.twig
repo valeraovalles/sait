@@ -105,6 +105,7 @@
 
     <script type="text/javascript">
 
+    //ajax para buscar usuarios
     $(document).ready(function () {
       $('#buscar').keyup(function(){
 
@@ -134,10 +135,43 @@
 
     });
 
+    //armar lista de usuarios seleccionados
+    function armarlista(correo){
 
+        listaoculta = $('#correo_para').val()
+
+        if(listaoculta=='')
+            listaoculta=correo
+        else
+            listaoculta=listaoculta+','+correo
+
+        //transformo la lista en un array
+        listaarray=listaoculta.split(",")
+        for(var i=0;i<listaarray.length;i++){
+        }
+
+
+        user=correo.replace("@telesurtv.net","")
+        tags='<div class="tags" id="'+user+'" onclick="eliminartag(\''+user+'\')">'+correo+'</div>';
+
+        $('#correo_para').val(listaoculta)
+        $('#tags').append(tags)
+        $('#ajaxlistausuario').hide()
+        $('#buscar').val('')
+    }
+
+
+    //eliminar usuarios
+    function eliminartag(user){
+        $('#'+user).remove()
+
+        listaoculta = $('#correo_para').val()
+        listaoculta=listaoculta.replace(","+user+"@telesurtv.net","")
+        listaoculta=listaoculta.replace(user+"@telesurtv.net,","")
+        listaoculta=listaoculta.replace(user+"@telesurtv.net","")
+        $('#correo_para').val(listaoculta)
+
+    }
 
 
 </script>
-
-
-
