@@ -1,0 +1,30 @@
+personalexterno_list:
+    pattern:  /
+    defaults: { _controller: "TransporteBundle:personalExterno:index" }
+
+personalexterno_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TransporteBundle:personalExterno:show" }
+
+personalexterno_new:
+    pattern:  /new
+    defaults: { _controller: "TransporteBundle:personalExterno:new" }
+
+personalexterno_create:
+    pattern:  /create
+    defaults: { _controller: "TransporteBundle:personalExterno:create" }
+    requirements: { _method: post }
+
+personalexterno_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TransporteBundle:personalExterno:edit" }
+
+personalexterno_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TransporteBundle:personalExterno:update" }
+    requirements: { _method: post|put }
+
+personalexterno_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TransporteBundle:personalExterno:delete" }
+    requirements: { _method: post|delete }

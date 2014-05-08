@@ -1,0 +1,32 @@
+<div id='cssmenu'>
+<ul>
+   <li class='active'><a href='{{ path('transporte') }}'><span>INICIO</span></a></li>
+   
+   <li class='has-sub'><a href='#'><span>ADMINISTRACION</span></a>
+      <ul>
+         
+         {# {% if is_granted('ROLE_TRANSPORTE_ADMINISTRADOR') %} #}
+         
+         <li><a href='{{ path('vehiculos_list') }}'><span>VEHICULOS</span></a></li>
+         {# {% endif %} #}
+         <li><a href='{{ path('personalexterno_list') }}'><span>PERSONAL EXTERNO</span></a></li>     
+         
+      </ul>
+   </li>
+   <li class='has-sub'><a href='#'><span>SOLICITUDES</span></a>
+      <ul>         
+         <li><a href="{{ path('solicitudes_new') }}"><span>CREAR</span></a></li>       
+         {% if is_granted('ROLE_TRANSPORTE_ADMINISTRADOR') %}  
+         <li><a href="{{ path('solicitudes_por_status',{'accion': 'Apro'})}}"><span>APROBAR</span></a></li> 
+         <li><a href="{{ path('solicitudes_por_status',{'accion': 'Culm'})}}"><span>CULMINAR</span></a></li>
+         {% endif %}
+         <li><a href="{{ path('solicitudes') }}"><span>GENERAL</span></a></li>         
+      </ul>
+   </li>
+   
+     
+   <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
+   <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
+</ul>
+</div>
+

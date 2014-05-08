@@ -1,0 +1,157 @@
+{% extends '::transporte.html.twig' %}
+
+{% block title %}Transporte{% endblock %}
+
+{% block titulobanner %}
+    TRANSPORTE
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">TRANSPORTE -  NUEVA SOLICITUD</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+ <div class="formShow">
+    
+    <form action="{{ path('solicitudes_create') }}" method="post" novalidate>   
+    {{ form_widget(form._token) }}
+
+        {# DESHABILITAMOS GENERACION DE COMBO DE USUARIOS, SE USARA EL ID DE LA SESION ACTIVA
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.idSolicitante) }}</div>
+            <div class="labelform">Solicitante:</div>
+            <div class="widgetform">
+                <select name="usuario">
+                {% for usu in usuarios %}                                       
+                    <option value="{{usu.id}}">{{usu.primerNombre}} {{usu.primerApellido}}</option>          
+                {% endfor %}            
+                </select>    
+            </div>                
+            <div class="widgetform">{{ form_widget(form.idSolicitante) }}</div>
+        </div>
+        #}
+        <div class="contenedorform">
+            <div class="labelform">Fecha de Solicitud:</div> 
+            <div class="widgetform">{{"now"|date("m/d/Y")}}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.fechaSalida) }}</div>
+            <div class="labelform">Fecha Salida:</div>
+            <div class="widgetform">                
+                {{ form_widget(form.fechaSalida, {'attr':{'class':'fecha'}})}}
+                {#{{ form_widget(form.fechaSalida.date.month, {'attr':{'class':'fecha'}} )}}
+                {{ form_widget(form.fechaSalida.date.year, {'attr':{'class':'fecha'}} )}}
+                #}
+                <script>
+                  $(function() {
+                    $( ".fecha" ).datepicker({
+                      changeMonth: true,
+                      changeYear: true,
+                      dateFormat: "yy-mm-dd",
+                    });
+                  });
+                </script>
+            </div>
+        </div>        
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.horaSalida) }}</div>
+            <div class="labelform">Hora Salida:</div>
+            <div class="widgetform">{{ form_widget(form.horaSalida, {'attr':{'class':'hora'}}) }}</div>
+            <script>
+            $(".hora select").css({
+                'width':'50px',
+            });
+            </script>    
+        </div>        
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.asistentes) }}</div>
+            <div class="labelform">Personal a Trasladar/Asistentes:</div>
+            <div class="widgetform">                
+                {{ form_widget(form.tipoPersonal) }}
+                {{ form_widget(form.asistentes) }}
+                {#
+                <ul id="asistente-fields-list" data-prototype="{{ form_widget(form.asistentes.vars.prototype) | e }}">
+                {% for asistente in form.asistentes %}
+                    <li>
+                        {{ form_errors(asistente) }}
+                        {{ form_widget(asistente) }}
+                    </li>
+                {% endfor %}
+                </ul>   
+                <div id="usuarios"></div>
+                <a href="#" id="add-another-asistente">Add</a>               
+                <a id="link_usuarios" href="#">Usuarios</a>
+                <script type="text/javascript">
+                // realiza un seguimiento de cuántos campos de correo electrónico se han pintado
+                var asistenteCount = '{{ form.asistentes | length }}';
+                jQuery(document).ready(function() {
+                    $('#usuarios').load('{{ path("user") }}');
+                    
+                    jQuery('#add-another-asistente').click(function() {
+                        var asistenteList = jQuery('#asistente-fields-list');
+
+                        // graba la plantilla prototipo
+                        var newWidget = asistenteList.attr('data-prototype');
+                        // sustituye el "__name__" usado en el id y name del prototipo con un
+                        // número que es único en tus correos termina con el
+                        // atributo name viéndose como name="contact[asistentes][2]"
+                        newWidget = newWidget.replace(/\$\$name\$\$/g, asistenteCount);
+                        asistenteCount++;
+
+                        // crea un nuevo elemento lista y lo añade a la lista
+                        var newLi = jQuery('<li></li>').html(newWidget);
+                        newLi.appendTo(jQuery('#asistente-fields-list'));
+
+                            return false;
+                    });
+                })
+                </script>
+                #}
+            </div>
+        </div>           
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.direccionDesde) }}</div>
+            <div class="labelform">Direccion Desde u Origen:</div>
+            <div class="widgetform">{{ form_widget(form.direccionDesde) }}</div>
+        </div>        
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.direccionHasta) }}</div>
+            <div class="labelform">Direccion Hasta o Destino:</div>
+            <div class="widgetform">{{ form_widget(form.direccionHasta) }}</div>
+        </div>        
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.descripcionEquipos) }}</div>
+            <div class="labelform">Equipos/Implementos a trasladar:</div>
+            <div class="widgetform">{{ form_widget(form.descripcionEquipos) }}</div>
+        </div>        
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.datosInteresRazon) }}</div>
+            <div class="labelform">Motivo de la Solicitud:</div>
+            <div class="widgetform">{{ form_widget(form.datosInteresRazon) }}</div>
+        </div>           
+        <ul>
+        <li>
+            <a href="{{ path('solicitudes_create') }}">               
+                <button class="btn btn-large btn-primary" type="submit">Crear Solicitud</button>
+            </a>| 
+            <a class="btn" href="{{ path('solicitudes') }}">IR AL LISTADO
+            </a> 
+            
+        </li>
+        </ul>  
+      
+    </form>
+  
+</div>
+{% endblock %}

@@ -1,3 +1,8 @@
-transporte_homepage:
-    pattern:  /hello
-    defaults: { _controller: TransporteBundle:Default:index }
+
+transporte:
+    pattern:  /
+    defaults: { _controller: "TransporteBundle:Default:index" }
+
+
+
+

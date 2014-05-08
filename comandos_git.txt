@@ -1,0 +1,20 @@
+ 	   73  php app/console 
+   74  php app/console doctrine:schema:update --force
+   75  sudo chmod 777 -R app/cache
+   76  sudo chmod 777 -R app/logs
+   77  php app/console doctrine:schema:update --force
+   78  git branch
+   79  git status
+   80  git add *
+   81  git commit -a -m "Cambios aplicacion directorio personalidades e instituciones. quitar campos y subir foto."
+   82  git checkout pre-master
+   83  git branch
+   84  git add *
+   85  git commit -a -m "respaldo Inicial"
+   86  git pull 
+   87  git merge jmangarret
+   88  git add * 
+   89  git commit -a -m "Cambios aplicacion directorio personalidades e instituciones. quitar campos y subir foto."
+   90  git push origin pre-master
+   91  ssh root@10.10.4.237
+   92  history > comandos_git.txt

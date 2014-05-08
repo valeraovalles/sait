@@ -1,0 +1,116 @@
+{% extends '::transporte.html.twig' %}
+
+{% block title %}Transporte{% endblock %}
+
+{% block titulobanner %}
+    TRANSPORTE
+{% endblock %}
+{#
+{% block javascripts %}
+ {{ parent() }}
+
+{% endblock %}
+#}
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">
+        TRANSPORTE -  SOLICITUDES 
+        {% if accion=="Apro" %} POR APROBAR {% endif %}
+        {% if accion=="Culm" %} POR CERRAR/CULMINAR {% endif %}
+        {% if accion=="none" %} PENDIENTES {% endif %}
+    </div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    <table class="records_list">
+        <div align="center" id="leyenda"></div>
+        <thead>
+            <tr>
+                <th>Id</th>                
+                <th>Fecha/Solicitud</th>
+                <th>Fecha/Salida</th>
+                <th>Hora/Salida</th>
+                <th>Direccion/Desde</th>        
+                <th>Direccion/Hasta</th>        
+                <th>Estatus</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('solicitudes_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>            
+                <td>{% if entity.fechaSolicitud %}{{ entity.fechaSolicitud|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if entity.fechaSalida %}{{ entity.fechaSalida|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ entity.horaSalida|date('G:i:s') }}</td>
+                <td>{{ entity.direccionDesde }}</td>
+                <td>{{ entity.direccionHasta }}</td>     
+                <td>                    
+                    {% if entity.estatus=="N" %} Nueva {% endif %}
+                    {% if entity.estatus=="A" %} Asignada {% endif %}
+                    {% if entity.estatus=="AP" %} Aprobada {% endif %}
+                    {% if entity.estatus=="C" %} Culminada {% endif %}
+                    {% if entity.estatus=="R" %} Rechazada {% endif %}
+                </td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('solicitudes_show', { 'id': entity.id }) }}" title="Mostrar">
+                            <i class="icon-search"></i>
+                        </a>
+                        {% if is_granted('ROLE_TRANSPORTE') %}
+                        <a href="{{ path('solicitudes_edit', { 'id': entity.id }) }}" title="Editar">
+                            <i class="icon-edit"></i>
+                        </a>
+                        {% endif %}
+                        {% if entity.estatus!="C" %} {# SI ESTA CULMINADA NO PUEDE SER RECHAZADA #}
+                        {# <a href="javascript:confirmar(entity.id,'R','RECHAZAR')" title="Rechazar"> #}
+                        <a href="#" title="Rechazar/Cancelar">
+                            <img src="{{asset('images/rechazo.png')}}" width=16px>
+                        </a>
+                        {% endif %}
+                        {% if accion=="Apro" %}
+                            <a href="{{ path('solicitudes_status',{'id':entity.id,'accion':'AP'}) }}" onclick="return confirm('Seguro que desea APROBAR la solicitud Nro: '+{{entity.id}})" title="Aprobar">
+                            <img src="{{asset('images/aprobar.png')}}" width=16px>
+                            </a>
+                            <script>
+                             $('#leyenda').html('Para APROBAR una solicitud haga click en el icono <img src="{{asset('images/aprobar.png')}}" width=16px>');                       
+                            </script>
+                        {% endif %}
+                        {% if accion=="Culm" %}
+                            <a href="{{ path('solicitudes_status',{'id':entity.id,'accion':'C'}) }}" 
+                            onclick="return confirm('Seguro que desea CERRAR/CULMINAR la solicitud Nro: '+{{entity.id}})" title="Cerrar/Culminar">
+                            <img src="{{asset('images/finalizar.png')}}" width=16px>
+                            </a>
+                            <script>
+                             $('#leyenda').html('Para CERRAR/CULMINAR una solicitud haga click en el icono <img src="{{asset('images/finalizar.png')}}" width=16px>');                       
+                            </script>
+                        {% endif %}                        
+                    </li>                    
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<br>
+        <ul>
+        <li>
+            <a href="{{ path('solicitudes_new') }}">               
+                <button class="btn btn-large btn-primary" type="button">Nueva Solicitud</button>
+            </a>
+        </li>
+    </ul>
+    </div>
+    {% endblock %}
