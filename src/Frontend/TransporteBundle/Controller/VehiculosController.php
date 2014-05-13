@@ -43,7 +43,7 @@ class VehiculosController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
+            $this->get('session')->getFlashBag()->add('notice', 'EL REGISTRO FUE CREADO CON EXITO');
             return $this->redirect($this->generateUrl('transporte_show', array('id' => $entity->getId())));
         }
 
@@ -134,7 +134,7 @@ class VehiculosController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-
+            $this->get('session')->getFlashBag()->add('notice', 'LOS DATOS FUERON MODIFICADOS CON EXITO');
             return $this->redirect($this->generateUrl('transporte_edit', array('id' => $id)));
         }
 

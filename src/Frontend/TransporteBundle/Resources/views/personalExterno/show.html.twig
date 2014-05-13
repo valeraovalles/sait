@@ -10,6 +10,17 @@
     {{ parent() }}
     
     <div class="titulo">TRANSPORTE -  DETALLE PERSONAL EXTERNO</div>
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
  <div class="formShow">
 
     <table class="record_properties" width="60%" align="center">

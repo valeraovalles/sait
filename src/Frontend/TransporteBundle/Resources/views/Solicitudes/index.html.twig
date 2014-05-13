@@ -33,7 +33,7 @@
         </div>
     {% endfor %}
 
-    <table class="records_list">
+    <table class="records_list" id="tablalistax">
         <div align="center" id="leyenda"></div>
         <thead>
             <tr>
@@ -70,13 +70,16 @@
                             <i class="icon-search"></i>
                         </a>
                         {% if is_granted('ROLE_TRANSPORTE') %}
+                        {% if entity.estatus!="C" and entity.estatus!="R"  and entity.estatus!="AP" %} 
+                        {# SI ESTA APROBADA/CULMINADA/RECAHZADA NO PUEDE SER EDITADA #}   
                         <a href="{{ path('solicitudes_edit', { 'id': entity.id }) }}" title="Editar">
                             <i class="icon-edit"></i>
                         </a>
                         {% endif %}
-                        {% if entity.estatus!="C" %} {# SI ESTA CULMINADA NO PUEDE SER RECHAZADA #}
-                        {# <a href="javascript:confirmar(entity.id,'R','RECHAZAR')" title="Rechazar"> #}
-                        <a href="#" title="Rechazar/Cancelar">
+                        {% endif %}
+                        {% if entity.estatus!="C" and entity.estatus!="R" %} 
+                        {# SI ESTA CULMINADA NO PUEDE SER RECHAZADA #}        
+                        <a href="{{ path('solicitudes_rechazar',{'id':entity.id}) }}" title="Rechazar/Cancelar">
                             <img src="{{asset('images/rechazo.png')}}" width=16px>
                         </a>
                         {% endif %}
@@ -104,13 +107,21 @@
         {% endfor %}
         </tbody>
     </table>
-<br>
-        <ul>
-        <li>
+    <br><br>
+    <div align="center">
             <a href="{{ path('solicitudes_new') }}">               
-                <button class="btn btn-large btn-primary" type="button">Nueva Solicitud</button>
+                <button class="btn btn-primary" type="button">Nueva Solicitud</button>
             </a>
-        </li>
-    </ul>
+    </div>
+    <br>
+    <script type="text/javascript">
+    $(document).ready(function(){
+       $('#tablalistax').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+            "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+            "aaSorting": [[5,'asc'],[3,'desc'],[4,'desc']],
+        } );
+    })
+    </script>
+
     </div>
     {% endblock %}
