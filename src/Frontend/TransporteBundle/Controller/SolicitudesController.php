@@ -117,6 +117,7 @@ class SolicitudesController extends Controller
      */
     public function editAction($id)
     {
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TransporteBundle:Solicitudes')->find($id);
@@ -127,12 +128,17 @@ class SolicitudesController extends Controller
 
         $editForm = $this->createForm(new SolicitudesType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('TransporteBundle:Solicitudes:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        if($this->get('security.context')->isGranted('ROLE_TRANSPORTE'))
+        {
+            return $this->render('TransporteBundle:Solicitudes:edit.html.twig', array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            ));
+        }else{
+            $this->get('session')->getFlashBag()->add('alert', 'NO TIENE PERMISOS PARA EDITAR LA SOLICITUD');
+            return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $id)));
+        }
     }
 
     /**
@@ -141,12 +147,8 @@ class SolicitudesController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        //$datos=$request->request->all();
-        //$datos=$datos['form_solicitud'];
-        //print_r($datos); exit;
-
+   
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('TransporteBundle:Solicitudes')->find($id);
 
         if (!$entity) {
@@ -173,7 +175,6 @@ class SolicitudesController extends Controller
             $this->get('session')->getFlashBag()->add('alert', 'ERROR AL VALIDAR FORMULARIO: '.$result['errors'][0]);
 
         }
-
         return $this->render('TransporteBundle:Solicitudes:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),

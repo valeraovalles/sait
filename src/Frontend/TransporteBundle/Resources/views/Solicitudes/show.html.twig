@@ -90,6 +90,7 @@
             <button class="btn btn-primary" type="button">EDITAR</button> 
         </a>
     </li>
+    {#
     <li>
         <form action="{{ path('solicitudes_delete', { 'id': entity.id }) }}" metdod="post">
             <input type="hidden" name="_metdod" value="DELETE" />
@@ -97,5 +98,6 @@
             <button type="submit">Delete</button>
         </form>
     </li>
+    #}
 </ul>
 {% endblock %}
