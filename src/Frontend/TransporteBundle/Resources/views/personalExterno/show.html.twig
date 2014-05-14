@@ -52,6 +52,7 @@
             <button class="btn btn-primary" type="button">EDITAR</button> 
         </a>
     </li>
+    {#
     <li>
         <form action="{{ path('personalexterno_delete', { 'id': entity.id }) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
@@ -59,6 +60,7 @@
             <button type="submit">Delete</button>
         </form>
     </li>
+    #}
     </ul>
 </div>
 {% endblock %}

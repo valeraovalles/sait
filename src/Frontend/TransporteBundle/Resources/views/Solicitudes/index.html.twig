@@ -5,12 +5,13 @@
 {% block titulobanner %}
     TRANSPORTE
 {% endblock %}
-{#
-{% block javascripts %}
+
+{% block stylesheets %}
  {{ parent() }}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 
 {% endblock %}
-#}
+
 {% block body -%}
     {{ parent() }}
     
@@ -113,14 +114,36 @@
                 <button class="btn btn-primary" type="button">Nueva Solicitud</button>
             </a>
     </div>
+    
     <br>
+  <a data-toggle="modal" data-target="#myModal" id="abrirModal" data-id="107" data-var="var">Abrir</a> 
+  <div id="myModel" class="modal hide fade"> 
+    <form>
+        <fieldset>
+        <label for="vehiculo">Debe asignar un vehiculo para aprobar la Solicitud:</label>
+        <select name="id_vehiculo">
+            <option="">-- Seleccione --></option>
+            {% for veh in vehiculos %}
+                <option="{{veh.id}}">{{veh.tipo}}{{veh.placa}}{{veh.modelo}}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="id_solicitud" id="id_solicitud">
+        </fieldset>
+    </form>
+  </div> 
     <script type="text/javascript">
     $(document).ready(function(){
        $('#tablalistax').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
             "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
             "aaSorting": [[5,'asc'],[3,'desc'],[4,'desc']],
-        } );
+        } );    
     })
+    $('#abrirModal').click(function(){ 
+        $("#name").val($(this).data('var'));
+        $("#email").val($(this).data('id'));
+        $('#myModel').modal() 
+
+    }); 
     </script>
 
     </div>

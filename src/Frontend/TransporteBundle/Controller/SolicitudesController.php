@@ -10,6 +10,10 @@ use Administracion\UsuarioBundle\Entity\User;
 
 use Frontend\TransporteBundle\Entity\Solicitudes;
 use Frontend\TransporteBundle\Form\SolicitudesType;
+
+use Frontend\TransporteBundle\Entity\Vehiculos;
+use Frontend\TransporteBundle\Form\VehiculosType;
+
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -26,6 +30,13 @@ class SolicitudesController extends Controller
     public function indexAction($accion="none") //All por defecto
     {
         $em = $this->getDoctrine()->getManager();
+        
+        $dql = "select u from TransporteBundle:Vehiculos u where u.estatus = :status ";
+        $query = $em->createQuery($dql);
+        $query->setParameter('status',1);          
+        $vehiculos = $query->getResult();  
+        //print_r($vehiculos);
+
         if ($accion=="none"){
             $entities = $em->getRepository('TransporteBundle:Solicitudes')->findAll();
         }
@@ -38,6 +49,7 @@ class SolicitudesController extends Controller
         
         return $this->render('TransporteBundle:Solicitudes:index.html.twig', array(
             'entities' => $entities,
+            'vehiculos' => $vehiculos,
             'accion' => $accion
         ));
     }
@@ -63,6 +75,28 @@ class SolicitudesController extends Controller
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('notice', 'EL REGISTRO FUE CREADO CON EXITO');
+            //CORREO
+            $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            $from=$usuario->getUsername().'@telesurtv.net';
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            ->setSubject('Solicitud de Transporte')     // we configure the title
+            ->setFrom(array($usuario->getUsername().'@telesurtv.net'))     // we configure the sender
+            ->setTo('jmangarret@telesurtv.net')    // we configure the recipient
+            ->setBody( $this->renderView(
+                        'TransporteBundle:Correo:solicitud_transporte.html.twig',
+                        array('perfil' => $perfil,
+                            'solicitud' => $entity,
+                        )
+                    ), 
+            'text/html');
+            /* PARA VER LA VISTA EN LA PAG
+             return $this->render('TransporteBundle:Correo:solicitud_transporte.html.twig', array(
+                            'solicitud' => $entity,
+                            'perfil' => $perfil,                            
+                        ));
+            */
+            $this->get('mailer')->send($message); 
+            //FIN CORREO
             return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $entity->getId())));
         }else{
             $datos=$request->request->all();

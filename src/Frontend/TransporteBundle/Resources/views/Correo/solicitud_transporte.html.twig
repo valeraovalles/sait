@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style type="text/css">
+        	th{
+        		text-align: right;
+        		margin-right: 20px;
+        	}
+
+        	.solicitud{
+        		text-align: justify;
+        	}
+
+        	table{
+        		width: 600px;
+
+        	}
+
+        	table td{
+        		padding: 10px;
+        		border:1px solid gray;
+        	}
+
+        	table th{
+        		border:1px solid gray;
+        		background-color: #d9edf7;
+        		padding-right: 10px;
+        		width: 25%;
+        	}
+        </style>
+    </head>
+
+    <body>
+    	<div align="center">
+			<div><h3>SOLICITUD DE TRANSPORTE</h3></div>
+            <h3 align="center">Se ha generado una nueva solicitud de Transporte, bajo los siguientes datos:</h3>
+			<table cellspacing=0>
+				<tr>
+					<th>Solicitante:</th>
+					<td>{{ perfil.primerNombre|title }}{{ perfil.primerApellido|title }}</td>
+				</tr>
+           	<tr>
+					<th>Motivo de Solicitud:</th>
+					<td>{{ solicitud.datosInteresRazon }}</td>
+				</tr>
+				<tr>
+					<th>Fecha de Salida:</th>
+					<td>{{ solicitud.fechaSalida|date('d-m-Y') }}</td>
+				</tr>
+                <tr>
+                    <th>Hora de Salida:</th>
+                    <td>{{ solicitud.horaSalida|date('G:i:s') }}</td>
+                </tr>
+                <tr>
+                    <th>Desde:</th>
+                    <td>{{ solicitud.direccionDesde }}</td>
+                </tr>
+                <tr>
+                    <th>Hasta:</th>
+                    <td>{{ solicitud.direccionHasta }}</td>
+                </tr>
+
+			</table>
+		</div>
+        <p align="center">
+            <i><b>NOTA:</b> Para mas información consulte el módulo de Transporte del Sistema de Aplicaciones Internas.</i>
+        </p>
+
+
+	</body>
+	
+</html>

@@ -62,9 +62,8 @@
             <a class="btn" href="{{ path('vehiculos_list') }}">IR AL LISTADO</a> 
         </p>
     </form>
-
-    <ul class="record_actions">
-            
+{#
+    <ul class="record_actions">            
     <li>
         <form action="{{ path('transporte_delete', { 'id': entity.id }) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
@@ -73,6 +72,7 @@
             <button type="submit">Delete</button>
         </form>
     </li>
-</ul>
+    </ul>
+#}
 </div>
 {% endblock %}

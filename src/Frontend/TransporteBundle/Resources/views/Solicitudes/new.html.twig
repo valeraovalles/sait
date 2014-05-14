@@ -73,7 +73,7 @@
             <div class="widgetform" id="lista">                                                
                 <input type="text" id="buscar" placeholder="Buscar" title="Escriba los nombres para listar. Recuerde diferenciar  minúsculas de mayúsculas" autocomplete=off>                                                 
                 <div id="ajaxlistado"></div>
-                <select multiple name="asistentes_tmp" id="asistentes_tmp"></select>                
+                <select multiple name="asistentes_tmp" id="asistentes_tmp" title="Haga click para eliminar de la lista"></select>                
                 <script type="text/javascript">
                 //ajax para buscar usuarios
                 $('#form_solicitud_asistentes').val('');
@@ -142,7 +142,7 @@
                 }
                 //Si hacemos click sobre el select que se esta cargando, Borramos la opción seleccionada
                 $('#asistentes_tmp').click(function(){
-                    if (confirm("Quitar este usuario?")){
+                    if (confirm("Quitar este usuario seleccionado?")){
                         $("#asistentes_tmp option:selected").remove();    
                         actAsistentes();
                     }
