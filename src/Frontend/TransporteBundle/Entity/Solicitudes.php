@@ -110,7 +110,11 @@ class Solicitudes
      */
     private $estatus;
 
-
+public function __toString()
+    {
+        return $this->getDireccionDesde();
+    }
+   
     /**
      * Get id
      *

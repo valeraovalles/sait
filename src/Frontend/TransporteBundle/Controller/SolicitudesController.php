@@ -13,6 +13,8 @@ use Frontend\TransporteBundle\Form\SolicitudesType;
 
 use Frontend\TransporteBundle\Entity\Vehiculos;
 use Frontend\TransporteBundle\Form\VehiculosType;
+use Frontend\TransporteBundle\Form\AsignacionesType;
+use Frontend\TransporteBundle\Entity\Asignaciones;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -34,8 +36,10 @@ class SolicitudesController extends Controller
         $dql = "select u from TransporteBundle:Vehiculos u where u.estatus = :status ";
         $query = $em->createQuery($dql);
         $query->setParameter('status',1);          
-        $vehiculos = $query->getResult();  
+        //$vehiculos = $query->getResult();  
         //print_r($vehiculos);
+        $asignaciones  = new Asignaciones();
+        $vehiculos = $this->createForm(new AsignacionesType(),$asignaciones);
 
         if ($accion=="none"){
             $entities = $em->getRepository('TransporteBundle:Solicitudes')->findAll();
@@ -49,7 +53,7 @@ class SolicitudesController extends Controller
         
         return $this->render('TransporteBundle:Solicitudes:index.html.twig', array(
             'entities' => $entities,
-            'vehiculos' => $vehiculos,
+            'vehiculos' => $vehiculos->createView(),
             'accion' => $accion
         ));
     }

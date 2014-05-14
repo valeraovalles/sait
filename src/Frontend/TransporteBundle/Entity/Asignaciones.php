@@ -40,13 +40,6 @@ class Asignaciones
     private $idVehiculo;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_conductor", type="integer")
-     */
-    private $idConductor;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_asignacion", type="datetime")

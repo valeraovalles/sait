@@ -23,7 +23,11 @@ class Vehiculos
     {
         $this->asignaciones = new ArrayCollection();
     }
-
+   
+   public function __toString()
+    {
+        return $this->getPlaca();
+    }
     /**
      * @var integer
      *
