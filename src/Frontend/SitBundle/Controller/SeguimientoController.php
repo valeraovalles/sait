@@ -228,7 +228,7 @@ class SeguimientoController extends Controller
         
         $datos=$request->request->all();
         if(isset($datos['solucion']) and $datos['solucion']!='')
-            $datos=$datos['solucion'];
+            $solucion=$datos['solucion'];
         else{
             $error[]="El comentario no debe estar en blanco.";
             return $this->render('SitBundle:Seguimiento:cerrarseguimiento.html.twig',array('ticket'=>$ticket,'error'=>$error));
@@ -238,11 +238,12 @@ class SeguimientoController extends Controller
         $fechactual = date_create_from_format('Y-m-d', \date("Y-m-d"));
         $horaactual=new \DateTime(\date("G:i:s"));
 
+
         //actualizo campos en ticket
         $query = $em->createQuery('update SitBundle:Ticket t set t.solucion= :solucion, t.fechasolucion= :fechasolucion, t.horasolucion= :horasolucion, t.estatus=6 WHERE t.id = :idticket');
         $query->setParameter('fechasolucion', $fechactual);
         $query->setParameter('horasolucion', $horaactual);
-        $query->setParameter('solucion', $datos['solucion']);
+        $query->setParameter('solucion', $solucion);
         $query->setParameter('idticket', $idticket);
         $query->execute();
         

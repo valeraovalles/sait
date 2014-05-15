@@ -45,7 +45,15 @@
                 ir al listado
             </a>
     </form>
-
+  <script>
+      $(function() {
+        $( "#frontend_mercalbundle_jornadatype_fechajornada" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+      });
+  </script>
 
 
 {% endblock %}

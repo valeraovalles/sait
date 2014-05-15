@@ -279,6 +279,25 @@
             });
         });
     </script>
+  <script>
+      $(function() {
+        $( "#frontend_distribucionbundle_operadortype_comodato_fechainicioacuerdo" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+        $( "#frontend_distribucionbundle_operadortype_comodato_fechafinacuerdo" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+        $( "#frontend_distribucionbundle_operadortype_comodato_fecharecepcion" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+      });
+  </script>
     <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
 
 {% endblock %}
