@@ -118,13 +118,17 @@
   <div id="myModel" class="modal hide fade">      
     <form action="{{ path('asignaciones_create') }}" method="post" novalidate>
         <fieldset>
-        <label for="vehiculo">Debe Asignar un Vehiculo para Aprobar la Solicitud:</label>
+        <label for="vehiculo"><b>Debe Asignar un Vehiculo para Aprobar la Solicitud:</b></label>
         {{ form_widget(form_asig) }}
         <input type="hidden" name="id_solicitud" id="id_solicitud">
         </fieldset>
           <a href="{{ path('asignaciones_create') }}">               
                 <button class="btn btn-primary" type="submit">Aprobar Solicitud</button>
           </a>
+
+          <button class="btn btn-danger" type="button" onclick="$('#myModel, .window').hide()">Cerrar Ventana</button>
+          
+
     </form>
   </div> 
     <script type="text/javascript">

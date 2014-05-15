@@ -121,7 +121,17 @@ class AsignacionesController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TransporteBundle:Asignaciones')->find($id);
+        $idSol=$entity->getIdSolicitud()->getId();
 
+        $entity_sol = $em->getRepository('TransporteBundle:Solicitudes')->find($id);
+        $stat=$entity_sol->getEstatus();
+        
+        if ($stat=="C"){
+            $this->get('session')->getFlashBag()->add('alert', 'LA SOLICITUD YA FUE CERRADA/CULMINADA');
+            return $this->render('TransporteBundle:Asignaciones:show.html.twig', array(
+            'entity'      => $entity,                        
+            ));
+        }
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Asignaciones entity.');
         }

@@ -16,7 +16,7 @@ class AsignacionesType extends AbstractType
             'label'  => 'Solicitud',            
             ))
             ->add('idVehiculo',null, array(            
-            'label'  => 'Vehiculo',
+            'label'  => 'Vehiculo', 
             ))
            
         ;

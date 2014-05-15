@@ -33,11 +33,6 @@ class SolicitudesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         
-        $dql = "select u from TransporteBundle:Vehiculos u where u.estatus = :status ";
-        $query = $em->createQuery($dql);
-        $query->setParameter('status',1);          
-        //$vehiculos = $query->getResult();  
-        //print_r($vehiculos);
         $entity_asig  = new Asignaciones();
         $form_asig = $this->createForm(new AsignacionesType(), $entity_asig);
 
@@ -82,11 +77,11 @@ class SolicitudesController extends Controller
             $this->get('session')->getFlashBag()->add('notice', 'EL REGISTRO FUE CREADO CON EXITO');
             //CORREO
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-            $from=$usuario->getUsername().'@telesurtv.net';
+            
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Solicitud de Transporte')     // we configure the title
             ->setFrom(array($usuario->getUsername().'@telesurtv.net'))     // we configure the sender
-            ->setTo('jmangarret@telesurtv.net')    // we configure the recipient
+            ->setTo('transporte@telesurtv.net')    // we configure the recipient
             ->setBody( $this->renderView(
                         'TransporteBundle:Correo:solicitud_transporte.html.twig',
                         array('perfil' => $perfil,
@@ -268,16 +263,19 @@ class SolicitudesController extends Controller
         $entity->setEstatus($accion);
         $em->persist($entity);
         $em->flush();
-            
+        
+        $idSolicitante=$entity->getIdSolicitante();
+        $solicitante = $em->getRepository('UsuarioBundle:User')->find($idSolicitante);
+
         //CORREO
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $usuario = $em->getRepository('UsuarioBundle:User')->find($idusuario);
         $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-        $from=$usuario->getUsername().'@telesurtv.net';
+        
         $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
         ->setSubject('Solicitud de Transporte')     // we configure the title
         ->setFrom(array($usuario->getUsername().'@telesurtv.net'))     // we configure the sender
-        ->setTo('jmangarret@telesurtv.net')    // we configure the recipient
+        ->setTo(array('transporte@telesurtv.net', $solicitante->getUsername().'@telesurtv.net'))     //enviamos a trasnporte y al solicitante        
         ->setBody( $this->renderView(
                     'TransporteBundle:Correo:solicitud_transporte.html.twig',
                     array('perfil' => $perfil,
