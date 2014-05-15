@@ -32,8 +32,14 @@
 
     <body>
     	<div align="center">
-			<div><h3>SOLICITUD DE TRANSPORTE</h3></div>
-            <h3 align="center">Se ha generado una nueva solicitud de Transporte, bajo los siguientes datos:</h3>
+            {% if status=="N" %}
+                <div><h3>NUEVA SOLICITUD DE TRANSPORTE</h3></div>            
+                <h3 align="center">Se ha generado una nueva solicitud de Transporte, bajo los siguientes datos:</h3>            
+            {% endif %}
+            {% if status=="AP" %}
+                <div><h3>APROBACION DE SOLICITUD DE TRANSPORTE</h3></div>            
+                <h3 align="center">Se ha aprobado la siguiente Solicitud de Transporte:</h3>            
+            {% endif %}
 			<table cellspacing=0>
 				<tr>
 					<th>Solicitante:</th>
@@ -58,6 +64,17 @@
                 <tr>
                     <th>Hasta:</th>
                     <td>{{ solicitud.direccionHasta }}</td>
+                </tr>
+                
+                <tr>
+                    <th>Estatus:</th>
+                    {% if status=="N" %}
+                        <td>Nueva</td>
+                    {% endif %}
+                    {% if status=="AP" %}
+                        <td>Aprobada</td>
+                    {% endif %}
+
                 </tr>
 
 			</table>

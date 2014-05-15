@@ -1,7 +1,5 @@
-{% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Asignaciones creation</h1>
+    {# 	FORMULARIO MODAL #}
 
     <form action="{{ path('asignaciones_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
@@ -9,12 +7,7 @@
             <button type="submit">Create</button>
         </p>
     </form>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('asignaciones') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
-{% endblock %}
+    <script type="text/javascript">
+    $("#frontend_transportebundle_asignacionestype_idSolicitud").removeAttr("width");
+    $("#frontend_transportebundle_asignacionestype_idSolicitud").css('width','300px');
+    </script>

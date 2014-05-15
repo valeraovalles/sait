@@ -6,12 +6,6 @@
     TRANSPORTE
 {% endblock %}
 
-{% block stylesheets %}
- {{ parent() }}
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-
-{% endblock %}
-
 {% block body -%}
     {{ parent() }}
     
@@ -52,8 +46,8 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('solicitudes_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>            
-                <td>{% if entity.fechaSolicitud %}{{ entity.fechaSolicitud|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if entity.fechaSalida %}{{ entity.fechaSalida|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if entity.fechaSolicitud %}{{ entity.fechaSolicitud|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if entity.fechaSalida %}{{ entity.fechaSalida|date('d-m-Y') }}{% endif %}</td>
                 <td>{{ entity.horaSalida|date('G:i:s') }}</td>
                 <td>{{ entity.direccionDesde }}</td>
                 <td>{{ entity.direccionHasta }}</td>     
@@ -85,7 +79,11 @@
                         </a>
                         {% endif %}
                         {% if accion=="Apro" %}
+                            {#
+
                             <a href="{{ path('solicitudes_status',{'id':entity.id,'accion':'AP'}) }}" onclick="return confirm('Seguro que desea APROBAR la solicitud Nro: '+{{entity.id}})" title="Aprobar">
+                            #}
+                            <a data-toggle="modal" data-target="#myModal" class="abrirModal" data-idsolicitud="{{entity.id}}">
                             <img src="{{asset('images/aprobar.png')}}" width=16px>
                             </a>
                             <script>
@@ -116,20 +114,17 @@
     </div>
     
     <br>
-  <a data-toggle="modal" data-target="#myModal" id="abrirModal" data-id="107" data-var="var">Abrir</a> 
-  <div id="myModel" class="modal hide fade"> 
-     {{ form_widget(vehiculos) }}
-    <form>
+  
+  <div id="myModel" class="modal hide fade">      
+    <form action="{{ path('asignaciones_create') }}" method="post" novalidate>
         <fieldset>
-        <label for="vehiculo">Debe asignar un vehiculo para aprobar la Solicitud:</label>
-        <select name="id_vehiculo">
-            <option="">-- Seleccione --></option>
-            {% for veh in vehiculos %}
-                <option="{{veh.id}}">{{veh.tipo}}{{veh.placa}}{{veh.modelo}}</option>
-            {% endfor %}
-        </select>
+        <label for="vehiculo">Debe Asignar un Vehiculo para Aprobar la Solicitud:</label>
+        {{ form_widget(form_asig) }}
         <input type="hidden" name="id_solicitud" id="id_solicitud">
         </fieldset>
+          <a href="{{ path('asignaciones_create') }}">               
+                <button class="btn btn-primary" type="submit">Aprobar Solicitud</button>
+          </a>
     </form>
   </div> 
     <script type="text/javascript">
@@ -139,9 +134,9 @@
             "aaSorting": [[5,'asc'],[3,'desc'],[4,'desc']],
         } );    
     })
-    $('#abrirModal').click(function(){ 
-        $("#name").val($(this).data('var'));
-        $("#email").val($(this).data('id'));
+    $('.abrirModal').click(function(){         
+        $("#frontend_transportebundle_asignacionestype_idSolicitud").val($(this).data('idsolicitud'));
+        $("#id_solicitud").val($(this).data('idsolicitud'));
         $('#myModel').modal() 
 
     }); 

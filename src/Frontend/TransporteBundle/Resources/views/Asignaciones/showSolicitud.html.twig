@@ -23,40 +23,36 @@
         </div>
     {% endfor %}
 
-
+{% for asig in entity %}
  <div class="formShow">
-
     <table class="record_properties">
         <tbody>
             <div class="contenedorform">
                 <div class="labelform">Id</div>
-                <div class="widgetform">{{ entity.id }}</div>
+                <div class="widgetform">{{ asig.id }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Solicitud</div>
-                <div class="widgetform">{{ entity.idSolicitud }}</div>
+                <div class="widgetform">{{ asig.idSolicitud }}</div>
             </div>            
             <div class="contenedorform">
                 <div class="labelform">Fecha Asignacion</div>
-                <div class="widgetform">{{ entity.fechaAsignacion|date('Y-m-d H:i:s') }}</div>
+                <div class="widgetform">{{ asig.fechaAsignacion|date('Y-m-d H:i:s') }}</div>
             </div> 
             <div class="contenedorform">
                 <div class="labelform">Vehiculo</div>
-                <div class="widgetform">{{ entity.idVehiculo}}</div>
+                <div class="widgetform">{{ asig.idVehiculo}}</div>
             </div>
         </tbody>
     </table>
 </div>
-
-        <ul class="record_actions">
-
+    <ul class="record_actions">
     <li>
         <a class="btn" href="{{ path('asignaciones') }}">IR AL LISTADO</a> | 
-        <a href="{{ path('asignaciones_edit', {'id': entity.id }) }}">
+        <a href="{{ path('asignaciones_edit', {'id': asig.id }) }}">
             <button class="btn btn-primary" type="button">EDITAR</button> 
         </a>
-
     </li>
-
 </ul>
+{% endfor %}
 {% endblock %}

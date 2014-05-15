@@ -38,8 +38,8 @@ class SolicitudesController extends Controller
         $query->setParameter('status',1);          
         //$vehiculos = $query->getResult();  
         //print_r($vehiculos);
-        $asignaciones  = new Asignaciones();
-        $vehiculos = $this->createForm(new AsignacionesType(),$asignaciones);
+        $entity_asig  = new Asignaciones();
+        $form_asig = $this->createForm(new AsignacionesType(), $entity_asig);
 
         if ($accion=="none"){
             $entities = $em->getRepository('TransporteBundle:Solicitudes')->findAll();
@@ -53,7 +53,8 @@ class SolicitudesController extends Controller
         
         return $this->render('TransporteBundle:Solicitudes:index.html.twig', array(
             'entities' => $entities,
-            'vehiculos' => $vehiculos->createView(),
+            'entity_asig' => $entity_asig,
+            'form_asig'   => $form_asig->createView(),
             'accion' => $accion
         ));
     }
@@ -90,6 +91,7 @@ class SolicitudesController extends Controller
                         'TransporteBundle:Correo:solicitud_transporte.html.twig',
                         array('perfil' => $perfil,
                             'solicitud' => $entity,
+                            'status' => 'N',
                         )
                     ), 
             'text/html');
@@ -137,7 +139,7 @@ class SolicitudesController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TransporteBundle:Solicitudes')->find($id);
-
+      
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Solicitudes entity.');
         }
@@ -145,7 +147,7 @@ class SolicitudesController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('TransporteBundle:Solicitudes:show.html.twig', array(
-            'entity'      => $entity,
+            'entity'      => $entity,            
             'delete_form' => $deleteForm->createView(),        ));
     }
 
@@ -266,6 +268,27 @@ class SolicitudesController extends Controller
         $entity->setEstatus($accion);
         $em->persist($entity);
         $em->flush();
+            
+        //CORREO
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuario = $em->getRepository('UsuarioBundle:User')->find($idusuario);
+        $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+        $from=$usuario->getUsername().'@telesurtv.net';
+        $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+        ->setSubject('Solicitud de Transporte')     // we configure the title
+        ->setFrom(array($usuario->getUsername().'@telesurtv.net'))     // we configure the sender
+        ->setTo('jmangarret@telesurtv.net')    // we configure the recipient
+        ->setBody( $this->renderView(
+                    'TransporteBundle:Correo:solicitud_transporte.html.twig',
+                    array('perfil' => $perfil,
+                        'solicitud' => $entity,
+                        'status' => 'AP',
+                    )
+                ), 
+        'text/html');
+        $this->get('mailer')->send($message); 
+        //FIN CORREO
+
 
         return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $id)));
                 

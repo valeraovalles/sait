@@ -6,6 +6,10 @@ asignaciones_show:
     pattern:  /{id}/show
     defaults: { _controller: "TransporteBundle:Asignaciones:show" }
 
+asignaciones_showSolicitud:
+    pattern:  /{idSolicitud}/showSolicitud
+    defaults: { _controller: "TransporteBundle:Asignaciones:showSolicitud" }
+
 asignaciones_new:
     pattern:  /new
     defaults: { _controller: "TransporteBundle:Asignaciones:new" }

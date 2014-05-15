@@ -22,16 +22,15 @@ class Solicitudes
      */
     private $id;
 
-    /**
+     /**
      * @ORM\OneToMany(targetEntity="Asignaciones", mappedBy="Solicitudes")
      */
-    protected $asignaciones;
+    private $asignaciones;
  
     public function __construct()
     {
         $this->asignaciones = new ArrayCollection();
     }
-
       /**
      * @var \Usuarios.user
      * 
@@ -110,11 +109,11 @@ class Solicitudes
      */
     private $estatus;
 
-public function __toString()
+    public function __toString()
     {
-        return $this->getDireccionDesde();
+        return 'Nro. '. $this->getId(). ': ' .$this->getDatosInteresRazon();
     }
-   
+ 
     /**
      * Get id
      *

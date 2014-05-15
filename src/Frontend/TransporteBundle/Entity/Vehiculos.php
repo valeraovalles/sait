@@ -17,17 +17,25 @@ class Vehiculos
      /**
      * @ORM\OneToMany(targetEntity="Asignaciones", mappedBy="Vehiculos")
      */
-    protected $asignaciones;
+    private $asignaciones;
  
     public function __construct()
     {
         $this->asignaciones = new ArrayCollection();
     }
-   
+    
+    /*
+    public function __construct()
+    {
+        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+   */
    public function __toString()
     {
-        return $this->getPlaca();
+        return $this->getTipo().' '.$this->getPlaca().' '.$this->getModelo();
     }
+
+    
     /**
      * @var integer
      *

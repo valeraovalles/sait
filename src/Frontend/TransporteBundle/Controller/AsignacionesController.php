@@ -41,10 +41,15 @@ class AsignacionesController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $str = \date("Y-m-d");
+            $fechaactual = \DateTime::createFromFormat('Y-m-d', $str);                        
+            $entity->setFechaAsignacion($fechaactual);                          
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('asignaciones_show', array('id' => $entity->getId())));
+            //Llamamos al action status del controlador solicitudes para actualizar el status
+            return $this->redirect($this->generateUrl('solicitudes_status', array('id' => $entity->getIdSolicitud()->getId(), 'accion'=>'AP')));
+            //return $this->redirect($this->generateUrl('asignaciones_show', array('id' => $entity->getId())));
         }
 
         return $this->render('TransporteBundle:Asignaciones:new.html.twig', array(
@@ -87,6 +92,24 @@ class AsignacionesController extends Controller
         return $this->render('TransporteBundle:Asignaciones:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
+    }
+    
+    public function showSolicitudAction($idSolicitud)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('TransporteBundle:Asignaciones')->findByIdSolicitud($idSolicitud);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Asignaciones entity.');
+        }
+
+        
+
+        return $this->render('TransporteBundle:Asignaciones:showSolicitud.html.twig', array(
+            'entity'      => $entity,            
+            
+            ));
     }
 
     /**

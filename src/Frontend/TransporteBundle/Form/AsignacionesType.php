@@ -11,9 +11,14 @@ class AsignacionesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fechaAsignacion')
-            ->add('idSolicitud')
-            ->add('idVehiculo')
+          //  ->add('fechaAsignacion')
+            ->add('idSolicitud',null, array(            
+            'label'  => 'Solicitud',            
+            ))
+            ->add('idVehiculo',null, array(            
+            'label'  => 'Vehiculo',
+            ))
+           
         ;
     }
 
