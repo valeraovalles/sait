@@ -40,6 +40,15 @@
                 <div><h3>APROBACION DE SOLICITUD DE TRANSPORTE</h3></div>            
                 <h3 align="center">Se ha aprobado la siguiente Solicitud de Transporte:</h3>            
             {% endif %}
+            {% if status=="C" %}
+                <div><h3>CULMINACION DE SOLICITUD DE TRANSPORTE</h3></div>            
+                <h3 align="center">Se ha finalizado/culminado la siguiente Solicitud de Transporte:</h3>            
+            {% endif %}
+            {% if status=="R" %}
+                <div><h3>RECHAZO DE SOLICITUD DE TRANSPORTE</h3></div>            
+                <h3 align="center">Se ha rechazado la siguiente Solicitud de Transporte:</h3>            
+            {% endif %}
+
 			<table cellspacing=0>
 				<tr>
 					<th>Solicitante:</th>
@@ -74,7 +83,12 @@
                     {% if status=="AP" %}
                         <td>Aprobada</td>
                     {% endif %}
-
+                    {% if status=="C" %}
+                        <td>Culminada</td>
+                    {% endif %}
+                    {% if status=="R" %}
+                        <td>Rechazada</td>
+                    {% endif %}
                 </tr>
 
 			</table>

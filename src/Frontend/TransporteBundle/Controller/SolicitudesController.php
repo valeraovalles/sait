@@ -282,16 +282,13 @@ class SolicitudesController extends Controller
                     'TransporteBundle:Correo:solicitud_transporte.html.twig',
                     array('perfil' => $perfil,
                         'solicitud' => $entity,
-                        'status' => 'AP',
+                        'status' => $accion,
                     )
                 ), 
         'text/html');
         $this->get('mailer')->send($message); 
         //FIN CORREO
-
-
-        return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $id)));
-                
+        return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $id)));                
     }
 
     public function rechazarAction($id, Request $request){        
@@ -315,7 +312,7 @@ class SolicitudesController extends Controller
             $query->setParameter('idsol', $id);
             $query->execute();
             $this->get('session')->getFlashBag()->add('alert', 'LA SOLICITUD FUE RECHAZADA CON EXITO');
-            return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $id)));
+            return $this->redirect($this->generateUrl('solicitudes_status', array('id' => $id, 'accion' => 'R')));
                      
         }
         return $this->render('TransporteBundle:Solicitudes:justificar.html.twig', array(
