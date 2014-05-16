@@ -62,7 +62,7 @@
             <div class="widgetform">{{ entity.horasolicitud|date("G:i:s") }}</div>
         </div>
 
-        {% if entity.estatus==4 and entity.estatus!=6 %}
+        {% if entity.estatus==4 or entity.estatus==6 %}
             <div class="contenedorform">
                 <div class="labelform">Fecha solución:</div>
                 <div class="widgetform">{{ entity.fechasolucion|date("d-m-Y") }}</div>
@@ -79,7 +79,7 @@
             <div class="widgetform">{{ entity.solicitud}}</div>
         </div>
 
-        {% if entity.estatus==4 %}
+        {% if entity.estatus==4 or entity.estatus==6 %}
             <div class="contenedorform">
                 <div class="labelform">Solución:</div>
                 <div class="widgetform">{{ entity.solucion}}</div>

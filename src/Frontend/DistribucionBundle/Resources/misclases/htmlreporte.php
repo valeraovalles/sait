@@ -56,7 +56,7 @@ class htmlreporte
 
 						<tr>
 						<td colspan='6' align='center'>DATOS DE OPERADOR</td>
-						<td colspan='5' align='center'>DATOS DE REPRESENTANTE</td>
+						<td colspan='6' align='center'>DATOS DE REPRESENTANTE</td>
 						</tr>
 						<tr>
 							<th>TIPO</th>
