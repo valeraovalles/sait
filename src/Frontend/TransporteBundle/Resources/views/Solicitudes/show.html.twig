@@ -86,7 +86,7 @@
     <ul class="record_actions">
     <li>
         <a class="btn" href="{{ path('solicitudes') }}">IR AL LISTADO</a> | 
-        {% if entity.estatus!="C" %} 
+        {% if entity.estatus!="C" and entity.estatus!="R" %} 
         <a href="{{ path('solicitudes_edit', {'id': entity.id }) }}">
             <button class="btn btn-primary" type="button">EDITAR</button> | 
         </a>
