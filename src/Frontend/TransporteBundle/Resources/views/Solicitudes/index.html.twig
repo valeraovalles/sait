@@ -65,7 +65,7 @@
                             <i class="icon-search"></i>
                         </a>
                         {% if is_granted('ROLE_TRANSPORTE') %}
-                        {% if entity.estatus!="C" and entity.estatus!="R"  and entity.estatus!="AP" %} 
+                        {% if entity.estatus=="N" %} 
                         {# SI ESTA APROBADA/CULMINADA/RECAHZADA NO PUEDE SER EDITADA #}   
                         <a href="{{ path('solicitudes_edit', { 'id': entity.id }) }}" title="Editar">
                             <i class="icon-edit"></i>
