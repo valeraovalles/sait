@@ -99,9 +99,8 @@ class SolicitudesController extends Controller
             $this->get('mailer')->send($message); 
             //FIN CORREO
             return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $entity->getId())));
-        }else{
-            $datos=$request->request->all();
-            print_r($datos);         
+        }else{            
+            $this->get('session')->getFlashBag()->add('alert', 'ERROR EN EL FORMULARIO PARA CREAR LA SOLICITUD');
         }
         return $this->render('TransporteBundle:Solicitudes:new.html.twig', array(
             'entity' => $entity,

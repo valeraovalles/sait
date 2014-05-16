@@ -86,15 +86,16 @@
     <ul class="record_actions">
     <li>
         <a class="btn" href="{{ path('solicitudes') }}">IR AL LISTADO</a> | 
+        {% if entity.estatus!="C" %} 
         <a href="{{ path('solicitudes_edit', {'id': entity.id }) }}">
             <button class="btn btn-primary" type="button">EDITAR</button> | 
         </a>
-          {% if entity.estatus=="AP" or entity.estatus=="C" %} 
+        {% endif %}
+        {% if entity.estatus=="AP" or entity.estatus=="C" %} 
         <a href="{{ path('asignaciones_showSolicitud', {'idSolicitud': entity.id }) }}">
             <button class="btn btn-secundary" type="button">ASIGNACION</button> 
         </a>
-
-          {% endif %}
+        {% endif %}
     </li>
     {#
     <li>
