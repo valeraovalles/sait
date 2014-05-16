@@ -17,13 +17,25 @@ class Vehiculos
      /**
      * @ORM\OneToMany(targetEntity="Asignaciones", mappedBy="Vehiculos")
      */
-    protected $asignaciones;
+    private $asignaciones;
  
     public function __construct()
     {
         $this->asignaciones = new ArrayCollection();
     }
+    
+    /*
+    public function __construct()
+    {
+        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+   */
+   public function __toString()
+    {
+        return $this->getTipo().' '.$this->getPlaca().' '.$this->getModelo();
+    }
 
+    
     /**
      * @var integer
      *
@@ -35,35 +47,35 @@ class Vehiculos
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="tipo", type="string", length=100)
      */
     private $tipo;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="placa", type="string", length=10)
      */
     private $placa;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="modelo", type="string", length=50)
      */
     private $modelo;
 
     /**
      * @var integer
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="ano", type="integer")
      */
     private $ano;
 
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="color", type="string", length=50)
      */
     private $color;

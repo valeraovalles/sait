@@ -27,20 +27,6 @@
     <form action="{{ path('solicitudes_create') }}" method="post" novalidate>   
     {{ form_widget(form._token) }}
 
-        {# DESHABILITAMOS GENERACION DE COMBO DE USUARIOS, SE USARA EL ID DE LA SESION ACTIVA
-        <div class="contenedorform">
-            <div class="text-error">{{ form_errors(form.idSolicitante) }}</div>
-            <div class="labelform">Solicitante:</div>
-            <div class="widgetform">
-                <select name="usuario">
-                {% for usu in usuarios %}                                       
-                    <option value="{{usu.id}}">{{usu.primerNombre}} {{usu.primerApellido}}</option>          
-                {% endfor %}            
-                </select>    
-            </div>                
-            <div class="widgetform">{{ form_widget(form.idSolicitante) }}</div>
-        </div>
-        #}
         <div class="contenedorform">
             <div class="labelform">Fecha de Solicitud:</div> 
             <div class="widgetform">{{"now"|date("m/d/Y")}}</div>
@@ -50,9 +36,6 @@
             <div class="labelform">Fecha Salida:</div>
             <div class="widgetform">                
                 {{ form_widget(form.fechaSalida, {'attr':{'class':'fecha'}})}}
-                {#{{ form_widget(form.fechaSalida.date.month, {'attr':{'class':'fecha'}} )}}
-                {{ form_widget(form.fechaSalida.date.year, {'attr':{'class':'fecha'}} )}}
-                #}
                 <script>
                   $(function() {
                     $( ".fecha" ).datepicker({
@@ -75,49 +58,97 @@
             </script>    
         </div>        
         <div class="contenedorform">
+            <div class="labelform">Tipo de Personal:</div>
+            <div class="widgetform">
+                <select name="tipop" id="tipop" title="Seleccione el tipo de personal a trasladar para Buscar en el siguiente campo...">
+                    <option value="I">Interno</option>
+                    <option value="E">Externo</option>
+                </select>
+            </div>            
+        </div>    
+        <div class="contenedorform">
             <div class="text-error">{{ form_errors(form.asistentes) }}</div>
-            <div class="labelform">Personal a Trasladar/Asistentes:</div>
-            <div class="widgetform">                
-                {{ form_widget(form.tipoPersonal) }}
-                {{ form_widget(form.asistentes) }}
-                {#
-                <ul id="asistente-fields-list" data-prototype="{{ form_widget(form.asistentes.vars.prototype) | e }}">
-                {% for asistente in form.asistentes %}
-                    <li>
-                        {{ form_errors(asistente) }}
-                        {{ form_widget(asistente) }}
-                    </li>
-                {% endfor %}
-                </ul>   
-                <div id="usuarios"></div>
-                <a href="#" id="add-another-asistente">Add</a>               
-                <a id="link_usuarios" href="#">Usuarios</a>
+            <div class="widgetform">  {{ form_widget(form.asistentes) }}</div>            
+            <div class="labelform">Personal a Trasladar:</div>    
+            <div class="widgetform" id="lista">                                                
+                <input type="text" id="buscar" placeholder="Buscar" title="Escriba los nombres para listar. Recuerde diferenciar  minúsculas de mayúsculas" autocomplete=off>                                                 
+                <div id="ajaxlistado"></div>
+                <select multiple name="asistentes_tmp" id="asistentes_tmp" title="Haga click para eliminar de la lista"></select>                
                 <script type="text/javascript">
-                // realiza un seguimiento de cuántos campos de correo electrónico se han pintado
-                var asistenteCount = '{{ form.asistentes | length }}';
-                jQuery(document).ready(function() {
-                    $('#usuarios').load('{{ path("user") }}');
+                //ajax para buscar usuarios
+                $('#form_solicitud_asistentes').val('');
+                $(document).ready(function () {
+                  $('#buscar').keyup(function(){
+
+                    if($('#buscar').val()==''){
+                        $('#ajaxlistado').html("");
+                    }else{
+                        if ($('#tipop').val()=="I"){
+                            var ruta= "{{ path('solicitudes_ajaxusuarios',{'val':'val'}) }}";
+                            ruta = ruta.replace("val",  $('#buscar').val());
+                        }else{
+                            var ruta= "{{ path('solicitudes_ajaxexternos',{'val':'val'}) }}";
+                            ruta = ruta.replace("val",  $('#buscar').val());
+                        }
+                            
+
+                     $.ajax({
+                       url: ruta,
+                       type : 'POST',
+                       beforeSend: function(){
+                        $("#loading").show();
+                       },
+                       complete: function(){
+                         $("#loading").hide();
+                       },
+                       success: function(data){
+                        $('#ajaxlistado').html(data);
+                       }
+                     });    
+                    }
+                  });
+
+                });
+                //armar lista de usuarios seleccionados
+                function armarlista(valor){
+                    var existe=false;                    
+                    var sel = document.getElementById("asistentes_tmp");                         
+                    var tip = document.getElementById("tipop").value;                         
+                    //Buscamos si ya existe el valor seleccionado
+                    for (var i = 0; i < sel.length; i++) 
+                    {                        
+                        if (sel[i].value==valor+'-'+tip)
+                        existe=true;                      
+                    }
+                    if (existe)
+                        alert("Ya este usuario fue seleccionado: "+valor);
+                    else
+                        $('#asistentes_tmp').append('<option value="' + valor + '-'+tip+'">' + valor +'-'+tip+'</option>');          
+                    actAsistentes();
+                    //$('#lista select option').attr('selected','selected');
+                    $('#ajaxlistausuario').hide()
+                    $('#buscar').val('')
+                }
+                function actAsistentes(){
+                    //PASA LOS DATOS ACTUALES DE LA LISTA AL CAMPO OCULTO DEL FORMULARIO QUE IRA A LA BD
+                    $('#form_solicitud_asistentes').val('');                    
+                    var sel = document.getElementById("asistentes_tmp");  
+                    var lista="";
+                    for (var i = 0; i < sel.length; i++) 
+                    {                        
+                        lista+=sel[i].value+", ";                                              
+                    }                    
+                    document.getElementById("form_solicitud_asistentes").value=lista;
+                }
+                //Si hacemos click sobre el select que se esta cargando, Borramos la opción seleccionada
+                $('#asistentes_tmp').click(function(){
+                    if (confirm("Quitar este usuario seleccionado?")){
+                        $("#asistentes_tmp option:selected").remove();    
+                        actAsistentes();
+                    }
                     
-                    jQuery('#add-another-asistente').click(function() {
-                        var asistenteList = jQuery('#asistente-fields-list');
-
-                        // graba la plantilla prototipo
-                        var newWidget = asistenteList.attr('data-prototype');
-                        // sustituye el "__name__" usado en el id y name del prototipo con un
-                        // número que es único en tus correos termina con el
-                        // atributo name viéndose como name="contact[asistentes][2]"
-                        newWidget = newWidget.replace(/\$\$name\$\$/g, asistenteCount);
-                        asistenteCount++;
-
-                        // crea un nuevo elemento lista y lo añade a la lista
-                        var newLi = jQuery('<li></li>').html(newWidget);
-                        newLi.appendTo(jQuery('#asistente-fields-list'));
-
-                            return false;
-                    });
-                })
+                });
                 </script>
-                #}
             </div>
         </div>           
         <div class="contenedorform">
@@ -143,7 +174,7 @@
         <ul>
         <li>
             <a href="{{ path('solicitudes_create') }}">               
-                <button class="btn btn-large btn-primary" type="submit">Crear Solicitud</button>
+                <button class="btn btn-primary" type="submit">Crear Solicitud</button>
             </a>| 
             <a class="btn" href="{{ path('solicitudes') }}">IR AL LISTADO
             </a> 
@@ -152,6 +183,6 @@
         </ul>  
       
     </form>
-  
+    
 </div>
 {% endblock %}

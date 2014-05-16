@@ -15,23 +15,8 @@ class SolicitudesType extends AbstractType
             ->add('fechaSolicitud', 'date',array(
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd',
-                ))                       
-            //->add('idSolicitante','hidden') 
-            ->add('tipoPersonal','choice',array('choices'=>array('Int'=>'Interno','Ext'=>'Externo')),array('mapped' => false))
-            ->add('asistentes')  
-            /*
-            ->add('asistentes', 'collection', array(
-                // cada elemento en el arreglo debe ser un campo "email"
-                'type'   => 'text',
-                'allow_add'    => true,
-                'by_reference' => false,        
-                // estas opciones se pasan a cada tipo "email"
-                'options'  => array(                 
-                    'attr'      => array('class' => 'asistente-box')
-                ),
-            ))
-            */     
-            //->add('fechaSalida','datetime',array('data' => new \DateTime("now")))
+                ))                                               
+            ->add('asistentes','hidden')  
             ->add('fechaSalida', 'date',array(
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd',
@@ -41,7 +26,7 @@ class SolicitudesType extends AbstractType
             ->add('direccionHasta','textarea')
             ->add('descripcionEquipos','textarea')
             ->add('datosInteresRazon','textarea')             
-        ;
+            ->add('justificacionRechazo','textarea',array('required'  => false));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -53,6 +38,6 @@ class SolicitudesType extends AbstractType
 
     public function getName()
     {
-        return 'frontend_transportebundle_solicitudestype';
+        return 'form_solicitud';
     }
 }

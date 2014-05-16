@@ -1,7 +1,7 @@
 <?php
 
 namespace Frontend\TransporteBundle\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -23,28 +23,24 @@ class Asignaciones
     private $id;
 
     /**
-     * @var integer
+     * @var \Solicitudes
      * 
      * @ORM\ManyToOne(targetEntity="Solicitudes", inversedBy="Asignaciones")
-     * @ORM\JoinColumn(name="id_solicitud", referencedColumnName="id")      
+     * @ORM\JoinColumn(name="id_solicitud", referencedColumnName="id")     
+     * @Assert\NotBlank() 
      */
     private $idSolicitud;
 
  
     /**
      * @var \Vehiculos
-     *
-     * @ORM\ManyToOne(targetEntity="Vehiculos")
+     * @Assert\NotBlank()
+     * @ORM\ManyToOne(targetEntity="Vehiculos", inversedBy="Asignaciones")
      * @ORM\JoinColumn(name="id_vehiculo", referencedColumnName="id")     
      */
     private $idVehiculo;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_conductor", type="integer")
-     */
-    private $idConductor;
+
 
     /**
      * @var \DateTime
@@ -67,10 +63,10 @@ class Asignaciones
     /**
      * Set idSolicitud
      *
-     * @param integer $idSolicitud
-     * @return Asignaciones
+     * @param \Frontend\TransporteBundle\Entity\Solicitudes $idSolicitud
+     * @return Solicitudes
      */
-    public function setIdSolicitud($idSolicitud)
+    public function setIdSolicitud(\Frontend\TransporteBundle\Entity\Solicitudes $idSolicitud = null)
     {
         $this->idSolicitud = $idSolicitud;
     
@@ -80,60 +76,38 @@ class Asignaciones
     /**
      * Get idSolicitud
      *
-     * @return integer 
+     * @return \Frontend\TransporteBundle\Entity\Solicitudes 
      */
     public function getIdSolicitud()
     {
         return $this->idSolicitud;
     }
 
-    /**
+  /**
      * Set idVehiculo
      *
-     * @param integer $idVehiculo
-     * @return Asignaciones
+     * @param \Frontend\TransporteBundle\Entity\Vehiculos $idVehiculo
+     * @return Vehiculos
      */
-    public function setIdVehiculo($idVehiculo)
+    public function setIdVehiculo(\Frontend\TransporteBundle\Entity\Vehiculos $idVehiculo = null)
     {
         $this->idVehiculo = $idVehiculo;
     
         return $this;
     }
 
-    /**
+  /**
      * Get idVehiculo
      *
-     * @return integer 
+     * @return \Frontend\TransporteBundle\Entity\Vehiculos 
      */
     public function getIdVehiculo()
     {
         return $this->idVehiculo;
     }
 
-    /**
-     * Set idConductor
-     *
-     * @param integer $idConductor
-     * @return Asignaciones
-     */
-    public function setIdConductor($idConductor)
-    {
-        $this->idConductor = $idConductor;
-    
-        return $this;
-    }
 
-    /**
-     * Get idConductor
-     *
-     * @return integer 
-     */
-    public function getIdConductor()
-    {
-        return $this->idConductor;
-    }
-
-    /**
+      /**
      * Set fechaAsignacion
      *
      * @param \DateTime $fechaAsignacion

@@ -4,7 +4,7 @@ namespace Frontend\TransporteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Solicitudes
  *
@@ -22,16 +22,15 @@ class Solicitudes
      */
     private $id;
 
-    /**
+     /**
      * @ORM\OneToMany(targetEntity="Asignaciones", mappedBy="Solicitudes")
      */
-    protected $asignaciones;
+    private $asignaciones;
  
     public function __construct()
     {
         $this->asignaciones = new ArrayCollection();
     }
-
       /**
      * @var \Usuarios.user
      * 
@@ -40,11 +39,9 @@ class Solicitudes
      */
     private $idSolicitante;
 
-    private $tipoPersonal;
-
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="asistentes", type="string", length=255)
      */
     private $asistentes;
@@ -58,42 +55,42 @@ class Solicitudes
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="fecha_salida", type="date")
      */
     private $fechaSalida;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="hora_salida", type="time")
      */
     private $horaSalida;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="direccion_desde", type="string", length=255)
      */
     private $direccionDesde;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="direccion_hasta", type="string", length=255)
      */
     private $direccionHasta;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="descripcion_equipos", type="string", length=255)
      */
     private $descripcionEquipos;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="datos_interes_razon", type="string", length=255)
      */
     private $datosInteresRazon;
@@ -107,12 +104,16 @@ class Solicitudes
 
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="estatus", type="string", length=2)
      */
     private $estatus;
 
-
+    public function __toString()
+    {
+        return 'Nro. '. $this->getId(). ': ' .$this->getDatosInteresRazon();
+    }
+ 
     /**
      * Get id
      *
@@ -145,20 +146,7 @@ class Solicitudes
     {
         return $this->idSolicitante;
     }
-
-
-    public function setTipoPersonal($tipoPersonal)
-    {
-        $this->tipoPersonal = $tipoPersonal;
-        return $this;
-    }
-
-    public function getTipoPersonal()
-    {
-        return $this->tipoPersonal;
-    }
-
-
+  
     /**
      * Set asistentes
      *

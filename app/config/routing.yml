@@ -14,6 +14,11 @@ personalexterno_index:
         resource: "@TransporteBundle/Resources/config/routing/personalexterno.yml"
         prefix:   /transporte/personalexterno
 
+TransporteBundle_asignaciones:
+        resource: "@TransporteBundle/Resources/config/routing/asignaciones.yml"
+        prefix:   /transporte/asignaciones
+        
+
 cumpleanios:
     resource: "@CumpleaniosBundle/Resources/config/routing.yml"
     prefix:   /cumpleanios

@@ -28,10 +28,8 @@
 
     <form action="{{ path('solicitudes_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />    
-            <div class="contenedorform">
-                <div class="labelform">Asistentes</div>
-                <div class="widgetform">{{ form_widget(edit_form.asistentes)}}</div>
-            </div>
+        {{ form_widget(edit_form._token)}}
+       
             <div class="contenedorform">
                 <div class="labelform">Fecha de Solicitud</div>
                 <div class="widgetform">{{ form_widget(edit_form.fechaSolicitud, {'attr':{'class':'fecha'}})}}</div>
@@ -48,6 +46,9 @@
                     });
                   });
                 </script>
+            </div>
+            <div class="contenedorform">                
+                <div class="widgetform">{{ form_widget(edit_form.asistentes)}}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Hora de Salida</div>
@@ -67,29 +68,23 @@
                 <div class="widgetform">{{ form_widget(edit_form.direccionHasta) }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">Descripcion/Equipos</div>
+                <div class="labelform">Equipos/Implementos</div>
                 <div class="widgetform">{{ form_widget(edit_form.descripcionEquipos) }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">Datos de interes/Razon</div>
+                <div class="labelform">Motivo de la Solicitud</div>
                 <div class="widgetform">{{ form_widget(edit_form.datosInteresRazon) }}</div>
-            </div>
-            {% if  entity.justificacionRechazo %}
-            <div class="contenedorform">
-                <div class="labelform">Justificación de Rechazo</div>
-                <div class="widgetform">{{ form_widget(edit_form.justificacionRechazo) }}</div>
-            </div>
-            {% endif %}
+            </div>           
       
-      
-        {{ form_widget(edit_form) }}
+       
+     
         <p>            
             <button class="btn btn-primary" type="submit">EDITAR</button> | 
             <a class="btn" href="{{ path('solicitudes') }}">IR AL LISTADO</a> 
         </p>
     </form>
-
-        <ul class="record_actions">
+{#
+    <ul class="record_actions">
     <li>
         <form action="{{ path('solicitudes_delete', { 'id': entity.id }) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
@@ -100,5 +95,6 @@
         </form>
     </li>
 </ul>
+#}
  </div>
 {% endblock %}

@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class AsignacionesRepository extends EntityRepository
 {
+	 public function SolicitudAsignada($idsolicitud)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT a FROM TransporteBundle:Asignaciones a WHERE
+        a.idSolicitud = :idsol');
+        $consulta->setParameter('idsol', $idsolicitud);
+        return $consulta->getResult();
+
+    }
 }

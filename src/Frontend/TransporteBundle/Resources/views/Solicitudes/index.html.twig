@@ -5,12 +5,7 @@
 {% block titulobanner %}
     TRANSPORTE
 {% endblock %}
-{#
-{% block javascripts %}
- {{ parent() }}
 
-{% endblock %}
-#}
 {% block body -%}
     {{ parent() }}
     
@@ -33,7 +28,7 @@
         </div>
     {% endfor %}
 
-    <table class="records_list">
+    <table class="records_list" id="tablalistax">
         <div align="center" id="leyenda"></div>
         <thead>
             <tr>
@@ -51,8 +46,8 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('solicitudes_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>            
-                <td>{% if entity.fechaSolicitud %}{{ entity.fechaSolicitud|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if entity.fechaSalida %}{{ entity.fechaSalida|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if entity.fechaSolicitud %}{{ entity.fechaSolicitud|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if entity.fechaSalida %}{{ entity.fechaSalida|date('d-m-Y') }}{% endif %}</td>
                 <td>{{ entity.horaSalida|date('G:i:s') }}</td>
                 <td>{{ entity.direccionDesde }}</td>
                 <td>{{ entity.direccionHasta }}</td>     
@@ -70,18 +65,25 @@
                             <i class="icon-search"></i>
                         </a>
                         {% if is_granted('ROLE_TRANSPORTE') %}
+                        {% if entity.estatus=="N" %} 
+                        {# SI ESTA APROBADA/CULMINADA/RECAHZADA NO PUEDE SER EDITADA #}   
                         <a href="{{ path('solicitudes_edit', { 'id': entity.id }) }}" title="Editar">
                             <i class="icon-edit"></i>
                         </a>
                         {% endif %}
-                        {% if entity.estatus!="C" %} {# SI ESTA CULMINADA NO PUEDE SER RECHAZADA #}
-                        {# <a href="javascript:confirmar(entity.id,'R','RECHAZAR')" title="Rechazar"> #}
-                        <a href="#" title="Rechazar/Cancelar">
+                        {% endif %}
+                        {% if entity.estatus!="C" and entity.estatus!="R" %} 
+                        {# SI ESTA CULMINADA NO PUEDE SER RECHAZADA #}        
+                        <a href="{{ path('solicitudes_rechazar',{'id':entity.id}) }}" title="Rechazar/Cancelar">
                             <img src="{{asset('images/rechazo.png')}}" width=16px>
                         </a>
                         {% endif %}
                         {% if accion=="Apro" %}
+                            {#
+
                             <a href="{{ path('solicitudes_status',{'id':entity.id,'accion':'AP'}) }}" onclick="return confirm('Seguro que desea APROBAR la solicitud Nro: '+{{entity.id}})" title="Aprobar">
+                            #}
+                            <a data-toggle="modal" data-target="#myModal" class="abrirModal" data-idsolicitud="{{entity.id}}">
                             <img src="{{asset('images/aprobar.png')}}" width=16px>
                             </a>
                             <script>
@@ -104,13 +106,45 @@
         {% endfor %}
         </tbody>
     </table>
-<br>
-        <ul>
-        <li>
+    <br><br>
+    <div align="center">
             <a href="{{ path('solicitudes_new') }}">               
-                <button class="btn btn-large btn-primary" type="button">Nueva Solicitud</button>
+                <button class="btn btn-primary" type="button">Nueva Solicitud</button>
             </a>
-        </li>
-    </ul>
+    </div>
+    
+    <br>
+  
+  <div id="myModel" class="modal hide fade">      
+    <form action="{{ path('asignaciones_create') }}" method="post" novalidate>
+        <fieldset>
+        <label for="vehiculo"><b>Debe Asignar un Vehiculo para Aprobar la Solicitud:</b></label>
+        {{ form_widget(form_asig) }}
+        <input type="hidden" name="id_solicitud" id="id_solicitud">
+        </fieldset>
+          <a href="{{ path('asignaciones_create') }}">               
+                <button class="btn btn-primary" type="submit">Aprobar Solicitud</button>
+          </a>
+
+          <button class="btn btn-danger" type="button" onclick="$('#myModel, .window').hide()">Cerrar Ventana</button>
+          
+
+    </form>
+  </div> 
+    <script type="text/javascript">
+    $(document).ready(function(){
+       $('#tablalistax').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+            "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+            "aaSorting": [[5,'asc'],[3,'desc'],[4,'desc']],
+        } );    
+    })
+    $('.abrirModal').click(function(){         
+        $("#frontend_transportebundle_asignacionestype_idSolicitud").val($(this).data('idsolicitud'));
+        $("#id_solicitud").val($(this).data('idsolicitud'));
+        $('#myModel').modal() 
+
+    }); 
+    </script>
+
     </div>
     {% endblock %}

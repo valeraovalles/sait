@@ -10,6 +10,12 @@ use Administracion\UsuarioBundle\Entity\User;
 
 use Frontend\TransporteBundle\Entity\Solicitudes;
 use Frontend\TransporteBundle\Form\SolicitudesType;
+
+use Frontend\TransporteBundle\Entity\Vehiculos;
+use Frontend\TransporteBundle\Form\VehiculosType;
+use Frontend\TransporteBundle\Form\AsignacionesType;
+use Frontend\TransporteBundle\Entity\Asignaciones;
+
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -26,6 +32,10 @@ class SolicitudesController extends Controller
     public function indexAction($accion="none") //All por defecto
     {
         $em = $this->getDoctrine()->getManager();
+        
+        $entity_asig  = new Asignaciones();
+        $form_asig = $this->createForm(new AsignacionesType(), $entity_asig);
+
         if ($accion=="none"){
             $entities = $em->getRepository('TransporteBundle:Solicitudes')->findAll();
         }
@@ -38,6 +48,8 @@ class SolicitudesController extends Controller
         
         return $this->render('TransporteBundle:Solicitudes:index.html.twig', array(
             'entities' => $entities,
+            'entity_asig' => $entity_asig,
+            'form_asig'   => $form_asig->createView(),
             'accion' => $accion
         ));
     }
@@ -47,35 +59,48 @@ class SolicitudesController extends Controller
      */
     public function createAction(Request $request)
     {
+        //public $listaAsi=""; 
         $entity  = new Solicitudes();
         $form = $this->createForm(new SolicitudesType(), $entity);
         $form->bind($request);
-
-        //$fsol=$this->get('request')->request->get('fechaSolicitud');
-        //echo $fsol; exit;             
-        
-        //$datos = $form->getData();
-        //print_r($datos); exit;
-        //$entity->setFechaSolicitud('05-05-2014');
-        
-     
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $usuario = $em->getRepository('UsuarioBundle:User')->find($idusuario);
             $entity->setIdSolicitante($usuario);
-
             $str = \date("Y-m-d");
             $fechaactual = \DateTime::createFromFormat('Y-m-d', $str);                        
             $entity->setFechaSolicitud($fechaactual);
-
-            $entity->setEstatus("N");
-            //$entity->setjustificacionRechazo();
-        
+            $entity->setEstatus("N");        
             $em->persist($entity);
             $em->flush();
-
+            $this->get('session')->getFlashBag()->add('notice', 'EL REGISTRO FUE CREADO CON EXITO');
+            //CORREO
+            $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            
+            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+            ->setSubject('Solicitud de Transporte')     // we configure the title
+            ->setFrom(array($usuario->getUsername().'@telesurtv.net'))     // we configure the sender
+            ->setTo('transporte@telesurtv.net')    // we configure the recipient
+            ->setBody( $this->renderView(
+                        'TransporteBundle:Correo:solicitud_transporte.html.twig',
+                        array('perfil' => $perfil,
+                            'solicitud' => $entity,
+                            'status' => 'N',
+                        )
+                    ), 
+            'text/html');
+            /* PARA VER LA VISTA EN LA PAG
+             return $this->render('TransporteBundle:Correo:solicitud_transporte.html.twig', array(
+                            'solicitud' => $entity,
+                            'perfil' => $perfil,                            
+                        ));
+            */
+            $this->get('mailer')->send($message); 
+            //FIN CORREO
             return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $entity->getId())));
+        }else{            
+            $this->get('session')->getFlashBag()->add('alert', 'ERROR EN EL FORMULARIO PARA CREAR LA SOLICITUD');
         }
         return $this->render('TransporteBundle:Solicitudes:new.html.twig', array(
             'entity' => $entity,
@@ -91,10 +116,7 @@ class SolicitudesController extends Controller
     {
         $entity = new Solicitudes();
         $form   = $this->createForm(new SolicitudesType(), $entity);
-        //NO SE USARA LA LISTA DE USUARIOS PARA EL SOLICITANTE
-        //$em = $this->getDoctrine()->getManager();           
-        //$usuarios= $em->getRepository('UsuarioBundle:Perfil')->findAll();
-
+   
         return $this->render('TransporteBundle:Solicitudes:new.html.twig', array(
             'entity' => $entity,
           //  'usuarios' => $usuarios,
@@ -111,7 +133,7 @@ class SolicitudesController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TransporteBundle:Solicitudes')->find($id);
-
+      
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Solicitudes entity.');
         }
@@ -119,7 +141,7 @@ class SolicitudesController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('TransporteBundle:Solicitudes:show.html.twig', array(
-            'entity'      => $entity,
+            'entity'      => $entity,            
             'delete_form' => $deleteForm->createView(),        ));
     }
 
@@ -129,22 +151,28 @@ class SolicitudesController extends Controller
      */
     public function editAction($id)
     {
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TransporteBundle:Solicitudes')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('La solicitud consultada no existe.');
+            throw $this->createNotFoundException('La solicitud no existe.');
         }
 
         $editForm = $this->createForm(new SolicitudesType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('TransporteBundle:Solicitudes:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        if($this->get('security.context')->isGranted('ROLE_TRANSPORTE'))
+        {
+            return $this->render('TransporteBundle:Solicitudes:edit.html.twig', array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            ));
+        }else{
+            $this->get('session')->getFlashBag()->add('alert', 'NO TIENE PERMISOS PARA EDITAR LA SOLICITUD');
+            return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $id)));
+        }
     }
 
     /**
@@ -153,8 +181,8 @@ class SolicitudesController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+   
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('TransporteBundle:Solicitudes')->find($id);
 
         if (!$entity) {
@@ -168,10 +196,19 @@ class SolicitudesController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
+            $this->get('session')->getFlashBag()->add('notice', 'LA SOLICITUD FUE MODIFICADA CON EXITO');
+            return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $id)));
+        }else{
+            $errors = $editForm->getErrors();            
+            if (count($errors)>0){
+                $result['errors'] = array();
+                foreach ($errors as $error) {
+                    $result['errors'][] = $error->getMessage();
+                }
+            }
+            $this->get('session')->getFlashBag()->add('alert', 'ERROR AL VALIDAR FORMULARIO: '.$result['errors'][0]);
 
-            return $this->redirect($this->generateUrl('solicitudes_edit', array('id' => $id)));
         }
-
         return $this->render('TransporteBundle:Solicitudes:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
@@ -225,8 +262,84 @@ class SolicitudesController extends Controller
         $entity->setEstatus($accion);
         $em->persist($entity);
         $em->flush();
+        
+        $idSolicitante=$entity->getIdSolicitante();
+        $solicitante = $em->getRepository('UsuarioBundle:User')->find($idSolicitante);
 
-        return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $id)));
-                
+        //CORREO
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuario = $em->getRepository('UsuarioBundle:User')->find($idusuario);
+        $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+        
+        $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+        ->setSubject('Solicitud de Transporte')     // we configure the title
+        ->setFrom(array($usuario->getUsername().'@telesurtv.net'))     // we configure the sender
+        ->setTo(array('transporte@telesurtv.net', $solicitante->getUsername().'@telesurtv.net'))     //enviamos a trasnporte y al solicitante        
+        ->setBody( $this->renderView(
+                    'TransporteBundle:Correo:solicitud_transporte.html.twig',
+                    array('perfil' => $perfil,
+                        'solicitud' => $entity,
+                        'status' => $accion,
+                    )
+                ), 
+        'text/html');
+        $this->get('mailer')->send($message); 
+        //FIN CORREO
+        return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $id)));                
+    }
+
+    public function rechazarAction($id, Request $request){        
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('TransporteBundle:Solicitudes')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('La solicitud no existe.');
+        }
+        $justificar_form = $this->createForm(new SolicitudesType(), $entity);  
+     
+        if($request->getMethod()=='PUT'){            
+            $datos=$request->request->all();
+            $datos=$datos['form_solicitud']; 
+            if($datos['justificacionRechazo']==null){
+                $this->get('session')->getFlashBag()->add('alert', 'DEBE ESCRIBIR UNA JUSTIFICACION');
+                return $this->redirect($this->generateUrl('solicitudes_rechazar',array('id'=>$id)));
+            }            
+            $query = $em->createQuery('update TransporteBundle:Solicitudes s set s.justificacionRechazo=:justificacion, s.estatus=:estatus WHERE s.id = :idsol');
+            $query->setParameter('estatus', 'R');            
+            $query->setParameter('justificacion', $datos['justificacionRechazo']);
+            $query->setParameter('idsol', $id);
+            $query->execute();
+            $this->get('session')->getFlashBag()->add('alert', 'LA SOLICITUD FUE RECHAZADA CON EXITO');
+            return $this->redirect($this->generateUrl('solicitudes_status', array('id' => $id, 'accion' => 'R')));
+                     
+        }
+        return $this->render('TransporteBundle:Solicitudes:justificar.html.twig', array(
+            'entity'      => $entity,
+            'justificar_form'   => $justificar_form->createView(),
+            'id' => $id
+        ));        
+    }
+
+    public function ajaxListaUsuariosAction($val)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dql = "select u from UsuarioBundle:Perfil u where u.primerNombre like :nombre or u.primerApellido like :ape ";
+        $query = $em->createQuery($dql);
+        $query->setParameter('nombre','%'.$val.'%');
+        $query->setParameter('ape','%'.$val.'%');
+        $query->setMaxResults(10);
+        $usuarios = $query->getResult();             
+        return $this->render('TransporteBundle:Solicitudes:ajaxlistausuarios.html.twig',array('usuarios'=>$usuarios, 'tipo'=>'I'));
+
+    }
+    public function ajaxListaExternosAction($val)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dql = "select e from TransporteBundle:personalExterno e where e.nombre like :nombre ";
+        $query = $em->createQuery($dql);
+        $query->setParameter('nombre','%'.$val.'%');        
+        $query->setMaxResults(10);
+        $usuarios = $query->getResult();             
+        return $this->render('TransporteBundle:Solicitudes:ajaxlistausuarios.html.twig',array('usuarios'=>$usuarios, 'tipo'=>'E'));
+
     }
 }

@@ -57,11 +57,11 @@
                 <div class="widgetform">{{ entity.direccionHasta }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">Descripcion/Equipos</div>
+                <div class="labelform">Equipos/Implementos</div>
                 <div class="widgetform">{{ entity.descripcionEquipos }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">Datos de interes/Razon</div>
+                <div class="labelform">Motivo de la Solicitud</div>
                 <div class="widgetform">{{ entity.datosInteresRazon }}</div>
             </div>
             {% if  entity.justificacionRechazo %}
@@ -82,14 +82,22 @@
             </div>
         </tbody>
     </table>
-
-        <ul class="record_actions">
+</div>
+    <ul class="record_actions">
     <li>
         <a class="btn" href="{{ path('solicitudes') }}">IR AL LISTADO</a> | 
+        {% if entity.estatus=="N" %} 
         <a href="{{ path('solicitudes_edit', {'id': entity.id }) }}">
-            <button class="btn btn-primary" type="button">EDITAR</button> 
+            <button class="btn btn-primary" type="button">EDITAR</button> | 
         </a>
+        {% endif %}
+        {% if entity.estatus=="AP" or entity.estatus=="C" %} 
+        <a href="{{ path('asignaciones_showSolicitud', {'idSolicitud': entity.id }) }}">
+            <button class="btn btn-secundary" type="button">ASIGNACION</button> 
+        </a>
+        {% endif %}
     </li>
+    {#
     <li>
         <form action="{{ path('solicitudes_delete', { 'id': entity.id }) }}" metdod="post">
             <input type="hidden" name="_metdod" value="DELETE" />
@@ -97,5 +105,6 @@
             <button type="submit">Delete</button>
         </form>
     </li>
-</ul>
+    #}
+    </ul>
 {% endblock %}

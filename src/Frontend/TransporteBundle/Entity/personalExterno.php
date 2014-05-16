@@ -3,6 +3,7 @@
 namespace Frontend\TransporteBundle\Entity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * personalExterno
@@ -24,21 +25,21 @@ class personalExterno
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="cedula", type="string", unique=true, length=20)
      */
     private $cedula;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="nombre", type="string", length=255)
      */
     private $nombre;
 
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="telefono", type="string", length=50, nullable=true)
      */
     private $telefono;

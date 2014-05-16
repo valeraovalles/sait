@@ -12,4 +12,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class SolicitudesRepository extends EntityRepository
 {
+
+
 }
