@@ -1,0 +1,62 @@
+{% extends '::transporte.html.twig' %}
+
+{% block title %}Transporte{% endblock %}
+
+{% block titulobanner %}
+    TRANSPORTE
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">TRANSPORTE -  RECHAZAR SOLICITUD</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+ <div class="formShow">
+
+    <form name="justificar_form" action="{{ path('solicitudes_rechazar', { 'id': entity.id }) }}" method="post" {{ form_enctype(justificar_form) }}>
+        <input type="hidden" name="_method" value="PUT" />    
+            <div class="contenedorform">
+                <div class="labelform">Id:</div>
+                <div class="widgetform">{{ entity.id}}</div>
+            </div>
+
+            <div class="contenedorform">
+                <div class="labelform">Fecha de Solicitud:</div>
+                <div class="widgetform">{{ entity.fechaSolicitud|date('d-m-Y') }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Fecha de Salida:</div>
+                <div class="widgetform">{{ entity.fechaSalida|date('d-m-Y')}}</div>          
+            <div class="contenedorform">
+                <div class="labelform">Direccion Desde:</div>
+                <div class="widgetform">{{ entity.direccionDesde }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Direccion Hasta:</div>
+                <div class="widgetform">{{entity.direccionHasta }}</div>
+            </div>            
+            <div class="contenedorform">
+                <div class="labelform">Justificación de Rechazo:</div>
+                <div class="widgetform">{{ form_widget(justificar_form.justificacionRechazo) }}</div>
+            </div>         
+        <p>            
+            <button class="btn btn-danger" type="submit">RECHAZAR</button> | 
+            <a class="btn" href="{{ path('solicitudes') }}">IR AL LISTADO</a> 
+        </p>
+    </form>
+   
+ </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+solicitudes:
+    pattern:  /
+    defaults: { _controller: "TransporteBundle:Solicitudes:index" }
+
+solicitudes_por_status:
+    pattern:  /{accion}/filtro
+    defaults: { _controller: "TransporteBundle:Solicitudes:index" }
+
+solicitudes_status:
+    pattern:  /{id}/{accion}/status
+    defaults: { _controller: "TransporteBundle:Solicitudes:status" }
+
+solicitudes_ajaxusuarios:
+    pattern:  /{val}/ajaxusuarios
+    defaults: { _controller: TransporteBundle:Solicitudes:ajaxListaUsuarios }
+
+solicitudes_ajaxexternos:
+    pattern:  /{val}/ajaxexternos
+    defaults: { _controller: TransporteBundle:Solicitudes:ajaxListaExternos }
+
+solicitudes_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TransporteBundle:Solicitudes:show" }
+
+solicitudes_new:
+    pattern:  /new
+    defaults: { _controller: "TransporteBundle:Solicitudes:new" }
+
+solicitudes_create:
+    pattern:  /create
+    defaults: { _controller: "TransporteBundle:Solicitudes:create" }
+
+solicitudes_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TransporteBundle:Solicitudes:edit" }
+
+solicitudes_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TransporteBundle:Solicitudes:update" }
+    requirements: { _method: post|put }
+
+solicitudes_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TransporteBundle:Solicitudes:delete" }
+    requirements: { _method: post|delete }
+
+solicitudes_rechazar:
+    pattern:  /{id}/rechazar
+    defaults: { _controller: "TransporteBundle:Solicitudes:rechazar" }
