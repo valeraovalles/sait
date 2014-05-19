@@ -151,6 +151,9 @@
             </div>
             {% endif %}
 
+            <div class="listado_aplicaciones">
+              <a href="{{ path('telesur_personal') }}">PERSONAL TELESUR<br><img  src="{{ asset("images/logo.jpg") }}" data-placement="bottom" title="Personal" data-trigger="hover"></a>
+            </div>
 
 
    </div>
@@ -222,6 +225,7 @@
             
             {% if app.user %} 
             <div align="left">
+                <div><b>UNIDAD:</b> {% if usuario.nivelorganizacional.descripcion!=''%} {{ usuario.nivelorganizacional.descripcion | upper }} {% else %} N/A {% endif %}</div>
                 <div><b>USUARIO:</b> {{ app.user.username | upper }}</div>
                 <div><b>NOMBRE:</b> {{ usuario.primerNombre | upper }}</div>
                 <div><b>APELLIDO:</b> {{ usuario.primerApellido | upper }}</div>

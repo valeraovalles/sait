@@ -1,0 +1,51 @@
+{% extends '::telesur.html.twig' %}
+
+{% block title %}Inicio - Telesur{% endblock %}
+
+{% block titulobanner %}
+    LISTADO DE APLICACIONES
+{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+
+    <div class="titulo">LISTADO DE PERSONAL</div>
+
+    <table id="tablalistaespecial" style="font-size:12px;width:98%;">
+    	<thead>
+	    	<tr>
+		    	<th>NOMBRE</th>
+		    	<th>APELLIDO</th>
+		    	<th>EXTENSIÓN</th>
+		    	<th>DEPENDENCIA</th>
+	    	</tr>
+	    </thead>
+	    <tbody>
+	    	{% for p in perfil %}
+	    		<tr>
+	    			<td>{{ p.primerNombre }}</td>
+	    			<td>{{ p.primerApellido }}</td>
+	    			<td>{{ p.Extension}}</td>
+	    			<td>
+	    				{% if p.nivelorganizacional!=null %}
+	    					{{ p.nivelorganizacional.descripcion }}
+	    				{% else %}
+	    					N/A
+	    				{% endif %}
+	    			</td>
+	    		</tr>
+	    	{% endfor %}
+    	</tbody>
+    </table>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tablalistaespecial').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'asc'],[1,'asc']],
+            } );
+        })
+    </script>
+    <br><br>
+{% endblock %}
