@@ -225,7 +225,7 @@
             
             {% if app.user %} 
             <div align="left">
-                <div><b>UNIDAD:</b> {% if usuario.nivelorganizacional.descripcion!=''%} {{ usuario.nivelorganizacional.descripcion | upper }} {% else %} N/A {% endif %}</div>
+                <div><b>UNIDAD:</b> {% if usuario.nivelorganizacional!=null%} {{ usuario.nivelorganizacional.descripcion | upper }} {% else %} N/A {% endif %}</div>
                 <div><b>USUARIO:</b> {{ app.user.username | upper }}</div>
                 <div><b>NOMBRE:</b> {{ usuario.primerNombre | upper }}</div>
                 <div><b>APELLIDO:</b> {{ usuario.primerApellido | upper }}</div>
