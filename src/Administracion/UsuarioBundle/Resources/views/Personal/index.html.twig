@@ -18,12 +18,15 @@
 		    	<th>NOMBRE</th>
 		    	<th>APELLIDO</th>
 		    	<th>EXTENSIÓN</th>
-		    	<th>DEPENDENCIA</th>
+		    	<th style="width:30%;">DEPENDENCIA</th>
+		    	<th>USUARIO</th>
+		    	<th>¿CORREO?</th>
 	    	</tr>
 	    </thead>
 	    <tbody>
 	    	{% for p in perfil %}
 	    		<tr>
+	    			
 	    			<td>{{ p.primerNombre }}</td>
 	    			<td>{{ p.primerApellido }}</td>
 	    			<td>{{ p.Extension}}</td>
@@ -32,6 +35,14 @@
 	    					{{ p.nivelorganizacional.descripcion }}
 	    				{% else %}
 	    					N/A
+	    				{% endif %}
+	    			</td>
+	    			<td>{{ p.user.username }}{% if p.user.password==null %}@telesurtv.net{% endif %}</td>
+	    			<td>
+	    				{% if p.user.password==null %}
+	    					SÍ
+	    				{% else %}
+	    					NO
 	    				{% endif %}
 	    			</td>
 	    		</tr>

@@ -33,6 +33,10 @@
             </div>
             {% endif %}
 
+            <div class="listado_aplicaciones">
+              <a href="{{ path('telesur_personal') }}">PERSONAL TELESUR<br><img  src="{{ asset("images/logo.jpg") }}" data-placement="bottom" title="Personal" data-trigger="hover"></a>
+            </div>
+            
             {% if is_granted('ROLE_DISTRIBUCION') %}
             <div class="listado_aplicaciones">
                 <a href="{{ path('distribucion_homepage')}}">DISTRIBUCIÓN<br><img id="neto" src="{{ asset("images/apps/mapamundi.jpg") }}" data-placement="bottom" title="DISTRIBUCIÓN" data-trigger="hover"></a><br>
@@ -151,9 +155,7 @@
             </div>
             {% endif %}
 
-            <div class="listado_aplicaciones">
-              <a href="{{ path('telesur_personal') }}">PERSONAL TELESUR<br><img  src="{{ asset("images/logo.jpg") }}" data-placement="bottom" title="Personal" data-trigger="hover"></a>
-            </div>
+
 
 
    </div>
