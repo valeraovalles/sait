@@ -73,7 +73,7 @@
             <div class="widgetform" id="lista">                                                
                 <input type="text" id="buscar" placeholder="Buscar" title="Escriba los nombres para listar. Recuerde diferenciar  minúsculas de mayúsculas" autocomplete=off>                                                 
                 <div id="ajaxlistado"></div>
-                <select multiple name="asistentes_tmp" id="asistentes_tmp" title="Haga click para eliminar de la lista"></select>                
+                <select style="width:250px;height:100px;" multiple name="asistentes_tmp" id="asistentes_tmp" title="Haga click para eliminar de la lista"></select>                
                 <script type="text/javascript">
                 //ajax para buscar usuarios
                 $('#form_solicitud_asistentes').val('');
@@ -81,7 +81,7 @@
                   $('#buscar').keyup(function(){
 
                     if($('#buscar').val()==''){
-                        $('#ajaxlistado').html("");
+                        $('#ajaxlistado').html('');
                     }else{
                         if ($('#tipop').val()=="I"){
                             var ruta= "{{ path('solicitudes_ajaxusuarios',{'val':'val'}) }}";
@@ -142,11 +142,13 @@
                 }
                 //Si hacemos click sobre el select que se esta cargando, Borramos la opción seleccionada
                 $('#asistentes_tmp').click(function(){
-                    if (confirm("Quitar este usuario seleccionado?")){
-                        $("#asistentes_tmp option:selected").remove();    
-                        actAsistentes();
-                    }
-                    
+
+                    if($('#asistentes_tmp').val()!=null){
+                        if (confirm("Quitar este usuario seleccionado?")){
+                            $("#asistentes_tmp option:selected").remove();    
+                            actAsistentes();
+                        }
+                    } else alert('Listado vacío.')
                 });
                 </script>
             </div>

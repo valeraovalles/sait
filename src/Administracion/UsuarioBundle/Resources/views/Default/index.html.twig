@@ -11,7 +11,7 @@
     {{ parent() }}
 
     
-    <div class="titulo" style="cursor:pointer" data-toggle="modal" href="#myModal">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }}<br><div style="font-size:9px;">CONSULTAR DATOS DE USUARIO AQUÍ</div> </div>
+    <div class="titulo" style="cursor:pointer" data-toggle="modal" href="#myModal">BIENVENIDO {{ usuario.primerNombre | upper}} {{ usuario.primerApellido | upper }}</div>
 
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="alert alert-success">
@@ -25,168 +25,151 @@
         </div>
     {% endfor %}
     <br>
-    <div class="jquery" align="left">
-
-            {% if usuario.user.password!=null %}
-            <div class="listado_aplicaciones">
-                <a href="{{ path('cambioclave')}}">CAMBIAR CLAVE<br><img id="neto" src="{{ asset("images/CLAVE.jpg") }}" data-placement="bottom" title="CAMBIAR CLAVE" data-trigger="hover"></a><br>
-            </div>
-            {% endif %}
-
-            <div class="listado_aplicaciones">
-              <a href="{{ path('telesur_personal') }}">PERSONAL TELESUR<br><img  src="{{ asset("images/logo.jpg") }}" data-placement="bottom" title="Personal" data-trigger="hover"></a>
-            </div>
+<div class="row">
+    <div class="col-md-5" style="padding-left:40px;">
+        {% if app.user %} 
+        <div class="infousuario" align="left">
+            <div><b>NOMBRE:</b> {{ usuario.primerNombre | upper }} {{ usuario.segundoNombre | upper }}</div>
+            <div><b>APELLIDO:</b> {{ usuario.primerApellido | upper }} {{ usuario.segundoApellido | upper }}</div>
+            <div><b>CEDULA:</b> {{ usuario.cedula | upper }} </div>
+            <div><b>UNIDAD:</b> {% if usuario.nivelorganizacional!=null%} {{ usuario.nivelorganizacional.descripcion | upper }} {% else %} N/A {% endif %}</div>
+            <div><b>USUARIO:</b> {{ app.user.username | upper }}</div>
             
-            {% if is_granted('ROLE_DISTRIBUCION') %}
-            <div class="listado_aplicaciones">
-                <a href="{{ path('distribucion_homepage')}}">DISTRIBUCIÓN<br><img id="neto" src="{{ asset("images/apps/mapamundi.jpg") }}" data-placement="bottom" title="DISTRIBUCIÓN" data-trigger="hover"></a><br>
-            </div>
+            {% if usuario.user.fueradenomina==false %}
+                <div><b>SUELDO NORMAL:</b> {{ datos.sueldo_basico | number_format(2, ',', '.') }}</div>
+                <div><b>FECHA INGRESO:</b> {{ datos.fecha_ingreso | upper | date('d-m-Y') }}</div>
+                <div><b>FECHA NACIMIENTO:</b> {{ datos.fecha_nacimiento| upper | date('d-m-Y') }}</div>
+                <div><b>DEPENDENCIA:</b> {{ datos.nombre }}</div>
+                <div><b>CARGO:</b> {{ datos.descripcion_cargo }}</div>
             {% endif %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-7" style="padding-right:40px;border-left:1px double gray;">
+        <div class="row">
+            {% if usuario.user.password!=null %}
+              <div class="col-md-4">
+                    <a href="{{ path('cambioclave')}}">CAMBIAR CLAVE<br><img id="neto" src="{{ asset("images/CLAVE.jpg") }}" data-placement="bottom" title="CAMBIAR CLAVE" data-trigger="hover"></a>      
+              </div>
+            {% endif %}
+
+            <div class="col-md-4">
+                <a href="{{ path('telesur_personal') }}">PERSONAL TELESUR<br><img  src="{{ asset("images/logo.jpg") }}" data-placement="bottom" title="Personal" data-trigger="hover"></a>
+            </div>
+
+            {% if is_granted('ROLE_DISTRIBUCION') %}
+                <div class="col-md-4">
+                    <a href="{{ path('distribucion_homepage')}}">DISTRIBUCIÓN<br><img id="neto" src="{{ asset("images/apps/mapamundi.jpg") }}" data-placement="bottom" title="DISTRIBUCIÓN" data-trigger="hover"></a>      
+                </div>
+            {% endif %}   
 
             {% if is_granted('ROLE_LICENCIAS') or is_granted('ROLE_LICADMIN') %}
-            <div class="listado_aplicaciones">
-              <a href="{{ path('licencias_homepage')}}">LICENCIAS<br><img id="licencias" src="{{ asset("images/licencias/candado.png") }}" data-placement="bottom" title="LICENCIAS" data-trigger="hover"></a>
-            </div>
+                <div class="col-md-4">
+                    <a href="{{ path('licencias_homepage')}}">LICENCIAS<br><img id="licencias" src="{{ asset("images/licencias/candado.png") }}" data-placement="bottom" title="LICENCIAS" data-trigger="hover"></a>
+                </div>  
             {% endif %}
-            
-           {# <div class="listado_aplicaciones">
-              <a href="http://10.10.0.152/egroupware/login.php?phpgw_forward=%2Findex.php">PROYECTOS<br><img id="licencias" src="{{ asset("images/logo.png") }}" data-placement="bottom" title="DATOS DE USUARIO" data-trigger="hover"></a>
-            </div> #}
 
             {% if is_granted('ROLE_VISITAS') %}
-            <div class="listado_aplicaciones">
-              <a href="{{ path('control_visitas_usuario')}}">VISITAS<br><img id="licencias" src="{{ asset("images/User_male.png") }}" data-placement="bottom" title="VISITAS" data-trigger="hover"></a>
-            </div>
-            {% endif %}
-
-            {% if usuario.user.fueradenomina==false %}
-            <div class="listado_aplicaciones">
-              <a href="{{ path('neto_homepage')}}">NETO<br><img id="licencias" src="{{ asset("images/moneda.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a>
-            </div>
-            {% endif %}
-
-            {% if is_granted('ROLE_VIDEOTECA') %}
-            <div class="listado_aplicaciones">
-              <a href="{{ path('videoteca_homepage')}}">VIDEOTECA<br><img id="licencias" src="{{ asset("images/videoteca.jpg") }}" data-placement="bottom" title="VIDEOTECA" data-trigger="hover"></a>
-            </div>
-            {% endif %}
-
-
-            {% if is_granted('ROLE_NOMINA') %}
-            <div class="listado_aplicaciones">
-              <a href="{{ path('nomina_formalimentacion')}}">NÓMINA<br><img id="licencias" src="{{ asset("images/nomina.jpeg") }}" data-placement="bottom" title="TXT PRESTACIONES" data-trigger="hover"></a>
-            </div>
-            {% endif %}
-
-            {% if usuario.user.fueradenomina==false %}
-            <div class="listado_aplicaciones">
-              <a href="{{ path('constancia_homepage')}}">CONSTANCIA<br><img id="licencias" src="{{ asset("images/constancia.jpeg") }}" data-placement="bottom" title="CONSTANCIA DE TRABAJO" data-trigger="hover"></a>
-            </div>
-            {% endif %}
-
-            <div class="listado_aplicaciones">
-              <a href="{{ path('sit_homepage')}}">SIT<br><img id="licencias" src="{{ asset("images/sit.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
-            </div>
-
-            {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_DGE') or is_granted('ROLE_CONTENIDOS_TESORERIA') or is_granted('ROLE_CONTENIDOS_FINANZAS') or is_granted('ROLE_CONTENIDOS_RRHH') or is_granted('ROLE_CONTENIDOS_PTTO') or is_granted('ROLE_CONTENIDOS_APOYO') or is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_ASISTENTES') or is_granted('ROLE_CONTENIDOS_DIRECTORLINEA') %}
-                <div class="listado_aplicaciones">
-                  <a href="{{ path('datosproveedor')}}">CONTROL DE PAGOS<br><img id="licencias" src="{{ asset("images/dinero.jpg") }}" data-placement="bottom" title="CONTROL DE PAGOS" data-trigger="hover"></a>
+                <div class="col-md-4">
+                    <a href="{{ path('control_visitas_usuario')}}">VISITAS<br><img id="licencias" src="{{ asset("images/User_male.png") }}" data-placement="bottom" title="VISITAS" data-trigger="hover"></a>        
                 </div>
             {% endif %}
 
-            <div class="listado_aplicaciones">
-              <a href="javascript:void(0)" id="pe">ESTUDIOS<br><img src="{{ asset("images/estudio.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            {% if usuario.user.fueradenomina==false %}
+                <div class="col-md-4">
+                    <a href="{{ path('neto_homepage')}}">NETO<br><img id="licencias" src="{{ asset("images/moneda.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a> 
+                </div>
+            {% endif %}
+
+            {% if is_granted('ROLE_VIDEOTECA') %}
+                <div class="col-md-4">
+                    <a href="{{ path('videoteca_homepage')}}">VIDEOTECA<br><img id="licencias" src="{{ asset("images/videoteca.jpg") }}" data-placement="bottom" title="VIDEOTECA" data-trigger="hover"></a>
+                </div>
+            {% endif %}
+
+            {% if is_granted('ROLE_NOMINA') %}
+                <div class="col-md-4">
+                    <a href="{{ path('nomina_formalimentacion')}}">NÓMINA<br><img id="licencias" src="{{ asset("images/nomina.jpeg") }}" data-placement="bottom" title="TXT PRESTACIONES" data-trigger="hover"></a>
+                </div>
+            {% endif %}
+
+            {% if usuario.user.fueradenomina==false %}
+                <div class="col-md-4">
+                    <a href="{{ path('constancia_homepage')}}">CONSTANCIA<br><img id="licencias" src="{{ asset("images/constancia.jpeg") }}" data-placement="bottom" title="CONSTANCIA DE TRABAJO" data-trigger="hover"></a>
+                </div>
+            {% endif %}
+
+            <div class="col-md-4">
+                <a href="{{ path('sit_homepage')}}">SIT<br><img id="licencias" src="{{ asset("images/sit.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
 
-            <div class="listado_aplicaciones">
-              <a href="javascript:void(0)" id="mm">MAPAMUNDI<br><img  src="{{ asset("images/mapamundi.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_DGE') or is_granted('ROLE_CONTENIDOS_TESORERIA') or is_granted('ROLE_CONTENIDOS_FINANZAS') or is_granted('ROLE_CONTENIDOS_RRHH') or is_granted('ROLE_CONTENIDOS_PTTO') or is_granted('ROLE_CONTENIDOS_APOYO') or is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_ASISTENTES') or is_granted('ROLE_CONTENIDOS_DIRECTORLINEA') %}
+                <div class="col-md-4">
+                    <a href="{{ path('datosproveedor')}}">CONTROL DE PAGOS<br><img id="licencias" src="{{ asset("images/dinero.jpg") }}" data-placement="bottom" title="CONTROL DE PAGOS" data-trigger="hover"></a>
+                </div>
+            {% endif %}
+
+            <div class="col-md-4">
+                <a href="javascript:void(0)" id="pe">ESTUDIOS<br><img src="{{ asset("images/estudio.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            </div>
+
+            <div class="col-md-4">
+                <a href="javascript:void(0)" id="mm">MAPAMUNDI<br><img  src="{{ asset("images/mapamundi.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
 
             {% if is_granted('ROLE_CREATV') %}
-            <div class="listado_aplicaciones" id="ct">
-              <a href="javascript:void(0)">CREATV<br><img  src="{{ asset("images/creatv.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
-            </div>
+                <div class="col-md-4">
+                    <a href="javascript:void(0)">CREATV<br><img  src="{{ asset("images/creatv.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+                </div>
             {% endif %}
 
-
             {% if is_granted('ROLE_TRANSPORTE') %}
-            <div class="listado_aplicaciones" id="tp">
-              <a href="javascript:void(0)">TRANSPORTE<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
-            </div>
+                <div class="col-md-4">
+                    <a href="javascript:void(0)">TRANSPORTE<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+                </div>
             {% endif %}
 
             {# UNA SOLA JORNADA#}
-            
-            <div class="listado_aplicaciones">
-              <a href="{{ path('mercal_homepagenum',{'idjornada':7})}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            <div class="col-md-4">
+                <a href="{{ path('mercal_homepagenum',{'idjornada':7})}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
-            
-        
+
             {# DOS JORNADAS #}
             {#
-            <div class="listado_aplicaciones">
-              <a href="{{ path('mercal_numeracion',{'idjornada1':1,'idjornada2':2})}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            <div class="col-md-4">
+                <a href="{{ path('mercal_numeracion',{'idjornada1':1,'idjornada2':2})}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
             #}
 
             {#
             {% if is_granted('ROLE_ADMINISTRADOR') %}
-            <div class="listado_aplicaciones">
-              <a href="{{ path('transporte_homepage') }}">TRANSPORTE NUEVO<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            <div class="col-md-4">
+                <a href="{{ path('transporte') }}">TRANSPORTE NUEVO<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
             {% endif %}
             #}
-
+           
             {% if is_granted('ROLE_CONTRATOS')%}
-            <div class="listado_aplicaciones">
-              <a href="{{ path('contratos') }}">CONTRATOS<br><img  src="{{ asset("images/contratos.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
-            </div>
+                <div class="col-md-4">
+                    <a href="{{ path('contratos') }}">CONTRATOS<br><img  src="{{ asset("images/contratos.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+                </div>
             {% endif %}
 
             {% if is_granted('ROLE_DIRECTORIO') %}
-            <div class="listado_aplicaciones">
-              <a href="{{ path('directorio_homepage')}}">DIRECTORIO<br><img src="{{ asset("images/directorio.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
-            </div>
+                <div class="col-md-4">
+                    <a href="{{ path('directorio_homepage')}}">DIRECTORIO<br><img src="{{ asset("images/directorio.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
+                </div>
             {% endif %}
 
             {% if is_granted('ROLE_CUMPLEANIOS') %}
-            <div class="listado_aplicaciones">
-              <a href="{{ path('cumpleanios_personal')}}">CUMPLEAÑOS<br><img src="{{ asset("images/cumpleanios.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
-            </div>
+                <div class="col-md-4">
+                    <a href="{{ path('cumpleanios_personal')}}">CUMPLEAÑOS<br><img src="{{ asset("images/cumpleanios.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
+                </div>
             {% endif %}
 
-
-
-
-   </div>
-
-    <br>
-
-    <div style="clear:both;float:none;"></div>
-
-
-    <script type="text/javascript">
-
-        $(document).ready(function (){
-
-                $(".jquery").hide(1);
-
-                $(".jquery").fadeIn(3000);
-
-        });
-
-        $(document).ready(function () {
-            $('#info').gips({ 'theme': 'red', placement: 'right',text:{{ datos|raw }}, autoHide: true });
-        });
-
-    </script>
-
-   
-    <script>
-
-    $('#info').popover();
-
-    </script>
+        </div>
+    </div>
+</div>
 
     {# ESTA SECCION ES PARA LOGEUAR AUTOMÁTICAMENTES ESTAS APLICACIONES EN EL SISTEMA #}
     <SCRIPT TYPE="text/javascript">
@@ -216,36 +199,5 @@
         <input type="password" name="signin[password]" id="signin_password" value="{{ PASSPASS }}"/>
     </form>
     {# HASTA AQUÍ #}
-
-    {# modal #}
-    <div style="width:500px;left:52%;" id="myModal" class="modal hide fade" tabindex="5" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h3 id="myModalLabel">DATOS DE USUARIO</h3>
-         </div>
-        <div class="modal-body">
-            
-            {% if app.user %} 
-            <div align="left">
-                <div><b>UNIDAD:</b> {% if usuario.nivelorganizacional!=null%} {{ usuario.nivelorganizacional.descripcion | upper }} {% else %} N/A {% endif %}</div>
-                <div><b>USUARIO:</b> {{ app.user.username | upper }}</div>
-                <div><b>NOMBRE:</b> {{ usuario.primerNombre | upper }}</div>
-                <div><b>APELLIDO:</b> {{ usuario.primerApellido | upper }}</div>
-                <div><b>CEDULA:</b> {{ usuario.cedula | upper }} </div>
-                {% if usuario.user.fueradenomina==false %}
-                    <div><b>SUELDO NORMAL:</b> {{ datos.sueldo_basico | upper }}</div>
-                    <div><b>FECHA INGRESO:</b> {{ datos.fecha_ingreso | upper | date('d-m-Y') }}</div>
-                    <div><b>FECHA NACIMIENTO:</b> {{ datos.fecha_nacimiento| upper | date('d-m-Y') }}</div>
-                    <div><b>DEPENDENCIA:</b> {{ datos.nombre }}</div>
-                    <div><b>CARGO:</b> {{ datos.descripcion_cargo }}</div>
-                {% endif %}
-            {% endif %}
-            </div>
-                    
-        </div>
-        <div class="modal-footer">
-          <button class="btn" data-dismiss="modal">Cerrar</button>
-        </div>
-    </div>
 
 {% endblock %}

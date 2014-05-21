@@ -7,47 +7,41 @@ Purpose of the stylesheet follows.
 */
 
 body{
-background-color       :#efefef;
-margin-top             :0;
-font-family            :"Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size              :12px;
-font-family            :VERDANA;
-/*color                :#010341;*/
-color                  :black;
-line-height            :20px;
-
+	background-color       :#efefef;
+	margin-top             :0;
+	font-size              :12px;
+	font-family            :VERDANA;
+	color                  :black;
+	line-height            :20px;
 }
+
 .contenedorprincipal{
-	width: 900px;
+	width: 60%;
 }
 
 
 #contenedor{
-background-color       :white;
-width                  :900px;
-box-shadow: 0px 2px 0px 2px #999;
-
-
-
+	background-color       :white;
+	width                  60%;
+	box-shadow: 0px 2px 0px 2px #999;
 }
 
 #banner{
-width                  :900px;
-height                 :128px;
+	background-color: blue;
+	width                  60%;
 }
 
 .titulo{
-text-align             :center;
-font-weight            :bold;
-padding-right          :20px;
-padding-top            :35px;
-font-size              :20px;
-margin-bottom          :20px;
+	text-align             :center;
+	font-weight            :bold;
+	padding-right          :20px;
+	padding-top            :35px;
+	font-size              :20px;
+	margin-bottom          :20px;
 }
 
-
 label{
-font-weight            :bold;
+	font-weight            :bold;
 }
 
 .pie{
@@ -60,20 +54,19 @@ font-weight            :bold;
 	box-shadow			   : 0px 2px 0px 2px #999;
 }
 
-
 .alert{
-margin                 :5px 0 5px 0;
-background-color       :#fef780;
-color                  :red;
+	margin                 :5px 0 5px 0;
+	background-color       :#fef780;
+	color                  :red;
 
 }
 
 input[type='text']{
-width                  :180px;
+	width                  :180px;
 }
 
 input[type='password']{
-width                  :180px;
+	width                  :180px;
 }
 
 .titulo-banner{
@@ -85,70 +78,52 @@ width                  :180px;
 }
 
 a{
-color                  :#010341;
-text-decoration        :none;
+	color                  :#010341;
+	text-decoration        :none;
 }
 
 a                      :hover{
-color                  :blue;
-text-decoration        :underline;
+	color                  :blue;
+	text-decoration        :underline;
 }
 
 /* LISTADO DE APLICACIONES */
-.listado_aplicaciones{
-float                  :left;
-width                  :200px;
-height                 :130px;
-text-align             :center;
-margin-left            :73px;
+
+.col-md-4{
+	margin-bottom: 15px;
+}
+.row img{
+	height               :75px;
 }
 
-.listado_aplicaciones:hover{
-float                :left;
-width                :200px;
-height               :130px;
-text-align           :center;
-margin-left          :73px;
-background-color     :#F4F7FC;
-}
-
-.listado_aplicaciones:hover img{
-height               :90px;
-}
-
-.listado_aplicaciones img{
-height               :75px;
-}
-
-.listado_aplicaciones a{
-color                :#154E8A;
-font-size            :16px;
+.infousuario div{
+	margin-bottom: 10px
 }
 /* FIN LISTADO DE APLICACIONES */
 
 /* FORMULARIOS NEW */
 .form-contenedor .labels{
-float                  :left;
-height                 :auto;
-width                  :40%;
-text-align             :right;
-padding-right          :10px;
-font-weight            :bold;
+	float                  :left;
+	height                 :auto;
+	width                  :40%;
+	text-align             :right;
+	padding-right          :10px;
+	font-weight            :bold;
 }
 
 .form-contenedor{
-margin-bottom          :5px;
+	margin-bottom          :5px;
 }
 
 .form-contenedor .widgets{
-height                 :auto;
-text-align             :left;
+	height                 :auto;
+	text-align             :left;
 }
 
 .form-contenedor ul{
-text-align             :center;   
-color                  :red;
-font-weight            :bold;
+	text-align             :center;   
+	color                  :red;
+	font-weight            :bold;
 }
 /* FIN FORMULARIOS NEW */
 

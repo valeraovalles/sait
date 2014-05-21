@@ -2,8 +2,8 @@
 {# PERSONAL INTERNO #}
 {% if tipo=="I" %}
     {% for usu in usuarios %}
-        <div id="ajaxusuarios" onclick="armarlista('{{ usu.primerNombre}} {{ usu.primerApellido}}')">
-        	{{ usu.primerNombre}} {{ usu.primerApellido}}
+        <div id="ajaxusuarios" onclick="armarlista('{{ usu.primerNombre}} {{ usu.primerApellido}}, C.I: {{ usu.cedula}}')" style="cursor:pointer;">
+        	{{ usu.primerNombre}} {{ usu.primerApellido}},  C.I: {{ usu.cedula}}
         </div>
     {% endfor %}
 {% endif %}
