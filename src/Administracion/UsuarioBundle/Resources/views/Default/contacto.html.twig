@@ -1,21 +1,24 @@
-{% extends '::base.html.twig' %}
+{% extends '::administracion.html.twig' %}
 
 {% block title %}Contacto{% endblock %}
 
-{% block titulobanner %}
-    DATOS DE CONTACTO
+{% block titulo %}
+    <h2>DATOS DE CONTACTO</h2>
+{% endblock %}
+
+{% block ubicacion %}
+    PÁGINA PRINCIPAL -> DATOS DE CONTACTO
 {% endblock %}
 
 {% block body %}
-
-<div class="titulo">CONTACTO</div>
+	{{ parent() }}
 
 	<div>UNIDAD DE APLICACIONES Y DESARROLLO</div>
 	<div>EXTENSIONES 264 Y 339</div>
 
 	<br><br>
 
-	<a class="btn btn-primary" href="{{ path("usuario_homepage") }}">Volver</a>
+	<a class="btn btn-primary" href="{{ path("usuario_homepage") }}">VOLVER</a>
 
 	<br><br>
 
