@@ -7,7 +7,10 @@
 {% endblock %}
 
 {% block ubicacion %}
-    PÁGINA PRINCIPAL -> DATOS DE CONTACTO
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active"> DATOS DE CONTACTO</li>
+</ol>
 {% endblock %}
 
 {% block body %}

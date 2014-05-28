@@ -45,9 +45,9 @@ body{
 
 .ubicacion{
 	text-align: left;
-	padding-left: 25px;
 	font-weight: bold;
 	padding-top: 10px;
+	font-size: 10px;
 }
 
 .titulo{
