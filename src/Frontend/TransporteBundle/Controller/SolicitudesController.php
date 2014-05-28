@@ -321,11 +321,13 @@ class SolicitudesController extends Controller
 
     public function ajaxListaUsuariosAction($val)
     {
+        $val=strtoupper($val);
         $em = $this->getDoctrine()->getManager();
-        $dql = "select u from UsuarioBundle:Perfil u where u.primerNombre like :nombre or u.primerApellido like :ape ";
+        $dql = "select u from UsuarioBundle:Perfil u where u.primerNombre like :nombre or u.primerApellido like :ape or u.cedula like :ced ";
         $query = $em->createQuery($dql);
         $query->setParameter('nombre','%'.$val.'%');
         $query->setParameter('ape','%'.$val.'%');
+        $query->setParameter('ced','%'.$val.'%');
         $query->setMaxResults(10);
         $usuarios = $query->getResult();             
         return $this->render('TransporteBundle:Solicitudes:ajaxlistausuarios.html.twig',array('usuarios'=>$usuarios, 'tipo'=>'I'));
@@ -333,6 +335,7 @@ class SolicitudesController extends Controller
     }
     public function ajaxListaExternosAction($val)
     {
+        $val=strtoupper($val);
         $em = $this->getDoctrine()->getManager();
         $dql = "select e from TransporteBundle:personalExterno e where e.nombre like :nombre ";
         $query = $em->createQuery($dql);

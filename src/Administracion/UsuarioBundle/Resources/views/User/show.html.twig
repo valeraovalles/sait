@@ -57,9 +57,9 @@
 <br>
 
 <form action="{{ path('user_delete', { 'id': entity.user.id }) }}" method="post" onsubmit="return confirm('Seguro que desea eliminar')">
-    <a class="btn btn-primary" href="{{ path('user') }}">Ir a la lista</a> | 
-    <a class="btn btn-primary" href="{{ path('user_edit', { 'id': entity.user.id }) }}">Ir a editar</a> | 
-    <button class="btn btn-danger" type="submit">Borrar</button>
+    <a class="btn btn-default" href="{{ path('user') }}">IR A LA LISTA</a> | 
+    <a class="btn btn-default" href="{{ path('user_edit', { 'id': entity.user.id }) }}">IR A EDITAR</a> | 
+    <button class="btn btn-danger" type="submit">BORRAR</button>
     {{ form_widget(delete_form) }}
 </form>
 

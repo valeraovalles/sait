@@ -1,18 +1,23 @@
 {% extends '::telesur.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}Personal{% endblock %}
 
-{% block titulobanner %}
-    LISTADO DE APLICACIONES
+{% block titulo %}
+    PERSONAL TELESUR
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">PERSONAL TELESUR</li>
+</ol>
 {% endblock %}
 
 {% block body %}
 
     {{ parent() }}
 
-    <div class="titulo">LISTADO DE PERSONAL</div>
-
-    <table id="tablalistaespecial" style="font-size:12px;width:98%;">
+    <table id="tabladatatable">
     	<thead>
 	    	<tr>
 		    	<th>NOMBRE</th>
@@ -27,8 +32,8 @@
 	    	{% for p in perfil %}
 	    		<tr>
 	    			
-	    			<td>{{ p.primerNombre }}</td>
-	    			<td>{{ p.primerApellido }}</td>
+	    			<td>{{ p.primerNombre | capitalize }}</td>
+	    			<td>{{ p.primerApellido | capitalize }}</td>
 	    			<td>{{ p.Extension}}</td>
 	    			<td>
 	    				{% if p.nivelorganizacional!=null %}
@@ -50,9 +55,11 @@
     	</tbody>
     </table>
 
+    <br><br><a class="btn btn-default" href="{{ path("usuario_homepage") }}">VOLVER</a>
+
     <script type="text/javascript">
         $(document).ready(function(){
-           $('#tablalistaespecial').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
                 "aaSorting": [[0,'asc'],[1,'asc']],
             } );

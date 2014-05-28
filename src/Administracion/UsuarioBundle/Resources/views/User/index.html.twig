@@ -22,7 +22,7 @@
                 <th>Apellidos</th>
                 <th>Cedula</th>
                 <th>Estatus</th>
-                <th>Id</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -41,8 +41,8 @@
                     {% endif %}
                 </td>
                 <td>
-                        <a href="{{ path('user_show', { 'id': entity.user.id }) }}"><span class="icon-search"></a>
-                        <a href="{{ path('user_edit', { 'id': entity.user.id }) }}"><span class="icon-edit"></a>
+                        <a href="{{ path('user_show', { 'id': entity.user.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
+                        <a href="{{ path('user_edit', { 'id': entity.user.id }) }}"><span class="glyphicon glyphicon-pencil"></a>
            
                 </td>
             </tr>
@@ -52,7 +52,7 @@
 
     <br><br>
 
-    <a class="btn btn-primary" href="{{ path('user_new') }}">Nuevo</a>
+    <a class="btn btn-default" href="{{ path('user_new') }}">NUEVO</a>
 
     <br><br>
 

@@ -71,20 +71,20 @@
 
 <br>
 
-<button class="btn btn-primary" type="submit">Editar</button> | 
+<button class="btn btn-primary" type="submit">EDITAR</button> | 
 
         <a class="btn btn-default" href="{{ path('user') }}">
-            Ir a la lista
+            IR A LA LISTA
         </a> | 
         <a class="btn btn-default" href="{{ path('rol_new') }}">
-            Ir a nuevo rol
+            IR A NUEVO ROL
         </a>
 
 </form>
 
 <form action="{{ path('rol_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('Seguro que desea eliminar')">
     {{ form_widget(delete_form) }}
-    <button class="btn btn-danger" type="submit">Borrar</button>
+    <button class="btn btn-danger" type="submit">BORRAR</button>
 </form>
 <br>
 
