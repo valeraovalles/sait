@@ -9,9 +9,10 @@
 {% block body -%}
     {{ parent() }}
     
-    {#
+    
     <div class="titulojornada">JORNADA {{ jornada.nombrejornada|upper }}</div>
 
+    {#
     <div id="numeracion"> 
         <div class="numero">{{ datos.numero }}</div>
         <div class="nombre">SUSPENDIDA</div>
@@ -24,6 +25,7 @@
         <div class="nombre">{{ datos.nombre }}</div>
         <div class="cedula">{{ datos.cedula }}</div>
     </div>
+    
 
     <input type="hidden" id="idjornada" value="{{ jornada.id }}">
 
