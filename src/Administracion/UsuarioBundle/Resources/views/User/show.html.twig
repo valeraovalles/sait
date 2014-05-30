@@ -1,29 +1,22 @@
 {% extends '::administracion.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}Consultar usuario{% endblock %}
 
-{% block titulobanner %}
-    ADMINISTRACIÓN DE USUARIOS
+{% block titulo %}
+    CONSULTAR USUARIO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+    <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+    <li><a href="{{ path("user") }}">LISTA DE USUARIOS</a></li>
+    <li class="active">CONSULTAR USUARIO</li>
+</ol>
 {% endblock %}
 
 {% block body %}
 
 {{ parent() }}
-
-<div class="titulo">DATOS DE USUARIO</div>
-    {% if app.session.started %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="Greenflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-
-        {% for flashMessage in app.session.flashbag.get('alert') %}
-            <div class="Redflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {% endif %}
 
     <div class="formShow">
         <div class="contenedorform">

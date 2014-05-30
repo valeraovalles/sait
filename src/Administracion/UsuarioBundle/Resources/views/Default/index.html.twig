@@ -14,6 +14,42 @@
 
 {% block body %}
 
+
+<script type="text/javascript"> 
+$(document).ready(function(){
+    $(".xxx").mouseenter(function() {
+        $(".ejemplo_img_cont", this).stop().animate({ top:'390px' },{ queue:false, duration:300 });
+    });
+    $(".xxx").mouseleave(function() {
+        $(".ejemplo_img_cont", this).stop().animate({ top:'450px' },{ queue:false, duration:300 });
+    });
+});
+</script>
+<style type="text/css">
+
+.ejemplo_img_cont {
+    float:left;
+    position:absolute;
+    background:#000;
+    height:60px;
+    line-height:25px;
+    width:560px;
+    padding:20px;
+    opacity:.8; 
+    filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+    -MS-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    top:450px;
+    left:0px;
+    color:#FFF;
+    font-size:18px;
+    font-family:"Lucida Grande", Arial, sans-serif;
+    z-index:10;
+}
+
+</style>
+
+
+
     {{ parent() }}
 
     {% for flashMessage in app.session.flashbag.get('notice') %}
@@ -50,121 +86,122 @@
     <div class="col-md-7" style="padding-right:40px;">
         <div class="row">
             {% if usuario.user.password!=null %}
-              <div class="col-md-4">
-                    <a href="{{ path('cambioclave')}}">CAMBIAR CLAVE<br><img id="neto" src="{{ asset("images/CLAVE.jpg") }}" data-placement="bottom" title="CAMBIAR CLAVE" data-trigger="hover"></a>      
+              <div class="col-sm-6 col-md-4">
+                    <a href="{{ path('cambioclave')}}">CAMBIAR CLAVE<br><img class="xxx" id="neto" src="{{ asset("images/CLAVE.jpg") }}" data-placement="bottom" title="CAMBIAR CLAVE" data-trigger="hover"></a>      
               </div>
+
             {% endif %}
 
-            <div class="col-md-4">
-                <a href="{{ path('telesur_personal') }}">PERSONAL TELESUR<br><img  src="{{ asset("images/logo.jpg") }}" data-placement="bottom" title="Personal" data-trigger="hover"></a>
+            <div class="col-sm-6 col-md-4">
+                <a href="{{ path('telesur_personal') }}">PERSONAL<br><img  src="{{ asset("images/logo.jpg") }}" data-placement="bottom" title="Personal" data-trigger="hover"></a>
             </div>
 
             {% if is_granted('ROLE_DISTRIBUCION') %}
-                <div class="col-md-4">
-                    <a href="{{ path('distribucion_homepage')}}">DISTRIBUCIÓN<br><img id="neto" src="{{ asset("images/apps/mapamundi.jpg") }}" data-placement="bottom" title="DISTRIBUCIÓN" data-trigger="hover"></a>      
+                <div class="col-sm-6 col-md-4">
+                    <a href="{{ path('distribucion_homepage')}}">DISTRIBUCIÓN<br><img class="img-circle" id="neto" src="{{ asset("images/apps/mapamundi.jpg") }}" data-placement="bottom" title="DISTRIBUCIÓN" data-trigger="hover"></a>      
                 </div>
             {% endif %}   
 
             {% if is_granted('ROLE_LICENCIAS') or is_granted('ROLE_LICADMIN') %}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <a href="{{ path('licencias_homepage')}}">LICENCIAS<br><img id="licencias" src="{{ asset("images/licencias/candado.png") }}" data-placement="bottom" title="LICENCIAS" data-trigger="hover"></a>
                 </div>  
             {% endif %}
 
             {% if is_granted('ROLE_VISITAS') %}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <a href="{{ path('control_visitas_usuario')}}">VISITAS<br><img id="licencias" src="{{ asset("images/User_male.png") }}" data-placement="bottom" title="VISITAS" data-trigger="hover"></a>        
                 </div>
             {% endif %}
 
             {% if usuario.user.fueradenomina==false %}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <a href="{{ path('neto_homepage')}}">NETO<br><img id="licencias" src="{{ asset("images/moneda.jpg") }}" data-placement="bottom" title="RECIBO DE PAGO" data-trigger="hover"></a> 
                 </div>
             {% endif %}
 
             {% if is_granted('ROLE_VIDEOTECA') %}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <a href="{{ path('videoteca_homepage')}}">VIDEOTECA<br><img id="licencias" src="{{ asset("images/videoteca.jpg") }}" data-placement="bottom" title="VIDEOTECA" data-trigger="hover"></a>
                 </div>
             {% endif %}
 
             {% if is_granted('ROLE_NOMINA') %}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <a href="{{ path('nomina_formalimentacion')}}">NÓMINA<br><img id="licencias" src="{{ asset("images/nomina.jpeg") }}" data-placement="bottom" title="TXT PRESTACIONES" data-trigger="hover"></a>
                 </div>
             {% endif %}
 
             {% if usuario.user.fueradenomina==false %}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <a href="{{ path('constancia_homepage')}}">CONSTANCIA<br><img id="licencias" src="{{ asset("images/constancia.jpeg") }}" data-placement="bottom" title="CONSTANCIA DE TRABAJO" data-trigger="hover"></a>
                 </div>
             {% endif %}
 
-            <div class="col-md-4">
+            <div class="col-sm-6 col-md-4">
                 <a href="{{ path('sit_homepage')}}">SIT<br><img id="licencias" src="{{ asset("images/sit.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
 
             {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_DGE') or is_granted('ROLE_CONTENIDOS_TESORERIA') or is_granted('ROLE_CONTENIDOS_FINANZAS') or is_granted('ROLE_CONTENIDOS_RRHH') or is_granted('ROLE_CONTENIDOS_PTTO') or is_granted('ROLE_CONTENIDOS_APOYO') or is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_ASISTENTES') or is_granted('ROLE_CONTENIDOS_DIRECTORLINEA') %}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <a href="{{ path('datosproveedor')}}">CONTROL DE PAGOS<br><img id="licencias" src="{{ asset("images/dinero.jpg") }}" data-placement="bottom" title="CONTROL DE PAGOS" data-trigger="hover"></a>
                 </div>
             {% endif %}
 
-            <div class="col-md-4">
+            <div class="col-sm-6 col-md-4">
                 <a href="javascript:void(0)" id="pe">ESTUDIOS<br><img src="{{ asset("images/estudio.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-sm-6 col-md-4">
                 <a href="javascript:void(0)" id="mm">MAPAMUNDI<br><img  src="{{ asset("images/mapamundi.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
 
             {% if is_granted('ROLE_CREATV') %}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <a href="javascript:void(0)">CREATV<br><img  src="{{ asset("images/creatv.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
                 </div>
             {% endif %}
 
             {% if is_granted('ROLE_TRANSPORTE') %}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <a href="javascript:void(0)">TRANSPORTE<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
                 </div>
             {% endif %}
 
             {# UNA SOLA JORNADA#}
-            <div class="col-md-4">
+            <div class="col-sm-6 col-md-4">
               <a href="{{ path('mercal_homepagenum',{'idjornada':8})}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
 
             {# DOS JORNADAS #}
             {#
-            <div class="col-md-4">
+            <div class="col-sm-6 col-md-4">
                 <a href="{{ path('mercal_numeracion',{'idjornada1':1,'idjornada2':2})}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
             #}
 
             {#
             {% if is_granted('ROLE_ADMINISTRADOR') %}
-            <div class="col-md-4">
+            <div class="col-sm-6 col-md-4">
                 <a href="{{ path('transporte') }}">TRANSPORTE NUEVO<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
             {% endif %}
             #}
            
             {% if is_granted('ROLE_CONTRATOS')%}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <a href="{{ path('contratos') }}">CONTRATOS<br><img  src="{{ asset("images/contratos.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
                 </div>
             {% endif %}
 
             {% if is_granted('ROLE_DIRECTORIO') %}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <a href="{{ path('directorio_homepage')}}">DIRECTORIO<br><img src="{{ asset("images/directorio.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
                 </div>
             {% endif %}
 
             {% if is_granted('ROLE_CUMPLEANIOS') %}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <a href="{{ path('cumpleanios_personal')}}">CUMPLEAÑOS<br><img src="{{ asset("images/cumpleanios.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
                 </div>
             {% endif %}
@@ -201,5 +238,9 @@
         <input type="password" name="signin[password]" id="signin_password" value="{{ PASSPASS }}"/>
     </form>
     {# HASTA AQUÍ #}
+
+
+
+
 
 {% endblock %}

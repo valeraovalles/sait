@@ -6,6 +6,9 @@ Description            :
 Purpose of the stylesheet follows.
 */
 
+
+
+
 *{
 	font-size:14px;
 	font-family: arial;
@@ -21,13 +24,9 @@ body{
 
 .contenedorprincipal{
 	width: 60%;
-}
-
-#contenedor{
-	background-color       :white;
-	width                  60%;
 	box-shadow: 0px 2px 0px 2px #999;
 }
+
 
 #banner{
 	width                  60%;
@@ -110,7 +109,7 @@ a                      :hover{
 
 	.formShow{
 		border:1px solid gray ;
-		width: 60%;
+		width: 70%;
 		padding: 20px;
 		margin-bottom: 10px;
 		border:5px outset;
@@ -127,8 +126,12 @@ a                      :hover{
 		width: 200px;
 	}
 
-	.formShow .contenedorform input[type="checkbox"]{
-		margin-bottom: 10px;
+	.formShow .contenedorform input[type="url"]{
+		width: 200px;
+	}
+
+	.formShow .contenedorform input[type="email"]{
+		width: 200px;
 	}
 
 	.formShow textarea{

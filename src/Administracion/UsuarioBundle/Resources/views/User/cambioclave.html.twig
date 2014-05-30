@@ -7,20 +7,24 @@
 {% endblock %}
 
 {% block ubicacion %}
-    PÁGINA PRINCIPAL -> CAMBIO DE CLAVE
+<ol class="breadcrumb">
+    <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+    <li class="active">CAMBIO CLAVE</li>
+</ol>
 {% endblock %}
+
 
 {% block body %}
 
     {{ parent() }}
 
     {% if form_errors(form.claveanterior) or form_errors(form.clavenueva) or form_errors(form.claveconfirmacion) %}
-    <div class="alert alert-danger errores" style="width:60%;">
-        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
-        <div>{{ form_errors(form.claveanterior) }}</div>
-        <div>{{ form_errors(form.clavenueva) }}</div>
-        <div>{{ form_errors(form.claveconfirmacion) }}</div>
-    </div>
+        <div class="alert alert-danger errores" style="width:60%;">
+            <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+            <div>{{ form_errors(form.claveanterior) }}</div>
+            <div>{{ form_errors(form.clavenueva) }}</div>
+            <div>{{ form_errors(form.claveconfirmacion) }}</div>
+        </div>
     {% endif %}
 
 
