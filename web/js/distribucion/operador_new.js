@@ -7,7 +7,7 @@ $(document).ready(function () {
    //AJAX DE CAMPOS QUE CAMBIAN DEPENDIENDO DEL TIPO DE OPERADOR
    $("#frontend_distribucionbundle_operadortype_tipooperador").change(function(evento){
       evento.preventDefault();
-
+      alert("sss")
         //televisoraabierta
         if($("#frontend_distribucionbundle_operadortype_tipooperador").val()=='3'){
             $("#usuario").html("Canal");
