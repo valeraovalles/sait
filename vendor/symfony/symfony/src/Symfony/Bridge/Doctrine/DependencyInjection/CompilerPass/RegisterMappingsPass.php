@@ -12,8 +12,6 @@
 namespace Symfony\Bridge\Doctrine\DependencyInjection\CompilerPass;
 
 use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use Symfony\Component\HttpKernel\Kernel;
-
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -158,7 +156,7 @@ abstract class RegisterMappingsPass implements CompilerPassInterface
      *
      * @param ContainerBuilder $container
      *
-     * @return boolean whether this compiler pass really should register the mappings
+     * @return bool    whether this compiler pass really should register the mappings
      */
     protected function enabled(ContainerBuilder $container)
     {

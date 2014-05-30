@@ -39,7 +39,7 @@ class LazyServiceProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @param boolean $lazyLoad whether to try lazy-loading the service with a proxy
+     * @param bool    $lazyLoad whether to try lazy-loading the service with a proxy
      *
      * @return stdClass A stdClass instance.
      */
@@ -50,9 +50,9 @@ class LazyServiceProjectServiceContainer extends Container
 
             return $this->services['foo'] = new stdClass_c1d194250ee2e2b7d2eab8b8212368a8(
                 function (& $wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) use ($container) {
-                    $proxy->setProxyInitializer(null);
-
                     $wrappedInstance = $container->getFooService(false);
+
+                    $proxy->setProxyInitializer(null);
 
                     return true;
                 }
@@ -155,7 +155,7 @@ class stdClass_c1d194250ee2e2b7d2eab8b8212368a8 extends \stdClass implements \Pr
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setProxyInitializer(\Closure $initializer = null)
     {
@@ -163,7 +163,7 @@ class stdClass_c1d194250ee2e2b7d2eab8b8212368a8 extends \stdClass implements \Pr
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getProxyInitializer()
     {
@@ -171,7 +171,7 @@ class stdClass_c1d194250ee2e2b7d2eab8b8212368a8 extends \stdClass implements \Pr
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function initializeProxy()
     {
@@ -179,7 +179,7 @@ class stdClass_c1d194250ee2e2b7d2eab8b8212368a8 extends \stdClass implements \Pr
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isProxyInitialized()
     {
@@ -187,12 +187,11 @@ class stdClass_c1d194250ee2e2b7d2eab8b8212368a8 extends \stdClass implements \Pr
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getWrappedValueHolderValue()
     {
         return $this->valueHolder5157dd96e88c0;
     }
-
 
 }

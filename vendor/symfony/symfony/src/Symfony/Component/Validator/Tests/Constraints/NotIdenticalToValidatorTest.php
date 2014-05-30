@@ -13,7 +13,6 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 
 use Symfony\Component\Validator\Constraints\NotIdenticalTo;
 use Symfony\Component\Validator\Constraints\NotIdenticalToValidator;
-use Symfony\Component\Validator\Tests\Constraints\AbstractComparisonValidatorTestCase;
 
 /**
  * @author Daniel Holmes <daniel@danielholmes.org>
@@ -31,7 +30,7 @@ class NotIdenticalToValidatorTest extends AbstractComparisonValidatorTestCase
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function provideValidComparisons()
     {
@@ -40,12 +39,13 @@ class NotIdenticalToValidatorTest extends AbstractComparisonValidatorTestCase
             array('2', 2),
             array('22', '333'),
             array(new \DateTime('2001-01-01'), new \DateTime('2000-01-01')),
-            array(new \DateTime('2000-01-01'), new \DateTime('2000-01-01'))
+            array(new \DateTime('2000-01-01'), new \DateTime('2000-01-01')),
+            array(null, 1),
         );
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function provideInvalidComparisons()
     {

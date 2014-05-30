@@ -34,7 +34,7 @@
     <h3>APLICACIONES TELESUR</h3>
     
 
-      <form class="form-signin" action="{{ path('usuario_login_check') }}" method="post">
+      <form novalidate class="form-signin" action="{{ path('usuario_login_check') }}" method="post">
         <h4 class="form-signin-heading">INGRESE SUS DATOS</h4>
         <input required type="text" id="username" name="_username" class="input-block-level"placeholder="Ingrese usuario..." data-placement="right" data-content="Puede ingresar el mismo usuario y clave de su correo Zimbra. Ante cualquier inconveniente comunicarse con la extensión 264/339." title="USUARIO">
         <input required type="password" name="_password" class="input-block-level" placeholder="Ingrese clave...">
