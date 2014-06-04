@@ -37,10 +37,10 @@
                 <td>{{ entity.tipooperador.operador }}</td>
                 <td align='center'>{% if entity.estatus == 1 %} Activo {% else %} <div style="background-color:yellow;color:red;">Inactivo<div> {% endif %}</td>
                 <td>
-                        <a href="{{ path('operador_show', { 'id': entity.id }) }}"><span class="icon-search"></a>
+                        <a href="{{ path('operador_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
          
                         {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
-                        <a href="{{ path('operador_edit', { 'id': entity.id }) }}"><span class="icon-edit"></a>
+                        <a href="{{ path('operador_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></a>
                         {% endif %}
                 </td>
             </tr>

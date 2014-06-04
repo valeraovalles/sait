@@ -153,9 +153,10 @@ class OperadorController extends Controller
         $datos=$request->request->all();
         $datos=$datos['frontend_distribucionbundle_operadortype'];
 
-        if(!isset($datos['pais'])){
+        if($datos['pais']==null){
             $id=0;
         } else $id=$datos['pais'];
+
 
         $entity  = new Operador();
         $form = $this->createForm(new OperadorType($id), $entity);

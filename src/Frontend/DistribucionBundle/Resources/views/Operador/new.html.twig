@@ -23,25 +23,25 @@
                 <div class="formShow">
 
                     <div class="contenedorform">
-                        <div>{{ form_errors(form.nombre) }}</div>
+                        <div class="text-danger">{{ form_errors(form.nombre) }}</div>
                         <div class="labelform">Operador:</div>
                         <div class="widgetform">{{ form_widget(form.nombre) }}</div>
                     </div>
                     
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.tipooperador) }}</div>
+                        <div class="text-danger">{{ form_errors(form.tipooperador) }}</div>
                         <div class="labelform">Tipo operador:</div>
                         <div class="widgetform">{{ form_widget(form.tipooperador) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.pais) }}</div>
+                        <div class="text-danger">{{ form_errors(form.pais) }}</div>
                         <div class="labelform">Pais:</div>
                         <div class="widgetform">{{ form_widget(form.pais) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.estado) }}</div>
+                        <div class="text-danger">{{ form_errors(form.estado) }}</div>
                         <div class="labelform">Estado:</div>
                         <div id="estado">
                             <div class="widgetform">{{ form_widget(form.estado) }}</div>
@@ -57,19 +57,19 @@
                     </div>
 
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.cobertura) }}</div>
+                        <div class="text-danger">{{ form_errors(form.cobertura) }}</div>
                         <div class="labelform">Cobertura:</div>
                         <div class="widgetform">{{ form_widget(form.cobertura) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.zona) }}</div>
+                        <div class="text-danger">{{ form_errors(form.zona) }}</div>
                         <div class="labelform">Zona:</div>
                         <div class="widgetform">{{ form_widget(form.zona) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.numeroabonados) }}</div>
+                        <div class="text-danger">{{ form_errors(form.numeroabonados) }}</div>
                         <div class="labelform" id="usuario">Nro. Abonados:</div>
                         <div class="widgetform">{{ form_widget(form.numeroabonados) }}</div>
                     </div>
@@ -87,43 +87,43 @@
                     </div>
 
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.direccion) }}</div>
+                        <div class="text-danger">{{ form_errors(form.direccion) }}</div>
                         <div class="labelform">Direccion:</div>
                         <div class="widgetform">{{ form_widget(form.direccion) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.observacion) }}</div>
+                        <div class="text-danger">{{ form_errors(form.observacion) }}</div>
                         <div class="labelform">Observacion:</div>
                         <div class="widgetform">{{ form_widget(form.observacion) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.paquete) }}</div>
+                        <div class="text-danger">{{ form_errors(form.paquete) }}</div>
                         <div class="labelform">Paquete:</div>
                         <div class="widgetform">{{ form_widget(form.paquete) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.urlweb) }}</div>
+                        <div class="text-danger">{{ form_errors(form.urlweb) }}</div>
                         <div class="labelform">Url Web:</div>
                         <div class="widgetform">{{ form_widget(form.urlweb) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.urlfacebook) }}</div>
+                        <div class="text-danger">{{ form_errors(form.urlfacebook) }}</div>
                         <div class="labelform"><img width="25px" src="{{ asset('images/facebook.png') }}"></div>
                         <div class="widgetform">{{ form_widget(form.urlfacebook) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.urltwitter) }}</div>
+                        <div class="text-danger">{{ form_errors(form.urltwitter) }}</div>
                         <div class="labelform"><img width="22px" src="{{ asset('images/twitter.png') }}"></div>
                         <div class="widgetform">{{ form_widget(form.urltwitter) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div class="text-warning">{{ form_errors(form.estatus) }}</div>
+                        <div class="text-danger">{{ form_errors(form.estatus) }}</div>
                         <div class="labelform">Activo:</div>
                         <div class="widgetform">{{ form_widget(form.estatus, { 'attr': {'checked': 'checked'} }) }}</div>
                     </div>
@@ -135,7 +135,7 @@
             <div id="comodato">
                 <div class="formShow">
                     <div class="contenedorform">
-                        <div>{{ form_errors(form.comodato.fechainicioacuerdo) }}</div>
+                        <div class="text-danger">{{ form_errors(form.comodato.fechainicioacuerdo) }}</div>
                         <div class="labelform">Fecha Inicio Transmisión:</div>
                         <div class="widgetform">{{ form_widget(form.comodato.fechainicioacuerdo) }}</div>
                     </div>
@@ -178,31 +178,31 @@
             <div id="representante">
                 <div class="formShow">
                     <div class="contenedorform">
-                        <div>{{ form_errors(form2.nombres) }}</div>
+                        <div class="text-danger">{{ form_errors(form2.nombres) }}</div>
                         <div class="labelform">Nombres:</div>
                         <div class="widgetform">{{ form_widget(form2.nombres) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div>{{ form_errors(form2.apellidos) }}</div>
+                        <div class="text-danger">{{ form_errors(form2.apellidos) }}</div>
                         <div class="labelform">Apellidos:</div>
                         <div class="widgetform">{{ form_widget(form2.apellidos) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div>{{ form_errors(form2.cargo) }}</div>
+                        <div class="text-danger">{{ form_errors(form2.cargo) }}</div>
                         <div class="labelform">Cargo:</div>
                         <div class="widgetform">{{ form_widget(form2.cargo) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div>{{ form_errors(form2.correo) }}</div>
+                        <div class="text-danger">{{ form_errors(form2.correo) }}</div>
                         <div class="labelform">Correo:</div>
                         <div class="widgetform">{{ form_widget(form2.correo) }}</div>
                     </div>
 
                     <div class="contenedorform">
-                        <div>{{ form_errors(form2.telefono1) }}</div>
+                        <div class="text-danger">{{ form_errors(form2.telefono1) }}</div>
                         <div class="labelform">Telefono1:</div>
                         <div class="widgetform">{{ form_widget(form2.telefono1) }}</div>
                     </div>
@@ -228,8 +228,8 @@
             </div>
 
         <br>
-       <button class="btn" type="submit">Crear</button> |
-        <a class="btn" href="{{ path('operador') }}">Volver</a>
+       <button class="btn btn-primary" type="submit">CREAR</button> |
+        <a class="btn btn-default" href="{{ path('operador') }}">VOLVER</a>
 
     
 
