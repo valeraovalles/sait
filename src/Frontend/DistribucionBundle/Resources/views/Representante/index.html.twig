@@ -1,16 +1,23 @@
 {% extends '::distribucion.html.twig' %}
-{% block title %}Distribución - Lista{% endblock %}
 
-{% block titulobanner %}
-    DISTRIBUCIÓN - REPRESENTANTES
+{% block title %}Representantes{% endblock %}
+
+{% block titulo %}
+    LISTA DE REPRESENTANTES
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li class="active">LISTA DE REPRESENTANTES</li>
+</ol>
+{% endblock %}
     
 {% block body -%}
     {{ parent() }}
-    <div class="titulo">LISTA DE REPRESENTANTES</div>
 
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table id="tabladatatable">
         <thead>
             <tr>
                 <th>Id</th>
@@ -30,12 +37,12 @@
                 <td>{{ entity.apellidos }}</td>
                 <td>{{ entity.correo }}</td>
                 <td>{{ entity.operador.nombre }}</td>
-                <td align='center'>{% if entity.operador.estatus==true %}Activo{% else %}<div style="background-color:yellow;color:red;">Inactivo<div>{% endif %}</td>
+                <td align='center'>{% if entity.operador.estatus==true %}<span class="label label-success">Activo</span>{% else %}<span class="label label-warning">Inactivo</span>{% endif %}</td>
                 <td>
-                    <a href="{{ path('representante_show', { 'id': entity.id }) }}"><span class="icon-search"></a>
+                    <a href="{{ path('representante_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
 
                     {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
-                    <a href="{{ path('representante_edit', { 'id': entity.id }) }}"><span class="icon-edit"></a>
+                    <a href="{{ path('representante_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></a>
                     {% endif %}
                 </td>
             </tr>
@@ -49,4 +56,16 @@
         </tbody>
     </table>
     <br><br><br><br>
+
+
+        <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'asc'],[1,'asc']],
+            } );
+        })
+    </script>
+
+
     {% endblock %}

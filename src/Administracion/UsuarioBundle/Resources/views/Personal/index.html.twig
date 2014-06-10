@@ -25,13 +25,12 @@
 		    	<th>EXTENSIÓN</th>
 		    	<th style="width:30%;">DEPENDENCIA</th>
 		    	<th>USUARIO</th>
-		    	<th>¿CORREO?</th>
+		    	<th title="CORREO INSTITUCIONAL">CORREO INST.</th>
 	    	</tr>
 	    </thead>
 	    <tbody>
 	    	{% for p in perfil %}
 	    		<tr>
-	    			
 	    			<td>{{ p.primerNombre | capitalize }}</td>
 	    			<td>{{ p.primerApellido | capitalize }}</td>
 	    			<td>{{ p.Extension}}</td>

@@ -1,24 +1,30 @@
 {% extends '::distribucion.html.twig' %}
  
-{% block title %}Distribucion - Telesur{% endblock %}
+ {% block title %}NUEVO OPERADOR{% endblock %}
 
-
-{% block titulobanner %}
-    OPERADORES
+{% block titulo %}
+    NUEVO OPERADOR
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li><a href="{{ path("operador") }}">LISTA DE OPERADORES</a></li>
+  <li class="active">NUEVO OPERADOR</li>
+
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">CREAR OPERADOR</div>
-
     <form name="form1" class="formNewEditOperador" novalidate action="{{ path('operador_create') }}" method="post" {{ form_enctype(form) }}>
 
         {{ form_widget(form._token) }}
         {{ form_widget(form2._token) }}
 
-            <div class="laert alert-info">DATOS DE OPERADOR</div><br>
+            <div class="alert alert-info">DATOS DE OPERADOR</div><br>
             <div id="operador">
                 <div class="formShow">
 
@@ -131,7 +137,7 @@
             </div>        
         <br>
         
-        <div class="laert alert-info">DATOS DE COMODATO</div><br>
+        <div class="alert alert-info">DATOS DE COMODATO</div><br>
             <div id="comodato">
                 <div class="formShow">
                     <div class="contenedorform">
@@ -174,7 +180,7 @@
         
         <br>
         
-            <div class="laert alert-info">DATOS DE REPRESENTANTE</div><br>
+            <div class="alert alert-info">DATOS DE REPRESENTANTE</div><br>
             <div id="representante">
                 <div class="formShow">
                     <div class="contenedorform">

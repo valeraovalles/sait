@@ -1,39 +1,32 @@
 {% extends '::distribucion.html.twig' %}
  
-{% block title %}Distribucion - Telesur{% endblock %}
+{% block title %}Reporte Gráfico{% endblock %}
 
-{% block titulobanner %}
-    REPORTES
+{% block titulo %}
+    REPORTE GRÁFICO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li class="active">REPORTE GRAFICO</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">INGRESE LOS PARÁMETROS</div>
-
-    {% if app.session.started %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="Greenflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-
-        {% for flashMessage in app.session.flashbag.get('alert') %}
-            <div class="Redflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {% endif %}
-
     <form novalidate action="{{ path('generar_reporte_grafico') }}" method="post" {{ form_enctype(form) }}>
+        <div class="formShow" style="width:500px;">
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(form.lapso) }}</div>
+                <div class="labelform">Lapso:</div>
+                <div class="widgetform">{{ form_widget(form.lapso) }}</div>
+            </div>
 
-        <div class="form-contenedor">
-            <div class="text-warning">{{ form_errors(form.lapso) }}</div>
-            <div class="labels">Lapso:</div>
-            <div class="widgets">{{ form_widget(form.lapso) }}</div>
+            <div id="tipografico"></div>
         </div>
-
-        <div id="tipografico"></div>
     </form>
 
     <script type="text/javascript">

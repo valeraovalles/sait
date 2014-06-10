@@ -1,102 +1,91 @@
 {% extends '::distribucion.html.twig' %}
 
-{% block title %}Distribución{% endblock %}
+{% block title %}Editar Representante{% endblock %}
 
-{% block titulobanner %}
-    DISTRIBUCIÓN - EDITAR REPRESENTANTE
+{% block titulo %}
+    EDITAR DE REPRESENTANTE {{ entity.nombres | upper}}<br>OPERADOR {{ entity.operador.nombre | upper}}
 {% endblock %}
 
-
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li><a href="{{ path("representante") }}">LISTA DE REPRESENTANTES</a></li>
+  <li class="active">EDITAR DE REPRESENTANTE</li>
+</ol>
+{% endblock %}
 
 {% block body %}
     {{ parent() }}
-
-    <div class="titulo">EDITAR REPRESENTANTE {{ entity.nombres | upper}}<br>OPERADOR {{ entity.operador.nombre | upper}}</div>
-
-    {% if app.session.started %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="Greenflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {% endif %}
 
     <form novalidate class="formNewEditOperador" action="{{ path('representante_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
 
         {{ form_widget(edit_form._token) }}
-        <fieldset>
-            <legend id="c"><div class="divisor">DATOS DE REPRESENTANTE</div> </legend>
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.nombres) }}</div>
-                    <div class="labels">Nombres:</div>
-                    <div class="widgets">{{ form_widget(edit_form.nombres) }}</div>
-                </div>  
+        <div class="formShow" style="width:500px;">
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(edit_form.nombres) }}</div>
+                <div class="labelform">Nombres:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nombres) }}</div>
+            </div>  
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.apellidos) }}</div>
-                    <div class="labels">Apellidos:</div>
-                    <div class="widgets">{{ form_widget(edit_form.apellidos) }}</div>
-                </div>  
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(edit_form.apellidos) }}</div>
+                <div class="labelform">Apellidos:</div>
+                <div class="widgetform">{{ form_widget(edit_form.apellidos) }}</div>
+            </div>  
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.cargo) }}</div>
-                    <div class="labels">Cargo:</div>
-                    <div class="widgets">{{ form_widget(edit_form.cargo) }}</div>
-                </div> 
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(edit_form.cargo) }}</div>
+                <div class="labelform">Cargo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.cargo) }}</div>
+            </div> 
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.correo) }}</div>
-                    <div class="labels">Correo:</div>
-                    <div class="widgets">{{ form_widget(edit_form.correo) }}</div>
-                </div> 
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(edit_form.correo) }}</div>
+                <div class="labelform">Correo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.correo) }}</div>
+            </div> 
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.telefono1) }}</div>
-                    <div class="labels">Telefono1:</div>
-                    <div class="widgets">{{ form_widget(edit_form.telefono1) }}</div>
-                </div> 
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(edit_form.telefono1) }}</div>
+                <div class="labelform">Telefono1:</div>
+                <div class="widgetform">{{ form_widget(edit_form.telefono1) }}</div>
+            </div> 
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.telefono2) }}</div>
-                    <div class="labels">Telefono2:</div>
-                    <div class="widgets">{{ form_widget(edit_form.telefono2) }}</div>
-                </div> 
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(edit_form.telefono2) }}</div>
+                <div class="labelform">Telefono2:</div>
+                <div class="widgetform">{{ form_widget(edit_form.telefono2) }}</div>
+            </div> 
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.fax) }}</div>
-                    <div class="labels">Fax:</div>
-                    <div class="widgets">{{ form_widget(edit_form.fax) }}</div>
-                </div> 
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(edit_form.fax) }}</div>
+                <div class="labelform">Fax:</div>
+                <div class="widgetform">{{ form_widget(edit_form.fax) }}</div>
+            </div> 
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.observacion) }}</div>
-                    <div class="labels">Observacion:</div>
-                    <div class="widgets">{{ form_widget(edit_form.observacion) }}</div>
-                </div> 
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(edit_form.observacion) }}</div>
+                <div class="labelform">Observacion:</div>
+                <div class="widgetform">{{ form_widget(edit_form.observacion) }}</div>
+            </div> 
 
 
-                <div style="display:none;">
-                    <div>{{ form_errors(edit_form.operador) }}</div>
-                    <div class="labels">Operador:</div>
-                    <div class="widgets">{{ form_widget(edit_form.operador) }}</div>
-                </div> 
-            </fieldset>
+            <div style="display:none;">
+                <div class="text-danger">{{ form_errors(edit_form.operador) }}</div>
+                <div class="labelform">Operador:</div>
+                <div class="widgetform">{{ form_widget(edit_form.operador) }}</div>
+            </div> 
+        </div>
 
 <br>
         <p>
-            <button class="btn" type="submit">Editar</button> | 
-            <a class="btn" href="{{ path('representante', {'id': entity.id}) }}">Ir a la lista</a> | 
-            <a class="btn" href="{{ path('operador_show', {'id': entity.operador.id}) }}">Ir al operador</a>
+            <button class="btn btn-primary" type="submit">EDITAR</button> | 
+            <a class="btn btn-default" href="{{ path('representante', {'id': entity.id}) }}">IR A LA LISTA</a> | 
+            <a class="btn btn-default" href="{{ path('operador_show', {'id': entity.operador.id}) }}">IR AL OPERADOR</a>
         </p>
     </form>
 
 <br>
-{#
-    <form action="{{ path('representante_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
-        <input type="hidden" name="_method" value="DELETE" />
-        {{ form_widget(delete_form) }}
-        <button class="btn btn-danger" type="submit">Borrar</button>
-    </form>
-#}
 {% endblock %}

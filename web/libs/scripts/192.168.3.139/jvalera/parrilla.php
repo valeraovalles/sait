@@ -244,8 +244,8 @@ if($idprograma!=$row['IdPrograma']){
                         <sinopsis>".utf8_encode($row['sinopsiscon'])."</sinopsis>
                         <foto>".$row['Logo']."</foto>
                         <url>".$row['Logo1']."</url>
-                        <hora_ini>".$horainicio."</hora_ini>
-                        <hora_fin>".$horafin."</hora_fin>
+                        <hora_ini>".str_replace("-", "/", $row['Data_Emissio'])." ".$horainicio."</hora_ini>
+                        <hora_fin>".str_replace("-", "/", $row['Data_Emissio'])." ".$horafin."</hora_fin>
                     </programa>";
     $cont++;
     }

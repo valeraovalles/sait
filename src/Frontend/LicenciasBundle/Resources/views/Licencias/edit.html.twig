@@ -1,14 +1,22 @@
 {% extends '::licencias.html.twig' %}
-{% block title %}Licencias - Editar{% endblock %}
 
-{% block titulobanner %}
-    TECNOLOGIA - LICENCIAS
+{% block title %}Licencia editar{% endblock %}
+
+{% block titulo %}
+    EDITAR LICENCIA <br> ({{ entity.nombre }})
 {% endblock %}
 
-    
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("licencias_homepage") }}">LICENCIAS INICIO</a></li>
+  <li class="active">EDITAR LICENCIA</li>
+</ol>
+{% endblock %}
+
+   
 {% block body -%}
     {{ parent() }}
-    <div class="titulo">EDITAR LICENCIA <br> ({{ entity.nombre }})</div>
     <div class="form-show_edit"><br>
     <form action="{{ path('licencias_update', { 'id': entity.id,'retorno':retorno }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
@@ -48,14 +56,14 @@
             <input type="hidden" name="_method" value="PUT" />
     
             <p>
-                <button type="submit" class="btn">Editar</button>
-                <a class="btn btn-danger" href="{{ path('licencias_delete', { 'id': entity.id, 'retorno':retorno }) }}">Eliminar</a> &nbsp;
+                <button type="submit" class="btn btn-primary">EDITAR</button>
+                <a class="btn btn-danger" href="{{ path('licencias_delete', { 'id': entity.id, 'retorno':retorno }) }}">ELIMINAR</a> &nbsp;
             </p>
         </form>
     </form>
     </div><br>
     <p>
-        <a class="btn" href="{{ path( retorno ) }}">Listado</a>
+        <a class="btn btn-default" href="{{ path( retorno ) }}">LISTADO</a>
         
     </p>
  <br><br>

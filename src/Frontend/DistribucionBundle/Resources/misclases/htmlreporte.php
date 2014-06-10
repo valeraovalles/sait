@@ -8,38 +8,20 @@ class htmlreporte
     public function informativo($em,$datos)
     {
 
-    	//FILTRO POR TODOS LOS OPERADORES
-		if($datos['operador']=='t' && $datos['tipooperador']=='t'){
-			$operador=$em->getRepository('DistribucionBundle:Operador')->Operadores($datos['pais'],$datos['fechadesde'],$datos['fechahasta']);
-			if(!empty($operador))
-			$titulo="OPERADOR :TODOS - TIPO DE OPERADOR: TODOS - PAÍS: ".strtoupper($operador[0]->getOperador()->getPais());
-		}
-		
 
-    	//FILTRO POR UN TIPO DE OPERADOR CON TODOS LOS OPERADORES
-		else if($datos['operador']=='t' && $datos['tipooperador']!='t'){
-			$operador=$em->getRepository('DistribucionBundle:Operador')->OperadorPorIdto(
-																	 $datos['pais'],$datos['tipooperador'],$datos['fechadesde'],$datos['fechahasta']);
-			if(!empty($operador))
-			$titulo="OPERADOR: TODOS - TIPO DE OPERADOR: ".strtoupper($operador[0]->getOperador()->getTipooperador())." - PAÍS: ".strtoupper($operador[0]->getOperador()->getPais());
-		}
-		
-		else if($datos['operador']!='t' && $datos['tipooperador']!='t'){
-			$operador=$em->getRepository('DistribucionBundle:Operador')->OperadorPorIdtoPorIdo(
-																	 $datos['pais'],$datos['tipooperador'],$datos['operador'],$datos['fechadesde'],$datos['fechahasta']);
-			
-			if(!empty($operador))
-			$titulo="OPERADOR: ".strtoupper($operador[0]->getOperador()->getNombre())." - TIPO DE OPERADOR: ".strtoupper($operador[0]->getOperador()->getTipooperador())." - PAÍS: ".strtoupper($operador[0]->getOperador()->getPais());
-		}
+        $dql = "
+		SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p JOIN o.comodato c
+        where o.pais in (:idpais) and o.tipooperador in (:idto) and o.id in (:ido) and o.fecharegistro>= :fechadesde and o.fecharegistro<= :fechahasta and o.estatus=true order by o.nombre ASC";
+        $consulta = $em->createQuery($dql);
+        $consulta->setParameter('idpais', $datos['pais']);
+        $consulta->setParameter('idto', $datos['tipooperador']);
+        $consulta->setParameter('ido', $datos['operador']);
+        $consulta->setParameter('fechadesde', $datos['fechadesde']);
+        $consulta->setParameter('fechahasta', $datos['fechahasta']);
+        $operador = $consulta->getResult();
 
-    	//FILTRO POR TODOS LOS TIPOS DE OPERADOR Y SELECCIONO UN OPERADOR
-		else if($datos['operador']!='t' && $datos['tipooperador']=='t'){
-			$operador=$em->getRepository('DistribucionBundle:Operador')->OperadorPorIdo(
-																	 $datos['pais'],$datos['operador'],$datos['fechadesde'],$datos['fechahasta']);
-			if(!empty($operador))
-			$titulo="OPERADOR: ".strtoupper($operador[0]->getOperador()->getNombre())." - TIPO DE OPERADOR: TODOS - PAÍS: ".strtoupper($operador[0]->getOperador()->getPais());
-		}
-		
+        $titulo="";
+
 
 		if(!empty($operador)){
 
@@ -115,7 +97,7 @@ class htmlreporte
 				
 				$ultimooperador=$o->getOperador()->getId();
 			}
-			$html .="<tr><td></td><td></td><td></td><td colspan=2 align=right><b>Total Abonados:</b></td><td><b>".$sumaabonados."</b></td><td colspan='5'><b>Total Operadores: ".$contador."</b></td></tr></table>";
+			$html .="<tr><td></td><td></td><td></td><td colspan=3 align=right><b>Total Abonados:</b></td><td><b>".$sumaabonados."</b></td><td colspan='5'><b>Total Operadores: ".$contador."</b></td></tr></table>";
 			$html .="</table>";
 		}else{
 			return false;
