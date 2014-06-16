@@ -23,7 +23,8 @@
      
     /* Database connection information */
     $gaSql['user']       = "postgres";
-    $gaSql['password']   = "..*t3l35ur*..";
+    #$gaSql['password']   = "..*t3l35ur*..";
+    $gaSql['password']   = "postgres";
     $gaSql['db']         = "sait";
     $gaSql['server']     = "localhost";
      
@@ -191,7 +192,7 @@
                     $row[] = $aRow[ $aColumns[$i] ];
 
                     if($i==8)
-                    $row[] = "<a href='consulta/".$id."'><span class='icon-search'></span></a>";    
+                    $row[] = "<a href='consulta/".$id."'><span class='glyphicon glyphicon-eye-open'></a>";    
             }
         }
         $output['aaData'][] = $row;

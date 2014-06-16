@@ -1,25 +1,18 @@
-<div id='cssmenu'>
-<ul>
-   <li class='active'><a href='{{ path('usuario_homepage') }}'><span>INICIO</span></a></li>
-   <li class='has-sub'><a href='#'><span>ADMINISTRACION</span></a>
-      <ul>
-         <li class='has-sub'><a href='#'><span>USUARIOS</span></a>
-            <ul>
-               <li><a href='{{ path('user') }}'><span>LISTADO</span></a></li>
-               <li><a href='{{ path('user_new') }}'><span>NUEVO</span></a></li>
-            </ul>
-         </li>
-         <li class='has-sub'><a href='#'><span>ROL
-         </span></a>
-            <ul>
-               <li><a href='{{ path('rol') }}'><span>LISTADO</span></a></li>
-               <li><a href='{{ path('rol_new') }}'><span>NUEVO</span></a></li>
-            </ul>
-         </li>
-      </ul>
-   </li>
-   <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
-   <li class='last'><a href='{{ path('contacto') }}'><span>CONTACTO</span></a></li>
-</ul>
+<div class="menubootstrap">
+  <div align="left">
+    <nav class="navbar navbar-inverse" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+          <a class="navbar-brand" href="{{ path('usuario_homepage') }}"><span style="color:white;" class="glyphicon glyphicon-home"></span></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ path('contacto') }}">CONTACTO</a></li>
+          <li><a href="{{ path('usuario_logout') }}">SALIR</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+  </div>
 </div>
 

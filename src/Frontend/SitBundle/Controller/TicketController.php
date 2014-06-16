@@ -37,7 +37,7 @@ class TicketController extends Controller
         $tickets = $query->getResult();
 
         //cuento la cantidad de tickets por unidad
-        $nuevos=0;$asignados=0;
+        $nuevos=0;$asignados=0;$seguimiento=0;
 
 
         foreach ($tickets as $t){ 
