@@ -1,55 +1,61 @@
 {% extends '::visita.html.twig' %}
 
+{% block title %}EDITAR USUARIO{% endblock %}
+
+{% block titulo %}
+    EDITAR USUARIO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("control_visitas_usuario") }}">VISITAS INICIO</a></li>
+  <li class="active">EDITAR USUARIO</li>
+
+</ol>
+{% endblock %}
+
+
 {% block body -%}
-
-
-
-    <h1>Editar Datos</h1>
-    <br>
-
-
+    {{ parent() }}
 
     <form action="{{ path('usuario_update_control', { 'id': visita.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
-        <div id="operador">        {{ form_widget(edit_form._token) }}
-
-                <div class="form-contenedor">
-                    <div class="labels">Nombres:</div>
+               {{ form_widget(edit_form._token) }}
+            <div class="formShow">
+                <div class="contenedorform">
+                    <div class="labelform">Nombres:</div>
                     <div>{{ form_errors(edit_form.nombres) }}</div>
-                    <div class="widgets">{{ form_widget(edit_form.nombres) }}</div>
+                    <div class="widgetform">{{ form_widget(edit_form.nombres) }}</div>
                 </div>
-                <div class="form-contenedor">
-                    <div class="labels">Apellidos:</div>
+                <div class="contenedorform">
+                    <div class="labelform">Apellidos:</div>
                     <div>{{ form_errors(edit_form.apellidos) }}</div>
-                    <div class="widgets">{{ form_widget(edit_form.apellidos) }}</div>
+                    <div class="widgetform">{{ form_widget(edit_form.apellidos) }}</div>
                 </div>
-                <div class="form-contenedor" style="display: none;">
-                    <div class="labels">Cedula:</div>
+                <div class="contenedorform" style="display: none;">
+                    <div class="labelform">Cedula:</div>
                     <div>{{ form_errors(edit_form.cedula) }}</div>
-                    <div class="widgets">{{ form_widget(edit_form.cedula) }}</div>
+                    <div class="widgetform">{{ form_widget(edit_form.cedula) }}</div>
                 </div>
-                <div class="form-contenedor">
-                    <div class="labels">Telefono:</div>
+                <div class="contenedorform">
+                    <div class="labelform">Telefono:</div>
                     <div>{{ form_errors(edit_form.telefono) }}</div>
-                    <div class="widgets">{{ form_widget(edit_form.telefono) }}</div>
+                    <div class="widgetform">{{ form_widget(edit_form.telefono) }}</div>
                 </div>
-                <div class="form-contenedor">
-                    <div class="labels">Direccion:</div>
+                <div class="contenedorform">
+                    <div class="labelform">Direccion:</div>
                     <div>{{ form_errors(edit_form.direccion) }}</div>
-                    <div class="widgets">{{ form_widget(edit_form.direccion) }}</div>
+                    <div class="widgetform">{{ form_widget(edit_form.direccion) }}</div>
                 </div>
         </div>
-        <p>
-                    <button type="submit"><i class="icon-edit"></i> Editar</button>
-        </p>
+                    <button type="submit" class="btn btn-primary"> EDITAR</button> | 
+                            <a class="btn btn-default" href="{{ path('control_visitas_usuario') }}">IR AL LISTADO</a>
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a class="btn" href="{{ path('control_visitas_usuario') }}"><i class="icon-th-list" ></i> Listado</a>
-        </form>
-    </li>
-</ul>
+
+
+
 {% endblock %}
 
 
