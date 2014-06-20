@@ -1,25 +1,22 @@
 {% extends '::contratos.html.twig' %}
 
-{% block titulobanner %}
-    ABOGADOS - PRINCIPAL
+{% block title %}Lista de Abogados{% endblock %}
+
+{% block titulo %}
+    LISTA DE ABOGADOS
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">LISTA DE ABOGADOS</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
  {{ parent() }}
-    <div class="titulo"> LISTADO DE ABOGADOS </div>
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
 
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-   {% endfor %}
-
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table id="tabladatatable">
         <thead>
             <tr>
                 <th width="80%">Nombre</th>
@@ -31,14 +28,22 @@
             <tr align="center">
                 <td>{{ entity.nombre }}</td>
                 <td>
-                    <a href="{{ path('abogados_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar contrato"><img width="22px" src="{{ asset('images/edit.png')}}"></a>
-                    
-                    <a onclick="return confirm('¿Desea eliminar?')" href="{{ path('abogados_delete', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="eliminar pago"><img width="18px" src="{{ asset('images/mal.jpeg')}}"></a>              
+                    <a href="{{ path('abogados_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
+                    <a href="{{ path('abogados_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></a>        
                 </td>
             </tr>
         {% endfor %}
         </tbody>
-    </table><br><br>
+    </table><br><br><br>
 
-    <a class="btn btn-primary dropdown-toggle" href="{{ path( 'abogados_new' ) }}">Registrar Abogado</a><br><br>
-    {% endblock %}
+    <a class="btn btn-default" href="{{ path( 'abogados_new' ) }}">Registrar Abogado</a><br><br>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'asc'],[1,'asc']],
+            } );
+        })
+    </script>
+{% endblock %}

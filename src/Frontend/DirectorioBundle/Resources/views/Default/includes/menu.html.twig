@@ -1,20 +1,31 @@
-<div id='cssmenu'>
-   <ul>
-      <li class='active'><a href='{{ path('directorio_homepage') }}'><span>INICIO</span></a></li>
-   
-      {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
-      <li class='has-sub'><a href='#'><span>ACCIONES</span></a>
-          <ul>
-            <li><a href='{{ path('institucion_new') }}'><span>REGISTRAR INSTITUCION</span></a></li>
-            <li><a href='{{ path('institucion') }}'><span>LISTAR INSTITUCION</span></a></li>
-            <li><a href='{{ path('personalidad_new') }}'><span>REGISTRAR PERSONA</span></a></li>
-            <li><a href='{{ path('personalidad') }}'><span>LISTAR PERSONA</span></a></li>
-         </ul>
-
-      </li>
-      {% endif %}
-      
-      <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
-      <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
- </ul>
+<div class="menubootstrap">
+  <div align="left">
+    <nav class="navbar navbar-inverse" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+          <a class="navbar-brand" href="{{ path('usuario_homepage') }}"><span style="color:white;" class="glyphicon glyphicon-home"></span></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li><a href="{{ path('directorio_homepage') }}">INICIO</a></li>
+            {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">ACCIONES<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{{ path('institucion_new') }}">REGISTRAR INSTITUCION</a></li>
+                    <li><a href="{{ path('institucion') }}">LISTAR INSTITUCION</a></li>
+                    <li><a href="{{ path('personalidad_new') }}">REGISTRAR PERSONA</a></li>
+                    <li><a href="{{ path('personalidad') }}">LISTAR PERSONA</a></li>
+                  </ul>
+               </li>
+            {% endif %}            
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ path('contacto') }}">CONTACTO</a></li>
+          <li><a href="{{ path('usuario_logout') }}">SALIR</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+  </div>
 </div>
