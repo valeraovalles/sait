@@ -46,8 +46,8 @@ class FunctionExtension extends AbstractExtension
     /**
      * @param XPathExpr    $xpath
      * @param FunctionNode $function
-     * @param boolean      $last
-     * @param boolean      $addNameTest
+     * @param bool         $last
+     * @param bool         $addNameTest
      *
      * @return XPathExpr
      *
@@ -90,7 +90,7 @@ class FunctionExtension extends AbstractExtension
         if (0 !== $b) {
             $expr .= ' - '.$b;
         }
-        
+
         $conditions = array(sprintf('%s %s 0', $expr, $sign));
 
         if (1 !== $a && -1 !== $a) {
@@ -98,7 +98,7 @@ class FunctionExtension extends AbstractExtension
         }
 
         return $xpath->addCondition(implode(' and ', $conditions));
-        
+
         // todo: handle an+b, odd, even
         // an+b means every-a, plus b, e.g., 2n+1 means odd
         // 0n+b means b

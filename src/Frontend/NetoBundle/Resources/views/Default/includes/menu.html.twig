@@ -1,62 +1,18 @@
-<div id='cssmenu'>
-<ul>
-   <li class='active'><a href='{{ path('distribucion_homepage') }}'><span>INICIO</span></a></li>
-   
-   <li class='has-sub'><a href='#'><span>OPERADOR</span></a>
-      <ul>
-         <li><a href='{{ path('operador') }}'><span>LISTA DE OPERADORES</span></a></li>
-         <li><a href='{{ path('operador_new') }}'><span>NUEVO OPERADOR</span></a></li>
-         
-         <li class='has-sub'><a href='#'><span>TIPO DE OPERADOR</span></a>
-            <ul>
-               <li><a href='{{ path('tipooperador_new') }}'><span>NUEVO TIPO DE OPERADOR</span></a></li>
-               <li><a href='{{ path('tipooperador') }}'><span>LISTA TIPO DE OPERADORES</span></a></li>
-            </ul>
-         </li>
-
-         <li class='has-sub'><a href='#'><span>PAQUETES</span></a>
-            <ul>
-               <li><a href='{{ path('paquete_new') }}'><span>NUEVO PAQUETE</span></a></li>
-               <li><a href='{{ path('paquete') }}'><span>LISTA TIPO DE PAQUETES</span></a></li>
-            </ul>
-         </li>
-
-         <li class='has-sub'><a href='#'><span>REPRESENTANTE</span></a>
-            <ul>
-               <li><a href='{{ path('representante') }}'><span>LISTA DE REPRESENTANTES</span></a></li>
-            </ul>
-         </li>
-
-         <li class='has-sub'><a href='#'><span>OBJETOS DEL COMODATO</span></a>
-            <ul>
-               <li><a href='{{ path('objetocomodato_new') }}'><span>NUEVO OBJETO DEL COMODATO</span></a></li>
-               <li><a href='{{ path('objetocomodato') }}'><span>LISTA OBJETOS DEL COMODATO</span></a></li>
-            </ul>
-         </li>
-
-         <li class='has-sub'><a href='#'><span>ZONA</span></a>
-            <ul>
-               <li><a href='{{ path('zona_new') }}'><span>NUEVA ZONA</span></a></li>
-               <li><a href='{{ path('zona') }}'><span>LISTA DE ZONAS</span></a></li>
-            </ul>
-         </li>
-
-         <li><a href='{{ path('operador_top') }}'><span>TOP OPERADORES</span></a></li>
-      </ul>
-   </li>
-   
-  
-   <li class='has-sub'><a href='#'><span>REPORTES</span></a>
-      <ul>
-         <li><a href='{{ path('reporte_informativo') }}'><span>REPORTE INFORMATIVO</span></a></li>
-         <li><a href='{{ path('reporte_grafico') }}'><span>REPORTE GRÁFICO</span></a></li>
-      </ul>
-   </li>
-   
-   <li class='has-sub'><a href='{{ path('infooperadores') }}'><span>RESUMEN</span></a></li>
-   
-   <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
-   <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
-</ul>
+<div class="menubootstrap">
+  <div align="left">
+    <nav class="navbar navbar-inverse" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+          <a class="navbar-brand" href="{{ path('usuario_homepage') }}"><span style="color:white;" class="glyphicon glyphicon-home"></span></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ path('contacto') }}">CONTACTO</a></li>
+          <li><a href="{{ path('usuario_logout') }}">SALIR</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+  </div>
 </div>
 

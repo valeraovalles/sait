@@ -35,6 +35,7 @@ class Personal
      * @var float
      *
      * @ORM\Column(name="apellido", type="string", nullable=true)
+     * @Assert\NotBlank(message="El campo apellido no puede estar en blanco.").
      * 
      */
     private $apellido;
@@ -43,6 +44,7 @@ class Personal
      * @var string
      *
      * @ORM\Column(name="cedpas", type="string", nullable=true)
+     * @Assert\NotBlank(message="El campo ced/pas no puede estar en blanco.").
      */
     private $cedpas;
 
@@ -50,6 +52,7 @@ class Personal
      * @var string
      *
      * @ORM\Column(name="correo", type="string", nullable=true)
+     * @Assert\NotBlank(message="El campo correo no puede estar en blanco.").
      */
     private $correo;
 
@@ -57,6 +60,7 @@ class Personal
      * @var string
      *
      * @ORM\Column(name="ubicacion", type="string", nullable=true)
+     * @Assert\NotBlank(message="El campo ubicacion no puede estar en blanco.").
      */
     private $ubicacion;
 
@@ -65,6 +69,7 @@ class Personal
      * @var string
      *
      * @ORM\Column(name="fechanac", type="date", nullable=true)
+     * @Assert\NotBlank(message="El campo fecha nacimiento no puede estar en blanco.").
      */
     private $fechanac;
 
@@ -72,6 +77,7 @@ class Personal
      * @var string
      *
      * @ORM\Column(name="sexo", type="string", nullable=true, length=2)
+     * @Assert\NotBlank(message="El campo sexo no puede estar en blanco.").
      */
     private $sexo;
 

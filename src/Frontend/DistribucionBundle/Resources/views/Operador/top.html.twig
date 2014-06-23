@@ -17,13 +17,15 @@
 
         {{ form_widget(form._token) }}
 
-                <div class="form-contenedor">
+        <div class="formShow">
+            <div class="contenedorform">
                     {{ form_errors(form.pais) }}
-                    <div class="labels">Pais:</div>
-                    <div class="widgets">{{ form_widget(form.pais) }}</div>
+                    <div class="labelform">Pais:</div>
+                    <div class="widgetform">{{ form_widget(form.pais) }}</div>
                 </div>
 
                 <div id="tipooperador"></div>
+        </div>
                 
     </form>
     <br>

@@ -1,0 +1,23 @@
+.infomapa{
+    background-color: red;
+}
+
+.infomapa tr{
+    background-color: white;
+}
+
+
+.infomapa th{
+    text-align: left;
+}
+
+.infooperador{
+    background-color: #0fa1e0;
+    font-size: 12px;
+}
+
+.infooperador tr{
+    background-color: white;
+}
+
+

@@ -19,7 +19,7 @@ namespace Symfony\Component\Intl\DateFormatter\DateFormat;
 class DayOfWeekTransformer extends Transformer
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function format(\DateTime $dateTime, $length)
     {
@@ -29,13 +29,15 @@ class DayOfWeekTransformer extends Transformer
                 return $dayOfWeek;
             case 5:
                 return $dayOfWeek[0];
+            case 6:
+                return substr($dayOfWeek, 0, 2);
             default:
                 return substr($dayOfWeek, 0, 3);
         }
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getReverseMatchingRegExp($length)
     {
@@ -44,13 +46,15 @@ class DayOfWeekTransformer extends Transformer
                 return 'Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday';
             case 5:
                 return '[MTWFS]';
+            case 6:
+                return 'Mo|Tu|We|Th|Fr|Sa|Su';
             default:
                 return 'Mon|Tue|Wed|Thu|Fri|Sat|Sun';
         }
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function extractDateOptions($matched, $length)
     {

@@ -1,9 +1,24 @@
 {% extends '::directorio.html.twig' %}
 
+{% block title %}Nueva Instituci&oacute;n{% endblock %}
+
+{% block titulo %}
+    NUEVA INSTITUCÍ&Oacute;N
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("directorio_homepage") }}">DIRECTORIO INICIO</a></li>
+  <li><a href="{{ path("institucion") }}">LISTA DE INSTITUCIONES</a></li>
+  <li class="active">NUEVA INSTITUCÍ&Oacute;N</li>
+
+</ol>
+{% endblock %}
+
+
 {% block body -%}
     {{ parent() }}
-    <br><h2>NUEVA INSTITUCIÓN</h2>
-    <br><br>
 
     <form action="{{ path('institucion_create') }}" method="post" {{ form_enctype(form) }} novalidate>
         {{ form_widget(form._token) }}
@@ -53,9 +68,9 @@
             </div>
                 <br><br>
 
-        <button type="submit" class="btn btn-primary">CREAR</button> | 
-        <a class="btn"href="{{ path('institucion') }}">IR AL LISTADO</a>
-
+        <button class="btn btn-primary" type="submit">CREAR</button> |
+        <a class="btn btn-default" href="{{ path('institucion') }}">VOLVER</a>
+    
     </form>
 
 {% endblock %}

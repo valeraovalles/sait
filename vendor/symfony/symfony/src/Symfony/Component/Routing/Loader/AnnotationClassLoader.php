@@ -68,7 +68,7 @@ abstract class AnnotationClassLoader implements LoaderInterface
     protected $routeAnnotationClass = 'Symfony\\Component\\Routing\\Annotation\\Route';
 
     /**
-     * @var integer
+     * @var int
      */
     protected $defaultRouteIndex = 0;
 
@@ -180,7 +180,7 @@ abstract class AnnotationClassLoader implements LoaderInterface
 
         $defaults = array_replace($globals['defaults'], $annot->getDefaults());
         foreach ($method->getParameters() as $param) {
-            if ($param->isOptional()) {
+            if (!isset($defaults[$param->getName()]) && $param->isOptional()) {
                 $defaults[$param->getName()] = $param->getDefaultValue();
             }
         }

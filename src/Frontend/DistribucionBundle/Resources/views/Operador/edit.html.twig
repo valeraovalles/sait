@@ -1,25 +1,23 @@
 {% extends '::distribucion.html.twig' %}
 
-{% block title %}Distribución{% endblock %}
+{% block title %}EDITAR OPERADOR{% endblock %}
 
-{% block titulobanner %}
-    DISTRIBUCIÓN - EDITAR OPERADOR
+{% block titulo %}
+    EDITAR OPERADOR {{ entity.nombre | upper}} {% if entity.estatus==1 %}(ACTIVO){% else %}<br><br><div class='Redflash-notice'>INACTIVO</div>{% endif %}
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li><a href="{{ path("operador") }}">LISTA DE OPERADORES</a></li>
+  <li class="active">EDITAR OPERADOR</li>
 
+</ol>
+{% endblock %}
 
 {% block body %}
     {{ parent() }}
-
-    <div class="titulo">EDITAR OPERADOR {{ entity.nombre | upper}} {% if entity.estatus==1 %}(ACTIVO){% else %}<br><br><div class='Redflash-notice'>INACTIVO</div>{% endif %}</div>
-
-    {% if app.session.started %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="Greenflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {% endif %}
 
     {% if verifica!=null %}
         <div class="alert alert-danger">
@@ -32,238 +30,230 @@
         {{ form_widget(edit_form._token) }}
 
 
-        <fieldset>
-            <legend id="a"><div class="divisor">EDITAR DATOS DE OPERADOR</div></legend>
-
-            <div id="operador">
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.nombre) }}</div>
-                    <div class="labels">Operador:</div>
-                    <div class="widgets">{{ form_widget(edit_form.nombre) }}</div>
+        <div class="alert alert-info">DATOS DE OPERADOR</div>
+            <div class="formShow">
+                <div class="contenedorform">
+                    <div class="text-danger">{{ form_errors(edit_form.nombre) }}</div>
+                    <div class="labelform">Operador:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.nombre) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.tipooperador) }}</div>
-                    <div class="labels">Tipo operador:</div>
-                    <div class="widgets">{{ form_widget(edit_form.tipooperador) }}</div>
+                    <div class="labelform">Tipo operador:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.tipooperador) }}</div>
                 </div>
   
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.pais) }}</div>
-                    <div class="labels">Pais:</div>
-                    <div class="widgets">{{ form_widget(edit_form.pais) }}</div>
+                    <div class="labelform">Pais:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.pais) }}</div>
                 </div>
                 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.estado) }}</div>
-                    <div class="labels">Estado:</div>
+                    <div class="labelform">Estado:</div>
                     <div id="estado">
-                        <div class="widgets">{{ form_widget(edit_form.estado) }}</div>
+                        <div class="widgetform">{{ form_widget(edit_form.estado) }}</div>
                     </div>
                 </div>
 
-                <div class="form-contenedor" id="franjatransmision" style="display:none;">
+                <div class="contenedorform" id="franjatransmision" style="display:none;">
                     <div>{{ form_errors(edit_form.franjatransmision) }}</div>
-                    <div class="labels">Franja transmision:</div>
-                    <div class="widgets">{{ form_widget(edit_form.franjatransmision) }}</div>
+                    <div class="labelform">Franja transmision:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.franjatransmision) }}</div>
                 </div>
                  
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.cobertura) }}</div>
-                    <div class="labels">Cobertura:</div>
-                    <div class="widgets">{{ form_widget(edit_form.cobertura) }}</div>
+                    <div class="labelform">Cobertura:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.cobertura) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.zona) }}</div>
-                    <div class="labels">Zona:</div>
-                    <div class="widgets">{{ form_widget(edit_form.zona) }}</div>
+                    <div class="labelform">Zona:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.zona) }}</div>
                 </div>
                     
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.numeroabonados) }}</div>
-                    <div class="labels" id="usuario">Nro. Abonados:</div>
-                    <div class="widgets">{{ form_widget(edit_form.numeroabonados) }}</div>
+                    <div class="labelform" id="usuario">Nro. Abonados:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.numeroabonados) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.dialUrl) }}</div>
-                    <div class="labels" id="ubicacion1">Dial1:</div>
-                    <div class="widgets">{{ form_widget(edit_form.dialUrl) }}</div>
+                    <div class="labelform" id="ubicacion1">Dial1:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.dialUrl) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.dialUrl2) }}</div>
-                    <div class="labels" id="ubicacion2">Dial2:</div>
-                    <div class="widgets">{{ form_widget(edit_form.dialUrl2) }}</div>
+                    <div class="labelform" id="ubicacion2">Dial2:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.dialUrl2) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.direccion) }}</div>
-                    <div class="labels">Direccion:</div>
-                    <div class="widgets">{{ form_widget(edit_form.direccion) }}</div>
+                    <div class="labelform">Direccion:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.direccion) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.observacion) }}</div>
-                    <div class="labels">Observacion:</div>
-                    <div class="widgets">{{ form_widget(edit_form.observacion) }}</div>
+                    <div class="labelform">Observacion:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.observacion) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.estatus) }}</div>
-                    <div class="labels">Activo:</div>
-                    <div class="widgets">{{ form_widget(edit_form.estatus) }}</div>
+                    <div class="labelform">Activo:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.estatus) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.paquete) }}</div>
-                    <div class="labels">Paquete:</div>
-                    <div class="widgets">{{ form_widget(edit_form.paquete) }}</div>
+                    <div class="labelform">Paquete:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.paquete) }}</div>
                 </div>
 
-                 <div class="form-contenedor">
+                 <div class="contenedorform">
                     <div>{{ form_errors(edit_form.urlweb) }}</div>
-                    <div class="labels">Url Web:</div>
-                    <div class="widgets">{{ form_widget(edit_form.urlweb) }}</div>
+                    <div class="labelform">Url Web:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.urlweb) }}</div>
                 </div>
 
-                 <div class="form-contenedor">
+                 <div class="contenedorform">
                     <div>{{ form_errors(edit_form.urlfacebook) }}</div>
-                    <div class="labels"><img width="25px" src="{{ asset('images/facebook.png') }}"></div>
-                    <div class="widgets">{{ form_widget(edit_form.urlfacebook) }}</div>
+                    <div class="labelform"><img width="25px" src="{{ asset('images/facebook.png') }}"></div>
+                    <div class="widgetform">{{ form_widget(edit_form.urlfacebook) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.urltwitter) }}</div>
-                    <div class="labels"><img width="22px" src="{{ asset('images/twitter.png') }}"></div>
-                    <div class="widgets">{{ form_widget(edit_form.urltwitter) }}</div>
+                    <div class="labelform"><img width="22px" src="{{ asset('images/twitter.png') }}"></div>
+                    <div class="widgetform">{{ form_widget(edit_form.urltwitter) }}</div>
                 </div>
             </div> 
-        </fieldset>
-        
+
         <br>
         
-        <fieldset>
-            <legend id="b"><div class="divisor">EDITAR DATOS DE COMODATO</div></legend>
-            <div id="comodato">
-
-                <div class="form-contenedor">
+            <div class="alert alert-info">DATOS DE COMODATO</div>
+            <div class="formShow">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.comodato.fechainicioacuerdo) }}</div>
-                    <div class="labels">Fecha Inicio:</div>
-                    <div class="widgets">{{ form_widget(edit_form.comodato.fechainicioacuerdo) }}</div>
+                    <div class="labelform">Fecha Inicio:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.comodato.fechainicioacuerdo) }}</div>
                 </div>
 
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.comodato.fechafinacuerdo) }}</div>
-                    <div class="labels">Fecha Fin:</div>
-                    <div class="widgets">{{ form_widget(edit_form.comodato.fechafinacuerdo) }}</div>
+                    <div class="labelform">Fecha Fin:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.comodato.fechafinacuerdo) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.comodato.recibereceptor) }}</div>
-                    <div class="labels">Recibe receptor:</div>
-                    <div class="widgets">{{ form_widget(edit_form.comodato.recibereceptor) }}</div>
+                    <div class="labelform">Recibe receptor:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.comodato.recibereceptor) }}</div>
                 </div>
                 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.comodato.fecharecepcion) }}</div>
-                    <div class="labels">Fecha recepción:</div>
-                    <div class="widgets">{{ form_widget(edit_form.comodato.fecharecepcion) }}</div>
+                    <div class="labelform">Fecha recepción:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.comodato.fecharecepcion) }}</div>
                 </div>
                 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.comodato.observacion) }}</div>
-                    <div class="labels">Observacion:</div>
-                    <div class="widgets">{{ form_widget(edit_form.comodato.observacion) }}</div>
+                    <div class="labelform">Observacion:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.comodato.observacion) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.comodato.objetocomodato) }}</div>
-                    <div class="labels">Objeto Comodato:</div>
-                    <div class="widgets">{{ form_widget(edit_form.comodato.objetocomodato) }}</div>
+                    <div class="labelform">Objeto Comodato:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.comodato.objetocomodato) }}</div>
                 </div>
             </div>
         </fieldset>
 
         <br>        
 
-        <fieldset>
-            <legend id="c"><div class="divisor">DATOS DE REPRESENTANTE</div> </legend>
-            <div id="representante">
-
+        <div class="alert alert-info">DATOS DE REPRESENTANTE</div>
+        <div class="formShow">
             <div class="form-show_edit">
 
-            {% set cont = 0 %}
-            {% set largo = representante | length %}
-            {% for re in representante %}
+                {% set cont = 0 %}
+                {% set largo = representante | length %}
+                {% for re in representante %}
 
-                <div class="divisor_representante"><a onclick="return confirm('No olvide guardar los datos del formulario principal o los datos se perderán, ¿desea continuar?')" href="{{ path('representante_edit', { 'id': re.id }) }}">EDITAR REPRESENTANTE {{ cont+1 }}</a></div>
-                <div class="form-contenedor">
-                    <div class="labels">Nombres:</div>
-                    <div class="widgets">{{ re.nombres }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div class="labels">Apellidos:</div>
-                    <div class="widgets">{{ re.apellidos }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div class="labels">Cargo:</div>
-                    <div class="widgets">{{ re.cargo }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div class="labels">correo:</div>
-                    <div class="widgets">{{ re.correo }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div class="labels">Telefono 1:</div>
-                    <div class="widgets">{{ re.telefono1 }}</div>
-                </div>
-
-                {% if re.telefono2!='' %}
-                    <div class="form-contenedor">
-                        <div class="labels">Telefono 2:</div>
-                        <div class="widgets">{{ re.telefono2 }}</div>
+                    <div class="alert alert-warning"><a onclick="return confirm('No olvide guardar los datos del formulario principal o los datos se perderán, ¿desea continuar?')" href="{{ path('representante_edit', { 'id': re.id }) }}">EDITAR REPRESENTANTE {{ cont+1 }}</a></div>
+                    <div class="contenedorform">
+                        <div class="labelform">Nombres:</div>
+                        <div class="widgetform">{{ re.nombres }}</div>
                     </div>
-                {% endif %}
 
-                {% if re.fax!='' %}
-                    <div class="form-contenedor">
-                        <div class="labels">Fax:</div>
-                        <div class="widgets">{{ re.fax }}</div>
+                    <div class="contenedorform">
+                        <div class="labelform">Apellidos:</div>
+                        <div class="widgetform">{{ re.apellidos }}</div>
                     </div>
-                {% endif %}
 
-                {% if re.observacion!='' %}
-                    <div class="form-contenedor">
-                        <div class="labels">Observacion:</div>
-                        <div class="widgets">{{ re.observacion }}</div>
+                    <div class="contenedorform">
+                        <div class="labelform">Cargo:</div>
+                        <div class="widgetform">{{ re.cargo }}</div>
                     </div>
-                {% endif %}
 
-                {% set cont=cont+1 %}
+                    <div class="contenedorform">
+                        <div class="labelform">correo:</div>
+                        <div class="widgetform">{{ re.correo }}</div>
+                    </div>
 
-               
-            {% endfor %}
+                    <div class="contenedorform">
+                        <div class="labelform">Telefono 1:</div>
+                        <div class="widgetform">{{ re.telefono1 }}</div>
+                    </div>
+
+                    {% if re.telefono2!='' %}
+                        <div class="contenedorform">
+                            <div class="labelform">Telefono 2:</div>
+                            <div class="widgetform">{{ re.telefono2 }}</div>
+                        </div>
+                    {% endif %}
+
+                    {% if re.fax!='' %}
+                        <div class="contenedorform">
+                            <div class="labelform">Fax:</div>
+                            <div class="widgetform">{{ re.fax }}</div>
+                        </div>
+                    {% endif %}
+
+                    {% if re.observacion!='' %}
+                        <div class="contenedorform">
+                            <div class="labelform">Observacion:</div>
+                            <div class="widgetform">{{ re.observacion }}</div>
+                        </div>
+                    {% endif %}
+
+                    {% set cont=cont+1 %}
+
+                   
+                {% endfor %}
             </div>
         </div>
-        </fieldset>
         <br>
-        <button class="btn" type="submit">Editar</button>
+        <button class="btn btn-primary" type="submit">EDITAR</button>
 
     </form>
 
     <form action="{{ path('operador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar el operador y sus representantes?')">
         <input class="btn" type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button class="btn btn-danger" type="submit">Desactivar</button> | 
-        <a class="btn" href="{{ path('operador') }}">Ir a lista</a> | 
-        <a class="btn" href="{{ path('operador_show', { 'id': entity.id }) }}">Ir a consultar</a>
+        <button class="btn btn-danger" type="submit">DESACTIVAR</button> | 
+        <a class="btn btn-default" href="{{ path('operador') }}">IR A LA LISTA</a> | 
+        <a class="btn btn-default" href="{{ path('operador_show', { 'id': entity.id }) }}">IR A CONSULTAR</a>
     </form>
 
     <br>

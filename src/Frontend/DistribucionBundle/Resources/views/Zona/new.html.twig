@@ -1,37 +1,39 @@
 {% extends '::distribucion.html.twig' %}
  
-{% block title %}Distribucion{% endblock %}
+{% block title %}Nueva Zona{% endblock %}
 
-
-{% block titulobanner %}
-    TIPO DE OPERADOR - NUEVO
+{% block titulo %}
+    NUEVA ZONA
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li><a href="{{ path("zona") }}">LISTA DE ZONAS</a></li>
+  <li class="active">NUEVA ZONA</li>
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">CREAR ZONA</div>
-
     <form novalidate class="formNewEditOperador" action="{{ path('zona_create') }}" method="post" {{ form_enctype(form) }}>
 
         {{ form_widget(form._token) }}
-
-        <fieldset>
-        <legend id="a"><div class="divisor">DATOS DE LA ZONA</div></legend>
-
-        <div class="form-contenedor">
-            <div>{{ form_errors(form.zona) }}</div>
-            <div class="labels">Zona:</div>
-            <div class="widgets">{{ form_widget(form.zona) }}</div>
+        <div class="formShow" style="width:500px;">
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(form.zona) }}</div>
+                <div class="labelform">Zona:</div>
+                <div class="widgetform">{{ form_widget(form.zona) }}</div>
+            </div>
         </div>
-        </fieldset>
 
 <br>
-        <button class="btn" type="submit">Crear</button> | 
+        <button class="btn btn-primary" type="submit">CREAR</button> | 
 
-        <a class="btn" href="{{ path('zona') }}">
-                Ir a la lista
+        <a class="btn btn-default" href="{{ path('zona') }}">
+                IR A LA LISTA
         </a>
     </form>
 

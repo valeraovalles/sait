@@ -18,7 +18,7 @@ class PersonalType extends AbstractType
             ->add('ubicacion')
             ->add('fechanac', 'date',array(
                     'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd'))
+                    'format' => 'dd-MM-y'))
             ->add('sexo')
         ;
     }

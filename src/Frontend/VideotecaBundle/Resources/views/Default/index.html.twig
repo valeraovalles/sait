@@ -1,32 +1,36 @@
 {% extends '::videoteca.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}Avila{% endblock %}
 
-{% block titulobanner %}
-    PAGINA PRINCIPAL VIDEOTECA
+{% block titulo %}
+    HISTÓRICO SISTEMA AVILA
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">AVILA INICIO</li>
+</ol>
 {% endblock %}
 
 {% block body %}
 
     {{ parent() }}
 
-        <div class="titulo">HISTÓRICO SISTEMA AVILA</div>
-
-        <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+        <table id="tabladatatable" class="table table-striped table-bordered">
         	<thead>
-                    <tr>
-	        	<th>Casete</th>
-	        	<th>Serial</th>
-	        	<th width="40%">Titulo</th>
-                        <th>Formato</th>
-                        <th>Evento</th>
-                        <th>Servicio</th>
-                        <th>Id Seg</th>
-                        <th>contenido segmento</th>
-                        <th>titulo complementario</th>
-                        <th>Acciones</th>
-
-                    </tr>
+                <tr>
+    	        	<th>Cas.</th>
+    	        	<th>Serial</th>
+    	        	<th width="25%">Titulo</th>
+                    <th>Formato</th>
+                    <th>Evento</th>
+                    <th>Servicio</th>
+                    <th>Idseg</th>
+                    <th width="25%">Contenido Seg</th>
+                    <th width="25%">Titulo Comp</th>
+                    <th>Acc.</th>
+                </tr>
         	</thead>
 
         	<tbody>
@@ -36,7 +40,7 @@
 
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
-                $('#example').dataTable( {
+                $('#tabladatatable').dataTable( {
                     "bProcessing": true,
                     "bServerSide": true,
                     "sAjaxSource": "/sait/web/libs/datatables/avila.php",

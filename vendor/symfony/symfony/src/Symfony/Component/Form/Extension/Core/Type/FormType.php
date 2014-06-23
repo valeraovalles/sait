@@ -31,7 +31,7 @@ class FormType extends BaseType
 
     public function __construct(PropertyAccessorInterface $propertyAccessor = null)
     {
-        $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::getPropertyAccessor();
+        $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::createPropertyAccessor();
     }
 
     /**
@@ -40,6 +40,8 @@ class FormType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
+
+        $isDataOptionSet = array_key_exists('data', $options);
 
         $builder
             ->setRequired($options['required'])
@@ -50,12 +52,11 @@ class FormType extends BaseType
             ->setByReference($options['by_reference'])
             ->setInheritData($options['inherit_data'])
             ->setCompound($options['compound'])
-            ->setData(isset($options['data']) ? $options['data'] : null)
-            ->setDataLocked(isset($options['data']))
+            ->setData($isDataOptionSet ? $options['data'] : null)
+            ->setDataLocked($isDataOptionSet)
             ->setDataMapper($options['compound'] ? new PropertyPathMapper($this->propertyAccessor) : null)
             ->setMethod($options['method'])
             ->setAction($options['action'])
-            ->setAutoInitialize($options['auto_initialize'])
         ;
 
         if ($options['trim']) {
@@ -156,7 +157,6 @@ class FormType extends BaseType
             if (null !== $options['virtual']) {
                 // Uncomment this as soon as the deprecation note should be shown
                 // trigger_error('The form option "virtual" is deprecated since version 2.3 and will be removed in 3.0. Use "inherit_data" instead.', E_USER_DEPRECATED);
-
                 return $options['virtual'];
             }
 
@@ -189,7 +189,6 @@ class FormType extends BaseType
             // According to RFC 2396 (http://www.ietf.org/rfc/rfc2396.txt)
             // section 4.2., empty URIs are considered same-document references
             'action'             => '',
-            'auto_initialize'    => true,
         ));
 
         $resolver->setAllowedTypes(array(
@@ -202,7 +201,6 @@ class FormType extends BaseType
      */
     public function getParent()
     {
-        return null;
     }
 
     /**

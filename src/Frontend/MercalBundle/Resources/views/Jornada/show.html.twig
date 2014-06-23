@@ -1,29 +1,21 @@
 {% extends '::mercal.html.twig' %}
  
-{% block title %}Mercal{% endblock %}
+{% block title %}Detalle de Jornada{% endblock %}
 
-{% block titulobanner %}
-    MERCAL
+{% block titulo %}
+    DETALLE DE JORNADA
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("jornada") }}">LISTA DE JORNADAS</a></li>
+  <li class="active">DETALLE DE JORNADA</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
-    
-    <div class="titulo">CONSULTAR JORNADA</div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-
         <div class="formShow" style="width:85%;">
             <div class="contenedorform">
                 <div class="labelform">Nombre jornada:</div>

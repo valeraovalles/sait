@@ -9,12 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Bridge\ProxyManager\LazyProxy\Tests\Dumper;
+namespace Symfony\Bridge\ProxyManager\Tests\LazyProxy\Dumper;
 
-use ProxyManager\Configuration;
 use Symfony\Bridge\ProxyManager\LazyProxy\PhpDumper\ProxyDumper;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 
 /**
@@ -45,7 +43,6 @@ class PhpDumperTest extends \PHPUnit_Framework_TestCase
             '->dump() does generate proxy lazy loading logic.'
         );
     }
-
 
     /**
      * Verifies that the generated container retrieves the same proxy instance on multiple subsequent requests

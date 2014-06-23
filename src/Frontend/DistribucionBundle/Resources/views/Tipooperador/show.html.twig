@@ -1,24 +1,25 @@
 {% extends '::distribucion.html.twig' %}
 
-{% block title %}DISTRIBUCIÓN{% endblock %}
+{% block title %}CONSULTAR TIPO DE OPERADOR{% endblock %}
 
-{% block titulobanner %}
-    TIPO DE OPERADOR - CONSULTA
+{% block titulo %}
+    CONSULTA TIPO DE OPERADOR
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li><a href="{{ path("tipooperador") }}">LISTA DE TIPO DE OPERADORES</a></li>
+  <li class="active">CONSULTAR TIPO DE OPERADOR</li>
+
+</ol>
 {% endblock %}
 
 {% block body %}
 
 {{ parent() }}
 
-    <div class="titulo">CONSULTA TIPO DE OPERADOR</div>
-
-    {% if app.session.started %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="Greenflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {% endif %}
 
     <div class="formShow">
 
@@ -48,20 +49,23 @@
 
     <br>
 
+
+    <a class="btn btn-default" href="{{ path('tipooperador') }}">
+        IR A LA LISTA
+    </a> |
+
     {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
+
+    <a class="btn btn-default" href="{{ path('tipooperador_edit', { 'id': entity.id }) }}">
+        IR A EDITAR
+    </a>
+
+    <br><br>
     <form action="{{ path('tipooperador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button class="btn btn-danger" type="submit">Borrar</button>
+        <button class="btn btn-danger" type="submit">BORRAR</button>
     </form>
-
-    <a class="btn" href="{{ path('tipooperador_edit', { 'id': entity.id }) }}">
-        Ir a editar
-    </a>
-    |{% endif %}
-    <a class="btn" href="{{ path('tipooperador') }}">
-        Ir a lista
-    </a>
-    <br><br>
+    {% endif %}
 
 {% endblock %}

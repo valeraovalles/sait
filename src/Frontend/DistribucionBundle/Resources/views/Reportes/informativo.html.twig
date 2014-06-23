@@ -1,38 +1,35 @@
 {% extends '::distribucion.html.twig' %}
- 
-{% block title %}Distribucion - Telesur{% endblock %}
 
+{% block title %}Reporte Informativo{% endblock %}
 
-{% block titulobanner %}
-    REPORTES
+{% block titulo %}
+    REPORTE INFORMATIVO
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li class="active">REPORTE INFORMATIVO</li>
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">INGRESE LOS PARÁMETROS</div>
-
-    {% if app.session.started %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="Redflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {% endif %}
-
     <form class="formNewEditOperador" novalidate action="{{ path('generar_reporte', { 'tipo': 'informativo','formato': 'xls'}) }}" method="post" {{ form_enctype(form) }}>
 
         {{ form_widget(form._token) }}
 
-                <div class="form-contenedor">
+        <div class="formShow" style="width:700px;">
+            <div class="contenedorform">
                     {{ form_errors(form.pais) }}
-                    <div class="labels">Pais:</div>
-                    <div class="widgets">{{ form_widget(form.pais) }}</div>
+                    <div class="labelform">Pais:</div>
+                    <div class="widgetform">{{ form_widget(form.pais) }}</div>
                 </div>
 
                 <div id="tipooperador"></div>
-
+        </div>
 
     </form>
 

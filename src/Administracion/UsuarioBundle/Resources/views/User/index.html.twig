@@ -1,28 +1,32 @@
 {% extends '::administracion.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}Lista de usuarios{% endblock %}
 
-{% block titulobanner %}
-    ADMINISTRACIÓN DE USUARIOS
+{% block titulo %}
+    LISTA DE USUARIOS
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">LISTA DE USUARIOS</li>
+</ol>
 {% endblock %}
 
 {% block body %}
 
     {{ parent() }}
 
-    <div class="titulo">LISTA DE USUARIOS</div>
-
-
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table id="tablalista" class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th style="width:100px;">Id</th>
+                <th style="width:100px;">ID</th>
                 <th>Username</th>
                 <th>Nombres</th>
                 <th>Apellidos</th>
                 <th>Cedula</th>
                 <th>Estatus</th>
-                <th>Id</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -41,8 +45,8 @@
                     {% endif %}
                 </td>
                 <td>
-                        <a href="{{ path('user_show', { 'id': entity.user.id }) }}"><span class="icon-search"></a>
-                        <a href="{{ path('user_edit', { 'id': entity.user.id }) }}"><span class="icon-edit"></a>
+                        <a href="{{ path('user_show', { 'id': entity.user.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
+                        <a href="{{ path('user_edit', { 'id': entity.user.id }) }}"><span class="glyphicon glyphicon-pencil"></a>
            
                 </td>
             </tr>
@@ -50,9 +54,9 @@
         </tbody>
     </table>
 
-    <br><br>
+    <br><br><br>
 
-    <a class="btn btn-primary" href="{{ path('user_new') }}">Nuevo</a>
+    <a class="btn btn-default" href="{{ path('user_new') }}">NUEVO</a>
 
     <br><br>
 

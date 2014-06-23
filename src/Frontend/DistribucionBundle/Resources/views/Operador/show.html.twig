@@ -1,19 +1,26 @@
 {% extends '::distribucion.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}CONSULTAR OPERADOR{% endblock %}
 
-{% block titulobanner %}
-    DISTRIBUCIÓN - VER OPERADOR
+{% block titulo %}
+    EL OPERADOR {{ entity.nombre | upper }} ESTÁ {% if entity.estatus==1 %}(ACTIVO){% else %}<br><br><div class='Redflash-notice'>INACTIVO</div>{% endif %}
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li><a href="{{ path("operador") }}">LISTA DE OPERADORES</a></li>
+  <li class="active">CONSULTAR OPERADOR</li>
+
+</ol>
 {% endblock %}
 
 {% block body %}
 
 {{ parent() }}
 
-<div class="titulo">EL OPERADOR {{ entity.nombre | upper }} ESTÁ {% if entity.estatus==1 %}(ACTIVO){% else %}<br><br><div class='Redflash-notice'>INACTIVO</div>{% endif %}</div>
-
-
-    <div id="a"><div class="divisor">DATOS DE OPERADOR</div></div>
+    <div class="alert alert-info">DATOS DE OPERADOR</div>
     <div id="operador">
     <div class="formShow">
         <div class="contenedorform">
@@ -136,7 +143,7 @@
     </div>
     </div>
 
-    <div id="b"><div class="divisor">DATOS DE COMODATO</div></div>
+    <div class="alert alert-info">DATOS DE COMODATO</div>
     <div id="comodato">
     <div class="formShow">
         <div class="contenedorform">
@@ -193,7 +200,7 @@
     </div>
 
 
-    <div id="c"><div class="divisor">DATOS DE REPRESENTANTE</div></div>
+    <div class="alert alert-info">DATOS DE REPRESENTANTE</div>
     {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
     <div><a href="{{ path('representante_new_add', {'id':entity.id}) }}">(Agregar Nuevo Representante)</a></div>
     <br>
@@ -262,19 +269,24 @@
 
 <br>
 
+
+<a class="btn btn-default" href="{{ path('operador') }}">IR A LA LISTA</a>{% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %} |
+<a class="btn btn-default" href="{{ path('operador_edit', { 'id': entity.id }) }}">IR A EDITAR</a> |
+<a class="btn btn-default" href="{{ path('operador_new', { 'id': entity.id }) }}">IR A NUEVO</a>
+{% endif %}
+
+<br><br>
+
 {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
 <form action="{{ path('operador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar el operador y sus representantes?')">
     <input type="hidden" name="_method" value="DELETE" />
     {{ form_widget(delete_form) }}
-    <button class="btn btn-danger" type="submit">Desactivar</button>
+    <button class="btn btn-danger" type="submit">DESACTIVAR</button>
 </form>
 {% endif %}
 
-<a class="btn" href="{{ path('operador') }}">Ir a lista</a>{% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %} |
-<a class="btn" href="{{ path('operador_edit', { 'id': entity.id }) }}">Ir a editar</a> |
-<a class="btn" href="{{ path('operador_new', { 'id': entity.id }) }}">Ir a nuevo</a>
-{% endif %}
-<br><br>
+
+
 
 
 

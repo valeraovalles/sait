@@ -50,6 +50,8 @@ class ReporteController extends Controller
             ->add('pais', 'entity', array(
                     'class' => 'DistribucionBundle:Pais',
                     'property' => 'pais',
+                    'expanded'=>false, 
+                    'multiple'=>true,
                     'empty_value' => 'Seleccione...',
                     'query_builder' => function(EntityRepository $er) {
                             return $er->createQueryBuilder('u')
