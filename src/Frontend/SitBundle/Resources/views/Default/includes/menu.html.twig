@@ -1,26 +1,41 @@
-<div id='cssmenu' style="height:63px;">
-<ul>
-   <li class='active'><a href='{{ path('sit_homepage') }}'><span>INICIO</span></a></li>
-   
-   {% if is_granted('ROLE_SIT_ADMINISTRADOR')%}
-   <li class='has-sub'><a href='#'><span>SIT</span></a>
-      <ul>
-         <li><a href='{{ path('ticket') }}'><span>GESTIONAR</span></a></li>
-         {% if is_granted('ROLE_SIT_SUPERADMINISTRADOR') %}
-         <li><a href='{{ path('ticket_listausuariounidad') }}'><span>USUARIO UNIDAD</span></a></li>
+<div class="menubootstrap">
+  <div align="left">
+    <nav class="navbar navbar-inverse" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+          <a class="navbar-brand" href="{{ path('usuario_homepage') }}"><span style="color:white;" class="glyphicon glyphicon-home"></span></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+         {% if is_granted('ROLE_SIT_ADMINISTRADOR')%}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">SIT<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ path('ticket') }}">GESTIONAR</a></li>
+              {% if is_granted('ROLE_SIT_SUPERADMINISTRADOR') %}
+              <li><a href="{{ path('ticket_listausuariounidad') }}">USUARIO UNIDAD</a></li>
+              {% endif %}
+              <li><a href="{{ path('ticket_asignado') }}">TICKETS ASIGNADOS</a></li>
+              <li><a href="{{ path('categoria') }}">CATEGORIAS</a></li>
+            </ul>
+          </li>
+
+          <li><a href="{{ path('reporte') }}">INFORME</a></li>
          {% endif %}
-         <li><a href='{{ path('ticket_asignado') }}'><span>TICKETS ASIGNADOS</span></a></li>
-         <li><a href='{{ path('categoria') }}'><span>CATEGORIAS</span></a></li>         
 
-      </ul>
-   </li>
-   <li class='has-sub'><a href='{{ path('reporte') }}'><span>INFORME</span></a></li>
-   {% endif %}
+         {% if is_granted('ROLE_SIT_GENERAL') %}
+         <li><a href="{{ path('ticketgeneral') }}">GENERAL</a></li>
+         {% endif %}
 
-   {% if is_granted('ROLE_SIT_GENERAL') %}
-   <li class='has-sub'><a href='{{ path('ticketgeneral') }}'><span>GENERAL</span></a></li>
-   {% endif %}
-   <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
-   <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
-</ul>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ path('contacto') }}">CONTACTO</a></li>
+          <li><a href="{{ path('usuario_logout') }}">SALIR</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+  </div>
 </div>
+

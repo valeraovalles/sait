@@ -2,33 +2,26 @@
  
 {% block title %}Constancia{% endblock %}
 
-
-{% block titulobanner %}
-    CONSTANCIA DE TRABAJO
+{% block titulo %}
+    CONSTANCIA DE TRABAJJO
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">CONSTANCIA INICIO</li>
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">CONSTANCIA DE TRABAJO<BR><h5>(TIENES {{ constancia[0]['cantidad'] }} CONSTANCIAS PENDIENTES POR TRAMITAR)</h5></div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
+    <div class="alert alert-info">(TIENES {{ constancia[0]['cantidad'] }} CONSTANCIAS PENDIENTES POR TRAMITAR)</div>
 
     {% if bloquea==false %}
     <br><a href="{{ path('constancia_new') }}" class="btn btn-primary" type="button">SOLICITAR CONSTANCIA</a><br><br>
     {% else %}
-    <div class="alert alert-error">Las solicitudes se realizan los días Lunes y Martes.</div>
+    <div class="alert alert-danger">LAS SOLICITUDES DEBEN REALIZARSE LOS DÍAS LUNES Y MARTES</div>
     {% endif %}
 
 

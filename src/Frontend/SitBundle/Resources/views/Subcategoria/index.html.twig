@@ -1,44 +1,34 @@
 {% extends '::sit.html.twig' %}
  
-{% block title %}Sit{% endblock %}
 
+{% block title %}Lista de subcategorias{% endblock %}
 
-{% block titulobanner %}
-    LISTADO DE SUBCATEGORIAS
+{% block titulo %}
+    LISTA DE SUBCATEGORIAS <BR><h5>CATEGORIA: {{ entities[0].categoria.categoria|upper }}</h5>
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("categoria") }}">LISTA DE CATEGORIAS</a></li>
+  <li class="active">LISTA DE SUBCATEGORIAS</li>
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
 
     {% if entities==null %}
-         <div class="titulo">LISTADO DE SUBCATEGORIAS<BR></div>
-
          <div class="alert alert-error">NO EXISTEN SUBCATEGORIAS</div>
          <br>
         <a class="btn btn-default" href="{{ path('categoria') }}">
-            Ir a la lista de categorias
+            IR A LA LISTA DE CATEGORIAS
         </a>
         <br><br>
     {% else %}
 
-    <div class="titulo">LISTADO DE SUBCATEGORIAS<BR><h5>CATEGORIA: {{ entities[0].categoria.categoria|upper }}</h5></div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-
-    <table class="records_list">
+    <table id="tabladatatable" class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
@@ -53,7 +43,7 @@
                 <td>{{ entity.subcategoria }}</td>
                 <td>
 
-                        <a href="{{ path('subcategoria_edit', { 'idsub': entity.id,'idcat':entity.categoria.id }) }}"><span class="icon-edit"></span></a>
+                        <a href="{{ path('subcategoria_edit', { 'idsub': entity.id,'idcat':entity.categoria.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
 
                 </td>
             </tr>
@@ -61,13 +51,23 @@
         </tbody>
     </table>
 
-    <br><br>
+    <br><br><br>
     <a class="btn btn-primary" href="{{ path('subcategoria_new',{'id':entities[0].categoria.id}) }}">
-        Ir a nueva subcategoria
+        IR A NUEVA SUBCATEGORIA
     </a> | 
         <a class="btn btn-default" href="{{ path('categoria') }}">
-            Ir a la lista de categorias
+            IR A LA LISTA DE SUBCATEGORIAS
         </a>
     <br><br>
     {% endif %}
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'asc'],[1,'asc']],
+            } );
+        })
+    </script>
     {% endblock %}

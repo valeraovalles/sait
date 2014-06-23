@@ -1,36 +1,25 @@
 {% extends '::sit.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Gestionar Ticket{% endblock %}
 
-
-{% block titulobanner %}
-    GESTIONAR TICKET
-{% endblock %}
-
-
-{% block body -%}
-    {{ parent() }}
-    
-    <div class="titulo">GESTIONAR TICKET
-        {% if usuarioticket %}
+{% block titulo %}
+    GESTIONAR TICKET  {% if usuarioticket %}
         <br>
 
         <h5>{% if entity.estatus!=4 and entity.estatus!=6 %}ASIGNADO A{% else %}CERRADO POR{% endif %} {{ usuarioticket.primernombre|upper }} {{ usuarioticket.primerapellido|upper }}</h5>
         {% endif %}
+{% endblock %}
 
-    </div>
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("ticket") }}">LISTADO DE TICKETS</a></li>
+  <li class="active">GESTIONAR TICKET</li>
+</ol>
+{% endblock %}
 
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
+{% block body -%}
+    {{ parent() }}
 
 {% if entity.estatus!=4 and entity.estatus!=6 %}
 <form action="{{ path('ticket_asigreasig',{'id':entity.id}) }}" method="post">
@@ -88,7 +77,7 @@
 
         <div class="contenedorform">
             <div class="labelform">Categoria:</div>
-            <div class="widgetform">{{ entity.categoria.categoria|upper }}{% if entity.estatus!=4 %}<a href="{{ path('ticket_asignarcatsub',{'id':entity.id}) }}"> <span class="icon-edit"></span></a>{% endif %}</div>
+            <div class="widgetform">{{ entity.categoria.categoria|upper }}{% if entity.estatus!=4 %}<a href="{{ path('ticket_asignarcatsub',{'id':entity.id}) }}"> <span class="glyphicon glyphicon-edit"></a>{% endif %}</div>
         </div>
 
         <div class="contenedorform">
