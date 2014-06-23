@@ -17,7 +17,7 @@
 
     {{ parent() }}
 
-    <table id="tablalista" class="table table-striped table-bordered">
+    <table id="tabladatatable" class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th style="width:100px;">ID</th>
@@ -60,12 +60,13 @@
 
     <br><br>
 
-    <script>
-    $(document).ready(function(){
-       $('#tabla_lista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-            "sPaginationType": "full_numbers" //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-        } );
-    })
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'asc']],
+            } );
+        })
     </script>
 
 {% endblock %}
