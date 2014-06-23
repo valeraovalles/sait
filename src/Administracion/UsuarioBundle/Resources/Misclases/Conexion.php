@@ -38,8 +38,8 @@ class Conexion
         
         public function postgresql_local(){
             
-                #return pg_connect("host=localhost dbname=sait user=postgres password=..*t3l35ur*..");
-            return pg_connect("host=localhost dbname=sait user=postgres password=postgres");
+            return pg_connect("host=localhost dbname=sait user=postgres password=..*t3l35ur*..");
+            #return pg_connect("host=localhost dbname=sait user=postgres password=postgres");
                 
         }
         
