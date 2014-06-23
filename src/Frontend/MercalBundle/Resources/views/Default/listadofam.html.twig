@@ -1,27 +1,22 @@
 {% extends '::mercal.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Asignar n&uacute;mero Familiar{% endblock %}
 
-{% block titulobanner %}
-    MERCAL
+{% block titulo %}
+    FAMILIARES DE {{ trabajador.primerNombre }} {{ trabajador.primerApellido }}<br><h4>JORNADA {{ jornada.nombrejornada|upper }} {{ jornada.fechajornada|date('d/m/Y') }}</h4>
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("mercal_seleccionajornada") }}">SELECCIONAR JORNADA</a></li>
+  <li><a href="{{ path("mercal_listado", {'idjornada':jornada.id}) }}">LISTADO DE TRABAJADORES</a></li>
+  <li class="active">ASIGNACIÓN DE NÚMEROS FAMILIAR</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
-    
-    <div class="titulo">FAMILIARES DE {{ trabajador.primerNombre }} {{ trabajador.primerApellido }}<br><h4>JORNADA {{ jornada.nombrejornada|upper }} {{ jornada.fechajornada|date('d/m/Y') }}</h4></div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
 
     <br>
    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalistaespecial">
@@ -44,18 +39,19 @@
                     {% if arraynumerofam[entity.id] is defined %}
                         {% if arraynumerofam[entity.id].compro==false and arraynumerofam[entity.id].fechahoranumeracion is not null %}
                                 <b class="label label-warning"><b class="label label-important">{{ arraynumerofam[entity.id].numero }}</b> Rezagado
-                                <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerofam', {'idjornada':jornada.id,'idtrabajador':trabajador.id,'idfamiliar':entity.id}) }}" ><b class="icon-remove"></b></a></b> | 
+                                <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerofam', {'idjornada':jornada.id,'idtrabajador':trabajador.id,'idfamiliar':entity.id}) }}" ><b class="glyphicon glyphicon-remove"></b></a></b> | 
                         {% elseif arraynumerofam[entity.id].compro==true and arraynumerofam[entity.id].fechahoranumeracion is not null %}
                                 <b class="label label-info">Ya compró</b>
                         {% else %}
-                            <b class="label label-success">{{ arraynumerofam[entity.id].numero }}
-                                <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerofam', {'idjornada':jornada.id,'idtrabajador':trabajador.id,'idfamiliar':entity.id}) }}" ><b class="icon-remove"></b></a>
-                            </b>
+                            <b class="label label-success">Nro. {{ arraynumerofam[entity.id].numero }}
+                                <a onclick="return confirm('¿Está seguro que desea eliminar el número asignado?')" href="{{ path('mercal_eliminarnumerofam', {'idjornada':jornada.id,'idtrabajador':trabajador.id,'idfamiliar':entity.id}) }}" ><b class="glyphicon glyphicon-remove"></b></a>
+                            </b>|
+                            
                         {% endif %}
                  
                    
                     {% else %}
-                        <a class="label label-important" href="{{ path('mercal_guardaasignarnumerofam', {'idjornada':jornada.id, 'idtrabajador': trabajador.id,'idfamiliar':entity.id }) }}">Asignar Numero</a> | 
+                        <a class="label label-danger" href="{{ path('mercal_guardaasignarnumerofam', {'idjornada':jornada.id, 'idtrabajador': trabajador.id,'idfamiliar':entity.id }) }}">Asignar Numero</a> | 
 
                     {% endif %}
 
@@ -65,7 +61,7 @@
         {% endfor %}
         </tbody>
     </table>
-    <br><br>
+    <br><br><br>
 
 
 

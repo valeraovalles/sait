@@ -1,35 +1,27 @@
 {% extends '::mercal.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Asignar n&uacute;mero{% endblock %}
 
-{% block titulobanner %}
-    MERCAL
+{% block titulo %}
+    SELECCIONAR UNA JORNADA
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">SELECCIONAR UNA JORNADA</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">SELECCIONE UNA JORNADA Y PRESIONE CONTINUAR</div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table id="tabladatatable">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nombre jornada</th>
-                <th>Fechaj ornada</th>
+                <th>Nombre de la Jornada</th>
+                <th>Fecha de la Jornada</th>
                 <th>Accion</th>
             </tr>
         </thead>
@@ -48,5 +40,13 @@
         </tbody>
     </table>
 
-    <br><br>
+    <br><br><br>
+<script type="text/javascript">
+    $(document).ready(function(){
+       $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+            "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+            "aaSorting": [[0,'asc'],[1,'asc']],
+        } );
+    })
+</script>
 {% endblock %}
