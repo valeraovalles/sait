@@ -1,109 +1,105 @@
 {% extends '::contratos.html.twig' %}
 
-{% block titulobanner %}
-    CONTRATOS AÑOS ANTERIORES - DETALLES
+{% block title %}Consultar Contrato AA{% endblock %}
+
+{% block titulo %}
+    CONSULTAR CONTRATO AÑO ANTERIOR
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("contratos_pasados") }}">LISTA DE CONTRATOS AÑOS ANTERIORES</a></li>
+  <li class="active">CONSULTAR CONTRATO AÑO ANTERIOR</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
  {{ parent() }}
-    <div class="titulo"> DETALLE DEL CONTRATO {{ entity.codigo }} </div>
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
+
+    <div class="formShow">       
+        <div class="contenedorform">
+            <div class="labelform">Fecha del Registro:</div>
+            <div class="widgetform">{{ entity.fechaRegistro|date('Y-m-d') }}</div>
         </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
+        <div class="contenedorform">
+            <div class="labelform">C&oacute;digo:</div>
+            <div class="widgetform">{{ entity.codigo }}</div>
         </div>
-   {% endfor %}
+        
+        <div class="contenedorform">
+            <div class="labelform">Empresa:</div>
+            <div class="widgetform">{{ entity.empresa }}</div>
+        </div>
+        {% if entity.obra != NULL %}
+            <div class="contenedorform">
+                <div class="labelform">Obra:</div>
+                <div class="widgetform">{{ entity.Obra }}</div>
+            </div>
+        {% endif %}
+        <div class="contenedorform">
+            <div class="labelform">Fecha de Inicio del Contrato:</div>
+            <div class="widgetform">{{ entity.fechaInicio|date('Y-m-d') }}</div>
+        </div>
+        {% if entity.fechaFin != NULL %}
+            <div class="contenedorform">
+                <div class="labelform">Fecha de Fin de Contrato:</div>
+                <div class="widgetform">{{ entity.fechaFin|date('Y-m-d') }}</div>
+            </div>
+        {% endif %}
+        {% if entity.duracion != NULL  %}
+            <div class="contenedorform">
+                <div class="labelform">Duraci&oacute;n:</div>
+                <div class="widgetform">{{ entity.duracion }}</div>
+            </div>
+        {% endif %}                
+        {% if entity.montoBs != NULL %}
+            <div class="contenedorform">
+                <div class="labelform">Monto en Bs:</div>
+                <div class="widgetform">{{ entity.montoBs }}</div>
+            </div>
+        {% endif %}
+        {% if entity.montoDolares != NULL %}
+            <div class="contenedorform">
+                <div class="labelform">Monto $:</div>
+                <div class="widgetform">{{ entity.montoDolares }}</div>
+            </div>
+        {% endif %}
+        {% if entity.montoEuros != NULL %}
+            <div class="contenedorform">
+                <div class="labelform">Monto €:</div>
+                <div class="widgetform">{{ entity.montoEuros }}</div>
+            </div>
+        {% endif %}
+        <div class="contenedorform">
+            <div class="labelform">Direccion Solicitante:</div>
+            <div class="widgetform">{{ entity.idDireccion }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Abogado:</div>
+            <div class="widgetform">{{ entity.idAbogado }}</div>
+        </div>  
 
-   <div class="form-show_edit">
-        <fieldset>       
-            <legend id="a"><div class="divisor">DATOS DEL CONTRATO</div> </legend>
-                <div class="contenedor">
-                    <div class="labels">Fecha del Registro:</div>
-                    <div class="dato">{{ entity.fechaRegistro|date('Y-m-d') }}</div>
-                </div>
-                <div class="contenedor">
-                    <div class="labels">C&oacute;digo:</div>
-                    <div class="dato">{{ entity.codigo }}</div>
-                </div>
-                <div class="contenedor">
-                    <div class="labels">Empresa:</div>
-                    <div class="dato">{{ entity.empresa }}</div>
-                </div>
-                {% if entity.obra != NULL %}
-                    <div class="contenedor">
-                        <div class="labels">Obra:</div>
-                        <div class="dato">{{ entity.Obra }}</div>
-                    </div>
-                {% endif %}
-                <div class="contenedor">
-                    <div class="labels">Fecha de Inicio del Contrato:</div>
-                    <div class="dato">{{ entity.fechaInicio|date('Y-m-d') }}</div>
-                </div>
-                {% if entity.fechaFin != NULL %}
-                    <div class="contenedor">
-                        <div class="labels">Fecha de Fin de Contrato:</div>
-                        <div class="dato">{{ entity.fechaFin|date('Y-m-d') }}</div>
-                    </div>
-               {% endif %}
-                {% if entity.duracion != NULL  %}
-                    <div class="contenedor">
-                        <div class="labels">Duraci&oacute;n:</div>
-                        <div class="dato">{{ entity.duracion }}</div>
-                    </div>
-                {% endif %}                
-                {% if entity.montoBs != NULL %}
-                    <div class="contenedor">
-                        <div class="labels">Monto en Bs:</div>
-                        <div class="dato">{{ entity.montoBs }}</div>
-                    </div>
-                {% endif %}
-                {% if entity.montoDolares != NULL %}
-                    <div class="contenedor">
-                        <div class="labels">Monto $:</div>
-                        <div class="dato">{{ entity.montoDolares }}</div>
-                    </div>
-                {% endif %}
-                {% if entity.montoEuros != NULL %}
-                    <div class="contenedor">
-                        <div class="labels">Monto €:</div>
-                        <div class="dato">{{ entity.montoEuros }}</div>
-                    </div>
-                {% endif %}
-                <div class="contenedor">
-                    <div class="labels">Direccion Solicitante:</div>
-                    <div class="dato">{{ entity.idDireccion }}</div>
-                </div>
-                <div class="contenedor">
-                    <div class="labels">Abogado:</div>
-                    <div class="dato">{{ entity.idAbogado }}</div>
-                </div>  
+        {% if entity.archivo %}
+            <div class="contenedorform">
+                <div class="labelform">Archivo:</div>
+                <div class="widgetform">
 
-                {% if entity.archivo %}
-                    <div class="contenedor">
-                        <div class="labels">Archivo:</div>
-                        <div class="dato">
+                    {% set extension =  entity.archivo|split(".") %}
 
-                            {% set extension =  entity.archivo|split(".") %}
-
-                            {% if extension[1]=='jpg' or extension[1]=='jpeg' or extension[1]=='png' or extension[1]=='gif'  %}
-                                <a data-toggle="modal" href="#myModal">
-                                    <img class="img-rounded" src="{{ asset('uploads/contratos/') }}{{ entity.archivo }}" width="150px">
-                                </a>
-                            {% else %}
-                                <a href="{{ asset('uploads/contratos/') }}/{{ entity.archivo }}">DESCARGA ARCHIVO {{ extension[1]|upper }}</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endif %}         
-        </fieldset>
+                    {% if extension[1]=='jpg' or extension[1]=='jpeg' or extension[1]=='png' or extension[1]=='gif'  %}
+                        <a data-toggle="modal" href="#myModal">
+                            <img class="img-rounded" src="{{ asset('uploads/contratos/') }}{{ entity.archivo }}" width="150px">
+                        </a>
+                    {% else %}
+                        <a href="{{ asset('uploads/contratos/') }}/{{ entity.archivo }}">DESCARGA ARCHIVO {{ extension[1]|upper }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
     </div>
-    <br>
-    <a href="{{ path('contratos_pasados') }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
-    <a href="{{ path('contratos_pasados_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar datos del contrato"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
-    <br><br> 
+
+    <br><br>
+    <a class="btn btn-default" href="{{ path('contratos_pasados') }}">IR A LA LISTA</a> |
+    <a class="btn btn-default" href="{{ path('contratos_pasados_edit', { 'id': entity.id }) }}">IR A EDITAR</a><br><br>
 {% endblock %}
