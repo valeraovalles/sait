@@ -101,7 +101,10 @@ a                      :hover{
 
 .infousuario div{
 	margin-bottom: 10px;
-	
+}
+
+.infousuario *{
+		font-size: 12px;
 }
 /* FIN LISTADO DE APLICACIONES */
 
