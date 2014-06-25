@@ -14,58 +14,10 @@
 
 {% block body %}
 
-
-<script type="text/javascript"> 
-$(document).ready(function(){
-    $(".xxx").mouseenter(function() {
-        $(".ejemplo_img_cont", this).stop().animate({ top:'390px' },{ queue:false, duration:300 });
-    });
-    $(".xxx").mouseleave(function() {
-        $(".ejemplo_img_cont", this).stop().animate({ top:'450px' },{ queue:false, duration:300 });
-    });
-});
-</script>
-<style type="text/css">
-
-.ejemplo_img_cont {
-    float:left;
-    position:absolute;
-    background:#000;
-    height:60px;
-    line-height:25px;
-    width:560px;
-    padding:20px;
-    opacity:.8; 
-    filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
-    -MS-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-    top:450px;
-    left:0px;
-    color:#FFF;
-    font-size:18px;
-    font-family:"Lucida Grande", Arial, sans-serif;
-    z-index:10;
-}
-
-</style>
-
-
-
     {{ parent() }}
 
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-    <br>
 <div class="row">
-    <div class="col-md-5" style="padding-left:40px;">
+    <div class="col-md-5" style="padding-left:30px;">
         {% if app.user %} 
         <div class="infousuario" align="left">
             <div><b>NOMBRE:</b> {{ usuario.primerNombre | upper }} {{ usuario.segundoNombre | upper }}</div>
@@ -75,7 +27,7 @@ $(document).ready(function(){
             {% if usuario.user.fueradenomina==false %}
                 <div><b>UNIDAD:</b> {% if usuario.nivelorganizacional!=null%} {{ usuario.nivelorganizacional.descripcion | upper }} {% else %} N/A {% endif %}</div>
                 <div><b>DEPENDENCIA:</b> {{ datos.nombre }}</div>
-                <div><b>SUELDO NORMAL:</b> {{ datos.sueldo_basico | number_format(2, ',', '.') }}</div>
+                <div><b>SUELDO BASICO:</b> {{ datos.sueldo_basico | number_format(2, ',', '.') }}</div>
                 <div><b>FECHA INGRESO:</b> {{ datos.fecha_ingreso | upper | date('d-m-Y') }}</div>
                 <div><b>FECHA NACIMIENTO:</b> {{ datos.fecha_nacimiento| upper | date('d-m-Y') }}</div>
                 <div><b>CARGO:</b> {{ datos.descripcion_cargo }}</div>
@@ -83,7 +35,7 @@ $(document).ready(function(){
         </div>
         {% endif %}
     </div>
-    <div class="col-md-7" style="padding-right:40px;">
+    <div class="col-md-7" style="padding-right:60px;">
         <div class="row">
             {% if usuario.user.password!=null %}
               <div class="col-sm-6 col-md-4">
@@ -158,7 +110,7 @@ $(document).ready(function(){
 
             {% if is_granted('ROLE_CREATV') %}
                 <div class="col-sm-6 col-md-4">
-                    <a href="javascript:void(0)">CREATV<br><img  src="{{ asset("images/creatv.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+                    <a id="ct" href="javascript:void(0)">CREATV<br><img  src="{{ asset("images/creatv.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
                 </div>
             {% endif %}
 
@@ -227,10 +179,6 @@ $(document).ready(function(){
         $( "#form60" ).submit();
     });
 
-    $( "#tp" ).click(function() {
-        $('#form60').attr('action', '/Telesur/web/transporte.php');
-        $( "#form60" ).submit();
-    });
     </SCRIPT>
 
     <form id="form60" action="" method="post" style="display:none;">
@@ -238,8 +186,6 @@ $(document).ready(function(){
         <input type="password" name="signin[password]" id="signin_password" value="{{ PASSPASS }}"/>
     </form>
     {# HASTA AQUÍ #}
-
-
 
 
 
