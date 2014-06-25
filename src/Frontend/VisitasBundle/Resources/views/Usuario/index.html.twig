@@ -1,15 +1,24 @@
 {% extends '::visita.html.twig' %}
 
 
+{% block title %}Lista{% endblock %}
+
+{% block titulo %}
+    LISTA DE VISITANTES
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">VISITAS INICIO</li>
+
+</ol>
+{% endblock %}
+
 {% block body -%}
+    {{parent()}}
 
-
-
-<br>
-    <h2>Listado de visitantes</h2>
-
-
-    <table class="records_list" id="tablalistax">
+    <table id="tabladatatable">
         <thead>
             <tr>
                 <th>Cedula</th>
@@ -43,12 +52,12 @@
                 <ul>
                     <li>
 
-                        <a href="{{ path('usuario_show_control', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="icon-search"></i></a>
+                        <a href="{{ path('usuario_show_control', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Consultar"><span class="glyphicon glyphicon-eye-open"></a>
                         
                         {#<a href="{{ path('usu', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Nueva Visita"><i class="icon-edit"></i></a>#}
-                        <a href="{{ path('usu', { 'id': entity.usuario.id }) }}" data-toggle="tooltip" data-placement="top" title="Nueva Visita"><i class="icon-edit"></i></a>
+                        <a href="{{ path('usu', { 'id': entity.usuario.id }) }}" data-toggle="tooltip" data-placement="top" title="Nueva Visita"><span class="glyphicon glyphicon-user"></a>
                         {% if entity.fechasalida=='' %}
-                        <a href="{{ path('salida', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Salida"><i class="icon-user icon-eject"></i></a>
+                        <a onclick="return confirm('¿Esta seguro que desea procesar la salida?')" href="{{ path('salida', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Salida"><span class="glyphicon glyphicon-eject"></a>
                         {% endif %}
 
                     </li>
@@ -59,25 +68,19 @@
 
         </tbody>
     </table>                   
-    <br><br>
+    <br><br><br>
     <!--a href="{{ path('reporteinfo')}}" class="btn btn-info"><i class="icon-user icon-print"></i> Generar Reporte </a-->
 <a class="btn btn-primary" href='{{ path('usuario_busqueda_control') }}'><span>REGISTRAR VISITA</span></a>
-<br>
-<script type="text/javascript">
+<br><br>
 
-
-$(document).ready(function(){
-   $('#tablalistax').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-        "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-        "aaSorting": [[5,'asc'],[3,'desc'],[4,'desc']],
-    } );
-})
-
-
-
-</script>
-
-
+        <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[5,'asc'],[3,'desc'],[4,'desc']],
+            } );
+        })
+    </script>
 
 
     {% endblock %}

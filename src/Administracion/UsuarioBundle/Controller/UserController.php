@@ -120,7 +120,6 @@ class UserController extends Controller
             $this->get('session')->getFlashBag()->add('notice', 'Su clave fue actualizada correctamente!!.');
             return $this->redirect($this->generateUrl('usuario_homepage'));
         }
-        $this->get('session')->getFlashBag()->add('alert', 'Hay conflictos en el formulario, por favor verifique!!');
         return $this->render('UsuarioBundle:User:cambioclave.html.twig', array(
             'form' => $form->createView(),        ));
     }

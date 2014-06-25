@@ -12,20 +12,20 @@ class Cambioclave
     /**
      * @var string
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="La clave anterior no puede estar en blanco.")
      */
     private $claveanterior;
 
     /**
      * @var string
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="La clave nueva no puede estar en blanco.")
      * @Assert\NotEqualTo(value = "123456", message="La clave no puede ser igual a 123456.")
      * @Assert\Length(
      *      min = "6",
      *      max = "15",
-     *      minMessage = "La clave no puede se menor a {{ limit }} caracteres de largo.",
-     *      maxMessage = "La clave no puede se mayor a {{ limit }} caracteres de largo."
+     *      minMessage = "La clave nueva debe contener al menos {{ limit }} caracteres de largo.",
+     *      maxMessage = "La clave nueva no puede se mayor a {{ limit }} caracteres de largo."
      * )
      */
     private $clavenueva;
@@ -33,13 +33,13 @@ class Cambioclave
     /**
      * @var string
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="La clave de confirmación no puede estar en blanco.")
      * @Assert\NotEqualTo(value = "123456", message="La clave no puede ser igual a 123456.")
      * @Assert\Length(
      *      min = "6",
      *      max = "15",
-     *      minMessage = "La clave no puede se menor a {{ limit }} caracteres de largo.",
-     *      maxMessage = "La clave no puede se mayor a {{ limit }} caracteres de largo."
+     *      minMessage = "La clave de confirmación debe contener al menos {{ limit }} caracteres de largo.",
+     *      maxMessage = "La clave de confirmación no puede se mayor a {{ limit }} caracteres de largo."
      * )
      */
     private $claveconfirmacion;

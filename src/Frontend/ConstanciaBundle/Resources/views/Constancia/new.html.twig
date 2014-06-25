@@ -1,12 +1,17 @@
 {% extends '::constancia.html.twig' %}
  
-{% block title %}Constancia{% endblock %}
+{% block title %}Nueva constancia{% endblock %}
 
-
-{% block titulobanner %}
-    CONSTANCIA DE TRABAJO
+{% block titulo %}
+    NUEVA CONSTANCIA
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">NUEVA CONSTANCIA</li>
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}

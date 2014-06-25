@@ -49,7 +49,7 @@ class ReportesController extends Controller
         include("libs/MPDF/mpdf.php");
         $mpdf=new \mPDF();
         $mpdf->AddPage('L','','','','',10,10,0,0);
-        $stylesheet = file_get_contents('css/distribucion.css');
+        $stylesheet = file_get_contents('bundles/distribucion/css/distribucion.css');
         $mpdf->WriteHTML($stylesheet,1);    // The parameter 1 tells that this is css/style only and no body/html/text
         $mpdf->WriteHTML($html);
         $mpdf->Output("Lic_total".".pdf","D");
@@ -83,7 +83,7 @@ class ReportesController extends Controller
         include("libs/MPDF/mpdf.php");
         $mpdf=new \mPDF();
         $mpdf->AddPage('L','','','','',10,10,0,0);
-        $stylesheet = file_get_contents('css/distribucion.css');
+        $stylesheet = file_get_contents('bundles/distribucion/css/distribucion.css');
         $mpdf->WriteHTML($stylesheet,1);    // The parameter 1 tells that this is css/style only and no body/html/text
         $mpdf->WriteHTML($html);
         $mpdf->Output("Lic_por_vencer".".pdf","D");
@@ -117,7 +117,7 @@ class ReportesController extends Controller
         include("libs/MPDF/mpdf.php");
         $mpdf=new \mPDF();
         $mpdf->AddPage('L','','','','',10,10,0,0);
-        $stylesheet = file_get_contents('css/distribucion.css');
+        $stylesheet = file_get_contents('bundles/distribucion/css/distribucion.css');
         $mpdf->WriteHTML($stylesheet,1);    // The parameter 1 tells that this is css/style only and no body/html/text
         $mpdf->WriteHTML($html);
         $mpdf->Output("Lic_vencidas".".pdf","D");

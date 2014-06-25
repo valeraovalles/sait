@@ -1,29 +1,22 @@
 {% extends '::administracion.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}Consultar usuario{% endblock %}
 
-{% block titulobanner %}
-    ADMINISTRACIÓN DE USUARIOS
+{% block titulo %}
+    CONSULTAR USUARIO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+    <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+    <li><a href="{{ path("user") }}">LISTA DE USUARIOS</a></li>
+    <li class="active">CONSULTAR USUARIO</li>
+</ol>
 {% endblock %}
 
 {% block body %}
 
 {{ parent() }}
-
-<div class="titulo">DATOS DE USUARIO</div>
-    {% if app.session.started %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="Greenflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-
-        {% for flashMessage in app.session.flashbag.get('alert') %}
-            <div class="Redflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {% endif %}
 
     <div class="formShow">
         <div class="contenedorform">
@@ -57,9 +50,9 @@
 <br>
 
 <form action="{{ path('user_delete', { 'id': entity.user.id }) }}" method="post" onsubmit="return confirm('Seguro que desea eliminar')">
-    <a class="btn btn-primary" href="{{ path('user') }}">Ir a la lista</a> | 
-    <a class="btn btn-primary" href="{{ path('user_edit', { 'id': entity.user.id }) }}">Ir a editar</a> | 
-    <button class="btn btn-danger" type="submit">Borrar</button>
+    <a class="btn btn-default" href="{{ path('user') }}">IR A LA LISTA</a> | 
+    <a class="btn btn-default" href="{{ path('user_edit', { 'id': entity.user.id }) }}">IR A EDITAR</a> | 
+    <button class="btn btn-danger" type="submit">BORRAR</button>
     {{ form_widget(delete_form) }}
 </form>
 

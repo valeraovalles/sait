@@ -1,32 +1,22 @@
 {% extends '::sit.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Listado{% endblock %}
 
-
-{% block titulobanner %}
-    LISTADO DE TICKETS
+{% block titulo %}
+    LISTADO DE TICKETS {{"now"|date("Y")}}
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">LISTADO DE TICKETS</li>
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
 
     <meta http-equiv="refresh" content="180"> 
-    
-    <div class="titulo">LISTADO DE TICKETS</div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
 
     {% if entities==null %}
 
@@ -34,7 +24,7 @@
 
     {% else %}
 
-    <table id="tablalistaespecial" class="table table-striped" style="font-size: 12px;">
+    <table id="tabladatatable" class="table table-striped table-bordered" style="font-size: 12px;">
         <thead>
             <tr>
                 <th>Id</th>
@@ -86,7 +76,7 @@
     </table>
 
     <br><br><br>
-    <div><span class="label label-danger">Nuevos:</span> <b>{{ contador[entities[0].unidad.id].nuevo }}</b> | <span class="label label-info">Asignados:</span> <b>{{ contador[entities[0].unidad.id].asignado }}</b> | <span class="label label-success">Cerrados:</span>  <b>{{ contador[entities[0].unidad.id].cerrado }} | <span class="label label-warning">Seguimiento:</span>  <b>{{ contador[entities[0].unidad.id].seguimiento }}</b></div>
+    <div><span class="label label-danger">Nuevos:</span> <b>{{ contador[entities[0].unidad.id].nuevo }}</b> | <span class="label label-info">Asignados:</span> <b>{{ contador[entities[0].unidad.id].asignado }}</b> | <span class="label label-success">Cerrados total:</span>  <b>{{ contador[entities[0].unidad.id].cerrado }} | <span class="label label-warning">Seguimiento:</span>  <b>{{ contador[entities[0].unidad.id].seguimiento }}</b></div>
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -97,4 +87,6 @@
         })
     </script>
     {% endif %}
+
+    <BR>
     {% endblock %}

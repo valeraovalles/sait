@@ -13,6 +13,7 @@ namespace Symfony\Component\Debug;
 
 use Symfony\Component\Debug\Exception\FatalErrorException;
 use Symfony\Component\Debug\Exception\ContextErrorException;
+use Symfony\Component\Debug\Exception\DummyException;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -55,10 +56,10 @@ class ErrorHandler
     /**
      * Registers the error handler.
      *
-     * @param integer $level The level at which the conversion to Exception is done (null to use the error_reporting() value and 0 to disable)
-     * @param Boolean $displayErrors Display errors (for dev environment) or just log they (production usage)
+     * @param int     $level The level at which the conversion to Exception is done (null to use the error_reporting() value and 0 to disable)
+     * @param bool    $displayErrors Display errors (for dev environment) or just log they (production usage)
      *
-     * @return The registered error handler
+     * @return ErrorHandler The registered error handler
      */
     public static function register($level = null, $displayErrors = true)
     {
@@ -104,6 +105,7 @@ class ErrorHandler
                     $stack = array_map(
                         function ($row) {
                             unset($row['args']);
+
                             return $row;
                         },
                         array_slice(debug_backtrace(false), 0, 10)
@@ -119,7 +121,46 @@ class ErrorHandler
         }
 
         if ($this->displayErrors && error_reporting() & $level && $this->level & $level) {
-            throw new ContextErrorException(sprintf('%s: %s in %s line %d', isset($this->levels[$level]) ? $this->levels[$level] : $level, $message, $file, $line), 0, $level, $file, $line, $context);
+            // make sure the ContextErrorException class is loaded (https://bugs.php.net/bug.php?id=65322)
+            if (!class_exists('Symfony\Component\Debug\Exception\ContextErrorException')) {
+                require __DIR__.'/Exception/ContextErrorException.php';
+            }
+            if (!class_exists('Symfony\Component\Debug\Exception\FlattenException')) {
+                require __DIR__.'/Exception/FlattenException.php';
+            }
+
+            if (PHP_VERSION_ID < 50400 && isset($context['GLOBALS']) && is_array($context)) {
+                unset($context['GLOBALS']);
+            }
+
+            $exception = new ContextErrorException(sprintf('%s: %s in %s line %d', isset($this->levels[$level]) ? $this->levels[$level] : $level, $message, $file, $line), 0, $level, $file, $line, $context);
+
+            // Exceptions thrown from error handlers are sometimes not caught by the exception
+            // handler, so we invoke it directly (https://bugs.php.net/bug.php?id=54275)
+            $exceptionHandler = set_exception_handler(function () {});
+            restore_exception_handler();
+
+            if (is_array($exceptionHandler) && $exceptionHandler[0] instanceof ExceptionHandler) {
+                $exceptionHandler[0]->handle($exception);
+
+                if (!class_exists('Symfony\Component\Debug\Exception\DummyException')) {
+                    require __DIR__.'/Exception/DummyException.php';
+                }
+
+                // we must stop the PHP script execution, as the exception has
+                // already been dealt with, so, let's throw an exception that
+                // will be caught by a dummy exception handler
+                set_exception_handler(function (\Exception $e) use ($exceptionHandler) {
+                    if (!$e instanceof DummyException) {
+                        // happens if our dummy exception is caught by a
+                        // catch-all from user code, in which case, let's the
+                        // current handler handle this "new" exception
+                        call_user_func($exceptionHandler, $e);
+                    }
+                });
+
+                throw new DummyException();
+            }
         }
 
         return false;
@@ -131,7 +172,7 @@ class ErrorHandler
             return;
         }
 
-        unset($this->reservedMemory);
+        $this->reservedMemory = '';
         $type = $error['type'];
         if (0 === $this->level || !in_array($type, array(E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE))) {
             return;
@@ -152,7 +193,7 @@ class ErrorHandler
         }
 
         // get current exception handler
-        $exceptionHandler = set_exception_handler(function() {});
+        $exceptionHandler = set_exception_handler(function () {});
         restore_exception_handler();
 
         if (is_array($exceptionHandler) && $exceptionHandler[0] instanceof ExceptionHandler) {

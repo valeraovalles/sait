@@ -1,38 +1,29 @@
 {% extends '::distribucion.html.twig' %}
-{% block title %}Distribución{% endblock %}
 
-{% block titulobanner %}
-    TIPO DE OPERADOR - LISTA
+{% block title %}Tipo operador{% endblock %}
+
+{% block titulo %}
+    TIPO DE OPERADOR
 {% endblock %}
 
-    
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">TIPO OPERADOR</li>
+</ol>
+{% endblock %}
+
 {% block body -%}
     {{ parent() }}
-    <div class="titulo">LISTA DE TIPOS OPERADOR</div>
 
-    {% if app.session.started %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="Greenflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-
-        {% for flashMessage in app.session.flashbag.get('alert') %}
-            <div class="Redflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-
-    {% endif %}
-
-    <table class="records_list" cellpaddin=0 cellspacing=0>
+    <table id="tabladatatable" class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Operador</th>
-                <th>Codigo</th>
-                <th>Userid</th>
-                <th>Actions</th>
+                <th>ID</th>
+                <th>OPERADOR</th>
+                <th>CÓDIGO</th>
+                <th>USUARIO</th>
+                <th>ACCIONES</th>
             </tr>
         </thead>
         <tbody>
@@ -44,10 +35,10 @@
                 <td>{{ entity.user }}</td>
                 <td>
           
-                    <a href="{{ path('tipooperador_show', { 'id': entity.id }) }}"><span class="icon-search"></a>
+                    <a href="{{ path('tipooperador_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
          
                     {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
-                    <a href="{{ path('tipooperador_edit', { 'id': entity.id }) }}"><span class="icon-edit"></a>
+                    <a href="{{ path('tipooperador_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></a>
                     {% endif %}
   
                 </td>
@@ -56,13 +47,20 @@
         </tbody>
     </table>
 
-    <br>
+    <br><br><br>
     {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
-    <a class="btn" href="{{ path('tipooperador_new') }}">
-        Ir a nuevo
+    <a class="btn btn-default" href="{{ path('tipooperador_new') }}">
+        NUEVO TIPO DE OPERADOR
     </a>
-    <br><br>
-    {% endif %}
     
-
+    {% endif %}
+    <br><br><br>
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'asc'],[1,'asc']],
+            } );
+        })
+    </script>
     {% endblock %}

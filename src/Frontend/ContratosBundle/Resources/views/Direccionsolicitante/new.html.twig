@@ -1,26 +1,34 @@
 {% extends '::contratos.html.twig' %}
 
-{% block titulobanner %}
-    DIRECCION SOLICITANTE - NUEVO REGISTRO
+{% block title %}Nueva Direcci&oacute;n{% endblock %}
+
+{% block titulo %}
+    NUEVA DIRECCI&Oacute;N
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("Direccionsolicitante") }}">LISTADO DE DIRECCIONES</a></li>
+  <li class="active">NUEVA DIRECCI&Oacute;N</li>
+</ol>
 {% endblock %}
     
 {% block body -%}
     {{ parent() }}
-    <div class="titulo">NUEVA DIRECCIÓN SOLICITANTE</div>
 
-    <form novalidate="novalidate" action="{{ path('Direccionsolicitante_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
-        <fieldset>       
-            <div id="descripcion" class="form-show_edit">
-                <br>
-                <div class="form-contenedor">
-                    {{ form_errors(form.nombre) }}
-                    <div class="labels">Nombre del Abogado:</div>
-                    <div class="dato">{{ form_widget(form.nombre) }}</div>
-                </div>
-                <button type="submit" class="btn">Registrar</button><br><br>
-            </div>
-        </fieldset>
+    <form novalidate="novalidate" action="{{ path('Direccionsolicitante_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}  
+        <div class="formShow">
+            <br>
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(form.nombre) }}</div>                    
+                <div class="labelform">Nombre de la Direcci&oacute;n:</div>
+                <div class="widgetform">{{ form_widget(form.nombre) }}</div>
+            </div>  
+        </div>
+        <br><br>
+            <button class="btn btn-primary" type="submit">CREAR</button> |
+        <a class="btn btn-default" href="{{ path('Direccionsolicitante') }}">VOLVER</a>
         <br>
-       <a href="{{ path( 'Direccionsolicitante') }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
     </form>
 {% endblock %}

@@ -14,8 +14,6 @@ namespace Symfony\Component\Intl\Tests\DateFormatter;
 use Symfony\Component\Intl\DateFormatter\IntlDateFormatter;
 use Symfony\Component\Intl\Globals\IntlGlobals;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\Intl\Util\IcuVersion;
-use Symfony\Component\Intl\Util\Version;
 
 /**
  * Test case for IntlDateFormatter implementations.
@@ -24,6 +22,12 @@ use Symfony\Component\Intl\Util\Version;
  */
 abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
 {
+
+    protected function setUp()
+    {
+        \Locale::setDefault('en');
+    }
+
     /**
      * When a time zone is not specified, it uses the system default however it returns null in the getter method
      * @covers Symfony\Component\Intl\DateFormatter\IntlDateFormatter::getTimeZoneId
@@ -145,7 +149,7 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
             array('EEE', 0, 'Thu'),
             array('EEEE', 0, 'Thursday'),
             array('EEEEE', 0, 'T'),
-            array('EEEEEE', 0, 'Thu'),
+            array('EEEEEE', 0, 'Th'),
 
             array('E', 1296540000, 'Tue'), // 2011-02-01
             array('E', 1296950400, 'Sun'), // 2011-02-06
@@ -378,7 +382,7 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
         $formatter->setPattern('yyyy-MM-dd HH:mm:ss');
 
         $this->assertEquals(
-            $this->getDateTime(0)->format('Y-m-d H:i:s'),
+            $this->getDateTime(0, 'UTC')->format('Y-m-d H:i:s'),
             $formatter->format(0)
         );
     }
@@ -396,7 +400,7 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
         $formatter->setPattern('yyyy-MM-dd HH:mm:ss');
 
         $this->assertEquals(
-            $this->getDateTime(0)->format('Y-m-d H:i:s'),
+            $this->getDateTime(0, 'Europe/London')->format('Y-m-d H:i:s'),
             $formatter->format(0)
         );
 
@@ -419,7 +423,7 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
         $formatter->setPattern('yyyy-MM-dd HH:mm:ss');
 
         $this->assertEquals(
-            $this->getDateTime(0)->format('Y-m-d H:i:s'),
+            $this->getDateTime(0, 'Europe/London')->format('Y-m-d H:i:s'),
             $formatter->format(0)
         );
 
@@ -586,7 +590,7 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
             array('EEE', 'Thu', 0),
             array('EEEE', 'Thursday', 0),
             array('EEEEE', 'T', 432000),
-            array('EEEEEE', 'Thu', 0),
+            array('EEEEEE', 'Th', 0),
         );
     }
 
@@ -850,27 +854,16 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
 
     public function setTimeZoneIdProvider()
     {
-        $data = array(
+        return array(
             array('UTC', 'UTC'),
             array('GMT', 'GMT'),
             array('GMT-03:00', 'GMT-03:00'),
             array('Europe/Zurich', 'Europe/Zurich'),
+            array('GMT-0300', 'GMT-0300'),
+            array('Foo/Bar', 'Foo/Bar'),
+            array('GMT+00:AA', 'GMT+00:AA'),
+            array('GMT+00AA', 'GMT+00AA'),
         );
-
-        // When time zone not exists, uses UTC by default
-        if (version_compare(PHP_VERSION, '5.5.0-dev', '>=')) {
-            $data[] = array('GMT-0300', 'UTC');
-            $data[] = array('Foo/Bar', 'UTC');
-            $data[] = array('GMT+00:AA', 'UTC');
-            $data[] = array('GMT+00AA', 'UTC');
-        } else {
-            $data[] = array('GMT-0300', 'GMT-0300');
-            $data[] = array('Foo/Bar', 'Foo/Bar');
-            $data[] = array('GMT+00:AA', 'GMT+00:AA');
-            $data[] = array('GMT+00AA', 'GMT+00AA');
-        }
-
-        return $data;
     }
 
     protected function getDefaultDateFormatter($pattern = null)
@@ -878,14 +871,8 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
         return $this->getDateFormatter('en', IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT, 'UTC', IntlDateFormatter::GREGORIAN, $pattern);
     }
 
-    protected function getDateTime($timestamp = null)
+    protected function getDateTime($timestamp, $timeZone)
     {
-        if (version_compare(PHP_VERSION, '5.5.0-dev', '>=')) {
-            $timeZone = date_default_timezone_get();
-        } else {
-            $timeZone = getenv('TZ') ?: 'UTC';
-        }
-
         $dateTime = new \DateTime();
         $dateTime->setTimestamp(null === $timestamp ? time() : $timestamp);
         $dateTime->setTimeZone(new \DateTimeZone($timeZone));
@@ -932,14 +919,14 @@ abstract class AbstractIntlDateFormatterTest extends \PHPUnit_Framework_TestCase
     abstract protected function getIntlErrorMessage();
 
     /**
-     * @return integer
+     * @return int
      */
     abstract protected function getIntlErrorCode();
 
     /**
-     * @param integer $errorCode
+     * @param int     $errorCode
      *
-     * @return Boolean
+     * @return bool
      */
     abstract protected function isIntlFailure($errorCode);
 }

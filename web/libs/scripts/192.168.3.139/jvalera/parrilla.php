@@ -72,10 +72,10 @@
 
 
 	# Cambie estos datos por los de su Servidor FTP
-    define("SERVER","192.168.70.8"); //IP o Nombre del Servidor  
+  define("SERVER","10.10.11.243"); //IP o Nombre del Servidor  
 	define("PORT",21); //Puerto
-	define("USER","creatv"); //Nombre de Usuario
-	define("PASSWORD","..*creatv*.."); //Contraseña de acceso
+	define("USER","jhoan"); //Nombre de Usuario
+	define("PASSWORD","123456"); //Contraseña de acceso
 
 
 	# FUNCIONES
@@ -244,8 +244,8 @@ if($idprograma!=$row['IdPrograma']){
                         <sinopsis>".utf8_encode($row['sinopsiscon'])."</sinopsis>
                         <foto>".$row['Logo']."</foto>
                         <url>".$row['Logo1']."</url>
-                        <hora_ini>".$horainicio."</hora_ini>
-                        <hora_fin>".$horafin."</hora_fin>
+                        <hora_ini>".str_replace("-", "/", $row['Data_Emissio'])." ".$horainicio."</hora_ini>
+                        <hora_fin>".str_replace("-", "/", $row['Data_Emissio'])." ".$horafin."</hora_fin>
                     </programa>";
     $cont++;
     }
@@ -259,7 +259,8 @@ if($idprograma!=$row['IdPrograma']){
         </semana>
     </root>";    
     
-    $nombre=str_replace("-", "", $lunes).'-'.str_replace("-", "", $domingo);
+    //$nombre=str_replace("-", "", $lunes).'-'.str_replace("-", "", $domingo);
+    $nombre="xmltv.xml";
 
     //envío el archivo por ftp
     $archivo = fopen ("/var/www/sait/web/uploads/parrilla/xml/".$nombre.".xml", "w+");
@@ -268,8 +269,7 @@ if($idprograma!=$row['IdPrograma']){
     fwrite($archivo, $xml);
     fclose($archivo);
 
-die;
     
-    SubirArchivo("/var/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml",$row["identificador_produccion"].".xml");
+    SubirArchivo("/var/www/sait/web/uploads/parrilla/xml/".$nombre,$nombre);
     //SubirArchivo("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml",$row["identificador_produccion"].".xml");
 ?>

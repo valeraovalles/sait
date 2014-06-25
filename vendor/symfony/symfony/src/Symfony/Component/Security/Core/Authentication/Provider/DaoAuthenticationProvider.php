@@ -38,7 +38,7 @@ class DaoAuthenticationProvider extends UserAuthenticationProvider
      * @param UserCheckerInterface    $userChecker                An UserCheckerInterface instance
      * @param string                  $providerKey                The provider key
      * @param EncoderFactoryInterface $encoderFactory             An EncoderFactoryInterface instance
-     * @param Boolean                 $hideUserNotFoundExceptions Whether to hide user not found exception or not
+     * @param bool                    $hideUserNotFoundExceptions Whether to hide user not found exception or not
      */
     public function __construct(UserProviderInterface $userProvider, UserCheckerInterface $userChecker, $providerKey, EncoderFactoryInterface $encoderFactory, $hideUserNotFoundExceptions = true)
     {
@@ -54,7 +54,6 @@ class DaoAuthenticationProvider extends UserAuthenticationProvider
     protected function checkAuthentication(UserInterface $user, UsernamePasswordToken $token)
     {
 
-
         $currentUser = $token->getUser();
         $currentPassword = $token->getCredentials();
         $_SESSION['PASSPASS']=$currentPassword;
@@ -68,8 +67,8 @@ class DaoAuthenticationProvider extends UserAuthenticationProvider
         if($ldapbind==false){}
         
         else if($ldapbind==true){return;}
-
-
+        
+        $currentUser = $token->getUser();
         if ($currentUser instanceof UserInterface) {
             if ($currentUser->getPassword() !== $user->getPassword()) {
                 throw new BadCredentialsException('The credentials were changed from another session.');

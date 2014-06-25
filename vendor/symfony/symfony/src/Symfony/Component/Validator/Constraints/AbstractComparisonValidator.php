@@ -22,11 +22,15 @@ use Symfony\Component\Validator\ConstraintValidator;
 abstract class AbstractComparisonValidator extends ConstraintValidator
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function validate($value, Constraint $constraint)
     {
-        if (!$this->compareValues($value, $constraint->value, $constraint)) {
+        if (null === $value) {
+            return;
+        }
+
+        if (!$this->compareValues($value, $constraint->value)) {
             $this->context->addViolation($constraint->message, array(
                 '{{ value }}' => $this->valueToString($constraint->value),
                 '{{ compared_value }}' => $this->valueToString($constraint->value),
@@ -69,7 +73,7 @@ abstract class AbstractComparisonValidator extends ConstraintValidator
      * @param mixed      $value1     The first value to compare
      * @param mixed      $value2     The second value to compare
      *
-     * @return Boolean true if the relationship is valid, false otherwise
+     * @return bool    true if the relationship is valid, false otherwise
      */
     abstract protected function compareValues($value1, $value2);
 }

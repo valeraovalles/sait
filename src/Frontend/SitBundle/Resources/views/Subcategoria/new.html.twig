@@ -1,10 +1,17 @@
 {% extends '::sit.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Nueva subcategoria{% endblock %}
 
+{% block titulo %}
+    NUEVA SUBCATEGORIA <br><h5>CATEGORIA {{ categoria.categoria|upper }}</h5>
+{% endblock %}
 
-{% block titulobanner %}
-    NUEVA SUBCATEGORIA
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("categoria") }}">LISTA DE CATEGORIAS</a></li>
+  <li class="active">NUEVA SUBCATEGORIA</li>
+</ol>
 {% endblock %}
 
 
@@ -12,9 +19,6 @@
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">NUEVA SUBCATEGORIA<br><h5>CATEGORIA {{ categoria.categoria|upper }}</h5></div>
-
-
     {% if form_errors(form.subcategoria)  %}
     <div class="alert alert-danger">
         <ul>
@@ -22,18 +26,6 @@
         </ul>
     </div>
     {% endif %}
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
 
     <form novalidate action="{{ path('subcategoria_create', { 'id': categoria.id }) }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
@@ -49,7 +41,7 @@
             </div>
         </div>
     
-        <button class="btn btn-primary" type="submit">Crear</button>
+        <button class="btn btn-primary" type="submit">CREAR</button>
       
     </form>
 

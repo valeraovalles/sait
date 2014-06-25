@@ -23,14 +23,13 @@ class BufferedBundleReader implements BundleReaderInterface
      */
     private $reader;
 
-
     private $buffer;
 
     /**
      * Buffers a given reader.
      *
      * @param BundleReaderInterface $reader     The reader to buffer.
-     * @param integer               $bufferSize The number of entries to store
+     * @param int                   $bufferSize The number of entries to store
      *                                          in the buffer.
      */
     public function __construct(BundleReaderInterface $reader, $bufferSize)

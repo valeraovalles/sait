@@ -11,7 +11,6 @@
 
 namespace Symfony\Component\Intl\Locale;
 
-use Symfony\Component\Intl\Exception\NotImplementedException;
 use Symfony\Component\Intl\Exception\MethodNotImplementedException;
 
 /**
@@ -77,7 +76,7 @@ class Locale
      *
      * @param string  $langtag      The language tag to check
      * @param string  $locale       The language range to check against
-     * @param Boolean $canonicalize
+     * @param bool    $canonicalize
      *
      * @return string The corresponding locale code
      *
@@ -272,7 +271,7 @@ class Locale
      *
      * @param array   $langtag      A list of the language tags to compare to locale
      * @param string  $locale       The locale to use as the language range when matching
-     * @param Boolean $canonicalize If true, the arguments will be converted to canonical form before matching
+     * @param bool    $canonicalize If true, the arguments will be converted to canonical form before matching
      * @param string  $default      The locale to use if no match is found
      *
      * @see http://www.php.net/manual/en/locale.lookup.php
@@ -305,7 +304,7 @@ class Locale
      *
      * @param string $locale The locale code
      *
-     * @return Boolean true on success or false on failure
+     * @return bool    true on success or false on failure
      *
      * @see http://www.php.net/manual/en/locale.parselocale.php
      *
@@ -313,6 +312,8 @@ class Locale
      */
     public static function setDefault($locale)
     {
-        throw new MethodNotImplementedException(__METHOD__);
+        if ('en' !== $locale) {
+            throw new MethodNotImplementedException(__METHOD__);
+        }
     }
 }

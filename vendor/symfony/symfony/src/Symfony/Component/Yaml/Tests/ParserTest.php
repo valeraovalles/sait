@@ -33,12 +33,6 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testSpecifications($file, $expected, $yaml, $comment)
     {
-        if ('escapedCharacters' == $file) {
-            if (!function_exists('iconv') && !function_exists('mb_convert_encoding')) {
-                $this->markTestSkipped('The iconv and mbstring extensions are not available.');
-            }
-        }
-
         $this->assertEquals($expected, var_export($this->parser->parse($yaml), true), $comment);
     }
 
@@ -62,9 +56,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                 if (isset($test['todo']) && $test['todo']) {
                     // TODO
                 } else {
-                    $expected = var_export(eval('return '.trim($test['php']).';'), true);
+                    eval('$expected = '.trim($test['php']).';');
 
-                    $tests[] = array($file, $expected, $test['yaml'], $test['test']);
+                    $tests[] = array($file, var_export($expected, true), $test['yaml'], $test['test']);
                 }
             }
         }
@@ -446,8 +440,8 @@ EOF;
 
     public function testNonUtf8Exception()
     {
-        if (!function_exists('mb_detect_encoding') || !function_exists('iconv')) {
-            $this->markTestSkipped('Exceptions for non-utf8 charsets require the mb_detect_encoding() and iconv() functions.');
+        if (!function_exists('iconv')) {
+            $this->markTestSkipped('Exceptions for non-utf8 charsets require the iconv() function.');
 
             return;
         }
@@ -521,6 +515,95 @@ hash:
 EOF;
 
         $this->assertEquals(array('hash' => null), Yaml::parse($input));
+    }
+
+    public function testStringBlockWithComments()
+    {
+        $this->assertEquals(array('content' => <<<EOT
+# comment 1
+header
+
+    # comment 2
+    <body>
+        <h1>title</h1>
+    </body>
+
+footer # comment3
+EOT
+        ), Yaml::parse(<<<EOF
+content: |
+    # comment 1
+    header
+
+        # comment 2
+        <body>
+            <h1>title</h1>
+        </body>
+
+    footer # comment3
+EOF
+        ));
+    }
+
+    public function testFoldedStringBlockWithComments()
+    {
+        $this->assertEquals(array(array('content' => <<<EOT
+# comment 1
+header
+
+    # comment 2
+    <body>
+        <h1>title</h1>
+    </body>
+
+footer # comment3
+EOT
+        )), Yaml::parse(<<<EOF
+-
+    content: |
+        # comment 1
+        header
+
+            # comment 2
+            <body>
+                <h1>title</h1>
+            </body>
+
+        footer # comment3
+EOF
+        ));
+    }
+
+    public function testNestedFoldedStringBlockWithComments()
+    {
+        $this->assertEquals(array(array(
+            'title'   => 'some title',
+            'content' => <<<EOT
+# comment 1
+header
+
+    # comment 2
+    <body>
+        <h1>title</h1>
+    </body>
+
+footer # comment3
+EOT
+        )), Yaml::parse(<<<EOF
+-
+    title: some title
+    content: |
+        # comment 1
+        header
+
+            # comment 2
+            <body>
+                <h1>title</h1>
+            </body>
+
+        footer # comment3
+EOF
+        ));
     }
 }
 

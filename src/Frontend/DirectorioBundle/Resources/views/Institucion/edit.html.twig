@@ -1,20 +1,24 @@
 {% extends '::directorio.html.twig' %}
 
+{% block title %}Editar Instituci&oacute;n{% endblock %}
+
+{% block titulo %}
+    EDITAR INSTITUCÍ&Oacute;N
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("directorio_homepage") }}">DIRECTORIO INICIO</a></li>
+  <li><a href="{{ path("institucion") }}">LISTA DE INSTITUCIONES</a></li>
+  <li class="active">EDITAR INSTITUCI&Oacute;N</li>
+
+</ol>
+{% endblock %}
+
+
 {% block body -%}
     {{ parent() }}
-<BR><h2>EDITAR INSTITUCIÓN</h2><BR>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
 
     <form action="{{ path('institucion_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
@@ -65,13 +69,11 @@
             </div>
         </div>       
 
-        {# form_widget(edit_form) #}
-
+            
         <BR><button class="btn btn-primary" type="submit">EDITAR</button> | 
-            <a class="btn" href="{{ path('institucion') }}">IR AL LISTADO</a> 
+            <a class="btn btn-default" href="{{ path('institucion') }}">IR A LA LISTA</a> | 
+        <a class="btn btn-default" href="{{ path('institucion_show', { 'id': entity.id }) }}">IR A CONSULTAR</a>
     </form>
-
-
        
         <br>
 

@@ -1,15 +1,21 @@
 {% extends '::administracion.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}Nuevo rol{% endblock %}
 
-{% block titulobanner %}
-    ADMINISTRACIÓN DE ROLES
+{% block titulo %}
+    NUEVO ROL
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+    <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+    <li><a href="{{ path("rol") }}">LISTA DE ROLES</a></li>
+    <li class="active">NUEVO ROL</li>
+</ol>
 {% endblock %}
 
 {% block body %}
 	{{ parent() }}
-
-	<div class="titulo">CREAR ROL</div>
 
 	<form novalidate action="{{ path('rol_create') }}" method="post" {{ form_enctype(form) }}>
 
@@ -25,8 +31,8 @@
      </div>
      <br>
 
-	        <button class="btn btn-primary" type="submit">Crear</button>
-	    	<a class="btn btn-default"  href="{{ path('rol') }}">Ir a la lista</a>
+	        <button class="btn btn-primary" type="submit">CREAR</button> | 
+	    	<a class="btn btn-default"  href="{{ path('rol') }}">IR A LA LISTA</a>
 	</form>
 
 {% endblock %}

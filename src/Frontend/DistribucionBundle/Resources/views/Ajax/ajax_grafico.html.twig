@@ -1,15 +1,15 @@
 {% if mostrar=='aniomes' %}
 	{% if dato[0]=='a' %}
 		{% if dato[1]=='1' %}
-		    <div class="form-contenedor">
-		        <div class="labels">Año desde:</div>
-				<div class="widgets">{{ form_widget(form.aniodesde) }}</div>
+		    <div class="contenedorform">
+		        <div class="labelform">Año desde:</div>
+				<div class="widgetform">{{ form_widget(form.aniodesde) }}</div>
 		    </div>
 		    <div id="aniohasta"></div>
 	    {% elseif dato[1]=='2' %}
-		    <div class="form-contenedor">
-		        <div class="labels">Año hasta:</div>
-				<div class="widgets">{{ form_widget(form.aniohasta) }}</div>
+		    <div class="contenedorform">
+		        <div class="labelform">Año hasta:</div>
+				<div class="widgetform">{{ form_widget(form.aniohasta) }}</div>
 		    </div>
 		    <div id="pais"></div>
 	    {% endif %}
@@ -17,21 +17,21 @@
 
 	{% if dato[0]=='m' %}
 		{% if dato[1]=='1' %}
-		    <div class="form-contenedor">
-		        <div class="labels">Año:</div>
-				<div class="widgets">{{ form_widget(form.anios) }}</div>
+		    <div class="contenedorform">
+		        <div class="labelform">Año:</div>
+				<div class="widgetform">{{ form_widget(form.anios) }}</div>
 		    </div>
 		    <div id="mesdesde"></div>
 	    {% elseif dato[1]=='2' %}
-		    <div class="form-contenedor">
-		        <div class="labels">Mes desde:</div>
-				<div class="widgets">{{ form_widget(form.mesdesde) }}</div>
+		    <div class="contenedorform">
+		        <div class="labelform">Mes desde:</div>
+				<div class="widgetform">{{ form_widget(form.mesdesde) }}</div>
 		    </div>
 		    <div id="meshasta"></div>
 	    {% elseif dato[1]=='3' %}
-		    <div class="form-contenedor">
-		        <div class="labels">Mes hasta:</div>
-				<div class="widgets">{{ form_widget(form.meshasta) }}</div>
+		    <div class="contenedorform">
+		        <div class="labelform">Mes hasta:</div>
+				<div class="widgetform">{{ form_widget(form.meshasta) }}</div>
 		    </div>
 		    <div id="pais"></div>
 		{% endif %}
@@ -39,35 +39,35 @@
 {% endif %}
 
 {% if mostrar=='tipografico' %}
-    <div class="form-contenedor">
-        <div class="labels">Tipo gráfico:</div>
-		<div class="widgets">{{ form_widget(form.tipografico) }}</div>
+    <div class="contenedorform">
+        <div class="labelform">Tipo gráfico:</div>
+		<div class="widgetform">{{ form_widget(form.tipografico) }}</div>
     </div>	
     <div id="aniomes"></div>
 {% endif %}
 
 
 {% if mostrar=='pais' %}
-    <div class="form-contenedor">
-        <div class="labels">Pais:</div>
-		<div class="widgets">{{ form_widget(form.pais) }}</div>
+    <div class="contenedorform">
+        <div class="labelform">Pais:</div>
+		<div class="widgetform">{{ form_widget(form.pais) }}</div>
     </div>	
     <div id="tipooperador"></div>
 {% endif %}
 
 {% if mostrar=='tipooperador' %}
-    <div class="form-contenedor">
-        <div class="labels">tipo operador:</div>
-		<div class="widgets">{{ form_widget(form.tipooperador) }}</div>
+    <div class="contenedorform">
+        <div class="labelform">tipo operador:</div>
+		<div class="widgetform">{{ form_widget(form.tipooperador) }}</div>
     </div>	
     <div id="botones"></div>
 {% endif %}
 
 {% if mostrar=='botones' %}
         <br>
-        <button class="btn" type="submit">Generar</button> | 
+        <button class="btn btn-primary" type="submit">GENERAR</button> | 
 
-        <a class="btn" href="{{ path('distribucion_homepage') }}">Ir al inicio</a>
+        <a class="btn btn-default" href="{{ path('distribucion_homepage') }}">IR AL INICIO</a>
         <br><br>
 {% endif %}
 

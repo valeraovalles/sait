@@ -1,9 +1,17 @@
 {% extends '::mercal.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Numeraci&oacute;n{% endblock %}
 
-{% block titulobanner %}
-    MERCAL
+{% block titulo %}
+    NUMERACI&Oacute;N
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("mercal_seleccionajornada") }}">SELECCIONAR JORNADA</a></li>
+  <li class="active">NUMERACI&Oacute;N</li>
+</ol>
 {% endblock %}
 
 {% block body -%}

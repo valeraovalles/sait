@@ -1,19 +1,19 @@
 {% if mostrar=='tipooperador' %}
-    <div class="form-contenedor">
-        <div class="labels">Tipo Operador:</div>
-		<div class="widgets">{{ form_widget(form.tipooperador) }}</div>
+    <div class="contenedorform">
+        <div class="labelform">Tipo Operador:</div>
+		<div class="widgetform">{{ form_widget(form.tipooperador) }}</div>
     </div>
     <div id="top"></div>
 {% endif %}
 
 {% if mostrar=='top' %}
-
+    <br>
 	<div class='titulo'>TOP 5</div>
 	
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>País</th>
                 <th>Tipo operador</th>
@@ -26,15 +26,15 @@
         {% for entity in datos %}
             <tr {% if loop.index is odd %}style="background-color: #e9f5fe;"{% endif %}>
                 <td>{{ entity.operador.id }}</td>
-                <td style="width:400px;">{{ entity.operador.nombre }}</td>
+                <td style="text-align:justify;">{{ entity.operador.nombre }}</td>
                 <td>{{ entity.operador.pais.pais }}</td>
                 <td>{{ entity.operador.tipooperador.operador }}</td>
                 <td>{% if entity.operador.estatus == 1 %} Activo {% else %} Inactivo {% endif %}</td>
                 <td>{{ entity.operador.numeroabonados }}</td>
                 <td>
-                        <a href="{{ path('operador_show', { 'id': entity.operador.id }) }}"><span class="icon-search"></a>
+                        <a href="{{ path('operador_show', { 'id': entity.operador.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
          
-                        <a href="{{ path('operador_edit', { 'id': entity.operador.id }) }}"><span class="icon-edit"></a>
+                        <a href="{{ path('operador_edit', { 'id': entity.operador.id }) }}"><span class="glyphicon glyphicon-pencil"></a>
                 </td>
             </tr>
 

@@ -18,8 +18,6 @@ class PersonalController extends Controller
     {
     	$em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('UsuarioBundle:Perfil')->findAll();
-
         $dql = "select p from UsuarioBundle:Perfil p join p.user u where u.isActive=true";
         $query = $em->createQuery($dql);
         $entities = $query->getResult();
