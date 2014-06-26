@@ -1,0 +1,35 @@
+cumpleanios_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: CumpleaniosBundle:Default:index }
+
+cumpleanios_personal:
+    pattern:  /personal/lista
+    defaults: { _controller: "CumpleaniosBundle:Personal:index" }
+
+cumpleanios_personal_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CumpleaniosBundle:Personal:show" }
+
+cumpleanios_personal_new:
+    pattern:  /new
+    defaults: { _controller: "CumpleaniosBundle:Personal:new" }
+
+cumpleanios_personal_create:
+    pattern:  /create
+    defaults: { _controller: "CumpleaniosBundle:Personal:create" }
+    requirements: { _method: post }
+
+cumpleanios_personal_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CumpleaniosBundle:Personal:edit" }
+
+cumpleanios_personal_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CumpleaniosBundle:Personal:update" }
+    requirements: { _method: post|put }
+
+cumpleanios_personal_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CumpleaniosBundle:Personal:delete" }
+    requirements: { _method: post|delete }
+

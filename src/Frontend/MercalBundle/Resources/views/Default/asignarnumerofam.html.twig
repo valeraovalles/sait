@@ -1,29 +1,25 @@
 {% extends '::mercal.html.twig' %}
- 
-{% block title %}Sit{% endblock %}
 
-{% block titulobanner %}
-    MERCAL
+{% block title %}Asignar n&uacute;mero{% endblock %}
+
+{% block titulo %}
+    ASIGNAR NÚMERO A {{ trabajador.primerNombre }} {{ trabajador.primerApellido }}<br><h4>JORNADA {{ jornada.nombrejornada|upper }} {{ jornada.fechajornada|date('d/m/Y') }}</h4>
 {% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path('mercal_seleccionajornada', { 'idjornada':jornada.id }) }}">LISTA DE JORNADAS</a></li>
+  <li><a href="{{ path('mercal_listado', { 'idjornada':jornada.id }) }}">LISTA DE TRABAJADORES</a></li>
+  <li class="active">ASIGNAR NUMERO AL TRABAJADOR</li>
+</ol>
+{% endblock %} 
+
 
 {% block body -%}
     {{ parent() }}
     
     <div class="titulo">AGREGAR FAMILIAR DE {{ trabajador.primerNombre }} {{ trabajador.primerApellido }}<br><h4>JORNADA {{ jornada.nombrejornada|upper }}</h4></div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-
     <form action="{{ path('mercal_guardaasignarnumerofam', {'idtrabajador':trabajador.id}) }}" method="post">
         <div class="formShow" style="width:85%;">
             <div class="contenedorform">

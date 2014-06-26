@@ -136,11 +136,17 @@ class Ticket
      * @Assert\NotBlank(message="Debe seleccionar una unidad.")
      */
     private $unidad;
-
+     //$extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf','zip','rar','JPG','PNG');
      /**
-     * @Assert\File(maxSize="5000000", maxSizeMessage="El archivo que intenta subir debe ser menos 5Mb")
+     * @Assert\File(
+     * maxSize="5M", 
+     * maxSizeMessage="El archivo que intenta subir debe ser menos 5Mb", 
+     * mimeTypesMessage="Formato de archivo no válido.",
+     * mimeTypes={"image/png", "image/jpeg","image/jpg", "image/gif", "application/pdf","application/zip","application/x-zip-compressed","multipart/x-zip","application/x-compressed","application/x-rar-compressed","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/vnd.oasis.opendocument.text","application/vnd.oasis.opendocument.spreadsheet"})
      *  
      */
+
+
     private $file;
 
 

@@ -14,12 +14,12 @@ class ComodatoType extends AbstractType
             //->add('codigo')
             ->add('fechainicioacuerdo', 'date',array(
                     'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd',
+                    'format' => 'dd-MM-y',
                 ))
             
             ->add('fechafinacuerdo','date',array(
                     'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd',
+                    'format' => 'dd-MM-y',
                 ))
             ->add('observacion','textarea')
             ->add('objetocomodato')
@@ -27,7 +27,7 @@ class ComodatoType extends AbstractType
             ->add('recibereceptor')
             ->add('fecharecepcion','date',array(
                     'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd',
+                    'format' => 'dd-MM-y',
                 ))
         ;
     }

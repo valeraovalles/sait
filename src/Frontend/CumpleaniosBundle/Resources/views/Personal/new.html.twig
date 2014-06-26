@@ -1,0 +1,87 @@
+{% extends '::cumpleanios.html.twig' %}
+
+{% block title %}Nuevo{% endblock %}
+
+{% block titulo %}
+    NUEVO PERSONAL EXTRANJERO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("cumpleanios_personal") }}">LISTADO DE PERSONAL EXTRANJERO</a></li>
+  <li class="active">NUEVO PERSONAL EXTRANJERO</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    {% if form_errors(form.nombre) or form_errors(form.apellido) or form_errors(form.cedpas) or form_errors(form.correo) or form_errors(form.ubicacion) or form_errors(form.fechanac) or form_errors(form.sexo) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.nombre) }}</div>        
+        <div>{{ form_errors(form.apellido) }}</div>
+        <div>{{ form_errors(form.cedpas) }}</div>
+        <div>{{ form_errors(form.correo) }}</div>
+        <div>{{ form_errors(form.ubicacion) }}</div>
+        <div>{{ form_errors(form.fechanac) }}</div>
+        <div>{{ form_errors(form.sexo) }}</div>
+    </div>
+    {% endif %}
+
+    <form novalidate action="{{ path('cumpleanios_personal_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+
+
+        <div class="formShow">
+
+            <div class="contenedorform">
+                <div class="labelform">Nombre:</div>
+                <div class="widgetform">{{ form_widget(form.nombre) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Apellido:</div>
+                <div class="widgetform">{{ form_widget(form.apellido) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Ced/pas:</div>
+                <div class="widgetform">{{ form_widget(form.cedpas) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Correo:</div>
+                <div class="widgetform">{{ form_widget(form.correo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Ubicacion:</div>
+                <div class="widgetform">{{ form_widget(form.ubicacion) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Fecha nacimiento:</div>
+                <div class="widgetform">{{ form_widget(form.fechanac) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Sexo:</div>
+                <div class="widgetform">{{ form_widget(form.sexo) }}</div>
+            </div>
+        </div>
+
+        <a class="btn btn-default" href="{{ path('cumpleanios_personal') }}">
+            VOLVER A LA LISTA
+        </a> | 
+
+            <button class="btn btn-primary" type="submit">CREAR</button>
+
+    </form>
+
+    <script>
+      $(function() {
+        $( "#frontend_cumpleaniosbundle_personaltype_fechanac" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+       });
+    </script>
+
+{% endblock %}

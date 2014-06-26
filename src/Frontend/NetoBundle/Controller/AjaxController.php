@@ -44,10 +44,6 @@ class AjaxController extends Controller
             ))->getForm();
         }
 
-        else if ($mostrar=='boton' and $datos[0]!='s'){
-            echo '<input type="submit" value="Generar recibo" class="btn btn-primary">';
-            die;
-        }
 
         if($datos[0]=='s'){
             $form = $this->createFormBuilder()

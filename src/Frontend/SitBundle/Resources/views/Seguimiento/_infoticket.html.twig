@@ -53,4 +53,13 @@
             </tr>
         {% endif %}
 
+        {% if ticket.estatus==6 %}
+          <tr>
+          <th>Solución:</th><td >{{ ticket.solucion|capitalize }}</td>
+          <th>Fecha/Hora Sol.</th><td>{{ ticket.fechasolucion|date('d-m-Y')}} {{ ticket.horasolucion|date('G:i:s')}}</td>
+
+
+          </tr>
+        {% endif %}
+
     </table>

@@ -1,235 +1,240 @@
 {% extends '::distribucion.html.twig' %}
  
-{% block title %}Distribucion - Telesur{% endblock %}
+ {% block title %}NUEVO OPERADOR{% endblock %}
 
-
-{% block titulobanner %}
-    OPERADORES
+{% block titulo %}
+    NUEVO OPERADOR
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li><a href="{{ path("operador") }}">LISTA DE OPERADORES</a></li>
+  <li class="active">NUEVO OPERADOR</li>
+
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">CREAR OPERADOR</div>
-
     <form name="form1" class="formNewEditOperador" novalidate action="{{ path('operador_create') }}" method="post" {{ form_enctype(form) }}>
 
         {{ form_widget(form._token) }}
         {{ form_widget(form2._token) }}
 
-        <fieldset>
-            <legend id="a"><div class="divisor">DATOS DE OPERADOR</div></legend>
+            <div class="alert alert-info">DATOS DE OPERADOR</div><br>
             <div id="operador">
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form.nombre) }}</div>
-                    <div class="labels">Operador:</div>
-                    <div class="widgets">{{ form_widget(form.nombre) }}</div>
-                </div>
+                <div class="formShow">
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.nombre) }}</div>
+                        <div class="labelform">Operador:</div>
+                        <div class="widgetform">{{ form_widget(form.nombre) }}</div>
+                    </div>
+                    
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.tipooperador) }}</div>
+                        <div class="labelform">Tipo operador:</div>
+                        <div class="widgetform">{{ form_widget(form.tipooperador) }}</div>
+                    </div>
 
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.tipooperador) }}</div>
-                    <div class="labels">Tipo operador:</div>
-                    <div class="widgets">{{ form_widget(form.tipooperador) }}</div>
-                </div>
-  
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.pais) }}</div>
-                    <div class="labels">Pais:</div>
-                    <div class="widgets">{{ form_widget(form.pais) }}</div>
-                </div>
-                
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.estado) }}</div>
-                    <div class="labels">Estado:</div>
-                    <div id="estado">
-                        <div class="widgets">{{ form_widget(form.estado) }}</div>
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.pais) }}</div>
+                        <div class="labelform">Pais:</div>
+                        <div class="widgetform">{{ form_widget(form.pais) }}</div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.estado) }}</div>
+                        <div class="labelform">Estado:</div>
+                        <div id="estado">
+                            <div class="widgetform">{{ form_widget(form.estado) }}</div>
+                        </div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div id="franjatransmision" style="display:none;">
+                            <div>{{ form_errors(form.franjatransmision) }}</div>
+                            <div class="labelform">Franja transmision:</div>
+                            <div class="widgetform">{{ form_widget(form.franjatransmision) }}</div>
+                        </div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.cobertura) }}</div>
+                        <div class="labelform">Cobertura:</div>
+                        <div class="widgetform">{{ form_widget(form.cobertura) }}</div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.zona) }}</div>
+                        <div class="labelform">Zona:</div>
+                        <div class="widgetform">{{ form_widget(form.zona) }}</div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.numeroabonados) }}</div>
+                        <div class="labelform" id="usuario">Nro. Abonados:</div>
+                        <div class="widgetform">{{ form_widget(form.numeroabonados) }}</div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div>{{ form_errors(form.dialUrl) }}</div>
+                        <div class="labelform" id="ubicacion1">Dial1:</div>
+                        <div class="widgetform">{{ form_widget(form.dialUrl) }}</div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div>{{ form_errors(form.dialUrl2) }}</div>
+                        <div class="labelform" id="ubicacion2">Dial2:</div>
+                        <div class="widgetform">{{ form_widget(form.dialUrl2) }}</div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.direccion) }}</div>
+                        <div class="labelform">Direccion:</div>
+                        <div class="widgetform">{{ form_widget(form.direccion) }}</div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.observacion) }}</div>
+                        <div class="labelform">Observacion:</div>
+                        <div class="widgetform">{{ form_widget(form.observacion) }}</div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.paquete) }}</div>
+                        <div class="labelform">Paquete:</div>
+                        <div class="widgetform">{{ form_widget(form.paquete) }}</div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.urlweb) }}</div>
+                        <div class="labelform">Url Web:</div>
+                        <div class="widgetform">{{ form_widget(form.urlweb) }}</div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.urlfacebook) }}</div>
+                        <div class="labelform"><img width="25px" src="{{ asset('images/facebook.png') }}"></div>
+                        <div class="widgetform">{{ form_widget(form.urlfacebook) }}</div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.urltwitter) }}</div>
+                        <div class="labelform"><img width="22px" src="{{ asset('images/twitter.png') }}"></div>
+                        <div class="widgetform">{{ form_widget(form.urltwitter) }}</div>
+                    </div>
+
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.estatus) }}</div>
+                        <div class="labelform">Activo:</div>
+                        <div class="widgetform">{{ form_widget(form.estatus, { 'attr': {'checked': 'checked'} }) }}</div>
                     </div>
                 </div>
-                <div class="form-contenedor" id="franjatransmision" style="display:none;">
-                    <div>{{ form_errors(form.franjatransmision) }}</div>
-                    <div class="labels">Franja transmision:</div>
-                    <div class="widgets">{{ form_widget(form.franjatransmision) }}</div>
-                </div>
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.cobertura) }}</div>
-                    <div class="labels">Cobertura:</div>
-                    <div class="widgets">{{ form_widget(form.cobertura) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.zona) }}</div>
-                    <div class="labels">Zona:</div>
-                    <div class="widgets">{{ form_widget(form.zona) }}</div>
-                </div>
-                    
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.numeroabonados) }}</div>
-                    <div class="labels" id="usuario">Nro. Abonados:</div>
-                    <div class="widgets">{{ form_widget(form.numeroabonados) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form.dialUrl) }}</div>
-                    <div class="labels" id="ubicacion1">Dial1:</div>
-                    <div class="widgets">{{ form_widget(form.dialUrl) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form.dialUrl2) }}</div>
-                    <div class="labels" id="ubicacion2">Dial2:</div>
-                    <div class="widgets">{{ form_widget(form.dialUrl2) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.direccion) }}</div>
-                    <div class="labels">Direccion:</div>
-                    <div class="widgets">{{ form_widget(form.direccion) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.observacion) }}</div>
-                    <div class="labels">Observacion:</div>
-                    <div class="widgets">{{ form_widget(form.observacion) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.estatus) }}</div>
-                    <div class="labels">Activo:</div>
-                    <div class="widgets">{{ form_widget(form.estatus, { 'attr': {'checked': 'checked'} }) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.paquete) }}</div>
-                    <div class="labels">Paquete:</div>
-                    <div class="widgets">{{ form_widget(form.paquete) }}</div>
-                </div>
-
-                 <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.urlweb) }}</div>
-                    <div class="labels">Url Web:</div>
-                    <div class="widgets">{{ form_widget(form.urlweb) }}</div>
-                </div>
-
-                 <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.urlfacebook) }}</div>
-                    <div class="labels"><img width="25px" src="{{ asset('images/facebook.png') }}"></div>
-                    <div class="widgets">{{ form_widget(form.urlfacebook) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div class="text-warning">{{ form_errors(form.urltwitter) }}</div>
-                    <div class="labels"><img width="22px" src="{{ asset('images/twitter.png') }}"></div>
-                    <div class="widgets">{{ form_widget(form.urltwitter) }}</div>
-                </div>
-            </div> 
-        </fieldset>
-        
+            </div>        
         <br>
         
-        <fieldset>
-            <legend id="b"><div class="divisor">DATOS DE COMODATO</div></legend>
+        <div class="alert alert-info">DATOS DE COMODATO</div><br>
             <div id="comodato">
+                <div class="formShow">
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form.comodato.fechainicioacuerdo) }}</div>
+                        <div class="labelform">Fecha Inicio Transmisión:</div>
+                        <div class="widgetform">{{ form_widget(form.comodato.fechainicioacuerdo) }}</div>
+                    </div>
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form.comodato.fechainicioacuerdo) }}</div>
-                    <div class="labels">Fecha Inicio Transmisión:</div>
-                    <div class="widgets">{{ form_widget(form.comodato.fechainicioacuerdo) }}</div>
-                </div>
+                    <div class="contenedorform">
+                        <div>{{ form_errors(form.comodato.fechafinacuerdo) }}</div>
+                        <div class="labelform">Fecha Fin Transmisión:</div>
+                        <div class="widgetform">{{ form_widget(form.comodato.fechafinacuerdo) }}</div>
+                    </div>
 
+                    <div class="contenedorform">
+                        <div>{{ form_errors(form.comodato.recibereceptor) }}</div>
+                        <div class="labelform">Recibe receptor: </div>
+                        <div class="widgetform" style="margin-bottom:10px;">{{ form_widget(form.comodato.recibereceptor) }}</div>
+                    </div>
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form.comodato.fechafinacuerdo) }}</div>
-                    <div class="labels">Fecha Fin Transmisión:</div>
-                    <div class="widgets">{{ form_widget(form.comodato.fechafinacuerdo) }}</div>
-                </div>
+                    <div class="contenedorform">
+                        <div>{{ form_errors(form.comodato.fecharecepcion) }}</div>
+                        <div class="labelform">Fecha recepción:</div>
+                        <div class="widgetform">{{ form_widget(form.comodato.fecharecepcion) }}</div>
+                    </div>
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form.comodato.recibereceptor) }}</div>
-                    <div class="labels">Recibe receptor:</div>
-                    <div class="widgets">{{ form_widget(form.comodato.recibereceptor) }}</div>
-                </div>
+                    <div class="contenedorform">
+                        <div>{{ form_errors(form.comodato.observacion) }}</div>
+                        <div class="labelform">Observacion:</div>
+                        <div class="widgetform">{{ form_widget(form.comodato.observacion) }}</div>
+                    </div>
 
-
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form.comodato.fecharecepcion) }}</div>
-                    <div class="labels">Fecha recepción:</div>
-                    <div class="widgets">{{ form_widget(form.comodato.fecharecepcion) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form.comodato.observacion) }}</div>
-                    <div class="labels">Observacion:</div>
-                    <div class="widgets">{{ form_widget(form.comodato.observacion) }}</div>
-                </div>
-
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form.comodato.objetocomodato) }}</div>
-                    <div class="labels">Objeto Comodato:</div>
-                    <div class="widgets">{{ form_widget(form.comodato.objetocomodato) }}</div>
+                    <div class="contenedorform">
+                        <div>{{ form_errors(form.comodato.objetocomodato) }}</div>
+                        <div class="labelform">Objeto Comodato:</div>
+                        <div class="widgetform">{{ form_widget(form.comodato.objetocomodato) }}</div>
+                    </div>
                 </div>
             </div>
-        </fieldset>
         
         <br>
         
-        <fieldset>
-            <legend id="c"><div class="divisor">DATOS DE REPRESENTANTE</div> </legend>
+            <div class="alert alert-info">DATOS DE REPRESENTANTE</div><br>
             <div id="representante">
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form2.nombres) }}</div>
-                    <div class="labels">Nombres:</div>
-                    <div class="widgets">{{ form_widget(form2.nombres) }}</div>
-                </div>  
+                <div class="formShow">
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form2.nombres) }}</div>
+                        <div class="labelform">Nombres:</div>
+                        <div class="widgetform">{{ form_widget(form2.nombres) }}</div>
+                    </div>
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form2.apellidos) }}</div>
-                    <div class="labels">Apellidos:</div>
-                    <div class="widgets">{{ form_widget(form2.apellidos) }}</div>
-                </div>  
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form2.apellidos) }}</div>
+                        <div class="labelform">Apellidos:</div>
+                        <div class="widgetform">{{ form_widget(form2.apellidos) }}</div>
+                    </div>
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form2.cargo) }}</div>
-                    <div class="labels">Cargo:</div>
-                    <div class="widgets">{{ form_widget(form2.cargo) }}</div>
-                </div> 
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form2.cargo) }}</div>
+                        <div class="labelform">Cargo:</div>
+                        <div class="widgetform">{{ form_widget(form2.cargo) }}</div>
+                    </div>
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form2.correo) }}</div>
-                    <div class="labels">Correo:</div>
-                    <div class="widgets">{{ form_widget(form2.correo) }}</div>
-                </div> 
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form2.correo) }}</div>
+                        <div class="labelform">Correo:</div>
+                        <div class="widgetform">{{ form_widget(form2.correo) }}</div>
+                    </div>
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form2.telefono1) }}</div>
-                    <div class="labels">Telefono1:</div>
-                    <div class="widgets">{{ form_widget(form2.telefono1) }}</div>
-                </div> 
+                    <div class="contenedorform">
+                        <div class="text-danger">{{ form_errors(form2.telefono1) }}</div>
+                        <div class="labelform">Telefono1:</div>
+                        <div class="widgetform">{{ form_widget(form2.telefono1) }}</div>
+                    </div>
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form2.telefono2) }}</div>
-                    <div class="labels">Telefono2:</div>
-                    <div class="widgets">{{ form_widget(form2.telefono2) }}</div>
-                </div> 
+                    <div class="contenedorform">
+                        <div>{{ form_errors(form2.telefono2) }}</div>
+                        <div class="labelform">Telefono2:</div>
+                        <div class="widgetform">{{ form_widget(form2.telefono2) }}</div>
+                    </div>
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form2.fax) }}</div>
-                    <div class="labels">Fax:</div>
-                    <div class="widgets">{{ form_widget(form2.fax) }}</div>
-                </div> 
+                    <div class="contenedorform">
+                        <div>{{ form_errors(form2.fax) }}</div>
+                        <div class="labelform">Fax:</div>
+                        <div class="widgetform">{{ form_widget(form2.fax) }}</div>
+                    </div>
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form2.observacion) }}</div>
-                    <div class="labels">Observacion:</div>
-                    <div class="widgets">{{ form_widget(form2.observacion) }}</div>
+                    <div class="contenedorform">
+                        <div>{{ form_errors(form2.observacion) }}</div>
+                        <div class="labelform">Observacion:</div>
+                        <div class="widgetform">{{ form_widget(form2.observacion) }}</div>
+                    </div>
                 </div> 
             </div>
-        </fieldset>
-
 
         <br>
-       <button class="btn" type="submit">Crear</button> |
-        <a class="btn" href="{{ path('operador') }}">Volver</a>
+       <button class="btn btn-primary" type="submit">CREAR</button> |
+        <a class="btn btn-default" href="{{ path('operador') }}">VOLVER</a>
 
     
 
@@ -248,7 +253,28 @@
             });
         });
     </script>
-    <script src="{{ asset('js/distribucion/operador_new.js') }}"></script>
+
+  <script>
+      $(function() {
+        $( "#frontend_distribucionbundle_operadortype_comodato_fechainicioacuerdo" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+        $( "#frontend_distribucionbundle_operadortype_comodato_fechafinacuerdo" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+        $( "#frontend_distribucionbundle_operadortype_comodato_fecharecepcion" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+      });
+  </script>
+
+    <script src="{{ asset('bundles/distribucion/js/operador_new.js') }}"></script>
 
     <br>
 {% endblock %}

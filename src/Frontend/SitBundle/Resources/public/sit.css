@@ -100,3 +100,36 @@
 	width: 100%;
 	position: absolute;
 }
+
+/*AJAX USUARIO SEGUIMIENTO*/
+#ajaxlistausuario{
+	width: 220px;
+	height: auto;
+	position: static;
+	top: 0;
+	left: 0;
+	border: 1px solid gray;
+	background-color: #eeeeee;
+	margin-bottom: 2px;
+}
+
+#ajaxusuarios{
+	cursor:pointer;
+	font-size: 12px;
+}
+
+#loading{
+	position: absolute;
+	top:90;
+	left: 270;
+}
+
+.tags{
+	background-color: #85c7f9;
+	width: 220px;
+	font-size: 12px;
+	margin-bottom: 2px;
+	font-weight: bold;
+	cursor: pointer;
+
+}

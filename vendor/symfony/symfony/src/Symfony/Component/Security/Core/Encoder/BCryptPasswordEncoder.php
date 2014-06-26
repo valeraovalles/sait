@@ -11,7 +11,7 @@
 
 namespace Symfony\Component\Security\Core\Encoder;
 
-use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 /**
  * @author Elnur Abdurrakhimov <elnur@elnur.pro>
@@ -27,8 +27,9 @@ class BCryptPasswordEncoder extends BasePasswordEncoder
     /**
      * Constructor.
      *
-     * @param integer $cost The algorithmic cost that should be used
+     * @param int     $cost The algorithmic cost that should be used
      *
+     * @throws \RuntimeException When no BCrypt encoder is available
      * @throws \InvalidArgumentException if cost is out of range
      */
     public function __construct($cost)
@@ -42,7 +43,7 @@ class BCryptPasswordEncoder extends BasePasswordEncoder
             throw new \InvalidArgumentException('Cost must be in the range of 4-31.');
         }
 
-        $this->cost = sprintf('%02d', $cost);
+        $this->cost = $cost;
     }
 
     /**
@@ -53,14 +54,28 @@ class BCryptPasswordEncoder extends BasePasswordEncoder
      * the "$2y$" salt prefix (which is not available in the early PHP versions).
      * @see https://github.com/ircmaxell/password_compat/issues/10#issuecomment-11203833
      *
+     * It is almost best to **not** pass a salt and let PHP generate one for you.
+     *
      * @param string $raw  The password to encode
      * @param string $salt The salt
      *
      * @return string The encoded password
+     *
+     * @link http://lxr.php.net/xref/PHP_5_5/ext/standard/password.c#111
      */
     public function encodePassword($raw, $salt)
     {
-        return password_hash($raw, PASSWORD_BCRYPT, array('cost' => $this->cost));
+        if ($this->isPasswordTooLong($raw)) {
+            throw new BadCredentialsException('Invalid password.');
+        }
+
+        $options = array('cost' => $this->cost);
+
+        if ($salt) {
+            $options['salt'] = $salt;
+        }
+
+        return password_hash($raw, PASSWORD_BCRYPT, $options);
     }
 
     /**
@@ -68,6 +83,6 @@ class BCryptPasswordEncoder extends BasePasswordEncoder
      */
     public function isPasswordValid($encoded, $raw, $salt)
     {
-        return password_verify($raw, $encoded);
+        return !$this->isPasswordTooLong($raw) && password_verify($raw, $encoded);
     }
 }

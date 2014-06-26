@@ -1,29 +1,24 @@
 {% extends '::mercal.html.twig' %}
- 
-{% block title %}Sit{% endblock %}
 
-{% block titulobanner %}
-    MERCAL
+{% block title %}Numeraci&oacute;n{% endblock %}
+
+{% block titulo %}
+    SELECCIONE UNA JORNADA PARA ADMINISTRAR LA NUMERACIÓN
 {% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">JORNADA A NUMERAR</li>
+</ol>
+{% endblock %} 
+
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">SELECCIONE UNA JORNADA PARA ADMINISTRAR LA NUMERACIÓN</div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    <table cellpadding="0" cellspacing="0" border="1" class="table table-condensed" style="width:500px;">
+    
+    <table cellpadding="0" cellspacing="0" border="1" class="table table-hover" style="width:500px;">
         <thead>
             <tr>
                 <th>Jornada</th>

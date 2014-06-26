@@ -32,8 +32,10 @@ security:
         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/usuario/notificar, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/usuario/inicio, roles: ROLE_USER }
+        - { path: ^/usuario/telesur/personal, roles: ROLE_USER }
         - { path: ^/usuario/contacto, roles: ROLE_USER }
         - { path: ^/usuario/cambioclave, roles: ROLE_USER }
+        - { path: ^/usuario/actualizacambioclave, roles: ROLE_USER }
         - { path: ^/usuario, roles: ROLE_ADMINISTRADOR }
     
     #ROLES DE DISTRIBUCION
@@ -63,6 +65,7 @@ security:
         - { path: ^/sit/asignado, roles: ROLE_SIT_ADMINISTRADOR}
         - { path: ^/sit/categoria, roles: ROLE_SIT_ADMINISTRADOR}
         - { path: ^/sit/subcategoria, roles: ROLE_SIT_ADMINISTRADOR}
+
 
     #ROLES DE LICENCIAS
         - { path: ^/licencias/reportes, roles:[ROLE_LICENCIAS , ROLE_LICADMIN] }
@@ -113,3 +116,6 @@ security:
         - { path: ^/jornada/asignum, roles: ROLE_JORNADA_ASIGNUM}
         - { path: ^/jornada/num, roles: ROLE_JORNADA_NUM}
         - { path: ^/jornada, roles: ROLE_USER}
+
+    #ROLES DE CUMPLEANIOS
+        - { path: ^/cumpleanios, roles: ROLE_CUMPLEANIOS}
