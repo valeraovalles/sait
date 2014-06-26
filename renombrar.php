@@ -1,22 +1,11 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
 <?php
-	# Cambie estos datos por los de su Servidor FTP
-	//define("SERVER","10.10.2.243"); //IP o Nombre del Servidor
-    define("SERVER","192.168.40.3"); //IP o Nombre del Servidor  
-	define("PORT",21); //Puerto
-	define("USER","fork"); //Nombre de Usuario
-	define("PASSWORD","fork"); //Contraseña de acceso
-        //define("USER","jhoan"); //Nombre de Usuario
-	//define("PASSWORD","123456"); //Contraseña de acceso
-
-
-
 	# FUNCIONES
-	function ConectarFTP(){
+	function ConectarFTPA(){
 		//Permite conectarse al Servidor FTP
-		$id_ftp=ftp_connect(SERVER,PORT); //Obtiene un manejador del Servidor FTP
-		ftp_login($id_ftp,USER,PASSWORD); //Se loguea al Servidor FTP
+		$id_ftp=ftp_connect("192.168.40.3",21); //Obtiene un manejador del Servidor FTP
+		ftp_login($id_ftp,"fork","fork"); //Se loguea al Servidor FTP
 		return $id_ftp; //Devuelve el manejador a la función
 	}
 
@@ -34,36 +23,73 @@
     	return str_replace($a, $b, $str);
     }
 
-?>
+
+    // establecer una conexión básica
+    $conn_id = ConectarFTPA();
+    //me ubico en un directorio
+    ftp_chdir($conn_id, "Rename");
+    // Obtener los archivos contenidos en el directorio actual
+    $contents = ftp_nlist($conn_id, ".");
+    // output $contents
 
 
-<?php
+    //conecto a la bd de mysqlserver
+    $link = mssql_connect('192.168.70.7', 'sa', '') or die("Could not connect !");
+    $selected = mssql_select_db("creatv_data", $link);
 
 
-$file = file_get_contents ("ftp://fork:fork@192.168.40.3/Rename/");
-if (!$file) {
-    echo "<p>Imposible abrir el archivo remoto.\n";
-    exit;
-}
-while (!feof ($file)) {
-    $line = fgets ($file, 1024);
-    /* Esto solo trabaja si el titulo y sus tags estan en una línea */
-    if (preg_match ("@\<title\>(.*)\</title\>@i", $line, $out)) {
-        $title = $out[1];
-        break;
+    foreach ($contents as $c) {
+        if($c!=".DS_Store" and $c!="._.DS_Store"){
+            $dato=explode(".", $c);
+            $idcoriginal=$dato[0];
+            $idrecortado=substr($dato[0],0,-2);
+            $ext=$dato[1];
+
+            $query="
+              SELECT p.Identificador, c.Titol_Emissio as tcontenido,p.Titol_Emissio as tproduccion
+              FROM [creatv_data].[dbo].[Produccion] p ,[creatv_data].[dbo].[Contenido] c 
+              where p.IdPrograma=c.IdPrograma and p.Identificador='".$idrecortado."'
+            ";
+
+            $result = mssql_query($query);
+            $row = mssql_fetch_array($result);
+            print_r($row);
+            die;
+            ftp_rename($conn_id, $idcoriginal.".".$ext, $row['tcontenido']." - ".$row['tproduccion'].".".$ext);
+            ftp_exec($conn_id, "mv .".$row['tcontenido']." - ".$row['tproduccion'].".".$ext." ../From_Interplay/".$row['tcontenido']." - ".$row['tproduccion'].".".$ext);
+            die;
+
+        }
     }
-}
-fclose($file);
-die;
+
+if(is_file($dir."/".$filename)) 
+        { 
+        //$thisneeded_dir = chdir('/ftp/pirimms/'); 
+        //$delfile = "rm -f ".$dir."/".$filename."";  
+        $delfile = "mv ".$dir."/".$filename." ".MEDIA_STORED_PATH."/".$gateway."/".$filename."";  
+        //echo "in delete zip file $delfile<br>"; 
+        echo "in move file $filename<br>"; 
+        exec($delfile, $output); 
+        } 
 
 
 
 
-//conecto a la bd de mysqlserver
-$link = mssql_connect('192.168.70.7', 'sa', '') or die("Could not connect !");
-$selected = mssql_select_db("creatv_data", $link);
+
+
+
+
+
 
 //////////////////////////////////GENERO XML
+
+
+
+
+
+
+
+
 
 //tipo contenido, contenido, produccion
 $query="

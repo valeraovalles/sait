@@ -263,7 +263,7 @@ if($idprograma!=$row['IdPrograma']){
     $nombre="xmltv.xml";
 
     //envío el archivo por ftp
-    $archivo = fopen ("/var/www/sait/web/uploads/parrilla/xml/".$nombre.".xml", "w+");
+    $archivo = fopen ("/var/www/sait/web/uploads/parrilla/xml/".$nombre, "w+");
 
     //$archivo = fopen ("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml", "w+");
     fwrite($archivo, $xml);
