@@ -116,7 +116,7 @@
 
             {% if is_granted('ROLE_TRANSPORTE') %}
                 <div class="col-sm-6 col-md-4">
-                    <a href="javascript:void(0)">TRANSPORTE<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+                    <a href="javascript:void(0)" id="tr">TRANSPORTE<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
                 </div>
             {% endif %}
 
@@ -178,6 +178,12 @@
         $('#form60').attr('action', '/Telesur/web/creatv.php');
         $( "#form60" ).submit();
     });
+
+    $( "#tr" ).click(function() {
+        $('#form60').attr('action', '/Telesur/web/transporte.php');
+        $( "#form60" ).submit();
+    });
+
 
     </SCRIPT>
 
