@@ -1,9 +1,13 @@
 {% extends '::mercal.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Numeraci&oacute;n{% endblock %}
 
-{% block titulobanner %}
-    MERCAL
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("mercal_jornadanumeracion") }}">JORNADA A NUMERAR</a></li>
+  <li class="active">NUMERACI&Oacute;N</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
@@ -11,20 +15,8 @@
     
     <div class="titulojornada">JORNADA {{ jornada.nombrejornada|upper }}</div>
 
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <br><div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <br><div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
     {% if datos==null %}
-        <div id="numeracion"> 
+        <div class="numeracion"> 
             <div class="numero">0</div>
             <div class="nombre">NO HA COMENZADO</div>
         </div>
@@ -33,22 +25,22 @@
             <div class="numero">{{ datos.numero }}</div>
             <div class="nombre">
                 
-                    {{ datos.nombre }}<br><br>{{ datos.cedula }}
+                    {{ datos.nombre }}<br>{{ datos.cedula }}
             </div>
             <input type="hidden" id="usernumeroid" value="{{ datos.usernumeroid }}">
         </div>
     {% endif %}
   
-    <input type="hidden" id="idjornada" value="{{ jornada.id }}">
+    <input type="hidden" id="idjornada" value="{{ jornada.id }}"><br>
 
     {% if datos!=null %}
         {% if datos.compro==null %}
-            <a style="width:100px;padding:10px;" class="label label-success" href="{{ path('ajaxmercal_siguiente', {'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'true'}) }}">COMPRO</a> | 
-            <a style="width:100px;padding:10px;" class="label label-important" href="{{ path('ajaxmercal_siguiente', {'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'false'}) }}">NO COMPRO</a><br>
+            <a class="btn btn-success" href="{{ path('ajaxmercal_siguiente', {'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'true'}) }}">COMPRO</a> | 
+            <a class="btn btn-danger" href="{{ path('ajaxmercal_siguiente', {'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'false'}) }}">NO COMPRO</a><br><br>
         {% elseif datos.compro=="verificar" %}
-            <b class="alert alert-info">LA COLA DE USUARIOS HA CULMINADO, VERIFIQUE MÁS TARDE SI NUEVOS USUARIOS FUERON AGREGADOS</b><br><br>
-            <a id="comprobar" style="padding:10px;" class="label label-warning" href="{{ path('ajaxmercal_siguientecomprobar', {'idjornada': jornada.id }) }}">VERIFICAR COLA</a> | 
-            <a onclick="return confirm('¿Está seguro que desea culminar la jornada?')" id="" style="padding:10px;" class="label label-important" href="{{ path('mercal_cerrarjornada',{'idjornada':jornada.id}) }}">CULMINAR JORNADA</a><br>
+            <b class="alert alert-info">LA COLA DE USUARIOS HA CULMINADO, VERIFIQUE MÁS TARDE SI NUEVOS USUARIOS FUERON AGREGADOS</b><br><br><br>
+            <a id="comprobar" style="padding:10px;" class="btn btn-warning" href="{{ path('ajaxmercal_siguientecomprobar', {'idjornada': jornada.id }) }}">VERIFICAR COLA</a> | 
+            <a onclick="return confirm('¿Está seguro que desea culminar la jornada?')" id="" style="padding:10px;" class="btn btn-danger" href="{{ path('mercal_cerrarjornada',{'idjornada':jornada.id}) }}">CULMINAR JORNADA</a><br><br>
         {% endif %}
         
     {% endif %}

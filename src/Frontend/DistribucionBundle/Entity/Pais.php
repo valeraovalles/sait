@@ -3,6 +3,7 @@
 namespace Frontend\DistribucionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Pais
@@ -26,6 +27,7 @@ class Pais
      * @var string
      *
      * @ORM\Column(name="pais", type="string", length=200, nullable=false)
+     * @Assert\NotBlank()
      */
     private $pais;
 

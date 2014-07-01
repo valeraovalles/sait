@@ -1,16 +1,25 @@
 {% extends '::cumpleanios.html.twig' %}
 
-{% block title %}CUMPLEAÑOS - EDITAR{% endblock %}
+ 
+{% block title %}Editar{% endblock %}
 
-{% block titulobanner %}
-    CUMPLEAÑOS - EDITAR
+{% block titulo %}
+    EDITAR PERSONAL
 {% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("cumpleanios_personal") }}">LISTADO DE PERSONAL EXTRANJERO</a></li>
+  <li class="active">EDITAR PERSONAL</li>
+</ol>
+{% endblock %}
+
 
 {% block body -%}
     
     {{ parent() }}
 
-    <div class="titulo">EDITAR</div>
 
     <form action="{{ path('cumpleanios_personal_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
@@ -49,9 +58,9 @@
         </div>
 
         <a class="btn btn-default" href="{{ path('cumpleanios_personal') }}">
-            Volver a la lista
+            IR A LA LISTA
         </a> | 
-            <button class="btn btn-primary" type="submit">Editar</button>
+            <button class="btn btn-primary" type="submit">EDITAR</button>
     </form>
 
 
@@ -59,7 +68,7 @@
         <form action="{{ path('cumpleanios_personal_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit">Borrar</button>
+            <button class="btn btn-danger" type="submit">BORRAR</button>
         </form>
 
 {% endblock %}

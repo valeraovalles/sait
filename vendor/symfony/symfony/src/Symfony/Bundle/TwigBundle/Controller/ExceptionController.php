@@ -39,22 +39,20 @@ class ExceptionController
      * @param Request              $request   The request
      * @param FlattenException     $exception A FlattenException instance
      * @param DebugLoggerInterface $logger    A DebugLoggerInterface instance
-     * @param string               $format    The format to use for rendering (html, xml, ...)
+     * @param string               $_format   The format to use for rendering (html, xml, ...)
      *
      * @return Response
      *
      * @throws \InvalidArgumentException When the exception template does not exist
      */
-    public function showAction(Request $request, FlattenException $exception, DebugLoggerInterface $logger = null, $format = 'html')
+    public function showAction(Request $request, FlattenException $exception, DebugLoggerInterface $logger = null, $_format = 'html')
     {
-        $request->setRequestFormat($format);
-
         $currentContent = $this->getAndCleanOutputBuffering($request->headers->get('X-Php-Ob-Level', -1));
 
         $code = $exception->getStatusCode();
 
         return new Response($this->twig->render(
-            $this->findTemplate($request, $format, $code, $this->debug),
+            $this->findTemplate($request, $_format, $code, $this->debug),
             array(
                 'status_code'    => $code,
                 'status_text'    => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
@@ -66,7 +64,7 @@ class ExceptionController
     }
 
     /**
-     * @param integer $startObLevel
+     * @param int     $startObLevel
      *
      * @return string
      */
@@ -88,8 +86,8 @@ class ExceptionController
     /**
      * @param Request $request
      * @param string  $format
-     * @param integer $code       An HTTP response status code
-     * @param Boolean $debug
+     * @param int     $code       An HTTP response status code
+     * @param bool    $debug
      *
      * @return TemplateReference
      */

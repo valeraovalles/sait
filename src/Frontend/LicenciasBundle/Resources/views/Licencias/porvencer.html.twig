@@ -1,23 +1,22 @@
 {% extends '::licencias.html.twig' %}
 
-{% block javascripts %}
-    {{ parent() }}
+{% block title %}Lista por vencer{% endblock %}
+
+{% block titulo %}
+    LISTA DE LICENCIAS POR VENCER
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-{% endblock %}
-
-{% block title %}Licencias - Lista{% endblock %}
-
-{% block titulobanner %}
-    TECNOLOGIA - LICENCIAS
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("licencias_homepage") }}">LICENCIAS INICIO</a></li>
+  <li class="active">LISTA DE LICENCIAS POR VENCER</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
-    <div class="titulo">LISTA DE LICENCIAS POR VENCER</div>
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table id="tabladatatable">
         <thead>
             <tr>
                 <th width="5%" align="center">Codigo</th>
@@ -45,7 +44,17 @@
             {% endfor %}
         </tbody>
     </table>
-        <br><br>
+        <br><br><br>
         <a href="{{ path('reporte_porvencer_pdf') }}"><img width="40px" src="{{ asset('images/pdf.jpg')}}"></a> &nbsp;
     <br><br>
+
+
+            <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'asc'],[1,'asc']],
+            } );
+        })
+    </script>
 {% endblock %}

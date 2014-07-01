@@ -1,18 +1,23 @@
 {% extends '::licencias.html.twig' %}
 
-{% block title %}Licencias - Detalles{% endblock %}
+{% block title %}Licencia detalles{% endblock %}
 
+{% block titulo %}
+    DETALLES DE LICENCIA <br> ({{ entity.nombre }})
+{% endblock %}
 
-{% block titulobanner %}
-    TECNOLOGIA - LICENCIAS
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("licencias_homepage") }}">LICENCIAS INICIO</a></li>
+  <li class="active">DETALLES DE LICENCIA</li>
+</ol>
 {% endblock %}
 
 {% block body %}
 
 {{ parent() }}
 
-
-    <div class="titulo"> DETALLES DE LICENCIA <br> ({{ entity.nombre }}) </div>
 
     <div class="form-show_edit">
         
@@ -56,11 +61,11 @@
     </div>
 
     <br>
-        <a class="btn" href="{{ path( retorno ) }}">Listado</a> &nbsp;
+        <a class="btn btn-default" href="{{ path( retorno ) }}">LISTADO</a> &nbsp;
         {% if rol == 1 %}   
-        <a class="btn" href="{{ path('licencias_edit', { 'id': entity.id, 'retorno': retorno }) }}">Editar</a>
+        <a class="btn btn-primary" href="{{ path('licencias_edit', { 'id': entity.id, 'retorno': retorno }) }}">EDITAR</a>
           <br><br>
-        <a class="btn btn-danger" href="{{ path('licencias_delete', { 'id': entity.id, 'retorno':retorno }) }}">Eliminar</a> &nbsp;
+        <a class="btn btn-danger" href="{{ path('licencias_delete', { 'id': entity.id, 'retorno':retorno }) }}">ELIMINAR</a> &nbsp;
         {% endif %}
         <br><br>
       

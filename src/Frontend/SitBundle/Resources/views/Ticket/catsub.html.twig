@@ -1,33 +1,23 @@
 {% extends '::sit.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+ 
+{% block title %}Categorias{% endblock %}
 
-
-{% block titulobanner %}
-    LISTA DE CATEGORIAS Y SUBCATEGORIAS
+{% block titulo %}
+    ASOCIAR CATEGORIAS
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("ticket") }}">LISTADO DE TICKETS</a></li>
+  <li class="active">ASOCIAR CATEGORIAS</li>
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">LISTADO DE CATEGORIAS Y SUBCATEGORIAS</div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    
-
-
 	<div class="row">
 	 	<div class="col-md-6">
 			<form novalidate action="{{ path('ticket_guardacatsub', { 'id': id }) }}" method="post">
@@ -83,6 +73,5 @@
                         <br><input type="submit" class="btn btn-warning" value="REASIGNAR TICKET">
                     </form>
                 </div>
-	
-
+	</div>
 {% endblock %}

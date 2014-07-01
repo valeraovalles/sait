@@ -1,77 +1,81 @@
 {% extends '::distribucion.html.twig' %}
-{% block title %}Distribución - Nuevo{% endblock %}
 
-{% block titulobanner %}
-    DISTRIBUCIÓN - REPRESENTANTE
+{% block title %}Nuevo Representante{% endblock %}
+
+{% block titulo %}
+    NUEVO REPRESENTANTE<br>OPERADOR ({{ operador.nombre | upper}})
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li><a href="{{ path("representante") }}">LISTA DE REPRESENTANTES</a></li>
+  <li class="active">NUEVO REPRESENTANTE</li>
+</ol>
+{% endblock %}
     
 {% block body -%}
     {{ parent() }}
-    <div class="titulo">NUEVO REPRESENTANTE<br>OPERADOR ({{ operador.nombre | upper}})</div>
 
     <form novalidate action="{{ path('representante_create_add', {'id':operador.id}) }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
-           
-        <div class="form-contenedor">
-            {{ form_errors(form.nombres) }}
-            <div class="labels">Nombres:</div>
-            <div class="widgets">{{ form_widget(form.nombres) }}</div>
-        </div>  
-            
-        <div class="form-contenedor">
-            {{ form_errors(form.apellidos) }}
-            <div class="labels">Apellidos:</div>
-            <div class="widgets">{{ form_widget(form.apellidos) }}</div>
-        </div>  
-            
-        <div class="form-contenedor">
-            {{ form_errors(form.cargo) }}
-            <div class="labels">Cargo:</div>
-            <div class="widgets">{{ form_widget(form.cargo) }}</div>
-        </div> 
+        <div class="formShow" style="width:500px;">
+            <div class="contenedorform">
+               <div class="text-danger">{{ form_errors(form.nombres) }}</div>
+                <div class="labelform">Nombres:</div>
+                <div class="widgetform">{{ form_widget(form.nombres) }}</div>
+            </div>  
+                
+            <div class="contenedorform">
+               <div class="text-danger">{{ form_errors(form.apellidos) }}</div>
+                <div class="labelform">Apellidos:</div>
+                <div class="widgetform">{{ form_widget(form.apellidos) }}</div>
+            </div>  
+                
+            <div class="contenedorform">
+               <div class="text-danger">{{ form_errors(form.cargo) }}</div>
+                <div class="labelform">Cargo:</div>
+                <div class="widgetform">{{ form_widget(form.cargo) }}</div>
+            </div> 
 
-        <div class="form-contenedor">
-            {{ form_errors(form.correo) }}
-            <div class="labels">Correo:</div>
-            <div class="widgets">{{ form_widget(form.correo) }}</div>
-        </div> 
-            
-        <div class="form-contenedor">
-            {{ form_errors(form.telefono1) }}
-            <div class="labels">Telefono1:</div>
-            <div class="widgets">{{ form_widget(form.telefono1) }}</div>
-        </div> 
-            
-        <div class="form-contenedor">
-            {{ form_errors(form.telefono2) }}
-            <div class="labels">Telefono2:</div>
-            <div class="widgets">{{ form_widget(form.telefono2) }}</div>
-        </div> 
-            
-        <div class="form-contenedor">
-            {{ form_errors(form.fax) }}
-            <div class="labels">Fax:</div>
-            <div class="widgets">{{ form_widget(form.fax) }}</div>
-        </div> 
-            
-        <div class="form-contenedor">
-            {{ form_errors(form.observacion) }}
-            <div class="labels">Observacion:</div>
-            <div class="widgets">{{ form_widget(form.observacion) }}</div>
-        </div> 
-        <p>
-            <button type="submit">Create</button>
-        </p>
+            <div class="contenedorform">
+               <div class="text-danger">{{ form_errors(form.correo) }}</div>
+                <div class="labelform">Correo:</div>
+                <div class="widgetform">{{ form_widget(form.correo) }}</div>
+            </div> 
+                
+            <div class="contenedorform">
+               <div class="text-danger">{{ form_errors(form.telefono1) }}</div>
+                <div class="labelform">Telefono1:</div>
+                <div class="widgetform">{{ form_widget(form.telefono1) }}</div>
+            </div> 
+                
+            <div class="contenedorform">
+               <div class="text-danger">{{ form_errors(form.telefono2) }}</div>
+                <div class="labelform">Telefono2:</div>
+                <div class="widgetform">{{ form_widget(form.telefono2) }}</div>
+            </div> 
+                
+            <div class="contenedorform">
+               <div class="text-danger">{{ form_errors(form.fax) }}</div>
+                <div class="labelform">Fax:</div>
+                <div class="widgetform">{{ form_widget(form.fax) }}</div>
+            </div> 
+                
+            <div class="contenedorform">
+               <div class="text-danger">{{ form_errors(form.observacion) }}</div>
+                <div class="labelform">Observacion:</div>
+                <div class="widgetform">{{ form_widget(form.observacion) }}</div>
+            </div> 
+        </div>
+            <button type="submit" class="btn btn-primary">CREAR</button> | 
+
+            <a class="btn btn-default" href="{{ path('representante') }}">
+                IR A LA LISTA
+            </a>
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('representante') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
 
     
 

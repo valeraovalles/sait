@@ -1,11 +1,22 @@
 {% extends '::directorio.html.twig' %}
 
+{% block title %}Lista de Personalidades{% endblock %}
+
+{% block titulo %}
+    LISTA DE PERSONALIDADES
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("directorio_homepage") }}"> DIRECTORIO INICIO</a></li>
+  <li class="active">LISTA DE PERSONALIDADES</li>
+</ol>
+{% endblock %}
+
 {% block body %}
     {{parent()}}
-<br>
-    <h2>LISTADO DE PERSONALIDADES</h2><br><br>
-    
-    <table id="tablalista" style="width: 97%;">
+    <table id="tabladatatable">
         <thead>
             <tr align= "center">
                 <th>Id</th>
@@ -22,22 +33,29 @@
                 <td align=left>{{ entity.nombre }} {{ entity.apellido }}</td>
                 <td>{{ entity.especialidad }}</td>
                 <td>{{ entity.pais }}</td>                
-               
-                    <td>
-                        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
-                        <a href="{{ path('personalidad_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
-                        {% endif %}
-                        <a href="{{ path('personalidad_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-search"></i></a>
-                    </td>
-                
+                <td>
+                    <a href="{{ path('personalidad_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
+                    {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+                        <a href="{{ path('personalidad_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></a>
+                    {% endif %}                  
+                </td>                 
             </tr>
         {% endfor %}
         </tbody>
     </table>
     {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}<br><br><br>
 
-    <a class="btn btn-primary" href="{{ path('personalidad_new') }}">
+    <a class="btn btn-default" href="{{ path('personalidad_new') }}">
         NUEVA PERSONALIDAD
     </a>{% endif %}<br><br>
 
+
+<script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'asc'],[1,'asc']],
+            } );
+        })
+    </script>
     {% endblock %}

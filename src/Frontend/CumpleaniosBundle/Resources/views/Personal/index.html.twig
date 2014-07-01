@@ -1,18 +1,24 @@
 {% extends '::cumpleanios.html.twig' %}
 
-{% block title %}CUMPLEAÑOS - LISTADO{% endblock %}
+ 
+{% block title %}Listado{% endblock %}
 
-{% block titulobanner %}
-    CUMPLEAÑOS - LISTADO
+{% block titulo %}
+    LISTADO DE PERSONAL EXTRANJERO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">LISTADO DE PERSONAL EXTRANJERO</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
 
     {{ parent() }}
 
-    <div class="titulo">LISTADO DE PERSONAL EXTRANJERO</div>
-
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalistaX">
+    <table id="tabladatatable" class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
@@ -34,14 +40,8 @@
                 <td>{{ entity.fechanac|date("Y-m-d") }}</td>
                 <td>{{ entity.sexo }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('cumpleanios_personal_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('cumpleanios_personal_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                        <a href="{{ path('cumpleanios_personal_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></a>
+                        <a href="{{ path('cumpleanios_personal_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></a>
                 </td>
             </tr>
         {% endfor %}
@@ -54,12 +54,13 @@
     </a>
     <br>
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function(){
-            $('#tablalistaX').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-                 "aaSorting": [[0,'desc']],
-             } );
-         })
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'asc'],[1,'asc']],
+            } );
+        })
     </script>
+    <br>
     {% endblock %}

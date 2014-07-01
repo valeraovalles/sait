@@ -1,15 +1,19 @@
 {% extends '::mercal.html.twig' %}
  
-{% block title %}Jornadas{% endblock %}
+{% block title %}Numeraci&oacute;n{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('bundles/mercal/numeracion.css') }}" rel="stylesheet" type="text/css" />
+{% block titulo %}
+    NUMERACI&Oacute;N DE LA JORNADA
 {% endblock %}
 
-{% block titulobanner %}
-    JORNADAS
-{% endblock %}
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path('mercal_seleccionajornada', { 'idjornada':jornada.id }) }}">LISTA DE JORNADAS</a></li>
+  <li><a href="{{ path('mercal_listado', { 'idjornada':jornada.id }) }}">LISTA DE TRABAJADORES</a></li>
+  <li class="active">NUMERACI&Oacute;N DE LA JORNADA</li>
+</ol>
+{% endblock %} 
 
 {% block body -%}
     {{ parent() }}

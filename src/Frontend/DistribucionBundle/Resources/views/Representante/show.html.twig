@@ -1,17 +1,23 @@
 {% extends '::distribucion.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}Consultar Representante{% endblock %}
 
-{% block titulobanner %}
-    DISTRIBUCIÓN - CONSULTAR - REPRESENTANTE
+{% block titulo %}
+    CONSULTA DE REPRESENTANTE ({{ entity.nombreS | upper }})
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li><a href="{{ path("representante") }}">LISTA DE REPRESENTANTES</a></li>
+  <li class="active">CONSULTA DE REPRESENTANTE</li>
+</ol>
+{% endblock %}
+    
 {% block body %}
 
 {{ parent() }}
-
-
-    <div class="titulo">REPRESENTANTE ({{ entity.nombreS | upper }})</div>
 
     <div class="formShow">
         <div class="contenedorform">
@@ -62,9 +68,9 @@
     </div>
 
 <br>
-    <a class="btn" href="{{ path('representante') }}">Ir a lista</a> | 
-    <a class="btn" href="{{ path('representante_edit', { 'id': entity.id }) }}">Ir a editar</a> | 
-    <a class="btn" href="{{ path('operador_show', {'id': entity.operador.id}) }}">Ir al operador</a>
+    <a class="btn btn-default" href="{{ path('representante') }}">IR A LA LISTA</a> | 
+    <a class="btn btn-default" href="{{ path('representante_edit', { 'id': entity.id }) }}">IR A EDITAR</a> | 
+    <a class="btn btn-default" href="{{ path('operador_show', {'id': entity.operador.id}) }}">IR AL OPERADOR</a>
 <br><br>
 
 {#

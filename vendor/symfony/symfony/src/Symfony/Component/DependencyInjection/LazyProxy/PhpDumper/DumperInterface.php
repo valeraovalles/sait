@@ -11,11 +11,10 @@
 
 namespace Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * Lazy proxy dumper capable of generating the instantiation logic php code for proxied services.
+ * Lazy proxy dumper capable of generating the instantiation logic PHP code for proxied services.
  *
  * @author Marco Pivetta <ocramius@gmail.com>
  */

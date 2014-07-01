@@ -86,7 +86,7 @@ class NamespacedAttributeBag extends AttributeBag
         $retval = null;
         $attributes = & $this->resolveAttributePath($name);
         $name = $this->resolveKey($name);
-        if (array_key_exists($name, $attributes)) {
+        if (null !== $attributes && array_key_exists($name, $attributes)) {
             $retval = $attributes[$name];
             unset($attributes[$name]);
         }
@@ -100,7 +100,7 @@ class NamespacedAttributeBag extends AttributeBag
      * This method allows structured namespacing of session attributes.
      *
      * @param string  $name         Key name
-     * @param boolean $writeContext Write context, default false
+     * @param bool    $writeContext Write context, default false
      *
      * @return array
      */

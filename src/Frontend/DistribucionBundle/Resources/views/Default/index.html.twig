@@ -1,5 +1,17 @@
 {% extends '::distribucion.html.twig' %}
-{% block title %}Inicio - Telesur{% endblock %}
+
+{% block title %}Distribución{% endblock %}
+
+{% block titulo %}
+    BIENVENIDO AL SISTEMA DE DISTRIBUCIÓN
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">DISTRIBUCIÓN INICIO</li>
+</ol>
+{% endblock %}
 
 {% block javascripts %}
 	{{ parent() }}
@@ -60,23 +72,11 @@
 
   </script>
 {% endblock %}
-
-{% block titulobanner %}
-    PÁGINA PRINCIPAL DISTRIBUCIÓN
-{% endblock %}
-
     
 {% block body %}
     {{ parent() }}
 
-    <div class="titulo">BIENVENIDO AL SISTEMA DE DISTRIBUCIÓN</div>
-    <div id="map_canvas" style="width:900px; height:400px"></div>
-
-
-
-
-
-
+    <div id="map_canvas" style="width:90%; height:500px"></div>
 
 <script>
   $(document).ready(function() {

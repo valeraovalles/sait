@@ -1,29 +1,21 @@
 {% extends '::mercal.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Crear Jornada{% endblock %}
 
-{% block titulobanner %}
-    MERCAL
+{% block titulo %}
+    CREAR JORNADA
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("jornada") }}">LISTA DE JORNADAS</a></li>
+  <li class="active">CREAR JORNADA</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
-    
-    <div class="titulo">CREAR NUEVA JORNADA</div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-
     <form novalidate action="{{ path('jornada_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
 
@@ -45,7 +37,15 @@
                 ir al listado
             </a>
     </form>
-
+  <script>
+      $(function() {
+        $( "#frontend_mercalbundle_jornadatype_fechajornada" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+      });
+  </script>
 
 
 {% endblock %}

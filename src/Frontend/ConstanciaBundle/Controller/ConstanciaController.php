@@ -58,7 +58,6 @@ class ConstanciaController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $entities = $em->getRepository('ConstanciaBundle:Constancia')->findAll();
 
         return $this->render('ConstanciaBundle:Constancia:index.html.twig', array(
@@ -158,7 +157,6 @@ class ConstanciaController extends Controller
 
         $f=new Funcion;
         $datosnomina=$f->datosUsuarioSigefirrhh($entity->getUser()->getCedula());
-
 
         return $this->render('ConstanciaBundle:Constancia:show.html.twig', array(
             'entity'      => $entity,

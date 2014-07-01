@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <root>
+        <semana>
+            <lunes cuantos='39'>
+                <programas>        
+                    <programa id='179'>
+                        <nombre>VIDAS</nombre>
+                        <sinopsis>ESPACIO QUE DA A CONOCER LAS HISTORIAS DE VIDA DE PERSONAS Y PERSONAJES SENCILLOS, INMERSOS EN EL DÍA A DÍA DE SUS OBRAS, TRABAJOS, PASIONES, CREENCIAS E HISTORIAS. SON NOTAS HUMANAS, QUE DESTACAN LA IDIOSINCRACIA, LA EXPRESIÓN Y LA CREATIVIDAD DE LOS LAT</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 00:00:00</hora_ini>
+                        <hora_fin>2014/06/30 00:30:00</hora_fin>
+                    </programa>        
+                    <programa id='256'>
+                        <nombre>RONDA 11 1330 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 00:30:00</hora_ini>
+                        <hora_fin>2014/06/30 01:00:00</hora_fin>
+                    </programa>        
+                </programas>
+            </domingo> 
+        </semana>
+    </root>

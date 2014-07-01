@@ -1,39 +1,42 @@
 {% extends '::distribucion.html.twig' %}
- 
-{% block title %}Distribucion{% endblock %}
 
+{% block title %}NUEVO TIPO DE OPERADOR{% endblock %}
 
-{% block titulobanner %}
-    TIPO DE OPERADOR - NUEVO
+{% block titulo %}
+    NUEVO TIPO DE OPERADOR
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li><a href="{{ path("tipooperador") }}">LISTA DE TIPO DE OPERADORES</a></li>
+  <li class="active">NUEVO TIPO DE OPERADOR</li>
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">CREAR OPERADOR</div>
-
     <form novalidate class="formNewEditOperador"  action="{{ path('tipooperador_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
 
-        <fieldset>
-        <legend id="a"><div class="divisor">DATOS DE OPERADOR</div></legend>
+        <div class="formShow" style="width:500px;">
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(form.operador) }}</div>
+                <div class="labelform">Tipo:</div>
+                <div class="widgetform">{{ form_widget(form.operador) }}</div>
+            </div>
 
-        <div class="form-contenedor">
-            <div>{{ form_errors(form.operador) }}</div>
-            <div class="labels">Tipo:</div>
-            <div class="widgets">{{ form_widget(form.operador) }}</div>
+            <div class="form-contenedor">
+                <div class="text-danger">{{ form_errors(form.codigo) }}</div>
+                <div class="labelform">Código:</div>
+                <div class="widgetform">{{ form_widget(form.codigo) }}</div>
+            </div>
         </div>
-
-        <div class="form-contenedor">
-            <div>{{ form_errors(form.codigo) }}</div>
-            <div class="labels">Código:</div>
-            <div class="widgets">{{ form_widget(form.codigo) }}</div>
-        </div>
-        </fieldset>
         <br>
-        <button class="btn" type="submit">Crear</button> | 
-        <a class="btn" href="{{ path('tipooperador') }}">Ir a lista</a>
+        <button class="btn btn-primary" type="submit">CREAR</button> | 
+        <a class="btn btn-default" href="{{ path('tipooperador') }}">IR A LA LISTA</a>
 
     </form>
 

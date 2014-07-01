@@ -4,15 +4,11 @@ parameters:
     database_host: localhost
     database_port: null
     database_name: sait
-    database_user: ecastro
-    database_password: 15975364
-
-
+    database_user: postgres
+    database_password: postgres
     mailer_transport: smtp
     mailer_host: correo.telesurtv.net
     mailer_user: aplicaciones@telesurtv.net
-    mailer_password: '4pl1c4c10n35'
-    mailer_port: 25
-
+    mailer_password: 4pl1c4c10n35
     locale: es
     secret: d1a9e66c51b73a5e43f27bbf07907f97

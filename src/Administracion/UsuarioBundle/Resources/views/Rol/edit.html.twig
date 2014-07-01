@@ -1,14 +1,21 @@
 {% extends '::administracion.html.twig' %}
 
-{% block title %}Inicio - Telesur{% endblock %}
+{% block title %}Editar rol{% endblock %}
 
-{% block titulobanner %}
-    ADMINISTRACIÓN DE ROLES
+{% block titulo %}
+    EDITAR ROL
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+    <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+    <li><a href="{{ path("rol") }}">LISTA DE ROLES</a></li>
+    <li class="active">EDITAR ROL</li>
+</ol>
 {% endblock %}
 
 {% block body %}
 {{ parent() }}
-<div class="titulo">EDITAR ROL</div>
 
 <form novalidate action="{{ path('rol_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     
@@ -22,17 +29,17 @@
         </div>
     </div>
 
-    <button class="btn btn-primary" type="submit">Editar</button> | 
+    <button class="btn btn-primary" type="submit">EDITAR</button> | 
 
         <a class="btn btn-default" href="{{ path('rol') }}">
-            Ir la lista
+            IR A LA LISTA
         </a>
 </form>
 
 
         <form action="{{ path('rol_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('Seguro que desea eliminar')">
             {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit">Borrar</button>
+            <button class="btn btn-danger" type="submit">BORRAR</button>
         </form>
 
 

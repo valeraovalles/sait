@@ -73,7 +73,7 @@ class Perfil
      * @var string
      *
      * @ORM\Column(name="extension", type="integer", nullable=true)
-     * @Assert\Type(type="integer", message="La extensión debe ser un número.")
+     * @Assert\Type(type="digit", message="La extensión debe ser un número.").
      * @Assert\NotEqualTo(value = "0", message="La extensión no puede ser igual a 0.")
      */
     private $extension=null;
@@ -87,6 +87,17 @@ class Perfil
      * })
      */
     private $user;
+
+    /**
+     * @var \"user"
+     *
+     * @ORM\ManyToOne(targetEntity="Nivelorganizacional")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="nivelorganizacional_id", referencedColumnName="id")
+     * })
+     */
+    private $nivelorganizacional;
+
 
 
 
@@ -284,6 +295,31 @@ class Perfil
     {
         return $this->user;
     }
+    
+
+    /**
+     * Set nivelorganizacional
+     *
+     * @param \Administracion\UsuarioBundle\Entity\nivelorganizacional $nivelorganizacional
+     * @return Perfil
+     */
+    public function setNivelorganizacional(\Administracion\UsuarioBundle\Entity\nivelorganizacional $nivelorganizacional = null)
+    {
+        $this->nivelorganizacional = $nivelorganizacional;
+    
+        return $this;
+    }
+
+    /**
+     * Get nivelorganizacional
+     *
+     * @return \Administracion\UsuarioBundle\Entity\nivelorganizacional 
+     */
+    public function getNivelorganizacional()
+    {
+        return $this->nivelorganizacional;
+    }
+    
     
     public function __toString()
     {

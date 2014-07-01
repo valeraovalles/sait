@@ -1,38 +1,33 @@
 {% extends '::contratos.html.twig' %}
 
-{% block titulobanner %}
-    ABOGADOS - EDITAR
+{% block title %}Editar Abogado{% endblock %}
+
+{% block titulo %}
+    EDITAR EL ABOGADO
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("abogados") }}">LISTADO DE ABOGADOS</a></li>
+  <li class="active">EDITAR EL ABOGADO</li>
+</ol>
+{% endblock %}
+    
 {% block body -%}
- {{ parent() }}
-    <div class="titulo"> EDITAR DATOS DEL ABOGADO </div>
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-   {% endfor %}
+    {{ parent() }}
 
     <form action="{{ path('abogados_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
         <input type="hidden" name="_method" value="PUT" />
-        <div id="descripcion" class="form-show_edit">
-        <br>
-            <fieldset>       
-                <div class="form-contenedor">
-                    {{ form_errors(edit_form.nombre) }}
-                    <div class="labels">Nombre del Abogado:</div>
-                    <div class="widgets">{{ form_widget(edit_form.nombre) }}</div>
-                </div>
-                <button type="submit" class="btn">Editar</button> <br><br>
-            </fieldset>
-
+        <div class="formShow">  
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(edit_form.nombre) }}</div>                    
+                <div class="labelform">Nombre del Abogado:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nombre) }}</div>
+            </div> 
         </div><br>
-    <a href="{{ path('abogados') }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
+    <BR><button class="btn btn-primary" type="submit">EDITAR</button> | 
+            <a class="btn btn-default" href="{{ path('abogados') }}">IR A LA LISTA</a> | 
+            <a class="btn btn-default" href="{{ path('abogados_show', { 'id': entity.id }) }}">IR A CONSULTAR</a>
     </form>
 {% endblock %}

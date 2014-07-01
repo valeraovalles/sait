@@ -1,0 +1,100 @@
+{% extends '::transporte.html.twig' %}
+
+{% block title %}Transporte{% endblock %}
+
+{% block titulobanner %}
+    TRANSPORTE
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">TRANSPORTE -  EDITAR SOLICITUD</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+ <div class="formShow">
+
+    <form action="{{ path('solicitudes_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />    
+        {{ form_widget(edit_form._token)}}
+       
+            <div class="contenedorform">
+                <div class="labelform">Fecha de Solicitud</div>
+                <div class="widgetform">{{ form_widget(edit_form.fechaSolicitud, {'attr':{'class':'fecha'}})}}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Fecha de Salida</div>
+                <div class="widgetform">{{ form_widget(edit_form.fechaSalida, {'attr':{'class':'fecha'}})}}</div>
+                   <script>
+                  $(function() {
+                    $( ".fecha" ).datepicker({
+                      changeMonth: true,
+                      changeYear: true,
+                      dateFormat: "yy-mm-dd",
+                    });
+                  });
+                </script>
+            </div>
+            <div class="contenedorform">                
+                <div class="widgetform">{{ form_widget(edit_form.asistentes)}}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Hora de Salida</div>
+                <div class="widgetform">{{ form_widget(edit_form.horaSalida, {'attr':{'class':'hora'}})}}</div>
+                   <script>
+                    $(".hora select").css({
+                        'width':'50px',
+                    });
+                    </script>    
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Direccion Desde</div>
+                <div class="widgetform">{{ form_widget(edit_form.direccionDesde) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Direccion Hasta</div>
+                <div class="widgetform">{{ form_widget(edit_form.direccionHasta) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Equipos/Implementos</div>
+                <div class="widgetform">{{ form_widget(edit_form.descripcionEquipos) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Motivo de la Solicitud</div>
+                <div class="widgetform">{{ form_widget(edit_form.datosInteresRazon) }}</div>
+            </div>           
+      
+       
+     
+        <p>            
+            <button class="btn btn-primary" type="submit">EDITAR</button> | 
+            <a class="btn" href="{{ path('solicitudes') }}">IR AL LISTADO</a> 
+        </p>
+    </form>
+{#
+    <ul class="record_actions">
+    <li>
+        <form action="{{ path('solicitudes_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            
+
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+#}
+ </div>
+{% endblock %}

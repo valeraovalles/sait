@@ -1,0 +1,13 @@
+
+    {# 	FORMULARIO MODAL #}
+
+    <form action="{{ path('asignaciones_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+    <script type="text/javascript">
+    $("#frontend_transportebundle_asignacionestype_idSolicitud").removeAttr("width");
+    $("#frontend_transportebundle_asignacionestype_idSolicitud").css('width','300px');
+    </script>

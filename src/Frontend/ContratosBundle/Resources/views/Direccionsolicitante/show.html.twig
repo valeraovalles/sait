@@ -1,34 +1,27 @@
 {% extends '::contratos.html.twig' %}
 
-{% block titulobanner %}
-    DIRECCION SOLICITANTE - DETALLES
+{% block title %}Detalle de direc. Solic.{% endblock %}
+
+{% block titulo %}
+    DETALLES DE LA DIRECCI&Oacute;N
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("Direccionsolicitante") }}">LISTADO DE DIRECCIONES</a></li>
+  <li class="active">DETALLES DE LA DIRECCI&Oacute;N</li>
+</ol>
 {% endblock %}
     
 {% block body -%}
-
     {{ parent() }}
-    <div class="titulo"> DETALLE DE LA DIRECCION SOLICITANTE </div>
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
+    <div class="formShow">       
+        <div class="contenedorform">
+            <div class="labelform">Nombre de la Direcci&oacute;n:</div>
+            <div class="widgetform">{{ entity.nombre }}</div>
         </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-   {% endfor %}
-
-    <div class="form-show_edit">
-        <fieldset>       
-                <div class="contenedor">
-                    <div class="labels">Nombre:</div>
-                    <div class="dato">{{ entity.nombre }}</div>
-                </div>
-        </fieldset>
     </div>
-    <a href="{{ path('Direccionsolicitante') }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
-    <a href="{{ path('Direccionsolicitante_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar datos del abogado"><img width="75px" src="{{ asset('images/edit.png')}}"></a>
-    <br><br> 
+    <a class="btn btn-default" href="{{ path('Direccionsolicitante') }}">IR A LA LISTA</a> |
+    <a class="btn btn-default" href="{{ path('Direccionsolicitante_edit', { 'id': entity.id }) }}">IR A EDITAR</a><br><br>
 {% endblock %}

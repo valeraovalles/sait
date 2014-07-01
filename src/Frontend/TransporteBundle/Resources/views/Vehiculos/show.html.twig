@@ -1,0 +1,80 @@
+{% extends '::transporte.html.twig' %}
+
+{% block title %}Transporte{% endblock %}
+
+{% block titulobanner %}
+    TRANSPORTE
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">TRANSPORTE - DETALLE DE VEHICULO</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+ <div class="formShow">
+
+    <table class="record_properties" width="60%" align="center">
+        <tbody>
+        <div class="contenedorform">
+            <div class="labelform">ID:</div>
+            <div class="widgetform">{{ entity.id|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Tipo:</div>
+            <div class="widgetform">{{ entity.tipo|capitalize }}</div>
+        </div>            
+        <div class="contenedorform">
+            <div class="labelform">Placa:</div>
+            <div class="widgetform">{{ entity.placa|capitalize }}</div>
+        </div>    
+        <div class="contenedorform">
+            <div class="labelform">Modelo:</div>
+            <div class="widgetform">{{ entity.modelo|capitalize }}</div>
+        </div>            
+        <div class="contenedorform">
+            <div class="labelform">Año:</div>
+            <div class="widgetform">{{ entity.ano|capitalize }}</div>
+        </div>            
+        <div class="contenedorform">
+            <div class="labelform">Color:</div>
+            <div class="widgetform">{{ entity.color|capitalize }}</div>
+        </div>            
+        <div class="contenedorform">
+            <div class="labelform">Estatus:</div>
+            <div class="widgetform">{{ entity.estatus|capitalize }}</div>
+        </div>        
+    </tbody>
+    </table>
+    <br>
+    <ul class="record_actions">
+    <li>
+        <a class="btn" href="{{ path('vehiculos_list') }}">IR AL LISTADO</a> | 
+        <a href="{{ path('transporte_edit', { 'id': entity.id }) }}">
+            <button class="btn btn-primary" type="button">EDITAR</button> 
+        </a>
+    </li>
+    {#
+
+    <li>
+        <form action="{{ path('transporte_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+    #}
+    </ul>
+</div>
+{% endblock %}
