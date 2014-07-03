@@ -110,9 +110,10 @@
 
             {% if is_granted('ROLE_CREATV') %}
                 <div class="col-sm-6 col-md-4">
-                    <a id="ct" href="javascript:void(0)">CREATV<br><img  src="{{ asset("images/creatv.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+                    <a href="{{ path('creatv_homepage')}}">CREATV<br><img src="{{ asset("images/creatv.jpg") }}" data-placement="bottom" title="CREATV" data-trigger="hover"></a>        
                 </div>
             {% endif %}
+
 
             {% if is_granted('ROLE_TRANSPORTE') %}
                 <div class="col-sm-6 col-md-4">

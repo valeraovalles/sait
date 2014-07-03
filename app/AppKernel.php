@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Frontend\ContratosBundle\ContratosBundle(),
             new Frontend\IncidenciaBundle\IncidenciaBundle(),
             new Frontend\CumpleaniosBundle\CumpleaniosBundle(),
+            new Frontend\CreatvBundle\CreatvBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
