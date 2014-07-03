@@ -9,3 +9,7 @@ creatv_formtxt:
 creatv_generatxt:
     pattern:  /generatxt
     defaults: { _controller: CreatvBundle:Default:generatxt }
+
+creatv_descargatxt:
+    pattern:  /descargatxt/{fecha}
+    defaults: { _controller: CreatvBundle:Default:descargatxt }

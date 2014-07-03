@@ -37,7 +37,15 @@ class DefaultController extends Controller
         	$datos=$request->request->all();
         	$datos=$datos['frontend_creatvbundle_txttype'];
 
-        	$this->procesatxt($datos['fecha']);
+        	$archivo=$this->procesatxt($datos['fecha']);
+
+	        if (!$archivo)
+				$this->get('session')->getFlashBag()->add('alert', "EL ARCHIVO NO SE HA SUBIDO POR FAVOR CONTACTE CON EL ADMINISTRADOR");
+	        else
+	        	$this->get('session')->getFlashBag()->add('notice', "ARCHIVO ENVIADO A LA CARPETA COMPARTIDA");
+
+	        return $this->redirect($this->generateUrl('creatv_descargatxt',array('fecha'=>$datos['fecha'])));	   
+
 
         }
 
@@ -54,17 +62,17 @@ class DefaultController extends Controller
 	        $selected = mssql_select_db("creatv_data", $link);
 		        
 			# Cambie estos datos por los de su Servidor FTP
-			/*define("SERVER","10.10.2.243"); //IP o Nombre del Servidor
+			define("SERVER","10.10.11.243"); //IP o Nombre del Servidor
 			define("PORT",21); //Puerto
 			define("USER","jhoan"); //Nombre de Usuario
-			define("PASSWORD","123456"); //Contraseña de acceso*/
-		        
-		    # Cambie estos datos por los de su Servidor FTP
+			define("PASSWORD","123456"); //Contraseña de acceso
+		        /*
+		        # Cambie estos datos por los de su Servidor FTP
 			define("SERVER","192.168.100.30"); //IP o Nombre del Servidor
-		    define("PORT",21); //Puerto
+		      	define("PORT",21); //Puerto
 			define("USER","creatv"); //Nombre de Usuario
 			define("PASSWORD","..*creatv*.."); //Contraseña de acceso
-
+*/
 			# Funcion
 			function ConectarFTP(){
 				//Permite conectarse al Servidor FTP
@@ -109,6 +117,8 @@ class DefaultController extends Controller
 				return str_replace($a, $b, $str);
 	        }
 	        
+
+        
 	        $query="
 	        select 
 	                EV.VideoSource, EV.ClipName, EV.SegName, EV.StartTime, C.Titol_Emissio AS titulo_contenido, p.Titol_Emissio as titulo_produccion, ev.DurPrev  
@@ -123,7 +133,7 @@ class DefaultController extends Controller
 	                e.Data_Emissio='".$f->voltea_fecha($fecha_escaleta)."' and 
 	                pa.IdCanal=10 and
 					EV.ClipName!=''	and 
-					e.IdParrilla=pa.IdParrilla and pa.Nom='PRINCIPAL ANTHONY'
+					e.IdParrilla=pa.IdParrilla and pa.Nom='PARRILLA PRINCIPAL'
 
 	        order by EV.OrderNum ASC
 	        ";
@@ -172,26 +182,33 @@ class DefaultController extends Controller
 	                else 
 	                $txt .=str_replace(".00","",$row["StartTime"])."\t".$row["ClipName"]."\t\t".$segmento.$row["titulo_contenido"]." - ".$row["titulo_produccion"]."\t".str_replace(".00","",$row["DurPrev"])."\r\n";
 	        }
-	      
-	                $txt=eliminar_acentos(utf8_encode($txt));
-	                
-	                $archivo = fopen ("/var/www/sait/web/uploads/creatv/txt/".$fecha_escaleta.".txt", "w+");
-	                //$archivo = fopen ("/home/jhoan/www/Telesur/web/uploads/creatv/txt/".$fecha_escaleta.".txt", "w+");
 
-	                fwrite($archivo, $txt);
-	                fclose($archivo);
+	        $txt=eliminar_acentos(utf8_encode($txt));
+	        
+	        $archivo = fopen ("/var/www/sait/web/uploads/creatv/txt/".$fecha_escaleta.".txt", "w+");
+	        //$archivo = fopen ("/home/jhoan/www/Telesur/web/uploads/creatv/txt/".$fecha_escaleta.".txt", "w+");
 
-	                SubirArchivo("/var/www/sait/web/uploads/creatv/txt/".$fecha_escaleta.".txt",$fecha_escaleta.".txt");
-	                //SubirArchivo("/home/jhoan/www/Telesur/web/uploads/creatv/txt/".$fecha_escaleta.".txt",$fecha_escaleta.".txt");
-	                
-	                
-	                //verificar si el archivo fue subido
-	                $archivo = fopen ("ftp://creatv:..*creatv*..@192.168.100.30/".$fecha_escaleta.".txt", "r");
-	                //$archivo = fopen ("ftp://jhoan:123456@10.10.2.243/".$fecha_escaleta.".txt", "r");
-	                if (!$archivo) {
-	                    echo "<p><DIV class='sms'>EL ARCHIVO NO SE HA SUBIDO POR FAVOR INTENTE DE NUEVO O DESCARGUE EL ARCHIVO DESDE <a TARGET='_blank' href='/Telesur/web/uploads/creatv/txt/".$fecha_escaleta.".txt'>AQUI</a></div>.\n";
-	                }
-	                else
-	                echo "<p><div class='sms' style='color:green;'>ARCHIVO ENVIADO A LA CARPETA COMPARTIDA, PUEDE VISUALIZAR EL ARCHIVO <a TARGET='_blank' href='/Telesur/web/uploads/creatv/txt/".$fecha_escaleta.".txt'>AQUI</a></div>\n";
-	   }
+	        fwrite($archivo, $txt);
+	        fclose($archivo);
+
+	        SubirArchivo("/var/www/sait/web/uploads/creatv/txt/".$fecha_escaleta.".txt",$fecha_escaleta.".txt");
+	        //SubirArchivo("/home/jhoan/www/Telesur/web/uploads/creatv/txt/".$fecha_escaleta.".txt",$fecha_escaleta.".txt");
+	        
+	   
+	        //verificar si el archivo fue subido
+	        //$archivo = fopen ("ftp://creatv:..*creatv*..@192.168.100.30/".$fecha_escaleta.".txt", "r");
+
+	        $archivo = ftp_nlist(ConectarFTP(), $fecha_escaleta.'.txt');
+	        return $archivo;
+
+	}
+
+
+    public function descargatxtAction($fecha){
+        $entity = new Txt();
+        $form   = $this->createForm(new TxtType($id), $entity);
+        return $this->render('CreatvBundle:Default:formtxt.html.twig',array('form'=>$form->createView(),'fecha'=>$fecha));
+
+    }
+
 }
