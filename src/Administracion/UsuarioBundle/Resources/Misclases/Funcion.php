@@ -302,4 +302,11 @@ function mes($num){
             return $mes;
             
         }
+
+  public function voltea_fecha($fecha){
+        
+    $valores=explode("-",$fecha);
+    $f=$valores[2].'-'.$valores[1].'-'.$valores[0];
+    return $f;  
+  }
 }

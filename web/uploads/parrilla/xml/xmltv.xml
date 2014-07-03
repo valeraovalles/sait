@@ -11,13 +11,2205 @@
                         <hora_ini>2014/06/30 00:00:00</hora_ini>
                         <hora_fin>2014/06/30 00:30:00</hora_fin>
                     </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/06/30 00:30:00</hora_ini>
+                        <hora_fin>2014/06/30 01:30:00</hora_fin>
+                    </programa>        
+                    <programa id='422'>
+                        <nombre>COLORES DEL FÚTBOL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 01:30:00</hora_ini>
+                        <hora_fin>2014/06/30 02:00:00</hora_fin>
+                    </programa>        
+                    <programa id='218'>
+                        <nombre>MP3 GIRA LATINA</nombre>
+                        <sinopsis>SERIE DOCUMENTAL QUE REGISTRA LOS SONIDOS TRADICIONALES DE NUESTRO CONTINENTE, SU MÚSICA Y SU FOLCLORE.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 02:00:00</hora_ini>
+                        <hora_fin>2014/06/30 02:30:00</hora_fin>
+                    </programa>        
+                    <programa id='201'>
+                        <nombre>RONDA 3 0230 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 02:30:00</hora_ini>
+                        <hora_fin>2014/06/30 03:00:00</hora_fin>
+                    </programa>        
+                    <programa id='415'>
+                        <nombre>NO SON TUIT, SON HISTORIAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 03:00:00</hora_ini>
+                        <hora_fin>2014/06/30 03:30:00</hora_fin>
+                    </programa>        
+                    <programa id='202'>
+                        <nombre>RONDA 4 0330 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 03:30:00</hora_ini>
+                        <hora_fin>2014/06/30 04:00:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/06/30 04:00:00</hora_ini>
+                        <hora_fin>2014/06/30 04:30:00</hora_fin>
+                    </programa>        
+                    <programa id='203'>
+                        <nombre>RONDA 5 0430 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 04:30:00</hora_ini>
+                        <hora_fin>2014/06/30 05:00:00</hora_fin>
+                    </programa>        
+                    <programa id='424'>
+                        <nombre>FUTBOL PASION CON EDUARDO GALEANO </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 05:00:00</hora_ini>
+                        <hora_fin>2014/06/30 05:30:00</hora_fin>
+                    </programa>        
+                    <programa id='178'>
+                        <nombre>REPORTAJES TELESUR</nombre>
+                        <sinopsis>25 MINUTOS DE PERIODÍSMO INVESTIGATIVO QUE BUSCA ENTREGAR AL ESPECTADOR DIFERENTES PERSPECTIVAS Y OPINIONES SOBRE UN TEMA EN PARTICULAR, EXTRAIDO DE LOS ACONTECIMIENTOS NOTICIOSOS QUE IMPACTA E INFLUYEN EN LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 05:30:00</hora_ini>
+                        <hora_fin>2014/06/30 06:00:00</hora_fin>
+                    </programa>        
+                    <programa id='353'>
+                        <nombre>ENTRE FRONTERAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 06:00:00</hora_ini>
+                        <hora_fin>2014/06/30 06:30:00</hora_fin>
+                    </programa>        
+                    <programa id='307'>
+                        <nombre>EL MUNDO HOY </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 06:30:00</hora_ini>
+                        <hora_fin>2014/06/30 08:30:00</hora_fin>
+                    </programa>        
+                    <programa id='205'>
+                        <nombre>RONDA 7 0830 HR CCS </nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 08:30:00</hora_ini>
+                        <hora_fin>2014/06/30 09:00:00</hora_fin>
+                    </programa>        
+                    <programa id='352'>
+                        <nombre>ATOMUN</nombre>
+                        <sinopsis>Es un espacio informativo enfocado en las noticias científico-tecnológicas   latinoamericanas y del resto del mundo, que destaca los avances logrados en esta materia. </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/06/30 09:00:00</hora_ini>
+                        <hora_fin>2014/06/30 09:30:00</hora_fin>
+                    </programa>        
+                    <programa id='434'>
+                        <nombre>REPORTE 360</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/06/30 09:30:00</hora_ini>
+                        <hora_fin>2014/06/30 10:00:00</hora_fin>
+                    </programa>        
+                    <programa id='180'>
+                        <nombre>IMPACTO ECONÓMICO MATUTINO</nombre>
+                        <sinopsis>LA OPORTUNIDAD DE MANTENERSE AL DÍA CON LAS INCIDENCIAS DE IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 10:00:00</hora_ini>
+                        <hora_fin>2014/06/30 10:30:00</hora_fin>
+                    </programa>        
+                    <programa id='237'>
+                        <nombre>RONDA 9 1030 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 10:30:00</hora_ini>
+                        <hora_fin>2014/06/30 11:00:00</hora_fin>
+                    </programa>        
+                    <programa id='210'>
+                        <nombre>DEPORTES TELESUR 4 1100 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 11:00:00</hora_ini>
+                        <hora_fin>2014/06/30 11:30:00</hora_fin>
+                    </programa>        
+                    <programa id='300'>
+                        <nombre>CONEXIÓN GLOBAL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/06/30 11:30:00</hora_ini>
+                        <hora_fin>2014/06/30 13:00:00</hora_fin>
+                    </programa>        
+                    <programa id='375'>
+                        <nombre>CONGÉNERO</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 13:00:00</hora_ini>
+                        <hora_fin>2014/06/30 13:30:00</hora_fin>
+                    </programa>        
                     <programa id='256'>
                         <nombre>RONDA 11 1330 HR CCS</nombre>
                         <sinopsis> </sinopsis>
                         <foto>0</foto>
                         <url>0</url>
-                        <hora_ini>2014/06/30 00:30:00</hora_ini>
-                        <hora_fin>2014/06/30 01:00:00</hora_fin>
+                        <hora_ini>2014/06/30 13:30:00</hora_ini>
+                        <hora_fin>2014/06/30 14:00:00</hora_fin>
+                    </programa>        
+                    <programa id='179'>
+                        <nombre>VIDAS</nombre>
+                        <sinopsis>ESPACIO QUE DA A CONOCER LAS HISTORIAS DE VIDA DE PERSONAS Y PERSONAJES SENCILLOS, INMERSOS EN EL DÍA A DÍA DE SUS OBRAS, TRABAJOS, PASIONES, CREENCIAS E HISTORIAS. SON NOTAS HUMANAS, QUE DESTACAN LA IDIOSINCRACIA, LA EXPRESIÓN Y LA CREATIVIDAD DE LOS LAT</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 14:00:00</hora_ini>
+                        <hora_fin>2014/06/30 14:30:00</hora_fin>
+                    </programa>        
+                    <programa id='197'>
+                        <nombre>LENGUAJE DE SEÑAS</nombre>
+                        <sinopsis>TELESUR NOTICIAS CON LENGUAJE DE SEÑAS, PROMUEVE LA INCLUSIÓN DE USUARIAS Y USUARIOS CON DISCAPACIDAD AUDITIVA, A ESTAR INFORMADO DE TODO EL ACONTECER NOTICIOSO DE AMÉRICA LATINA Y EL MUNDO. CON UNA VISIÓN INTEGRAL DE LAS TRANSFORMACIONES QUE SE ESTÁN PRO</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 14:30:00</hora_ini>
+                        <hora_fin>2014/06/30 15:00:00</hora_fin>
+                    </programa>        
+                    <programa id='211'>
+                        <nombre>DEPORTES TELESUR 5 1500 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 15:00:00</hora_ini>
+                        <hora_fin>2014/06/30 15:30:00</hora_fin>
+                    </programa>        
+                    <programa id='302'>
+                        <nombre>RONDA 13 1530 HR CCS </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 15:30:00</hora_ini>
+                        <hora_fin>2014/06/30 16:00:00</hora_fin>
+                    </programa>        
+                    <programa id='180'>
+                        <nombre>IMPACTO ECONÓMICO MATUTINO</nombre>
+                        <sinopsis>LA OPORTUNIDAD DE MANTENERSE AL DÍA CON LAS INCIDENCIAS DE IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 16:00:00</hora_ini>
+                        <hora_fin>2014/06/30 16:30:00</hora_fin>
+                    </programa>        
+                    <programa id='321'>
+                        <nombre>TEMAS DEL DÍA 1630HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 16:30:00</hora_ini>
+                        <hora_fin>2014/06/30 17:00:00</hora_fin>
+                    </programa>        
+                    <programa id='415'>
+                        <nombre>NO SON TUIT, SON HISTORIAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 17:00:00</hora_ini>
+                        <hora_fin>2014/06/30 17:30:00</hora_fin>
+                    </programa>        
+                    <programa id='305'>
+                        <nombre>RONDA 15 1730HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 17:30:00</hora_ini>
+                        <hora_fin>2014/06/30 18:00:00</hora_fin>
+                    </programa>        
+                    <programa id='212'>
+                        <nombre>DEPORTES TELESUR 6 1800 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 18:00:00</hora_ini>
+                        <hora_fin>2014/06/30 18:30:00</hora_fin>
+                    </programa>        
+                    <programa id='304'>
+                        <nombre>RONDA 16 1830 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 18:30:00</hora_ini>
+                        <hora_fin>2014/06/30 19:00:00</hora_fin>
+                    </programa>        
+                    <programa id='181'>
+                        <nombre>IMPACTO ECONÓMICO ESTELAR</nombre>
+                        <sinopsis>IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE  LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO. </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 19:00:00</hora_ini>
+                        <hora_fin>2014/06/30 19:30:00</hora_fin>
+                    </programa>        
+                    <programa id='299'>
+                        <nombre>EDICIÓN CENTRAL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 19:30:00</hora_ini>
+                        <hora_fin>2014/06/30 20:30:00</hora_fin>
+                    </programa>        
+                    <programa id='213'>
+                        <nombre>DEPORTES TELESUR 7 2030 HR CCS </nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 20:30:00</hora_ini>
+                        <hora_fin>2014/06/30 21:00:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/06/30 21:00:00</hora_ini>
+                        <hora_fin>2014/06/30 22:00:00</hora_fin>
+                    </programa>        
+                    <programa id='350'>
+                        <nombre>RONDA 22 22:00 Hrs CCs</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/06/30 22:00:00</hora_ini>
+                        <hora_fin>2014/06/30 22:30:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/06/30 22:30:00</hora_ini>
+                        <hora_fin>2014/06/30 23:00:00</hora_fin>
+                    </programa>        
+                    <programa id='187'>
+                        <nombre>DOSSIER ESTELAR</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/06/30 23:00:00</hora_ini>
+                        <hora_fin>2014/06/30 00:00:00</hora_fin>
+                    </programa>
+                </programas>
+            </lunes> 
+            <martes cuantos='39'>
+                <programas>        
+                    <programa id='352'>
+                        <nombre>ATOMUN</nombre>
+                        <sinopsis>Es un espacio informativo enfocado en las noticias científico-tecnológicas   latinoamericanas y del resto del mundo, que destaca los avances logrados en esta materia. </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/01 00:00:00</hora_ini>
+                        <hora_fin>2014/07/01 00:30:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/01 00:30:00</hora_ini>
+                        <hora_fin>2014/07/01 01:30:00</hora_fin>
+                    </programa>        
+                    <programa id='200'>
+                        <nombre>RONDA 2 0130 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 01:30:00</hora_ini>
+                        <hora_fin>2014/07/01 02:00:00</hora_fin>
+                    </programa>        
+                    <programa id='181'>
+                        <nombre>IMPACTO ECONÓMICO ESTELAR</nombre>
+                        <sinopsis>IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE  LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO. </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 02:00:00</hora_ini>
+                        <hora_fin>2014/07/01 02:30:00</hora_fin>
+                    </programa>        
+                    <programa id='201'>
+                        <nombre>RONDA 3 0230 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 02:30:00</hora_ini>
+                        <hora_fin>2014/07/01 03:00:00</hora_fin>
+                    </programa>        
+                    <programa id='360'>
+                        <nombre>USA DE VERDAD</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 03:00:00</hora_ini>
+                        <hora_fin>2014/07/01 03:30:00</hora_fin>
+                    </programa>        
+                    <programa id='202'>
+                        <nombre>RONDA 4 0330 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 03:30:00</hora_ini>
+                        <hora_fin>2014/07/01 04:00:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/01 04:00:00</hora_ini>
+                        <hora_fin>2014/07/01 04:30:00</hora_fin>
+                    </programa>        
+                    <programa id='203'>
+                        <nombre>RONDA 5 0430 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 04:30:00</hora_ini>
+                        <hora_fin>2014/07/01 05:00:00</hora_fin>
+                    </programa>        
+                    <programa id='187'>
+                        <nombre>DOSSIER ESTELAR</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 05:00:00</hora_ini>
+                        <hora_fin>2014/07/01 06:00:00</hora_fin>
+                    </programa>        
+                    <programa id='363'>
+                        <nombre>CRUCE DE PALABRAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 06:00:00</hora_ini>
+                        <hora_fin>2014/07/01 06:30:00</hora_fin>
+                    </programa>        
+                    <programa id='307'>
+                        <nombre>EL MUNDO HOY </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 06:30:00</hora_ini>
+                        <hora_fin>2014/07/01 08:30:00</hora_fin>
+                    </programa>        
+                    <programa id='205'>
+                        <nombre>RONDA 7 0830 HR CCS </nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 08:30:00</hora_ini>
+                        <hora_fin>2014/07/01 09:00:00</hora_fin>
+                    </programa>        
+                    <programa id='355'>
+                        <nombre>GUÍA TU CUERPO</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 09:00:00</hora_ini>
+                        <hora_fin>2014/07/01 09:30:00</hora_fin>
+                    </programa>        
+                    <programa id='434'>
+                        <nombre>REPORTE 360</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/01 09:30:00</hora_ini>
+                        <hora_fin>2014/07/01 10:00:00</hora_fin>
+                    </programa>        
+                    <programa id='180'>
+                        <nombre>IMPACTO ECONÓMICO MATUTINO</nombre>
+                        <sinopsis>LA OPORTUNIDAD DE MANTENERSE AL DÍA CON LAS INCIDENCIAS DE IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 10:00:00</hora_ini>
+                        <hora_fin>2014/07/01 10:30:00</hora_fin>
+                    </programa>        
+                    <programa id='237'>
+                        <nombre>RONDA 9 1030 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 10:30:00</hora_ini>
+                        <hora_fin>2014/07/01 11:00:00</hora_fin>
+                    </programa>        
+                    <programa id='210'>
+                        <nombre>DEPORTES TELESUR 4 1100 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 11:00:00</hora_ini>
+                        <hora_fin>2014/07/01 11:30:00</hora_fin>
+                    </programa>        
+                    <programa id='300'>
+                        <nombre>CONEXIÓN GLOBAL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/01 11:30:00</hora_ini>
+                        <hora_fin>2014/07/01 13:00:00</hora_fin>
+                    </programa>        
+                    <programa id='186'>
+                        <nombre>DOSSIER VESPERTINO</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 13:00:00</hora_ini>
+                        <hora_fin>2014/07/01 14:00:00</hora_fin>
+                    </programa>        
+                    <programa id='352'>
+                        <nombre>ATOMUN</nombre>
+                        <sinopsis>Es un espacio informativo enfocado en las noticias científico-tecnológicas   latinoamericanas y del resto del mundo, que destaca los avances logrados en esta materia. </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/01 14:00:00</hora_ini>
+                        <hora_fin>2014/07/01 14:30:00</hora_fin>
+                    </programa>        
+                    <programa id='197'>
+                        <nombre>LENGUAJE DE SEÑAS</nombre>
+                        <sinopsis>TELESUR NOTICIAS CON LENGUAJE DE SEÑAS, PROMUEVE LA INCLUSIÓN DE USUARIAS Y USUARIOS CON DISCAPACIDAD AUDITIVA, A ESTAR INFORMADO DE TODO EL ACONTECER NOTICIOSO DE AMÉRICA LATINA Y EL MUNDO. CON UNA VISIÓN INTEGRAL DE LAS TRANSFORMACIONES QUE SE ESTÁN PRO</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 14:30:00</hora_ini>
+                        <hora_fin>2014/07/01 15:00:00</hora_fin>
+                    </programa>        
+                    <programa id='211'>
+                        <nombre>DEPORTES TELESUR 5 1500 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 15:00:00</hora_ini>
+                        <hora_fin>2014/07/01 15:30:00</hora_fin>
+                    </programa>        
+                    <programa id='302'>
+                        <nombre>RONDA 13 1530 HR CCS </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 15:30:00</hora_ini>
+                        <hora_fin>2014/07/01 16:00:00</hora_fin>
+                    </programa>        
+                    <programa id='180'>
+                        <nombre>IMPACTO ECONÓMICO MATUTINO</nombre>
+                        <sinopsis>LA OPORTUNIDAD DE MANTENERSE AL DÍA CON LAS INCIDENCIAS DE IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 16:00:00</hora_ini>
+                        <hora_fin>2014/07/01 16:30:00</hora_fin>
+                    </programa>        
+                    <programa id='321'>
+                        <nombre>TEMAS DEL DÍA 1630HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 16:30:00</hora_ini>
+                        <hora_fin>2014/07/01 17:00:00</hora_fin>
+                    </programa>        
+                    <programa id='360'>
+                        <nombre>USA DE VERDAD</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 17:00:00</hora_ini>
+                        <hora_fin>2014/07/01 17:30:00</hora_fin>
+                    </programa>        
+                    <programa id='305'>
+                        <nombre>RONDA 15 1730HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 17:30:00</hora_ini>
+                        <hora_fin>2014/07/01 18:00:00</hora_fin>
+                    </programa>        
+                    <programa id='212'>
+                        <nombre>DEPORTES TELESUR 6 1800 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 18:00:00</hora_ini>
+                        <hora_fin>2014/07/01 18:30:00</hora_fin>
+                    </programa>        
+                    <programa id='304'>
+                        <nombre>RONDA 16 1830 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 18:30:00</hora_ini>
+                        <hora_fin>2014/07/01 19:00:00</hora_fin>
+                    </programa>        
+                    <programa id='181'>
+                        <nombre>IMPACTO ECONÓMICO ESTELAR</nombre>
+                        <sinopsis>IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE  LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO. </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 19:00:00</hora_ini>
+                        <hora_fin>2014/07/01 19:30:00</hora_fin>
+                    </programa>        
+                    <programa id='299'>
+                        <nombre>EDICIÓN CENTRAL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 19:30:00</hora_ini>
+                        <hora_fin>2014/07/01 20:30:00</hora_fin>
+                    </programa>        
+                    <programa id='213'>
+                        <nombre>DEPORTES TELESUR 7 2030 HR CCS </nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 20:30:00</hora_ini>
+                        <hora_fin>2014/07/01 21:00:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/01 21:00:00</hora_ini>
+                        <hora_fin>2014/07/01 22:00:00</hora_fin>
+                    </programa>        
+                    <programa id='350'>
+                        <nombre>RONDA 22 22:00 Hrs CCs</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/01 22:00:00</hora_ini>
+                        <hora_fin>2014/07/01 22:30:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/01 22:30:00</hora_ini>
+                        <hora_fin>2014/07/01 23:00:00</hora_fin>
+                    </programa>        
+                    <programa id='187'>
+                        <nombre>DOSSIER ESTELAR</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/01 23:00:00</hora_ini>
+                        <hora_fin>2014/07/01 00:00:00</hora_fin>
+                    </programa>
+                </programas>
+            </martes> 
+            <miercoles cuantos='37'>
+                <programas>        
+                    <programa id='355'>
+                        <nombre>GUÍA TU CUERPO</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 00:00:00</hora_ini>
+                        <hora_fin>2014/07/02 00:30:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/02 00:30:00</hora_ini>
+                        <hora_fin>2014/07/02 01:30:00</hora_fin>
+                    </programa>        
+                    <programa id='200'>
+                        <nombre>RONDA 2 0130 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 01:30:00</hora_ini>
+                        <hora_fin>2014/07/02 02:00:00</hora_fin>
+                    </programa>        
+                    <programa id='181'>
+                        <nombre>IMPACTO ECONÓMICO ESTELAR</nombre>
+                        <sinopsis>IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE  LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO. </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 02:00:00</hora_ini>
+                        <hora_fin>2014/07/02 02:30:00</hora_fin>
+                    </programa>        
+                    <programa id='201'>
+                        <nombre>RONDA 3 0230 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 02:30:00</hora_ini>
+                        <hora_fin>2014/07/02 03:00:00</hora_fin>
+                    </programa>        
+                    <programa id='415'>
+                        <nombre>NO SON TUIT, SON HISTORIAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 03:00:00</hora_ini>
+                        <hora_fin>2014/07/02 03:30:00</hora_fin>
+                    </programa>        
+                    <programa id='202'>
+                        <nombre>RONDA 4 0330 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 03:30:00</hora_ini>
+                        <hora_fin>2014/07/02 04:00:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/02 04:00:00</hora_ini>
+                        <hora_fin>2014/07/02 04:30:00</hora_fin>
+                    </programa>        
+                    <programa id='203'>
+                        <nombre>RONDA 5 0430 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 04:30:00</hora_ini>
+                        <hora_fin>2014/07/02 05:00:00</hora_fin>
+                    </programa>        
+                    <programa id='187'>
+                        <nombre>DOSSIER ESTELAR</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 05:00:00</hora_ini>
+                        <hora_fin>2014/07/02 06:00:00</hora_fin>
+                    </programa>        
+                    <programa id='360'>
+                        <nombre>USA DE VERDAD</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 06:00:00</hora_ini>
+                        <hora_fin>2014/07/02 06:30:00</hora_fin>
+                    </programa>        
+                    <programa id='307'>
+                        <nombre>EL MUNDO HOY </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 06:30:00</hora_ini>
+                        <hora_fin>2014/07/02 08:30:00</hora_fin>
+                    </programa>        
+                    <programa id='205'>
+                        <nombre>RONDA 7 0830 HR CCS </nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 08:30:00</hora_ini>
+                        <hora_fin>2014/07/02 09:00:00</hora_fin>
+                    </programa>        
+                    <programa id='281'>
+                        <nombre>ZONA VERDE</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 09:00:00</hora_ini>
+                        <hora_fin>2014/07/02 09:30:00</hora_fin>
+                    </programa>        
+                    <programa id='434'>
+                        <nombre>REPORTE 360</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/02 09:30:00</hora_ini>
+                        <hora_fin>2014/07/02 10:00:00</hora_fin>
+                    </programa>        
+                    <programa id='180'>
+                        <nombre>IMPACTO ECONÓMICO MATUTINO</nombre>
+                        <sinopsis>LA OPORTUNIDAD DE MANTENERSE AL DÍA CON LAS INCIDENCIAS DE IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 10:00:00</hora_ini>
+                        <hora_fin>2014/07/02 10:30:00</hora_fin>
+                    </programa>        
+                    <programa id='237'>
+                        <nombre>RONDA 9 1030 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 10:30:00</hora_ini>
+                        <hora_fin>2014/07/02 11:00:00</hora_fin>
+                    </programa>        
+                    <programa id='210'>
+                        <nombre>DEPORTES TELESUR 4 1100 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 11:00:00</hora_ini>
+                        <hora_fin>2014/07/02 11:30:00</hora_fin>
+                    </programa>        
+                    <programa id='300'>
+                        <nombre>CONEXIÓN GLOBAL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/02 11:30:00</hora_ini>
+                        <hora_fin>2014/07/02 13:00:00</hora_fin>
+                    </programa>        
+                    <programa id='186'>
+                        <nombre>DOSSIER VESPERTINO</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 13:00:00</hora_ini>
+                        <hora_fin>2014/07/02 14:00:00</hora_fin>
+                    </programa>        
+                    <programa id='355'>
+                        <nombre>GUÍA TU CUERPO</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 14:00:00</hora_ini>
+                        <hora_fin>2014/07/02 14:30:00</hora_fin>
+                    </programa>        
+                    <programa id='197'>
+                        <nombre>LENGUAJE DE SEÑAS</nombre>
+                        <sinopsis>TELESUR NOTICIAS CON LENGUAJE DE SEÑAS, PROMUEVE LA INCLUSIÓN DE USUARIAS Y USUARIOS CON DISCAPACIDAD AUDITIVA, A ESTAR INFORMADO DE TODO EL ACONTECER NOTICIOSO DE AMÉRICA LATINA Y EL MUNDO. CON UNA VISIÓN INTEGRAL DE LAS TRANSFORMACIONES QUE SE ESTÁN PRO</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 14:30:00</hora_ini>
+                        <hora_fin>2014/07/02 15:00:00</hora_fin>
+                    </programa>        
+                    <programa id='211'>
+                        <nombre>DEPORTES TELESUR 5 1500 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 15:00:00</hora_ini>
+                        <hora_fin>2014/07/02 15:30:00</hora_fin>
+                    </programa>        
+                    <programa id='302'>
+                        <nombre>RONDA 13 1530 HR CCS </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 15:30:00</hora_ini>
+                        <hora_fin>2014/07/02 16:00:00</hora_fin>
+                    </programa>        
+                    <programa id='180'>
+                        <nombre>IMPACTO ECONÓMICO MATUTINO</nombre>
+                        <sinopsis>LA OPORTUNIDAD DE MANTENERSE AL DÍA CON LAS INCIDENCIAS DE IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 16:00:00</hora_ini>
+                        <hora_fin>2014/07/02 16:30:00</hora_fin>
+                    </programa>        
+                    <programa id='321'>
+                        <nombre>TEMAS DEL DÍA 1630HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 16:30:00</hora_ini>
+                        <hora_fin>2014/07/02 17:00:00</hora_fin>
+                    </programa>        
+                    <programa id='363'>
+                        <nombre>CRUCE DE PALABRAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 17:00:00</hora_ini>
+                        <hora_fin>2014/07/02 17:30:00</hora_fin>
+                    </programa>        
+                    <programa id='305'>
+                        <nombre>RONDA 15 1730HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 17:30:00</hora_ini>
+                        <hora_fin>2014/07/02 18:00:00</hora_fin>
+                    </programa>        
+                    <programa id='212'>
+                        <nombre>DEPORTES TELESUR 6 1800 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 18:00:00</hora_ini>
+                        <hora_fin>2014/07/02 18:30:00</hora_fin>
+                    </programa>        
+                    <programa id='304'>
+                        <nombre>RONDA 16 1830 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 18:30:00</hora_ini>
+                        <hora_fin>2014/07/02 19:00:00</hora_fin>
+                    </programa>        
+                    <programa id='181'>
+                        <nombre>IMPACTO ECONÓMICO ESTELAR</nombre>
+                        <sinopsis>IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE  LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO. </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 19:00:00</hora_ini>
+                        <hora_fin>2014/07/02 19:30:00</hora_fin>
+                    </programa>        
+                    <programa id='299'>
+                        <nombre>EDICIÓN CENTRAL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 19:30:00</hora_ini>
+                        <hora_fin>2014/07/02 20:30:00</hora_fin>
+                    </programa>        
+                    <programa id='213'>
+                        <nombre>DEPORTES TELESUR 7 2030 HR CCS </nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 20:30:00</hora_ini>
+                        <hora_fin>2014/07/02 21:00:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/02 21:00:00</hora_ini>
+                        <hora_fin>2014/07/02 22:00:00</hora_fin>
+                    </programa>        
+                    <programa id='350'>
+                        <nombre>RONDA 22 22:00 Hrs CCs</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/02 22:00:00</hora_ini>
+                        <hora_fin>2014/07/02 22:30:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/02 22:30:00</hora_ini>
+                        <hora_fin>2014/07/02 23:00:00</hora_fin>
+                    </programa>        
+                    <programa id='187'>
+                        <nombre>DOSSIER ESTELAR</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/02 23:00:00</hora_ini>
+                        <hora_fin>2014/07/02 00:00:00</hora_fin>
+                    </programa>
+                </programas>
+            </miercoles> 
+            <jueves cuantos='37'>
+                <programas>        
+                    <programa id='281'>
+                        <nombre>ZONA VERDE</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 00:00:00</hora_ini>
+                        <hora_fin>2014/07/03 00:30:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/03 00:30:00</hora_ini>
+                        <hora_fin>2014/07/03 01:30:00</hora_fin>
+                    </programa>        
+                    <programa id='200'>
+                        <nombre>RONDA 2 0130 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 01:30:00</hora_ini>
+                        <hora_fin>2014/07/03 02:00:00</hora_fin>
+                    </programa>        
+                    <programa id='181'>
+                        <nombre>IMPACTO ECONÓMICO ESTELAR</nombre>
+                        <sinopsis>IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE  LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO. </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 02:00:00</hora_ini>
+                        <hora_fin>2014/07/03 02:30:00</hora_fin>
+                    </programa>        
+                    <programa id='201'>
+                        <nombre>RONDA 3 0230 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 02:30:00</hora_ini>
+                        <hora_fin>2014/07/03 03:00:00</hora_fin>
+                    </programa>        
+                    <programa id='178'>
+                        <nombre>REPORTAJES TELESUR</nombre>
+                        <sinopsis>25 MINUTOS DE PERIODÍSMO INVESTIGATIVO QUE BUSCA ENTREGAR AL ESPECTADOR DIFERENTES PERSPECTIVAS Y OPINIONES SOBRE UN TEMA EN PARTICULAR, EXTRAIDO DE LOS ACONTECIMIENTOS NOTICIOSOS QUE IMPACTA E INFLUYEN EN LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 03:00:00</hora_ini>
+                        <hora_fin>2014/07/03 03:30:00</hora_fin>
+                    </programa>        
+                    <programa id='202'>
+                        <nombre>RONDA 4 0330 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 03:30:00</hora_ini>
+                        <hora_fin>2014/07/03 04:00:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/03 04:00:00</hora_ini>
+                        <hora_fin>2014/07/03 04:30:00</hora_fin>
+                    </programa>        
+                    <programa id='203'>
+                        <nombre>RONDA 5 0430 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 04:30:00</hora_ini>
+                        <hora_fin>2014/07/03 05:00:00</hora_fin>
+                    </programa>        
+                    <programa id='187'>
+                        <nombre>DOSSIER ESTELAR</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 05:00:00</hora_ini>
+                        <hora_fin>2014/07/03 06:00:00</hora_fin>
+                    </programa>        
+                    <programa id='178'>
+                        <nombre>REPORTAJES TELESUR</nombre>
+                        <sinopsis>25 MINUTOS DE PERIODÍSMO INVESTIGATIVO QUE BUSCA ENTREGAR AL ESPECTADOR DIFERENTES PERSPECTIVAS Y OPINIONES SOBRE UN TEMA EN PARTICULAR, EXTRAIDO DE LOS ACONTECIMIENTOS NOTICIOSOS QUE IMPACTA E INFLUYEN EN LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 06:00:00</hora_ini>
+                        <hora_fin>2014/07/03 06:30:00</hora_fin>
+                    </programa>        
+                    <programa id='307'>
+                        <nombre>EL MUNDO HOY </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 06:30:00</hora_ini>
+                        <hora_fin>2014/07/03 08:30:00</hora_fin>
+                    </programa>        
+                    <programa id='205'>
+                        <nombre>RONDA 7 0830 HR CCS </nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 08:30:00</hora_ini>
+                        <hora_fin>2014/07/03 09:00:00</hora_fin>
+                    </programa>        
+                    <programa id='353'>
+                        <nombre>ENTRE FRONTERAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 09:00:00</hora_ini>
+                        <hora_fin>2014/07/03 09:30:00</hora_fin>
+                    </programa>        
+                    <programa id='434'>
+                        <nombre>REPORTE 360</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/03 09:30:00</hora_ini>
+                        <hora_fin>2014/07/03 10:00:00</hora_fin>
+                    </programa>        
+                    <programa id='180'>
+                        <nombre>IMPACTO ECONÓMICO MATUTINO</nombre>
+                        <sinopsis>LA OPORTUNIDAD DE MANTENERSE AL DÍA CON LAS INCIDENCIAS DE IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 10:00:00</hora_ini>
+                        <hora_fin>2014/07/03 10:30:00</hora_fin>
+                    </programa>        
+                    <programa id='237'>
+                        <nombre>RONDA 9 1030 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 10:30:00</hora_ini>
+                        <hora_fin>2014/07/03 11:00:00</hora_fin>
+                    </programa>        
+                    <programa id='210'>
+                        <nombre>DEPORTES TELESUR 4 1100 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 11:00:00</hora_ini>
+                        <hora_fin>2014/07/03 11:30:00</hora_fin>
+                    </programa>        
+                    <programa id='300'>
+                        <nombre>CONEXIÓN GLOBAL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/03 11:30:00</hora_ini>
+                        <hora_fin>2014/07/03 13:00:00</hora_fin>
+                    </programa>        
+                    <programa id='186'>
+                        <nombre>DOSSIER VESPERTINO</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 13:00:00</hora_ini>
+                        <hora_fin>2014/07/03 14:00:00</hora_fin>
+                    </programa>        
+                    <programa id='281'>
+                        <nombre>ZONA VERDE</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 14:00:00</hora_ini>
+                        <hora_fin>2014/07/03 14:30:00</hora_fin>
+                    </programa>        
+                    <programa id='197'>
+                        <nombre>LENGUAJE DE SEÑAS</nombre>
+                        <sinopsis>TELESUR NOTICIAS CON LENGUAJE DE SEÑAS, PROMUEVE LA INCLUSIÓN DE USUARIAS Y USUARIOS CON DISCAPACIDAD AUDITIVA, A ESTAR INFORMADO DE TODO EL ACONTECER NOTICIOSO DE AMÉRICA LATINA Y EL MUNDO. CON UNA VISIÓN INTEGRAL DE LAS TRANSFORMACIONES QUE SE ESTÁN PRO</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 14:30:00</hora_ini>
+                        <hora_fin>2014/07/03 15:00:00</hora_fin>
+                    </programa>        
+                    <programa id='211'>
+                        <nombre>DEPORTES TELESUR 5 1500 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 15:00:00</hora_ini>
+                        <hora_fin>2014/07/03 15:30:00</hora_fin>
+                    </programa>        
+                    <programa id='302'>
+                        <nombre>RONDA 13 1530 HR CCS </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 15:30:00</hora_ini>
+                        <hora_fin>2014/07/03 16:00:00</hora_fin>
+                    </programa>        
+                    <programa id='180'>
+                        <nombre>IMPACTO ECONÓMICO MATUTINO</nombre>
+                        <sinopsis>LA OPORTUNIDAD DE MANTENERSE AL DÍA CON LAS INCIDENCIAS DE IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 16:00:00</hora_ini>
+                        <hora_fin>2014/07/03 16:30:00</hora_fin>
+                    </programa>        
+                    <programa id='321'>
+                        <nombre>TEMAS DEL DÍA 1630HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 16:30:00</hora_ini>
+                        <hora_fin>2014/07/03 17:00:00</hora_fin>
+                    </programa>        
+                    <programa id='178'>
+                        <nombre>REPORTAJES TELESUR</nombre>
+                        <sinopsis>25 MINUTOS DE PERIODÍSMO INVESTIGATIVO QUE BUSCA ENTREGAR AL ESPECTADOR DIFERENTES PERSPECTIVAS Y OPINIONES SOBRE UN TEMA EN PARTICULAR, EXTRAIDO DE LOS ACONTECIMIENTOS NOTICIOSOS QUE IMPACTA E INFLUYEN EN LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 17:00:00</hora_ini>
+                        <hora_fin>2014/07/03 17:30:00</hora_fin>
+                    </programa>        
+                    <programa id='305'>
+                        <nombre>RONDA 15 1730HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 17:30:00</hora_ini>
+                        <hora_fin>2014/07/03 18:00:00</hora_fin>
+                    </programa>        
+                    <programa id='212'>
+                        <nombre>DEPORTES TELESUR 6 1800 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 18:00:00</hora_ini>
+                        <hora_fin>2014/07/03 18:30:00</hora_fin>
+                    </programa>        
+                    <programa id='304'>
+                        <nombre>RONDA 16 1830 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 18:30:00</hora_ini>
+                        <hora_fin>2014/07/03 19:00:00</hora_fin>
+                    </programa>        
+                    <programa id='181'>
+                        <nombre>IMPACTO ECONÓMICO ESTELAR</nombre>
+                        <sinopsis>IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE  LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO. </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 19:00:00</hora_ini>
+                        <hora_fin>2014/07/03 19:30:00</hora_fin>
+                    </programa>        
+                    <programa id='299'>
+                        <nombre>EDICIÓN CENTRAL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 19:30:00</hora_ini>
+                        <hora_fin>2014/07/03 20:30:00</hora_fin>
+                    </programa>        
+                    <programa id='213'>
+                        <nombre>DEPORTES TELESUR 7 2030 HR CCS </nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 20:30:00</hora_ini>
+                        <hora_fin>2014/07/03 21:00:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/03 21:00:00</hora_ini>
+                        <hora_fin>2014/07/03 22:00:00</hora_fin>
+                    </programa>        
+                    <programa id='350'>
+                        <nombre>RONDA 22 22:00 Hrs CCs</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/03 22:00:00</hora_ini>
+                        <hora_fin>2014/07/03 22:30:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/03 22:30:00</hora_ini>
+                        <hora_fin>2014/07/03 23:00:00</hora_fin>
+                    </programa>        
+                    <programa id='187'>
+                        <nombre>DOSSIER ESTELAR</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/03 23:00:00</hora_ini>
+                        <hora_fin>2014/07/03 00:00:00</hora_fin>
+                    </programa>
+                </programas>
+            </jueves> 
+            <viernes cuantos='37'>
+                <programas>        
+                    <programa id='353'>
+                        <nombre>ENTRE FRONTERAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 00:00:00</hora_ini>
+                        <hora_fin>2014/07/04 00:30:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/04 00:30:00</hora_ini>
+                        <hora_fin>2014/07/04 01:30:00</hora_fin>
+                    </programa>        
+                    <programa id='200'>
+                        <nombre>RONDA 2 0130 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 01:30:00</hora_ini>
+                        <hora_fin>2014/07/04 02:00:00</hora_fin>
+                    </programa>        
+                    <programa id='181'>
+                        <nombre>IMPACTO ECONÓMICO ESTELAR</nombre>
+                        <sinopsis>IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE  LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO. </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 02:00:00</hora_ini>
+                        <hora_fin>2014/07/04 02:30:00</hora_fin>
+                    </programa>        
+                    <programa id='201'>
+                        <nombre>RONDA 3 0230 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 02:30:00</hora_ini>
+                        <hora_fin>2014/07/04 03:00:00</hora_fin>
+                    </programa>        
+                    <programa id='177'>
+                        <nombre>REALIDADES</nombre>
+                        <sinopsis>Mas allá de los titulares y las informaciones de último minuto, este espacio semanal analiza el contexto político, económico, social y cultural de las realidades de nuestros pueblos, narradas por los verdaderos protagonistas.</sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/04 03:00:00</hora_ini>
+                        <hora_fin>2014/07/04 03:30:00</hora_fin>
+                    </programa>        
+                    <programa id='202'>
+                        <nombre>RONDA 4 0330 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 03:30:00</hora_ini>
+                        <hora_fin>2014/07/04 04:00:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/04 04:00:00</hora_ini>
+                        <hora_fin>2014/07/04 04:30:00</hora_fin>
+                    </programa>        
+                    <programa id='203'>
+                        <nombre>RONDA 5 0430 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 04:30:00</hora_ini>
+                        <hora_fin>2014/07/04 05:00:00</hora_fin>
+                    </programa>        
+                    <programa id='187'>
+                        <nombre>DOSSIER ESTELAR</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 05:00:00</hora_ini>
+                        <hora_fin>2014/07/04 06:00:00</hora_fin>
+                    </programa>        
+                    <programa id='177'>
+                        <nombre>REALIDADES</nombre>
+                        <sinopsis>Mas allá de los titulares y las informaciones de último minuto, este espacio semanal analiza el contexto político, económico, social y cultural de las realidades de nuestros pueblos, narradas por los verdaderos protagonistas.</sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/04 06:00:00</hora_ini>
+                        <hora_fin>2014/07/04 06:30:00</hora_fin>
+                    </programa>        
+                    <programa id='307'>
+                        <nombre>EL MUNDO HOY </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 06:30:00</hora_ini>
+                        <hora_fin>2014/07/04 08:30:00</hora_fin>
+                    </programa>        
+                    <programa id='205'>
+                        <nombre>RONDA 7 0830 HR CCS </nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 08:30:00</hora_ini>
+                        <hora_fin>2014/07/04 09:00:00</hora_fin>
+                    </programa>        
+                    <programa id='375'>
+                        <nombre>CONGÉNERO</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 09:00:00</hora_ini>
+                        <hora_fin>2014/07/04 09:30:00</hora_fin>
+                    </programa>        
+                    <programa id='434'>
+                        <nombre>REPORTE 360</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/04 09:30:00</hora_ini>
+                        <hora_fin>2014/07/04 10:00:00</hora_fin>
+                    </programa>        
+                    <programa id='180'>
+                        <nombre>IMPACTO ECONÓMICO MATUTINO</nombre>
+                        <sinopsis>LA OPORTUNIDAD DE MANTENERSE AL DÍA CON LAS INCIDENCIAS DE IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 10:00:00</hora_ini>
+                        <hora_fin>2014/07/04 10:30:00</hora_fin>
+                    </programa>        
+                    <programa id='237'>
+                        <nombre>RONDA 9 1030 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 10:30:00</hora_ini>
+                        <hora_fin>2014/07/04 11:00:00</hora_fin>
+                    </programa>        
+                    <programa id='210'>
+                        <nombre>DEPORTES TELESUR 4 1100 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 11:00:00</hora_ini>
+                        <hora_fin>2014/07/04 11:30:00</hora_fin>
+                    </programa>        
+                    <programa id='300'>
+                        <nombre>CONEXIÓN GLOBAL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/04 11:30:00</hora_ini>
+                        <hora_fin>2014/07/04 13:00:00</hora_fin>
+                    </programa>        
+                    <programa id='186'>
+                        <nombre>DOSSIER VESPERTINO</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 13:00:00</hora_ini>
+                        <hora_fin>2014/07/04 14:00:00</hora_fin>
+                    </programa>        
+                    <programa id='353'>
+                        <nombre>ENTRE FRONTERAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 14:00:00</hora_ini>
+                        <hora_fin>2014/07/04 14:30:00</hora_fin>
+                    </programa>        
+                    <programa id='197'>
+                        <nombre>LENGUAJE DE SEÑAS</nombre>
+                        <sinopsis>TELESUR NOTICIAS CON LENGUAJE DE SEÑAS, PROMUEVE LA INCLUSIÓN DE USUARIAS Y USUARIOS CON DISCAPACIDAD AUDITIVA, A ESTAR INFORMADO DE TODO EL ACONTECER NOTICIOSO DE AMÉRICA LATINA Y EL MUNDO. CON UNA VISIÓN INTEGRAL DE LAS TRANSFORMACIONES QUE SE ESTÁN PRO</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 14:30:00</hora_ini>
+                        <hora_fin>2014/07/04 15:00:00</hora_fin>
+                    </programa>        
+                    <programa id='211'>
+                        <nombre>DEPORTES TELESUR 5 1500 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 15:00:00</hora_ini>
+                        <hora_fin>2014/07/04 15:30:00</hora_fin>
+                    </programa>        
+                    <programa id='302'>
+                        <nombre>RONDA 13 1530 HR CCS </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 15:30:00</hora_ini>
+                        <hora_fin>2014/07/04 16:00:00</hora_fin>
+                    </programa>        
+                    <programa id='180'>
+                        <nombre>IMPACTO ECONÓMICO MATUTINO</nombre>
+                        <sinopsis>LA OPORTUNIDAD DE MANTENERSE AL DÍA CON LAS INCIDENCIAS DE IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 16:00:00</hora_ini>
+                        <hora_fin>2014/07/04 16:30:00</hora_fin>
+                    </programa>        
+                    <programa id='321'>
+                        <nombre>TEMAS DEL DÍA 1630HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 16:30:00</hora_ini>
+                        <hora_fin>2014/07/04 17:00:00</hora_fin>
+                    </programa>        
+                    <programa id='177'>
+                        <nombre>REALIDADES</nombre>
+                        <sinopsis>Mas allá de los titulares y las informaciones de último minuto, este espacio semanal analiza el contexto político, económico, social y cultural de las realidades de nuestros pueblos, narradas por los verdaderos protagonistas.</sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/04 17:00:00</hora_ini>
+                        <hora_fin>2014/07/04 17:30:00</hora_fin>
+                    </programa>        
+                    <programa id='305'>
+                        <nombre>RONDA 15 1730HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 17:30:00</hora_ini>
+                        <hora_fin>2014/07/04 18:00:00</hora_fin>
+                    </programa>        
+                    <programa id='212'>
+                        <nombre>DEPORTES TELESUR 6 1800 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 18:00:00</hora_ini>
+                        <hora_fin>2014/07/04 18:30:00</hora_fin>
+                    </programa>        
+                    <programa id='304'>
+                        <nombre>RONDA 16 1830 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 18:30:00</hora_ini>
+                        <hora_fin>2014/07/04 19:00:00</hora_fin>
+                    </programa>        
+                    <programa id='181'>
+                        <nombre>IMPACTO ECONÓMICO ESTELAR</nombre>
+                        <sinopsis>IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE  LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO. </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 19:00:00</hora_ini>
+                        <hora_fin>2014/07/04 19:30:00</hora_fin>
+                    </programa>        
+                    <programa id='299'>
+                        <nombre>EDICIÓN CENTRAL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 19:30:00</hora_ini>
+                        <hora_fin>2014/07/04 20:30:00</hora_fin>
+                    </programa>        
+                    <programa id='213'>
+                        <nombre>DEPORTES TELESUR 7 2030 HR CCS </nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 20:30:00</hora_ini>
+                        <hora_fin>2014/07/04 21:00:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/04 21:00:00</hora_ini>
+                        <hora_fin>2014/07/04 22:00:00</hora_fin>
+                    </programa>        
+                    <programa id='350'>
+                        <nombre>RONDA 22 22:00 Hrs CCs</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/04 22:00:00</hora_ini>
+                        <hora_fin>2014/07/04 22:30:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/04 22:30:00</hora_ini>
+                        <hora_fin>2014/07/04 23:00:00</hora_fin>
+                    </programa>        
+                    <programa id='187'>
+                        <nombre>DOSSIER ESTELAR</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/04 23:00:00</hora_ini>
+                        <hora_fin>2014/07/04 00:00:00</hora_fin>
+                    </programa>
+                </programas>
+            </viernes> 
+            <sabado cuantos='37'>
+                <programas>        
+                    <programa id='375'>
+                        <nombre>CONGÉNERO</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 00:00:00</hora_ini>
+                        <hora_fin>2014/07/05 00:30:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/05 00:30:00</hora_ini>
+                        <hora_fin>2014/07/05 01:30:00</hora_fin>
+                    </programa>        
+                    <programa id='200'>
+                        <nombre>RONDA 2 0130 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 01:30:00</hora_ini>
+                        <hora_fin>2014/07/05 02:00:00</hora_fin>
+                    </programa>        
+                    <programa id='181'>
+                        <nombre>IMPACTO ECONÓMICO ESTELAR</nombre>
+                        <sinopsis>IMPACTO ECONÓMICO OFRECE UN INFORME COMPLETO DE  LAS NOTICIAS MÁS RELEVANTES DEL ACONTECER ECONÓMICO DE LATINOAMÉRICA Y EL MUNDO. </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 02:00:00</hora_ini>
+                        <hora_fin>2014/07/05 02:30:00</hora_fin>
+                    </programa>        
+                    <programa id='201'>
+                        <nombre>RONDA 3 0230 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 02:30:00</hora_ini>
+                        <hora_fin>2014/07/05 03:00:00</hora_fin>
+                    </programa>        
+                    <programa id='363'>
+                        <nombre>CRUCE DE PALABRAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 03:00:00</hora_ini>
+                        <hora_fin>2014/07/05 03:30:00</hora_fin>
+                    </programa>        
+                    <programa id='202'>
+                        <nombre>RONDA 4 0330 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 03:30:00</hora_ini>
+                        <hora_fin>2014/07/05 04:00:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/05 04:00:00</hora_ini>
+                        <hora_fin>2014/07/05 04:30:00</hora_fin>
+                    </programa>        
+                    <programa id='203'>
+                        <nombre>RONDA 5 0430 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 04:30:00</hora_ini>
+                        <hora_fin>2014/07/05 05:00:00</hora_fin>
+                    </programa>        
+                    <programa id='187'>
+                        <nombre>DOSSIER ESTELAR</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 05:00:00</hora_ini>
+                        <hora_fin>2014/07/05 06:00:00</hora_fin>
+                    </programa>        
+                    <programa id='352'>
+                        <nombre>ATOMUN</nombre>
+                        <sinopsis>Es un espacio informativo enfocado en las noticias científico-tecnológicas   latinoamericanas y del resto del mundo, que destaca los avances logrados en esta materia. </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/05 06:00:00</hora_ini>
+                        <hora_fin>2014/07/05 06:30:00</hora_fin>
+                    </programa>        
+                    <programa id='204'>
+                        <nombre>RONDA 6 0630 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 06:30:00</hora_ini>
+                        <hora_fin>2014/07/05 07:00:00</hora_fin>
+                    </programa>        
+                    <programa id='428'>
+                        <nombre>EN EL MEDIO DIGITAL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/05 07:00:00</hora_ini>
+                        <hora_fin>2014/07/05 07:30:00</hora_fin>
+                    </programa>        
+                    <programa id='355'>
+                        <nombre>GUÍA TU CUERPO</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 07:30:00</hora_ini>
+                        <hora_fin>2014/07/05 08:00:00</hora_fin>
+                    </programa>        
+                    <programa id='209'>
+                        <nombre>DEPORTES TELESUR 3 08:00 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/05 08:00:00</hora_ini>
+                        <hora_fin>2014/07/05 08:30:00</hora_fin>
+                    </programa>        
+                    <programa id='205'>
+                        <nombre>RONDA 7 0830 HR CCS </nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 08:30:00</hora_ini>
+                        <hora_fin>2014/07/05 09:00:00</hora_fin>
+                    </programa>        
+                    <programa id='281'>
+                        <nombre>ZONA VERDE</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 09:00:00</hora_ini>
+                        <hora_fin>2014/07/05 09:30:00</hora_fin>
+                    </programa>        
+                    <programa id='188'>
+                        <nombre>SÍNTESIS</nombre>
+                        <sinopsis>RECORRIDO POR LOS HECHOS QUE FUERON NOTICIA DURANTE TODA LA SEMANA EN AMÉRICA LATINA Y EL RESTO DEL MUNDO. SÍNTESIS, BRINDA UN DOSSIER PERIODÍSTICO COMPLETO DE TODAS LAS INFORMACIONES MAS RELEVANTES DEL PANORAMA MUNDIAL.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 09:30:00</hora_ini>
+                        <hora_fin>2014/07/05 10:00:00</hora_fin>
+                    </programa>        
+                    <programa id='390'>
+                        <nombre>IMPACTO ECONOMICO FIN DE SEMANA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 10:00:00</hora_ini>
+                        <hora_fin>2014/07/05 10:30:00</hora_fin>
+                    </programa>        
+                    <programa id='237'>
+                        <nombre>RONDA 9 1030 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 10:30:00</hora_ini>
+                        <hora_fin>2014/07/05 11:00:00</hora_fin>
+                    </programa>        
+                    <programa id='210'>
+                        <nombre>DEPORTES TELESUR 4 1100 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 11:00:00</hora_ini>
+                        <hora_fin>2014/07/05 11:30:00</hora_fin>
+                    </programa>        
+                    <programa id='255'>
+                        <nombre>RONDA 10 1130 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 11:30:00</hora_ini>
+                        <hora_fin>2014/07/05 12:00:00</hora_fin>
+                    </programa>        
+                    <programa id='218'>
+                        <nombre>MP3 GIRA LATINA</nombre>
+                        <sinopsis>SERIE DOCUMENTAL QUE REGISTRA LOS SONIDOS TRADICIONALES DE NUESTRO CONTINENTE, SU MÚSICA Y SU FOLCLORE.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 12:00:00</hora_ini>
+                        <hora_fin>2014/07/05 12:30:00</hora_fin>
+                    </programa>        
+                    <programa id='389'>
+                        <nombre>UN SABOR ME TRAJO HASTA AQUI</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 12:30:00</hora_ini>
+                        <hora_fin>2014/07/05 13:00:00</hora_fin>
+                    </programa>        
+                    <programa id='186'>
+                        <nombre>DOSSIER VESPERTINO</nombre>
+                        <sinopsis>UNA HORA DE ANÁLISIS DE LOS SUCESOS INTERNACIONALES Y NOTICIAS DE RESONANCIA MUNDIAL EN PLENO DESARROLLO CONDUCIDO POR EL PERIODÍSTA Y CORRESPONSAL DE GUERRA URUGUAYO WALTER MARTÍNEZ.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 13:00:00</hora_ini>
+                        <hora_fin>2014/07/05 14:00:00</hora_fin>
+                    </programa>        
+                    <programa id='188'>
+                        <nombre>SÍNTESIS</nombre>
+                        <sinopsis>RECORRIDO POR LOS HECHOS QUE FUERON NOTICIA DURANTE TODA LA SEMANA EN AMÉRICA LATINA Y EL RESTO DEL MUNDO. SÍNTESIS, BRINDA UN DOSSIER PERIODÍSTICO COMPLETO DE TODAS LAS INFORMACIONES MAS RELEVANTES DEL PANORAMA MUNDIAL.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 14:00:00</hora_ini>
+                        <hora_fin>2014/07/05 14:30:00</hora_fin>
+                    </programa>        
+                    <programa id='257'>
+                        <nombre>RONDA 12 1430 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 14:30:00</hora_ini>
+                        <hora_fin>2014/07/05 15:00:00</hora_fin>
+                    </programa>        
+                    <programa id='211'>
+                        <nombre>DEPORTES TELESUR 5 1500 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 15:00:00</hora_ini>
+                        <hora_fin>2014/07/05 15:30:00</hora_fin>
+                    </programa>        
+                    <programa id='302'>
+                        <nombre>RONDA 13 1530 HR CCS </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 15:30:00</hora_ini>
+                        <hora_fin>2014/07/05 16:00:00</hora_fin>
+                    </programa>        
+                    <programa id='422'>
+                        <nombre>COLORES DEL FÚTBOL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 16:00:00</hora_ini>
+                        <hora_fin>2014/07/05 16:30:00</hora_fin>
+                    </programa>        
+                    <programa id='303'>
+                        <nombre>RONDA 14 1630 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 16:30:00</hora_ini>
+                        <hora_fin>2014/07/05 17:00:00</hora_fin>
+                    </programa>        
+                    <programa id='389'>
+                        <nombre>UN SABOR ME TRAJO HASTA AQUI</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 17:00:00</hora_ini>
+                        <hora_fin>2014/07/05 17:30:00</hora_fin>
+                    </programa>        
+                    <programa id='305'>
+                        <nombre>RONDA 15 1730HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 17:30:00</hora_ini>
+                        <hora_fin>2014/07/05 18:00:00</hora_fin>
+                    </programa>        
+                    <programa id='212'>
+                        <nombre>DEPORTES TELESUR 6 1800 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 18:00:00</hora_ini>
+                        <hora_fin>2014/07/05 18:30:00</hora_fin>
+                    </programa>        
+                    <programa id='178'>
+                        <nombre>REPORTAJES TELESUR</nombre>
+                        <sinopsis>25 MINUTOS DE PERIODÍSMO INVESTIGATIVO QUE BUSCA ENTREGAR AL ESPECTADOR DIFERENTES PERSPECTIVAS Y OPINIONES SOBRE UN TEMA EN PARTICULAR, EXTRAIDO DE LOS ACONTECIMIENTOS NOTICIOSOS QUE IMPACTA E INFLUYEN EN LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 18:30:00</hora_ini>
+                        <hora_fin>2014/07/05 19:00:00</hora_fin>
+                    </programa>        
+                    <programa id='390'>
+                        <nombre>IMPACTO ECONOMICO FIN DE SEMANA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 19:00:00</hora_ini>
+                        <hora_fin>2014/07/05 19:30:00</hora_fin>
+                    </programa>        
+                    <programa id='311'>
+                        <nombre>RONDA 17 1930 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 19:30:00</hora_ini>
+                        <hora_fin>2014/07/05 20:00:00</hora_fin>
+                    </programa>        
+                    <programa id='213'>
+                        <nombre>DEPORTES TELESUR 7 2030 HR CCS </nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 20:30:00</hora_ini>
+                        <hora_fin>2014/07/05 21:00:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/05 21:00:00</hora_ini>
+                        <hora_fin>2014/07/05 22:00:00</hora_fin>
+                    </programa>        
+                    <programa id='350'>
+                        <nombre>RONDA 22 22:00 Hrs CCs</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/05 22:00:00</hora_ini>
+                        <hora_fin>2014/07/05 22:30:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/05 22:30:00</hora_ini>
+                        <hora_fin>2014/07/05 23:00:00</hora_fin>
+                    </programa>        
+                    <programa id='226'>
+                        <nombre>BIOGRÁFICOS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/05 23:00:00</hora_ini>
+                        <hora_fin>2014/07/05 00:00:00</hora_fin>
+                    </programa>
+                </programas>
+            </sabado> 
+            <domingo cuantos='42'>
+                <programas>        
+                    <programa id='188'>
+                        <nombre>SÍNTESIS</nombre>
+                        <sinopsis>RECORRIDO POR LOS HECHOS QUE FUERON NOTICIA DURANTE TODA LA SEMANA EN AMÉRICA LATINA Y EL RESTO DEL MUNDO. SÍNTESIS, BRINDA UN DOSSIER PERIODÍSTICO COMPLETO DE TODAS LAS INFORMACIONES MAS RELEVANTES DEL PANORAMA MUNDIAL.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 00:00:00</hora_ini>
+                        <hora_fin>2014/07/06 00:30:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/06 00:30:00</hora_ini>
+                        <hora_fin>2014/07/06 01:30:00</hora_fin>
+                    </programa>        
+                    <programa id='422'>
+                        <nombre>COLORES DEL FÚTBOL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 01:30:00</hora_ini>
+                        <hora_fin>2014/07/06 02:00:00</hora_fin>
+                    </programa>        
+                    <programa id='390'>
+                        <nombre>IMPACTO ECONOMICO FIN DE SEMANA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 02:00:00</hora_ini>
+                        <hora_fin>2014/07/06 02:30:00</hora_fin>
+                    </programa>        
+                    <programa id='201'>
+                        <nombre>RONDA 3 0230 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 02:30:00</hora_ini>
+                        <hora_fin>2014/07/06 03:00:00</hora_fin>
+                    </programa>        
+                    <programa id='428'>
+                        <nombre>EN EL MEDIO DIGITAL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/06 03:00:00</hora_ini>
+                        <hora_fin>2014/07/06 03:30:00</hora_fin>
+                    </programa>        
+                    <programa id='202'>
+                        <nombre>RONDA 4 0330 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 03:30:00</hora_ini>
+                        <hora_fin>2014/07/06 04:00:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/06 04:00:00</hora_ini>
+                        <hora_fin>2014/07/06 04:30:00</hora_fin>
+                    </programa>        
+                    <programa id='203'>
+                        <nombre>RONDA 5 0430 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 04:30:00</hora_ini>
+                        <hora_fin>2014/07/06 05:00:00</hora_fin>
+                    </programa>        
+                    <programa id='218'>
+                        <nombre>MP3 GIRA LATINA</nombre>
+                        <sinopsis>SERIE DOCUMENTAL QUE REGISTRA LOS SONIDOS TRADICIONALES DE NUESTRO CONTINENTE, SU MÚSICA Y SU FOLCLORE.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 05:00:00</hora_ini>
+                        <hora_fin>2014/07/06 05:30:00</hora_fin>
+                    </programa>        
+                    <programa id='375'>
+                        <nombre>CONGÉNERO</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 05:30:00</hora_ini>
+                        <hora_fin>2014/07/06 06:00:00</hora_fin>
+                    </programa>        
+                    <programa id='355'>
+                        <nombre>GUÍA TU CUERPO</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 06:00:00</hora_ini>
+                        <hora_fin>2014/07/06 06:30:00</hora_fin>
+                    </programa>        
+                    <programa id='204'>
+                        <nombre>RONDA 6 0630 HR CCS</nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 06:30:00</hora_ini>
+                        <hora_fin>2014/07/06 07:00:00</hora_fin>
+                    </programa>        
+                    <programa id='390'>
+                        <nombre>IMPACTO ECONOMICO FIN DE SEMANA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 07:00:00</hora_ini>
+                        <hora_fin>2014/07/06 07:30:00</hora_fin>
+                    </programa>        
+                    <programa id='188'>
+                        <nombre>SÍNTESIS</nombre>
+                        <sinopsis>RECORRIDO POR LOS HECHOS QUE FUERON NOTICIA DURANTE TODA LA SEMANA EN AMÉRICA LATINA Y EL RESTO DEL MUNDO. SÍNTESIS, BRINDA UN DOSSIER PERIODÍSTICO COMPLETO DE TODAS LAS INFORMACIONES MAS RELEVANTES DEL PANORAMA MUNDIAL.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 07:30:00</hora_ini>
+                        <hora_fin>2014/07/06 08:00:00</hora_fin>
+                    </programa>        
+                    <programa id='209'>
+                        <nombre>DEPORTES TELESUR 3 08:00 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/06 08:00:00</hora_ini>
+                        <hora_fin>2014/07/06 08:30:00</hora_fin>
+                    </programa>        
+                    <programa id='205'>
+                        <nombre>RONDA 7 0830 HR CCS </nombre>
+                        <sinopsis>25 MINUTOS DE NOTICIAS AL MOMENTO DESDE LOS DIVERSOS ESCENARIOS DE AMÉRICA LATINA Y EL RESTO DEL MUNDO, INTEGRADOS EN UNA SOLA VOZ INFORMATIVA.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 08:30:00</hora_ini>
+                        <hora_fin>2014/07/06 09:00:00</hora_fin>
+                    </programa>        
+                    <programa id='179'>
+                        <nombre>VIDAS</nombre>
+                        <sinopsis>ESPACIO QUE DA A CONOCER LAS HISTORIAS DE VIDA DE PERSONAS Y PERSONAJES SENCILLOS, INMERSOS EN EL DÍA A DÍA DE SUS OBRAS, TRABAJOS, PASIONES, CREENCIAS E HISTORIAS. SON NOTAS HUMANAS, QUE DESTACAN LA IDIOSINCRACIA, LA EXPRESIÓN Y LA CREATIVIDAD DE LOS LAT</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 09:00:00</hora_ini>
+                        <hora_fin>2014/07/06 09:30:00</hora_fin>
+                    </programa>        
+                    <programa id='188'>
+                        <nombre>SÍNTESIS</nombre>
+                        <sinopsis>RECORRIDO POR LOS HECHOS QUE FUERON NOTICIA DURANTE TODA LA SEMANA EN AMÉRICA LATINA Y EL RESTO DEL MUNDO. SÍNTESIS, BRINDA UN DOSSIER PERIODÍSTICO COMPLETO DE TODAS LAS INFORMACIONES MAS RELEVANTES DEL PANORAMA MUNDIAL.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 09:30:00</hora_ini>
+                        <hora_fin>2014/07/06 10:00:00</hora_fin>
+                    </programa>        
+                    <programa id='375'>
+                        <nombre>CONGÉNERO</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 10:00:00</hora_ini>
+                        <hora_fin>2014/07/06 10:30:00</hora_fin>
+                    </programa>        
+                    <programa id='237'>
+                        <nombre>RONDA 9 1030 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 10:30:00</hora_ini>
+                        <hora_fin>2014/07/06 11:00:00</hora_fin>
+                    </programa>        
+                    <programa id='210'>
+                        <nombre>DEPORTES TELESUR 4 1100 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 11:00:00</hora_ini>
+                        <hora_fin>2014/07/06 11:30:00</hora_fin>
+                    </programa>        
+                    <programa id='255'>
+                        <nombre>RONDA 10 1130 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 11:30:00</hora_ini>
+                        <hora_fin>2014/07/06 12:00:00</hora_fin>
+                    </programa>        
+                    <programa id='355'>
+                        <nombre>GUÍA TU CUERPO</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 12:00:00</hora_ini>
+                        <hora_fin>2014/07/06 12:30:00</hora_fin>
+                    </programa>        
+                    <programa id='424'>
+                        <nombre>FUTBOL PASION CON EDUARDO GALEANO </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 12:30:00</hora_ini>
+                        <hora_fin>2014/07/06 13:00:00</hora_fin>
+                    </programa>        
+                    <programa id='179'>
+                        <nombre>VIDAS</nombre>
+                        <sinopsis>ESPACIO QUE DA A CONOCER LAS HISTORIAS DE VIDA DE PERSONAS Y PERSONAJES SENCILLOS, INMERSOS EN EL DÍA A DÍA DE SUS OBRAS, TRABAJOS, PASIONES, CREENCIAS E HISTORIAS. SON NOTAS HUMANAS, QUE DESTACAN LA IDIOSINCRACIA, LA EXPRESIÓN Y LA CREATIVIDAD DE LOS LAT</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 13:00:00</hora_ini>
+                        <hora_fin>2014/07/06 13:30:00</hora_fin>
+                    </programa>        
+                    <programa id='177'>
+                        <nombre>REALIDADES</nombre>
+                        <sinopsis>Mas allá de los titulares y las informaciones de último minuto, este espacio semanal analiza el contexto político, económico, social y cultural de las realidades de nuestros pueblos, narradas por los verdaderos protagonistas.</sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/06 13:30:00</hora_ini>
+                        <hora_fin>2014/07/06 14:00:00</hora_fin>
+                    </programa>        
+                    <programa id='363'>
+                        <nombre>CRUCE DE PALABRAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 14:00:00</hora_ini>
+                        <hora_fin>2014/07/06 14:30:00</hora_fin>
+                    </programa>        
+                    <programa id='257'>
+                        <nombre>RONDA 12 1430 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 14:30:00</hora_ini>
+                        <hora_fin>2014/07/06 15:00:00</hora_fin>
+                    </programa>        
+                    <programa id='211'>
+                        <nombre>DEPORTES TELESUR 5 1500 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 15:00:00</hora_ini>
+                        <hora_fin>2014/07/06 15:30:00</hora_fin>
+                    </programa>        
+                    <programa id='302'>
+                        <nombre>RONDA 13 1530 HR CCS </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 15:30:00</hora_ini>
+                        <hora_fin>2014/07/06 16:00:00</hora_fin>
+                    </programa>        
+                    <programa id='422'>
+                        <nombre>COLORES DEL FÚTBOL</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 16:00:00</hora_ini>
+                        <hora_fin>2014/07/06 16:30:00</hora_fin>
+                    </programa>        
+                    <programa id='303'>
+                        <nombre>RONDA 14 1630 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 16:30:00</hora_ini>
+                        <hora_fin>2014/07/06 17:00:00</hora_fin>
+                    </programa>        
+                    <programa id='305'>
+                        <nombre>RONDA 15 1730HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 17:30:00</hora_ini>
+                        <hora_fin>2014/07/06 18:00:00</hora_fin>
+                    </programa>        
+                    <programa id='212'>
+                        <nombre>DEPORTES TELESUR 6 1800 HR CCS</nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 18:00:00</hora_ini>
+                        <hora_fin>2014/07/06 18:30:00</hora_fin>
+                    </programa>        
+                    <programa id='178'>
+                        <nombre>REPORTAJES TELESUR</nombre>
+                        <sinopsis>25 MINUTOS DE PERIODÍSMO INVESTIGATIVO QUE BUSCA ENTREGAR AL ESPECTADOR DIFERENTES PERSPECTIVAS Y OPINIONES SOBRE UN TEMA EN PARTICULAR, EXTRAIDO DE LOS ACONTECIMIENTOS NOTICIOSOS QUE IMPACTA E INFLUYEN EN LATINOAMÉRICA Y EL MUNDO.</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 18:30:00</hora_ini>
+                        <hora_fin>2014/07/06 19:00:00</hora_fin>
+                    </programa>        
+                    <programa id='415'>
+                        <nombre>NO SON TUIT, SON HISTORIAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 19:00:00</hora_ini>
+                        <hora_fin>2014/07/06 19:30:00</hora_fin>
+                    </programa>        
+                    <programa id='311'>
+                        <nombre>RONDA 17 1930 HR CCS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 19:30:00</hora_ini>
+                        <hora_fin>2014/07/06 20:00:00</hora_fin>
+                    </programa>        
+                    <programa id='363'>
+                        <nombre>CRUCE DE PALABRAS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 20:00:00</hora_ini>
+                        <hora_fin>2014/07/06 20:30:00</hora_fin>
+                    </programa>        
+                    <programa id='213'>
+                        <nombre>DEPORTES TELESUR 7 2030 HR CCS </nombre>
+                        <sinopsis>ACCIÓN Y ADRENALINA DEPORTIVA. LA COBERTURA DETALLADA Y LA MÁS COMPLETA INFORMACIÓN SOBRE EL APASIONANTE MUNDO DEL DEPORTE EN DEPORTES TELESUR. CON LOS EQUIPOS MÁS DESTACADOS DEL MOMENTO, LAS MEJORES JUGADAS DEL DÍA, LOS ENCUENTROS MÁS ESPERADOS POR LA FA</sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 20:30:00</hora_ini>
+                        <hora_fin>2014/07/06 21:00:00</hora_fin>
+                    </programa>        
+                    <programa id='429'>
+                        <nombre>DE ZURDA </nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>1</url>
+                        <hora_ini>2014/07/06 21:00:00</hora_ini>
+                        <hora_fin>2014/07/06 22:00:00</hora_fin>
+                    </programa>        
+                    <programa id='350'>
+                        <nombre>RONDA 22 22:00 Hrs CCs</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/06 22:00:00</hora_ini>
+                        <hora_fin>2014/07/06 22:30:00</hora_fin>
+                    </programa>        
+                    <programa id='184'>
+                        <nombre>NAD NUESTRA AMÉRICA DEPORTIVA</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>1</foto>
+                        <url>2</url>
+                        <hora_ini>2014/07/06 22:30:00</hora_ini>
+                        <hora_fin>2014/07/06 23:00:00</hora_fin>
+                    </programa>        
+                    <programa id='226'>
+                        <nombre>BIOGRÁFICOS</nombre>
+                        <sinopsis> </sinopsis>
+                        <foto>0</foto>
+                        <url>0</url>
+                        <hora_ini>2014/07/06 23:00:00</hora_ini>
+                        <hora_fin>2014/07/06 00:00:00</hora_fin>
                     </programa>        
                 </programas>
             </domingo> 
