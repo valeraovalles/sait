@@ -67,6 +67,7 @@ class DefaultController extends Controller
 			define("USER","jhoan"); //Nombre de Usuario
 			define("PASSWORD","123456"); //Contraseña de acceso*/
 		        
+		        
 		        # Cambie estos datos por los de su Servidor FTP
 			define("SERVER","192.168.100.30"); //IP o Nombre del Servidor
 		      	define("PORT",21); //Puerto
