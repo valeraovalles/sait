@@ -20,7 +20,7 @@
 	{{ parent() }}
 
 
-	{% if fecha is defined %}<a href="{{ asset('uploads/creatv/txt/') }}{{ fecha }}.txt">DESCARGA EL ARCHIVO {{ fecha }}.txt AQUÍ</a><br>{% endif %}
+	{% if fecha is defined %}<a download="{{ fecha }}.txt" href="{{ asset('uploads/creatv/txt/') }}{{ fecha }}.txt">DESCARGA EL ARCHIVO {{ fecha }}.txt AQUÍ</a><br><br>{% endif %}
 
     <form novalidate action="{{ path('creatv_generatxt') }}" method="post" {{ form_enctype(form) }}>
 
