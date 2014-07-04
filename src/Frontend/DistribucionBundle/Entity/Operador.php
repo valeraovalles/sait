@@ -51,7 +51,6 @@ class Operador
      * @var integer
      *
      * @ORM\Column(name="dialUrl", type="string", length=100, nullable=true)
-     * @Assert\NotBlank()
      * @Assert\NotEqualTo(value = "0")
      */
     private $dialUrl;

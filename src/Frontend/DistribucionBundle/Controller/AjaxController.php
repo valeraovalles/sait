@@ -229,6 +229,9 @@ class AjaxController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        print_r($datos);
+
+
         if($mostrar=='operador'){
 
             $datos=explode("-", $datos);
