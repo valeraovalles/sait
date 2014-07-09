@@ -52,7 +52,6 @@ class ReporteController extends Controller
                     'property' => 'pais',
                     'expanded'=>false, 
                     'multiple'=>true,
-                    'empty_value' => 'Seleccione...',
                     'query_builder' => function(EntityRepository $er) {
                             return $er->createQueryBuilder('u')
                             ->orderBy('u.pais', 'ASC')
