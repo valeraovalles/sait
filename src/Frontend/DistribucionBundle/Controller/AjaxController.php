@@ -229,9 +229,6 @@ class AjaxController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        print_r($datos);
-
-
         if($mostrar=='operador'){
 
             $datos=explode("-", $datos);
@@ -247,7 +244,7 @@ class AjaxController extends Controller
             $consulta->setParameter('idtipooperador', $idtipooperador);
             $operador = $consulta->getResult();
 
-
+            $array['t']="Todos";
             if(!empty($operador)){
                 foreach ($operador as $o) {
                     $array[$o['id']]=$o['nombre'];
@@ -260,8 +257,10 @@ class AjaxController extends Controller
                     ->add('operador', 'choice', array(
                         'choices'   => $array,
                         'expanded'=>false, 
-                        'multiple'=>true,
-           
+                        'multiple'=>false,
+                        'empty_value' => 'Seleccione...',
+
+
                     ))
                 ->getForm();
 

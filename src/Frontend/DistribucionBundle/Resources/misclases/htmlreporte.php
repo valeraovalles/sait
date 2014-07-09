@@ -8,14 +8,26 @@ class htmlreporte
     public function informativo($em,$datos)
     {
 
+
     	if($datos=='todo'){
 	  		$dql = "
 			SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p JOIN o.comodato c
-	        order by o.nombre ASC";
+	        order by o.pais ASC";
 	        $consulta = $em->createQuery($dql);
 	        $operador = $consulta->getResult();
 	    }
 
+	    else if($datos['operador']=='t'){
+	        $dql = "
+			SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p JOIN o.comodato c
+	        where o.pais in (:idpais) and o.tipooperador in (:idto) and o.fecharegistro>= :fechadesde and o.fecharegistro<= :fechahasta and o.estatus=true order by o.nombre ASC";
+	        $consulta = $em->createQuery($dql);
+	        $consulta->setParameter('idpais', $datos['pais']);
+	        $consulta->setParameter('idto', $datos['tipooperador']);
+	        $consulta->setParameter('fechadesde', $datos['fechadesde']);
+	        $consulta->setParameter('fechahasta', $datos['fechahasta']);
+	        $operador = $consulta->getResult();	
+	    }
 
 	    else{
 	        $dql = "
