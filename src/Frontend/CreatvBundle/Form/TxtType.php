@@ -12,7 +12,8 @@ class TxtType extends AbstractType
     {
         $builder
             ->add('tipo', 'choice', array(
-                                'choices'   => array(''=>'Seleccione...','PARRILLA PRINCIPAL'=>'TXT PARRILLA PRINCIPAL','PARRILLA INGLES'=>'TXT PARRILLA INGLES')))
+                                //'choices'   => array(''=>'Seleccione...','PARRILLA PRINCIPAL'=>'TXT PARRILLA PRINCIPAL','PARRILLA INGLES'=>'TXT PARRILLA INGLES')))
+                                'choices'   => array('PARRILLA PRINCIPAL'=>'TXT PARRILLA PRINCIPAL')))
             ->add('fecha', 'date',array(
                     'widget' => 'single_text',
                     'format' => 'dd-MM-y',

@@ -51,19 +51,20 @@ class DefaultController extends Controller
 
 	        $link = mssql_connect('192.168.70.7', 'sa', '') or die("Could not connect !");
 	        $selected = mssql_select_db("creatv_data", $link);
-		        
+		       
+		    /* 
 			# Cambie estos datos por los de su Servidor FTP
 			define("SERVER","10.10.11.243"); //IP o Nombre del Servidor
 			define("PORT",21); //Puerto
 			define("USER","jhoan"); //Nombre de Usuario
-			define("PASSWORD","123456"); //Contraseña de acceso
+			define("PASSWORD","123456"); //Contraseña de acceso*/
 		        
-		     /*   
+		      
 		        # Cambie estos datos por los de su Servidor FTP
 			define("SERVER","192.168.100.30"); //IP o Nombre del Servidor
 		      	define("PORT",21); //Puerto
 			define("USER","creatv"); //Nombre de Usuario
-			define("PASSWORD","..*creatv*.."); //Contraseña de acceso*/
+			define("PASSWORD","..*creatv*.."); //Contraseña de acceso
 
 			# Funcion
 			function ConectarFTP(){
