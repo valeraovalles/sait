@@ -125,8 +125,8 @@
 
     //tipo contenido, contenido, produccion
     $query="
-      SELECT pa.Data_Inici, pa.Data_Fi, es.Data_Emissio, pr.Identificador, ev.StartTime, co.Titol_Original, co.Titol_Emissio, co.Sinopsis as sinopsiscon, ev.Logo, ev.Logo1, co.IdPrograma, co.Durada,blo.Hora_Inici as horainicio, blo.Durada as duracion
-      FROM [creatv_data].[dbo].[Escaleta] es, [creatv_data].[dbo].[Evento] ev, [creatv_data].[dbo].[Parrilla] pa, [creatv_data].[dbo].[Produccion] pr, [creatv_data].[dbo].[Contenido] co, [creatv_data].[dbo].[Bloque] blo
+      SELECT pa.Data_Inici, pa.Data_Fi, es.Data_Emissio, pr.Identificador, ev.StartTime, co.Titol_Original, co.Titol_Emissio, co.Sinopsis as sinopsiscon, co.IdPrograma, co.Durada,blo.Hora_Inici as horainicio, blo.Durada as duracion, case lo.LogoNum when '1' then lo.Descripcio end as foto, case lo.LogoNum when '2' then lo.Descripcio end as url
+      FROM [creatv_data].[dbo].[Escaleta] es, [creatv_data].[dbo].[Evento] ev, [creatv_data].[dbo].[Parrilla] pa, [creatv_data].[dbo].[Produccion] pr, [creatv_data].[dbo].[Contenido] co, [creatv_data].[dbo].[Bloque] blo, [creatv_data].[dbo].[Logo] lo
       where 
       pa.Data_Inici='".$lunes."' and
       pa.Data_Fi='".$domingo."' and
@@ -140,7 +140,8 @@
       pa.IdParrilla=es.IdParrilla and
       ev.IdProduccio=pr.IdProduccio and
       co.IdPrograma=pr.IdPrograma and
-      ev.IdBloc=blo.IdBloc
+      ev.IdBloc=blo.IdBloc and
+      (lo.IdLogo=co.IdLogo1 and lo.LogoNum=1 or lo.IdLogo=co.IdLogo2 and lo.LogoNum=2)
       ORDER by es.Data_Emissio, ev.OrderNum ASC 
     ";
 
@@ -210,10 +211,10 @@ if($idprograma!=$row['IdPrograma']){
 
     $xml .="        
                     <programa id='".$row['IdPrograma']."'>
-                        <nombre>".utf8_encode($row['Titol_Emissio'])."</nombre>
+                        <nombre>".utf8_encode($row['Titol_Original'])."</nombre>
                         <sinopsis>".utf8_encode($row['sinopsiscon'])."</sinopsis>
-                        <foto>".$row['Logo']."</foto>
-                        <url>".$row['Logo1']."</url>
+                        <foto>".$row['foto']."</foto>
+                        <url>".$row['url']."</url>
                         <hora_ini>".str_replace("-", "/", $row['Data_Emissio'])." ".$horainicio."</hora_ini>
                         <hora_fin>".str_replace("-", "/", $row['Data_Emissio'])." ".$horafin."</hora_fin>
                     </programa>";
