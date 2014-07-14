@@ -11,5 +11,5 @@ creatv_generatxt:
     defaults: { _controller: CreatvBundle:Default:generatxt }
 
 creatv_descargatxt:
-    pattern:  /descargatxt/{fecha}
+    pattern:  /descargatxt/{fecha}/{tipo}
     defaults: { _controller: CreatvBundle:Default:descargatxt }

@@ -19,7 +19,6 @@ class DefaultController extends Controller
 
     public function formtxtAction()
     {
-
         $entity = new Txt();
         $form   = $this->createForm(new TxtType($id), $entity);
         return $this->render('CreatvBundle:Default:formtxt.html.twig',array('form'=>$form->createView()));
@@ -37,24 +36,16 @@ class DefaultController extends Controller
         	$datos=$request->request->all();
         	$datos=$datos['frontend_creatvbundle_txttype'];
 
-        	$archivo=$this->procesatxt($datos['fecha']);
+        	$archivo=$this->procesatxt($datos['fecha'],$datos['tipo']);
 
-	        if (!$archivo)
-				$this->get('session')->getFlashBag()->add('alert', "EL ARCHIVO NO SE HA SUBIDO POR FAVOR CONTACTE CON EL ADMINISTRADOR");
-	        else
-	        	$this->get('session')->getFlashBag()->add('notice', "ARCHIVO ENVIADO A LA CARPETA COMPARTIDA");
-
-	        return $this->redirect($this->generateUrl('creatv_descargatxt',array('fecha'=>$datos['fecha'])));	   
-
-
+        	if($archivo==true)
+	        return $this->redirect($this->generateUrl('creatv_descargatxt',array('fecha'=>$datos['fecha'],'tipo'=>$datos['tipo'])));	   
         }
-
 
         return $this->render('CreatvBundle:Default:formtxt.html.twig',array('form'=>$form->createView()));
     }
 
-
-    public function procesatxt($fecha_escaleta){
+    public function procesatxt($fecha_escaleta,$tipo){
 
 		    $f=new Funcion;
 
@@ -62,17 +53,17 @@ class DefaultController extends Controller
 	        $selected = mssql_select_db("creatv_data", $link);
 		        
 			# Cambie estos datos por los de su Servidor FTP
-			/*define("SERVER","10.10.11.243"); //IP o Nombre del Servidor
+			define("SERVER","10.10.11.243"); //IP o Nombre del Servidor
 			define("PORT",21); //Puerto
 			define("USER","jhoan"); //Nombre de Usuario
-			define("PASSWORD","123456"); //Contraseña de acceso*/
+			define("PASSWORD","123456"); //Contraseña de acceso
 		        
-		        
+		     /*   
 		        # Cambie estos datos por los de su Servidor FTP
 			define("SERVER","192.168.100.30"); //IP o Nombre del Servidor
 		      	define("PORT",21); //Puerto
 			define("USER","creatv"); //Nombre de Usuario
-			define("PASSWORD","..*creatv*.."); //Contraseña de acceso
+			define("PASSWORD","..*creatv*.."); //Contraseña de acceso*/
 
 			# Funcion
 			function ConectarFTP(){
@@ -134,7 +125,7 @@ class DefaultController extends Controller
 	                e.Data_Emissio='".$f->voltea_fecha($fecha_escaleta)."' and 
 	                pa.IdCanal=10 and
 					EV.ClipName!=''	and 
-					e.IdParrilla=pa.IdParrilla and pa.Nom='PARRILLA PRINCIPAL'
+					e.IdParrilla=pa.IdParrilla and pa.Nom='".$tipo."'
 
 	        order by EV.OrderNum ASC
 	        ";
@@ -184,31 +175,36 @@ class DefaultController extends Controller
 	                $txt .=str_replace(".00","",$row["StartTime"])."\t".$row["ClipName"]."\t\t".$segmento.$row["titulo_contenido"]." - ".$row["titulo_produccion"]."\t".str_replace(".00","",$row["DurPrev"])."\r\n";
 	        }
 
+	        if(empty($txt)){
+            	$this->get('session')->getFlashBag()->add('alert', 'No existe información para la fecha seleccionada, por favor verifique que el nombre de la parrilla sea '.$tipo.', si es así por favor contacte con el administrador a través de la Ext. 339/264.');
+            	return;
+        	}
+
 	        $txt=eliminar_acentos(utf8_encode($txt));
 	        
-	        $archivo = fopen ("/var/www/sait/web/uploads/creatv/txt/".$fecha_escaleta.".txt", "w+");
-	        //$archivo = fopen ("/home/jhoan/www/Telesur/web/uploads/creatv/txt/".$fecha_escaleta.".txt", "w+");
+	        $archivo = fopen ("/var/www/sait/web/uploads/creatv/txt/".$fecha_escaleta."_".$tipo.".txt", "w+");
 
 	        fwrite($archivo, $txt);
 	        fclose($archivo);
 
-	        SubirArchivo("/var/www/sait/web/uploads/creatv/txt/".$fecha_escaleta.".txt",$fecha_escaleta.".txt");
-	        //SubirArchivo("/home/jhoan/www/Telesur/web/uploads/creatv/txt/".$fecha_escaleta.".txt",$fecha_escaleta.".txt");
+	        SubirArchivo("/var/www/sait/web/uploads/creatv/txt/".$fecha_escaleta."_".$tipo.".txt",$fecha_escaleta."_".$tipo.".txt");
 	        
-	   
-	        //verificar si el archivo fue subido
-	        //$archivo = fopen ("ftp://creatv:..*creatv*..@192.168.100.30/".$fecha_escaleta.".txt", "r");
+	        $archivo = ftp_nlist(ConectarFTP(), $fecha_escaleta.'_'.$tipo.'.txt');
 
-	        $archivo = ftp_nlist(ConectarFTP(), $fecha_escaleta.'.txt');
-	        return $archivo;
+	        if (!$archivo)
+				$this->get('session')->getFlashBag()->add('alert', "EL ARCHIVO NO SE HA SUBIDO POR FAVOR CONTACTE CON EL ADMINISTRADOR");
+	        else {
+	        	$this->get('session')->getFlashBag()->add('notice', "ARCHIVO ENVIADO A LA CARPETA COMPARTIDA");
+	        	return true;
+	        }
 
+	        return;
 	}
 
-
-    public function descargatxtAction($fecha){
+    public function descargatxtAction($fecha,$tipo){
         $entity = new Txt();
         $form   = $this->createForm(new TxtType($id), $entity);
-        return $this->render('CreatvBundle:Default:formtxt.html.twig',array('form'=>$form->createView(),'fecha'=>$fecha));
+        return $this->render('CreatvBundle:Default:formtxt.html.twig',array('form'=>$form->createView(),'fecha'=>$fecha,'tipo'=>$tipo));
 
     }
 
