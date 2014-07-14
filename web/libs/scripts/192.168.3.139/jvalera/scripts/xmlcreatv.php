@@ -143,7 +143,7 @@ while($row = mssql_fetch_array($result)){
 
     
     //envío el archivo por ftp
-    $archivo = fopen ("/var/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml", "w+");
+    $archivo = fopen ("/var/www/sait/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml", "w+");
     //$archivo = fopen ("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml", "w+");
     fwrite($archivo, $xml_final);
     fclose($archivo);
@@ -156,7 +156,7 @@ while($row = mssql_fetch_array($result)){
     $query="update [creatv_data].[dbo].[xml] set Estatus='true' where Identificador='".$id."' and Fecha='".date('Y-m-d')."' and Estatus='false'";
     mssql_query($query);
     
-    SubirArchivo("/var/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml",$row["identificador_produccion"].".xml");
+    SubirArchivo("/var/www/sait/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml",$row["identificador_produccion"].".xml");
     //SubirArchivo("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml",$row["identificador_produccion"].".xml");
 
         
