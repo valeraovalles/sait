@@ -120,9 +120,49 @@ class DefaultController extends Controller
             $this->get('mailer')->send($message);    
         //FIN CORREO
 
+        $this->proximos($jornada);
+
         $this->get('session')->getFlashBag()->add('notice', 'SE HA ASIGNADO EL NUMERO '.$ultimonumero.' AL TRABAJADOR');
         return $this->redirect($this->generateUrl('mercal_asignarnumero',array('idjornada'=>$jornada->getId(),'idtrabajador'=>$idtrabajador)));
     }
+
+    public function proximos($jornada){
+                //actualizo json con ultimo registro si este existe
+        $em = $this->getDoctrine()->getManager();
+        $dql = "select u from MercalBundle:Usernumero u where u.fechahoranumeracion is null and u.compro is null and u.jornada= :idjornada order by u.id ASC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idjornada', $jornada->getId());
+        $query ->setMaxResults(4);
+        $usernumero = $query->getResult();
+        $proximos=null;$cont=0;
+        foreach ($usernumero as $v) {
+            if($cont!=0){
+                $json[$cont-1]=array(
+                    'usernumeroid'=>$v->getId(),
+                    'numero'=>$v->getNumero(),
+                    'nombre'=>strtoupper($v->getTrabajador()->getPrimerNombre().' '.$v->getTrabajador()->getPrimerApellido()),
+                    'cedula'=>'C.I. '.strtoupper($v->getTrabajador()->getCedula()),
+                    'tipo'=>'t',
+                    'compro'=>$v->getCompro()
+                );
+
+            }
+            $cont++;
+        }
+
+        if(isset($json)){
+            $jsonencoded = json_encode($json);
+            $fh = fopen("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY")."proximos.json", 'w+');
+            fwrite($fh, $jsonencoded);
+            fclose($fh);
+            return;
+        } else {
+            if (file_exists("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY")."proximos.json")) {
+                unlink("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY")."proximos.json");
+            }
+        }
+    }
+
 
     //funcion para actualizar el json al ultimo registro no numerado
     public function actualizajson($jornada){
@@ -220,6 +260,7 @@ class DefaultController extends Controller
         $em->flush();
 
         $this->actualizajson($jornada);
+        $this->proximos($jornada);
 
         $this->get('session')->getFlashBag()->add('notice', 'El número asignado se ha eliminado correctamente.');
         return $this->redirect($this->generateUrl('mercal_asignarnumero',array('idjornada'=>$idjornada,'idtrabajador'=>$idtrabajador)));       
@@ -246,6 +287,7 @@ class DefaultController extends Controller
         $jornada =  $em->getRepository('MercalBundle:Jornada')->find($idjornada);
 
         $this->actualizajson($jornada);
+        $this->proximos($jornada);
 
         if (file_exists("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json")) {
             $str_datos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY").".json");
@@ -355,6 +397,7 @@ class DefaultController extends Controller
         $em->flush();
 
         $this->actualizajson($jornada);
+        $this->proximos($jornada);
 
         $this->get('session')->getFlashBag()->add('notice', 'El número asignado se ha eliminado correctamente.');
         return $this->redirect($this->generateUrl('mercal_listadofam',array('idjornada'=>$idjornada,'idtrabajador'=>$idtrabajador)));       
@@ -389,7 +432,16 @@ class DefaultController extends Controller
         } 
         else $datos=null;
 
-        return $this->render('MercalBundle:Default:homepagenum.html.twig',array('datos'=>$datos,'jornada'=>$jornada));
+        //muestro los proximos
+        $this->proximos($jornada);
+
+        if (file_exists("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY")."proximos.json")) {
+            $proximos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY")."proximos.json");
+            $proximos = json_decode($proximos,true);
+        } 
+        else $proximos=null;
+
+        return $this->render('MercalBundle:Default:homepagenum.html.twig',array('datos'=>$datos,'jornada'=>$jornada,'proximos'=>$proximos));
     }
 
 
@@ -422,20 +474,6 @@ class DefaultController extends Controller
 
         return $this->render('MercalBundle:Default:numeracion.html.twig',array('datos1'=>$datos1,'datos2'=>$datos2,'jornada1'=>$jornada1,'jornada2'=>$jornada2));
     }
-
-
-
-
-
-
-
-    
-
-
-
-    
-
-
 
 
    public function nuevofamAction($idtrabajador,$idjornada)

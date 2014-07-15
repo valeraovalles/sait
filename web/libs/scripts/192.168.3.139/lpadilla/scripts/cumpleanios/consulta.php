@@ -120,7 +120,7 @@ $html ="<html><head><meta http-equiv='Content-Type' content='text/html; charset=
     $mail->setText('FELICIDADES');
     $mail->setHtml($html); 
     $mail->setSMTPParams('correo.telesurtv.net', 25, null, true,'aplicaciones@telesurtv.net', '4pl1c4c10n35');
-    $mail->setBCC('distribucion-todostelesur2013@telesurtv.net');
+    $mail->setBCC('distribucion-alltelesur-2014@telesurtv.net');
     //$mail->setBCC('jvalera@telesurtv.net');
     $em='';
     $mail->send(array($em), 'smtp');

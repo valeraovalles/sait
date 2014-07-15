@@ -1,35 +1,25 @@
 {% extends '::sit.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Consulta Asignado{% endblock %}
 
-
-{% block titulobanner %}
-    TICKET ASIGNADO
+{% block titulo %}
+    CONSULTA TICKET ASIGNADO {% if usuarioticket %}
+        <br><h5>ASIGNADO A {{ usuarioticket.primernombre|upper }} {{ usuarioticket.primerapellido|upper }}</h5>
+        {% endif %}
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("ticket") }}">LISTADO DE TICKETS</a></li>
+  <li><a href="{{ path("ticket_asignado") }}">LISTA DE TICKETS ASIGNADOS</a></li>
+  <li class="active">CONSULTA DE TICKETS ASIGNADOS</li>
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">TICKET ASIGNADO
-        {% if usuarioticket %}
-        <br><h5>ASIGNADO A {{ usuarioticket.primernombre|upper }} {{ usuarioticket.primerapellido|upper }}</h5>
-        {% endif %}
-
-    </div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
 <form novalidate action="{{ path('ticket_asignadosolucion',{'id':entity.id}) }}" method="post">
 <div class="row-fluid">
   <div class="span7">
@@ -99,7 +89,7 @@
                 <div class="widgetform">{{ form_widget(form.solucion, { 'attr': {'style': 'width:80%;height:200px;'} }) }}</div>
             </div>
 
-        <input type="submit" class="btn btn-primary" value="Cerrar">
+        <br><input onclick="return confirm('¿Desea cerrar el ticket?')" type="submit" class="btn btn-danger" value="CERRAR TICKET"> | <a class="btn btn-primary" href="{{ path('ticket') }}">IR A LA LISTA</a>
   </div>
 </div>
 </form>
@@ -112,10 +102,5 @@
           <button class="btn" data-dismiss="modal">Cerrar</button>
         </div>
     </div>
-
-
-<a class="btn btn-primary" href="{{ path('ticket') }}">Ir a la lista</a>
-
-
-<br><br>
+    <br>
 {% endblock %}

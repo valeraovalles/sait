@@ -555,20 +555,6 @@ class TicketController extends Controller
                 $extension=$nombre[1];
                 $nombre=$nombre[0];
 
-                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf','zip','rar','JPG','PNG');
-         
-                //valido las extensiones
-                if (in_array($extension,$extensiones)==false) {
-                    $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
-
-                    return $this->render('SitBundle:Default:index.html.twig', array(
-                        'form'   => $form->createView(),
-                        'form2'   => $form2->createView(),
-                        'ticketusuario'=>$ticketusuario,
-                        'datosusuario'=>$datosusuario
-                    ));
-                }
-                
                 $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre));
 
                 //GUARDO EL ARCHIVO

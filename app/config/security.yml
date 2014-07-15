@@ -35,6 +35,7 @@ security:
         - { path: ^/usuario/telesur/personal, roles: ROLE_USER }
         - { path: ^/usuario/contacto, roles: ROLE_USER }
         - { path: ^/usuario/cambioclave, roles: ROLE_USER }
+        - { path: ^/usuario/actualizacambioclave, roles: ROLE_USER }
         - { path: ^/usuario, roles: ROLE_ADMINISTRADOR }
     
     #ROLES DE DISTRIBUCION

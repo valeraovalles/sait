@@ -1,68 +1,61 @@
 {% extends '::sit.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}SIT{% endblock %}
 
-{% block titulobanner %}
+{% block titulo %}
     SISTEMA INTEGRAL DE TECNOLOGÍA
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">SIT INICIO</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">SISTEMA INTEGRAL DE TECNOLOGÍA</div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-
 <div class="row">
   <div class="col-md-6">
   	<div class="tickettitulo alert alert-info"><h5>SOLICITAR SOPORTE TÉCNICO</h5></div>
   	<div class="ticketsoporte">
 
+    {% if form_errors(form.unidad) or form_errors(form.solicitud) or form_errors(form2.extension) or form_errors(form.file)%}
+    <div class="alert alert-danger errores" style="width:90%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.unidad) }}</div>
+        <div>{{ form_errors(form.solicitud) }}</div>
+        <div>{{ form_errors(form2.extension) }}</div>
+        <div>{{ form_errors(form.file) }}</div>
+    </div>
+    {% endif %}
 
-	    <form novalidate action="{{ path('ticket_create') }}" method="post" {{ form_enctype(form) }}>
+    <form novalidate action="{{ path('ticket_create') }}" method="post" {{ form_enctype(form) }}>
 	        {{ form_widget(form._token) }}
 	        {{ form_widget(form2._token) }}
 
 		<div class="formShowSit">
 	            <div class="contenedorformSit">
-          		    <div class="text-danger"><li>{{ form_errors(form.unidad) }}</li></div>
 	                <div class="labelformSit">Unidad:</div>
 	                <div class="widgetformSit">{{ form_widget(form.unidad) }}</div>
 	            </div>
 	        	<div class="contenedorformSit">
-	        		<div class="text-danger"><li>{{ form_errors(form.solicitud) }}</li></div>
 	                <div class="labelformSit">Solicitud:</div>
 	                <div class="widgetformSit">{{ form_widget(form.solicitud) }}</div>
 	            </div>
 	            <div class="contenedorformSit">
-	            	<div class="text-danger"><li>{{ form_errors(form2.extension) }}</li></div>
 	                <div class="labelformSit">Ext. Solicitante:</div>
 	                <div class="widgetformSit">{{ form_widget(form2.extension, { 'attr': {'value': datosusuario.extension} }) }}</div>
                     </div><br>
 	   	        <div class="contenedorformSit">
-	   	        	<div class="text-danger">
-	   	        		<li>
-	   	        			{{ form_errors(form.file) }}
-	   	        		</li>
-	   	        	</div>
                     <div style="text-align:center;padding-left: 120px;">
                        	{{ form_widget(form.file) }}
                     </div>
                 </div>
 		</div>
 
-            <button class="btn btn-large btn-primary" type="submit">Solicitar</button>
+            <button class="btn btn-large btn-primary" type="submit">SOLICITAR</button>
 	    </form>
   	</div>
   </div>
@@ -155,5 +148,5 @@
 	</div>
   </div>
 </div>
-
+<br>
 {% endblock %}

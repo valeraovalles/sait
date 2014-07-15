@@ -14,7 +14,7 @@ class JornadaType extends AbstractType
             ->add('nombrejornada')
             ->add('fechajornada', 'date',array(
                     'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd',
+                    'format' => 'dd-MM-y',
                 ))
         ;
     }

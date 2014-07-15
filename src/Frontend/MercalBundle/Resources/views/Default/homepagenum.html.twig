@@ -2,24 +2,11 @@
  
 {% block title %}Numeraci&oacute;n{% endblock %}
 
-{% block titulo %}
-    NUMERACI&Oacute;N
-{% endblock %}
-
-{% block ubicacion %}
-<ol class="breadcrumb">
-  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
-  <li><a href="{{ path("mercal_seleccionajornada") }}">SELECCIONAR JORNADA</a></li>
-  <li class="active">NUMERACI&Oacute;N</li>
-</ol>
-{% endblock %}
-
 {% block body -%}
     {{ parent() }}
     
     {#
     <div class="titulojornada">JORNADA {{ jornada.nombrejornada|upper }}</div>
-
     <div id="numeracion"> 
         <div class="numero">{{ datos.numero }}</div>
         <div class="nombre">SUSPENDIDA</div>
@@ -27,11 +14,13 @@
     </div>
     #}
     
+    <div class="titulojornada">JORNADA {{ jornada.nombrejornada|upper }}</div>
     <div id="numeracion"> 
         <div class="numero">{{ datos.numero }}</div>
         <div class="nombre">{{ datos.nombre }}</div>
         <div class="cedula">{{ datos.cedula }}</div>
     </div>
+    
 
     <input type="hidden" id="idjornada" value="{{ jornada.id }}">
 

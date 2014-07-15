@@ -1,30 +1,22 @@
 {% extends '::constancia.html.twig' %}
  
-{% block title %}Constancia{% endblock %}
+{% block title %}Consulta de constancia{% endblock %}
 
-
-{% block titulobanner %}
-    CONSTANCIA DE TRABAJO
+{% block titulo %}
+    CONSULTA DE CONSTANCIA
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("constancia") }}">CONSTANCIA INICIO</a></li>
+  <li class="active">CONSTANCIA CONSULTA</li>
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">CONSULTA</div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
  <div class="formShow">
 
             <div class="contenedorform">
@@ -83,19 +75,19 @@
         </div>
 
 
-        <a class="btn" href="{{ path('constancia') }}">
-            Ir a la lista
+        <a class="btn btn-default" href="{{ path('constancia') }}">
+            IR A LA LISTA  
         </a> | 
 
-        <a class="btn" href="{{ path('constancia_edit', { 'id': entity.id }) }}">
-            Ir a editar
+        <a class="btn btn-default" href="{{ path('constancia_edit', { 'id': entity.id }) }}">
+            IR A EDITAR
         </a> | 
         <a href="{{ path('constancia_pdf', { 'id': entity.id }) }}"><img width="25px" src="{{ asset('images/pdf.gif')}}"></a>
 
         <br><br>
-        <form action="{{ path('constancia_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Está seguro que desea borrar?')">
+        <form style="display:none;" action="{{ path('constancia_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Está seguro que desea borrar?')">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit">Borrar</button>
+            <button class="btn btn-danger" type="submit">BORRAR</button>
         </form>
 {% endblock %}

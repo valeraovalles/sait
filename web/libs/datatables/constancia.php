@@ -18,12 +18,12 @@
     $sIndexColumn = "fechasolicitud";
      
     /* DB table to use */
-    $sTable = "constancia.constancia c, usuarios.perfil p";
+    $sTable = "constancia.constancia c, usuarios.perfil p, usuarios.user u";
      
     /* Database connection information */
     $gaSql['user']       = "postgres";
-    #$gaSql['password']   = "..*t3l35ur*..";
-    $gaSql['password']   = "postgres";
+    $gaSql['password']   = "..*t3l35ur*..";
+    #$gaSql['password']   = "postgres";
     $gaSql['db']         = "sait";
     $gaSql['server']     = "localhost";
      
@@ -127,8 +127,8 @@
         }
     }
 
-    if($sWhere=="") $sWhere="where c.user_id=p.id";
-    else $sWhere .=" and c.user_id=p.id";
+    if($sWhere=="") $sWhere="where c.user_id=p.id and p.id=u.id and u.is_active=true";
+    else $sWhere .=" and c.user_id=p.id and p.id=u.id and u.is_active=true";
 
     $sQuery = "
         SELECT ".str_replace(" , ", " ", implode(", ", $aColumns)).", c.id as idconstancia, c.culminada
@@ -195,12 +195,12 @@
 
                 if($i==5){
                     if($aRow['culminada']=='f')
-                        $estatus='<span style="display:none;">1-</span><span class="label label-important">Nueva</span>';
+                        $estatus='<span style="display:none;">1-</span><span class="label label-danger">Nueva</span>';
                     else
                         $estatus='<span style="display:none;">2-</span><span class="label label-success">Cerrada</span>';
                 $row[5] =$estatus;
-                $row[] = "<a href='".$aRow['idconstancia']."/show'><span class='icon-search'></span></a>
-                          <a href='edit/".$aRow['idconstancia']."'><span class='icon-edit'></span></a>
+                $row[] = "<a href='".$aRow['idconstancia']."/show'><span class='glyphicon glyphicon-eye-open'></span></a>
+                          <a href='edit/".$aRow['idconstancia']."'><span class='glyphicon glyphicon-pencil'></span></a>
                           <a href='pdf/".$aRow['idconstancia']."'><img style='width:18px;' src='/sait/web/images/pdf.gif'></a>"; 
                 }
             }

@@ -1,18 +1,24 @@
 {% extends '::cumpleanios.html.twig' %}
+ 
+{% block title %}Consultar{% endblock %}
 
-{% block title %}CUMPLEAÑOS - CONSULTA{% endblock %}
-
-{% block titulobanner %}
-    CUMPLEAÑOS - CONSULTA
+{% block titulo %}
+    CONSULTA PERSONAL
 {% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("cumpleanios_personal") }}">LISTADO DE PERSONAL EXTRANJERO</a></li>
+  <li class="active">CONSULTA PERSONAL</li>
+</ol>
+{% endblock %}
+
 
 {% block body -%}
     {{ parent() }}
 
-    <div class="titulo">CONSULTA</div>
-
-
-    <div class="formShow">
+      <div class="formShow">
         <div class="contenedorform">
             <div class="labelform">Nombre:</div>
             <div class="widgetform">{{ entity.nombre }}</div>
@@ -45,17 +51,17 @@
         </div>
     </div>
         <a class="btn btn-default" href="{{ path('cumpleanios_personal') }}">
-            Volver a la lista
+            VOLVER A LA LISTA
         </a> | 
 
-        <a class="btn btn-primary" href="{{ path('cumpleanios_personal_edit', { 'id': entity.id }) }}">
-            Editar
+        <a class="btn btn-default" href="{{ path('cumpleanios_personal_edit', { 'id': entity.id }) }}">
+            IR A EDITAR
         </a>
         <br><br>
         <form action="{{ path('cumpleanios_personal_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit">Borrar</button>
+            <button class="btn btn-danger" type="submit">BORRAR</button>
         </form><br>
 
 {% endblock %}

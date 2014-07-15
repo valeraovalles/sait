@@ -1,25 +1,22 @@
 {% extends '::distribucion.html.twig' %}
-{% block title %}Distribución - Lista{% endblock %}
 
-{% block titulobanner %}
-    DISTRIBUCIÓN - LISTA
+{% block title %}Lista{% endblock %}
+
+{% block titulo %}
+    PAIS "{{ pais.pais|upper}}"<br>TIPO DE OPERADOR "{{ top.operador|upper }}"
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li class="active">DISTRIBUCIÓN - LISTA</li>
+</ol>
+{% endblock %}
     
 {% block body -%}
     {{ parent() }}
-    <div class="titulo">PAIS "{{ pais.pais|upper}}"<br>TIPO DE OPERADOR "{{ top.operador|upper }}"</div>
-
-    {% if app.session.started %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="Greenflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {% endif %}
-
-
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table id="tabladatatable" class="table table-striped table-bordered">
         <thead>
             <tr>
 
@@ -41,10 +38,10 @@
                 <td>{{ entity.tipooperador.operador }}</td>
                 <td>{% if entity.estatus == 1 %} Activo {% else %} <div style="background-color:yellow;color:red;">Inactivo<div> {% endif %}</td>
                 <td>
-                        <a href="{{ path('operador_show', { 'id': entity.id }) }}"><span class="icon-search"></span></a>
+                        <a href="{{ path('operador_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
          
                         {% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %}
-                        <a href="{{ path('operador_edit', { 'id': entity.id }) }}"><span class="icon-edit"></span></a>
+                        <a href="{{ path('operador_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></a>
                         {% endif %}
                 </td>
             </tr>
@@ -60,9 +57,16 @@
 
 <br><br>
 <br>
-    <a class="btn" href="{{ path('distribucion_homepage') }}">Ir al mapa</a> | 
-    <a class="btn" href="{{ path('infooperadores') }}">Ir al resumen</a>
+    <a class="btn btn-default" href="{{ path('distribucion_homepage') }}">IR AL MAPA</a> | 
+    <a class="btn btn-default" href="{{ path('infooperadores') }}">IR AL RESUMEN</a>
 <br><br>
 
-    
+        <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'asc'],[1,'asc']],
+            } );
+        })
+    </script>
     {% endblock %}
