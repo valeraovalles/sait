@@ -102,20 +102,8 @@
             return $dia;
     }
 
-    //redondeo la hora de inicio del programa ya que no es exacta
-    function rendondearhorainicio($tiempo){
-        $tiempo =explode(":",$tiempo);
-        $hora=$tiempo[0];
-        $minuto=$tiempo[1];
-        $segundo='00';
-
-        if($minuto<30) $minuto='00';
-        else $minuto='30';
-        return $hora.":".$minuto.":".$segundo;
-    }
-
     //sumo hora inicio con el redondeo de final para calcular el tiempo final
-    function sumar($h1,$h2)
+    function sumarhoras($h1,$h2)
     {
         $h2h = date('H', strtotime($h2));
         $h2m = date('i', strtotime($h2));
@@ -128,28 +116,6 @@
      
     }
 
-    //redondeo la hora final del programa ya que no es exacta
-    function rendondearhorafin($tiempoinicio,$tiempofin){
-
-        $tiempofin =explode(":",$tiempofin);
-            $horafin=$tiempofin[0];
-            $minutofin=$tiempofin[1];
-            $segundofin=00;
-
-
-        //si solo hay que aumentar media hora entonces aumento una hora y el minuto es 00
-        if($minutofin<30)
-            $minutofin=30;
-        else{
-            $minutofin=00;
-            $horafin=$horafin+1;
-        }
-
-        $tiempofin= sumar($tiempoinicio,$horafin.":".$minutofin.":".$segundofin);
-
-        return $tiempofin;
-    }
-
     //conecto a la bd de mysqlserver
     $link = mssql_connect('192.168.70.7', 'sa', '') or die("Could not connect !");
     $selected = mssql_select_db("creatv_data", $link);
@@ -159,11 +125,12 @@
 
     //tipo contenido, contenido, produccion
     $query="
-      SELECT pa.Data_Inici, pa.Data_Fi, es.Data_Emissio, pr.Identificador, ev.StartTime, co.Titol_Emissio, pr.Sinopsis as sipnopsisprod, co.Sinopsis as sinopsiscon, ev.Logo, ev.Logo1, co.IdPrograma, co.Durada
-      FROM [creatv_data].[dbo].[Escaleta] es, [creatv_data].[dbo].[Evento] ev, [creatv_data].[dbo].[Parrilla] pa, [creatv_data].[dbo].[Produccion] pr, [creatv_data].[dbo].[Contenido] co
+      SELECT pa.Data_Inici, pa.Data_Fi, es.Data_Emissio, pr.Identificador, ev.StartTime, co.Titol_Original, co.Titol_Emissio, co.Sinopsis as sinopsiscon, co.IdPrograma, co.Durada,blo.Hora_Inici as horainicio, blo.Durada as duracion, case lo.LogoNum when '1' then lo.Descripcio end as foto, case lo.LogoNum when '2' then lo.Descripcio end as url
+      FROM [creatv_data].[dbo].[Escaleta] es, [creatv_data].[dbo].[Evento] ev, [creatv_data].[dbo].[Parrilla] pa, [creatv_data].[dbo].[Produccion] pr, [creatv_data].[dbo].[Contenido] co, [creatv_data].[dbo].[Bloque] blo, [creatv_data].[dbo].[Logo] lo
       where 
       pa.Data_Inici='".$lunes."' and
       pa.Data_Fi='".$domingo."' and
+      pa.Nom='PARRILLA WEB' and
       pa.IdCanal=10 and
       --es.IdParrilla='443' and 
       --ev.Nivel=1 and
@@ -172,7 +139,9 @@
       ev.IdEscaleta=es.IdEscaleta and 
       pa.IdParrilla=es.IdParrilla and
       ev.IdProduccio=pr.IdProduccio and
-      co.IdPrograma=pr.IdPrograma
+      co.IdPrograma=pr.IdPrograma and
+      ev.IdBloc=blo.IdBloc and
+      (lo.IdLogo=co.IdLogo1 and lo.LogoNum=1 or lo.IdLogo=co.IdLogo2 and lo.LogoNum=2)
       ORDER by es.Data_Emissio, ev.OrderNum ASC 
     ";
 
@@ -184,6 +153,7 @@
       FROM [creatv_data].[dbo].[Escaleta] es, [creatv_data].[dbo].[Evento] ev, [creatv_data].[dbo].[Parrilla] pa
       where 
       es.Data_Emissio='".$lunes."' and
+      pa.Nom='PARRILLA WEB' and
       pa.IdCanal=10 and
       ev.SegName!='1/1' and
       ev.IdEscaleta=es.IdEscaleta and 
@@ -203,18 +173,19 @@ $idprograma=0; //para no repetir el programa
 $diaanterior=0; //para no repetir el dia
 $da=null; //variable para indicar que la etiqueta de cierre del lunes no debe mostrarla al principio
 
+$htmm="<?xml version='1.0' encoding='UTF-8' ?><table style='font-size:14px;' cellpadding='10px;' border=1><tr><th width='10%'>DIA</th><th width='20%'>TITULO EMISIÓN</th><th width='20%'>TITULO ORIGINAL</th><th width='5%'>H. INICIO</th><th width='5%'>H. FIN</th><th width='40%'>SINOPSIS</th></tr>";
 while($row = mssql_fetch_array($result)){  
 
 //para que no se repita el programa
 if($idprograma!=$row['IdPrograma']){
 
     //separo los milisengundos de la hora
-    $horainicio=explode(".",$row['StartTime']);
-    $horainicio=rendondearhorainicio($horainicio[0]);
+    $horainicio=explode(".",$row['horainicio']);
+    $horainicio=$horainicio[0];
 
     //separo los milisengundos de la hora
-    $horafin=explode(".",$row['Durada']);
-    $horafin=rendondearhorafin($horainicio,$horafin[0]);
+    $duracion=explode(".",$row['duracion']);
+    $horafin=sumarhoras($horainicio,$duracion[0]);
 
     //consulto la fecha de emision para calcular la cantidad de programas por dia
     $fechaemision=explode("-", $row['Data_Emissio']);
@@ -240,14 +211,26 @@ if($idprograma!=$row['IdPrograma']){
 
     $xml .="        
                     <programa id='".$row['IdPrograma']."'>
-                        <nombre>".utf8_encode($row['Titol_Emissio'])."</nombre>
+                        <nombre>".utf8_encode($row['Titol_Original'])."</nombre>
                         <sinopsis>".utf8_encode($row['sinopsiscon'])."</sinopsis>
-                        <foto>".$row['Logo']."</foto>
-                        <url>".$row['Logo1']."</url>
+                        <foto>".$row['foto']."</foto>
+                        <url>".$row['url']."</url>
                         <hora_ini>".str_replace("-", "/", $row['Data_Emissio'])." ".$horainicio."</hora_ini>
                         <hora_fin>".str_replace("-", "/", $row['Data_Emissio'])." ".$horafin."</hora_fin>
                     </programa>";
     $cont++;
+
+    $htmm .="
+      <tr>
+        <td>".$dias[$diasemana]."</td>
+        <td>".utf8_encode($row['Titol_Emissio'])."</td>
+        <td>".utf8_encode($row['Titol_Original'])."</td>
+        <td>".$horainicio."</td>
+        <td>".$horafin."</td>
+        <td>".utf8_encode($row['sinopsiscon'])."</td>
+      </tr>
+    ";
+
     }
 
     $idprograma=$row['IdPrograma'];
@@ -257,19 +240,29 @@ if($idprograma!=$row['IdPrograma']){
                 </programas>
             </domingo> 
         </semana>
-    </root>";    
+    </root>";  
+
+    $htmm .="</table>";
     
     //$nombre=str_replace("-", "", $lunes).'-'.str_replace("-", "", $domingo);
     $nombre="xmltv.xml";
 
     //envío el archivo por ftp
-    $archivo = fopen ("/var/www/sait/web/uploads/parrilla/xml/".$nombre.".xml", "w+");
-
+    $archivo = fopen ("/var/www/sait/web/uploads/parrilla/xml/".$nombre, "w+");
     //$archivo = fopen ("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml", "w+");
     fwrite($archivo, $xml);
     fclose($archivo);
-
     
-    SubirArchivo("/var/www/sait/web/uploads/parrilla/xml/".$nombre,$nombre);
+    //SubirArchivo("/var/www/sait/web/uploads/parrilla/xml/".$nombre,$nombre);
     //SubirArchivo("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml",$row["identificador_produccion"].".xml");
+
+
+
+
+    //envío el archivo por ftp
+    $archivo = fopen ("/var/www/sait/web/uploads/parrilla/xml/html.html", "w+");
+    //$archivo = fopen ("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml", "w+");
+    fwrite($archivo, $htmm);
+    fclose($archivo);
+    
 ?>

@@ -1,3 +1,7 @@
+creatv:
+    resource: "@CreatvBundle/Resources/config/routing.yml"
+    prefix:   /creatv
+
 transporte_index:
     resource: "@TransporteBundle/Resources/config/routing.yml"
     prefix:   /transporte

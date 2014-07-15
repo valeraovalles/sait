@@ -24,23 +24,24 @@
         <div class="formShow" style="width:700px;">
             <div class="contenedorform">
                     {{ form_errors(form.pais) }}
-                    <div class="labelform">Pais:</div>
-                    <div class="widgetform">{{ form_widget(form.pais) }}</div>
+                    <div class="labelform" style="width:30%;">Pais:</div>
+                    <div class="widgetform">{{ form_widget(form.pais,{'attr':{'style':'width:70%;height:150px;','class':'xx'}}) }}</div>
                 </div>
 
                 <div id="tipooperador"></div>
         </div>
-
     </form>
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#form_pais').change(function(){
+            $('#form_pais').click(function(){
                 var dato = $("#form_pais").val();
                 var ruta = "{{ path('ajax', {'datos': 'variable','mostrar': 'tipooperador'}) }}";
                 ruta = ruta.replace("variable", dato);
                 $('#tipooperador').load(ruta);
             });
+
+            $("#form_pais input[type=checkbox]").prop('checked', true);
         });
     </script>
 

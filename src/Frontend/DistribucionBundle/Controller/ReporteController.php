@@ -52,7 +52,6 @@ class ReporteController extends Controller
                     'property' => 'pais',
                     'expanded'=>false, 
                     'multiple'=>true,
-                    'empty_value' => 'Seleccione...',
                     'query_builder' => function(EntityRepository $er) {
                             return $er->createQueryBuilder('u')
                             ->orderBy('u.pais', 'ASC')
@@ -294,6 +293,23 @@ class ReporteController extends Controller
         */
         
         return $this->render('DistribucionBundle:Reportes:generargrafico.html.twig',array('y'=>$y,'x'=>$x,'tituloprincipal'=>$tituloprincipal,'titulovertical'=>$titulovertical,'unidad'=>$unidad));
+    }
+    public function informativogeneralAction()
+    {;
+        $em = $this->getDoctrine()->getManager();
+        $html=new htmlreporte;
+        $html=$html->informativo($em, "todo");
+        $html=$html;
+
+        header("Content-type: application/octet-stream");
+        //indicamos al navegador que se está devolviendo un archivo
+        header("Content-Disposition: attachment; filename=informativo.xls");
+        //con esto evitamos que el navegador lo grabe en su caché
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        //damos salida a la tabla
+        echo $html;
+        die;
     }
     public function generarreporteAction(Request $request, $tipo, $formato)
     {
