@@ -88,4 +88,20 @@
 
          <br>
     </form>
+
+
+  <script>
+      $(function() {
+        $( "#frontend_contratosbundle_contratostype_fechaInicio" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+        $( "#frontend_contratosbundle_contratostype_fechaFin" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+      });
+  </script>
 {% endblock %}

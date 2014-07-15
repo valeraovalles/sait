@@ -13,17 +13,17 @@ class ContratosType extends AbstractType
         $builder
             ->add('fechaRegistro','date',array(
                     'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd',
+                    'format' => 'yy-MM-dd',
                 )) 
             ->add('codigo')
             ->add('empresa','textarea')
             ->add('fechaInicio','date',array(
                     'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd',
+                    'format' => 'dd-MM-y',
                 )) 
             ->add('fechaFin','date',array(
                     'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd',
+                    'format' => 'dd-MM-y',
                 )) 
             ->add('duracion')
             ->add('montoBs')
