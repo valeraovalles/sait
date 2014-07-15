@@ -1,9 +1,21 @@
 {% extends '::administracion.html.twig' %}
-{% block title %}Inicio - Telesur{% endblock %}
+
+{% block title %}Editar usuario{% endblock %}
+
+{% block titulo %}
+    EDITAR USUARIO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+    <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+    <li><a href="{{ path("user") }}">LISTA DE USUARIOS</a></li>
+    <li class="active">EDITAR USUARIO</li>
+</ol>
+{% endblock %}
 
 {% block body %}
 {{ parent() }}
-<div class="titulo">EDITAR USUARIO</div>
 
 <form novalidate class="formulario" action="{{ path('user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
 
@@ -12,57 +24,57 @@
  
      <div class="formShow">
         <div class="contenedorform">
-            <div class="text-error">{{ form_errors(edit_form.username) }}</div>
+            <div class="text-danger">{{ form_errors(edit_form.username) }}</div>
             <div class="labelform">Username:</div>
             <div class="widgetform">{{ form_widget(edit_form.username) }}</div>
         </div>
         <div class="contenedorform">
-            <div class="text-error">{{ form_errors(edit_form.password) }}</div>
+            <div class="text-danger">{{ form_errors(edit_form.password) }}</div>
             <div class="labelform">Password:</div>
             <div class="widgetform">{{ form_widget(edit_form.password) }}</div>
         </div>
         <div class="contenedorform">
-            <div class="text-error">{{ form_errors(edit_form.isActive) }}</div>
+            <div class="text-danger">{{ form_errors(edit_form.isActive) }}</div>
             <div class="labelform">Activo:</div>
             <div class="widgetform">{{ form_widget(edit_form.isActive) }}</div>
         </div>
         <div class="contenedorform">
-            <div class="text-error">{{ form_errors(edit_form.fueradenomina) }}</div>
+            <div class="text-danger">{{ form_errors(edit_form.fueradenomina) }}</div>
             <div class="labelform">Fuera de Nomina:</div>
             <div class="widgetform">{{ form_widget(edit_form.fueradenomina) }}</div>
         </div>
         <div class="contenedorform">
-            <div class="text-error">{{ form_errors(edit_form_perfil.primerNombre) }}</div>
+            <div class="text-danger">{{ form_errors(edit_form_perfil.primerNombre) }}</div>
             <div class="labelform">Primer nombre:</div>
             <div class="widgetform">{{ form_widget(edit_form_perfil.primerNombre) }}</div>
         </div>
         <div class="contenedorform">
-            <div class="text-error">{{ form_errors(edit_form_perfil.segundoNombre) }}</div>
+            <div class="text-danger">{{ form_errors(edit_form_perfil.segundoNombre) }}</div>
             <div class="labelform">Segundo nombre:</div>
             <div class="widgetform">{{ form_widget(edit_form_perfil.segundoNombre) }}</div>
         </div>
         <div class="contenedorform">
-            <div class="text-error">{{ form_errors(edit_form_perfil.primerApellido) }}</div>
+            <div class="text-danger">{{ form_errors(edit_form_perfil.primerApellido) }}</div>
             <div class="labelform">Primer apellido:</div>
             <div class="widgetform">{{ form_widget(edit_form_perfil.primerApellido) }}</div>
         </div>
         <div class="contenedorform">
-            <div class="text-error">{{ form_errors(edit_form_perfil.segundoApellido) }}</div>
+            <div class="text-danger">{{ form_errors(edit_form_perfil.segundoApellido) }}</div>
             <div class="labelform">Segundo apellido:</div>
             <div class="widgetform">{{ form_widget(edit_form_perfil.segundoApellido) }}</div>
         </div>
         <div class="contenedorform">
-            <div class="text-error">{{ form_errors(edit_form_perfil.cedula) }}</div>
+            <div class="text-danger">{{ form_errors(edit_form_perfil.cedula) }}</div>
             <div class="labelform">Cédula:</div>
             <div class="widgetform">{{ form_widget(edit_form_perfil.cedula) }}</div>
         </div>
         <div class="contenedorform">
-            <div class="text-error">{{ form_errors(edit_form_perfil.extension) }}</div>
+            <div class="text-danger">{{ form_errors(edit_form_perfil.extension) }}</div>
             <div class="labelform">Extensión:</div>
             <div class="widgetform">{{ form_widget(edit_form_perfil.extension) }}</div>
         </div>
         <div class="contenedorform">
-            <div class="text-error">{{ form_errors(edit_form.rol) }}</div>
+            <div class="text-danger">{{ form_errors(edit_form.rol) }}</div>
             <div class="labelform">Rol:</div>
             <div class="widgetform">{{ form_widget(edit_form.rol) }}</div>
         </div>
@@ -71,20 +83,20 @@
 
 <br>
 
-<button class="btn btn-primary" type="submit">Editar</button> | 
+<button class="btn btn-primary" type="submit">EDITAR</button> | 
 
         <a class="btn btn-default" href="{{ path('user') }}">
-            Ir a la lista
+            IR A LA LISTA
         </a> | 
         <a class="btn btn-default" href="{{ path('rol_new') }}">
-            Ir a nuevo rol
+            IR A NUEVO ROL
         </a>
 
 </form>
 
 <form action="{{ path('rol_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('Seguro que desea eliminar')">
     {{ form_widget(delete_form) }}
-    <button class="btn btn-danger" type="submit">Borrar</button>
+    <button class="btn btn-danger" type="submit">BORRAR</button>
 </form>
 <br>
 

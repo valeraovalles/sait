@@ -1,15 +1,21 @@
 {% extends '::distribucion.html.twig' %}
 
-{% block title %}Distribución{% endblock %}
+{% block title %}Total{% endblock %}
 
-{% block titulobanner %}
-    DISTRIBUCIÓN - TOTALIZACIÓN
+{% block titulo %}
+    TOTALIZACIÓN POR PAÍSES
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li class="active">TOTALIZACIÓN POR PAÍSES</li>
+</ol>
 {% endblock %}
 
 {% block body %}
   {{ parent() }}
-
-  <div class="titulo">TOTALIZACIÓN POR PAÍSES</div>
 
     <table class="records_list" cellpadding=5px cellspacing=1 class="infooperador">
         <tr>

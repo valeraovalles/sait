@@ -1,17 +1,23 @@
 {% extends '::sit.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Nueva categoria{% endblock %}
 
-
-{% block titulobanner %}
+{% block titulo %}
     NUEVA CATEGORIA
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("categoria") }}">LISTA DE CATEGORIAS</a></li>
+  <li class="active">NUEVA CATEGORIA</li>
+</ol>
 {% endblock %}
 
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">NUEVA CATEGORIA</div>
 
     {% if form_errors(form.categoria)  %}
     <div class="alert alert-danger">
@@ -20,18 +26,6 @@
         </ul>
     </div>
     {% endif %}
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
 
     <form novalidate action="{{ path('categoria_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
@@ -47,9 +41,9 @@
         </div>
         
      
-        <button class="btn btn-primary" type="submit">Crear</button> | 
+        <button class="btn btn-primary" type="submit">CREAR</button> | 
         <a class="btn btn-default" href="{{ path('categoria') }}">
-            Ir a la lista
+            IR A LA LISTA
         </a>
      
     </form>

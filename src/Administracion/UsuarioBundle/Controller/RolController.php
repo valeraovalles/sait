@@ -160,6 +160,8 @@ class RolController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        //$entity = $em->getRepository('UsuarioBundle:Rol')->find($id);
+
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 

@@ -50,11 +50,15 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
 
         $attributes = array();
         foreach ($request->attributes->all() as $key => $value) {
-            if ('_route' == $key && is_object($value)) {
-                $value = $value->getPath();
+            if ('_route' === $key && is_object($value)) {
+                $attributes['_route'] = $this->varToString($value->getPath());
+            } elseif ('_route_params' === $key) {
+                foreach ($value as $key => $v) {
+                    $attributes['_route_params'][$key] = $this->varToString($v);
+                }
+            } else {
+                $attributes[$key] = $this->varToString($value);
             }
-
-            $attributes[$key] = $this->varToString($value);
         }
 
         $content = null;
@@ -294,13 +298,14 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
             } elseif ($expires instanceof \DateTime) {
                 $expires = $expires->getTimestamp();
             } else {
-                $expires = strtotime($expires);
-                if (false === $expires || -1 == $expires) {
-                    throw new \InvalidArgumentException(sprintf('The "expires" cookie parameter is not valid.', $expires));
+                $tmp = strtotime($expires);
+                if (false === $tmp || -1 == $tmp) {
+                    throw new \InvalidArgumentException(sprintf('The "expires" cookie parameter is not valid (%s).', $expires));
                 }
+                $expires = $tmp;
             }
 
-            $cookie .= '; expires='.substr(\DateTime::createFromFormat('U', $expires, new \DateTimeZone('UTC'))->format('D, d-M-Y H:i:s T'), 0, -5);
+            $cookie .= '; expires='.str_replace('+0000', '', \DateTime::createFromFormat('U', $expires, new \DateTimeZone('GMT'))->format('D, d-M-Y H:i:s T'));
         }
 
         if ($domain) {

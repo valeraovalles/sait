@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('libs/menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/datatable.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('libs/bootstrap3/css/bootstrap.min.css') }}">
+{% endblock %}
+    
+{% block javascripts %}
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/datatable.js') }}"></script>
+    <script src="{{ asset('js/general.js') }}"></script>
+    <script src="{{ asset('libs/bootstrap3/js/bootstrap.min.js') }}"></script>
+{% endblock %}
+    
+{% block menu %}
+    {% include 'UsuarioBundle:Default:includes/menu.html.twig' %}
+{% endblock %}

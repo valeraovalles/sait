@@ -1,37 +1,36 @@
 {% if mostrar=='periodo' and datos[0]!='s' and datos[0]!='a' %}
-    <div class="form-contenedor">
+    <div class="contenedorform">
         <div>{{ form_errors(form.periodo) }}</div>
-        <div class="labels">Periodo:</div>
-        <div class="widgets">{{ form_widget(form.periodo) }}</div>
+        <div class="labelform">Periodo:</div>
+        <div class="widgetform">{{ form_widget(form.periodo) }}</div>
     </div>
     <div id="anio"></div>
 {% endif %}
 
 {% if mostrar=='periodo' and datos[0]=='a' %}
-    <div class="form-contenedor">
+    <div class="contenedorform">
         <div>{{ form_errors(form.aniosaguinaldos) }}</div>
-        <div class="labels">Año:</div>
-        <div class="widgets">{{ form_widget(form.aniosaguinaldos) }}</div>
+        <div class="labelform">Año:</div>
+        <div class="widgetform">{{ form_widget(form.aniosaguinaldos) }}</div>
     </div>
     <div id="boton"></div>
 {% endif %}
 
 {% if mostrar=='anio' and datos[0]!='s' %}
-    <div class="form-contenedor">
+    <div class="contenedorform">
         <div>{{ form_errors(form.anios) }}</div>
-        <div class="labels">Año:</div>
-        <div class="widgets">{{ form_widget(form.anios) }}</div>
+        <div class="labelform">Año:</div>
+        <div class="widgetform">{{ form_widget(form.anios) }}</div>
     </div>
     <div id="mes"></div>
 {% endif %}
 
 {% if mostrar=='mes' and datos[0]!='s' %}
-    <div class="form-contenedor">
+    <div class="contenedorform">
         <div>{{ form_errors(form.meses) }}</div>
-        <div class="labels">Mes:</div>
-        <div class="widgets">{{ form_widget(form.meses) }}</div>
+        <div class="labelform">Mes:</div>
+        <div class="widgetform">{{ form_widget(form.meses) }}</div>
     </div>
-    <div id="boton"></div>
 {% endif %}
 
 
@@ -41,6 +40,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#form_periodo').change(function(){
+            $('#botonx').hide();
             var dato = $("#form_periodo").val();
             var ruta = "{{ path('ajax_neto', {'datos': 'variable','mostrar': 'anio'}) }}";
             ruta = ruta.replace("variable", dato);
@@ -48,6 +48,7 @@
         });
 
         $('#form_anios').change(function(){
+            $('#botonx').hide();
             var dato = $("#form_anios").val();
             var ruta = "{{ path('ajax_neto', {'datos': 'variable','mostrar': 'mes'}) }}";
             ruta = ruta.replace("variable", dato);
@@ -55,17 +56,11 @@
         });
 
         $('#form_meses').change(function(){
-            var dato = $("#form_meses").val();
-            var ruta = "{{ path('ajax_neto', {'datos': 'variable','mostrar': 'boton'}) }}";
-            ruta = ruta.replace("variable", dato);
-            $('#boton').load(ruta);
+            $('#botonx').show();
         });
 
         $('#form_aniosaguinaldos').change(function(){
-            var dato = $("#form_aniosaguinaldos").val();
-            var ruta = "{{ path('ajax_neto', {'datos': 'variable','mostrar': 'boton'}) }}";
-            ruta = ruta.replace("variable", dato);
-            $('#boton').load(ruta);
+             $('#botonx').show();
         });
     });
 </script>

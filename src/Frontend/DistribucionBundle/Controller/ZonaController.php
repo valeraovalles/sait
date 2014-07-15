@@ -142,6 +142,7 @@ class ZonaController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('notice', 'Actualización exitosa!');
             return $this->redirect($this->generateUrl('zona_edit', array('id' => $id)));
         }
 

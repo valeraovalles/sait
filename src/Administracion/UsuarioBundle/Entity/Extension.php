@@ -12,8 +12,8 @@ class Extension
     /**
      * @var string
      *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="numeric", message="La extensión debe ser un número.")
+     * @Assert\NotBlank(message="La extensión no debe estar en blanco.")
+     * @Assert\Type(type="digit", message="La extensión debe ser un número.")
      * @Assert\NotEqualTo(value = "0", message="La extensión no puede ser igual a 0.")
      */
     private $extension=null;

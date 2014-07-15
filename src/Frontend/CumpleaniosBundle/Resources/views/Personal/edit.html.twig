@@ -1,0 +1,74 @@
+{% extends '::cumpleanios.html.twig' %}
+
+ 
+{% block title %}Editar{% endblock %}
+
+{% block titulo %}
+    EDITAR PERSONAL
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("cumpleanios_personal") }}">LISTADO DE PERSONAL EXTRANJERO</a></li>
+  <li class="active">EDITAR PERSONAL</li>
+</ol>
+{% endblock %}
+
+
+{% block body -%}
+    
+    {{ parent() }}
+
+
+    <form action="{{ path('cumpleanios_personal_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+        {{ form_widget(edit_form._token) }}
+
+
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform">Nombre:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nombre) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Apellido:</div>
+                <div class="widgetform">{{ form_widget(edit_form.apellido) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Cedpas:</div>
+                <div class="widgetform">{{ form_widget(edit_form.cedpas) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Correo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.correo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Ubicacion:</div>
+                <div class="widgetform">{{ form_widget(edit_form.ubicacion) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Fechanac:</div>
+                <div class="widgetform">{{ form_widget(edit_form.fechanac) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Sexo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.sexo) }}</div>
+            </div>
+        </div>
+
+        <a class="btn btn-default" href="{{ path('cumpleanios_personal') }}">
+            IR A LA LISTA
+        </a> | 
+            <button class="btn btn-primary" type="submit">EDITAR</button>
+    </form>
+
+
+
+        <form action="{{ path('cumpleanios_personal_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button class="btn btn-danger" type="submit">BORRAR</button>
+        </form>
+
+{% endblock %}

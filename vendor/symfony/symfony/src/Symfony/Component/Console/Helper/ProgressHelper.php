@@ -47,21 +47,21 @@ class ProgressHelper extends Helper
     /**
      * Current step
      *
-     * @var integer
+     * @var int
      */
     private $current;
 
     /**
      * Maximum number of steps
      *
-     * @var integer
+     * @var int
      */
     private $max;
 
     /**
      * Start time of the progress bar
      *
-     * @var integer
+     * @var int
      */
     private $startTime;
 
@@ -167,7 +167,7 @@ class ProgressHelper extends Helper
     /**
      * Sets the redraw frequency.
      *
-     * @param int $freq The frequency in seconds
+     * @param int $freq The frequency in steps
      */
     public function setRedrawFrequency($freq)
     {
@@ -178,7 +178,7 @@ class ProgressHelper extends Helper
      * Starts the progress output.
      *
      * @param OutputInterface $output An Output instance
-     * @param integer         $max    Maximum steps
+     * @param int|null        $max    Maximum steps
      */
     public function start(OutputInterface $output, $max = null)
     {
@@ -186,6 +186,8 @@ class ProgressHelper extends Helper
         $this->current   = 0;
         $this->max       = (int) $max;
         $this->output    = $output;
+        $this->lastMessagesLength = 0;
+        $this->barCharOriginal = '';
 
         if (null === $this->format) {
             switch ($output->getVerbosity()) {
@@ -218,8 +220,8 @@ class ProgressHelper extends Helper
     /**
      * Advances the progress output X steps.
      *
-     * @param integer $step   Number of steps to advance
-     * @param Boolean $redraw Whether to redraw or not
+     * @param int     $step   Number of steps to advance
+     * @param bool    $redraw Whether to redraw or not
      *
      * @throws \LogicException
      */
@@ -233,8 +235,12 @@ class ProgressHelper extends Helper
             $redraw = true;
         }
 
+        $prevPeriod = intval($this->current / $this->redrawFreq);
+
         $this->current += $step;
-        if ($redraw || 0 === $this->current % $this->redrawFreq) {
+
+        $currPeriod = intval($this->current / $this->redrawFreq);
+        if ($redraw || $prevPeriod !== $currPeriod || $this->max === $this->current) {
             $this->display();
         }
     }
@@ -242,8 +248,8 @@ class ProgressHelper extends Helper
     /**
      * Sets the current progress.
      *
-     * @param integer $current The current progress
-     * @param Boolean $redraw  Whether to redraw or not
+     * @param int     $current The current progress
+     * @param bool    $redraw  Whether to redraw or not
      *
      * @throws \LogicException
      */
@@ -263,8 +269,12 @@ class ProgressHelper extends Helper
             $redraw = true;
         }
 
+        $prevPeriod = intval($this->current / $this->redrawFreq);
+
         $this->current = $current;
-        if ($redraw || 0 === $this->current % $this->redrawFreq) {
+
+        $currPeriod = intval($this->current / $this->redrawFreq);
+        if ($redraw || $prevPeriod !== $currPeriod || $this->max === $this->current) {
             $this->display();
         }
     }
@@ -272,7 +282,7 @@ class ProgressHelper extends Helper
     /**
      * Outputs the current progress string.
      *
-     * @param Boolean $finish Forces the end result
+     * @param bool    $finish Forces the end result
      *
      * @throws \LogicException
      */
@@ -333,7 +343,7 @@ class ProgressHelper extends Helper
     /**
      * Generates the array map of format variables to values.
      *
-     * @param Boolean $finish Forces the end result
+     * @param bool    $finish Forces the end result
      *
      * @return array Array of format vars and values
      */
@@ -342,12 +352,12 @@ class ProgressHelper extends Helper
         $vars    = array();
         $percent = 0;
         if ($this->max > 0) {
-            $percent = (double) round($this->current / $this->max, 2);
+            $percent = (float) $this->current / $this->max;
         }
 
         if (isset($this->formatVars['bar'])) {
             $completeBars = 0;
-            $emptyBars = 0;
+
             if ($this->max > 0) {
                 $completeBars = floor($percent * $this->barWidth);
             } else {
@@ -382,7 +392,7 @@ class ProgressHelper extends Helper
         }
 
         if (isset($this->formatVars['percent'])) {
-            $vars['percent'] = str_pad($percent * 100, $this->widths['percent'], ' ', STR_PAD_LEFT);
+            $vars['percent'] = str_pad(floor($percent * 100), $this->widths['percent'], ' ', STR_PAD_LEFT);
         }
 
         return $vars;
@@ -391,7 +401,7 @@ class ProgressHelper extends Helper
     /**
      * Converts seconds into human-readable format.
      *
-     * @param integer $secs Number of seconds
+     * @param int     $secs Number of seconds
      *
      * @return string Time in readable format
      */
@@ -436,7 +446,7 @@ class ProgressHelper extends Helper
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {

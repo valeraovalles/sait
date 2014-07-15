@@ -1,0 +1,47 @@
+{% extends '::transporte.html.twig' %}
+
+{% block title %}Transporte{% endblock %}
+
+{% block titulobanner %}
+    TRANSPORTE
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">TRANSPORTE -  EDITAR ASIGNACION</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+ <div class="formShow">
+
+    <form action="{{ path('asignaciones_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+          <div class="contenedorform">
+                <div class="labelform">Solicitud</div>
+                <div class="widgetform">{{ form_widget(edit_form.idSolicitud) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Vehiculo</div>
+                <div class="widgetform">{{ form_widget(edit_form.idVehiculo) }}</div>
+            </div>    
+        {{ form_widget(edit_form) }}
+        <p>            
+            <button class="btn btn-primary" type="submit">EDITAR</button> | 
+            <a class="btn" href="{{ path('asignaciones') }}">IR AL LISTADO</a> 
+        </p>
+    </form>
+</div>
+  
+{% endblock %}

@@ -23,7 +23,20 @@
         </div>
     {% endfor %}
 
-
-    <a href=""></a>
+    <table align=center width="100%"> 
+        <tr>
+            <th>
+                Solicitar<br>
+                <a href="{{ path('solicitudes_new') }}"><img src="{{asset('images/transporte/transporte.jpg')}}" width=100px></a>
+            </th>
+            <th>
+                Ver Solicitudes<br>
+                <a href="{{ path('solicitudes') }}"><img src="{{asset('images/transporte/lupa.png')}}" width=100px></a> 
+            </th>
+        </tr>      
+    </table>
+    
+    
+    
 
 {% endblock %}

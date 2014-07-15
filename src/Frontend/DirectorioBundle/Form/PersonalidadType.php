@@ -19,6 +19,8 @@ class PersonalidadType extends AbstractType
             ->add('especialidad',null,array( 'empty_value' => 'Seleccione...'))
             ->add('pais',null,array( 'empty_value' => 'Seleccione...'))
             ->add('paisprocedencia',null,array( 'empty_value' => 'Seleccione...'))
+            ->add('archivo','hidden')
+            ->add('file','file')
 ;
     }
 

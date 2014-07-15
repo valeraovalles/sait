@@ -32,8 +32,9 @@ class UsuarioController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $dql   = "SELECT v FROM FrontendVisitasBundle:Visita v join v.usuario u ";
+        $dql   = "SELECT v FROM FrontendVisitasBundle:Visita v join v.usuario u order by v.fechaentrada DESC, v.horaentrada DESC";
         $query = $em->createQuery($dql);
+        $query->setMaxResults(1000);
         $entities = $query->getResult(); 
 
 

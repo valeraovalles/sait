@@ -482,8 +482,9 @@
    }
    ```
 
- * The method `ExecutionContext::addViolationAtSubPath()` was deprecated and
-   will be removed in Symfony 2.3. You should use `addViolationAt()` instead.
+ * The methods `ExecutionContext::addViolationAtSubPath()` and
+   `ExecutionContext::addViolationAtPath()` were deprecated and will be
+   removed in Symfony 2.3. You should use `addViolationAt()` instead.
 
    Before:
 
@@ -645,3 +646,23 @@
    extended with an optional `$context` array. This was necessary to allow for
    more complex use-cases that require context information during the
    (de)normalization and en-/decoding steps.
+
+### HttpKernel
+
+ * The `Symfony\Component\HttpKernel\Log\LoggerInterface` now extends `Psr\Log\LoggerInterface`.
+   So if you have implemented your own logger, you need to implement these methods:
+
+     * `emergency`
+     * `critical`
+     * `error`
+     * `warning`
+     * `log`
+
+#### Deprecations:
+
+ * The following Logger methods are deprecated and will be removed in 3.0. You should use the new PSR-3 methods:
+
+     * `emerg()` -> `emergency()`
+     * `crit()`  -> `critical()`
+     * `err()`   -> `error()`
+     * `warn()`  -> `warning()`

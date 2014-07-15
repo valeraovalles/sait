@@ -1,13 +1,23 @@
-<div id='cssmenu'>
-<ul>
-   <li class='active'><a href='{{ path('constancia_homepage') }}'><span>INICIO</span></a></li>
-   
-   {% if is_granted('ROLE_CONSTANCIA_ADMINISTRADOR') %}
-   <li class='has-sub'><a href='{{ path('constancia') }}'><span>GESTIONAR</span></a></li>
-   {% endif %}
-   
-   <li class='has-sub'><a href='{{ path('usuario_homepage') }}'><span>APLICACIONES</span></a></li>
-   <li><a href='{{ path('usuario_logout') }}'><span>SALIR</span></a></li>
-</ul>
+<div class="menubootstrap">
+  <div align="left">
+    <nav class="navbar navbar-inverse" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+          <a class="navbar-brand" href="{{ path('usuario_homepage') }}"><span style="color:white;" class="glyphicon glyphicon-home"></span></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        	{% if is_granted('ROLE_CONSTANCIA_ADMINISTRADOR') %}
+         		<li><a href="{{ path('constancia') }}">GESTIONAR</a></li>
+   			{% endif %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ path('contacto') }}">CONTACTO</a></li>
+          <li><a href="{{ path('usuario_logout') }}">SALIR</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+  </div>
 </div>
 

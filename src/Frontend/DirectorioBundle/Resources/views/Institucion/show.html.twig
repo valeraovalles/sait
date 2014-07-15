@@ -1,10 +1,23 @@
 {% extends '::directorio.html.twig' %}
 
+{% block title %}Consultar Instituci&oacute;n{% endblock %}
+
+{% block titulo %}
+    CONSULTAR INSTITUCÍ&Oacute;N
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("directorio_homepage") }}">DIRECTORIO INICIO</a></li>
+  <li><a href="{{ path("institucion") }}">LISTA DE INSTITUCIONES</a></li>
+  <li class="active">CONSULTAR INSTITUCI&Oacute;N</li>
+
+</ol>
+{% endblock %}
+
 {% block body -%}
     {{ parent() }}
-<br>
-<h2>CONSULTAR INSTITUCIÓN</h2><br>
-
         <div class="formShow" style="width:70%;">
         <div class="contenedorform">
             <div class="labelform">Institucion:</div>
@@ -40,20 +53,17 @@
         </div>
     </div>
     
+    <br><br>
+    <a class="btn btn-default" href="{{ path('institucion') }}">IR A LA LISTA</a>{% if is_granted('ROLE_DIRECTORIO_ADMIN') %} |
+    <a class="btn btn-default" href="{{ path('institucion_edit', { 'id': entity.id }) }}">IR A EDITAR</a><br><br>
+    <form action="{{ path('institucion_delete', { 'id': entity.id }) }}" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button type="submit" class="btn btn-danger">ELIMINAR</button>
+    </form>
+    {% else %}
         <br><br>
-        <a class="btn" href="{{ path('institucion') }}"> IR AL LISTADO </a> 
-        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
-         | <a class="btn btn-primary"href="{{ path('institucion_edit', { 'id': entity.id }) }}">IR A EDITAR</a>
-        <br><br>
-
-        <form action="{{ path('institucion_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit" class="btn btn-danger">ELIMINAR</button>
-        </form>
-        {% else %}
-        <br><br>
-        {% endif %}
+    {% endif %}       
 
 {% endblock %}
 

@@ -23,6 +23,10 @@ sit_guardacerrarseguimiento:
     pattern:  /guardacerrarseguimiento/{idticket}
     defaults: { _controller: SitBundle:Seguimiento:guardacerrarseguimiento }
 
+ajax_listadocorreo:
+    pattern:  /ajax/listadocorreo/{letra}
+    defaults: { _controller: SitBundle:Ajax:listadocorreo }
+
 ################################################################################
 sit_homepage:
     pattern:  /inicio

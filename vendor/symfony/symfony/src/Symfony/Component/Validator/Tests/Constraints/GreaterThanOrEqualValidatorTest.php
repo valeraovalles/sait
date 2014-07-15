@@ -30,7 +30,7 @@ class GreaterThanOrEqualValidatorTest extends AbstractComparisonValidatorTestCas
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function provideValidComparisons()
     {
@@ -41,11 +41,12 @@ class GreaterThanOrEqualValidatorTest extends AbstractComparisonValidatorTestCas
             array(new \DateTime('2000/01/01'), new \DateTime('2000/01/01')),
             array('a', 'a'),
             array('z', 'a'),
+            array(null, 1),
         );
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function provideInvalidComparisons()
     {

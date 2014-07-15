@@ -12,7 +12,7 @@
 namespace Symfony\Bundle\WebProfilerBundle\Controller;
 
 use Symfony\Component\HttpKernel\Profiler\Profiler;
-use Symfony\Component\HttpKernel\Debug\ExceptionHandler;
+use Symfony\Component\Debug\ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,6 +40,8 @@ class ExceptionController
      * @param string $token The profiler token
      *
      * @return Response A Response instance
+     *
+     * @throws NotFoundHttpException
      */
     public function showAction($token)
     {
@@ -55,7 +57,7 @@ class ExceptionController
         if (!$this->twig->getLoader()->exists($template)) {
             $handler = new ExceptionHandler();
 
-            return new Response($handler->getContent($exception));
+            return new Response($handler->getContent($exception), 200, array('Content-Type' => 'text/html'));
         }
 
         $code = $exception->getStatusCode();
@@ -69,7 +71,7 @@ class ExceptionController
                 'logger'         => null,
                 'currentContent' => '',
             )
-        ));
+        ), 200, array('Content-Type' => 'text/html'));
     }
 
     /**
@@ -78,6 +80,8 @@ class ExceptionController
      * @param string $token The profiler token
      *
      * @return Response A Response instance
+     *
+     * @throws NotFoundHttpException
      */
     public function cssAction($token)
     {
@@ -93,10 +97,10 @@ class ExceptionController
         if (!$this->templateExists($template)) {
             $handler = new ExceptionHandler();
 
-            return new Response($handler->getStylesheet($exception));
+            return new Response($handler->getStylesheet($exception), 200, array('Content-Type' => 'text/css'));
         }
 
-        return new Response($this->twig->render('@WebProfiler/Collector/exception.css.twig'));
+        return new Response($this->twig->render('@WebProfiler/Collector/exception.css.twig'), 200, array('Content-Type' => 'text/css'));
     }
 
     protected function getTemplate()

@@ -33,9 +33,17 @@ class SeguimientoController extends Controller
         $errorc=null;
         $errore=null;
         $em = $this->getDoctrine()->getManager();
-
-        
         $ticket =  $em->getRepository('SitBundle:Ticket')->find($idticket);
+
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+
+        if($ticket->getEstatus()!='5' and $ticket->getUnidad()->getId()!=$usuariounidad[0]->getId() or $ticket->getEstatus()=='5' and $ticket->getUnidad()->getId()!=$usuariounidad[0]->getId()){
+            $this->get('session')->getFlashBag()->add('alert', 'DEJA DE ESTAR INVENTANDO VAINAS');
+            return $this->redirect($this->generateUrl('sit_homepage'));
+        }
+
         $seguimiento =  $em->getRepository('SitBundle:Seguimiento')->findByTicket($idticket);
         
         if($ticket->getEstatus()!=6){
@@ -43,7 +51,6 @@ class SeguimientoController extends Controller
             $consulta->setParameter('id', $idticket);
             $consulta->execute();
         }
-
 
         
         $cs = new Correoseguimiento();
@@ -126,13 +133,14 @@ class SeguimientoController extends Controller
             foreach ($a as $p) {
                 $email[]=$p;
             }
-
+            $email[]='aplicaciones@telesurtv.net';
+            
             //CORREO
             $message = \Swift_Message::newInstance()  
             ->setSubject($formcs->getData()->getAsunto())  
-            ->setFrom('sit@telesurtv.net')     
+            ->setFrom('aplicaciones@telesurtv.net')     
             ->setTo($email)
-            ->setBody($formcs->getData()->getCuerpo(), 'text/html');
+            ->setBody($formcs->getData()->getCuerpo().'<br><b>Comentario de la solicitud:</b> '.$ticket->getSolicitud().',<br><br><b>Nota: Puedes responder este correo directamente desde el Sit haciendo clic en tu solicitud marcada de color naranja así como ver el seguimiento de la misma.</b>', 'text/html');
             
             if(isset($nombre))
                 $message->attach(\Swift_Attachment::fromPath('uploads/sit/'.$nombre));
@@ -186,6 +194,18 @@ class SeguimientoController extends Controller
         $em->persist($entity);
         $em->flush();  
         
+
+        //CORREO
+        $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+        ->setSubject('Sit-Comentario')     // we configure the title
+        ->setFrom($perfil->getUser()->getUsername().'@telesurtv.net')     // we configure the sender
+        ->setTo('aplicaciones@telesurtv.net')    // we configure the recipient
+        ->setBody($datos.'<br><b>Comentario de la solicitud:</b> '.$ticket->getSolicitud().'<br><br><b>ID:</b> '.$ticket->getId(), 'text/html');
+
+        $this->get('mailer')->send($message);    // then we send the message.
+        //FIN CORREO
+
+
         $this->get('session')->getFlashBag()->add('notice', 'Se ha enviado el comentario exitosamente!');
         return $this->redirect($this->generateUrl('sit_seguimientoprincipal', array('idticket' => $idticket)));
     }
@@ -208,7 +228,7 @@ class SeguimientoController extends Controller
         
         $datos=$request->request->all();
         if(isset($datos['solucion']) and $datos['solucion']!='')
-            $datos=$datos['solucion'];
+            $solucion=$datos['solucion'];
         else{
             $error[]="El comentario no debe estar en blanco.";
             return $this->render('SitBundle:Seguimiento:cerrarseguimiento.html.twig',array('ticket'=>$ticket,'error'=>$error));
@@ -218,11 +238,12 @@ class SeguimientoController extends Controller
         $fechactual = date_create_from_format('Y-m-d', \date("Y-m-d"));
         $horaactual=new \DateTime(\date("G:i:s"));
 
+
         //actualizo campos en ticket
         $query = $em->createQuery('update SitBundle:Ticket t set t.solucion= :solucion, t.fechasolucion= :fechasolucion, t.horasolucion= :horasolucion, t.estatus=6 WHERE t.id = :idticket');
         $query->setParameter('fechasolucion', $fechactual);
         $query->setParameter('horasolucion', $horaactual);
-        $query->setParameter('solucion', $datos['solucion']);
+        $query->setParameter('solucion', $solucion);
         $query->setParameter('idticket', $idticket);
         $query->execute();
         

@@ -182,6 +182,9 @@ table.display td.center {
     text-align: center;
 }
 
+#tabladatatable th{
+	text-align: center;
+}
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables row classes
  */

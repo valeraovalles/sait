@@ -1,11 +1,29 @@
 {% extends '::directorio.html.twig' %}
 
+{% block title %}Consultar Personalidad{% endblock %}
+
+{% block titulo %}
+    CONSULTAR PERSONALIDAD
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("directorio_homepage") }}">DIRECTORIO INICIO</a></li>
+  <li><a href="{{ path("personalidad") }}">LISTA DE PERSONALIDADES</a></li>
+  <li class="active">CONSULTAR PERSONALIDAD</li>
+</ol>
+{% endblock %}
+
 {% block body -%}
     {{ parent() }}
-<br>
-<h2>CONSULTAR PERSONALIDAD</h2><br>
 
         <div class="formShow" style="width:70%;">
+        {% if entity.archivo %}
+        <div align="center">            
+            <img src="{{asset('uploads/directorio/')}}{{entity.archivo}}" width="200px" alt="Imagen {{entity.archivo}}no encontrada" /><br><br>
+        </div>
+        {% endif %}
         <div class="contenedorform">
             <div class="labelform">Nombre:</div>
             <div class="widgetform">{{ entity.nombre|capitalize }}</div>
@@ -30,23 +48,17 @@
             <div class="labelform">Pais:</div>
             <div class="widgetform">{{ entity.pais|capitalize }}</div>
         </div>
+
     </div>
-
-
         <br><br>
-        <a class="btn" href="{{ path('personalidad') }}"> LISTADO </a>{% if is_granted('ROLE_DIRECTORIO_ADMIN') %} | 
-        <a class="btn btn-primary" href="{{ path('personalidad_edit', { 'id': entity.id }) }}"> EDITAR </a>
-        
-
-        <br><br>
-
+        <a class="btn btn-default" href="{{ path('personalidad') }}">IR A LA LISTA</a>{% if is_granted('ROLE_DIRECTORIO_ADMIN') %} |
+        <a class="btn btn-default" href="{{ path('personalidad_edit', { 'id': entity.id }) }}">IR A EDITAR</a><br><br>
         <form action="{{ path('personalidad_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit" class="btn btn-danger">ELIMINAR</button>
-        </form>
-                {% else %}
-        <br><br>
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button type="submit" class="btn btn-danger">ELIMINAR</button><br><br>
+        {% else %}
+            <br><br>
         {% endif %}
 
 {% endblock %}

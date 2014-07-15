@@ -1,0 +1,68 @@
+{% extends '::transporte.html.twig' %}
+
+{% block title %}Transporte{% endblock %}
+
+{% block titulobanner %}
+    TRANSPORTE
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">TRANSPORTE -  EDITAR PERSONAL EXTERNO</div>
+    
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    <div class="formShow">
+    <form action="{{ path('personalexterno_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(edit_form.cedula) }}</div>
+            <div class="labelform">Cédula:</div>
+            <div class="widgetform">{{ form_widget(edit_form.cedula) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(edit_form.nombre) }}</div>
+            <div class="labelform">Nombre y Apellido:</div>
+            <div class="widgetform">{{ form_widget(edit_form.nombre, {'attr':{'class':'txtMay'}})}}</div>
+        </div>
+      <div class="contenedorform">
+            <div class="text-error">{{ form_errors(edit_form.telefono) }}</div>
+            <div class="labelform">Teléfono:</div>
+            <div class="widgetform">{{ form_widget(edit_form.telefono) }}</div>
+        </div>
+    
+        {{ form_widget(edit_form) }}
+        <p>
+            <button class="btn btn-primary" type="submit">EDITAR</button> | 
+            <a class="btn" href="{{ path('personalexterno_list') }}">IR AL LISTADO</a> 
+        </p>   
+        <script>
+        $(".txtMay").css({
+            'text-transform':'uppercase',
+        });
+        </script>  
+    </form>
+    {#
+    <ul class="record_actions">   
+    <li>
+        <form action="{{ path('personalexterno_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>      
+    </li>
+    </ul>
+    #}
+    </div>
+{% endblock %}

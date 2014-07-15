@@ -1,3 +1,8 @@
+telesur_personal:
+    pattern:  /telesur/personal
+    defaults: { _controller: UsuarioBundle:Personal:index }
+
+
 usuario_homepage:
     pattern:  /inicio
     defaults: { _controller: UsuarioBundle:Default:index }

@@ -63,7 +63,7 @@ class DefaultController extends Controller
                 a.monto_deduce as deduce FROM historicoquincena a, historiconomina b, 
                 trabajador tr,concepto c, tipoPersonal d, personal e, conceptoTipoPersonal f, 
                 grupoNomina g, dependencia j, cargo k, frecuenciaTipoPersonal ftp, frecuenciaPago fp 
-                WHERE a.anio = ".$anio." AND a.mes = ".$mes." AND a.semana_quincena = ".$quincena." AND e.cedula = ".$usuario->getCedula()." 
+                WHERE a.anio = ".$anio." AND a.mes = ".$mes." AND a.semana_quincena = ".$quincena." AND e.cedula = ".$usuario->getCedula()."
                 AND g.id_grupo_nomina = a.id_grupo_nomina 
                 AND d.id_tipo_personal = a.id_tipo_personal AND b.id_tipo_personal = d.id_tipo_personal 
                 AND b.id_trabajador = a.id_trabajador AND a.id_historico_nomina=b.id_historico_nomina 

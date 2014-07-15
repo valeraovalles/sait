@@ -1,29 +1,22 @@
 {% extends '::mercal.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Asignar n&uacute;mero{% endblock %}
 
-{% block titulobanner %}
-    MERCAL
+{% block titulo %}
+    ASIGNACIÓN DE NÚMEROS<br>JORNADA {{ jornada.nombrejornada|upper }} {{ jornada.fechajornada|date('d/m/Y') }}
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("mercal_seleccionajornada") }}">SELECCIONAR JORNADA</a></li>
+  <li class="active">ASIGNACIÓN DE NÚMEROS</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
-    
-    <div class="titulo">ASIGNACIÓN DE NÚMEROS<br><h4>JORNADA {{ jornada.nombrejornada|upper }} {{ jornada.fechajornada|date('d/m/Y') }}</h4></div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    <br>
+        <br>
    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalistaespecial">
         <thead>
             <tr>
@@ -51,7 +44,7 @@
 
                     {% else %}
 
-                        <a class="label label-important" href="{{ path('mercal_asignarnumero', { 'idjornada':jornada.id,'idtrabajador': entity.
+                        <a class="label label-danger" href="{{ path('mercal_asignarnumero', { 'idjornada':jornada.id,'idtrabajador': entity.
                         user.id }) }}">Asignar Nro.</a>
 
                     {% endif %}
@@ -65,7 +58,7 @@
 
                     {% else %}
 
-                        <a class="label label-important" href="{{ path('mercal_listadofam', {'idjornada':jornada.id, 'idtrabajador': entity.user.id }) }}">Asignar Nro.</a>
+                        <a class="label label-danger" href="{{ path('mercal_listadofam', {'idjornada':jornada.id, 'idtrabajador': entity.user.id }) }}">Asignar Nro.</a>
 
                     {% endif %}
 
@@ -74,9 +67,10 @@
         {% endfor %}
         </tbody>
     </table>
+    <br><br><br>
+    <a class="btn btn-default" href="{{ path('mercal_seleccionajornada') }}">Volver a las jornadas</a>
     <br><br>
-    <a class="btn btn-primary" href="{{ path('mercal_seleccionajornada') }}">Volver a las jornadas</a>
-    <br>
+
     <script type="text/javascript">
         $(document).ready(function(){
            $('#tablalistaespecial').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA

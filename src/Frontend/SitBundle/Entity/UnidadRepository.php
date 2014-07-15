@@ -22,9 +22,11 @@ class UnidadRepository extends EntityRepository
     public function ticketsunidad($idunidad)
     {
         $em = $this->getEntityManager();
-        $dql = "select t from SitBundle:Ticket t where t.unidad= :idunidad order by t.estatus ASC";
+        $dql = "select t from SitBundle:Ticket t where t.unidad= :idunidad and t.fechasolicitud>= :aniod and t.fechasolicitud<= :anioh order by t.estatus ASC";
         $query = $em->createQuery($dql);
         $query->setParameter('idunidad',$idunidad);
+        $query->setParameter('aniod',\date('Y').'-01-01');
+        $query->setParameter('anioh',\date('Y').'-12-31');
         return  $query->getResult();
 
     }

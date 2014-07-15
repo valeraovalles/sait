@@ -1,0 +1,68 @@
+{% extends '::transporte.html.twig' %}
+
+{% block title %}Transporte{% endblock %}
+
+{% block titulobanner %}
+    TRANSPORTE
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">TRANSPORTE - NUEVO VEHICULO</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+ <div class="formShow">
+
+    <form action="{{ path('transporte_create') }}" method="post" {{ form_enctype(form) }}>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.tipo) }}</div>
+            <div class="labelform">Tipo:</div>
+            <div class="widgetform">{{ form_widget(form.tipo) }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.placa) }}</div>
+            <div class="labelform">Placa:</div>
+            <div class="widgetform">{{ form_widget(form.placa) }}</div>
+        </div>        
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.modelo) }}</div>
+            <div class="labelform">Modelo:</div>
+            <div class="widgetform">{{ form_widget(form.modelo) }}</div>
+        </div>        
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.ano) }}</div>
+            <div class="labelform">Año:</div>
+            <div class="widgetform">{{ form_widget(form.ano) }}</div>
+        </div>        
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.color) }}</div>
+            <div class="labelform">Color:</div>
+            <div class="widgetform">{{ form_widget(form.color) }}</div>
+        </div>        
+        <div class="contenedorform">
+            <div class="text-error">{{ form_errors(form.estatus) }}</div>
+            <div class="labelform">Estatus:</div>
+            <div class="widgetform">{{ form_widget(form.estatus) }}</div>
+        </div>        
+        {{ form_widget(form) }}
+
+
+        <p>     
+            <button class="btn btn-primary" type="submit">CREAR VEHICULO</button> | 
+            <a class="btn" href="{{ path('vehiculos_list') }}">IR AL LISTADO</a> 
+        </p>
+    </form>
+</div>
+    
+{% endblock %}
