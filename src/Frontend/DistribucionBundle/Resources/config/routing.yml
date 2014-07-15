@@ -31,6 +31,12 @@ infooperadores:
     defaults: { _controller: "DistribucionBundle:Operador:info" }
 
 #REPORTES
+
+reporte_informativogeneral:
+    pattern:  /reporte/informativogeneral
+    defaults: { _controller: "DistribucionBundle:Reporte:informativogeneral" }
+
+
 reporte_informativo:
     pattern:  /reporte/informativo
     defaults: { _controller: "DistribucionBundle:Reporte:reporteinformativo" }

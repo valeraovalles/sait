@@ -1,11 +1,20 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
 <?php
+	# Cambie estos datos por los de su Servidor FTP
+	//define("SERVER","10.10.2.243"); //IP o Nombre del Servidor
+    define("SERVER","192.168.70.8"); //IP o Nombre del Servidor  
+	define("PORT",21); //Puerto
+	define("USER","creatv"); //Nombre de Usuario
+	define("PASSWORD","..*creatv*.."); //Contraseña de acceso
+        //define("USER","jhoan"); //Nombre de Usuario
+	//define("PASSWORD","123456"); //Contraseña de acceso
+
 	# FUNCIONES
-	function ConectarFTPA(){
+	function ConectarFTP(){
 		//Permite conectarse al Servidor FTP
-		$id_ftp=ftp_connect("192.168.40.3",21); //Obtiene un manejador del Servidor FTP
-		ftp_login($id_ftp,"fork","fork"); //Se loguea al Servidor FTP
+		$id_ftp=ftp_connect(SERVER,PORT); //Obtiene un manejador del Servidor FTP
+		ftp_login($id_ftp,USER,PASSWORD); //Se loguea al Servidor FTP
 		return $id_ftp; //Devuelve el manejador a la función
 	}
 
@@ -17,79 +26,22 @@
 		ftp_quit($id_ftp); //Cierra la conexion FTP
 	}
         
-    function eliminar_acentos($str){
-    	$a = array('Á','É','Í','Ó','Ú');
-    	$b = array('A','E','I','O','U');
-    	return str_replace($a, $b, $str);
-    }
-
-
-    // establecer una conexión básica
-    $conn_id = ConectarFTPA();
-    //me ubico en un directorio
-    ftp_chdir($conn_id, "Rename");
-    // Obtener los archivos contenidos en el directorio actual
-    $contents = ftp_nlist($conn_id, ".");
-    // output $contents
-
-
-    //conecto a la bd de mysqlserver
-    $link = mssql_connect('192.168.70.7', 'sa', '') or die("Could not connect !");
-    $selected = mssql_select_db("creatv_data", $link);
-
-
-    foreach ($contents as $c) {
-        if($c!=".DS_Store" and $c!="._.DS_Store"){
-            $dato=explode(".", $c);
-            $idcoriginal=$dato[0];
-            $idrecortado=substr($dato[0],0,-2);
-            $ext=$dato[1];
-
-            $query="
-              SELECT p.Identificador, c.Titol_Emissio as tcontenido,p.Titol_Emissio as tproduccion
-              FROM [creatv_data].[dbo].[Produccion] p ,[creatv_data].[dbo].[Contenido] c 
-              where p.IdPrograma=c.IdPrograma and p.Identificador='".$idrecortado."'
-            ";
-
-            $result = mssql_query($query);
-            $row = mssql_fetch_array($result);
-            print_r($row);
-            die;
-            ftp_rename($conn_id, $idcoriginal.".".$ext, $row['tcontenido']." - ".$row['tproduccion'].".".$ext);
-            ftp_exec($conn_id, "mv .".$row['tcontenido']." - ".$row['tproduccion'].".".$ext." ../From_Interplay/".$row['tcontenido']." - ".$row['tproduccion'].".".$ext);
-            die;
-
+        function eliminar_acentos($str){
+	$a = array('Á','É','Í','Ó','Ú');
+	$b = array('A','E','I','O','U');
+	return str_replace($a, $b, $str);
         }
-    }
 
-if(is_file($dir."/".$filename)) 
-        { 
-        //$thisneeded_dir = chdir('/ftp/pirimms/'); 
-        //$delfile = "rm -f ".$dir."/".$filename."";  
-        $delfile = "mv ".$dir."/".$filename." ".MEDIA_STORED_PATH."/".$gateway."/".$filename."";  
-        //echo "in delete zip file $delfile<br>"; 
-        echo "in move file $filename<br>"; 
-        exec($delfile, $output); 
-        } 
+?>
 
 
+<?php
 
-
-
-
-
-
-
+//conecto a la bd de mysqlserver
+$link = mssql_connect('192.168.70.7', 'sa', '') or die("Could not connect !");
+$selected = mssql_select_db("creatv_data", $link);
 
 //////////////////////////////////GENERO XML
-
-
-
-
-
-
-
-
 
 //tipo contenido, contenido, produccion
 $query="
@@ -104,7 +56,8 @@ $query="
         tc.IdTipoPrograma=c.IdTipusPrograma and
         c.IdPrograma=p.IdPrograma and
         x.IdProduccion=p.IdProduccio and
-        x.Fecha='".date('Y-m-d')."'
+        x.Fecha='".date('Y-m-d')."' and
+        x.Estatus=0
   order by p.IdProduccio ASC
 ";
 
@@ -161,7 +114,7 @@ while($row = mssql_fetch_array($result)){
             
             //identifico a que placeholder va cada tipo de contenido
             $PLACEHOLDER='';
-            if(utf8_encode($row['descripcion_tc'])=='INFORMATIVOS PROGRAMAS' || utf8_encode($row['descripcion_tc'])=='DOCUMENTALES' || utf8_encode($row['descripcion_tc'])=='ESPECIALES' || utf8_encode($row['descripcion_tc'])=='NOTICIEROS' || utf8_encode($row['descripcion_tc'])=='SERIES' || utf8_encode($row['descripcion_tc'])=='UNITARIOS') $PLACEHOLDER='PROGRAMA';
+            if(utf8_encode($row['descripcion_tc'])=='INFORMATIVOS PROGRAMAS' || utf8_encode($row['descripcion_tc'])=='DOCUMENTALES' || utf8_encode($row['descripcion_tc'])=='ESPECIALES' || utf8_encode($row['descripcion_tc'])=='NOTICIEROS' || utf8_encode($row['descripcion_tc'])=='SERIES' || utf8_encode($row['descripcion_tc'])=='UNITARIOS' || utf8_encode($row['descripcion_tc'])=='INGLES') $PLACEHOLDER='PROGRAMA';
             else if(utf8_encode($row['descripcion_tc'])=='BUMPERS' || utf8_encode($row['descripcion_tc'])=='PROMOS CAPITULARES' || utf8_encode($row['descripcion_tc'])=='PROMOS CAPSULAS' || utf8_encode($row['descripcion_tc'])=='PROMOS CARTELERA' || utf8_encode($row['descripcion_tc'])=='PROMOS EFEMÉRIDES' || utf8_encode($row['descripcion_tc'])=='PROMOS ESPECIALES' || utf8_encode($row['descripcion_tc'])=='PROMOS GENERICAS' || utf8_encode($row['descripcion_tc'])=='PROMOS GRAN ESTRENO' || utf8_encode($row['descripcion_tc'])=='PROMOS INDENTIDAD' || utf8_encode($row['descripcion_tc'])=='PROMOS INSTITUCONALES' || utf8_encode($row['descripcion_tc'])=='PROMOS MUY PRONTO' || utf8_encode($row['descripcion_tc'])=='CONTEO') $PLACEHOLDER='PROMO';
             else if(utf8_encode($row['descripcion_tc'])=='PATROCINIOS') $PLACEHOLDER='PATROCINIO';
             
@@ -190,12 +143,20 @@ while($row = mssql_fetch_array($result)){
 
     
     //envío el archivo por ftp
-    $archivo = fopen ("/var/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml", "w+");
+    $archivo = fopen ("/var/www/sait/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml", "w+");
     //$archivo = fopen ("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml", "w+");
     fwrite($archivo, $xml_final);
     fclose($archivo);
     
-    SubirArchivo("/var/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml",$row["identificador_produccion"].".xml");
+
+    //actualizar estatus
+    $id=$row['identificador_produccion'];
+
+    
+    $query="update [creatv_data].[dbo].[xml] set Estatus='true' where Identificador='".$id."' and Fecha='".date('Y-m-d')."' and Estatus='false'";
+    mssql_query($query);
+    
+    SubirArchivo("/var/www/sait/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml",$row["identificador_produccion"].".xml");
     //SubirArchivo("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml",$row["identificador_produccion"].".xml");
 
         

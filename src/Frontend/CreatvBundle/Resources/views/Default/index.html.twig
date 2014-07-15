@@ -1,0 +1,25 @@
+{% extends '::creatv.html.twig' %}
+
+{% block title %}Creatv{% endblock %}
+
+{% block titulo %}
+    SELECCIONE UNA OPCIÓN
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">CREATV INICIO</li>
+</ol>
+{% endblock %}
+
+
+
+{% block body %} 
+	{{ parent() }}
+
+	<img src="{{ asset('images/txt.png') }}" width="45px"> <a class="btn btn-primary btn-lg" href="{{ path('creatv_formtxt') }}">GENERAR TXT</a>
+
+	<br><br>
+
+{% endblock %}

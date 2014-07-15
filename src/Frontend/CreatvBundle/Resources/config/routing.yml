@@ -1,0 +1,15 @@
+creatv_homepage:
+    pattern:  /inicio
+    defaults: { _controller: CreatvBundle:Default:index }
+
+creatv_formtxt:
+    pattern:  /formtxt
+    defaults: { _controller: CreatvBundle:Default:formtxt }
+
+creatv_generatxt:
+    pattern:  /generatxt
+    defaults: { _controller: CreatvBundle:Default:generatxt }
+
+creatv_descargatxt:
+    pattern:  /descargatxt/{fecha}/{tipo}
+    defaults: { _controller: CreatvBundle:Default:descargatxt }
