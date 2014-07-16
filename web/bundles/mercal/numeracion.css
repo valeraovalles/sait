@@ -1,0 +1,26 @@
+.numeracionx .numero{
+	font-size: 150px;
+}
+
+.numeracionx .nombre {
+	font-size: 27px;
+}
+
+.numeracionx .cedula {
+	font-size: 22px;
+}
+
+.titulojornadax{
+	font-size: 30px;
+	padding-top: 30px;
+	font-weight: bold;
+}
+
+#table{
+	width:100%;
+
+}
+
+#table td{
+	width:50%;
+}

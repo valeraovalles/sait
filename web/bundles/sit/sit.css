@@ -1,0 +1,135 @@
+.ticketespera{
+	border-left: 1px solid #d9edf7;
+}
+
+.ticketsoporte{
+	border-right: 1px solid #d9edf7;
+}
+
+
+.formShowSit{
+	width: 99%;
+	margin: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.formShowSit select{
+	width: 200px;
+}
+
+.formShowSit .contenedorformSit input[type="text"]{
+	width: 200px;
+}
+
+.formShowSit .contenedorformSit input[type="number"]{
+	width: 200px;
+	height: 25px;
+}
+
+
+.formShowSit .contenedorformSit input[type="checkbox"]{
+	margin-bottom: 10px;
+}
+
+.formShowSit textarea{
+	width: 200px;
+	height: 100px;
+}
+
+.formShowSit .contenedorformSit{
+	padding: 5px;
+	height: auto;
+	overflow: visible;
+}
+
+.formShowSit .labelformSit{
+	float                  :left;
+	width                  :28%;
+	text-align             :right;
+	font-weight            :bold;
+	padding-right: 10px;
+}
+
+.formShowSit .widgetformSit{
+	text-align: left;
+}
+
+.siterror{
+	text-align: left;
+	margin-left: 105px;
+}
+
+
+.ticketsolicitante{
+	margin-top: 20px;
+	width: 95%;
+	font-size: 12px;
+}
+
+
+.ticketsolicitante td{
+	text-align: left;
+	margin-left: 20px;
+}
+
+.listadoticketsolicitante{
+	overflow-y: scroll;
+	height: 264px;
+}
+
+.SITcategoria{
+	font-weight: bold;
+	text-align: left;
+}
+
+.SITsubcategoria{
+	margin-left: 20px;
+	text-align: left;
+}
+
+.contenedorcatsub{
+	width: 350px;
+}
+
+.situnidad{
+	text-align: left;
+}
+
+.sitimagen img:hover{
+	width: 100%;
+	position: absolute;
+}
+
+/*AJAX USUARIO SEGUIMIENTO*/
+#ajaxlistausuario{
+	width: 220px;
+	height: auto;
+	position: static;
+	top: 0;
+	left: 0;
+	border: 1px solid gray;
+	background-color: #eeeeee;
+	margin-bottom: 2px;
+}
+
+#ajaxusuarios{
+	cursor:pointer;
+	font-size: 12px;
+}
+
+#loading{
+	position: absolute;
+	top:90;
+	left: 270;
+}
+
+.tags{
+	background-color: #85c7f9;
+	width: 220px;
+	font-size: 12px;
+	margin-bottom: 2px;
+	font-weight: bold;
+	cursor: pointer;
+
+}
