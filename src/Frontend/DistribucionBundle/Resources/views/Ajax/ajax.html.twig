@@ -1,31 +1,31 @@
 {% if mostrar=='tipooperador' %}
     <div class="contenedorform">
-        <div class="labelform">Tipo Operador:</div>
-		<div class="widgetform">{{ form_widget(form.tipooperador) }}</div>
+        <div class="labelform" style="width:30%">Tipo Operador:</div>
+		<div class="widgetform">{{ form_widget(form.tipooperador,{'attr':{'style':'width:70%;height:80px;'}}) }}</div>
     </div>
     <div id="operador"></div>
 {% endif %}
 
 {% if mostrar=='operador' %}
     <div class="contenedorform">
-        <div class="labelform">Operador:</div>
-        <div class="widgetform">{{ form_widget(form.operador) }}</div>
+        <div class="labelform" style="width:30%">Operador:</div>
+        <div class="widgetform">{{ form_widget(form.operador,{'attr':{'style':'width:70%;'}}) }}</div>
     </div>
     <div id="fechadesde"></div>
 {% endif %}
 
 {% if mostrar=='fechadesde' %}
     <div class="contenedorform">
-        <div class="labelform">Fecha desde:</div>
-        <div class="widgetform">{{ form_widget(form.fechadesde) }}</div>
+        <div class="labelform" style="width:30%">Fecha desde:</div>
+        <div class="widgetform">{{ form_widget(form.fechadesde,{'attr':{'style':'width:40%;'}}) }}</div>
     </div>
     <div id="fechahasta"></div>
 {% endif %}
 
 {% if mostrar=='fechahasta' %}
     <div class="contenedorform">
-        <div class="labelform">Fecha hasta:</div>
-        <div class="widgetform">{{ form_widget(form.fechahasta) }}</div>
+        <div class="labelform" style="width:30%">Fecha hasta:</div>
+        <div class="widgetform">{{ form_widget(form.fechahasta,{'attr':{'style':'width:40%;'}}) }}</div>
     </div>
     <div id="formato"></div>
 {% endif %}
@@ -33,8 +33,8 @@
 
 {% if mostrar=='formato' %}
     <div class="contenedorform">
-        <div class="labelform">Formato:</div>
-        <div class="widgetform">{{ form_widget(form.formato) }}</div>
+        <div class="labelform" style="width:30%">Formato:</div>
+        <div class="widgetform">{{ form_widget(form.formato,{'attr':{'style':'width:40%;'}}) }}</div>
     </div>
     <div id="botones"></div>
 {% endif %}
