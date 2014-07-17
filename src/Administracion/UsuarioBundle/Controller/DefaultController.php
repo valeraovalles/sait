@@ -4,6 +4,8 @@ namespace Administracion\UsuarioBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
+use Administracion\UsuarioBundle\Entity\Logs\Logs;
+
 use Doctrine\ORM\Mapping as ORM;
 use Administracion\UsuarioBundle\Resources\Misclases\Funcion;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -28,6 +30,19 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UsuarioBundle:Perfil')->find($IdUsuario);
 
+        
+        $peticion = $this->getRequest();
+        $logs = new Logs();
+        $logs->setUtc(\date('U'));
+        $logs->setUsuario($entity);
+        $logs->setFecha(date_create_from_format('Y-m-d', \date("Y-m-d")));
+        $logs->setHora(new \DateTime(\date("G:i:s")));
+        $logs->setIp($peticion->getClientIp());
+        $logs->setNavegador($peticion->server->get('HTTP_USER_AGENT'));
+        $logs->setUrl($peticion->getUri());
+        $em->persist($logs);
+        $em->flush();
+                
 
         $f=new Funcion;
         $datos_usuario=$f->datosUsuarioSigefirrhh($entity->getCedula());
@@ -44,7 +59,6 @@ class DefaultController extends Controller
         SecurityContext::AUTHENTICATION_ERROR,
         $sesion->get(SecurityContext::AUTHENTICATION_ERROR)
         );
-        
         
         return $this->render('UsuarioBundle:Default:login.html.twig', array(
         'last_username' => $sesion->get(SecurityContext::LAST_USERNAME),

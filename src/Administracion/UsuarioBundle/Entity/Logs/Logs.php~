@@ -1,0 +1,78 @@
+<?php
+
+namespace Administracion\UsuarioBundle\Entity\Logs;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * logs_analitics
+ *
+ * @ORM\Table(name="log.logs_analitics")
+ * @ORM\Entity(repositoryClass="Administracion\UsuarioBundle\Entity\Logs\LogsRepository")
+ */
+class Logs {
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="log.logs_analitics_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="utc", type="string", nullable=false)
+     */
+    private $utc;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fecha", type="date", nullable=false)
+     */
+    private $fecha;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hora", type="time", nullable=false)
+     */
+    private $hora;
+    
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\Perfil")
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="usuario", referencedColumnName="$id")
+     * })
+     */
+    private $usuario;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url", type="string", nullable=false)
+     */
+    private $url;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip", type="string", nullable=false)
+     */
+    private $ip;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="navegador", type="string", nullable=false)
+     */
+    private $navegador;
+    
+
+}
