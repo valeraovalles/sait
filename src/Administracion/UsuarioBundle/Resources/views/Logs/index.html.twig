@@ -1,0 +1,139 @@
+{% extends '::administracion.html.twig' %}
+
+{% block title %}Inicio - Telesur{% endblock %}
+
+{% block titulo %}<h2 class="title-dashboard">DashBoard</h2>{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li class="active">PAGINA PRINCIPAL</li>
+</ol>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        .container-dashboard{
+            width: 90%;
+            margin: 0 auto;
+        }
+        .title-dashboard{
+            color: #545b60;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript">
+    	/**
+        * Request data from the server, add it to the graph and set a timeout 
+        * to request again
+        */
+       function requestData() {
+           $.ajax({
+               type: 'post',
+               url: '{{ path("logs_charts_live") }}',
+               success: function(point) {
+                   var series = chart.series[0],
+                       shift = series.data.length > 20; // shift if the series is 
+                                                        // longer than 20
+
+                   // add the point
+                   chart.series[0].addPoint(point, true, shift);
+
+                   // call it again after one second
+                   setTimeout(requestData, 1000);    
+               },
+               cache: false
+           });
+       }
+       
+        $(document).ready(function() {
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container-live',
+                    defaultSeriesType: 'spline',
+                    events: {
+                        load: requestData
+                    }
+                },
+                title: {
+                    text: 'Live random data'
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150,
+                    maxZoom: 20 * 1000
+                },
+                yAxis: {
+                    minPadding: 0.2,
+                    maxPadding: 0.2,
+                    title: {
+                        text: 'Value',
+                        margin: 80
+                    }
+                },
+                series: [{
+                    name: 'Random data',
+                    data: []
+                }]
+            });        
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+	<div class="container-dashboard">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+                                    <div class="panel-heading">Registro de Visitas live </div>
+					<div class="panel-body" id="container-live">
+					Panel content
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">Registro de Browser</div>
+					<div class="panel-body">
+					Panel content
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">Registro de S.O</div>
+					<div class="panel-body">
+					Panel content
+					</div>
+				</div>
+			</div>
+		</div>
+                <div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">Registro de Usuarios</div>
+					<div class="panel-body">
+					Panel content
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">Registro de Aplicaciones</div>
+					<div class="panel-body">
+					Panel content
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

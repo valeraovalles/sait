@@ -32,17 +32,11 @@ class DefaultController extends Controller
 
         
         $peticion = $this->getRequest();
-        $logs = new Logs();
-        $logs->setUtc(\date('U'));
-        $logs->setUsuario($entity);
-        $logs->setFecha(date_create_from_format('Y-m-d', \date("Y-m-d")));
-        $logs->setHora(new \DateTime(\date("G:i:s")));
-        $logs->setIp($peticion->getClientIp());
-        $logs->setNavegador($peticion->server->get('HTTP_USER_AGENT'));
-        $logs->setUrl($peticion->getUri());
-        $em->persist($logs);
-        $em->flush();
-                
+        $logs = $em->getRepository('UsuarioBundle:Logs\Logs')->logsRecord($em, $peticion, $entity);
+
+//        if(!$logs){
+//            
+//        }
 
         $f=new Funcion;
         $datos_usuario=$f->datosUsuarioSigefirrhh($entity->getCedula());

@@ -1,0 +1,12 @@
+a. Usuarios Únicos
+c. Paginas Visitadas (Aplicaciones)
+d. Páginas Vistas/Visitante Únicos nos mide cuantas páginas en promedio navegó un visitante único
+g. Ranking de páginas más vistas (Aplicaciones).
+
+Informacion a monitorear:
+1. nro de usuarios conectados (realtime).
+2. nro de visitas diarias, semanales y mensuales (usuario unicos).
+3. ranking de navegadores web (navegador y versiones)
+4. 
+
+

@@ -133,3 +133,14 @@ perfil_delete:
     pattern:  /perfil/{id}/delete
     defaults: { _controller: "UsuarioBundle:Perfil:delete" }
     requirements: { _method: post }
+
+#-- Gestion de Registros.
+#---Logs - General
+
+logs_general:
+    pattern:  /logs
+    defaults: { _controller: "UsuarioBundle:Logs/Default:index" }
+
+logs_charts_live: 
+    pattern:  /logs/live
+    defaults: { _controller: "UsuarioBundle:Logs/Default:dataLive" }

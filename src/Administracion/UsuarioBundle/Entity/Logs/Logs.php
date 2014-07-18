@@ -5,7 +5,7 @@ namespace Administracion\UsuarioBundle\Entity\Logs;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * logs_analitics
+ * Logs
  *
  * @ORM\Table(name="log.logs_analitics")
  * @ORM\Entity(repositoryClass="Administracion\UsuarioBundle\Entity\Logs\LogsRepository")

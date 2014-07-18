@@ -17,6 +17,9 @@
               <li class="divider"></li>
               <li><a href="{{ path('rol') }}">LISTA DE ROLES</a></li>
               <li><a href="{{ path('rol_new') }}">NUEVO ROL</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation" class="dropdown-header">Gestión de Registros</li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('logs_general') }}">General</a></li>
             </ul>
           </li>
           {% endif %}
