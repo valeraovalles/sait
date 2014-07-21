@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>        
+        <XML>
+            <Content>UPDATE</Content>
+            <Clip>
+                <ClipName>INPRVDC0014</ClipName>
+                <TipoContenido>INFORMATIVOS PROGRAMAS</TipoContenido>
+                <Contenido><![CDATA[ VOCES DE CAMBIO CAP14 27JUL17]]></Contenido>
+                <OriginalTitle></OriginalTitle>
+                <Description> </Description>
+                <Notes>a</Notes>
+                <DurPrev></DurPrev>
+                <Chapter></Chapter>
+                <EndDate></EndDate>
+                <EPG></EPG>
+                <EPG_Content> </EPG_Content>
+                <Segments>
+            
+                <Segment>
+                    <SegTitle>1-4 VOCES DE CAMBIO - VOCES DE CAMBIO CAP14 27JUL17</SegTitle>
+                    <MediaID>INPRVDC001401</MediaID>
+                    <Duration>00:13:00.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>2-4 VOCES DE CAMBIO - VOCES DE CAMBIO CAP14 27JUL17</SegTitle>
+                    <MediaID>INPRVDC001402</MediaID>
+                    <Duration>00:13:00.00</Duration>
+                    <SegNumber>2</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>3-4 VOCES DE CAMBIO - VOCES DE CAMBIO CAP14 27JUL17</SegTitle>
+                    <MediaID>INPRVDC001403</MediaID>
+                    <Duration>00:13:00.00</Duration>
+                    <SegNumber>3</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>4-4 VOCES DE CAMBIO - VOCES DE CAMBIO CAP14 27JUL17</SegTitle>
+                    <MediaID>INPRVDC001404</MediaID>
+                    <Duration>00:13:00.00</Duration>
+                    <SegNumber>4</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            </Segments></Clip></XML>

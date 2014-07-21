@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>        
+        <XML>
+            <Content>UPDATE</Content>
+            <Clip>
+                <ClipName>INGTGE0001</ClipName>
+                <TipoContenido>INGLES</TipoContenido>
+                <Contenido><![CDATA[ THE WORLD TODAY GLOBAL EMPIRE   24 JUL14]]></Contenido>
+                <OriginalTitle></OriginalTitle>
+                <Description> </Description>
+                <Notes>a</Notes>
+                <DurPrev></DurPrev>
+                <Chapter></Chapter>
+                <EndDate></EndDate>
+                <EPG></EPG>
+                <EPG_Content> </EPG_Content>
+                <Segments>
+            
+                <Segment>
+                    <SegTitle>1-1 THE WORLD TODAY GLOBAL EMPIRE    - THE WORLD TODAY GLOBAL EMPIRE   24 JUL14</SegTitle>
+                    <MediaID>INGTGE000101</MediaID>
+                    <Duration>00:30:00.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            </Segments></Clip></XML>
