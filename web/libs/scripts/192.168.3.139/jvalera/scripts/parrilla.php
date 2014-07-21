@@ -125,23 +125,19 @@
 
     //tipo contenido, contenido, produccion
     $query="
-      SELECT pa.Data_Inici, pa.Data_Fi, es.Data_Emissio, pr.Identificador, ev.StartTime, co.Titol_Original, co.Titol_Emissio, co.Sinopsis as sinopsiscon, co.IdPrograma, co.Durada,blo.Hora_Inici as horainicio, blo.Durada as duracion, case lo.LogoNum when '1' then lo.Descripcio end as foto, case lo.LogoNum when '2' then lo.Descripcio end as url
-      FROM [creatv_data].[dbo].[Escaleta] es, [creatv_data].[dbo].[Evento] ev, [creatv_data].[dbo].[Parrilla] pa, [creatv_data].[dbo].[Produccion] pr, [creatv_data].[dbo].[Contenido] co, [creatv_data].[dbo].[Bloque] blo, [creatv_data].[dbo].[Logo] lo
+      SELECT pa.Data_Inici, pa.Data_Fi, es.Data_Emissio, pr.Identificador, ev.StartTime, co.Titol_Original, co.Titol_Emissio, co.Sinopsis as sinopsiscon, co.IdPrograma, co.Durada,blo.Hora_Inici as horainicio, blo.Durada as duracion, (select Descripcio from [creatv_data].[dbo].[Logo] where IdLogo=co.IdLogo1 and LogoNum=1) as foto,
+(select Descripcio from [creatv_data].[dbo].[Logo] where IdLogo=co.IdLogo2 and LogoNum=2) as url
+      FROM [creatv_data].[dbo].[Escaleta] es, [creatv_data].[dbo].[Evento] ev, [creatv_data].[dbo].[Parrilla] pa, [creatv_data].[dbo].[Produccion] pr, [creatv_data].[dbo].[Contenido] co, [creatv_data].[dbo].[Bloque] blo
       where 
       pa.Data_Inici='".$lunes."' and
       pa.Data_Fi='".$domingo."' and
       pa.Nom='PARRILLA WEB' and
       pa.IdCanal=10 and
-      --es.IdParrilla='443' and 
-      --ev.Nivel=1 and
-      --ev.IdSubContenidorExtern=-1 and
-      ev.SegName!='1/1' and
       ev.IdEscaleta=es.IdEscaleta and 
       pa.IdParrilla=es.IdParrilla and
       ev.IdProduccio=pr.IdProduccio and
       co.IdPrograma=pr.IdPrograma and
-      ev.IdBloc=blo.IdBloc and
-      (lo.IdLogo=co.IdLogo1 and lo.LogoNum=1 or lo.IdLogo=co.IdLogo2 and lo.LogoNum=2)
+      ev.IdBloc=blo.IdBloc
       ORDER by es.Data_Emissio, ev.OrderNum ASC 
     ";
 
@@ -155,7 +151,6 @@
       es.Data_Emissio='".$lunes."' and
       pa.Nom='PARRILLA WEB' and
       pa.IdCanal=10 and
-      ev.SegName!='1/1' and
       ev.IdEscaleta=es.IdEscaleta and 
       pa.IdParrilla=es.IdParrilla 
       group by es.Data_Emissio, ev.IdBloc";
@@ -173,7 +168,7 @@ $idprograma=0; //para no repetir el programa
 $diaanterior=0; //para no repetir el dia
 $da=null; //variable para indicar que la etiqueta de cierre del lunes no debe mostrarla al principio
 
-$htmm="<?xml version='1.0' encoding='UTF-8' ?><table style='font-size:14px;' cellpadding='10px;' border=1><tr><th width='10%'>DIA</th><th width='20%'>TITULO EMISIÓN</th><th width='20%'>TITULO ORIGINAL</th><th width='5%'>H. INICIO</th><th width='5%'>H. FIN</th><th width='40%'>SINOPSIS</th></tr>";
+$htmm="<?xml version='1.0' encoding='UTF-8' ?><table style='font-size:14px;' cellpadding='10px;' border=1><tr><th width='10%'>DIA</th><th width='20%'>TITULO ORIGINAL</th><th>FOTO</th><th>URL</th><th width='5%'>H. INICIO</th><th width='5%'>H. FIN</th><th width='40%'>SINOPSIS</th></tr>";
 while($row = mssql_fetch_array($result)){  
 
 //para que no se repita el programa
@@ -223,8 +218,9 @@ if($idprograma!=$row['IdPrograma']){
     $htmm .="
       <tr>
         <td>".$dias[$diasemana]."</td>
-        <td>".utf8_encode($row['Titol_Emissio'])."</td>
         <td>".utf8_encode($row['Titol_Original'])."</td>
+        <td>".utf8_encode($row['foto'])."</td>
+        <td>".utf8_encode($row['url'])."</td>
         <td>".$horainicio."</td>
         <td>".$horafin."</td>
         <td>".utf8_encode($row['sinopsiscon'])."</td>
@@ -253,11 +249,8 @@ if($idprograma!=$row['IdPrograma']){
     fwrite($archivo, $xml);
     fclose($archivo);
     
-    //SubirArchivo("/var/www/sait/web/uploads/parrilla/xml/".$nombre,$nombre);
+    SubirArchivo("/var/www/sait/web/uploads/parrilla/xml/".$nombre,$nombre);
     //SubirArchivo("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml",$row["identificador_produccion"].".xml");
-
-
-
 
     //envío el archivo por ftp
     $archivo = fopen ("/var/www/sait/web/uploads/parrilla/xml/html.html", "w+");
