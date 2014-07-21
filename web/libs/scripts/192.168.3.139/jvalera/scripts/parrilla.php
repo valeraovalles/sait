@@ -1,5 +1,7 @@
 <?php
 
+  //ESTE SCRIPT ES PARA LA UNIDAD DE ARCHIVOS MULTIMEDIA Y RENOMBRA UN ARCHIVO DE VIDEO QUE CONTIENE EL ID DEL CREATV POR SU TITULO ORIGINAL
+
     function principio_semana()
     {
     $unix = date ("U"); /// esto nos convierte la fecha de hoy en Unix
