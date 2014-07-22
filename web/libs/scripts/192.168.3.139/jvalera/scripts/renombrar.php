@@ -45,15 +45,17 @@
             $idrecortado=substr($dato[0],0,-2);
             $ext=$dato[1];
 
-            $query="
-              SELECT p.Identificador, c.Titol_Emissio as tcontenido,p.Titol_Emissio as tproduccion
-              FROM [creatv_data].[dbo].[Produccion] p ,[creatv_data].[dbo].[Contenido] c 
-              where p.IdPrograma=c.IdPrograma and p.Identificador='".$idrecortado."'
+            $query="                
+              SELECT p.Identificador, c.Titol_Emissio as tcontenido,p.Titol_Emissio as tproduccion, s.NumOrdre, (SELECT COUNT(*) FROM [creatv_data].[dbo].[Segmento] s where s.IdMedia like '%".$idrecortado."%') as numseg
+              FROM [creatv_data].[dbo].[Produccion] p ,[creatv_data].[dbo].[Contenido] c ,[creatv_data].[dbo].[Segmento] s
+              where p.IdPrograma=c.IdPrograma and s.IdProduccio=p.IdProduccio and s.IdMedia='".$idcoriginal."'
             ";
 
             $result = mssql_query($query);
             $row = mssql_fetch_array($result);
-            ftp_rename($conn_id, $idcoriginal.".".$ext, "../From_Interplay/1-1 ".$row['tcontenido']." - ".$row['tproduccion'].".".$ext);
+            
+            if(!empty($row))
+                ftp_rename($conn_id, $idcoriginal.".".$ext, "../From_Interplay/".$row['NumOrdre']."-".$row['numseg']." ".$row['tcontenido']." - ".$row['tproduccion'].".".$ext);
 
         }
     }
