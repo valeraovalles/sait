@@ -74,10 +74,16 @@
 
 
 	# Cambie estos datos por los de su Servidor FTP
-  define("SERVER","10.10.11.243"); //IP o Nombre del Servidor  
+        /*define("SERVER","10.10.11.243"); //IP o Nombre del Servidor  
 	define("PORT",21); //Puerto
 	define("USER","jhoan"); //Nombre de Usuario
-	define("PASSWORD","123456"); //Contraseña de acceso
+	define("PASSWORD","123456"); //Contraseña de acceso*/
+        
+	# Cambie estos datos por los de su Servidor FTP
+        define("SERVER","192.168.3.58"); //IP o Nombre del Servidor  
+	define("PORT",21); //Puerto
+	define("USER","aplicacionesxml"); //Nombre de Usuario
+	define("PASSWORD","*u53r-xml#"); //Contraseña de acceso
 
 
 	# FUNCIONES
@@ -254,7 +260,7 @@ if($idprograma!=$row['IdPrograma']){
     SubirArchivo("/var/www/sait/web/uploads/parrilla/xml/".$nombre,$nombre);
     //SubirArchivo("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml",$row["identificador_produccion"].".xml");
 
-    //envío el archivo por ftp
+    //creo html
     $archivo = fopen ("/var/www/sait/web/uploads/parrilla/xml/html.html", "w+");
     //$archivo = fopen ("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml", "w+");
     fwrite($archivo, $htmm);

@@ -32,13 +32,14 @@
     $contents = ftp_nlist($conn_id, ".");
     // output $contents
 
+    
     //conecto a la bd de mysqlserver
     $link = mssql_connect('192.168.70.7', 'sa', '') or die("Could not connect !");
     $selected = mssql_select_db("creatv_data", $link);
 
 
     foreach ($contents as $c) {
-        if($c!=".DS_Store" and $c!="._.DS_Store" and $c!='otros'){
+        if($c!=".DS_Store" and $c!="._.DS_Store"){
             $dato=explode(".", $c);
             $idcoriginal=$dato[0];
             $idrecortado=substr($dato[0],0,-2);
@@ -52,7 +53,7 @@
 
             $result = mssql_query($query);
             $row = mssql_fetch_array($result);
-            ftp_rename($conn_id, $idcoriginal.".".$ext, "../From_Interplay/".$row['tcontenido']." - ".$row['tproduccion'].".".$ext);
+            ftp_rename($conn_id, $idcoriginal.".".$ext, "../From_Interplay/1-1 ".$row['tcontenido']." - ".$row['tproduccion'].".".$ext);
 
         }
     }
