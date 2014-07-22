@@ -54,8 +54,9 @@
             $result = mssql_query($query);
             $row = mssql_fetch_array($result);
             
+            
             if(!empty($row))
-                ftp_rename($conn_id, $idcoriginal.".".$ext, "../From_Interplay/".$row['NumOrdre']."-".$row['numseg']." ".$row['tcontenido']." - ".$row['tproduccion'].".".$ext);
+                ftp_rename($conn_id, $idcoriginal.".".$ext, "../From_Interplay/".$row['NumOrdre']."-".$row['numseg']." ".utf8_encode($row['tcontenido'])." - ".utf8_encode($row['tproduccion']).".".$ext);
 
         }
     }
