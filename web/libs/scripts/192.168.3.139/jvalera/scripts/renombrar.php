@@ -31,7 +31,6 @@
     // Obtener los archivos contenidos en el directorio actual
     $contents = ftp_nlist($conn_id, ".");
     // output $contents
-
     
     //conecto a la bd de mysqlserver
     $link = mssql_connect('192.168.70.7', 'sa', '') or die("Could not connect !");
@@ -44,7 +43,6 @@
             $idcoriginal=$dato[0];
             $idrecortado=substr($dato[0],0,-2);
             $ext=$dato[1];
-
             $query="                
               SELECT p.Identificador, c.Titol_Emissio as tcontenido,p.Titol_Emissio as tproduccion, s.NumOrdre, (SELECT COUNT(*) FROM [creatv_data].[dbo].[Segmento] s where s.IdMedia like '%".$idrecortado."%') as numseg
               FROM [creatv_data].[dbo].[Produccion] p ,[creatv_data].[dbo].[Contenido] c ,[creatv_data].[dbo].[Segmento] s
@@ -53,8 +51,7 @@
 
             $result = mssql_query($query);
             $row = mssql_fetch_array($result);
-            
-            
+
             if(!empty($row))
                 ftp_rename($conn_id, $idcoriginal.".".$ext, "../From_Interplay/".$row['NumOrdre']."-".$row['numseg']." ".utf8_encode($row['tcontenido'])." - ".utf8_encode($row['tproduccion']).".".$ext);
 

@@ -93,10 +93,26 @@
 		ftp_login($id_ftp,USER,PASSWORD); //Se loguea al Servidor FTP
 		return $id_ftp; //Devuelve el manejador a la función
 	}
+        
+	# FUNCIONES
+	function ConectarFTPSecundario(){
+		//Permite conectarse al Servidor FTP
+		$id_ftp=ftp_connect("192.168.3.88",21); //Obtiene un manejador del Servidor FTP
+		ftp_login($id_ftp,"xmlhilos","*xmlhilos#"); //Se loguea al Servidor FTP
+		return $id_ftp; //Devuelve el manejador a la función
+	}
 
 	function SubirArchivo($archivo_local,$archivo_remoto){
 		//Sube archivo de la maquina Cliente al Servidor (Comando PUT)
 		$id_ftp=ConectarFTP(); //Obtiene un manejador y se conecta al Servidor FTP
+		ftp_put($id_ftp,$archivo_remoto,$archivo_local,FTP_BINARY);
+		//Sube un archivo al Servidor FTP en modo Binario
+		ftp_quit($id_ftp); //Cierra la conexion FTP
+	}
+        
+	function SubirArchivoSecundario($archivo_local,$archivo_remoto){
+		//Sube archivo de la maquina Cliente al Servidor (Comando PUT)
+		$id_ftp=ConectarFTPSecundario(); //Obtiene un manejador y se conecta al Servidor FTP
 		ftp_put($id_ftp,$archivo_remoto,$archivo_local,FTP_BINARY);
 		//Sube un archivo al Servidor FTP en modo Binario
 		ftp_quit($id_ftp); //Cierra la conexion FTP
@@ -258,6 +274,7 @@ if($idprograma!=$row['IdPrograma']){
     fclose($archivo);
     
     SubirArchivo("/var/www/sait/web/uploads/parrilla/xml/".$nombre,$nombre);
+    SubirArchivoSecundario("/var/www/sait/web/uploads/parrilla/xml/".$nombre,$nombre);
     //SubirArchivo("/home/jhoan/www/Telesur/web/uploads/creatv/xml/".$row["identificador_produccion"].".xml",$row["identificador_produccion"].".xml");
 
     //creo html
