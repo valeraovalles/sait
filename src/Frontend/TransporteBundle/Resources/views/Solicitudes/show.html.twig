@@ -50,12 +50,6 @@
             <div class="labelform">Motivo de la Solicitud</div>
             <div class="widgetform">{{ entity.datosInteresRazon }}</div>
         </div>
-        {% if  entity.justificacionRechazo %}
-            <div class="contenedorform">
-                <div class="labelform">Justificación de Rechazo</div>
-                <div class="widgetform">{{ entity.justificacionRechazo }}</div>
-            </div>
-        {% endif %}
         <div class="contenedorform">
             <div class="labelform">Estatus Actual</div>
             <div class="widgetform">
@@ -68,6 +62,12 @@
                 {% endif %}
             </div>
         </div>
+        {% if  entity.justificacion %}
+            <div class="contenedorform">
+                <div class="labelform">Justificación</div>
+                <div class="widgetform">{{ entity.justificacion }}</div>
+            </div>
+        {% endif %}        
         {% if entity.estatus=="N" %}
             <form action="{{ path('solicitudes_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}<br>
                 <div class="contenedorform">
@@ -75,8 +75,6 @@
                     <div class="widgetform">{{ form_widget(form.estatus) }}</div>
                 </div>
                 <div id="muestra"></div>
-
-                <br><button class="btn btn-primary" type="submit">APROBAR / RECHAZAR</button>
             </form>
         {% endif %}
     </div>

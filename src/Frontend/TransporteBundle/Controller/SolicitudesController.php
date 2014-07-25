@@ -70,39 +70,18 @@ class SolicitudesController extends Controller
             $entity->setFechaSolicitud($fechaactual);
             $entity->setEstatus("N");        
             $em->persist($entity);
-           // $em->flush();
+            $em->flush();
             $this->get('session')->getFlashBag()->add('notice', 'EL REGISTRO FUE CREADO CON EXITO');
             
 
-         /*   //CORREO
-            $ticket = $em->getRepository('SitBundle:Ticket')->find($id);
-            //$ticket->getUnidad()->getCorreo();
-            //$ticket->getSolicitante()->getUser()->getUsername();
-            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-            ->setSubject('Sit-Cerrado')     // we configure the title
-            ->setFrom($ticket->getUnidad()->getCorreo())     // we configure the sender
-            ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
-            ->setBody( $this->renderView(
-                    'SitBundle:Correo:solucion.html.twig',
-                    array('ticket' => $ticket)
-                ), 'text/html');
-
-            $this->get('mailer')->send($message);    // then we send the message.
-            //FIN CORREO
-
-*/
-      
-            //CORREO
+           //CORREO
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
 
             
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-           ->setSubject('Solicitud de transporte')       // we configure the title
-            
-           ->setFrom('lpadilla@telesurtv.net')
-           ->setTo('lpadilla@telesurtv.net')
-            //->setFrom($usuario->getUsername().'@telesurtv.net')
-            //->setTo('transporte@telesurtv.net')    // we configure the recipient
+            ->setSubject('Solicitud de transporte')       // we configure the title
+            ->setTo(array($usuario->getUsername().'@telesurtv.net', 'lpadilla@telesurtv.net'))
+            ->setFrom('app_transporte@telesurtv.net')    // we configure the recipient
             ->setBody( $this->renderView(
                         'TransporteBundle:Correo:solicitud_transporte.html.twig',
                         array('perfil' => $perfil,
@@ -111,16 +90,17 @@ class SolicitudesController extends Controller
                         )
                     ), 
             'text/html');
-             //PARA VER LA VISTA EN LA PAG
+
+
+             /*//PARA VER LA VISTA EN LA PAG
              return $this->render('TransporteBundle:Correo:solicitud_transporte.html.twig', array(
                             'solicitud' => $entity,
                             'perfil' => $perfil, 
                             'status' => 'N',                           
                         ));
-            
+            */
              $this->get('mailer')->send($message); 
             //FIN CORREO
-            die;
 
             return $this->redirect($this->generateUrl('showmissolicitudes', array('id' => $entity->getId())));
         }else{            
@@ -163,7 +143,7 @@ class SolicitudesController extends Controller
         }
 
         $form = $this->createFormBuilder()
-            ->add('estatus','choice',array( 'choices'   =>array( 'S' => 'Seleccione..', 'AP'=>'Aprobado', 'R'=>'Rechazado' ) ) )
+            ->add('estatus','choice',array( 'choices'   =>array( 'S' => 'Seleccione..', 'AP'=>'Aprobar', 'R'=>'Rechazar' ) ) )
             ->getForm();
        
         $deleteForm = $this->createDeleteForm($id);
@@ -176,7 +156,14 @@ class SolicitudesController extends Controller
 
     public function ajaxapruebarechazaAction($datos)
     {
-die;
+
+        $form = $this->createFormBuilder()
+            ->add('justificacion','textarea')
+            ->getForm();          
+
+        return $this->render('TransporteBundle:Solicitudes:ajaxapruebarechaza.html.twig', array(
+            'datos'   => $datos, 
+            'form'    => $form->createView(),            ));
     }
 
 
@@ -238,39 +225,62 @@ die;
      */
     public function updateAction(Request $request, $id)
     {
-   
         $em = $this->getDoctrine()->getManager();
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+
+        $datosform = $request->request->all();
+        $datosform = $datosform['form'];
+
+        $estatus = $datosform['estatus'];
+        $justificacion = $datosform['justificacion'];
+
         $entity = $em->getRepository('TransporteBundle:Solicitudes')->find($id);
+        $editForm = $this->createForm(new SolicitudesType(), $entity);
+        $deleteForm = $this->createDeleteForm($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Solicitudes entity.');
         }
+            
+        $entity->setEstatus($estatus);
+        $entity->setJustificacion($justificacion);
 
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new SolicitudesType(), $entity);
-        $editForm->bind($request);
+        $em->persist($entity);
+        $em->flush();
 
-        if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
-            $this->get('session')->getFlashBag()->add('notice', 'LA SOLICITUD FUE MODIFICADA CON EXITO');
-            return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $id)));
-        }else{
-            $errors = $editForm->getErrors();            
-            if (count($errors)>0){
-                $result['errors'] = array();
-                foreach ($errors as $error) {
-                    $result['errors'][] = $error->getMessage();
-                }
-            }
-            $this->get('session')->getFlashBag()->add('alert', 'ERROR AL VALIDAR FORMULARIO: '.$result['errors'][0]);
-
+     
+        //CORREO
+        $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+        $usuario = $em->getRepository('UsuarioBundle:User')->find($idusuario);
+        
+        
+        if ($estatus=='AP')
+        {
+            $aaa= "Solicitud de transporte - APROBADA";  
+        }elseif($estatus == "R")
+        {
+            $aaa= "Solicitud de transporte - RECHAZADA";     
         }
-        return $this->render('TransporteBundle:Solicitudes:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+
+        $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+        ->setSubject($aaa)
+        ->setTo(array($usuario->getUsername().'@telesurtv.net'))
+        ->setFrom('app_transporte@telesurtv.net')    // we configure the recipient
+        ->setBody( $this->renderView(
+                    'TransporteBundle:Correo:solicitud_transporte.html.twig',
+                    array('perfil' => $perfil,
+                        'solicitud' => $entity,
+                        'status' => $estatus,
+                    )
+                ), 
+        'text/html');
+         $this->get('mailer')->send($message); 
+        //FIN CORREO
+
+        $this->get('session')->getFlashBag()->add('notice', 'LA SOLICITUD FUE MODIFICADA CON EXITO');
+        return $this->redirect($this->generateUrl('solicitudes_show', array('id' => $id)));
+        
     }
     /**
      * Deletes a Solicitudes entity.
