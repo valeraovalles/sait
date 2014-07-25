@@ -1,3 +1,4 @@
+
 <?php
 namespace Frontend\SitBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +13,7 @@ use Frontend\SitBundle\Resources\Misclases\htmlreporte;
 class ReporteController extends Controller
 {
 
-    /**
+     /**
      * Lists all Categoria entities.
      *
      */

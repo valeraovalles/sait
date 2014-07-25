@@ -1,8 +1,167 @@
-
 transporte:
-    pattern:  /
+    pattern:  /index
     defaults: { _controller: "TransporteBundle:Default:index" }
+#SOLICITUDES
+solicitudes:
+    pattern:  /solicitudes
+    defaults: { _controller: "TransporteBundle:Solicitudes:index" }
+
+missolicitudes:
+    pattern:  /mis_solicitudes
+    defaults: { _controller: "TransporteBundle:Solicitudes:missolicitudes" }
+
+solicitudes_por_status:
+    pattern:  /solicitudes/{accion}/filtro
+    defaults: { _controller: "TransporteBundle:Solicitudes:missolicitudes" }
+
+solicitudes_status:
+    pattern:  /solicitudes/{id}/{accion}/status
+    defaults: { _controller: "TransporteBundle:Solicitudes:status" }
+
+solicitudes_ajaxusuarios:
+    pattern:  /solicitudes/{val}/ajaxusuarios
+    defaults: { _controller: TransporteBundle:Solicitudes:ajaxListaUsuarios }
+
+solicitudes_ajaxexternos:
+    pattern:  /solicitudes/{val}/ajaxexternos
+    defaults: { _controller: TransporteBundle:Solicitudes:ajaxListaExternos }
+
+solicitudes_show:
+    pattern:  /solicitudes/{id}/show
+    defaults: { _controller: "TransporteBundle:Solicitudes:show" }
+
+showmissolicitudes:
+    pattern:  /solicitudes/{id}/show/mis_solicitudes
+    defaults: { _controller: "TransporteBundle:Solicitudes:showmissolicitudes" }
 
 
+solicitudes_new:
+    pattern:  /solicitudes/new
+    defaults: { _controller: "TransporteBundle:Solicitudes:new" }
+
+solicitudes_create:
+    pattern:  /solicitudes/create
+    defaults: { _controller: "TransporteBundle:Solicitudes:create" }
+
+solicitudes_edit:
+    pattern:  /solicitudes/{id}/edit
+    defaults: { _controller: "TransporteBundle:Solicitudes:edit" }
+
+solicitudes_update:
+    pattern:  /solicitudes/{id}/update
+    defaults: { _controller: "TransporteBundle:Solicitudes:update" }
+    requirements: { _method: post|put }
+
+solicitudes_delete:
+    pattern:  /solicitudes/{id}/delete
+    defaults: { _controller: "TransporteBundle:Solicitudes:delete" }
+    requirements: { _method: post|delete }
+
+solicitudes_rechazar:
+    pattern:  /solicitudes/{id}/rechazar
+    defaults: { _controller: "TransporteBundle:Solicitudes:rechazar" }
 
 
+#ASIGNACIONES
+asignaciones:
+    pattern:  /asignaciones/index
+    defaults: { _controller: "TransporteBundle:Asignaciones:index" }
+
+asignacionesshow:
+    pattern:  /asignaciones/{id}/show
+    defaults: { _controller: "TransporteBundle:Asignaciones:show" }
+
+asignacionesshowSolicitud:
+    pattern:  /asignaciones/{idSolicitud}/showSolicitud
+    defaults: { _controller: "TransporteBundle:Asignaciones:showSolicitud" }
+
+asignacionesnew:
+    pattern:  /asignaciones/new
+    defaults: { _controller: "TransporteBundle:Asignaciones:new" }
+
+asignacionescreate:
+    pattern:  /asignaciones/create
+    defaults: { _controller: "TransporteBundle:Asignaciones:create" }
+    requirements: { _method: post }
+
+asignacionesedit:
+    pattern:  /asignaciones/{id}/edit
+    defaults: { _controller: "TransporteBundle:Asignaciones:edit" }
+
+asignacionesupdate:
+    pattern:  /asignaciones/{id}/update
+    defaults: { _controller: "TransporteBundle:Asignaciones:update" }
+    requirements: { _method: post|put }
+
+asignacionesdelete:
+    pattern:  /asignaciones/{id}/delete
+    defaults: { _controller: "TransporteBundle:Asignaciones:delete" }
+    requirements: { _method: post|delete }
+
+#PERSONAL EXTERNO
+personalexterno_list:
+    pattern:  /personalexterno
+    defaults: { _controller: "TransporteBundle:personalExterno:index" }
+
+personalexterno_show:
+    pattern:  /personalexterno/{id}/show
+    defaults: { _controller: "TransporteBundle:personalExterno:show" }
+
+personalexterno_new:
+    pattern:  /personalexterno/new
+    defaults: { _controller: "TransporteBundle:personalExterno:new" }
+
+personalexterno_create:
+    pattern:  /personalexterno/create
+    defaults: { _controller: "TransporteBundle:personalExterno:create" }
+    requirements: { _method: post }
+
+personalexterno_edit:
+    pattern:  /personalexterno/{id}/edit
+    defaults: { _controller: "TransporteBundle:personalExterno:edit" }
+
+personalexterno_update:
+    pattern:  /personalexterno/{id}/update
+    defaults: { _controller: "TransporteBundle:personalExterno:update" }
+    requirements: { _method: post|put }
+
+personalexterno_delete:
+    pattern:  /personalexterno/{id}/delete
+    defaults: { _controller: "TransporteBundle:personalExterno:delete" }
+    requirements: { _method: post|delete }
+
+#VEHICULOS
+vehiculos_list: 
+    pattern:  /vehiculos
+    defaults: { _controller: "TransporteBundle:Vehiculos:index" }
+
+transporte_show:
+    pattern:  /vehiculos/{id}/show
+    defaults: { _controller: "TransporteBundle:Vehiculos:show" }
+
+transporte_new:
+    pattern:  /vehiculos/new
+    defaults: { _controller: "TransporteBundle:Vehiculos:new" }
+
+transporte_create:
+    pattern:  /vehiculos/create
+    defaults: { _controller: "TransporteBundle:Vehiculos:create" }
+    requirements: { _method: post }
+
+transporte_edit:
+    pattern:  /vehiculos/{id}/edit
+    defaults: { _controller: "TransporteBundle:Vehiculos:edit" }
+
+transporte_update:
+    pattern:  /vehiculos/{id}/update
+    defaults: { _controller: "TransporteBundle:Vehiculos:update" }
+    requirements: { _method: post|put }
+
+transporte_delete:
+    pattern:  /vehiculos/{id}/delete
+    defaults: { _controller: "TransporteBundle:Vehiculos:delete" }
+    requirements: { _method: post|delete }
+
+ajaxapruebarechaza:
+    pattern: /solicitudes/ajax/{datos}
+    defaults: { _controller: "TransporteBundle:Solicitudes:ajaxapruebarechaza"}
