@@ -26,7 +26,7 @@ class SolicitudesType extends AbstractType
             ->add('direccionHasta','textarea')
             ->add('descripcionEquipos','textarea')
             ->add('datosInteresRazon','textarea')             
-            ->add('justificacionRechazo','textarea',array('required'  => false));
+            ->add('justificacion','textarea',array('required'  => false));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

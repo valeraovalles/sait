@@ -1,110 +1,94 @@
 {% extends '::transporte.html.twig' %}
+ 
+{% block title %}Detalle de Solicitud{% endblock %}
 
-{% block title %}Transporte{% endblock %}
-
-{% block titulobanner %}
-    TRANSPORTE
+{% block titulo %}
+    DETALLE DE SOLICITUD
 {% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("solicitudes") }}">LISTADO DE MIS SOLICITUDES</a></li>
+  <li class="active">DETALLE DE SOLICITUD</li>
+</ol>
+{% endblock %}
+
 
 {% block body -%}
     {{ parent() }}
-    
-    <div class="titulo">TRANSPORTE -  DETALLE DE SOLICITUD</div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
+    <div class="formShow"> 
+        <div class="contenedorform">
+            <div class="labelform">Asistentes</div>
+            <div class="widgetform">{{ entity.asistentes }}</div>
         </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
+        <div class="contenedorform">
+            <div class="labelform">Fecha de Solicitud</div>
+            <div class="widgetform">{{ entity.fechaSolicitud|date('d-m-Y') }}</div>
         </div>
-    {% endfor %}
-
-
- <div class="formShow">
-
-    <table class="record_properties">
-        <tbody>
-            <div class="contenedorform">
-                <div class="labelform">Id</div>
-                <div class="widgetform">{{ entity.id }}</div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha de Salida</div>
+            <div class="widgetform">{{ entity.fechaSalida|date('d-m-Y') }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Hora de Salida</div>
+            <div class="widgetform">{{ entity.horaSalida|date('G:i:s') }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Direccion Desde</div>
+            <div class="widgetform">{{ entity.direccionDesde }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Direccion Hasta</div>
+            <div class="widgetform">{{ entity.direccionHasta }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Equipos/Implementos</div>
+            <div class="widgetform">{{ entity.descripcionEquipos }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Motivo de la Solicitud</div>
+            <div class="widgetform">{{ entity.datosInteresRazon }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Estatus Actual</div>
+            <div class="widgetform">
+                {% if entity.estatus=="N" %}
+                    <td><a class="label label-info" href="#">Nueva</a></td>
+                {% elseif entity.estatus=="AP" %}
+                    <td><a class="label label-success" href="#">Aprobada</a></td>
+                {% elseif entity.estatus=="R" %}
+                    <td><a class="label label-danger" href="#">Rechazada</a></td>
+                {% endif %}
             </div>
+        </div>
+        {% if  entity.justificacion %}
             <div class="contenedorform">
-                <div class="labelform">Asistentes</div>
-                <div class="widgetform">{{ entity.asistentes }}</div>
+                <div class="labelform">Justificación</div>
+                <div class="widgetform">{{ entity.justificacion }}</div>
             </div>
-            <div class="contenedorform">
-                <div class="labelform">Fecha de Solicitud</div>
-                <div class="widgetform">{{ entity.fechaSolicitud|date('d-m-Y') }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Fecha de Salida</div>
-                <div class="widgetform">{{ entity.fechaSalida|date('d-m-Y') }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Hora de Salida</div>
-                <div class="widgetform">{{ entity.horaSalida|date('G:i:s') }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Direccion Desde</div>
-                <div class="widgetform">{{ entity.direccionDesde }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Direccion Hasta</div>
-                <div class="widgetform">{{ entity.direccionHasta }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Equipos/Implementos</div>
-                <div class="widgetform">{{ entity.descripcionEquipos }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Motivo de la Solicitud</div>
-                <div class="widgetform">{{ entity.datosInteresRazon }}</div>
-            </div>
-            {% if  entity.justificacionRechazo %}
-            <div class="contenedorform">
-                <div class="labelform">Justificación de Rechazo</div>
-                <div class="widgetform">{{ entity.justificacionRechazo }}</div>
-            </div>
-            {% endif %}
-            <div class="contenedorform">
-                <div class="labelform">Estatus</div>
-                <div class="widgetform">
-                    {% if entity.estatus=="N" %} Nueva {% endif %}
-                    {% if entity.estatus=="A" %} Asignada {% endif %}
-                    {% if entity.estatus=="AP" %} Aprobada {% endif %}
-                    {% if entity.estatus=="C" %} Culminada {% endif %}
-                    {% if entity.estatus=="R" %} Rechazada {% endif %}
+        {% endif %}        
+        {% if entity.estatus=="N" %}
+            <form action="{{ path('solicitudes_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}<br>
+                <div class="contenedorform">
+                    <div class="labelform" style="width:35%;">Administrar:</div>
+                    <div class="widgetform">{{ form_widget(form.estatus) }}</div>
                 </div>
-            </div>
-        </tbody>
-    </table>
-</div>
-    <ul class="record_actions">
-    <li>
-        <a class="btn" href="{{ path('solicitudes') }}">IR AL LISTADO</a> | 
-        {% if entity.estatus=="N" %} 
-        <a href="{{ path('solicitudes_edit', {'id': entity.id }) }}">
-            <button class="btn btn-primary" type="button">EDITAR</button> | 
-        </a>
+                <div id="muestra"></div>
+            </form>
         {% endif %}
-        {% if entity.estatus=="AP" or entity.estatus=="C" %} 
-        <a href="{{ path('asignaciones_showSolicitud', {'idSolicitud': entity.id }) }}">
-            <button class="btn btn-secundary" type="button">ASIGNACION</button> 
-        </a>
-        {% endif %}
-    </li>
-    {#
-    <li>
-        <form action="{{ path('solicitudes_delete', { 'id': entity.id }) }}" metdod="post">
-            <input type="hidden" name="_metdod" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-    #}
-    </ul>
+    </div>
+    <br>
+    <a class="btn btn-default" href="{{ path('solicitudes') }}">IR A LA LISTA</a><br><br>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_estatus').change(function(){
+                var dato = $("#form_estatus").val();
+                var ruta = "{{ path('ajaxapruebarechaza', {'datos': 'variable'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#muestra').load(ruta);
+            });
+        });
+    </script>
 {% endblock %}

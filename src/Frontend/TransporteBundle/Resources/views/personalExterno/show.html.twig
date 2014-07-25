@@ -1,66 +1,38 @@
 {% extends '::transporte.html.twig' %}
+ 
+{% block title %}Detalle de Personal Externo{% endblock %}
 
-{% block title %}Transporte{% endblock %}
+{% block titulo %}
+    DETALLE DE PERSONAL EXTERNO
+{% endblock %}
 
-{% block titulobanner %}
-    TRANSPORTE
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("personalexterno_list") }}">LISTADO PERSONAL EXTERNO</a></li>
+  <li class="active">DETALLE DE PERSONAL EXTERNO</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
-    
-    <div class="titulo">TRANSPORTE -  DETALLE PERSONAL EXTERNO</div>
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
+    <div class="formShow">       
+        <div class="contenedorform">
+            <div class="labelform">Cédula:</div>
+            <div class="widgetform">{{ entity.cedula }}</div>
         </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
+        <div class="contenedorform">
+            <div class="labelform">Nombre y Apellido:</div>
+            <div class="widgetform">{{ entity.nombre|upper }}</div>
         </div>
-    {% endfor %}
- <div class="formShow">
+        <div class="contenedorform">
+            <div class="labelform">Teléfono:</div>
+            <div class="widgetform">{{ entity.telefono }}</div>
+        </div>
+    </div>
 
-    <table class="record_properties" width="60%" align="center">
-        <tbody>    
-            <div class="contenedorform">
-                <div class="labelform">ID:</div>
-                <div class="widgetform">{{ entity.id }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Cédula:</div>
-                <div class="widgetform">{{ entity.cedula }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Nombre y Apellido:</div>
-                <div class="widgetform">{{ entity.nombre|upper }}</div>
-            </div>
-            <div class="contenedorform">
-                <div class="labelform">Teléfono:</div>
-                <div class="widgetform">{{ entity.telefono }}</div>
-            </div>
+    <br><br>
+    <a class="btn btn-default" href="{{ path('personalexterno_list') }}">IR A LA LISTA</a> |
+    <a class="btn btn-default" href="{{ path('personalexterno_edit', { 'id': entity.id }) }}">IR A EDITAR</a><br><br>
 
-        </tbody>
-    </table>
-    <br>
-    <ul class="record_actions">
-    <li>
-        <a class="btn" href="{{ path('personalexterno_list') }}">IR AL LISTADO</a> | 
-        <a href="{{ path('personalexterno_edit', { 'id': entity.id }) }}">
-            <button class="btn btn-primary" type="button">EDITAR</button> 
-        </a>
-    </li>
-    {#
-    <li>
-        <form action="{{ path('personalexterno_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-    #}
-    </ul>
-</div>
 {% endblock %}
