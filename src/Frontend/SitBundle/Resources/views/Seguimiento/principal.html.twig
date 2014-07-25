@@ -47,33 +47,44 @@
                 </tr>
               </thead>
               <tbody>
-          {% for s in seguimiento %}
-              <tr>
-                  <td>{{ s.id }}</td>
-                  <td>{{ s.fecha|date('d-m-Y G:i:s') }}</td>
-                  <td style="text-align: justify;">
-                        {{ s.evento|raw }}
-                        {% if s.archivo!='' %}
-                            {% set ext=s.archivo|split('.') %}
-                            {% if ext[1]=='pdf' %}
-                                <a href="{{ asset('uploads/sit/') }}{{ s.archivo }}">Descarga</a>
-                            {% else %}
-                                <a href="/sait/web/libs/scripts/forzardescarga.php?archivo={{ s.archivo }}&ruta=../../uploads/sit/"><img width="80px" class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ s.archivo }}"></a>
-                            {% endif%}
-                        {% endif %}
-                  </td>
-                  <td>{% if s.tipo=='e' %}<span class="label label-info">Email</span>{% elseif s.tipo=='c' %}<span class="label label-success">Comentario</span>{% endif %}</td>
-                  <td>{{ s.responsable.primerNombre }} {{ s.responsable.primerApellido }}</td>
-              </tr>
-          {% endfor %}
+                {% for s in seguimiento %}
+                    <tr>
+                        <td>{{ s.id }}</td>
+                        <td>{{ s.fecha|date('d-m-Y G:i:s') }}</td>
+                        <td style="text-align: justify;">
+                              {{ s.evento|raw }}
+                              {% if s.archivo!='' %}
+                                  {% set ext=s.archivo|split('.') %}
+                                  {% if ext[1]=='pdf' %}
+                                      <a href="{{ asset('uploads/sit/') }}{{ s.archivo }}">Descarga</a>
+                                  {% else %}
+                                      <a href="/sait/web/libs/scripts/forzardescarga.php?archivo={{ s.archivo }}&ruta=../../uploads/sit/"><img width="80px" class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ s.archivo }}"></a>
+                                  {% endif%}
+                              {% endif %}
+                        </td>
+                        <td>{% if s.tipo=='e' %}<span class="label label-info">Email</span>{% elseif s.tipo=='c' %}<span class="label label-success">Comentario</span>{% endif %}</td>
+                        <td>{{ s.responsable.primerNombre }} {{ s.responsable.primerApellido }}</td>
+                    </tr>
+                {% endfor %}
               </tbody>
           </table>
 
     <br><br><br><br>
-    <a href="{{ path('ticket') }}" class="btn btn-default">IR AL LISTADO</a> {% if ticket.estatus!=6 %}| 
-    <a href="#" class="btn btn-info" data-toggle="modal" data-target="#correo">ENVIAR CORREO</a> | 
-    <a href="#" class="btn btn-info" data-toggle="modal" data-target="#comentario">REALIZAR UN COMENTARIO</a> | 
-    <a href="{{ path('sit_cerrarseguimiento',{'idticket':ticket.id}) }}" class="btn btn-danger">CERRAR SEGUIMIENTO</a>{% endif %}
+    {% if is_granted('ROLE_SIT_ADMINISTRADOR')%}
+      <a href="{{ path('ticket') }}" class="btn btn-default">IR AL LISTADO</a> 
+    {% endif %}
+
+    {% if ticket.estatus!=6 %}
+      {% if is_granted('ROLE_SIT_ADMINISTRADOR')%}| 
+        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#correo">ENVIAR CORREO</a> | 
+      {% endif %}
+
+      <a href="#" class="btn btn-info" data-toggle="modal" data-target="#comentario">REALIZAR UN COMENTARIO</a> 
+
+      {% if is_granted('ROLE_SIT_ADMINISTRADOR')%}| 
+        <a href="{{ path('sit_cerrarseguimiento',{'idticket':ticket.id}) }}" class="btn btn-danger">CERRAR SEGUIMIENTO</a>
+      {% endif %}
+    {% endif %}
     <br>
     
     <script type="text/javascript">
@@ -84,4 +95,5 @@
             } );
         })
     </script>
+    <br><br>
 {% endblock %}

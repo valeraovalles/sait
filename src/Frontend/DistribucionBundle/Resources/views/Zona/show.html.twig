@@ -1,16 +1,23 @@
 {% extends '::distribucion.html.twig' %}
 
-{% block title %}DISTRIBUCIÓN{% endblock %}
+{% block title %}Consultar Zona{% endblock %}
 
-{% block titulobanner %}
-    TIPO DE OPERADOR - CONSULTA
+{% block titulo %}
+    CONSULTA DE ZONA
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li><a href="{{ path("zona") }}">LISTA DE ZONAS</a></li>
+  <li class="active">CONSULTA DE ZONA</li>
+</ol>
 {% endblock %}
 
 {% block body %}
 
 {{ parent() }}
-
-    <div class="titulo">CONSULTA DE ZONA</div>
 
     <div class="formShow">
 
@@ -31,16 +38,16 @@
         <form action="{{ path('zona_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
-            <button class="btn-danger" type="submit">Borrar</button>
+            <button class="btn btn-danger" type="submit">BORRAR</button>
         </form>
 
 
-        <a class="btn" href="{{ path('zona_edit', { 'id': entity.id }) }}">
-            Ir a Editar
+        <a class="btn btn-default" href="{{ path('zona_edit', { 'id': entity.id }) }}">
+            IR A EDITAR
         </a>
         |{% endif %}
-        <a class="btn" href="{{ path('zona') }}">
-            Ir a la lista
+        <a class="btn btn-default" href="{{ path('zona') }}">
+            IR A LA LISTA
         </a> 
 
         <br><br>

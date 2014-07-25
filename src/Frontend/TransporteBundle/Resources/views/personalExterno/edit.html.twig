@@ -1,0 +1,44 @@
+{% extends '::transporte.html.twig' %}
+ 
+{% block title %}Editar de Personal Externo{% endblock %}
+
+{% block titulo %}
+    EDITAR PERSONAL EXTERNO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("personalexterno_list") }}">LISTADO PERSONAL EXTERNO</a></li>
+  <li class="active">EDITAR PERSONAL EXTERNO</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <form action="{{ path('personalexterno_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
+        <input type="hidden" name="_method" value="PUT" />
+        <div class="formShow">  
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(edit_form.cedula) }}</div>                    
+                <div class="labelform">C&eacute;dula:</div>
+                <div class="widgetform">{{ form_widget(edit_form.cedula) }}</div>
+            </div> 
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(edit_form.nombre) }}</div>                    
+                <div class="labelform">Nombre y Apellido:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nombre, {'attr':{'class':'txtMay'}})}}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(edit_form.telefono) }}</div>
+                <div class="labelform">Teléfono:</div>
+                <div class="widgetform">{{ form_widget(edit_form.telefono) }}</div>
+            </div>
+        </div><br>
+    <BR><button class="btn btn-primary" type="submit">EDITAR</button> | 
+            <a class="btn btn-default" href="{{ path('personalexterno_list') }}">IR A LA LISTA</a> | 
+            <a class="btn btn-default" href="{{ path('personalexterno_show', { 'id': entity.id }) }}">IR A CONSULTAR</a>
+    </form>
+
+{% endblock %}

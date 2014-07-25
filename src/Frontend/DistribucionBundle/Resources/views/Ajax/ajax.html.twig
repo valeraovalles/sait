@@ -1,55 +1,55 @@
 {% if mostrar=='tipooperador' %}
-    <div class="form-contenedor">
-        <div class="labels">Tipo Operador:</div>
-		<div class="widgets">{{ form_widget(form.tipooperador) }}</div>
+    <div class="contenedorform">
+        <div class="labelform" style="width:30%">Tipo Operador:</div>
+		<div class="widgetform">{{ form_widget(form.tipooperador,{'attr':{'style':'width:70%;height:80px;'}}) }}</div>
     </div>
     <div id="operador"></div>
 {% endif %}
 
 {% if mostrar=='operador' %}
-    <div class="form-contenedor">
-        <div class="labels">Operador:</div>
-        <div class="widgets">{{ form_widget(form.operador) }}</div>
+    <div class="contenedorform">
+        <div class="labelform" style="width:30%">Operador:</div>
+        <div class="widgetform">{{ form_widget(form.operador,{'attr':{'style':'width:70%;'}}) }}</div>
     </div>
     <div id="fechadesde"></div>
 {% endif %}
 
 {% if mostrar=='fechadesde' %}
-    <div class="form-contenedor">
-        <div class="labels">Fecha desde:</div>
-        <div class="widgets">{{ form_widget(form.fechadesde) }}</div>
+    <div class="contenedorform">
+        <div class="labelform" style="width:30%">Fecha desde:</div>
+        <div class="widgetform">{{ form_widget(form.fechadesde,{'attr':{'style':'width:40%;'}}) }}</div>
     </div>
     <div id="fechahasta"></div>
 {% endif %}
 
 {% if mostrar=='fechahasta' %}
-    <div class="form-contenedor">
-        <div class="labels">Fecha hasta:</div>
-        <div class="widgets">{{ form_widget(form.fechahasta) }}</div>
+    <div class="contenedorform">
+        <div class="labelform" style="width:30%">Fecha hasta:</div>
+        <div class="widgetform">{{ form_widget(form.fechahasta,{'attr':{'style':'width:40%;'}}) }}</div>
     </div>
     <div id="formato"></div>
 {% endif %}
 
 
 {% if mostrar=='formato' %}
-    <div class="form-contenedor">
-        <div class="labels">Formato:</div>
-        <div class="widgets">{{ form_widget(form.formato) }}</div>
+    <div class="contenedorform">
+        <div class="labelform" style="width:30%">Formato:</div>
+        <div class="widgetform">{{ form_widget(form.formato,{'attr':{'style':'width:40%;'}}) }}</div>
     </div>
     <div id="botones"></div>
 {% endif %}
 
 {% if mostrar=='botones' %}
         <br>
-        <button class="btn" type="submit">Generar</button> | 
+        <button class="btn btn-primary" type="submit">GENERAR</button> | 
 
-        <a class="btn" href="{{ path('distribucion_homepage') }}">Ir al inicio</a>
+        <a class="btn btn-default" href="{{ path('distribucion_homepage') }}">IR AL INICIO</a>
 {% endif %}
 
 {% if mostrar=='aniomes' %}
-    <div class="form-contenedor">
-        <div class="labels">Fecha hasta:</div>
-        <div class="widgets">{{ form_widget(form) }}</div>
+    <div class="contenedorform">
+        <div class="labelform">Fecha hasta:</div>
+        <div class="widgetform">{{ form_widget(form) }}</div>
     </div>
     <div id="formato"></div>
 {% endif %}
@@ -93,3 +93,18 @@
         });
     });
 </script>
+
+  <script>
+      $(function() {
+        $( "#form_fechadesde" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+        $( "#form_fechahasta" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "dd-mm-yy",
+        });
+      });
+  </script>

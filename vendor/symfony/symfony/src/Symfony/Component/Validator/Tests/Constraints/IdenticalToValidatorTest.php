@@ -13,7 +13,6 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 
 use Symfony\Component\Validator\Constraints\IdenticalTo;
 use Symfony\Component\Validator\Constraints\IdenticalToValidator;
-use Symfony\Component\Validator\Tests\Constraints\AbstractComparisonValidatorTestCase;
 
 /**
  * @author Daniel Holmes <daniel@danielholmes.org>
@@ -31,7 +30,7 @@ class IdenticalToValidatorTest extends AbstractComparisonValidatorTestCase
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function provideValidComparisons()
     {
@@ -40,12 +39,13 @@ class IdenticalToValidatorTest extends AbstractComparisonValidatorTestCase
         return array(
             array(3, 3),
             array('a', 'a'),
-            array($date, $date)
+            array($date, $date),
+            array(null, 1),
         );
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function provideInvalidComparisons()
     {

@@ -1,0 +1,62 @@
+{% extends '::transporte.html.twig' %}
+
+{% block title %}Transporte{% endblock %}
+
+{% block titulobanner %}
+    TRANSPORTE
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">TRANSPORTE -  DETALLE DE ASIGNACION</div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+
+ <div class="formShow">
+
+    <table class="record_properties">
+        <tbody>
+            <div class="contenedorform">
+                <div class="labelform">Id</div>
+                <div class="widgetform">{{ entity.id }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Solicitud</div>
+                <div class="widgetform">{{ entity.idSolicitud }}</div>
+            </div>            
+            <div class="contenedorform">
+                <div class="labelform">Fecha Asignacion</div>
+                <div class="widgetform">{{ entity.fechaAsignacion|date('Y-m-d H:i:s') }}</div>
+            </div> 
+            <div class="contenedorform">
+                <div class="labelform">Vehiculo</div>
+                <div class="widgetform">{{ entity.idVehiculo}}</div>
+            </div>
+        </tbody>
+    </table>
+</div>
+
+        <ul class="record_actions">
+
+    <li>
+        <a class="btn" href="{{ path('asignaciones') }}">IR AL LISTADO</a> | 
+        <a href="{{ path('asignaciones_edit', {'id': entity.id }) }}">
+            <button class="btn btn-primary" type="button">EDITAR</button> 
+        </a>
+
+    </li>
+
+</ul>
+{% endblock %}

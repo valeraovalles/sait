@@ -32,12 +32,12 @@ class TicketController extends Controller
 
         $tickets = $em->getRepository('SitBundle:Ticket')->tickets();
 
-        $dql = "select t from SitBundle:Ticket t where t.estatus!=4 and t.estatus!=3 order by  t.estatus ASC, t.fechasolicitud DESC, t.horasolicitud DESC";
+        $dql = "select t from SitBundle:Ticket t where t.estatus!=6 and t.estatus!=4 and t.estatus!=3 order by  t.estatus ASC, t.fechasolicitud DESC, t.horasolicitud DESC";
         $query = $em->createQuery($dql);
         $tickets = $query->getResult();
 
         //cuento la cantidad de tickets por unidad
-        $nuevos=0;$asignados=0;
+        $nuevos=0;$asignados=0;$seguimiento=0;
 
 
         foreach ($tickets as $t){ 
@@ -45,6 +45,8 @@ class TicketController extends Controller
                     $nuevos=$nuevos+1;
                 else if($t->getEstatus()=='2')
                     $asignados=$asignados+1;
+                else if ($t->getEstatus() == '5')
+                    $seguimiento=$seguimiento+1;
             
         }
         //FIN
@@ -52,7 +54,8 @@ class TicketController extends Controller
         return $this->render('SitBundle:Ticket:general.html.twig', array(
             'entities' => $tickets,
             'nuevos'=> $nuevos,
-            'asignados'=> $asignados
+            'asignados'=> $asignados,
+            'seguimiento' => $seguimiento
         ));
     }
 
@@ -64,7 +67,7 @@ class TicketController extends Controller
             "Buenas noches","el presente es para","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
             "urgente","esto con caracter de urgencia","con caracter de urgencia","Se agradece su valiosa colaboracion","carmen",
             "buenas tardes el motivo es para","el motivo es para","el motivo es para","por su colaboracion","por su colaboración","buen dia","Buenos tardes","camaradas","los molesto para",
-            "por el presente","estimados","....","Buenas tardes:"
+            "por el presente","estimados","....","Buenas tardes:","Hola Johan", "Mil Gracias por tu colaboración", "Mil Gracias por tu colaboración."
         );
 
         $solicitud=str_replace($eliminar, array(), $solicitud);
@@ -145,7 +148,7 @@ class TicketController extends Controller
         //$ticket->getSolicitante()->getUser()->getUsername();
         $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
         ->setSubject('Sit-Cerrado')     // we configure the title
-        ->setFrom('sit@telesurtv.net')     // we configure the sender
+        ->setFrom($ticket->getUnidad()->getCorreo())     // we configure the sender
         ->setTo(array($ticket->getUnidad()->getCorreo(),$ticket->getSolicitante()->getUser()->getUsername().'@telesurtv.net'))    // we configure the recipient
         ->setBody( $this->renderView(
                 'SitBundle:Correo:solucion.html.twig',
@@ -274,7 +277,7 @@ class TicketController extends Controller
             //CORREO
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Asignado')     // we configure the title
-            ->setFrom('sit@telesurtv.net')     // we configure the sender
+            ->setFrom('aplicaciones@telesurtv.net')     // we configure the sender
             ->setTo($user->getUser()->getUsername().'@telesurtv.net')     // we configure the recipient
             ->setBody( $this->renderView(
                     'SitBundle:Correo:asignado.html.twig',
@@ -331,7 +334,7 @@ class TicketController extends Controller
 
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Reasignado')     // we configure the title
-            ->setFrom('sit@telesurtv.net')     // we configure the sender
+            ->setFrom('aplicaciones@telesurtv.net')     // we configure the sender
             ->setTo($unidad->getCorreo())     // we configure the recipient
             ->setBody( $this->renderView(
                     'SitBundle:Correo:reasignado.html.twig',
@@ -552,20 +555,6 @@ class TicketController extends Controller
                 $extension=$nombre[1];
                 $nombre=$nombre[0];
 
-                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf','zip','rar','JPG','PNG');
-         
-                //valido las extensiones
-                if (in_array($extension,$extensiones)==false) {
-                    $this->get('session')->getFlashBag()->add('alert', 'El formato de archivo que intenta subir no está permitido.');
-
-                    return $this->render('SitBundle:Default:index.html.twig', array(
-                        'form'   => $form->createView(),
-                        'form2'   => $form2->createView(),
-                        'ticketusuario'=>$ticketusuario,
-                        'datosusuario'=>$datosusuario
-                    ));
-                }
-                
                 $nombre=str_replace(array(" ","/",".","_","-"),array("","","","",""),trim($nombre));
 
                 //GUARDO EL ARCHIVO
@@ -598,7 +587,7 @@ class TicketController extends Controller
 
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Sit-Solicitud')     // we configure the title
-            ->setFrom('sit@telesurtv.net')     // we configure the sender
+            ->setFrom($datosusuario->getUser()->getUsername().'@telesurtv.net')     // we configure the sender
             ->setTo($unidad->getCorreo())     // we configure the recipient
             ->setBody( $this->renderView(
                     'SitBundle:Correo:solicitud.html.twig',

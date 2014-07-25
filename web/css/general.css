@@ -6,157 +6,112 @@ Description            :
 Purpose of the stylesheet follows.
 */
 
+
+
+
+*{
+	font-size:14px;
+	font-family: arial;
+}
+
 body{
-background-color       :#efefef;
-margin-top             :0;
-font-family            :"Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size              :12px;
-font-family            :VERDANA;
-/*color                :#010341;*/
-color                  :black;
-line-height            :20px;
+	background-color       :#efefef;
+	margin-top             :0;
+	font-size              :12px;
+	color                  :black;
 
 }
+
 .contenedorprincipal{
-	width: 900px;
+    background-color       :white;
+    width:                  90%;
+    max-width: 1100px;
+    box-shadow: 0px 2px 0px 2px #999;
 }
 
 
-#contenedor{
-background-color       :white;
-width                  :900px;
-box-shadow: 0px 2px 0px 2px #999;
-
-
-
-}
-
-#banner{
-width                  :900px;
-height                 :128px;
-}
-
-.titulo{
-text-align             :center;
-font-weight            :bold;
-padding-right          :20px;
-padding-top            :35px;
-font-size              :20px;
-margin-bottom          :20px;
-}
-
-
-label{
-font-weight            :bold;
-}
 
 .pie{
 	background-color       :#082683;
 	/*background-color: maroon;*/
-	font-size              :10px;
+	font-size              :12px;
 	padding                :3px;
 	color                  :white;
 	font-weight            :bold;
 	box-shadow			   : 0px 2px 0px 2px #999;
 }
 
-
-.alert{
-margin                 :5px 0 5px 0;
-background-color       :#fef780;
-color                  :red;
-
+.ubicacion{
+	text-align: left;
+	font-weight: bold;
+	padding-top: 10px;
+	font-size: 10px;
 }
 
+.titulo{
+	padding-bottom: 15px;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.menubootstrap{
+	margin-top: -5px;
+}
+
+.menubootstrap li a{
+	font-size: 13px;
+}
+
+#tabladatatable{
+	width: 97%;
+}
+
+#tabladatatable td{
+	padding: 8px;
+}
+
+
 input[type='text']{
-width                  :180px;
+	width                  :180px;
 }
 
 input[type='password']{
-width                  :180px;
-}
-
-.titulo-banner{
-	color: white;
-    margin-top:         -30px;
-    text-align:         left;
-    padding-left:       116px;
-    font-weight:        bold;
+	width                  :180px;
 }
 
 a{
-color                  :#010341;
-text-decoration        :none;
+	color                  :#010341;
+	text-decoration        :none;
 }
 
 a                      :hover{
-color                  :blue;
-text-decoration        :underline;
+	color                  :blue;
+	text-decoration        :underline;
 }
 
 /* LISTADO DE APLICACIONES */
-.listado_aplicaciones{
-float                  :left;
-width                  :200px;
-height                 :130px;
-text-align             :center;
-margin-left            :73px;
+
+.row .col-md-4{
+	margin-bottom: 20px;
+}
+.row img{
+	height               :75px;
 }
 
-.listado_aplicaciones:hover{
-float                :left;
-width                :200px;
-height               :130px;
-text-align           :center;
-margin-left          :73px;
-background-color     :#F4F7FC;
+.infousuario div{
+	margin-bottom: 10px;
 }
 
-.listado_aplicaciones:hover img{
-height               :90px;
-}
-
-.listado_aplicaciones img{
-height               :75px;
-}
-
-.listado_aplicaciones a{
-color                :#154E8A;
-font-size            :16px;
+.infousuario *{
+		font-size: 12px;
 }
 /* FIN LISTADO DE APLICACIONES */
-
-/* FORMULARIOS NEW */
-.form-contenedor .labels{
-float                  :left;
-height                 :auto;
-width                  :40%;
-text-align             :right;
-padding-right          :10px;
-font-weight            :bold;
-}
-
-.form-contenedor{
-margin-bottom          :5px;
-}
-
-.form-contenedor .widgets{
-height                 :auto;
-text-align             :left;
-}
-
-.form-contenedor ul{
-text-align             :center;   
-color                  :red;
-font-weight            :bold;
-}
-/* FIN FORMULARIOS NEW */
 
 /* FORMULARIOS */
 
 	.formShow{
 		border:1px solid gray ;
-		width: 60%;
+		width: 70%;
 		padding: 20px;
 		margin-bottom: 10px;
 		border:5px outset;
@@ -173,8 +128,12 @@ font-weight            :bold;
 		width: 200px;
 	}
 
-	.formShow .contenedorform input[type="checkbox"]{
-		margin-bottom: 10px;
+	.formShow .contenedorform input[type="url"]{
+		width: 200px;
+	}
+
+	.formShow .contenedorform input[type="email"]{
+		width: 200px;
 	}
 
 	.formShow textarea{
@@ -214,41 +173,6 @@ li{
 list-style             :none;
 }
 
-.cienpx{
-width                  :100px;
-}
-
-.dospx{
-width                  :200px
-}
-
-.trespx{
-width                  :300px
-}
-
-.cuatropx{
-width                  :400px
-}
-
-.cincopx{
-width                  :500px
-}
-
-.seispx{
-width                  :600px
-}
-
-.sietepx{
-width                  :700px
-}
-
-.ochopx{
-width                  :800px
-}
-
-.nuevepx{
-width                  :900px
-}
 
 img{
 
@@ -305,52 +229,8 @@ height                 :120px;
 }
 
 
-.divisor{
-
-margin-top             :10px;
-margin-bottom          :10px;
-font-weight            :bold;
-text-decoration        :underline;
-font-size              :14px;
-cursor                 :pointer;
-
-}
-
-.records_list{
-width                  :800px;
-font-size              :12px;
-}
-
-.records_list th{
-text-align             :left;
-background-color       :#0fa1e0; 
-}
-
-.records_list td{
-text-align             :left;
-border                 :1px solid #0fa1e0;
-}
-
-.Redflash-notice{
-color                  :red;
-background-color       :#fffbeb;
-margin-bottom          :5px;
-}
-
-.Greenflash-notice{
-color                  :green;
-background-color       :#fffbeb;
-margin-bottom          :5px;
-}
-
-.help-inline{
-color                  :red
-margin-bottom          :5px;
-
-}
-
 #administracion_usuariobundle_usertype_rol label{
-	font-size: 12px;
+	display: block;
 }
 
 
@@ -360,5 +240,12 @@ margin-bottom          :5px;
 	padding: 0px;
 	margin: 0px;
 }
+
+
+.errores{
+    text-align: left;
+    width: 800px;
+}
+
 
 

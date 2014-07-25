@@ -1,10 +1,24 @@
 {% extends '::directorio.html.twig' %}
 
+{% block title %}Nueva Personalidad{% endblock %}
+
+{% block titulo %}
+    NUEVA PERSONALIDAD
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("directorio_homepage") }}">DIRECTORIO INICIO</a></li>
+  <li><a href="{{ path("personalidad") }}">LISTA DE PERSONALIDADES</a></li>
+  <li class="active">NUEVA PERSONALIDAD</li>
+
+</ol>
+{% endblock %}
+
+
 {% block body -%}
     {{parent()}}
-<BR><BR>
-    <h1>NUEVA PERSONALIDAD</h1>
-    <br><br>
 
     <form action="{{ path('personalidad_create') }}" method="post" {{ form_enctype(form) }} novalidate>
         {{ form_widget(form._token) }}
@@ -56,17 +70,24 @@
                     <div class="labelform">Ciudad:</div>
                     <div class="widgetform">{{ form_widget(form.ciudad) }}</div>
                 </div>
+
+
+                <div class="contenedorform">
+                    <div class="text-danger">
+                        <li>
+                            {{ form_errors(form.file) }}
+                        </li>
+                    </div>
+                    <div class="labelform">Archivo:</div>
+                    <div class="widgetform">
+                        {{ form_widget(form.file) }}
+                    </div>
+                </div>
+
             </div>
 
                 <br><br>
-
-        <button type="submit" class="btn btn-primary">CREAR PERSONALIDAD</button> | 
-        <a class="btn" href="{{ path('personalidad') }}">IR AL LISTADO</a>
-
+            <button class="btn btn-primary" type="submit">CREAR</button> |
+        <a class="btn btn-default" href="{{ path('personalidad') }}">VOLVER</a>
     </form>
-
-        
-
 {% endblock %}
-
-

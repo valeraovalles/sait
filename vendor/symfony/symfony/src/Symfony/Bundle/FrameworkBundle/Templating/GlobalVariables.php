@@ -26,6 +26,9 @@ class GlobalVariables
 {
     protected $container;
 
+    /**
+     * @param ContainerInterface $container The DI container
+     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
@@ -46,7 +49,7 @@ class GlobalVariables
     /**
      * Returns the current user.
      *
-     * @return mixed|void
+     * @return mixed
      *
      * @see TokenInterface::getUser()
      */
@@ -71,7 +74,7 @@ class GlobalVariables
     /**
      * Returns the current request.
      *
-     * @return Request|null The http request object
+     * @return Request|null The HTTP request object
      */
     public function getRequest()
     {
@@ -105,10 +108,10 @@ class GlobalVariables
     /**
      * Returns the current app debug mode.
      *
-     * @return Boolean The current debug mode
+     * @return bool    The current debug mode
      */
     public function getDebug()
     {
-        return (Boolean) $this->container->getParameter('kernel.debug');
+        return (bool) $this->container->getParameter('kernel.debug');
     }
 }

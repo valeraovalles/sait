@@ -1,0 +1,55 @@
+{% extends '::transporte.html.twig' %}
+ 
+{% block title %}Editar de Vehiculos {% endblock %}
+{% block titulo %}
+    EDITAR VEHICULO
+{% endblock %}
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("vehiculos_list") }}">LISTADO DE VEHICULOS</a></li>
+  <li class="active">EDITAR VEHICULO</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <form action="{{ path('transporte_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
+        <input type="hidden" name="_method" value="PUT" />
+        <div class="formShow">  
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(edit_form.tipo) }}</div>
+                <div class="labelform">Tipo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.tipo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(edit_form.placa) }}</div>
+                <div class="labelform">Placa:</div>
+                <div class="widgetform">{{ form_widget(edit_form.placa) }}</div>
+            </div>        
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(edit_form.modelo) }}</div>
+                <div class="labelform">Modelo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.modelo) }}</div>
+            </div>        
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(edit_form.ano) }}</div>
+                <div class="labelform">Año:</div>
+                <div class="widgetform">{{ form_widget(edit_form.ano) }}</div>
+            </div>        
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(edit_form.color) }}</div>
+                <div class="labelform">Color:</div>
+                <div class="widgetform">{{ form_widget(edit_form.color) }}</div>
+            </div>        
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(edit_form.estatus) }}</div>
+                <div class="labelform">Estatus:</div>
+                <div class="widgetform">{{ form_widget(edit_form.estatus) }}</div>
+            </div>   
+            <br><button class="btn btn-primary" type="submit">EDITAR</button> | 
+            <a class="btn btn-default" href="{{ path('vehiculos_list') }}">IR A LA LISTA</a> | 
+            <a class="btn btn-default" href="{{ path('transporte_show', { 'id': entity.id }) }}">IR A CONSULTAR</a>
+        </div><br>
+    </form>
+{% endblock %}

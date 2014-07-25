@@ -30,8 +30,7 @@ class DatosproveedorController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        if ($this->get('security.context')->isGranted('ROLE_CONTENIDOS_ADMIN'))
-        {
+        
             //OBTENGO LA INFORMACION DE TODOS LOS PROVEEDORES ACTIVOS
             $titulo = "COMPLETO DE PROVEEDORES";
             $estatus = 'A';
@@ -40,66 +39,7 @@ class DatosproveedorController extends Controller
             $consulta = $em->createQuery($dql)->setParameter('estatus', $estatus);
             $entities = $consulta->getResult();
 
-        }elseif($this->get('security.context')->isGranted('ROLE_CONTENIDOS_COMPRAS'))
-        {
-            //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE COMPRAS QUE ESTEN ACTIVOS
-            $titulo = "PROVEEDORES (COMPRAS)";            
-            $id_tipoproveedor = 1;
-            $estatus = 'A';
-
-            $dql = "select d from ContenidosBundle:Datosproveedor d 
-                    where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
-            $consulta = $em->createQuery($dql)->setParameters(
-                                                                array(
-                                                                        'id_tipoproveedor'=> $id_tipoproveedor, 
-                                                                        'estatus' => $estatus,
-                                                                     )
-
-
-                                                             );
-            $entities = $consulta->getResult();
-
-        }elseif($this->get('security.context')->isGranted('ROLE_CONTENIDOS_EQUIPOS'))
-        {
-            //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE EQUIPOS QUE ESTEN ACTIVOS
-            $id_tipoproveedor = 4;
-            $estatus = 'A';
-            $titulo = "DE EQUIPOS TELESUR";
-
-            $dql = "select d from ContenidosBundle:Datosproveedor d 
-                    where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
-            $consulta = $em->createQuery($dql)->setParameters(
-                                                                array(
-                                                                        'id_tipoproveedor'=> $id_tipoproveedor, 
-                                                                        'estatus' => $estatus,
-                                                                     )
-
-
-                                                             );
-            $entities = $consulta->getResult();
-
-        }elseif($this->get('security.context')->isGranted('ROLE_CONTENIDOS_CONTENIDOS'))
-        {
-            //OBTENGO LA INFORMACION  DE LOS PROVEEDORES DE INFORMACION QUE ESTEN ACTIVOS
-            $id_tipoproveedor = 2;
-            $estatus = 'A';
-            $titulo = "PROVEEDORES (VP DE CONTENIDOS)";
-
-            $dql = "select d from ContenidosBundle:Datosproveedor d 
-                    where d.idTipoprov=:id_tipoproveedor and d.estatus=:estatus";
-            $consulta = $em->createQuery($dql)->setParameters(
-                                                                array(
-                                                                        'id_tipoproveedor'=> $id_tipoproveedor, 
-                                                                        'estatus' => $estatus,
-                                                                     )
-
-
-                                                             );
-
-            $entities = $consulta->getResult();
-        }
-
-        return $this->render('ContenidosBundle:Datosproveedor:index.html.twig', array(
+            return $this->render('ContenidosBundle:Datosproveedor:index.html.twig', array(
             'entities' => $entities,
             'titulo' => $titulo,
         )); 

@@ -1,30 +1,22 @@
 {% extends '::sit.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Usuario Unidad{% endblock %}
 
-
-{% block titulobanner %}
+{% block titulo %}
     ASIGNAR UNIDAD A USUARIO
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("ticket_listausuariounidad") }}">LISTA DE USUARIOS</a></li>
+  <li class="active">UNIDAD USUARIO</li>
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">ASIGNAR UNIDAD A USUARIO</div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
     <form action="{{ path('ticket_asignarusuariounidad',{'id': entity.id }) }}" method="post">
         <div class="formShow">
             <div class="contenedorform">
@@ -46,7 +38,7 @@
                 <div class="widgetform">{{ form_widget(form.unidad) }}</div>
             </div>
         </div>
-        <input type="submit" value="Guardar asociación" class="btn btn-primary">
+        <input type="submit" value="GUARDAR ASOCIACIÓN" class="btn btn-primary">
     </form>
 
 {% endblock %}

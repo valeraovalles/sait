@@ -24,8 +24,8 @@
     <form novalidate="novalidate" action="{{ path('contratacion_update', { 'id': entity.id, 'id_presupuesto': id_presupuesto, 'id_proveedor': id_proveedor }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
         <input type="hidden" name="_method" value="PUT" />
 
-        <div id="descripcion" class="form-show_edit">
-            <fieldset>
+        <fieldset>
+            <div id="descripcion" class="form-show_edit">
                 <div class="divisor">DATOS DE LA CONTRATACI&Oacute;N</div>
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.concepto) }}
@@ -50,14 +50,19 @@
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.fechaInicio) }}
                     <div class="labels">Fecha de Inicio:</div>
-                    <div class="widgets">{{ form_widget(edit_form.fechaInicio) }}</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaInicio, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                 <div class="form-contenedor">
-                    {{ form_errors(edit_form.fechaFin) }}
-                    <div class="labels">Fecha de Fin:</div>
-                    <div class="widgets">{{ form_widget(edit_form.fechaFin) }}</div>
+                    {{ form_errors(edit_form.fechaInicio) }}
+                    <div class="labels">Fecha Fin:</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaFin, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
-
                 <div class="divisor">DATOS DE LA SOLICITUD</div>
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.numSolicitud) }}
@@ -75,19 +80,25 @@
                     <div class="widgets">{{ form_widget(edit_form.numPuntocuenta) }}</div>
                 </div>
                 <div class="form-contenedor">
-                    {{ form_errors(edit_form.fechaPunto) }}
+                    {{ form_errors(edit_form.fechaInicio) }}
                     <div class="labels">Fecha del Punto de Cuenta:</div>
-                    <div class="widgets">{{ form_widget(edit_form.fechaPunto) }}</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaPunto, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.numAlcance) }}
-                    <div class="labels">N&uacute;mero de alcance (Punto de Cuenta):</div>
+                    <div class="labels">N&uacute;mero de alcance:</div>
                     <div class="widgets">{{ form_widget(edit_form.numAlcance) }}</div>
                 </div>
                 <div class="form-contenedor">
-                    {{ form_errors(edit_form.fechaAlcance) }}
-                    <div class="labels">Fecha de alcance (Punto de Cuenta):</div>
-                    <div class="widgets">{{ form_widget(edit_form.fechaAlcance) }}</div>
+                    {{ form_errors(edit_form.fechaInicio) }}
+                    <div class="labels">Fecha de Alcance:</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaAlcance, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
 
                 <div class="divisor">DETALLES DE LA CONTRATACI&Oacute;N</div>
@@ -97,19 +108,25 @@
                     <div class="widgets">{{ form_widget(edit_form.numContrato) }}</div>
                 </div>
                 <div class="form-contenedor">
-                    {{ form_errors(edit_form.fechaContrato) }}
+                    {{ form_errors(edit_form.fechaInicio) }}
                     <div class="labels">Fecha del Contrato:</div>
-                    <div class="widgets">{{ form_widget(edit_form.fechaContrato) }}</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaContrato, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.numAddendum) }}
-                    <div class="labels">N&uacute;mero del Addendum:</div>
+        <div class="labels">N&uacute;mero del Addendum:</div>
                     <div class="widgets">{{ form_widget(edit_form.numAddendum) }}</div>
                 </div>
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.fechaAddendum) }}
                     <div class="labels">Fecha del Addendum:</div>
-                    <div class="widgets">{{ form_widget(edit_form.fechaAddendum) }}</div>
+                    <div class="widgets">{{ form_widget(edit_form.fechaAddendum, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
 
                 {% if tipoprov == 'COMPRAS' %}
@@ -124,10 +141,15 @@
                         <div class="widgets">{{ form_widget(edit_form.observacionesCompras) }}</div>
                     </div>
                 {% endif %}
-            </fieldset>
-            <button type="submit" class="btn">Editar</button><br><br>
-        </div>
+                <button type="submit" class="btn">Editar</button><br><br>
+            </div>
+        </fieldset>
         <br>       
         <a href="{{ path('contratacion' , { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
     </form>
+    <script type="text/javascript">
+        $(function () {
+            $(".fecha").datepicker();
+        });
+    </script>
 {% endblock %}

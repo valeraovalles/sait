@@ -27,8 +27,7 @@
         <div id="descripcion" class="form-show_edit">
             <br>
         <fieldset>       
-            <legend id="a"><div class="divisor">DATOS DEL BENEFICIARIO</div> </legend>
-            
+            <div class="divisor">DATOS DEL BENEFICIARIO</div>            
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.nombreBeneficiario) }}
                     <div class="labels">Nombre del Beneficiario:</div>
@@ -44,12 +43,10 @@
                     <div class="labels">Pais:</div>
                     <div class="widgets">{{ form_widget(edit_form.pais) }}</div>
                 </div>
-            
         </fieldset>
         <br>
         <fieldset>       
-            <legend id="c"><div class="divisor">DATOS DEL BANCO BENEFICIARIO</div> </legend>
-            
+            <div class="divisor">DATOS DEL BANCO BENEFICIARIO</div>
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.bancoBenef) }}
                     <div class="labels">Nombre:</div>
@@ -80,11 +77,10 @@
                     <div class="labels">Direcci&oacute;n:</div>
                     <div class="widgets">{{ form_widget(edit_form.direccionBancobenef) }}</div>
                 </div>
-                
         </fieldset>
         <br>
         <fieldset>       
-            <legend id="b"><div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div> </legend>
+            <div class="divisor">DATOS DEL BANCO INTERMEDIARIO</div>
             
                 <div class="form-contenedor">
                     {{ form_errors(edit_form.bancoInterm) }}

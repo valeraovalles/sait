@@ -1,0 +1,67 @@
+{% extends '::cumpleanios.html.twig' %}
+ 
+{% block title %}Consultar{% endblock %}
+
+{% block titulo %}
+    CONSULTA PERSONAL
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("cumpleanios_personal") }}">LISTADO DE PERSONAL EXTRANJERO</a></li>
+  <li class="active">CONSULTA PERSONAL</li>
+</ol>
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+
+      <div class="formShow">
+        <div class="contenedorform">
+            <div class="labelform">Nombre:</div>
+            <div class="widgetform">{{ entity.nombre }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Apellido:</div>
+            <div class="widgetform">{{ entity.apellido }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Cedpas:</div>
+            <div class="widgetform">{{ entity.cedpas }}</div>
+        </div>
+        {% if entity.correo %}
+        <div class="contenedorform">
+            <div class="labelform">Correo:</div>
+            <div class="widgetform">{{ entity.correo }}</div>
+        </div>
+        {% endif %}
+        <div class="contenedorform">
+            <div class="labelform">Ubicacion:</div>
+            <div class="widgetform">{{ entity.ubicacion }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fechanac:</div>
+            <div class="widgetform">{{ entity.fechanac|date("d-m-Y") }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Sexo:</div>
+            <div class="widgetform">{{ entity.sexo }}</div>
+        </div>
+    </div>
+        <a class="btn btn-default" href="{{ path('cumpleanios_personal') }}">
+            VOLVER A LA LISTA
+        </a> | 
+
+        <a class="btn btn-default" href="{{ path('cumpleanios_personal_edit', { 'id': entity.id }) }}">
+            IR A EDITAR
+        </a>
+        <br><br>
+        <form action="{{ path('cumpleanios_personal_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button class="btn btn-danger" type="submit">BORRAR</button>
+        </form><br>
+
+{% endblock %}

@@ -16,7 +16,7 @@ class DefaultController extends Controller
 
     public function formalimentacionAction(){
 
-    	$tn=array('0'=>'Seleccione...', '21'=>'Trabajadores e','25'=>'Trabajadores o','14'=>'Trabajadores an','24'=>'Contratados','32'=>'Comision de servicios','31'=>'Convenios internacionales','41'=>'Jubilados y pensionados');
+    	$tn=array('0'=>'Seleccione...', '21'=>'Trabajadores e','25'=>'Trabajadores o','14'=>'Trabajadores an','24'=>'Contratados','32'=>'Comisión de servicio','64'=>'Contratados-Multimedia','65'=>'Contratados-Imagen y Promoción','31'=>'Convenios Internacionales','41'=>'Jubilados y Pensionados','73'=>'Empleados Multimedia','74'=>'Empelados Imagen y Promociones');
     	$anio=array('0'=>'Seleccione...', date("Y")-2=>date("Y")-2,date("Y")-1=>date("Y")-1,date("Y")=>date("Y"));
     	$mes=array('0'=>'Seleccione...', '1'=>'Enero','2'=>'Febrero','3'=>'Marzo','4'=>'Abril','5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre');
 		$form = $this->createFormBuilder()
@@ -39,7 +39,7 @@ class DefaultController extends Controller
         $datos=$request->request->all();
         $datos=$datos['form'];
 
-		$tn=array('0'=>'Seleccione...', '21'=>'Trabajadores e','25'=>'Trabajadores o','14'=>'Trabajadores an','24'=>'Contratados','32'=>'Comision de servicios','31'=>'Convenios internacionales','41'=>'Jubilados y pensionados');
+		$tn=array('0'=>'Seleccione...', '21'=>'Trabajadores e','25'=>'Trabajadores o','14'=>'Trabajadores an','24'=>'Contratados','32'=>'Comisión de servicio','64'=>'Contratados-Multimedia','65'=>'Contratadados-Imagen y Promoción','31'=>'Convenios internacionales','41'=>'Jubilados y pensionados');
 
 		$a=new Conexion;
 		$postgresql_sigefirrhh=$a->postgresql_sigefirrhh();

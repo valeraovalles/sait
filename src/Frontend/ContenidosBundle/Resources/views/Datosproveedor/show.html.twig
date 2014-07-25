@@ -19,179 +19,179 @@
             {{ flashMessage }}
         </div>
    {% endfor %}
-    
-        {% if entity.estatus == 'I' %}
-            <div class="inactivo">PROVEEDOR INACTIVO</div>
-        {% elseif  entity.estatus == 'A' %}
-            <div class="activo">PROVEEDOR ACTIVO</div>
-        {% endif %}
+
+    {% if entity.estatus == 'I' %}
+        <div class="inactivo">PROVEEDOR INACTIVO</div>
+    {% elseif  entity.estatus == 'A' %}
+        <div class="activo">PROVEEDOR ACTIVO</div>
+    {% endif %}
         
     <div class="form-show_edit">
-    <br> 
-    <div class="contenedor">
-    <fieldset>      
-        <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
-            <div class="contenedor">
-                <div class="labels">Nombre:</div>
-                <div class="dato">{{ entity.nombre }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">Identificaci&oacute;n F&iacute;scal:</div>
-                <div class="dato">{{ entity.Numidentificacionfiscal }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">Pa&iacute;s:</div>
-                <div class="dato">{{ entity.pais }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">Direcci&oacute;n:</div>
-                <div class="dato">{{ entity.direccionEmpresa }}</div>
-            </div>
-            <div class="contenedor">
-                <div class="labels">Tel&eacute;fono de Oficina 1:</div>
-                <div class="dato">{{ entity.oficina1 }}</div>
-            </div>
-            {% if entity.oficina2 != NULL %}
+        <br> 
+        <fieldset>      
+            <div class="divisor">DATOS DEL PROVEEDOR</div>  
                 <div class="contenedor">
-                    <div class="labels">Tel&eacute;fono de Oficina 2:</div>
-                    <div class="dato">{{ entity.oficina2 }}</div>
+                    <div class="labels">Nombre:</div>
+                    <div class="dato">{{ entity.nombre }}</div>
                 </div>
-            {% else %}
                 <div class="contenedor">
-                    <div class="labels">Tel&eacute;fono de Oficina 2:</div>
-                    <div class="dato">NO POSEE DESCRIPCION</div>
+                    <div class="labels">Identificaci&oacute;n F&iacute;scal:</div>
+                    <div class="dato">{{ entity.Numidentificacionfiscal }}</div>
                 </div>
-            {% endif %}
-            {% if entity.movil != NULL %}
                 <div class="contenedor">
-                    <div class="labels">Tel&eacute;fono de Oficina 3:</div>
-                    <div class="dato">{{ entity.movil }}</div>
+                    <div class="labels">Pa&iacute;s:</div>
+                    <div class="dato">{{ entity.pais }}</div>
                 </div>
-            {% else %}
                 <div class="contenedor">
-                    <div class="labels">Tel&eacute;fono de Oficina 3:</div>
-                    <div class="dato">NO POSEE DESCRIPCION</div>
+                    <div class="labels">Direcci&oacute;n:</div>
+                    <div class="dato">{{ entity.direccionEmpresa }}</div>
                 </div>
-            {% endif %}
-            <div class="contenedor">
-                <div class="labels">Direcci&oacute;n de Correo:</div>
-                <div class="dato">{{ entity.correoEmpresa }}</div>
-            </div>
-            {% if entity.skypeEmpresa != NULL %}
                 <div class="contenedor">
-                    <div class="labels">Direcci&oacute;n de Skype:</div>
-                    <div class="dato">{{ entity.skypeEmpresa }}</div>
+                    <div class="labels">Tel&eacute;fono de Oficina 1:</div>
+                    <div class="dato">{{ entity.oficina1 }}</div>
                 </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Direcci&oacute;n de Skype:</div>
-                    <div class="dato">NO POSEE DESCRIPCION</div>
-                </div>
-            {% endif %}
-    </fieldset>
-    <fieldset>       
-        <legend id="b"><div class="divisor">DATOS DEL REPRESENTANTE</div> </legend>
-            {% if entity.nombreRepr != NULL and entity.apellidoRepr %}
-                <div class="contenedor">
-                    <div class="labels">Nombre del Representante:</div>
-                    <div class="dato">{{ entity.nombreRepr }} {{ entity.apellidoRepr }}</div>
-                </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Nombre del Representante:</div>
-                    <div class="dato">NO POSEE DESCRIPCION</div>
-                </div>
-            {% endif %}
-            {% if entity.cargo != NULL %}
-                <div class="contenedor">
-                    <div class="labels">Cargo:</div>
-                    <div class="dato">{{ entity.cargo }}</div>
-                </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Cargo:</div>
-                    <div class="dato">NO POSEE DESCRIPCION</div>
-                </div>
-            {% endif %} 
-            {% if entity.telfhab  != NULL %}
-                <div class="contenedor">
-                    <div class="labels">Tel&eacute;fono de habitaci&oacute;n:</div>
-                    <div class="dato">{{ entity.telfhab }}</div>
-                </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Tel&eacute;fono de habitaci&oacute;n:</div>
-                    <div class="dato">NO POSEE DECRIPCION</div>
-                </div>
-            {% endif %}
-            {% if entity.movil2 != NULL %}
-                <div class="contenedor">
-                    <div class="labels">Tel&eacute;fono Movil:</div>
-                    <div class="dato">{{ entity.movil2 }}</div>
-                </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Tel&eacute;fono Movil:</div>
-                    <div class="dato">NO POSEE DESCRIPCION</div>
-                </div>
-            {% endif %}
-            {% if entity.correoRepr != NULL %}
-                <div class="contenedor">
-                    <div class="labels">Correo:</div>
-                    <div class="dato">{{ entity.correoRepr }}</div>
-                </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Correo:</div>
-                    <div class="dato">NO POSEE DESCRIPCION</div>
-                </div>
-            {% endif %}
-            {% if entity.skypeRepr %}
-                <div class="contenedor">
-                    <div class="labels">Skype:</div>
-                    <div class="dato">{{ entity.skypeRepr }}</div>
-                </div>
-            {% else %}
-                <div class="contenedor">
-                    <div class="labels">Skype:</div>
-                    <div class="dato">NO POSEE DESCRIPCION</div>
-                </div>
-            {% endif %}
-    </fieldset>
-    <fieldset>       
-        <legend id="c"><div class="divisor">DETALLES DEL PROVEEDOR</div> </legend>
-            <div class="contenedor">
-                <div class="labels">Tipo de Proveedor:</div>       
-                {% if entity.idDetalletipoproveedor != NULL %}
-                    <div class="dato">
-                        {{ entity.idTipoprov.nombre }}
-                         
-                        {% if entity.idDetalletipoproveedor == 'SATELITES' %}
-                            <br>{{ entity.idDetalletipoproveedor }}
-                            {% if entity.tipoSatelite == TRUE %}
-                                -- FIJO
-                            {% elseif  entity.tipoSatelite == FALSE %} 
-                               -- OCACIONAL
-                            {% endif %}
-                        {% else %}    
-                            -- {{ entity.idDetalletipoproveedor }}
-                        {% endif %}                
+                {% if entity.oficina2 != NULL %}
+                    <div class="contenedor">
+                        <div class="labels">Tel&eacute;fono de Oficina 2:</div>
+                        <div class="dato">{{ entity.oficina2 }}</div>
                     </div>
                 {% else %}
-                    <div class="dato">{{ entity.idTipoprov.nombre }}</div>
+                    <div class="contenedor">
+                        <div class="labels">Tel&eacute;fono de Oficina 2:</div>
+                        <div class="dato">NO POSEE DESCRIPCION</div>
+                    </div>
                 {% endif %}
-            </div>
-            <div class="contenedor">
-                <div class="labels">Unidad Solicitante:</div>
-                <div class="dato">{{ entity.idUnidad }}</div>
-            </div>
-    </fieldset>
-    <br>
-</div>
-</div>
+                {% if entity.movil != NULL %}
+                    <div class="contenedor">
+                        <div class="labels">Tel&eacute;fono de Oficina 3:</div>
+                        <div class="dato">{{ entity.movil }}</div>
+                    </div>
+                {% else %}
+                    <div class="contenedor">
+                        <div class="labels">Tel&eacute;fono de Oficina 3:</div>
+                        <div class="dato">NO POSEE DESCRIPCION</div>
+                    </div>
+                {% endif %}
+                <div class="contenedor">
+                    <div class="labels">Direcci&oacute;n de Correo:</div>
+                    <div class="dato">{{ entity.correoEmpresa }}</div>
+                </div>
+                {% if entity.skypeEmpresa != NULL %}
+                    <div class="contenedor">
+                        <div class="labels">Direcci&oacute;n de Skype:</div>
+                        <div class="dato">{{ entity.skypeEmpresa }}</div>
+                    </div>
+                {% else %}
+                    <div class="contenedor">
+                        <div class="labels">Direcci&oacute;n de Skype:</div>
+                        <div class="dato">NO POSEE DESCRIPCION</div>
+                    </div>
+                {% endif %}
+        </fieldset>
+        <fieldset>       
+            <div class="divisor">DATOS DEL REPRESENTANTE</div>
+                {% if entity.nombreRepr != NULL and entity.apellidoRepr %}
+                    <div class="contenedor">
+                        <div class="labels">Nombre del Representante:</div>
+                        <div class="dato">{{ entity.nombreRepr }} {{ entity.apellidoRepr }}</div>
+                    </div>
+                {% else %}
+                    <div class="contenedor">
+                        <div class="labels">Nombre del Representante:</div>
+                        <div class="dato">NO POSEE DESCRIPCION</div>
+                    </div>
+                {% endif %}
+                {% if entity.cargo != NULL %}
+                    <div class="contenedor">
+                        <div class="labels">Cargo:</div>
+                        <div class="dato">{{ entity.cargo }}</div>
+                    </div>
+                {% else %}
+                    <div class="contenedor">
+                        <div class="labels">Cargo:</div>
+                        <div class="dato">NO POSEE DESCRIPCION</div>
+                    </div>
+                {% endif %} 
+                {% if entity.telfhab  != NULL %}
+                    <div class="contenedor">
+                        <div class="labels">Tel&eacute;fono de habitaci&oacute;n:</div>
+                        <div class="dato">{{ entity.telfhab }}</div>
+                    </div>
+                {% else %}
+                    <div class="contenedor">
+                        <div class="labels">Tel&eacute;fono de habitaci&oacute;n:</div>
+                        <div class="dato">NO POSEE DECRIPCION</div>
+                    </div>
+                {% endif %}
+                {% if entity.movil2 != NULL %}
+                    <div class="contenedor">
+                        <div class="labels">Tel&eacute;fono Movil:</div>
+                        <div class="dato">{{ entity.movil2 }}</div>
+                    </div>
+                {% else %}
+                    <div class="contenedor">
+                        <div class="labels">Tel&eacute;fono Movil:</div>
+                        <div class="dato">NO POSEE DESCRIPCION</div>
+                    </div>
+                {% endif %}
+                {% if entity.correoRepr != NULL %}
+                    <div class="contenedor">
+                        <div class="labels">Correo:</div>
+                        <div class="dato">{{ entity.correoRepr }}</div>
+                    </div>
+                {% else %}
+                    <div class="contenedor">
+                        <div class="labels">Correo:</div>
+                        <div class="dato">NO POSEE DESCRIPCION</div>
+                    </div>
+                {% endif %}
+                {% if entity.skypeRepr %}
+                    <div class="contenedor">
+                        <div class="labels">Skype:</div>
+                        <div class="dato">{{ entity.skypeRepr }}</div>
+                    </div>
+                {% else %}
+                    <div class="contenedor">
+                        <div class="labels">Skype:</div>
+                        <div class="dato">NO POSEE DESCRIPCION</div>
+                    </div>
+                {% endif %}
+        </fieldset>
+        <fieldset>       
+            <div class="divisor">DETALLES DEL PROVEEDOR</div>
+                <div class="contenedor">
+                    <div class="labels">Tipo de Proveedor:</div>       
+                    {% if entity.idDetalletipoproveedor != NULL %}
+                        <div class="dato">
+                            {{ entity.idTipoprov.nombre }}
+                             
+                            {% if entity.idDetalletipoproveedor == 'SATELITES' %}
+                                <br>{{ entity.idDetalletipoproveedor }}
+                                {% if entity.tipoSatelite == TRUE %}
+                                    -- FIJO
+                                {% elseif  entity.tipoSatelite == FALSE %} 
+                                   -- OCACIONAL
+                                {% endif %}
+                            {% else %}    
+                                -- {{ entity.idDetalletipoproveedor }}
+                            {% endif %}                
+                        </div>
+                    {% else %}
+                        <div class="dato">{{ entity.idTipoprov.nombre }}</div>
+                    {% endif %}
+                </div>
+                <div class="contenedor">
+                    <div class="labels">Unidad Solicitante:</div>
+                    <div class="dato">{{ entity.idUnidad }}</div>
+                </div>
+        </fieldset>
+        <br>
+    </div>
     <a href="{{ path('datosproveedor', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Volver al listado"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
     
-    <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="70px" src="{{ asset('images/edit.png')}}"></a>
+    {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_ASISTENTES') or is_granted('ROLE_CONTENIDOS_COMPRAS') or is_granted('ROLE_CONTENIDOS_APOYO') or is_granted('ROLE_CONTENIDOS_ADMIN') %}
+        <a href="{{ path('datosproveedor_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="70px" src="{{ asset('images/edit.png')}}"></a>
+    {% endif %}
 
 <br>
 

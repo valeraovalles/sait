@@ -1,20 +1,24 @@
 {% extends '::visita.html.twig' %}
 
+{% block title %}CONSULTAR USUARIO{% endblock %}
+
+{% block titulo %}
+    DATOS DEL USUARIO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("control_visitas_usuario") }}">VISITAS INICIO</a></li>
+  <li class="active">CONSULTAR USUARIO</li>
+
+</ol>
+{% endblock %}
+
+
 {% block body -%}
-
-    {% if app.session.started %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="Greenflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {% endif %}
-
-
-    <h1>Datos del Usuario</h1>
-
-    <br><br>
-
+    {{parent()}}
+    
     <table class="record_properties" border="1" cellspacing="9" cellpadding="5">
         <thead >
             <tr>
@@ -51,7 +55,7 @@
         {#<a class="btn btn-success"   href="{{ path('usu', { 'id':entity.id }) }}">Nueva Visita</a>#}
         <br>
         <br>
-        <a class="btn" href="{{ path('control_visitas_usuario') }}">Regresar</a>
-        <a class="btn" href="{{ path('usuario_edit_control', { 'id': entity.id }) }}">Editar</a>
+        <a class="btn btn-default" href="{{ path('control_visitas_usuario') }}">IR AL LISTADO</a> | 
+        <a class="btn btn-default" href="{{ path('usuario_edit_control', { 'id': entity.id }) }}">IR A EDITAR</a>
 </ul>
 {% endblock %}

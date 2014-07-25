@@ -19,7 +19,7 @@
         {% endblock %}
     </head>
 
-    <div align="center"><span class="label label-important">Nuevos:</span> <b>{{ nuevos }}</b> | <span class="label label-info">Asignados:</span> <b>{{ asignados }}</b></div>
+    <div align="center"><span class="label label-important">Nuevos:</span> <b>{{ nuevos }}</b> | <span class="label label-info">Asignados:</span> <b>{{ asignados }}</b> | <span class="label label-warning">Seguimiento:</span> <b>{{ seguimiento }}</b></div>
 
     <br>
     <table cellpadding="0" cellspacing="0" border="0" class="table table-striped" style="font-size:12px;">
@@ -48,6 +48,8 @@
                     {% elseif entity.estatus==2 %}<span class="label label-info"><span style="display:none;">2-</span>Asignado</span>
                     {% elseif entity.estatus==3 %}<span class="label label-warning"><span style="display:none;">3-</span>Re-Asignado</span>
                     {% elseif entity.estatus==4 %}<span class="label label-success"><span style="display:none;">2-</span>Culminado</span>
+                    {% elseif entity.estatus==5 %}<span class="label label-warning"><span style="display:none;">2-</span>Seguimiento</span>
+                    {% elseif entity.estatus==6 %}<span class="label label-warning"><span style="display:none;">2-</span>Culminado-Seguimiento</span>
                     {% endif %}
 
                 </td>

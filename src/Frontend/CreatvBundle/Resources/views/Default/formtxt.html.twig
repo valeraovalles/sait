@@ -1,0 +1,55 @@
+{% extends '::creatv.html.twig' %}
+
+{% block title %}Creatv{% endblock %}
+
+{% block titulo %}
+    SELECCIONE UNA OPCIÓN
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("creatv_homepage") }}">CREATV INICIO</a></li>
+  <li class="active">TXT</li>
+</ol>
+{% endblock %}
+
+
+
+{% block body %} 
+	{{ parent() }}
+
+
+	{% if fecha is defined %}<a download="{{ fecha }}_{{ tipo }}.txt" href="{{ asset('uploads/creatv/txt/') }}{{ fecha }}_{{ tipo }}.txt">DESCARGA EL ARCHIVO {{ fecha }}_{{ tipo }}.txt AQUÍ</a><br><br>{% endif %}
+
+    <form novalidate action="{{ path('creatv_generatxt') }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_widget(form._token) }}
+
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(form.tipo) }}</div>
+                <div class="labelform">Tipo:</div>
+                <div class="widgetform">{{ form_widget(form.tipo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="text-danger">{{ form_errors(form.fecha) }}</div>
+                <div class="labelform">Fecha:</div>
+                <div class="widgetform">{{ form_widget(form.fecha) }}</div>
+            </div>
+        </div>
+        <input type="submit" value="GENERAR" class="btn btn-primary">
+    </form>
+
+	  <script>
+	      $(function() {
+	        $( "#frontend_creatvbundle_txttype_fecha" ).datepicker({
+	          changeMonth: true,
+	          changeYear: true,
+	          dateFormat: "dd-mm-yy",
+	        });
+	      });
+	  </script>
+
+	<br><br>
+{% endblock %}

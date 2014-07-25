@@ -1,0 +1,30 @@
+vehiculos_list: 
+    pattern:  /
+    defaults: { _controller: "TransporteBundle:Vehiculos:index" }
+
+transporte_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TransporteBundle:Vehiculos:show" }
+
+transporte_new:
+    pattern:  /new
+    defaults: { _controller: "TransporteBundle:Vehiculos:new" }
+
+transporte_create:
+    pattern:  /create
+    defaults: { _controller: "TransporteBundle:Vehiculos:create" }
+    requirements: { _method: post }
+
+transporte_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TransporteBundle:Vehiculos:edit" }
+
+transporte_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TransporteBundle:Vehiculos:update" }
+    requirements: { _method: post|put }
+
+transporte_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TransporteBundle:Vehiculos:delete" }
+    requirements: { _method: post|delete }

@@ -1,36 +1,29 @@
 {% extends '::mercal.html.twig' %}
  
-{% block title %}Sit{% endblock %}
+{% block title %}Lista de Jornadas{% endblock %}
 
-{% block titulobanner %}
-    MERCAL
+{% block titulo %}
+    LISTA DE JORNADAS
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">LISTA DE JORNADAS</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">LISTADO DE JORNADAS</div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tablalista">
+    <table id="tabladatatable">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nombrejornada</th>
-                <th>Fechajornada</th>
+                <th>Nombre de la Jornada</th>
+                <th>Fecha de Jornada</th>
                 <th>Estatus</th>
-                <th>Actions</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -47,18 +40,22 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{{ path('jornada_show', { 'id': entity.id }) }}">Ver</a> | 
-                    <a href="{{ path('jornada_edit', { 'id': entity.id }) }}">Editar</a>
-
+                    <a href="{{ path('jornada_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
+                    <a href="{{ path('jornada_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></a>            
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <br><br>
-        <a class="btn btn-primary" href="{{ path('jornada_new') }}">
-               Nueva jornada
-        </a>
-        <br>
-
-    {% endblock %}
+    <br><br><br>
+    <a class="btn btn-default" href="{{ path( 'jornada_new' ) }}">Nueva jornada</a><br><br>
+        
+<script type="text/javascript">
+    $(document).ready(function(){
+       $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+            "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+            "aaSorting": [[0,'asc'],[1,'asc']],
+        } );
+    })
+</script>
+{% endblock %}

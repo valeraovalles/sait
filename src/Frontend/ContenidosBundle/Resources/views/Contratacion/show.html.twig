@@ -18,9 +18,10 @@
             {{ flashMessage }}
         </div>
    {% endfor %}
-        <div class="form-show_edit">
-            <fieldset> 
-                <legend id="a"><div class="divisor">DATOS DE LA CONTRATACI&Oacute;N</div> </legend>
+        
+        <fieldset> 
+            <div class="form-show_edit">
+                <div class="divisor">DATOS DE LA CONTRATACI&Oacute;N</div>
                     <div class="contenedor">
                         <div class="labels">Concepto:</div>
                         <div class="dato">{{ entity.concepto }}</div>
@@ -86,11 +87,11 @@
                         </div>
                     {% else %}
                         <div class="contenedor">
-                            <div class="labels">N&uacute;mero de Alcance (Punto de Cuenta):</div>
+                            <div class="labels">N&uacute;mero de Alcance:</div>
                             <div class="dato">NO HAY DESCRPCION</div>
                         </div>
                         <div class="contenedor">
-                            <div class="labels">Fecha de Alcance (Punto de Cuenta):</div>
+                            <div class="labels">Fecha de Alcance:</div>
                             <div class="dato">NO HAY DESCRIPCION</div>
                         </div>
                     {% endif %}
@@ -150,8 +151,9 @@
                             <div class="dato">{{ entity.debeMe }}</div>
                         </div>
                     {% endif %}
-            </fieldset>       
-        </div>
+            </div>
+        </fieldset>       
+        
         <a href="{{ path('contratacion' , { 'id_presupuesto': id_presupuesto,'id_proveedor': id_proveedor } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
         {% if is_granted('ROLE_CONTENIDOS_ADMIN') or is_granted('ROLE_CONTENIDOS_COMPRAS') %}
             <a href="{{ path('contratacion_edit', { 'id': entity.id,'id_presupuesto': id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="editar proveedor"><img width="75px" src="{{ asset('images/edit.png')}}"></a>

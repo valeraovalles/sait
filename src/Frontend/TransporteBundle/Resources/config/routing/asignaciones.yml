@@ -1,0 +1,34 @@
+asignaciones:
+    pattern:  /
+    defaults: { _controller: "TransporteBundle:Asignaciones:index" }
+
+asignaciones_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TransporteBundle:Asignaciones:show" }
+
+asignaciones_showSolicitud:
+    pattern:  /{idSolicitud}/showSolicitud
+    defaults: { _controller: "TransporteBundle:Asignaciones:showSolicitud" }
+
+asignaciones_new:
+    pattern:  /new
+    defaults: { _controller: "TransporteBundle:Asignaciones:new" }
+
+asignaciones_create:
+    pattern:  /create
+    defaults: { _controller: "TransporteBundle:Asignaciones:create" }
+    requirements: { _method: post }
+
+asignaciones_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TransporteBundle:Asignaciones:edit" }
+
+asignaciones_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TransporteBundle:Asignaciones:update" }
+    requirements: { _method: post|put }
+
+asignaciones_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TransporteBundle:Asignaciones:delete" }
+    requirements: { _method: post|delete }

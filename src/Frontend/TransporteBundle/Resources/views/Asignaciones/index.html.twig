@@ -1,0 +1,70 @@
+{% extends '::transporte.html.twig' %}
+
+{% block title %}Transporte{% endblock %}
+
+{% block titulobanner %}
+    TRANSPORTE
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <div class="titulo">
+        TRANSPORTE -  ASIGNACIONES 
+    </div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('alert') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    <table class="records_list" id="tablalistax">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Solicitud</th>
+                <th>Fecha Asignacion</th>
+                <th>Vehiculo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('asignaciones_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.idSolicitud %}{{ entity.idSolicitud }}{% endif %}</td>
+                <td>{% if entity.fechaAsignacion %}{{ entity.fechaAsignacion|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{% if entity.idVehiculo %}{{ entity.idVehiculo }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>                        
+                        <a href="{{ path('asignaciones_show', { 'id': entity.id }) }}" title="Mostrar">
+                        <i class="icon-search"></i>
+                        </a>
+                        <a href="{{ path('asignaciones_edit', { 'id': entity.id }) }}" title="Editar">
+                            <i class="icon-edit"></i>
+                        </a>
+                    </li>                   
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br><br>
+    <script type="text/javascript">
+    $(document).ready(function(){
+       $('#tablalistax').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+            "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+            "aaSorting": [[5,'asc'],[3,'desc'],[4,'desc']],
+        } );    
+    })
+    </script>
+    {% endblock %}

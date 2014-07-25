@@ -22,7 +22,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $config = $processor->processConfiguration(new Configuration(), array(array('secret' => 's3cr3t')));
 
         $this->assertEquals(
-            array_merge(array('secret' => 's3cr3t'), self::getBundleDefaultConfig()),
+            array_merge(array('secret' => 's3cr3t', 'trusted_hosts' => array()), self::getBundleDefaultConfig()),
             $config
         );
     }
@@ -33,7 +33,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testValidTrustedProxies($trustedProxies, $processedProxies)
     {
         $processor = new Processor();
-        $configuration = new Configuration(array());
+        $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, array(array(
             'secret'          => 's3cr3t',
             'trusted_proxies' => $trustedProxies
@@ -62,7 +62,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testInvalidTypeTrustedProxies()
     {
         $processor = new Processor();
-        $configuration = new Configuration(array());
+        $configuration = new Configuration();
         $processor->processConfiguration($configuration, array(
             array(
                 'secret' => 's3cr3t',
@@ -77,7 +77,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testInvalidValueTrustedProxies()
     {
         $processor = new Processor();
-        $configuration = new Configuration(array());
+        $configuration = new Configuration();
         $processor->processConfiguration($configuration, array(
             array(
                 'secret' => 's3cr3t',
@@ -128,7 +128,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'debug'          => '%kernel.debug%',
             ),
             'serializer'          => array(
-                'enabled' => false           
+                'enabled' => false
             )
         );
     }

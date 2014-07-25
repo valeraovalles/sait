@@ -20,7 +20,7 @@ framework:
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:
-        cookie_lifetime:       10000
+        cookie_lifetime:       3600
     fragments:       ~
 
 # Twig Configuration
@@ -29,7 +29,7 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         directorio_imagenes: '/uploads/images/'
-
+        
 
 # Assetic Configuration
 assetic:
@@ -72,5 +72,5 @@ swiftmailer:
     host:      %mailer_host%
     username:  %mailer_user%
     password:  %mailer_password%
-    port:      %mailer_port%
     spool:     { type: memory }
+    disable_delivery:  false

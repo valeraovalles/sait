@@ -1,0 +1,56 @@
+{% extends '::transporte.html.twig' %}
+ 
+{% block title %}Detalle de Vehiculos {% endblock %}
+
+{% block titulo %}
+    DETALLE DE VEHICULOS
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("vehiculos_list") }}">LISTADO DE VEHICULOS</a></li>
+  <li class="active">DETALLE DE VEHICULOS</li>
+</ol>
+{% endblock %}
+
+
+{% block body -%}
+    {{ parent() }}
+
+    <div class="formShow"> 
+        <div class="contenedorform">
+            <div class="labelform">Tipo:</div>
+            <div class="widgetform">{{ entity.tipo|capitalize }}</div>
+        </div>            
+        <div class="contenedorform">
+            <div class="labelform">Placa:</div>
+            <div class="widgetform">{{ entity.placa|capitalize }}</div>
+        </div>    
+        <div class="contenedorform">
+            <div class="labelform">Modelo:</div>
+            <div class="widgetform">{{ entity.modelo|capitalize }}</div>
+        </div>            
+        <div class="contenedorform">
+            <div class="labelform">Año:</div>
+            <div class="widgetform">{{ entity.ano|capitalize }}</div>
+        </div>            
+        <div class="contenedorform">
+            <div class="labelform">Color:</div>
+            <div class="widgetform">{{ entity.color|capitalize }}</div>
+        </div>
+        {% if entity.estatus == 1 %}            
+            <div class="contenedorform">
+                <div class="labelform">Estatus:</div>
+                <div class="widgetform">Activo</div>
+            </div>
+        {% else %}
+            <div class="contenedorform">
+                <div class="labelform">Estatus:</div>
+                <div class="widgetform">Inactivo</div>
+            </div>
+        {% endif %}
+    </div> 
+    <a class="btn btn-default" href="{{ path('vehiculos_list') }}">IR A LA LISTA</a> |
+    <a class="btn btn-default" href="{{ path('transporte_edit', { 'id': entity.id }) }}">IR A EDITAR</a><br><br>
+{% endblock %}

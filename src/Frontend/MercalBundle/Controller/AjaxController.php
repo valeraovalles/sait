@@ -79,6 +79,23 @@ class AjaxController extends Controller
                     <div class="cedula">'.$datos[0]['cedula'].'</div>
             ';
         }
+
+        if (file_exists("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY")."proximos.json")) {
+            $proximos = file_get_contents("uploads/jornada/".$jornada->getNombrejornada().$jornada->getFechajornada()->format("dmY")."proximos.json");
+            $proximos = json_decode($proximos,true);
+
+            if($proximos){
+                $marquee='';
+                foreach ($proximos as $v) {
+                    $marquee .= ' | Nro. '.$v['numero'].' '.$v['nombre'].' | ';
+                }
+
+                if($marquee!='')
+                    echo '<br><br><div class="alert alert-info" style="font-size:13px;color:back;"><b>PROXIMOS 3: </b>'.$marquee.'</div>';
+            }
+
+        }
+
            
         die;
 

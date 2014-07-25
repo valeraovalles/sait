@@ -13,25 +13,26 @@
             {{ flashMessage }}
         </div>
     {% endfor %}
-
     {% for flashMessage in app.session.flashbag.get('alert') %}
         <div class="alert alert-danger">
             {{ flashMessage }}
         </div>
    {% endfor %}
 
-    <div class="form-show_edit">
-        <legend id="b"><div class="divisor">DATOS DE UNIDAD EJECUTORA</div> </legend>
+    <fieldset>  
+        <div class="form-show_edit">
+            <div class="divisor">DATOS DE UNIDAD EJECUTORA</div>
             <div class="contenedor">
                 <div class="labels">Unidad Ejecutora:</div>
                 <div class="dato">{{ entity.idUnidadejec }}</div>
-            </div>
-                
+            </div>  
             <div class="contenedor">
                 <div class="labels">Estatus del Pago:</div>
                 <div class="dato" style="fontcolor:#333">
-                    {% if entity1.0.fechaUnidadseis != NULL %}
-                            TESORERÍA                  
+                    {% if entity1.0.fechaUnidadsiete != NULL %}
+                            ENTREGADO AL BENEFICIARIO                  
+                    {% elseif entity1.0.fechaUnidadseis != NULL %}
+                            TESORERÍA
                     {% elseif entity1.0.fechaUnidadcinco != NULL %}
                             FINANZAS           
                     {% elseif entity1.0.fechaUnidadcuatro != NULL %}
@@ -44,7 +45,7 @@
                             RECURSOS HUMANOS        
                     {% endif %}  
                 </div>
-            </div>            
+            </div>          
 
             {% if compras == 1 %}
                 <legend id="b"><div class="divisor">CONDICIONES DEL PAGO</div> </legend>
@@ -65,7 +66,7 @@
                 {% endif %}
             {% endif %}
 
-            <legend id="a"><div class="divisor">DATOS DEL PAGO</div> </legend>
+            <div class="divisor">DATOS DEL PAGO</div>
             <div class="contenedor">
                 <div class="labels">N&uacute;mero del Memorandum:</div>
                 <div class="dato">{{ entity.numMemo }}</div>
@@ -79,7 +80,7 @@
                 <div class="labels">Fecha de la Factura:</div>
                 <div class="dato">{{ entity.fechaFactura|date('Y-m-d') }}</div>
             </div>
-             
+                 
             {% if entity.tipoMoneda == 1 %}
                 <div class="contenedor">
                     <div class="labels">Tipo de Moneda:</div>
@@ -121,8 +122,9 @@
                 <div class="dato">{{ entity.fechaPago|date('Y-m-d') }}</div>
                 
             </div>
-            
-    </div>
+                
+        </div>
+    </fielset>
 <br>
 <a href="{{ path('pago' , { 'id_proveedor': id_proveedor, 'id_presupuesto': id_presupuesto, 'id_contratacion':id_contratacion } ) }}"><img width="85px" src="{{ asset('images/listado.jpg')}}"></a>
 <a href="{{ path('pago_edit', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="control de pagos"><img width="75px" src="{{ asset('images/edit.png')}}"></a>

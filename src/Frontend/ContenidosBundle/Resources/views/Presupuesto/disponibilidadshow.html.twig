@@ -132,21 +132,21 @@
             </thead>
             <tbody>
                 {% if dispbs > 0 %}
-                    <tr align="center" style="color:#00aa00; size=4;">
+                    <tr align="center" style="color:#00aa00; size:4;">
                         <td>{{ dispdolares }}</td>
                         <td>{{ dispeuros }}</td>
                         <td>{{ dispbs }}</td>
                     </tr>
                     <div class="activo">SALDO DE {{ dispbs }}Bs</div>
                 {% elseif dispbs < 0 %}
-                    <tr align="center" style="color:#ff0000; size=4;">
+                    <tr align="center" style="color:#ff0000; size:4;">
                         <td>{{ dispdolares }}</td>
                         <td>{{ dispeuros }}</td>
                         <td>{{ dispbs }}</td>
                     </tr>
                     <div class="inactivo">DEUDA DE {{ -1*dispbs }}Bs</div>
                 {% elseif dispbs == 0 %}
-                    <tr align="center" style="color:#ff0000; size=4;">
+                    <tr align="center" style="color:#ff0000; size:4;">
                         <td>{{ dispdolares }}</td>
                         <td>{{ dispeuros }}</td>
                         <td>{{ dispbs }}</td>

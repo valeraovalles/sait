@@ -1,24 +1,22 @@
 {% extends '::visita.html.twig' %}
  
+{% block title %}NUEVA VISITA{% endblock %}
 
+{% block titulo %}
+    NUEVA VISITA
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("control_visitas_usuario") }}">VISITAS INICIO</a></li>
+  <li class="active">NUEVA VISITA</li>
+
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
-
-
-
-    {% if app.session.started %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="Greenflash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {% endif %}
-
-    
-    <div class="titulo">Nueva Visita</div>
-
-
 
     <form novalidate action="{{ path('usua', { 'id': visita.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
@@ -26,55 +24,53 @@
         {{ form_widget(edit_form._token) }}
         {{ form_widget(form._token) }}
 
-
-
-            <div id="operador">
-                <div class="form-contenedor">
+            <div class="formShow">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.cedula) }}</div>
-                    <div class="labels">Cedula:</div>
-                    <div class="widgets">{{ form_widget(edit_form.cedula) }}</div>
+                    <div class="labelform">Cedula:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.cedula) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.nombres) }}</div>
-                    <div class="labels">Nombres:</div>
-                    <div class="widgets">{{ form_widget(edit_form.nombres) }}</div>
+                    <div class="labelform">Nombres:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.nombres) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.apellidos) }}</div>
-                    <div class="labels">Apellidos:</div>
-                    <div class="widgets">{{ form_widget(edit_form.apellidos) }}</div>
+                    <div class="labelform">Apellidos:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.apellidos) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.telefono) }}</div>
-                    <div class="labels">Telefono:</div>
-                    <div class="widgets">{{ form_widget(edit_form.telefono) }}</div>
+                    <div class="labelform">Telefono:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.telefono) }}</div>
                 </div>
 
-                <div class="form-contenedor">
+                <div class="contenedorform">
                     <div>{{ form_errors(edit_form.direccion) }}</div>
-                    <div class="labels">Direccion:</div>
-                    <div class="widgets">{{ form_widget(edit_form.direccion) }}</div>
+                    <div class="labelform">Direccion:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.direccion) }}</div>
                 </div>
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form.contacto) }}</div>
-                    <div class="labels">Contacto:</div>
-                    <div class="widgets">{{ form_widget(form.contacto) }}</div>
+                <div class="contenedorform">
+                    <div class="text-danger">{{ form_errors(form.contacto) }}</div>
+                    <div class="labelform">Contacto:</div>
+                    <div class="widgetform">{{ form_widget(form.contacto) }}</div>
                 </div>
 
-                <div class="form-contenedor">
-                    <div>{{ form_errors(form.observaciones) }}</div>
-                    <div class="labels">Observaciones:</div>
-                    <div class="widgets">{{ form_widget(form.observaciones) }}</div>
+                <div class="contenedorform">
+                    <div class="text-danger">{{ form_errors(form.observaciones) }}</div>
+                    <div class="labelform">Observaciones:</div>
+                    <div class="widgetform">{{ form_widget(form.observaciones) }}</div>
                 </div>
 
 
             </div> 
 
-       <button class="btn btn-success" type="submit">Agregar</button> 
+       <button class="btn btn-primary" type="submit">AGREGAR</button> 
     </form>
 
 

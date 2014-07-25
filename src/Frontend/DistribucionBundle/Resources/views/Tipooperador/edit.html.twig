@@ -1,45 +1,49 @@
 {% extends '::distribucion.html.twig' %}
 
-{% block title %}Distribución{% endblock %}
+{% block title %}EDITAR TIPO DE OPERADOR{% endblock %}
 
-{% block titulobanner %}
-    DISTRIBUCIÓN - EDITAR TIPO OPERADOR
+{% block titulo %}
+    EDITAR TIPO OPERADOR {{ entity.operador | upper}}
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("distribucion_homepage") }}">DISTRIBUCIÓN INICIO</a></li>
+  <li><a href="{{ path("tipooperador") }}">LISTA DE TIPO DE OPERADORES</a></li>
+  <li class="active">EDITAR TIPO DE OPERADOR</li>
+</ol>
 {% endblock %}
 
 {% block body %}
     {{ parent() }}
 
-    <div class="titulo">EDITAR TIPO OPERADOR {{ entity.operador | upper}}</div>
-
     <form novalidate class="formNewEditOperador" action="{{ path('tipooperador_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
 
         {{ form_widget(edit_form._token) }}
-        <fieldset>
-            <legend id="a"><div class="divisor">EDITAR DATOS DE TIPO OPERADOR</div></legend>
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.operador) }}</div>
-                    <div class="labels">Tipo:</div>
-                    <div class="widgets">{{ form_widget(edit_form.operador) }}</div>
-                </div>
-
-                
-                <div class="form-contenedor">
-                    <div>{{ form_errors(edit_form.codigo) }}</div>
-                    <div class="labels">Código:</div>
-                    <div class="widgets">{{ form_widget(edit_form.codigo, { 'attr': {'readonly': 'readonly' } }) }}</div>
+        <div class="formShow" style="width:500px;">
+                <div class="contenedorform">
+                    <div class="text-danger">{{ form_errors(edit_form.operador) }}</div>
+                    <div class="labelform">Tipo:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.operador) }}</div>
                 </div>
                 
-        </fieldset>
+                <div class="contenedorform">
+                    <div class="text-danger">{{ form_errors(edit_form.codigo) }}</div>
+                    <div class="labelform">Código:</div>
+                    <div class="widgetform">{{ form_widget(edit_form.codigo, { 'attr': {'readonly': 'readonly' } }) }}</div>
+                </div>
+        </div>                
         <br>
-            <button class="btn" type="submit">Editar</button> |
+            <button class="btn btn-primary" type="submit">EDITAR</button> |
 
-            <a class="btn" href="{{ path('tipooperador') }}">Ir a lista</a>
+            <a class="btn btn-default" href="{{ path('tipooperador') }}">IR A LA LISTA</a>
     </form>
 
     <form action="{{ path('tipooperador_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Seguro que desea borrar?')">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button class="btn btn-danger" type="submit">Borrar</button>
+        <button class="btn btn-danger" type="submit">BORRAR</button>
     </form>
 {% endblock %}

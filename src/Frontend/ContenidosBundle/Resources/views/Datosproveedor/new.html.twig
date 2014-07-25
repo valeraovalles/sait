@@ -24,7 +24,7 @@
     <form novalidate="novalidate" action="{{ path('datosproveedor_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
         <fieldset>            
             <div id="descripcion" class="form-show_edit">
-                <legend id="a"><div class="divisor">DATOS DEL PROVEEDOR</div> </legend>
+                <div class="divisor">DATOS DEL PROVEEDOR</div>
                 <div class="form-contenedor">
                     {{ form_errors(form.nombre) }}
                     <div class="labels">Nombre:</div>
@@ -71,7 +71,7 @@
                     <div class="widgets">{{ form_widget(form.pais) }}</div>
                 </div>
             <br>           
-            <legend id="b"><div class="divisor">DATOS DEL REPRESENTANTE</div> </legend>
+            <div class="divisor">DATOS DEL REPRESENTANTE</div>
                 <div class="form-contenedor">
                     {{ form_errors(form.nombreRepr) }}
                     <div class="labels">Nombre:</div>
@@ -108,7 +108,7 @@
                     <div class="widgets">{{ form_widget(form.skypeRepr) }}</div>
                 </div>       
             <br>
-            <legend id="c"><div class="divisor">DATOS DEL REPRESENTANTE</div> </legend>
+            <div class="divisor">DATOS DEL PROVEEDOR</div>
                 <div class="form-contenedor">
                     {{ form_errors(form.idTipoprov) }}
                     <div class="labels">Tipo de Proveedor:</div>

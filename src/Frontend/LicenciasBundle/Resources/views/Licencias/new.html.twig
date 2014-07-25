@@ -1,14 +1,21 @@
 {% extends '::licencias.html.twig' %}
-{% block title %}Licencias - Nueva{% endblock %}
 
-{% block titulobanner %}
-    TECNOLOGIA - LICENCIAS
+{% block title %}Licencia nueva{% endblock %}
+
+{% block titulo %}
+    NUEVA LICENCIA
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("licencias_homepage") }}">LICENCIAS INICIO</a></li>
+  <li class="active">NUEVA LICENCIA</li>
+</ol>
+{% endblock %}
     
 {% block body -%}
     {{ parent() }}
-    <div class="titulo">NUEVA LICENCIA</div>
     <div class="form-show_edit"><br>
     <form novalidate action="{{ path('licencias_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
@@ -44,7 +51,7 @@
                 <div class="dato">{{ form_widget(form.codigo) }}</div>
             </div>
         <p>
-            <button class="btn" type="submit">Crear</button>
+            <button class="btn btn-primary" type="submit">CREAR</button>
         </p>
     </form>
 </div><br><br>

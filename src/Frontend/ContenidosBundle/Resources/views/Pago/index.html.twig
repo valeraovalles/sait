@@ -53,6 +53,10 @@
 
                     <a href="{{ path('pago_control', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="control del pago"><img width="22px" src="{{ asset('images/dinero.jpg')}}"></a>
 
+                    {% if is_granted('ROLE_CONTENIDOS_ADMIN') %}
+                        <a href="{{ path('pago_control_ruta', { 'id': entity.id, 'id_contratacion':id_contratacion, 'id_presupuesto':id_presupuesto, 'id_proveedor':id_proveedor }) }}" data-toggle="tooltip" data-placement="top" title="ruta del pago"><img width="22px" src="{{ asset('images/ruta.jpg')}}"></a>
+                    {% endif %}
+
                 </td>
             </tr>
         {% endfor %}

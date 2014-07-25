@@ -1,18 +1,23 @@
 {% extends '::constancia.html.twig' %}
  
-{% block title %}Constancia{% endblock %}
+{% block title %}Editar constancia{% endblock %}
 
+{% block titulo %}
+    EDITAR CONSTANCIA
+{% endblock %}
 
-{% block titulobanner %}
-    CONSTANCIA DE TRABAJO
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("constancia") }}">CONSTANCIA INICIO</a></li>
+  <li class="active">CONSTANCIA EDITAR</li>
+</ol>
 {% endblock %}
 
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">SELECCIONE LOS PARÁMETROS</div>
-
     <form action="{{ path('constancia_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
         {{ form_widget(edit_form._token) }}
@@ -75,16 +80,16 @@
             </div>
         </div>
 
-        <button class="btn btn-primary" type="submit">Editar</button> | 
-        <a class="btn" href="{{ path('constancia') }}">
-            Ir a la lista
+        <button class="btn btn-primary" type="submit">EDITAR</button> | 
+        <a class="btn btn-default" href="{{ path('constancia') }}">
+            IR A LA LISTA
         </a>
 
     </form>
 
-    <form action="{{ path('constancia_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Está seguro que desea borrar?')">
+    <form style="display:none;" action="{{ path('constancia_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirm('¿Está seguro que desea borrar?')">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button class="btn btn-danger" type="submit">Borrar</button>
+        <button class="btn btn-danger" type="submit">BORRAR</button>
     </form>
 {% endblock %}

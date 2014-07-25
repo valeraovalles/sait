@@ -1,17 +1,27 @@
 {% extends '::directorio.html.twig' %}
 
+{% block title %}Lista de Instituciones{% endblock %}
+
+{% block titulo %}
+    LISTA DE INSTITUCIONES
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("directorio_homepage") }}"> DIRECTORIO INICIO</a></li>
+  <li class="active">LISTA DE INSTITUCIONES</li>
+</ol>
+{% endblock %}
+
 {% block body -%}
     {{parent()}}
-<br>
-    <h2>LISTADO DE INSTITUCIONES</h2><br><br>
-
-    <table id="tablalista" style="width: 97%;">
+    <table id="tabladatatable">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Institucion</th>
-                <th>Area</th>
-                <th>Email</th>
+                <th>Area</th> 
                 <th>Pais</th>
                 <th>Actiones</th>
             </tr>
@@ -22,16 +32,13 @@
                 <td><a href="{{ path('institucion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.institucion }}</td>
                 <td>{{ entity.areainst }}</td>
-                <td>{{ entity.emailinst }}</td>
-                <td>{{ entity.pais }}</td>
-                
-                    <td>
-                        {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
-                        <a href="{{ path('institucion_edit', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-edit"></i></a>
-                        {% endif %}
-                        <a href="{{ path('institucion_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="icon-search"></i></a>
-                    </td>
-                
+                 <td>{{ entity.pais }}</td>                
+                <td>
+                    <a href="{{ path('institucion_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
+                    {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
+                        <a href="{{ path('institucion_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></a>
+                    {% endif %}                  
+                </td>                
             </tr>
         {% endfor %}
         </tbody>
@@ -39,8 +46,17 @@
     {% if is_granted('ROLE_DIRECTORIO_ADMIN') %}
     <br><br><br><br>
 
-    <a class="btn btn-primary" href="{{ path('institucion_new') }}">
+    <a class="btn btn-default" href="{{ path('institucion_new') }}">
         NUEVA INSTITUCIÓN
     </a>{% endif %}<br><br>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'asc'],[1,'asc']],
+            } );
+        })
+    </script>
 
     {% endblock %}

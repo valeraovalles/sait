@@ -26,29 +26,37 @@
             
             <div id="descripcion" class="form-show_edit">
 
-                <legend id="b"><div class="divisor">DATOS DE UNIDAD EJECUTORA</div> </legend>
+                <div class="divisor">DATOS DE UNIDAD EJECUTORA</div>
                 <div class="form-contenedor">
                     {{ form_errors(form.idUnidadejec) }}
                     <div class="labels">Unidad Ejecutora:</div>
                     <div class="dato">{{ form_widget(form.idUnidadejec) }}</div>
                 </div>
-
                 <div class="form-contenedor">
                     <div class="labelss">Fecha de Entrega en RRHH:</div>
-                    <div class="datos">{{ form_widget(form1.fechaUnidaduno) }}</div>
+                    <div class="datos">{{ form_widget(form1.fechaUnidaduno, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div> 
                 <div class="form-contenedor">
                     <div class="labelss">Fecha de Entrega en Compras:</div>
-                    <div class="datos">{{ form_widget(form1.fechaUnidaddos) }}</div>
+                    <div class="datos">{{ form_widget(form1.fechaUnidaddos, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                 <div class="form-contenedor">
                     <div class="labelss">Fecha de Entrega en Oficina Directora:</div>
-                    <div class="datos">{{ form_widget(form1.fechaUnidadtres) }}</div>
+                    <div class="datos">{{ form_widget(form1.fechaUnidadtres, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
                                 
 {# DIAS DE ENTREGA #}
                 {% if compras == 1 %}
-                    <legend id="b"><div class="divisor">CONDICIONES DEL PAGO</div> </legend>
+                    <div class="divisor">CONDICIONES DEL PAGO</div>
                     <div class="form-contenedor">
                         {{ form_errors(form.contraEntrega) }}
                         <div class="labels">Pago Contra Entrega:</div>
@@ -57,7 +65,7 @@
                 {% endif %}
 
                 <div id="vista"></div>
-                <legend id="a"><div class="divisor">DATOS DEL PAGO</div> </legend>
+                <div class="divisor">DATOS DEL PAGO</div>
                 <div class="form-contenedor">
                     {{ form_errors(form.numMemo) }}
                     <div class="labels">N&uacute;mero del Memorandum:</div>
@@ -71,7 +79,10 @@
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaFactura) }}
                     <div class="labels">Fecha de factura:</div>
-                    <div class="dato">{{ form_widget(form.fechaFactura) }}</div>
+                    <div class="dato">{{ form_widget(form.fechaFactura, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
 
                 {% if tipomoneda == 1 %}
@@ -106,7 +117,10 @@
                 <div class="form-contenedor">
                     {{ form_errors(form.fechaPago) }}
                     <div class="labels">Fecha del Pago:</div>
-                    <div class="dato">{{ form_widget(form.fechaPago) }}</div>
+                    <div class="dato">{{ form_widget(form.fechaPago, 
+                                    {'attr': 
+                                        {'class': "fecha"}
+                                    }) }}</div>
                 </div>
 
 
@@ -126,8 +140,8 @@
                 $('#vista').load(ruta);
             });
         });
+        $(function () {
+            $(".fecha").datepicker();
+        });
     </script>
-
 {% endblock %}
-
-

@@ -1,0 +1,60 @@
+{% extends '::transporte.html.twig' %}
+ 
+{% block title %}Crear de Vehiculos{% endblock %}
+
+{% block titulo %}
+    CREAR VEHICULO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("vehiculos_list") }}">LISTADO DE VEHICULOS</a></li>
+  <li class="active">CREAR VEHICULO</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    <form action="{{ path('personalexterno_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
+
+        <div class="formShow">
+            <br>
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(form.tipo) }}</div>
+                <div class="labelform">Tipo:</div>
+                <div class="widgetform">{{ form_widget(form.tipo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(form.placa) }}</div>
+                <div class="labelform">Placa:</div>
+                <div class="widgetform">{{ form_widget(form.placa) }}</div>
+            </div>        
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(form.modelo) }}</div>
+                <div class="labelform">Modelo:</div>
+                <div class="widgetform">{{ form_widget(form.modelo) }}</div>
+            </div>        
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(form.ano) }}</div>
+                <div class="labelform">Año:</div>
+                <div class="widgetform">{{ form_widget(form.ano) }}</div>
+            </div>        
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(form.color) }}</div>
+                <div class="labelform">Color:</div>
+                <div class="widgetform">{{ form_widget(form.color) }}</div>
+            </div>        
+            <div class="contenedorform">
+                <div class="text-error">{{ form_errors(form.estatus) }}</div>
+                <div class="labelform">Estatus:</div>
+                <div class="widgetform">{{ form_widget(form.estatus) }}</div>
+            </div> 
+        </div>
+        <br><br>
+            <button class="btn btn-primary" type="submit">CREAR</button> |
+        <a class="btn btn-default" href="{{ path('vehiculos_list') }}">VOLVER</a>
+        <br>
+    </form>  
+{% endblock %}

@@ -27,6 +27,7 @@ class Institucion
      * @var string
      *
      * @ORM\Column(name="institucion", type="string", nullable=false)
+     * @Assert\NotBlank()
      */
     private $institucion;
 
@@ -34,6 +35,7 @@ class Institucion
      * @var string
      *
      * @ORM\Column(name="director", type="string", nullable=false)
+     * @Assert\NotBlank()
      */
     private $director;
 
@@ -41,6 +43,7 @@ class Institucion
      * @var string
      *
      * @ORM\Column(name="areainst", type="string", nullable=false)
+     * @Assert\NotBlank()
      */
     private $areainst;
 
@@ -48,6 +51,7 @@ class Institucion
      * @var string
      *
      * @ORM\Column(name="telfinst", type="string", length=100, nullable=false)
+     * @Assert\NotBlank()
      */
     private $telfinst;
 
@@ -55,13 +59,15 @@ class Institucion
      * @var string
      *
      * @ORM\Column(name="emailinst", type="string", nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $emailinst;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="direccion", type="string", nullable=false)
+     * @ORM\Column(name="direccion", type="string", nullable=true)
      */
     private $direccion;
 

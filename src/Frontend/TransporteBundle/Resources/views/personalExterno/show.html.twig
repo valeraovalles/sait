@@ -1,0 +1,38 @@
+{% extends '::transporte.html.twig' %}
+ 
+{% block title %}Detalle de Personal Externo{% endblock %}
+
+{% block titulo %}
+    DETALLE DE PERSONAL EXTERNO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("personalexterno_list") }}">LISTADO PERSONAL EXTERNO</a></li>
+  <li class="active">DETALLE DE PERSONAL EXTERNO</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <div class="formShow">       
+        <div class="contenedorform">
+            <div class="labelform">Cédula:</div>
+            <div class="widgetform">{{ entity.cedula }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Nombre y Apellido:</div>
+            <div class="widgetform">{{ entity.nombre|upper }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Teléfono:</div>
+            <div class="widgetform">{{ entity.telefono }}</div>
+        </div>
+    </div>
+
+    <br><br>
+    <a class="btn btn-default" href="{{ path('personalexterno_list') }}">IR A LA LISTA</a> |
+    <a class="btn btn-default" href="{{ path('personalexterno_edit', { 'id': entity.id }) }}">IR A EDITAR</a><br><br>
+
+{% endblock %}
