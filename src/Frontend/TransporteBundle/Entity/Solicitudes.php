@@ -98,9 +98,9 @@ class Solicitudes
     /**
      * @var string
      *
-     * @ORM\Column(name="justificacion_rechazo", type="string", length=255, nullable=true)
+     * @ORM\Column(name="justificacion", type="string", length=255, nullable=true)
      */
-    private $justificacionRechazo;
+    private $justificacion;
 
     /**
      * @var string
@@ -355,26 +355,26 @@ class Solicitudes
     }
 
     /**
-     * Set justificacionRechazo
+     * Set justificacion
      *
-     * @param string $justificacionRechazo
+     * @param string $justificacion
      * @return Solicitudes
      */
-    public function setJustificacionRechazo($justificacionRechazo)
+    public function setJustificacion($justificacion)
     {
-        $this->justificacionRechazo = $justificacionRechazo;
+        $this->justificacion = $justificacion;
     
         return $this;
     }
 
     /**
-     * Get justificacionRechazo
+     * Get justificacion
      *
      * @return string 
      */
-    public function getJustificacionRechazo()
+    public function getJustificacion()
     {
-        return $this->justificacionRechazo;
+        return $this->justificacion;
     }
 
     /**

@@ -61,6 +61,10 @@ solicitudes_rechazar:
     pattern:  /solicitudes/{id}/rechazar
     defaults: { _controller: "TransporteBundle:Solicitudes:rechazar" }
 
+solicitudes_aprobar:
+    pattern:  /solicitudes/{id}/aprobar
+    defaults: { _controller: "TransporteBundle:Solicitudes:aprobar" }
+
 
 #ASIGNACIONES
 asignaciones:

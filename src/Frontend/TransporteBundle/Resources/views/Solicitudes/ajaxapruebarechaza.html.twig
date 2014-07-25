@@ -1,0 +1,9 @@
+<div class="contenedorform" id="muestra"a>
+    <div class="labelform" style="width:35%;">Justificaci&oacute;n:</div>
+    <div class="widgetform">{{ form_widget(form.justificacion, { 'attr': {'style': 'width:100%;height:100px;'} }) }}</div>
+</div>
+{% if datos == 'AP' %}
+    <BR><button class="btn btn-primary" type="submit">APROBAR SOLICITUD</button>
+{% else %}
+    <BR><button class="btn btn-primary" type="submit">RECHAZAR SOLICITUD</button>
+{% endif %}
