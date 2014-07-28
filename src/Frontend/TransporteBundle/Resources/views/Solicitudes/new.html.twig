@@ -61,12 +61,12 @@
             </div>    
             <div class="contenedorform">
                 <div class="text-error">{{ form_errors(form.asistentes) }}</div>
-                <div class="widgetform">  {{ form_widget(form.asistentes) }}</div>            
+                <div class="widgetform">  {{ form_widget(form.asistentes) }} </div>    
                 <div class="labelform">Personal a Trasladar:</div>    
                 <div class="widgetform" id="lista">                                                
-                    <input type="text" id="buscar" placeholder="Buscar" title="Escriba los nombres para listar. Recuerde diferenciar  minúsculas de mayúsculas" autocomplete=off>                                                 
-                    <div id="ajaxlistado"></div>
-                    <select style="width:250px;height:100px;" multiple name="asistentes_tmp" id="asistentes_tmp" title="Haga click para eliminar de la lista"></select>                
+                    <input type="text" id="buscar" placeholder="Coloque aqui la cédula o nombre a buscar" title="Escriba los nombres para listar. Recuerde diferenciar  minúsculas de mayúsculas" style="width:350px;height:50px;" autocomplete=off>                                                 
+                    <div id="ajaxlistado" 'attr': {'style': 'width:200%;height:400px;' ></div>
+                    <select style="width:350px;height:300px;" multiple name="asistentes_tmp" id="asistentes_tmp" title="Haga click para eliminar de la lista"></select>                
                     <script type="text/javascript">
                     //ajax para buscar usuarios
                     $('#form_solicitud_asistentes').val('');
