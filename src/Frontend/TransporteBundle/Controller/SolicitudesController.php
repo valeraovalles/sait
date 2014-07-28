@@ -80,7 +80,7 @@ class SolicitudesController extends Controller
             
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Solicitud de transporte')       // we configure the title
-            ->setTo(array($usuario->getUsername().'@telesurtv.net', 'lpadilla@telesurtv.net'))
+            ->setTo(array($usuario->getUsername().'@telesurtv.net', 'aplicaciones@telesurtv.net'))
             ->setFrom('app_transporte@telesurtv.net')    // we configure the recipient
             ->setBody( $this->renderView(
                         'TransporteBundle:Correo:solicitud_transporte.html.twig',
