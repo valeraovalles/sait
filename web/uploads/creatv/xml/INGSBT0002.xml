@@ -2,9 +2,9 @@
         <XML>
             <Content>UPDATE</Content>
             <Clip>
-                <ClipName>INGIFM0002</ClipName>
+                <ClipName>INGSBT0002</ClipName>
                 <TipoContenido>INGLES</TipoContenido>
-                <Contenido><![CDATA[ INTERVIEWS FROM MEXICO 31JUL14]]></Contenido>
+                <Contenido><![CDATA[ THE STORIES B T T 04AGO14 ]]></Contenido>
                 <OriginalTitle></OriginalTitle>
                 <Description> </Description>
                 <Notes>a</Notes>
@@ -16,8 +16,8 @@
                 <Segments>
             
                 <Segment>
-                    <SegTitle>1-1 INTERVIEWS FROM MEXICO   - INTERVIEWS FROM MEXICO 31JUL14</SegTitle>
-                    <MediaID>INGIFM000201</MediaID>
+                    <SegTitle>1-1 THE STORIES BEHIND THE TWEETS        - THE STORIES B T T 04AGO14 </SegTitle>
+                    <MediaID>INGSBT000201</MediaID>
                     <Duration>00:24:00.00</Duration>
                     <SegNumber>1</SegNumber>
                     <ClipGroup>PROGRAMA</ClipGroup>

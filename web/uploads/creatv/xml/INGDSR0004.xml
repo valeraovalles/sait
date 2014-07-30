@@ -2,9 +2,9 @@
         <XML>
             <Content>UPDATE</Content>
             <Clip>
-                <ClipName>INGIFM0002</ClipName>
+                <ClipName>INGDSR0004</ClipName>
                 <TipoContenido>INGLES</TipoContenido>
-                <Contenido><![CDATA[ INTERVIEWS FROM MEXICO 31JUL14]]></Contenido>
+                <Contenido><![CDATA[ N DONT STOP REBEL DIAZ 06AGO14]]></Contenido>
                 <OriginalTitle></OriginalTitle>
                 <Description> </Description>
                 <Notes>a</Notes>
@@ -16,9 +16,9 @@
                 <Segments>
             
                 <Segment>
-                    <SegTitle>1-1 INTERVIEWS FROM MEXICO   - INTERVIEWS FROM MEXICO 31JUL14</SegTitle>
-                    <MediaID>INGIFM000201</MediaID>
-                    <Duration>00:24:00.00</Duration>
+                    <SegTitle>1-1 N DONT STOP REBEL DIAZ - N DONT STOP REBEL DIAZ 06AGO14</SegTitle>
+                    <MediaID>INGDSR000401</MediaID>
+                    <Duration>00:10:00.00</Duration>
                     <SegNumber>1</SegNumber>
                     <ClipGroup>PROGRAMA</ClipGroup>
                     <Description> </Description>
