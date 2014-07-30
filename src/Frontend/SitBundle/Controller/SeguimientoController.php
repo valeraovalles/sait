@@ -133,7 +133,7 @@ class SeguimientoController extends Controller
             foreach ($a as $p) {
                 $email[]=$p;
             }
-            $email[]='aplicaciones@telesurtv.net';
+            $email[]=$ticket->getUnidad()->getCorreo();
             
             //CORREO
             $message = \Swift_Message::newInstance()  
@@ -195,11 +195,12 @@ class SeguimientoController extends Controller
         $em->flush();  
         
 
+        
         //CORREO
         $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
         ->setSubject('Sit-Comentario')     // we configure the title
         ->setFrom($perfil->getUser()->getUsername().'@telesurtv.net')     // we configure the sender
-        ->setTo('aplicaciones@telesurtv.net')    // we configure the recipient
+        ->setTo($ticket->getUnidad()->getCorreo())    // we configure the recipient
         ->setBody($datos.'<br><b>Comentario de la solicitud:</b> '.$ticket->getSolicitud().'<br><br><b>ID:</b> '.$ticket->getId(), 'text/html');
 
         $this->get('mailer')->send($message);    // then we send the message.
