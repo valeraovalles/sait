@@ -3,59 +3,37 @@
 {% block javascripts %}
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript">
-    $(function () {
-    var chart;
-    
-    $(document).ready(function () {
-    	
-    	// Build the chart
-        $('#container-so').highcharts({
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-            title: {
-                text: 'Browser market shares at a specific website, 2014'
-            },
-            tooltip: {
-        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
+        $(function () {
+            $('#container-so').highcharts({
+                chart: {
+                    type: 'pie'
+                },
+
+                series: [{}]
+            });
+
+
+            // the button action
+            $('#button').click(function() {
+                var chart = $('#container-so').highcharts();
+                $.ajax({
+                    url: '{{ path("logs_charts_so") }}',
+                    success: function(point) {
+                        chart.series[0].setData(point);
+                        // call it again after one second
+                        //setTimeout(requestData, 3000);    
                     },
-                    showInLegend: true
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Browser share',
-                data: [
-                    ['Firefox',   45.0],
-                    ['IE',       26.8],
-                    {
-                        name: 'Chrome',
-                        y: 12.8,
-                        sliced: true,
-                        selected: true
-                    },
-                    ['Safari',    8.5],
-                    ['Opera',     6.2],
-                    ['Others',   0.7]
-                ]
-            }]
+                    cache: false
+                });
+                //chart.series[0].setData([129.2, 144.0, 176.0]);
+            });
         });
-    });
-    
-});
     </script>
 {% endblock %}
 <div class="panel panel-default">
-        <div class="panel-heading">Registro de S.O</div>
+        <div class="panel-heading">Registro de S.O
+        <button id="button" class="autocompare">Set new data</button>
+        </div>
         <div class="panel-body" id="container-so">
         Panel content
         </div>

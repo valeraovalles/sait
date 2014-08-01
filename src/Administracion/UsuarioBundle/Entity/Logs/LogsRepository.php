@@ -39,10 +39,22 @@ class logsRepository extends EntityRepository{
     
     public function findRecordMin(){
         $query = $this->getEntityManager()->createQuery("
-            SELECT count(Logs.ip) FROM UsuarioBundle:Logs\Logs Logs
+            SELECT count(distinct Logs.ip) FROM UsuarioBundle:Logs\Logs Logs
         ");
 
         return $query->getResult();
-        
     }
+    
+//    SELECT COUNT(ip) FROM (SELECT DISTINCT(ip) FROM logs_analitics WHERE navegador LIKE '%Linux%') AS foo
+    public function findSO($so, $em){
+                     
+        $query = $em->createQuery(
+            'SELECT COUNT(DISTINCT Logs.ip)
+               FROM UsuarioBundle:Logs\Logs Logs
+              WHERE Logs.navegador LIKE :so'
+        )->setParameter('so', '%'.$so.'%');
+         
+        return $query->getResult();
+    }
+        
 }

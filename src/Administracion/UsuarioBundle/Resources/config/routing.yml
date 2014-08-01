@@ -143,4 +143,8 @@ logs_general:
 
 logs_charts_live: 
     pattern:  /logs/live
-    defaults: { _controller: "UsuarioBundle:Logs/Default:dataLive" }
+    defaults: { _controller: "UsuarioBundle:Logs/Default:dataVisitaLive" }
+    
+logs_charts_so: 
+    pattern:  /logs/so
+    defaults: { _controller: "UsuarioBundle:Logs/Default:dataSOLive" }
