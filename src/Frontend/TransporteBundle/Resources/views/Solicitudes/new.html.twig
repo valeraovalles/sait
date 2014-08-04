@@ -13,6 +13,21 @@
   <li class="active">CREAR SOLICITUD</li>
 </ol>
 {% endblock %}
+{% block stylesheets %}
+ {{ parent() }} 
+ <style type="text/css">
+     /* select with CSS avatar icons */
+    option.avatar {
+      background-repeat: no-repeat !important;
+      padding-left: 20px;
+    }
+    .avatar .ui-icon-closethick {
+      background-position: left top;
+      background: url("{{ asset("images/images/ui-icons_2e83ff_256x240.png") }}");
+    }
+ </style>
+   
+{% endblock %}
 {% block body -%}
     {{ parent() }}
 
@@ -102,6 +117,7 @@
                       });
 
                     });
+
                     //armar lista de usuarios seleccionados
                     function armarlista(valor){
                         var existe=false;                    
@@ -116,7 +132,21 @@
                         if (existe)
                             alert("Ya este usuario fue seleccionado: "+valor);
                         else
-                            $('#asistentes_tmp').append('<option value="' + valor + '-'+tip+'">' + valor +'-'+tip+'</option>');          
+
+                           $('#asistentes_tmp').append(' <option value="' + valor + '-'+tip+'" data-style="background-image: url("{{ asset("images/images/ui-icons_2e83ff_256x240.png") }}");">' + valor +'-'+tip+'</option>');
+
+                    //    $('#asistentes_tmp').append('<option value="' + valor + '-'+tip+'" data-class="avatar" data-style="background-image: url("{{ asset("images/images/ui-icons_2e83ff_256x240.png") }}");">' + valor +'-'+tip+'</option>');
+
+
+                      
+      
+       
+      
+
+
+
+
+
                         actAsistentes();
                         //$('#lista select option').attr('selected','selected');
                         $('#ajaxlistausuario').hide()
@@ -129,7 +159,7 @@
                         var lista="";
                         for (var i = 0; i < sel.length; i++) 
                         {                        
-                            lista+=sel[i].value+", ";                                              
+                            lista+=sel[i].value+", ";  
                         }                    
                         document.getElementById("form_solicitud_asistentes").value=lista;
                     }
@@ -174,3 +204,42 @@
     </form>
 
 {% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script>
+  $(function() {
+    $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
+      _renderItem: function( ul, item ) {
+        var li = $( "<li>", { text: item.label } );
+ 
+        if ( item.disabled ) {
+          li.addClass( "ui-state-disabled" );
+        }
+ 
+        $( "<span>", {
+          style: item.element.attr( "data-style" ),
+          "class": "ui-icon " + item.element.attr( "data-class" )
+        })
+          .appendTo( li );
+ 
+        return li.appendTo( ul );
+      }
+    });
+ 
+    $( "#filesA" )
+      .iconselectmenu()
+      .iconselectmenu( "menuWidget" )
+        .addClass( "ui-menu-icons" );
+ 
+    $( "#filesB" )
+      .iconselectmenu()
+      .iconselectmenu( "menuWidget" )
+        .addClass( "ui-menu-icons customicons" );
+ 
+    $( "#people" )
+      .iconselectmenu()
+      .iconselectmenu( "menuWidget")
+        .addClass( "ui-menu-icons avatar" );
+  });
+  </script>
+  {% endblock %}

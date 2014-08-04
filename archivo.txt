@@ -1,0 +1,26 @@
+total 108804
+-rwxrwxrwx  1 root     root            0 jul 25 17:22 2
+drwxrwxrwx  6 lpadilla lpadilla     4096 jul 25 14:16 app
+-rwxrwxrwx  1 lpadilla lpadilla   163314 jul 16 10:00 architect.log
+-rw-rw-r--  1 lpadilla lpadilla        0 jul 29 13:01 archivo.txt
+drwxrwxrwx  2 lpadilla lpadilla     4096 jul 25 17:22 bin
+-rwxrwxrwx  1 lpadilla lpadilla      756 jul 25 14:16 comandos_git.txt
+-rwxrwxrwx  1 lpadilla lpadilla      754 jul 25 14:16 comandos_git.txt~
+-rwxrwxrwx  1 lpadilla lpadilla     2144 jul 25 14:16 composer.json
+-rwxrwxrwx  1 lpadilla lpadilla    58654 jul 25 14:16 composer.lock
+-rwxrwxrwx  1 lpadilla lpadilla   961843 jul 25 14:16 composer.phar
+-rwxrwxrwx  1 lpadilla lpadilla     1897 jul 16 10:00 h.backup
+-rwxrwxrwx  1 lpadilla lpadilla       57 jul 16 10:00 index.php
+-rwxrwxrwx  1 lpadilla lpadilla     1065 jul 16 10:00 LICENSE
+drwxrwxrwx  2 lpadilla lpadilla     4096 jul 16 10:01 nbproject
+-rwxrwxrwx  1 lpadilla lpadilla      110 jul 25 14:16 newEmptyPHP.php
+-rwxrwxrwx  1 lpadilla lpadilla       33 jul 16 10:00 README.md
+-rwxrwxrwx  1 lpadilla lpadilla     8380 jul 25 14:16 renombrar.php
+-rwxrwxrwx  1 lpadilla lpadilla    10240 jul 16 10:00 sait
+-rwxrwxrwx  1 lpadilla lpadilla 11924269 jul 16 10:00 sait.backup
+-rwxrwxrwx  1 lpadilla lpadilla 98199770 jul 25 14:16 sait.zip
+drwxrwxrwx  5 lpadilla lpadilla     4096 jul 16 10:00 src
+-rwxrwxrwx  1 lpadilla lpadilla     1308 jul 16 10:00 UPGRADE-2.2.md
+-rwxrwxrwx  1 lpadilla lpadilla     8495 jul 16 10:00 UPGRADE.md
+drwxrwxrwx 14 lpadilla lpadilla     4096 jul 25 14:16 vendor
+drwxrwxrwx  8 lpadilla lpadilla     4096 jul 25 14:16 web
