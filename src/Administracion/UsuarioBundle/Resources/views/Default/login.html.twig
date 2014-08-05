@@ -7,6 +7,14 @@
 {% endblock %}
 
 {% block body %}
+<ol class="breadcrumb" style="text-align: left;font-weight: bold;">
+<li><a href="http://intranet.telesurtv.net">VOLVER A LA INTRANET</a></li>
+<li><a href="http://telesurtv.net">IR A LA WEB DE TELESUR</a></li>
+<li class="active">SAIT</li>
+<span class="text-danger" style="float: right;font-size: 13px;">SE RECOMIENDA EL USO DE FIREFOX O CHROME <a href="http://www.google.co.ve/intl/es-419/chrome/"><img width="20px" src="{{ asset('images/chrome.png') }}"></a>  <a href="https://www.mozilla.org/"><img width="20px" src="{{ asset('images/firefox.png') }}"></a></span>
+</ol>
+  
+  
     <script type="text/javascript">
         if(navigator.appVersion.indexOf("MSIE 7.")!=-1){
 
@@ -16,7 +24,7 @@
     }
     </script>
 
-    <p class="text-info"><marquee scrollamount="3">SE RECOMIENDA EL USO DE CHROME O FIREFOX</marquee></p>
+    
     
     {% block mensaje %}
         {% if error %}
