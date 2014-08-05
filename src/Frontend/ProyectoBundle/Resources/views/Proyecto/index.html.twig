@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Proyecto list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Fechainicio</th>
+                <th>Estatus</th>
+                <th>Porcentaje</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a></td>
+                <td>{{ entity.descripcion }}</td>
+                <td>{% if entity.fechainicio %}{{ entity.fechainicio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.estatus }}</td>
+                <td>{{ entity.porcentaje }}</td>
+                <td>{{ entity.id }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('proyecto_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('proyecto_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('proyecto_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
