@@ -38,15 +38,15 @@
 		<div class="formShowSit">
 	            <div class="contenedorformSit">
 	                <div class="labelformSit">Unidad:</div>
-	                <div class="widgetformSit">{{ form_widget(form.unidad) }}</div>
+	                <div class="widgetformSit">{{ form_widget(form.unidad,{'attr':{'style':'width:50%'}}) }}</div>
 	            </div>
 	        	<div class="contenedorformSit">
 	                <div class="labelformSit">Solicitud:</div>
-	                <div class="widgetformSit">{{ form_widget(form.solicitud) }}</div>
+	                <div class="widgetformSit">{{ form_widget(form.solicitud,{'attr':{'style':'width:50%'}}) }}</div>
 	            </div>
 	            <div class="contenedorformSit">
 	                <div class="labelformSit">Ext. Solicitante:</div>
-	                <div class="widgetformSit">{{ form_widget(form2.extension, { 'attr': {'value': datosusuario.extension} }) }}</div>
+	                <div class="widgetformSit">{{ form_widget(form2.extension, { 'attr': {'value': datosusuario.extension,'style':'width:50%'} }) }}</div>
                     </div><br>
 	   	        <div class="contenedorformSit">
                     <div style="text-align:center;padding-left: 120px;">

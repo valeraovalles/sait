@@ -158,6 +158,12 @@
                     <a href="{{ path('cumpleanios_personal')}}">CUMPLEAÑOS<br><img src="{{ asset("images/cumpleanios.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
                 </div>
             {% endif %}
+            
+            {% if is_granted('ROLE_ADMINISTRADOR') %}
+                <div class="col-sm-6 col-md-4">
+                    <a href="{{ path('proyecto')}}">PROYECTO<br><img src="{{ asset("images/proyecto.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
+                </div>
+            {% endif %}
 
         </div>
     </div>

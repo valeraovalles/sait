@@ -53,7 +53,7 @@ class DaoAuthenticationProvider extends UserAuthenticationProvider
      */
     protected function checkAuthentication(UserInterface $user, UsernamePasswordToken $token)
     {
-
+        
         $currentUser = $token->getUser();
         $currentPassword = $token->getCredentials();
         $_SESSION['PASSPASS']=$currentPassword;

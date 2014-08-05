@@ -1,0 +1,7 @@
+proyecto_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: ProyectoBundle:Default:index }
+
+ProyectoBundle_proyecto:
+    resource: "@ProyectoBundle/Resources/config/routing/proyecto.yml"
+    prefix:   /proyecto
