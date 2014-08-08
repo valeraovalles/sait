@@ -1,15 +1,83 @@
-{% extends '::base.html.twig' %}
+{% extends '::proyecto.html.twig' %}
 
+{% block title %}Nuevo Proyecto{% endblock %}
+
+{% block titulo %}
+    NUEVO PROYECTO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
+  <li class="active">NUEVO PROYECTO</li>
+</ol>
+{% endblock %}
+    
 {% block body -%}
-    <h1>Proyecto creation</h1>
+    {{ parent()}}
+    
+    {% if form_errors(form.nombre) or form_errors(form.descripcion) or form_errors(form.fechainicio) or form_errors(form.estatus) or form_errors(form.responsable) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.nombre) }}</div>        
+        <div>{{ form_errors(form.descripcion) }}</div>
+        <div>{{ form_errors(form.fechainicio) }}</div>
+        <div>{{ form_errors(form.estatus) }}</div>
+        <div>{{ form_errors(form.responsable) }}</div>
+    </div>
+    {% endif %}
+    
+    
+     <form novalidate action="{{ path('proyecto_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
 
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('proyecto') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform">Nombre:</div>
+                <div class="widgetform">{{ form_widget(form.nombre) }}</div>
+            </div>
+            
+            <div class="contenedorform">
+                <div class="labelform">Descripción:</div>
+                <div class="widgetform">{{ form_widget(form.descripcion) }}</div>
+            </div>
+            
+            <div class="contenedorform">
+                <div class="labelform">Fecha inicio:</div>
+                <div class="widgetform">{{ form_widget(form.fechainicio) }}</div>
+            </div>
+            
+            <div class="contenedorform">
+                <div class="labelform">Estatus:</div>
+                <div class="widgetform">{{ form_widget(form.estatus) }}</div>
+            </div>
+            
+            <div class="contenedorform" style="display:none;">
+                <div class="labelform">Porcentaje:</div>
+                <div class="widgetform">{{ form_widget(form.porcentaje,{'attr':{'values':0}}) }}</div>
+            </div>
+            
+            <div class="contenedorform">
+                <div class="labelform">Responsable:</div>
+                <div class="widgetform">{{ form_widget(form.responsable) }}</div>
+            </div>
+        </div>
+        <a class="btn btn-default" href="{{ path('proyecto') }}">
+            VOLVER A LA LISTA
+        </a> | 
+        <input type="submit" class="btn btn-primary" value="CREAR PROYECTO">
+        <br><br>
+       
+     </form>
+        
+    <script>
+    $(function() {
+      $( "#frontend_proyectobundle_proyecto_fechainicio" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+      });
+    });
+    </script>
 {% endblock %}

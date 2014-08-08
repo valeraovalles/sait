@@ -1,0 +1,10 @@
+#frontend_proyectobundle_proyecto_responsable label{
+	display: block;
+}
+
+#frontend_proyectobundle_proyecto_responsable input{
+	float: left;
+	text-align: left;
+	padding: 0px;
+	margin: 0px;
+}
