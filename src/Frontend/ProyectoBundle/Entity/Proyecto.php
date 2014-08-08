@@ -3,6 +3,7 @@
 namespace Frontend\ProyectoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Proyecto
@@ -16,6 +17,7 @@ class Proyecto
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", nullable=false)
+     * @Assert\NotBlank(message="El nombre del proyecto no puede estar en blanco.")
      */
     private $nombre;
 
@@ -23,6 +25,7 @@ class Proyecto
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=500, nullable=false)
+     * @Assert\NotBlank(message="La descripcion del proyecto no puede estar en blanco.")
      */
     private $descripcion;
 
@@ -30,6 +33,7 @@ class Proyecto
      * @var \DateTime
      *
      * @ORM\Column(name="fechainicio", type="date", nullable=false)
+     * @Assert\NotBlank(message="La fecha de inicio del proyecto no puede estar en blanco.")
      */
     private $fechainicio;
 
@@ -37,6 +41,7 @@ class Proyecto
      * @var integer
      *
      * @ORM\Column(name="estatus", type="integer", nullable=false)
+     * @Assert\NotBlank(message="El estatus del proyecto no puede estar en blanco.")
      */
     private $estatus;
 
@@ -47,14 +52,22 @@ class Proyecto
      */
     private $porcentaje;
 
-    
-     /**
-     * @var \Frontend\ProyectoBundle\Entity\Actividad
+    /**
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\Perfil")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="responsable_id", referencedColumnName="id")
-     * })
+     * @ORM\ManyToMany(targetEntity="Administracion\UsuarioBundle\Entity\Perfil", inversedBy="proyecto")
+     * @ORM\JoinTable(name="proyecto.responsableproyecto",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="proyecto_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="responsable_id", referencedColumnName="id")
+     *   }
+     * )
+     * @Assert\Count(
+     *      min = "1",
+     *      minMessage = "Debe seleccionar al menos 1 encargado de proyecto.",
+     * )
      */
    
     private $responsable;
@@ -71,7 +84,10 @@ class Proyecto
     private $id;
 
 
-
+    public function __construct()
+    {
+        $this->responsable = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     /**
      * Set nombre
      *

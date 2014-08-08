@@ -5,6 +5,7 @@ namespace Frontend\ProyectoBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class ProyectoType extends AbstractType
 {
@@ -17,11 +18,22 @@ class ProyectoType extends AbstractType
         $builder
             ->add('nombre')
             ->add('descripcion')
-            ->add('fechainicio')
-            ->add('estatus')
+            ->add('fechainicio','date',array(
+                    'widget' => 'single_text',
+                    'format'   => 'dd-MM-y',  ))
+            ->add('estatus','choice',array('choices'=>array(''=>'Seleccione...',1=>'Activo',2=>'Pendiente')))
             ->add('porcentaje')
-            ->add('responsable')
-        ;
+            ->add('responsable','entity',array(
+                'class' => 'UsuarioBundle:Perfil',
+                'empty_value'=>'Seleccione...',
+                'multiple'=>true,
+                'expanded'=>true,
+                'query_builder' => function(EntityRepository $x){
+                return $x->createQueryBuilder('x')
+                ->where('x.id in (:id)')
+                ->setParameter('id', array(365,325))
+                ;}
+            ));
     }
     
     /**
