@@ -2,9 +2,9 @@
         <XML>
             <Content>UPDATE</Content>
             <Clip>
-                <ClipName>INGIFW0000</ClipName>
-                <TipoContenido>INGLES</TipoContenido>
-                <Contenido><![CDATA[ INTERVIEWS FROM WASHINGTON D.C.]]></Contenido>
+                <ClipName>PRCSPSU0210</ClipName>
+                <TipoContenido>PROMOS CAPSULAS</TipoContenido>
+                <Contenido><![CDATA[ PALESTINA KABCHI VERSION 2]]></Contenido>
                 <OriginalTitle></OriginalTitle>
                 <Description> </Description>
                 <Notes>a</Notes>
@@ -16,11 +16,11 @@
                 <Segments>
             
                 <Segment>
-                    <SegTitle>1-1 INTERVIEWS FRON WASHINGTON D.C. - INTERVIEWS FROM WASHINGTON D.C.</SegTitle>
-                    <MediaID>INGIFW000001</MediaID>
-                    <Duration>00:25:00.00</Duration>
+                    <SegTitle>1-1 CAPSULAS - PALESTINA KABCHI VERSION 2</SegTitle>
+                    <MediaID>PRCSPSU0210</MediaID>
+                    <Duration>00:01:18.00</Duration>
                     <SegNumber>1</SegNumber>
-                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <ClipGroup>PROMO</ClipGroup>
                     <Description> </Description>
                 </Segment>
             </Segments></Clip></XML>
