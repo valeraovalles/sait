@@ -9,29 +9,39 @@ use Doctrine\ORM\EntityRepository;
 
 class ProyectoType extends AbstractType
 {
+    
+    public function __construct($usuariounidad)
+    {
+        $this->usuariounidad = $usuariounidad;
+    }
         /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $usuariounidad = $this->usuariounidad;
+        foreach ($usuariounidad as $x){
+           $datos[]=$x->getId();
+        }
+        
         $builder
             ->add('nombre')
-            ->add('descripcion')
+            ->add('descripcion','textarea')
             ->add('fechainicio','date',array(
                     'widget' => 'single_text',
                     'format'   => 'dd-MM-y',  ))
             ->add('estatus','choice',array('choices'=>array(''=>'Seleccione...',1=>'Activo',2=>'Pendiente')))
-            ->add('porcentaje')
+            ->add('porcentaje','text')
             ->add('responsable','entity',array(
                 'class' => 'UsuarioBundle:Perfil',
                 'empty_value'=>'Seleccione...',
                 'multiple'=>true,
                 'expanded'=>true,
-                'query_builder' => function(EntityRepository $x){
+                'query_builder' => function(EntityRepository $x)use($datos){
                 return $x->createQueryBuilder('x')
                 ->where('x.id in (:id)')
-                ->setParameter('id', array(365,325))
+                ->setParameter('id', $datos)
                 ;}
             ));
     }
