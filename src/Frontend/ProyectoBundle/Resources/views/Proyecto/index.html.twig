@@ -3,7 +3,8 @@
 {% block title %}Proyecto{% endblock %}
 
 {% block titulo %}
-    LISTA DE PROYECTOS
+    LISTA DE PROYECTOS<br>
+    {{ perfil.nivelorganizacional.descripcion|upper }}
 {% endblock %}
 
 {% block ubicacion %}
@@ -16,50 +17,68 @@
 {% block body -%}
     {{ parent() }}
     
-    <table id="tabladatatable">
+    <table id="tabladatatable" class="table table-hover">
         <thead>
             <tr>
-                <th>Id</th>
+                <th style="display:none;">Id</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Fecha inicio</th>
                 <th>Estatus</th>
-                <th>Porcentaje</th>
+                <th>Completado</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.id }}</td>
-                <td><a href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a></td>
-                <td>{{ entity.descripcion }}</td>
-                <td>{% if entity.fechainicio %}{{ entity.fechainicio|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.estatus }}</td>
-                <td>{{ entity.porcentaje }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('proyecto_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('proyecto_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                <td style="display:none;">{{ entity.id }}</td>
+                <td><a style="font-size: 20px;color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
+                <td width="250px" style="text-align: justify;">{{ entity.descripcion }}</td>
+                <td align="center">{% if entity.fechainicio %}{{ entity.fechainicio|date('d-m-Y') }}{% endif %}</td>
+                <td align="center">
+                    {% if entity.estatus==1 %}
+                        <span class="label label-danger">NUEVO</span>
+                    {% endif %}
+                </td>
+                <td align="center">
+                    
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ entity.porcentaje }}%;">
+                            {{ entity.porcentaje }}%
+                        </div>
+                    </div>
+                </td>
+                <td align="center">
+                    
+                    <a style="color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
+                    <a style="color:black;" href="{{ path('proyecto_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a style="color:black;" href="{{ path('proyecto_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-list-alt"></span></a>
+                    
+                    
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <br><br><a class="btn btn-default" href="{{ path('proyecto_new') }}">NUEVO PROYECTO</a><br><br>
+    
+        
+    <br><br><a class="btn btn-default" href="{{ path('proyecto_new') }}">NUEVO PROYECTO</a><br><br>
+
+
+
                 
     <script type="text/javascript">
         $(document).ready(function(){
            $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-                "aaSorting": [[0,'asc'],[1,'asc']],
+                "aaSorting": [[0,'desc']],
             } );
+            $('#xx').tooltip()
         })
     </script>
+
+
+
     {% endblock %}

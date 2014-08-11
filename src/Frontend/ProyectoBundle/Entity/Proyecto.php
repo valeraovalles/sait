@@ -49,6 +49,7 @@ class Proyecto
      * @var integer
      *
      * @ORM\Column(name="porcentaje", type="integer", nullable=false)
+     * @Assert\NotBlank(message="Debe colocar un porcentaje de avance.")
      */
     private $porcentaje;
 

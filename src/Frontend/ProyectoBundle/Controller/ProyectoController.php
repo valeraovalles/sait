@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\ProyectoBundle\Entity\Proyecto;
 use Frontend\ProyectoBundle\Form\ProyectoType;
 
+use Administracion\UsuarioBundle\Resources\Misclases\Funcion;
+
 /**
  * Proyecto controller.
  *
@@ -22,12 +24,18 @@ class ProyectoController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
 
         $entities = $em->getRepository('ProyectoBundle:Proyecto')->findAll();
 
         return $this->render('ProyectoBundle:Proyecto:index.html.twig', array(
             'entities' => $entities,
+            'perfil'=>$perfil
         ));
+        
+        
+        
     }
     /**
      * Creates a new Proyecto entity.
@@ -35,15 +43,20 @@ class ProyectoController extends Controller
      */
     public function createAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $f=new Funcion; 
+        $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
+        
         $entity = new Proyecto();
-        $form = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity,$usuariounidad);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
+            $this->get('session')->getFlashBag()->add('notice', 'Proyecto creado exitosamente.');
             return $this->redirect($this->generateUrl('proyecto_show', array('id' => $entity->getId())));
         }
 
@@ -60,9 +73,9 @@ class ProyectoController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Proyecto $entity)
+    private function createCreateForm(Proyecto $entity,$usuariounidad)
     {
-        $form = $this->createForm(new ProyectoType(), $entity, array(
+        $form = $this->createForm(new ProyectoType($usuariounidad), $entity, array(
             'action' => $this->generateUrl('proyecto_create'),
             'method' => 'POST',
         ));
@@ -78,8 +91,14 @@ class ProyectoController extends Controller
      */
     public function newAction()
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $f=new Funcion; 
+        $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
+        
         $entity = new Proyecto();
-        $form   = $this->createCreateForm($entity);
+        $form   = $this->createCreateForm($entity,$usuariounidad);
 
         return $this->render('ProyectoBundle:Proyecto:new.html.twig', array(
             'entity' => $entity,
@@ -116,6 +135,9 @@ class ProyectoController extends Controller
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $f=new Funcion; 
+        $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
 
         $entity = $em->getRepository('ProyectoBundle:Proyecto')->find($id);
 
@@ -123,7 +145,7 @@ class ProyectoController extends Controller
             throw $this->createNotFoundException('Unable to find Proyecto entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($entity,$usuariounidad);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ProyectoBundle:Proyecto:edit.html.twig', array(
@@ -140,9 +162,9 @@ class ProyectoController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Proyecto $entity)
+    private function createEditForm(Proyecto $entity,$usuariounidad)
     {
-        $form = $this->createForm(new ProyectoType(), $entity, array(
+        $form = $this->createForm(new ProyectoType($usuariounidad), $entity, array(
             'action' => $this->generateUrl('proyecto_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -158,6 +180,10 @@ class ProyectoController extends Controller
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $f=new Funcion; 
+        $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
+
 
         $entity = $em->getRepository('ProyectoBundle:Proyecto')->find($id);
 
@@ -166,13 +192,14 @@ class ProyectoController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($entity,$usuariounidad);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('proyecto_edit', array('id' => $id)));
+            
+            $this->get('session')->getFlashBag()->add('notice', 'Proyecto editado exitosamente.');
+            return $this->redirect($this->generateUrl('proyecto_show', array('id' => $id)));
         }
 
         return $this->render('ProyectoBundle:Proyecto:edit.html.twig', array(
@@ -217,7 +244,7 @@ class ProyectoController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('proyecto_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'BORRAR'))
             ->getForm()
         ;
     }

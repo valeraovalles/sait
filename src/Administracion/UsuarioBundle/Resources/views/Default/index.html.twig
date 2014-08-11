@@ -104,10 +104,12 @@
                 <a href="javascript:void(0)" id="pe">ESTUDIOS<br><img src="{{ asset("images/estudio.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
 
+            {#
             <div class="col-sm-6 col-md-4">
                 <a href="javascript:void(0)" id="mm">MAPAMUNDI<br><img  src="{{ asset("images/mapamundi.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
-
+            #}
+            
             {% if is_granted('ROLE_CREATV') %}
                 <div class="col-sm-6 col-md-4">
                     <a href="{{ path('creatv_homepage')}}">CREATV<br><img src="{{ asset("images/creatv.jpg") }}" data-placement="bottom" title="CREATV" data-trigger="hover"></a>        
@@ -159,7 +161,7 @@
                 </div>
             {% endif %}
             
-            {% if is_granted('ROLE_ADMINISTRADOR') %}
+            {% if is_granted('ROLE_PROYECTO') %}
                 <div class="col-sm-6 col-md-4">
                     <a href="{{ path('proyecto')}}">PROYECTO<br><img src="{{ asset("images/proyecto.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
                 </div>
