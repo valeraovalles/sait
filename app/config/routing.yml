@@ -1,3 +1,7 @@
+proyecto:
+    resource: "@ProyectoBundle/Resources/config/routing.yml"
+    prefix:   /
+
 creatv:
     resource: "@CreatvBundle/Resources/config/routing.yml"
     prefix:   /creatv

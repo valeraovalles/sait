@@ -145,8 +145,6 @@ class Ticket
      * mimeTypes={"image/png", "image/jpeg","image/jpg", "image/gif", "application/pdf","application/zip","application/x-zip-compressed","multipart/x-zip","application/x-compressed","application/x-rar-compressed","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/vnd.oasis.opendocument.text","application/vnd.oasis.opendocument.spreadsheet"})
      *  
      */
-
-
     private $file;
 
 

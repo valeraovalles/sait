@@ -36,7 +36,7 @@ class Seguimiento
     /**
      * @var string
      *
-     * @ORM\Column(name="evento", type="string", length=1000, nullable=false)
+     * @ORM\Column(name="evento", type="string", length=2000, nullable=false)
      */
     private $evento;
 
