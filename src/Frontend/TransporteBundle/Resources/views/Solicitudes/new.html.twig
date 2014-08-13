@@ -13,218 +13,77 @@
   <li class="active">CREAR SOLICITUD</li>
 </ol>
 {% endblock %}
-{% block stylesheets %}
- {{ parent() }} 
- <style type="text/css">
-     /* select with CSS avatar icons */
-    option.avatar {
-      background-repeat: no-repeat !important;
-      padding-left: 20px;
-    }
-    .avatar .ui-icon-closethick {
-      background-position: left top;
-      background: url("{{ asset("images/images/ui-icons_2e83ff_256x240.png") }}");
-    }
- </style>
-   
-{% endblock %}
+
 {% block body -%}
     {{ parent() }}
 
+ <div class="formShow">
+    
+    <form action="{{ path('solicitudes_create') }}" method="post" novalidate {{ form_enctype(form) }} {{ form_enctype(form1) }}>   
+    {{ form_widget(form._token) }} {{ form_widget(form1._token) }}
 
-    <form action="{{ path('solicitudes_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}               
-        <div class="formShow">
-            <br>
-            <div class="contenedorform">
-                <div class="labelform">Fecha de Solicitud:</div> 
-                <div class="widgetform">{{"now"|date("m/d/Y")}}</div>
+        <div class="contenedorform">
+            <div class="labelform">Tipo de Personal:</div>
+            <div class="widgetform">
+                <select name="tipop" id="tipop" title="Seleccione el tipo de personal a trasladar para Buscar en el siguiente campo...">
+                    <option value="I">Interno</option>
+                    <option value="E">Externo</option>
+                </select>
+            </div>            
+        </div>    
+        <div class="contenedorform">                       
+            <div class="labelform">Personal a Trasladar:</div>
+            <div id="vista">                                               
+            <div class="widgetform" id="buscar">  
+                {{ form_widget(form1.buscar, { 'attr': {'style': 'width:80%;height:50px;','title':'Escriba los nombres para listar. Recuerde diferenciar  minúsculas de mayúsculas', 'placeholder': 'Coloque aqui el nombre o cédula a buscar', 'id': 'buscar'} }) }}
             </div>
-            <div class="contenedorform">
-                <div class="text-error">{{ form_errors(form.fechaSalida) }}</div>
-                <div class="labelform">Fecha Salida:</div>
-                <div class="widgetform">                
-                    {{ form_widget(form.fechaSalida, {'attr':{'class':'fecha'}})}}
-                    <script>
-                      $(function() {
-                        $( ".fecha" ).datepicker({
-                          changeMonth: true,
-                          changeYear: true,
-                          dateFormat: "yy-mm-dd",
-                        });
-                      });
-                    </script>
-                </div>
-            </div>        
-            <div class="contenedorform">
-                <div class="text-error">{{ form_errors(form.horaSalida) }}</div>
-                <div class="labelform">Hora Salida:</div>
-                <div class="widgetform">{{ form_widget(form.horaSalida, {'attr':{'class':'hora'}}) }}</div>
-                <script>
-                $(".hora select").css({
-                    'width':'50px',
-                });
-                </script>    
-            </div>        
-            <div class="contenedorform">
-                <div class="labelform">Tipo de Personal:</div>
-                <div class="widgetform">
-                    <select name="tipop" id="tipop" title="Seleccione el tipo de personal a trasladar para Buscar en el siguiente campo...">
-                        <option value="I">Interno</option>
-                        <option value="E">Externo</option>
-                    </select>
-                </div>            
-            </div>    
-            <div class="contenedorform">
-                <div class="text-error">{{ form_errors(form.asistentes) }}</div>
-                <div class="widgetform">  {{ form_widget(form.asistentes) }} </div>    
-                <div class="labelform">Personal a Trasladar:</div>    
-                <div class="widgetform" id="lista">                                                
-                    <input type="text" id="buscar" placeholder="Coloque aqui la cédula o nombre a buscar" title="Escriba los nombres para listar. Recuerde diferenciar  minúsculas de mayúsculas" style="width:350px;height:50px;" autocomplete=off>                                                 
-                    <div id="ajaxlistado" 'attr': {'style': 'width:200%;height:400px;' ></div>
-                    <select style="width:350px;height:300px;" multiple name="asistentes_tmp" id="asistentes_tmp" title="Haga click para eliminar de la lista"></select>                
-                    <script type="text/javascript">
-                //ajax para buscar usuarios
-                $('#form_solicitud_asistentes').val('');
-                $(document).ready(function () {
-                  $('#buscar').keyup(function(){
+            </div>
+            <div class="text-error">{{ form_errors(form.asistentes) }}</div>
+            <div class="labelform"></div>
+            <div class="widgetform">{{ form_widget(form.asistentes, {'attr':{'style':'width:80%;height:200px;'}}) }}</div> 
+        </div>                  
+        <ul>
+        <li>
+            <a href="{{ path('solicitudes_create') }}">               
+                <button class="btn btn-primary" type="submit">Crear Solicitud</button>
+            </a>| 
+            <a class="btn" href="{{ path('solicitudes') }}">IR AL LISTADO
+            </a>            
+        </li>
+        </ul>      
+    </form>    
+</div>
+{#
+<script type="text/javascript">
+    $(document).ready(function () {
+        if($('.vista').val()=='')
+        {
+            alert('Mensaje aaa manejado con JavaScript');
+        }else
+        {
+            alert('Mensaje manejado con JavaScript');
+        }
+    });
 
-                    if($('#buscar').val()==''){
-                        $('#ajaxlistado').html('');
-                    }else{
-                        if ($('#tipop').val()=="I"){
-                            var ruta= "{{ path('solicitudes_ajaxusuarios',{'val':'val'}) }}";
-                            ruta = ruta.replace("val",  $('#buscar').val());
-                        }else{
-                            var ruta= "{{ path('solicitudes_ajaxexternos',{'val':'val'}) }}";
-                            ruta = ruta.replace("val",  $('#buscar').val());
-                        }
-                            
-
-                     $.ajax({
-                       url: ruta,
-                       type : 'POST',
-                       beforeSend: function(){
-                        $("#loading").show();
-                       },
-                       complete: function(){
-                         $("#loading").hide();
-                       },
-                       success: function(data){
-                        $('#ajaxlistado').html(data);
-                       }
-                     });    
-                    }
-                  });
-
-                });
-                //armar lista de usuarios seleccionados
-                function armarlista(valor){
-                    var existe=false;                    
-                    var sel = document.getElementById("asistentes_tmp");                         
-                    var tip = document.getElementById("tipop").value;                         
-                    //Buscamos si ya existe el valor seleccionado
-                    for (var i = 0; i < sel.length; i++) 
-                    {                        
-                        if (sel[i].value==valor+'-'+tip)
-                        existe=true;                      
-                    }
-                    if (existe)
-                        alert("Ya este usuario fue seleccionado: "+valor);
-                    else
-                        $('#asistentes_tmp').append('<option value="' + valor + '-'+tip+'">' + valor +'-'+tip+'</option>');          
-                    actAsistentes();
-                    //$('#lista select option').attr('selected','selected');
-                    $('#ajaxlistausuario').hide()
-                    $('#buscar').val('')
-                }
-                function actAsistentes(){
-                    //PASA LOS DATOS ACTUALES DE LA LISTA AL CAMPO OCULTO DEL FORMULARIO QUE IRA A LA BD
-                    $('#form_solicitud_asistentes').val('');                    
-                    var sel = document.getElementById("asistentes_tmp");  
-                    var lista="";
-                    for (var i = 0; i < sel.length; i++) 
-                    {                        
-                        lista+=sel[i].value+", ";                                              
-                    }                    
-                    document.getElementById("form_solicitud_asistentes").value=lista;
-                }
-                //Si hacemos click sobre el select que se esta cargando, Borramos la opción seleccionada
-                $('#asistentes_tmp').click(function(){
-
-                    if($('#asistentes_tmp').val()!=null){
-                        if (confirm("Quitar este usuario seleccionado?")){
-                            $("#asistentes_tmp option:selected").remove();    
-                            actAsistentes();
-                        }
-                    } else alert('Listado vacío.')
-                });
-                </script>
-                </div>
-            </div>           
-            <div class="contenedorform">
-                <div class="text-error">{{ form_errors(form.direccionDesde) }}</div>
-                <div class="labelform">Direccion Desde u Origen:</div>
-                <div class="widgetform">{{ form_widget(form.direccionDesde) }}</div>
-            </div>        
-            <div class="contenedorform">
-                <div class="text-error">{{ form_errors(form.direccionHasta) }}</div>
-                <div class="labelform">Direccion Hasta o Destino:</div>
-                <div class="widgetform">{{ form_widget(form.direccionHasta) }}</div>
-            </div>        
-            <div class="contenedorform">
-                <div class="text-error">{{ form_errors(form.descripcionEquipos) }}</div>
-                <div class="labelform">Equipos/Implementos a trasladar:</div>
-                <div class="widgetform">{{ form_widget(form.descripcionEquipos) }}</div>
-            </div>        
-            <div class="contenedorform">
-                <div class="text-error">{{ form_errors(form.datosInteresRazon) }}</div>
-                <div class="labelform">Motivo de la Solicitud:</div>
-                <div class="widgetform">{{ form_widget(form.datosInteresRazon) }}</div>
-            </div>  
-        </div>
-        <br><br>
-            <button class="btn btn-primary" type="submit">CREAR</button> |
-        <a class="btn btn-default" href="{{ path('missolicitudes') }}">IR AL LISTADO</a>
-        <br>
-    </form>
+        $(function() {
+            $( ".fecha" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "yy-mm-dd",
+            });
+        });
+    });
+</script>
+#}
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#form_buscar').change(function(){
+                var dato = $("#form_buscar").val();
+                var ruta = "{{ path('ajax_solicitudesmuestrapersonal', {'valores': 'variable'}) }}";
+                ruta = ruta.replace("variable", dato);
+                $('#muestra').load(ruta);
+            });
+        });
+    </script>
 
 {% endblock %}
-{% block javascripts %}
-{{ parent() }}
-<script>
-  $(function() {
-    $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
-      _renderItem: function( ul, item ) {
-        var li = $( "<li>", { text: item.label } );
- 
-        if ( item.disabled ) {
-          li.addClass( "ui-state-disabled" );
-        }
- 
-        $( "<span>", {
-          style: item.element.attr( "data-style" ),
-          "class": "ui-icon " + item.element.attr( "data-class" )
-        })
-          .appendTo( li );
- 
-        return li.appendTo( ul );
-      }
-    });
- 
-    $( "#filesA" )
-      .iconselectmenu()
-      .iconselectmenu( "menuWidget" )
-        .addClass( "ui-menu-icons" );
- 
-    $( "#filesB" )
-      .iconselectmenu()
-      .iconselectmenu( "menuWidget" )
-        .addClass( "ui-menu-icons customicons" );
- 
-    $( "#people" )
-      .iconselectmenu()
-      .iconselectmenu( "menuWidget")
-        .addClass( "ui-menu-icons avatar" );
-  });
-  </script>
-  {% endblock %}

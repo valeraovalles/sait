@@ -56,6 +56,13 @@ class SolicitudesController extends Controller
      */
     public function createAction(Request $request)
     {
+
+
+               $datos=$request->request->all();
+        $datos=$datos['form_solicitud'];
+print_r($datos);
+
+die;
         //public $listaAsi=""; 
         $entity  = new Solicitudes();
         $form = $this->createForm(new SolicitudesType(), $entity);
@@ -120,11 +127,17 @@ class SolicitudesController extends Controller
     {
         $entity = new Solicitudes();
         $form   = $this->createForm(new SolicitudesType(), $entity);
-   
+        
+        $form1 = $this->createFormBuilder()
+                ->add('buscar', 'text')
+                ->getForm();
+
+
+
         return $this->render('TransporteBundle:Solicitudes:new.html.twig', array(
             'entity' => $entity,
-          //  'usuarios' => $usuarios,
             'form'   => $form->createView(),
+            'form1'   => $form1->createView(),
         ));
     }
 

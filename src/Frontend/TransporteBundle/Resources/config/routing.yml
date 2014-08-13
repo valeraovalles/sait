@@ -65,6 +65,10 @@ solicitudes_aprobar:
     pattern:  /solicitudes/{id}/aprobar
     defaults: { _controller: "TransporteBundle:Solicitudes:aprobar" }
 
+ajax_solicitudesmuestrapersonal:
+    pattern: /solicitudes/ajax/{valores}
+    defaults: { _controller: "TransporteBundle:AjaxController:ajax_solicitudesmuestrapersonal"}
+
 
 #ASIGNACIONES
 asignaciones:
