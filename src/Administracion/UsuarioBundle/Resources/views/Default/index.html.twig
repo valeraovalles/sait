@@ -26,7 +26,9 @@
             <div><b>CEDULA:</b> {{ usuario.cedula | upper }} </div>
             {% if usuario.user.fueradenomina==false %}
                 <div><b>UNIDAD:</b> {% if usuario.nivelorganizacional!=null%} {{ usuario.nivelorganizacional.descripcion | upper }} {% else %} N/A {% endif %}</div>
-                <div><b>DEPENDENCIA:</b> {{ datos.nombre }}</div>
+                {% if datos.nombre %}
+                    <div><b>DEPENDENCIA:</b> {{ datos.nombre }}</div>
+                {% endif %}
                 {#<div><b>SUELDO BASICO:</b> {{ datos.sueldo_basico | number_format(2, ',', '.') }}</div>#}
                 <div><b>FECHA INGRESO:</b> {{ datos.fecha_ingreso | upper | date('d-m-Y') }}</div>
                 <div><b>FECHA NACIMIENTO:</b> {{ datos.fecha_nacimiento| upper | date('d-m-Y') }}</div>

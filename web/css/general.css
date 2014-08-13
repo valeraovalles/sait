@@ -64,6 +64,7 @@ body{
 
 #tabladatatable td{
         padding: 8px;
+        vertical-align: middle;
 }
 
 

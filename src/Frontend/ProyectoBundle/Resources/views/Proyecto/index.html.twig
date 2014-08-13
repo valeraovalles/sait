@@ -36,20 +36,27 @@
                 <td><a style="font-size: 20px;color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
                 <td width="250px" style="text-align: justify;">{{ entity.descripcion }}</td>
                 <td align="center">{% if entity.fechainicio %}{{ entity.fechainicio|date('d-m-Y') }}{% endif %}</td>
-                <td align="center">
+                <td>
                     {% if entity.estatus==1 %}
-                        <span class="label label-danger">NUEVO</span>
+                        <span class="label label-primary">EN PROGRESO</span>
+                    {% elseif entity.estatus==2 %}
+                        <span class="label label-warning">SIN COMENZAR</span>
                     {% endif %}
                 </td>
-                <td align="center">
-                    
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ entity.porcentaje }}%;">
+                <td>
+                    {% if entity.porcentaje==0 and entity.estatus==2 %}
+                        <span class="label label-info">N/A</span>
+                    {% elseif entity.porcentaje==0 %}
+                        <span class="label label-info">SIN AVANCE</span>
+                    {% else %}
+                        <br><div class="progress">
+                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ entity.porcentaje }}%;color:black;font-weight:bold;">
                             {{ entity.porcentaje }}%
+                          </div>
                         </div>
-                    </div>
+                    {% endif %}
                 </td>
-                <td align="center">
+                <td>
                     
                     <a style="color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
                     <a style="color:black;" href="{{ path('proyecto_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
@@ -78,7 +85,5 @@
             $('#xx').tooltip()
         })
     </script>
-
-
 
     {% endblock %}
