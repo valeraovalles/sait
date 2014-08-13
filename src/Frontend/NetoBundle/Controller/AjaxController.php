@@ -28,7 +28,7 @@ class AjaxController extends Controller
         }
 
         else if ($mostrar=='anio' and $datos[0]!='s'){
-            $anios=array('s'=>'Seleccione', date('Y')-1 => date('Y')-1, date('Y') => date('Y'));
+            $anios=array('s'=>'Seleccione', date('Y')-2 => date('Y')-2, date('Y')-1 => date('Y')-1, date('Y') => date('Y'));
             $form = $this->createFormBuilder()
             ->add('anios', 'choice', array(
                 'choices'   => $anios,

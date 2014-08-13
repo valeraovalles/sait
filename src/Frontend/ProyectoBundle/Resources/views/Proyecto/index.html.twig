@@ -1,0 +1,89 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Proyecto{% endblock %}
+
+{% block titulo %}
+    LISTA DE PROYECTOS<br>
+    {{ perfil.nivelorganizacional.descripcion|upper }}
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li class="active">LISTA DE PROYECTOS</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+    
+    <table id="tabladatatable" class="table table-hover">
+        <thead>
+            <tr>
+                <th style="display:none;">Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Fecha inicio</th>
+                <th>Estatus</th>
+                <th>Completado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td style="display:none;">{{ entity.id }}</td>
+                <td><a style="font-size: 20px;color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
+                <td width="250px" style="text-align: justify;">{{ entity.descripcion }}</td>
+                <td align="center">{% if entity.fechainicio %}{{ entity.fechainicio|date('d-m-Y') }}{% endif %}</td>
+                <td>
+                    {% if entity.estatus==1 %}
+                        <span class="label label-primary">EN PROGRESO</span>
+                    {% elseif entity.estatus==2 %}
+                        <span class="label label-warning">SIN COMENZAR</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if entity.porcentaje==0 and entity.estatus==2 %}
+                        <span class="label label-info">N/A</span>
+                    {% elseif entity.porcentaje==0 %}
+                        <span class="label label-info">SIN AVANCE</span>
+                    {% else %}
+                        <br><div class="progress">
+                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ entity.porcentaje }}%;color:black;font-weight:bold;">
+                            {{ entity.porcentaje }}%
+                          </div>
+                        </div>
+                    {% endif %}
+                </td>
+                <td>
+                    
+                    <a style="color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
+                    <a style="color:black;" href="{{ path('proyecto_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a style="color:black;" href="{{ path('proyecto_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-list-alt"></span></a>
+                    
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+        
+    <br><br><a class="btn btn-default" href="{{ path('proyecto_new') }}">NUEVO PROYECTO</a><br><br>
+
+
+
+                
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'desc']],
+            } );
+            $('#xx').tooltip()
+        })
+    </script>
+
+    {% endblock %}
