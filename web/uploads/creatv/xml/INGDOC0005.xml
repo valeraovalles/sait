@@ -2,9 +2,9 @@
         <XML>
             <Content>UPDATE</Content>
             <Clip>
-                <ClipName>INGTGE0004</ClipName>
+                <ClipName>INGDOC0005</ClipName>
                 <TipoContenido>INGLES</TipoContenido>
-                <Contenido><![CDATA[ THE WORLD TODAY G E 12AGO14]]></Contenido>
+                <Contenido><![CDATA[ SMALL RIDERS OF DESERT 24AGO14]]></Contenido>
                 <OriginalTitle></OriginalTitle>
                 <Description> </Description>
                 <Notes>a</Notes>
@@ -16,9 +16,9 @@
                 <Segments>
             
                 <Segment>
-                    <SegTitle>1-1 THE WORLD TODAY GLOBAL EMPIRE    - THE WORLD TODAY G E 12AGO14</SegTitle>
-                    <MediaID>INGTGE000401</MediaID>
-                    <Duration>00:30:00.00</Duration>
+                    <SegTitle>1-1 DOCUMENTARY - SMALL RIDERS OF DESERT 24AGO14</SegTitle>
+                    <MediaID>INGDOC000501</MediaID>
+                    <Duration>01:00:00.00</Duration>
                     <SegNumber>1</SegNumber>
                     <ClipGroup>PROGRAMA</ClipGroup>
                     <Description> </Description>
