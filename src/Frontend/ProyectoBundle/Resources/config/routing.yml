@@ -5,3 +5,7 @@ proyecto_homepage:
 ProyectoBundle_proyecto:
     resource: "@ProyectoBundle/Resources/config/routing/proyecto.yml"
     prefix:   /proyecto
+
+ProyectoBundle_tarea:
+    resource: "@ProyectoBundle/Resources/config/routing/tarea.yml"
+    prefix:   /tarea

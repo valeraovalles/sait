@@ -28,15 +28,31 @@
         </div>
         <div class="contenedorform">
             <div class="labelform">Fecha inicio:</div>
-            <div class="widgetform">{{ entity.fechainicio|date('d-m-Y') }}</div>
+            <div class="widgetform">
+                {% if entity.fechainicio %}
+                    {{ entity.fechainicio|date('d-m-Y') }}
+                {% else %}
+                    <span class="label label-info">POR DEFINIR</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha Fin:</div>
+            <div class="widgetform">
+                {% if entity.fechafin %}
+                    {{ entity.fechafin|date('d-m-Y') }}
+                {% else %}
+                    <span class="label label-info">POR DEFINIR</span>
+                {% endif %}
+            </div>
         </div>
         <div class="contenedorform">
             <div class="labelform">Estatus:</div>
             <div class="widgetform">
                 {% if entity.estatus==1 %}
-                    <span class="label label-danger">EN PROGRESO</span>
+                    <span class="label label-danger">SIN INICIAR</span>
                 {% elseif entity.estatus==2 %}
-                    <span class="label label-warning">SIN COMENZAR</span>
+                    <span class="label label-warning">EN PROGRESO</span>
                 {% endif %}
             </div>
         </div>

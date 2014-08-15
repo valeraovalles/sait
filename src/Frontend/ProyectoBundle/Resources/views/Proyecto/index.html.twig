@@ -24,6 +24,7 @@
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Fecha inicio</th>
+                <th>Fecha fin</th>
                 <th>Estatus</th>
                 <th>Completado</th>
                 <th>Acciones</th>
@@ -34,13 +35,26 @@
             <tr>
                 <td style="display:none;">{{ entity.id }}</td>
                 <td><a style="font-size: 20px;color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
-                <td width="250px" style="text-align: justify;">{{ entity.descripcion }}</td>
-                <td align="center">{% if entity.fechainicio %}{{ entity.fechainicio|date('d-m-Y') }}{% endif %}</td>
-                <td>
+                <td width="250px" style="text-align: justify;">{{ entity.descripcion|capitalize }}</td>
+                <td align="center">
+                    {% if entity.fechainicio %}
+                        {{ entity.fechainicio|date('d-m-Y') }}
+                    {% else %}
+                        <span class="label label-info">POR DEFINIR</span>
+                    {% endif %}
+                </td>
+                <td align="center">
+                    {% if entity.fechafin %}
+                        {{ entity.fechafin|date('d-m-Y') }}
+                    {% else %}
+                        <span class="label label-info">POR DEFINIR</span>
+                    {% endif %}
+                </td>
+                <td align="center">
                     {% if entity.estatus==1 %}
-                        <span class="label label-primary">EN PROGRESO</span>
+                        <span class="label label-danger">SIN INICIAR</span>
                     {% elseif entity.estatus==2 %}
-                        <span class="label label-warning">SIN COMENZAR</span>
+                        <span class="label label-warning">EN PROGRESO/span>
                     {% endif %}
                 </td>
                 <td>
@@ -60,7 +74,7 @@
                     
                     <a style="color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
                     <a style="color:black;" href="{{ path('proyecto_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
-                    <a style="color:black;" href="{{ path('proyecto_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-list-alt"></span></a>
+                    <a style="color:black;" href="{{ path('tarea', { 'idproyecto': entity.id }) }}"><span class="glyphicon glyphicon-list-alt"></span></a>
                     
                     
                 </td>

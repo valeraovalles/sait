@@ -1,0 +1,62 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Tarea{% endblock %}
+
+{% block titulo %}
+    LISTA DE TAREAS<br>
+    {{ proyecto.nombre|upper }}<br>
+    {{ proyecto.nivelorganizacional.descripcion|upper }}
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
+  <li class="active">LISTA DE TAREAS</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <table id="tabladatatable" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Fecha inicio</th>
+                <th>Fecha fin</th>
+                <th>Porcentaje</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('tarea_show', { 'id': entity.id,'idproyecto':proyecto.id }) }}">{{ entity.nombre }}}</a></td>
+                <td>{{ entity.descripcion }}</td>
+                <td>{% if entity.fechainicio %}{{ entity.fechainicio|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if entity.fechafin %}{{ entity.fechafin|date('d-m-Y') }}{% endif %}</td>
+                <td>{{ entity.porcentaje }}</td>
+                <td>
+                        <a href="{{ path('tarea_show', { 'id': entity.id,'idproyecto':proyecto.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
+                        <a href="{{ path('tarea_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br><br><a class="btn btn-default" href="{{ path('tarea_new', { 'idproyecto':proyecto.id  }) }}">NUEVA TAREA</a><br><br>
+                
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'desc']],
+            } );
+            $('#xx').tooltip()
+        })
+    </script>
+    
+    {% endblock %}

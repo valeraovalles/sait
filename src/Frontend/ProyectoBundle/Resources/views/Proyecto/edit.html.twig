@@ -17,14 +17,11 @@
 {% block body -%}
     {{ parent() }}
 
-    {% if form_errors(edit_form.nombre) or form_errors(edit_form.descripcion) or form_errors(edit_form.fechainicio) or form_errors(edit_form.estatus) or form_errors(edit_form.responsable) or form_errors(edit_form.porcentaje) %}
+    {% if form_errors(edit_form.nombre) or form_errors(edit_form.descripcion) or form_errors(edit_form.responsable) %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>{{ form_errors(edit_form.nombre) }}</div>        
         <div>{{ form_errors(edit_form.descripcion) }}</div>
-        <div>{{ form_errors(edit_form.fechainicio) }}</div>
-        <div>{{ form_errors(edit_form.estatus) }}</div>
-        <div>{{ form_errors(edit_form.porcentaje) }}</div>
         <div>{{ form_errors(edit_form.responsable) }}</div>
     </div>
     {% endif %}
@@ -42,21 +39,6 @@
             <div class="contenedorform">
                 <div class="labelform">Descripción:</div>
                 <div class="widgetform">{{ form_widget(edit_form.descripcion) }}</div>
-            </div>
-            
-            <div class="contenedorform">
-                <div class="labelform">Fecha inicio:</div>
-                <div class="widgetform">{{ form_widget(edit_form.fechainicio) }}</div>
-            </div>
-            
-            <div class="contenedorform">
-                <div class="labelform">Estatus:</div>
-                <div class="widgetform">{{ form_widget(edit_form.estatus) }}</div>
-            </div>
-            
-            <div class="contenedorform">
-                <div class="labelform">% Completado:</div>
-                <div class="widgetform">{{ form_widget(edit_form.porcentaje) }}</div>
             </div>
             
             <div class="contenedorform">

@@ -3,6 +3,7 @@
 namespace Frontend\ProyectoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tarea
@@ -12,17 +13,29 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Tarea
 {
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="proyecto.tarea_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+    
     /**
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", nullable=false)
+     * @Assert\NotBlank(message="El nombre no puede estar en blanco.")
      */
     private $nombre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="string", length=500, nullable=false)
+     * @ORM\Column(name="descripcion", type="string", length=500, nullable=true)
      */
     private $descripcion;
 
@@ -30,13 +43,14 @@ class Tarea
      * @var \DateTime
      *
      * @ORM\Column(name="fechainicio", type="date", nullable=false)
+     * @Assert\NotBlank(message="La fecha de inicio puede estar en blanco.")
      */
     private $fechainicio;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechafin", type="date", nullable=false)
+     * @ORM\Column(name="fechafin", type="date", nullable=true)
      */
     private $fechafin;
 
@@ -47,28 +61,6 @@ class Tarea
      */
     private $porcentaje;
 
-    
-     /**
-     * @var \Frontend\ProyectoBundle\Entity\Actividad
-     *
-     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\Perfil")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="responsable_id", referencedColumnName="id")
-     * })
-     */
-   
-    private $responsable;
-
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="proyecto.tarea_id_seq", allocationSize=1, initialValue=1)
-     */
-    private $id;
 
     /**
      * @var \Frontend\ProyectoBundle\Entity\Proyecto
@@ -195,29 +187,6 @@ class Tarea
     public function getPorcentaje()
     {
         return $this->porcentaje;
-    }
-
-    /**
-     * Set responsableId
-     *
-     * @param integer $responsableId
-     * @return Tarea
-     */
-    public function setResponsable(\Administracion\UsuarioBundle\Entity\Perfil $responsable = null)
-    {
-        $this->responsable = $responsable;
-
-        return $this;
-    }
-
-    /**
-     * Get responsableId
-     *
-     * @return integer 
-     */
-    public function getResponsable()
-    {
-        return $this->responsable;
     }
 
     /**

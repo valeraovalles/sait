@@ -1,33 +1,32 @@
 {% extends '::proyecto.html.twig' %}
 
-{% block title %}Nuevo Proyecto{% endblock %}
+{% block title %}Nueva tarea{% endblock %}
 
 {% block titulo %}
-    NUEVO PROYECTO
+    NUEVA TAREA
 {% endblock %}
 
 {% block ubicacion %}
 <ol class="breadcrumb">
   <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
-  <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
-  <li class="active">NUEVO PROYECTO</li>
+    <li><a href="{{ path("tarea",{'idproyecto':proyecto.id}) }}">LISTA DE TAREAS</a></li>
+  <li class="active">NUEVA TAREA</li>
 </ol>
 {% endblock %}
     
 {% block body -%}
     {{ parent()}}
     
-    {% if form_errors(form.nombre) or form_errors(form.descripcion) or form_errors(form.responsable) %}
+    {% if form_errors(form.nombre) or form_errors(form.descripcion) or form_errors(form.fechainicio) %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>{{ form_errors(form.nombre) }}</div>        
         <div>{{ form_errors(form.descripcion) }}</div>
-        <div>{{ form_errors(form.responsable) }}</div>
+        <div>{{ form_errors(form.fechainicio) }}</div>
     </div>
     {% endif %}
     
-    
-     <form novalidate action="{{ path('proyecto_create') }}" method="post" {{ form_enctype(form) }}>
+     <form novalidate action="{{ path('tarea_create',{'idproyecto':proyecto.id}) }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
 
         <div class="formShow">
@@ -42,8 +41,8 @@
             </div>
             
             <div class="contenedorform">
-                <div class="labelform">Responsable:</div>
-                <div class="widgetform">{{ form_widget(form.responsable) }}</div>
+                <div class="labelform">Fecha inicio:</div>
+                <div class="widgetform">{{ form_widget(form.fechainicio) }}</div>
             </div>
         </div>
         <a class="btn btn-default" href="{{ path('proyecto') }}">
@@ -55,11 +54,14 @@
         
     <script>
     $(function() {
-      $( "#frontend_proyectobundle_proyecto_fechainicio" ).datepicker({
+      $( "#frontend_proyectobundle_tarea_fechainicio" ).datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat: "dd-mm-yy",
       });
     });
     </script>
+    {{ form(form) }}
+
+
 {% endblock %}

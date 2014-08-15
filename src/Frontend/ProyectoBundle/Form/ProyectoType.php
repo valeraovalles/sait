@@ -31,7 +31,7 @@ class ProyectoType extends AbstractType
             ->add('fechainicio','date',array(
                     'widget' => 'single_text',
                     'format'   => 'dd-MM-y',  ))
-            ->add('estatus','choice',array('choices'=>array(''=>'Seleccione...',1=>'En progreso',2=>'Sin comenzar')))
+            ->add('estatus','choice',array('choices'=>array(''=>'Seleccione...',1=>'Sin Iniciar',2=>'En progresop',3=>'Culminado')))
             ->add('porcentaje','text')
             ->add('responsable','entity',array(
                 'class' => 'UsuarioBundle:Perfil',
