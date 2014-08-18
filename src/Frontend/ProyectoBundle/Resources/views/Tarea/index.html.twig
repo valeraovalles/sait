@@ -3,8 +3,8 @@
 {% block title %}Tarea{% endblock %}
 
 {% block titulo %}
-    LISTA DE TAREAS<br>
-    {{ proyecto.nombre|upper }}<br>
+    <h1>LISTA DE TAREAS</h1>
+    PROYECTO ({{ proyecto.nombre|upper }})<br>
     {{ proyecto.nivelorganizacional.descripcion|upper }}
 {% endblock %}
 
@@ -26,28 +26,55 @@
                 <th>Descripcion</th>
                 <th>Fecha inicio</th>
                 <th>Fecha fin</th>
-                <th>Porcentaje</th>
+                <th>Estatus</th>
+                <th>Completado</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('tarea_show', { 'id': entity.id,'idproyecto':proyecto.id }) }}">{{ entity.nombre }}}</a></td>
+                <td><a href="{{ path('tarea_show', { 'id': entity.id,'idproyecto':proyecto.id }) }}">{{ entity.nombre }}</a></td>
                 <td>{{ entity.descripcion }}</td>
-                <td>{% if entity.fechainicio %}{{ entity.fechainicio|date('d-m-Y') }}{% endif %}</td>
-                <td>{% if entity.fechafin %}{{ entity.fechafin|date('d-m-Y') }}{% endif %}</td>
-                <td>{{ entity.porcentaje }}</td>
-                <td>
-                        <a href="{{ path('tarea_show', { 'id': entity.id,'idproyecto':proyecto.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
+                <td align="center">{% if entity.fechainicio %}{{ entity.fechainicio|date('d-m-Y') }}{% endif %}</td>
+                <td align="center">
+                    {% if entity.fechafin %}
+                        {{ entity.fechafin|date('d-m-Y') }}
+                    {% else %}
+                        <span class="label label-info">POR DEFINIR</span>
+                    {% endif %}
+                </td>
+                <td align="center">
+                    {% if entity.estatus==1 %}
+                        <span class="label label-danger">SIN INICIAR</span>
+                    {% elseif entity.estatus==2 %}
+                        <span class="label label-warning">EN PROGRESO/span>
+                    {% endif %}
+                </td>
+                <td align="center">
+                    {% if entity.porcentaje==0 and entity.estatus==1 %}
+                        <span class="label label-info">N/A</span>
+                    {% elseif entity.porcentaje==0 %}
+                        <span class="label label-info">SIN AVANCE</span>
+                    {% else %}
+                        <br><div class="progress">
+                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ entity.porcentaje }}%;color:black;font-weight:bold;">
+                            {{ entity.porcentaje }}%
+                          </div>
+                        </div>
+                    {% endif %}
+                </td>
+                <td align="center">
+                        <a href="{{ path('tarea_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
                         <a href="{{ path('tarea_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a style="color:black;" href="{{ path('tarea', { 'idproyecto': entity.id }) }}">ACTIVIDADES <span class="badge">0</span></a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <br><br><a class="btn btn-default" href="{{ path('tarea_new', { 'idproyecto':proyecto.id  }) }}">NUEVA TAREA</a><br><br>
+    <br><br><a class="btn btn-default" href="{{ path('proyecto') }}">LISTA DE PROYECTOS</a> | <a class="btn btn-primary" href="{{ path('tarea_new', { 'idproyecto':proyecto.id  }) }}">NUEVA TAREA</a><br><br>
                 
     <script type="text/javascript">
         $(document).ready(function(){

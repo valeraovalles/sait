@@ -25,6 +25,13 @@ class Tarea
     private $id;
     
     /**
+     * @var integer
+     * @ORM\Column(name="estatus", type="integer", nullable=false)
+     */
+
+    private $estatus;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", nullable=false)
@@ -96,6 +103,30 @@ class Tarea
     {
         return $this->nombre;
     }
+    
+    /**
+     * Set estatus
+     *
+     * @param integer $estatus
+     * @return Proyecto
+     */
+    public function setEstatus($estatus)
+    {
+        $this->estatus = $estatus;
+
+        return $this;
+    }
+
+    /**
+     * Get estatus
+     *
+     * @return integer 
+     */
+    public function getEstatus()
+    {
+        return $this->estatus;
+    }
+
 
     /**
      * Set descripcion

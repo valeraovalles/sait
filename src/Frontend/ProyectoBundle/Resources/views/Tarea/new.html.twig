@@ -45,10 +45,10 @@
                 <div class="widgetform">{{ form_widget(form.fechainicio) }}</div>
             </div>
         </div>
-        <a class="btn btn-default" href="{{ path('proyecto') }}">
+        <a class="btn btn-default" href="{{ path('tarea',{'idproyecto':proyecto.id}) }}">
             VOLVER A LA LISTA
         </a> | 
-        <input type="submit" class="btn btn-primary" value="CREAR PROYECTO">
+        <input type="submit" class="btn btn-primary" value="CREAR TAREA">
         <br><br>
      </form>
         
@@ -61,7 +61,5 @@
       });
     });
     </script>
-    {{ form(form) }}
-
 
 {% endblock %}

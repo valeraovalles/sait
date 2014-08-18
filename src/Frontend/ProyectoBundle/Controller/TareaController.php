@@ -15,14 +15,36 @@ use Frontend\ProyectoBundle\Form\TareaType;
 class TareaController extends Controller
 {
 
+    
+    public function fechainicioproyecto($idproyecto){
+
+        $em = $this->getDoctrine()->getManager();
+        
+        //busco la fecha mas baja de las tareas para que sea la fecha de inicio del proyecto
+        $dql = "select x from ProyectoBundle:Tarea x where x.proyecto= :idproyecto order by x.fechainicio ASC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idproyecto',$idproyecto);
+        $query->setMaxResults(1);
+        $tarea = $query->getResult();
+        
+        if(!empty($tarea))
+            $fechainicio=$tarea[0]->getFechainicio();
+        else $fechainicio=null;
+        
+
+        //actualizo campos en ticket
+        $query = $em->createQuery('update ProyectoBundle:Proyecto x set x.fechainicio= :fechainicio WHERE x.id = :idproyecto');
+        $query->setParameter('fechainicio', $fechainicio);
+        $query->setParameter('idproyecto', $idproyecto);
+        $query->execute();
+    }
+    
     /**
      * Lists all Tarea entities.
      *
      */
     public function indexAction($idproyecto)
     {
-        echo 'sf';
-        
         $em = $this->getDoctrine()->getManager();
         $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($idproyecto);       
         $entities = $em->getRepository('ProyectoBundle:Tarea')->findAll();
@@ -47,10 +69,14 @@ class TareaController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setPorcentaje(0);
+            $entity->setEstatus(1);
+            $entity->setProyecto($proyecto);
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tarea_show', array('id' => $entity->getId(),'idproyecto'=>$idproyecto)));
+            $this->fechainicioproyecto($idproyecto);
+            
+            return $this->redirect($this->generateUrl('tarea_show', array('id' => $entity->getId())));
         }
 
         return $this->render('ProyectoBundle:Tarea:new.html.twig', array(
@@ -103,16 +129,16 @@ class TareaController extends Controller
      * Finds and displays a Tarea entity.
      *
      */
-    public function showAction($id,$idproyecto)
+    public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($idproyecto);
         $entity = $em->getRepository('ProyectoBundle:Tarea')->find($id);
+        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($entity->getProyecto()->getId());
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tarea entity.');
         }
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($id,$entity->getProyecto()->getId());
 
         return $this->render('ProyectoBundle:Tarea:show.html.twig', array(
             'entity'      => $entity,
@@ -130,18 +156,20 @@ class TareaController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('ProyectoBundle:Tarea')->find($id);
+        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($entity->getProyecto()->getId());
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tarea entity.');
         }
 
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($id,$entity->getProyecto()->getId());
 
         return $this->render('ProyectoBundle:Tarea:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'proyecto'=>$proyecto
         ));
     }
 
@@ -184,7 +212,8 @@ class TareaController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tarea_edit', array('id' => $id)));
+            $this->fechainicioproyecto($entity->getProyecto()->getId());
+            return $this->redirect($this->generateUrl('tarea_show', array('id' => $id)));
         }
 
         return $this->render('ProyectoBundle:Tarea:edit.html.twig', array(
@@ -199,22 +228,27 @@ class TareaController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('ProyectoBundle:Tarea')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Tarea entity.');
+        }
+        
+
+        $form = $this->createDeleteForm($id,$entity->getProyecto()->getId());
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ProyectoBundle:Tarea')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Tarea entity.');
-            }
+
 
             $em->remove($entity);
             $em->flush();
+            
+            $this->fechainicioproyecto($entity->getProyecto()->getId());
         }
 
-        return $this->redirect($this->generateUrl('tarea'));
+        return $this->redirect($this->generateUrl('tarea',array('idproyecto' => $entity->getProyecto()->getId())));
     }
 
     /**
@@ -224,12 +258,12 @@ class TareaController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
+    private function createDeleteForm($id,$idproyecto)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('tarea_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'BORRAR'))
             ->getForm()
         ;
     }

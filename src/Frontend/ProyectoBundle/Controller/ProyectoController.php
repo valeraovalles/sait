@@ -21,21 +21,42 @@ class ProyectoController extends Controller
      * Lists all Proyecto entities.
      *
      */
+    public function totaltarea() {
+        $em = $this->getDoctrine()->getManager();
+        
+        //cuento las tareas del proyecto
+        $dql = "select x from ProyectoBundle:Tarea x";
+        $query = $em->createQuery($dql);
+        $tareas = $query->getResult();
+        
+        //inicializo
+        foreach ($tareas as $v) {
+            $totaltarea[$v->getProyecto()->getId()]=0;
+        }  
+        //sumo
+        foreach ($tareas as $v) {
+            $totaltarea[$v->getProyecto()->getId()]=$totaltarea[$v->getProyecto()->getId()]+1;
+        } 
+        
+        return $totaltarea;
+        
+    }
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
 
         $f=new Funcion; 
         $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
         
-        
         $entities = $em->getRepository('ProyectoBundle:Proyecto')->findAll();
 
         return $this->render('ProyectoBundle:Proyecto:index.html.twig', array(
             'entities' => $entities,
-            'perfil'=>$perfil
+            'perfil'=>$perfil,
+            'totaltarea'=>$this->totaltarea()
         ));
         
         

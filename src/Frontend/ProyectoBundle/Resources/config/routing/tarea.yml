@@ -3,7 +3,7 @@ tarea:
     defaults: { _controller: "ProyectoBundle:Tarea:index" }
 
 tarea_show:
-    path:     /{id}/show/{idproyecto}
+    path:     /{id}/show
     defaults: { _controller: "ProyectoBundle:Tarea:show" }
 
 tarea_new:

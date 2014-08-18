@@ -3,7 +3,7 @@
 {% block title %}Proyecto{% endblock %}
 
 {% block titulo %}
-    LISTA DE PROYECTOS<br>
+    <h1>LISTA DE PROYECTOS</h1>
     {{ perfil.nivelorganizacional.descripcion|upper }}
 {% endblock %}
 
@@ -35,7 +35,7 @@
             <tr>
                 <td style="display:none;">{{ entity.id }}</td>
                 <td><a style="font-size: 20px;color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
-                <td width="250px" style="text-align: justify;">{{ entity.descripcion|capitalize }}</td>
+                <td width="15%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,10) }}...</span></td>
                 <td align="center">
                     {% if entity.fechainicio %}
                         {{ entity.fechainicio|date('d-m-Y') }}
@@ -57,8 +57,8 @@
                         <span class="label label-warning">EN PROGRESO/span>
                     {% endif %}
                 </td>
-                <td>
-                    {% if entity.porcentaje==0 and entity.estatus==2 %}
+                <td align="center">
+                    {% if entity.porcentaje==0 and entity.estatus==1 %}
                         <span class="label label-info">N/A</span>
                     {% elseif entity.porcentaje==0 %}
                         <span class="label label-info">SIN AVANCE</span>
@@ -74,7 +74,7 @@
                     
                     <a style="color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
                     <a style="color:black;" href="{{ path('proyecto_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
-                    <a style="color:black;" href="{{ path('tarea', { 'idproyecto': entity.id }) }}"><span class="glyphicon glyphicon-list-alt"></span></a>
+                    <a style="color:black;" href="{{ path('tarea', { 'idproyecto': entity.id }) }}">TAREAS  <span class="badge">{% if totaltarea[entity.id] is defined %}{{ totaltarea[entity.id] }}{% else %}0{% endif %}</span></a> 
                     
                     
                 </td>
@@ -92,11 +92,12 @@
                 
     <script type="text/javascript">
         $(document).ready(function(){
+           $('span').tooltip()
+            
            $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
                 "aaSorting": [[0,'desc']],
             } );
-            $('#xx').tooltip()
         })
     </script>
 
