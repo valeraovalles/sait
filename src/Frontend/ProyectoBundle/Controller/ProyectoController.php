@@ -28,6 +28,7 @@ class ProyectoController extends Controller
         $dql = "select x from ProyectoBundle:Tarea x";
         $query = $em->createQuery($dql);
         $tareas = $query->getResult();
+        $totaaltarea=array();
         
         //inicializo
         foreach ($tareas as $v) {

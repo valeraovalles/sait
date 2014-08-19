@@ -15,6 +15,27 @@ use Frontend\ProyectoBundle\Form\TareaType;
 class TareaController extends Controller
 {
 
+        public function totalactividad() {
+        $em = $this->getDoctrine()->getManager();
+        
+        //cuento las tareas del proyecto
+        $dql = "select x from ProyectoBundle:Actividad x where x.ubicacion<>4";
+        $query = $em->createQuery($dql);
+        $actividades = $query->getResult();
+        $totalact=array();
+        
+        //inicializo
+        foreach ($actividades as $v) {
+            $totalact[$v->getTarea()->getId()]=0;
+        }  
+        //sumo
+        foreach ($actividades as $v) {
+            $totalact[$v->getTarea()->getId()]=$totalact[$v->getTarea()->getId()]+1;
+        } 
+        
+        return $totalact;
+        
+    }
     
     public function fechainicioproyecto($idproyecto){
 
@@ -51,6 +72,7 @@ class TareaController extends Controller
         return $this->render('ProyectoBundle:Tarea:index.html.twig', array(
             'entities' => $entities,
             'proyecto' => $proyecto,
+            'totalact'=>$this->totalactividad()
         ));
     }
     /**

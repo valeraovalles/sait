@@ -9,3 +9,7 @@ ProyectoBundle_proyecto:
 ProyectoBundle_tarea:
     resource: "@ProyectoBundle/Resources/config/routing/tarea.yml"
     prefix:   /tarea
+
+ProyectoBundle_actividad:
+    resource: "@ProyectoBundle/Resources/config/routing/actividad.yml"
+    prefix:   /actividad

@@ -48,7 +48,9 @@
                     {% if entity.estatus==1 %}
                         <span class="label label-danger">SIN INICIAR</span>
                     {% elseif entity.estatus==2 %}
-                        <span class="label label-warning">EN PROGRESO/span>
+                        <span class="label label-warning">EN PROGRESO</span>
+                    {% elseif entity.estatus==3 %}
+                        <span class="label label-success">CULMINADO</span>
                     {% endif %}
                 </td>
                 <td align="center">
@@ -67,7 +69,7 @@
                 <td align="center">
                         <a href="{{ path('tarea_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
                         <a href="{{ path('tarea_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
-                        <a style="color:black;" href="{{ path('tarea', { 'idproyecto': entity.id }) }}">ACTIVIDADES <span class="badge">0</span></a>
+                        <a style="color:black;" href="{{ path('actividad', { 'idtarea': entity.id }) }}">ACTIVIDADES <span class="badge">{% if totalact[entity.id] is defined %}{{ totalact[entity.id] }}{% else %}0{% endif %}</span></a>
                 </td>
             </tr>
         {% endfor %}

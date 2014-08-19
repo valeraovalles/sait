@@ -252,4 +252,6 @@ class Tarea
     {
         return $this->proyecto;
     }
+    
+
 }
