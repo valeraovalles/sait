@@ -32,25 +32,37 @@ class Proyecto
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechainicio", type="date", nullable=false)
-     * @Assert\NotBlank(message="La fecha de inicio del proyecto no puede estar en blanco.")
+     * @ORM\Column(name="fechainicio", type="date", nullable=true)
      */
     private $fechainicio;
 
     /**
-     * @var integer
+     * @var \DateTime
      *
-     * @ORM\Column(name="estatus", type="integer", nullable=false)
-     * @Assert\NotBlank(message="El estatus del proyecto no puede estar en blanco.")
+     * @ORM\Column(name="fechafinestimada", type="date", nullable=true)
      */
+    private $fechafinestimada;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechafinreal", type="date", nullable=true)
+     */
+    private $fechafinreal;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="estatus", type="integer", nullable=false)
+     */
+
     private $estatus;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="porcentaje", type="integer", nullable=false)
-     * @Assert\NotBlank(message="Debe colocar un porcentaje de avance.")
      */
+    
     private $porcentaje;
 
     /**
@@ -73,7 +85,6 @@ class Proyecto
    
     private $responsable;
 
-
     /**
      * @var integer
      *
@@ -82,19 +93,33 @@ class Proyecto
      * @ORM\GeneratedValue(strategy="SEQUENCE")
      * @ORM\SequenceGenerator(sequenceName="proyecto.proyecto_id_seq", allocationSize=1, initialValue=1)
      */
-    private $id;
 
+    private $id;
+    
+    /**
+     * @var \"user"
+     *
+     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\Nivelorganizacional")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="nivelorganizacional_id", referencedColumnName="id")
+     * })
+     */
+    private $nivelorganizacional;
+
+    
 
     public function __construct()
     {
         $this->responsable = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
     /**
      * Set nombre
      *
      * @param string $nombre
      * @return Proyecto
      */
+    
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
@@ -107,6 +132,7 @@ class Proyecto
      *
      * @return string 
      */
+    
     public function getNombre()
     {
         return $this->nombre;
@@ -158,6 +184,29 @@ class Proyecto
         return $this->fechainicio;
     }
 
+        /**
+     * Set fechafin
+     *
+     * @param \DateTime $fechafin
+     * @return Proyecto
+     */
+    public function setFechafin($fechafin)
+    {
+        $this->fechafin = $fechafin;
+
+        return $this;
+    }
+
+    /**
+     * Get fechafin
+     *
+     * @return \DateTime 
+     */
+    public function getFechafin()
+    {
+        return $this->fechafin;
+    }
+    
     /**
      * Set estatus
      *
@@ -236,4 +285,74 @@ class Proyecto
     {
         return $this->id;
     }
+    
+    /**
+     * Set nivelorganizacional
+     *
+     * @param \Administracion\UsuarioBundle\Entity\nivelorganizacional $nivelorganizacional
+     * @return Perfil
+     */
+    public function setNivelorganizacional(\Administracion\UsuarioBundle\Entity\nivelorganizacional $nivelorganizacional = null)
+    {
+        $this->nivelorganizacional = $nivelorganizacional;
+    
+        return $this;
+    }
+
+    /**
+     * Get nivelorganizacional
+     *
+     * @return \Administracion\UsuarioBundle\Entity\nivelorganizacional 
+     */
+    public function getNivelorganizacional()
+    {
+        return $this->nivelorganizacional;
+    }
+    
+    /**
+     * Set fechafinreal
+     *
+     * @param \DateTime $fechafinreal
+     * @return Tarea
+     */
+    public function setFechafinreal($fechafinreal)
+    {
+        $this->fechafinreal = $fechafinreal;
+
+        return $this;
+    }
+
+    /**
+     * Get fechafinreal
+     *
+     * @return \DateTime 
+     */
+    public function getFechafinreal()
+    {
+        return $this->fechafinreal;
+    }
+    
+    /**
+     * Set fechafinestimada
+     *
+     * @param \DateTime $fechafinestimada
+     * @return Tarea
+     */
+    public function setFechafinestimada($fechafinestimada)
+    {
+        $this->fechafinestimada = $fechafinestimada;
+
+        return $this;
+    }
+
+    /**
+     * Get fechafinestimada
+     *
+     * @return \DateTime 
+     */
+    public function getFechafinestimada()
+    {
+        return $this->fechafinestimada;
+    }
+    
 }

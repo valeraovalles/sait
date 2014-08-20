@@ -1,0 +1,34 @@
+actividad:
+    path:     /lista/{idtarea}
+    defaults: { _controller: "ProyectoBundle:Actividad:index" }
+
+actividad_show:
+    path:     /{id}/show
+    defaults: { _controller: "ProyectoBundle:Actividad:show" }
+
+actividad_new:
+    path:     /new/{idtarea}
+    defaults: { _controller: "ProyectoBundle:Actividad:new" }
+
+actividad_create:
+    path:     /create/{idtarea}
+    defaults: { _controller: "ProyectoBundle:Actividad:create" }
+    requirements: { _method: post }
+
+actividad_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ProyectoBundle:Actividad:edit" }
+
+actividad_update:
+    path:     /{id}/update
+    defaults: { _controller: "ProyectoBundle:Actividad:update" }
+    requirements: { _method: post|put }
+
+actividad_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ProyectoBundle:Actividad:delete" }
+    requirements: { _method: post|delete }
+
+actividad_ubicacion:
+    path:     /{id}/ubicacion/{direccion}
+    defaults: { _controller: "ProyectoBundle:Actividad:ubicacion" }

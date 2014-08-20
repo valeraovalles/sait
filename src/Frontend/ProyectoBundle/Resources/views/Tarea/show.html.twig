@@ -1,16 +1,17 @@
 {% extends '::proyecto.html.twig' %}
 
-{% block title %}Consultar Proyecto{% endblock %}
+{% block title %}Consultar Tarea{% endblock %}
 
 {% block titulo %}
-    CONSULTAR DE PROYECTO
+    CONSULTA DE TAREA
 {% endblock %}
 
 {% block ubicacion %}
 <ol class="breadcrumb">
   <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
   <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
-  <li class="active">CONSULTAR DE PROYECTO</li>
+  <li><a href="{{ path("tarea",{'idproyecto':proyecto.id}) }}">LISTA DE TAREAS</a></li>
+  <li class="active">CONSULTA DE TAREA</li>
 </ol>
 {% endblock %}
 
@@ -22,10 +23,12 @@
             <div class="labelform">Nombre:</div>
             <div class="widgetform">{{ entity.nombre|capitalize }}</div>
         </div>
+        {% if entity.descripcion %}
         <div class="contenedorform">
             <div class="labelform">Descripcion:</div>
             <div class="widgetform">{{ entity.descripcion|capitalize }}</div>
         </div>
+        {% endif %}
         <div class="contenedorform">
             <div class="labelform">Fecha inicio:</div>
             <div class="widgetform">
@@ -57,36 +60,26 @@
             </div>
         </div>
         <div class="contenedorform">
-            <div class="labelform">Responsable(s):</div>
-            <div class="widgetform">
-                    {% set cont = 0 %}
-                    {% set largo = entity.responsable | length %}
-                    {% for es in entity.responsable %} 
-                        {% set cont=cont+1 %}
-                            {{ es.primerNombre|title }} {{ es.primerApellido|title }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
-                    {% endfor %}
-            
-            </div>
-        </div>
-        <div class="contenedorform">
             <div class="labelform">% Completado:</div>
             <div class="widgetform">
-                {% if entity.porcentaje==0 %}
-                    <span class="label label-info">SIN AVANCE</span>
-                {% else %}
-                    <div class="progress" style="width:50%;">
-                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ entity.porcentaje }}%;color:black;font-weight:bold;">
-                        {{ entity.porcentaje }}%
-                      </div>
-                    </div>
-                {% endif %}
+                    {% if entity.porcentaje==0 and entity.estatus==1 %}
+                        <span class="label label-info">N/A</span>
+                    {% elseif entity.porcentaje==0 %}
+                        <span class="label label-info">SIN AVANCE</span>
+                    {% else %}
+                        <br><div class="progress">
+                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ entity.porcentaje }}%;color:black;font-weight:bold;">
+                            {{ entity.porcentaje }}%
+                          </div>
+                        </div>
+                    {% endif %}
             </div>
         </div>
     </div>
-        <a class="btn btn-default" href="{{ path('proyecto') }}">
+        <a class="btn btn-default" href="{{ path('tarea',{'idproyecto':proyecto.id}) }}">
             IR A LA LISTA
         </a> |
-        <a class="btn btn-default" href="{{ path('proyecto_edit', { 'id': entity.id }) }}">
+        <a class="btn btn-default" href="{{ path('tarea_edit', { 'id': entity.id }) }}">
             IR A EDITAR
         </a>
 
@@ -95,4 +88,5 @@
             {{ form_errors(delete_form) }}
             {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
         {{ form_end(delete_form) }}
+        
 {% endblock %}
