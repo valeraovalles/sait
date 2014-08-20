@@ -4,7 +4,7 @@
             <Clip>
                 <ClipName>NOTIREP0000</ClipName>
                 <TipoContenido>NOTICIEROS</TipoContenido>
-                <Contenido><![CDATA[ Reporte 360º]]></Contenido>
+                <Contenido><![CDATA[ Reporte 360]]></Contenido>
                 <OriginalTitle></OriginalTitle>
                 <Description> </Description>
                 <Notes>a</Notes>
@@ -16,7 +16,7 @@
                 <Segments>
             
                 <Segment>
-                    <SegTitle>1-1 REPORTE 360º - Reporte 360º</SegTitle>
+                    <SegTitle>1-1 REPORTE 360 - Reporte 360</SegTitle>
                     <MediaID>NOTIREP000001</MediaID>
                     <Duration>00:24:00.00</Duration>
                     <SegNumber>1</SegNumber>

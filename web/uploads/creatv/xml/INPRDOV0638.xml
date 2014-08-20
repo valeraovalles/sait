@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>        
+        <XML>
+            <Content>UPDATE</Content>
+            <Clip>
+                <ClipName>INPRDOV0638</ClipName>
+                <TipoContenido>INFORMATIVOS PROGRAMAS</TipoContenido>
+                <Contenido><![CDATA[ 18AGO14]]></Contenido>
+                <OriginalTitle></OriginalTitle>
+                <Description> </Description>
+                <Notes>a</Notes>
+                <DurPrev></DurPrev>
+                <Chapter></Chapter>
+                <EndDate></EndDate>
+                <EPG></EPG>
+                <EPG_Content> </EPG_Content>
+                <Segments>
+            
+                <Segment>
+                    <SegTitle>1-2 DOSSIER VESPERTINO - 18AGO14</SegTitle>
+                    <MediaID>INPRDOV063801</MediaID>
+                    <Duration>00:26:00.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>2-2 DOSSIER VESPERTINO - 18AGO14</SegTitle>
+                    <MediaID>INPRDOV063802</MediaID>
+                    <Duration>00:26:00.00</Duration>
+                    <SegNumber>2</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            </Segments></Clip></XML>
