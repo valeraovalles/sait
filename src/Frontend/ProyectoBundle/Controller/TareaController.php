@@ -19,18 +19,18 @@ class TareaController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         //cuento las tareas del proyecto
-        $dql = "select x from ProyectoBundle:Actividad x where x.ubicacion<>4";
+        $dql = "select x from ProyectoBundle:Actividad x";
         $query = $em->createQuery($dql);
         $actividades = $query->getResult();
         $totalact=array();
         
         //inicializo
         foreach ($actividades as $v) {
-            $totalact[$v->getTarea()->getId()]=0;
+            $totalact[$v->getTarea()->getId()][$v->getUbicacion()]=0;
         }  
         //sumo
         foreach ($actividades as $v) {
-            $totalact[$v->getTarea()->getId()]=$totalact[$v->getTarea()->getId()]+1;
+            $totalact[$v->getTarea()->getId()][$v->getUbicacion()]=$totalact[$v->getTarea()->getId()][$v->getUbicacion()]+1;
         } 
         
         return $totalact;
@@ -51,7 +51,6 @@ class TareaController extends Controller
         if(!empty($tarea))
             $fechainicio=$tarea[0]->getFechainicio();
         else $fechainicio=null;
-        
 
         //actualizo campos en ticket
         $query = $em->createQuery('update ProyectoBundle:Proyecto x set x.fechainicio= :fechainicio WHERE x.id = :idproyecto');
@@ -60,15 +59,19 @@ class TareaController extends Controller
         $query->execute();
     }
     
+    
+
     /**
      * Lists all Tarea entities.
      *
      */
     public function indexAction($idproyecto)
     {
+
         $em = $this->getDoctrine()->getManager();
         $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($idproyecto);       
         $entities = $em->getRepository('ProyectoBundle:Tarea')->findAll();
+        
         return $this->render('ProyectoBundle:Tarea:index.html.twig', array(
             'entities' => $entities,
             'proyecto' => $proyecto,
@@ -96,6 +99,20 @@ class TareaController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            
+            $message = \Swift_Message::newInstance()   
+            ->setSubject('Proyectos-Tareas')  
+            ->setFrom($perfil->getNivelorganizacional()->getCorreo())     // we configure the sender
+            ->setTo($perfil->getNivelorganizacional()->getCorreo())   
+            ->setBody( $this->renderView(
+                    'ProyectoBundle:Correo:tarea.html.twig',
+                    array('tarea' => $entity)
+                ), 'text/html');
+
+            $this->get('mailer')->send($message);   
+            
             $this->fechainicioproyecto($idproyecto);
             
             return $this->redirect($this->generateUrl('tarea_show', array('id' => $entity->getId())));

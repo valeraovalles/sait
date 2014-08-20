@@ -40,10 +40,10 @@
             </div>
         </div>
         <div class="contenedorform">
-            <div class="labelform">Fecha Fin:</div>
+            <div class="labelform">Fecha fin estimada:</div>
             <div class="widgetform">
-                {% if entity.fechafin %}
-                    {{ entity.fechafin|date('d-m-Y') }}
+                {% if entity.fechafinestimada %}
+                    {{ entity.fechafinestimada|date('d-m-Y') }}
                 {% else %}
                     <span class="label label-info">POR DEFINIR</span>
                 {% endif %}

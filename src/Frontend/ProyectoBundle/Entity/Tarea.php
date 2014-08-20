@@ -57,9 +57,16 @@ class Tarea
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechafin", type="date", nullable=true)
+     * @ORM\Column(name="fechafinestimada", type="date", nullable=true)
      */
-    private $fechafin;
+    private $fechafinestimada;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechafinreal", type="date", nullable=true)
+     */
+    private $fechafinreal;
 
     /**
      * @var integer
@@ -127,7 +134,6 @@ class Tarea
         return $this->estatus;
     }
 
-
     /**
      * Set descripcion
      *
@@ -137,7 +143,6 @@ class Tarea
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
-
         return $this;
     }
 
@@ -160,7 +165,6 @@ class Tarea
     public function setFechainicio($fechainicio)
     {
         $this->fechainicio = $fechainicio;
-
         return $this;
     }
 
@@ -175,26 +179,49 @@ class Tarea
     }
 
     /**
-     * Set fechafin
+     * Set fechafinreal
      *
-     * @param \DateTime $fechafin
+     * @param \DateTime $fechafinreal
      * @return Tarea
      */
-    public function setFechafin($fechafin)
+    public function setFechafinreal($fechafinreal)
     {
-        $this->fechafin = $fechafin;
+        $this->fechafinreal = $fechafinreal;
 
         return $this;
     }
 
     /**
-     * Get fechafin
+     * Get fechafinreal
      *
      * @return \DateTime 
      */
-    public function getFechafin()
+    public function getFechafinreal()
     {
-        return $this->fechafin;
+        return $this->fechafinreal;
+    }
+    
+    /**
+     * Set fechafinestimada
+     *
+     * @param \DateTime $fechafinestimada
+     * @return Tarea
+     */
+    public function setFechafinestimada($fechafinestimada)
+    {
+        $this->fechafinestimada = $fechafinestimada;
+
+        return $this;
+    }
+
+    /**
+     * Get fechafinestimada
+     *
+     * @return \DateTime 
+     */
+    public function getFechafinestimada()
+    {
+        return $this->fechafinestimada;
     }
 
     /**

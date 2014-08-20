@@ -39,10 +39,16 @@ class Proyecto
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechafin", type="date", nullable=true)
+     * @ORM\Column(name="fechafinestimada", type="date", nullable=true)
      */
+    private $fechafinestimada;
     
-    private $fechafin;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechafinreal", type="date", nullable=true)
+     */
+    private $fechafinreal;
 
     /**
      * @var integer
@@ -301,6 +307,52 @@ class Proyecto
     public function getNivelorganizacional()
     {
         return $this->nivelorganizacional;
+    }
+    
+    /**
+     * Set fechafinreal
+     *
+     * @param \DateTime $fechafinreal
+     * @return Tarea
+     */
+    public function setFechafinreal($fechafinreal)
+    {
+        $this->fechafinreal = $fechafinreal;
+
+        return $this;
+    }
+
+    /**
+     * Get fechafinreal
+     *
+     * @return \DateTime 
+     */
+    public function getFechafinreal()
+    {
+        return $this->fechafinreal;
+    }
+    
+    /**
+     * Set fechafinestimada
+     *
+     * @param \DateTime $fechafinestimada
+     * @return Tarea
+     */
+    public function setFechafinestimada($fechafinestimada)
+    {
+        $this->fechafinestimada = $fechafinestimada;
+
+        return $this;
+    }
+
+    /**
+     * Get fechafinestimada
+     *
+     * @return \DateTime 
+     */
+    public function getFechafinestimada()
+    {
+        return $this->fechafinestimada;
     }
     
 }

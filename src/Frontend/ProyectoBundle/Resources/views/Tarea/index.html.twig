@@ -25,7 +25,7 @@
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Fecha inicio</th>
-                <th>Fecha fin</th>
+                <th>Fecha fin (e)</th>
                 <th>Estatus</th>
                 <th>Completado</th>
                 <th>Actions</th>
@@ -38,8 +38,8 @@
                 <td>{{ entity.descripcion }}</td>
                 <td align="center">{% if entity.fechainicio %}{{ entity.fechainicio|date('d-m-Y') }}{% endif %}</td>
                 <td align="center">
-                    {% if entity.fechafin %}
-                        {{ entity.fechafin|date('d-m-Y') }}
+                    {% if entity.fechafinestimada %}
+                        {{ entity.fechafinestimada|date('d-m-Y') }}
                     {% else %}
                         <span class="label label-info">POR DEFINIR</span>
                     {% endif %}
@@ -69,7 +69,13 @@
                 <td align="center">
                         <a href="{{ path('tarea_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
                         <a href="{{ path('tarea_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
-                        <a style="color:black;" href="{{ path('actividad', { 'idtarea': entity.id }) }}">ACTIVIDADES <span class="badge">{% if totalact[entity.id] is defined %}{{ totalact[entity.id] }}{% else %}0{% endif %}</span></a>
+                        <a href="{{ path('actividad', { 'idtarea': entity.id }) }}">
+                            <span class="label label-primary">{% if totalact[entity.id][1] is defined %}{{ totalact[entity.id][1] }}{% else %}0{% endif %}</span>
+                            <span class="label label-warning">{% if totalact[entity.id][2] is defined %}{{ totalact[entity.id][2] }}{% else %}0{% endif %}</span>
+                            <span class="label label-info">{% if totalact[entity.id][3] is defined %}{{ totalact[entity.id][3] }}{% else %}0{% endif %}</span>
+                            <span class="label label-success">{% if totalact[entity.id][4] is defined %}{{ totalact[entity.id][4] }}{% else %}0{% endif %}</span>
+                            <span class="label label-warning">{% if totalact[entity.id][5] is defined %}{{ totalact[entity.id][5] }}{% else %}0{% endif %}</span>
+                        </a>
                 </td>
             </tr>
         {% endfor %}
