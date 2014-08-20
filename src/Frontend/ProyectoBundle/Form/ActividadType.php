@@ -30,7 +30,7 @@ class ActividadType extends AbstractType
             ->add('diasestimados','text')
             ->add('diasreales')
             ->add('ubicacion')
-            ->add('descripcion')
+            ->add('descripcion','textarea')
             ->add('responsable','entity',array(
                 'class' => 'UsuarioBundle:Perfil',
                 'empty_value'=>'Seleccione...',

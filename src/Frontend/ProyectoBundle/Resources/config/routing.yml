@@ -13,3 +13,8 @@ ProyectoBundle_tarea:
 ProyectoBundle_actividad:
     resource: "@ProyectoBundle/Resources/config/routing/actividad.yml"
     prefix:   /actividad
+
+ProyectoBundle_comentarioactividad:
+    resource: "@ProyectoBundle/Resources/config/routing/comentarioactividad.yml"
+    prefix:   /comentarioactividad
+

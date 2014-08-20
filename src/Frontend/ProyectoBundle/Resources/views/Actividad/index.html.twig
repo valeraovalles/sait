@@ -38,6 +38,7 @@
                         <div class="accionact">
                             <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
                             <a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
                             <a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion', { 'id': act.id,'direccion':'dep' }) }}"><span class="glyphicon glyphicon-fire"></span></a>
                         </div>
                         
@@ -65,6 +66,7 @@
                         <div class="accionact">
                             <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
                             <a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
                             <a onclick="return confirm('¿Seguro que desea colocar esta actividad como dependiente?')" href="{{ path('actividad_ubicacion', { 'id': act.id,'direccion':'dep' }) }}"><span class="glyphicon glyphicon-fire"></span></a>
                         </div>
                         
@@ -86,6 +88,9 @@
                 {% for act in entities if act.ubicacion==3 %}                    
                     <div class="tarjetaact img-rounded">
                         <div class="responsableact bg-info">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        <div class="accionact">
+                            <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
+                        </div>
                         
                         <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
                         
@@ -129,6 +134,7 @@
                         <div class="accionact">
                             <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
                             <a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
                             <a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion', { 'id': act.id,'direccion':'enpro' }) }}"><span class="glyphicon glyphicon-ok"></span></a>
                         </div>
                         
