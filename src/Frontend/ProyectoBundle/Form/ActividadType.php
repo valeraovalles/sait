@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
 
-class ProyectoType extends AbstractType
+class ActividadType extends AbstractType
 {
     
     public function __construct($usuariounidad)
@@ -20,30 +20,29 @@ class ProyectoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        
         $usuariounidad = $this->usuariounidad;
         foreach ($usuariounidad as $x){
            $datos[]=$x->getId();
         }
-        
+
         $builder
-            ->add('nombre')
-            ->add('descripcion','textarea')
-            ->add('fechainicio','date',array(
-                    'widget' => 'single_text',
-                    'format'   => 'dd-MM-y',  ))
-            ->add('estatus','choice',array('choices'=>array(''=>'Seleccione...',1=>'Sin Iniciar',2=>'En progresop',3=>'Culminado')))
-            ->add('porcentaje','text')
+            ->add('diasestimados','text')
+            ->add('diasreales')
+            ->add('ubicacion')
+            ->add('descripcion')
             ->add('responsable','entity',array(
                 'class' => 'UsuarioBundle:Perfil',
                 'empty_value'=>'Seleccione...',
-                'multiple'=>true,
-                'expanded'=>true,
+                'multiple'=>false,
+                'expanded'=>false,
                 'query_builder' => function(EntityRepository $x)use($datos){
                 return $x->createQueryBuilder('x')
                 ->where('x.id in (:id)')
                 ->setParameter('id', $datos)
                 ;}
             ));
+        ;
     }
     
     /**
@@ -52,7 +51,7 @@ class ProyectoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Frontend\ProyectoBundle\Entity\Proyecto'
+            'data_class' => 'Frontend\ProyectoBundle\Entity\Actividad'
         ));
     }
 
@@ -61,6 +60,6 @@ class ProyectoType extends AbstractType
      */
     public function getName()
     {
-        return 'frontend_proyectobundle_proyecto';
+        return 'frontend_proyectobundle_actividad';
     }
 }

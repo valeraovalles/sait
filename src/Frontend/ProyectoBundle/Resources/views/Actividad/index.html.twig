@@ -1,0 +1,156 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Actividad{% endblock %}
+
+{% block titulo %}
+    <h1>LISTA DE ACTIVIDADES</h1>
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
+  <li><a href="{{ path("tarea",{'idproyecto':tarea.proyecto.id}) }}">LISTA DE TAREAS</a></li>
+  <li class="active">LISTA DE ACTIVIDADES</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    
+    <table class="table tablaactividad">
+        <tr>
+            <th class="bg-primary">NUEVA</th>
+            <th class="bg-warning">EN PROCESO</th>
+            <th class="bg-info">EN REVISIÓN</th>
+            <th class="bg-success">CULMINADO</th>
+            <th class="bg-danger">DEPENDENCIA</th>
+        </tr>
+        <tr>
+            {# NUEVA #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==1 %}
+                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-primary">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        <div class="accionact">
+                            <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            <a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion', { 'id': act.id,'direccion':'dep' }) }}"><span class="glyphicon glyphicon-fire"></span></a>
+                        </div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-3"></div>
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.diasestimados }} DÍAS</span></div>
+                          <div class="col-md-3">{% if act.ubicacion!=4 %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'der'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a>{% endif %}</div>
+                        </div>
+
+                    </div>                   
+                    
+                {% endfor %}
+                </div>
+            </td>
+            
+            {# EN PROCESO #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==2 %}
+                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-warning">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        <div class="accionact">
+                            <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            <a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a onclick="return confirm('¿Seguro que desea colocar esta actividad como dependiente?')" href="{{ path('actividad_ubicacion', { 'id': act.id,'direccion':'dep' }) }}"><span class="glyphicon glyphicon-fire"></span></a>
+                        </div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-3"><a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.diasestimados }} DÍAS</span></div>
+                          <div class="col-md-3"><a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'der'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                        </div>
+                    </div>                                       
+                {% endfor %}
+                </div>
+            </td>
+            
+            {# EN REVISION #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==3 %}                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-info">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-3">{% if act.ubicacion!=1 %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a>{% endif %}</div>
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.diasestimados }} DÍAS</span></div>
+                          <div class="col-md-3">{% if act.ubicacion!=4 %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'der'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a>{% endif %}</div>
+                        </div>
+                    </div>      
+                {% endfor %}             
+                </div>
+            </td>
+            
+            {# CULMINADO #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==4 %}
+                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-success">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-3"><a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.diasestimados }} DÍAS</span></div>
+                        </div>
+                    </div>                   
+                    
+                {% endfor %}
+                </div>
+            </td>
+            
+            {# DEPENDENCIA #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==5 %}
+                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-danger">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        <div class="accionact">
+                            <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            <a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion', { 'id': act.id,'direccion':'enpro' }) }}"><span class="glyphicon glyphicon-ok"></span></a>
+                        </div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-12"><span class="bg-info diasact">{{ act.diasestimados }} DÍAS</span></div>
+                        </div>
+                    </div>                   
+                    
+                {% endfor %}
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <a class="btn btn-default" href="{{ path('tarea',{'idproyecto':tarea.proyecto.id}) }}">
+        IR A LA LISTA DE TAREAS
+    </a> | 
+    
+    <a class="btn btn-primary" href="{{ path('actividad_new',{'idtarea':tarea.id}) }}">
+        CREAR NUEVA ACTIVIDAD
+    </a><br><br>
+ 
+    {% endblock %}

@@ -88,10 +88,10 @@ a                      :hover{
 
 /* LISTADO DE APLICACIONES */
 
-.row .col-md-4{
+.col-img-apliinicio .row .col-md-4{
         margin-bottom: 20px;
 }
-.row img{
+.col-img-apliinicio .row img{
         height               :75px;
 }
 

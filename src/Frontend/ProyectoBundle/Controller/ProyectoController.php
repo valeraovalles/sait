@@ -21,17 +21,41 @@ class ProyectoController extends Controller
      * Lists all Proyecto entities.
      *
      */
+    public function totaltarea() {
+        $em = $this->getDoctrine()->getManager();
+        
+        //cuento las tareas del proyecto
+        $dql = "select x from ProyectoBundle:Tarea x";
+        $query = $em->createQuery($dql);
+        $tareas = $query->getResult();
+        $totaltarea=array();
+        
+        //inicializo
+        foreach ($tareas as $v) {
+            $totaltarea[$v->getProyecto()->getId()]=0;
+        }  
+        //sumo
+        foreach ($tareas as $v) {
+            $totaltarea[$v->getProyecto()->getId()]=$totaltarea[$v->getProyecto()->getId()]+1;
+        } 
+        
+        return $totaltarea;
+        
+    }
+  
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-
-        $entities = $em->getRepository('ProyectoBundle:Proyecto')->findAll();
+        
+        $entities = $em->getRepository('ProyectoBundle:Proyecto')->findByNivelorganizacional($perfil->getNivelorganizacional()->getId());
 
         return $this->render('ProyectoBundle:Proyecto:index.html.twig', array(
             'entities' => $entities,
-            'perfil'=>$perfil
+            'perfil'=>$perfil,
+            'totaltarea'=>$this->totaltarea()
         ));
         
         
@@ -44,22 +68,46 @@ class ProyectoController extends Controller
     public function createAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        
+        //genero formulario con los integrantes de la unidad
         $f=new Funcion; 
         $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
-        
         $entity = new Proyecto();
         $form = $this->createCreateForm($entity,$usuariounidad);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            //guardo valores por defecto
+            $entity->setEstatus(1);
+            $entity->setPorcentaje(0);
+            $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            $entity->setNivelorganizacional($perfil->getNivelorganizacional());
+            
             $em->persist($entity);
             $em->flush();
+
+            $message = \Swift_Message::newInstance()   
+            ->setSubject('Proyectos')  
+            ->setFrom($perfil->getNivelorganizacional()->getCorreo())     // we configure the sender
+            ->setTo($perfil->getNivelorganizacional()->getCorreo())   
+            ->setBody( $this->renderView(
+                    'ProyectoBundle:Correo:proyecto.html.twig',
+                    array('proyecto' => $entity)
+                ), 'text/html');
+
+            $this->get('mailer')->send($message);   
+            
+            
             $this->get('session')->getFlashBag()->add('notice', 'Proyecto creado exitosamente.');
             return $this->redirect($this->generateUrl('proyecto_show', array('id' => $entity->getId())));
         }
 
+
+        
         return $this->render('ProyectoBundle:Proyecto:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -112,10 +160,14 @@ class ProyectoController extends Controller
      */
     public function showAction($id)
     {
+        
         $em = $this->getDoctrine()->getManager();
 
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        
         $entity = $em->getRepository('ProyectoBundle:Proyecto')->find($id);
 
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Proyecto entity.');
         }
@@ -187,6 +239,13 @@ class ProyectoController extends Controller
 
         $entity = $em->getRepository('ProyectoBundle:Proyecto')->find($id);
 
+        //guardo el valor de las variables ya que no se envian por formulario
+        $estatus=$entity->getEstatus();
+        $porcentaje=$entity->getPorcentaje();
+        $fechainicio=$entity->getFechainicio();
+        $fechafin=$entity->getFechafin();
+        $nivelorg=$entity->getNivelorganizacional();
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Proyecto entity.');
         }
@@ -196,6 +255,13 @@ class ProyectoController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+            $entity->setEstatus($estatus);
+            $entity->setPorcentaje($porcentaje);
+            $entity->setFechainicio($fechainicio);
+            $entity->setFechafin($fechafin);
+            $entity->setNivelorganizacional($nivelorg);
+            
             $em->flush();
             
             $this->get('session')->getFlashBag()->add('notice', 'Proyecto editado exitosamente.');

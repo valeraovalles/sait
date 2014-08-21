@@ -1,3 +1,9 @@
+UsuarioBundle_nivelorganizacional:
+    resource: "@UsuarioBundle/Resources/config/routing/nivelorganizacional.yml"
+    prefix:   /nivelorganizacional
+
+
+
 telesur_personal:
     pattern:  /telesur/personal
     defaults: { _controller: UsuarioBundle:Personal:index }

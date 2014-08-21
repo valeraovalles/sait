@@ -3,9 +3,10 @@
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('bundles/proyecto/css/proyecto.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('bundles/proyecto/css/tablaactividad.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 
 {% block menu %}
-    {% include 'DistribucionBundle:Default:includes/menu.html.twig' %}
+    {% include 'ProyectoBundle:Default:includes/menu.html.twig' %}
 {% endblock %}
