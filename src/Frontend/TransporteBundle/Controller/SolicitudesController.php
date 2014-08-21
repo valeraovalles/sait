@@ -124,7 +124,7 @@ die;
      *
      */
     public function newAction()
-    {
+    {       
         $entity = new Solicitudes();
         $form   = $this->createForm(new SolicitudesType(), $entity);
         
