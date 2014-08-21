@@ -1,0 +1,30 @@
+nivelorganizacional:
+    path:     /lista
+    defaults: { _controller: "UsuarioBundle:Nivelorganizacional:index" }
+
+nivelorganizacional_show:
+    path:     /{id}/show
+    defaults: { _controller: "UsuarioBundle:Nivelorganizacional:show" }
+
+nivelorganizacional_new:
+    path:     /new
+    defaults: { _controller: "UsuarioBundle:Nivelorganizacional:new" }
+
+nivelorganizacional_create:
+    path:     /create
+    defaults: { _controller: "UsuarioBundle:Nivelorganizacional:create" }
+    requirements: { _method: post }
+
+nivelorganizacional_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UsuarioBundle:Nivelorganizacional:edit" }
+
+nivelorganizacional_update:
+    path:     /{id}/update
+    defaults: { _controller: "UsuarioBundle:Nivelorganizacional:update" }
+    requirements: { _method: post|put }
+
+nivelorganizacional_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UsuarioBundle:Nivelorganizacional:delete" }
+    requirements: { _method: post|delete }

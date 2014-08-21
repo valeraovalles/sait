@@ -3,6 +3,7 @@
 namespace Frontend\ProyectoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tarea
@@ -12,54 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Tarea
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nombre", type="string", nullable=false)
-     */
-    private $nombre;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="descripcion", type="string", length=500, nullable=false)
-     */
-    private $descripcion;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fechainicio", type="date", nullable=false)
-     */
-    private $fechainicio;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fechafin", type="date", nullable=false)
-     */
-    private $fechafin;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="porcentaje", type="integer", nullable=false)
-     */
-    private $porcentaje;
-
     
-     /**
-     * @var \Frontend\ProyectoBundle\Entity\Actividad
-     *
-     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\Perfil")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="responsable_id", referencedColumnName="id")
-     * })
-     */
-   
-    private $responsable;
-
-
     /**
      * @var integer
      *
@@ -69,6 +23,58 @@ class Tarea
      * @ORM\SequenceGenerator(sequenceName="proyecto.tarea_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
+    
+    /**
+     * @var integer
+     * @ORM\Column(name="estatus", type="integer", nullable=false)
+     */
+
+    private $estatus;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", nullable=false)
+     * @Assert\NotBlank(message="El nombre no puede estar en blanco.")
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=500, nullable=true)
+     */
+    private $descripcion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechainicio", type="date", nullable=false)
+     * @Assert\NotBlank(message="La fecha de inicio puede estar en blanco.")
+     */
+    private $fechainicio;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechafinestimada", type="date", nullable=true)
+     */
+    private $fechafinestimada;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fechafinreal", type="date", nullable=true)
+     */
+    private $fechafinreal;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="porcentaje", type="integer", nullable=false)
+     */
+    private $porcentaje;
+
 
     /**
      * @var \Frontend\ProyectoBundle\Entity\Proyecto
@@ -104,6 +110,29 @@ class Tarea
     {
         return $this->nombre;
     }
+    
+    /**
+     * Set estatus
+     *
+     * @param integer $estatus
+     * @return Proyecto
+     */
+    public function setEstatus($estatus)
+    {
+        $this->estatus = $estatus;
+
+        return $this;
+    }
+
+    /**
+     * Get estatus
+     *
+     * @return integer 
+     */
+    public function getEstatus()
+    {
+        return $this->estatus;
+    }
 
     /**
      * Set descripcion
@@ -114,7 +143,6 @@ class Tarea
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
-
         return $this;
     }
 
@@ -137,7 +165,6 @@ class Tarea
     public function setFechainicio($fechainicio)
     {
         $this->fechainicio = $fechainicio;
-
         return $this;
     }
 
@@ -152,26 +179,49 @@ class Tarea
     }
 
     /**
-     * Set fechafin
+     * Set fechafinreal
      *
-     * @param \DateTime $fechafin
+     * @param \DateTime $fechafinreal
      * @return Tarea
      */
-    public function setFechafin($fechafin)
+    public function setFechafinreal($fechafinreal)
     {
-        $this->fechafin = $fechafin;
+        $this->fechafinreal = $fechafinreal;
 
         return $this;
     }
 
     /**
-     * Get fechafin
+     * Get fechafinreal
      *
      * @return \DateTime 
      */
-    public function getFechafin()
+    public function getFechafinreal()
     {
-        return $this->fechafin;
+        return $this->fechafinreal;
+    }
+    
+    /**
+     * Set fechafinestimada
+     *
+     * @param \DateTime $fechafinestimada
+     * @return Tarea
+     */
+    public function setFechafinestimada($fechafinestimada)
+    {
+        $this->fechafinestimada = $fechafinestimada;
+
+        return $this;
+    }
+
+    /**
+     * Get fechafinestimada
+     *
+     * @return \DateTime 
+     */
+    public function getFechafinestimada()
+    {
+        return $this->fechafinestimada;
     }
 
     /**
@@ -195,29 +245,6 @@ class Tarea
     public function getPorcentaje()
     {
         return $this->porcentaje;
-    }
-
-    /**
-     * Set responsableId
-     *
-     * @param integer $responsableId
-     * @return Tarea
-     */
-    public function setResponsable(\Administracion\UsuarioBundle\Entity\Perfil $responsable = null)
-    {
-        $this->responsable = $responsable;
-
-        return $this;
-    }
-
-    /**
-     * Get responsableId
-     *
-     * @return integer 
-     */
-    public function getResponsable()
-    {
-        return $this->responsable;
     }
 
     /**
@@ -252,4 +279,6 @@ class Tarea
     {
         return $this->proyecto;
     }
+    
+
 }

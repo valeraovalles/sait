@@ -1,33 +1,33 @@
 {% extends '::proyecto.html.twig' %}
 
-{% block title %}Editar Proyecto{% endblock %}
+{% block title %}Editar Tarea{% endblock %}
 
 {% block titulo %}
-    EDITAR PROYECTO
+    EDITAR TAREA
 {% endblock %}
 
 {% block ubicacion %}
 <ol class="breadcrumb">
   <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
   <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
-  <li class="active">EDITAR PROYECTO</li>
+  <li><a href="{{ path("tarea",{'idproyecto':proyecto.id}) }}">LISTA DE TAREAS</a></li>
+  <li class="active">EDITAR TAREA</li>
 </ol>
 {% endblock %}
     
 {% block body -%}
     {{ parent() }}
-
-    {% if form_errors(edit_form.nombre) or form_errors(edit_form.descripcion) or form_errors(edit_form.responsable) %}
+    
+    {% if form_errors(edit_form.nombre) or form_errors(edit_form.descripcion) or form_errors(edit_form.fechainicio) %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>{{ form_errors(edit_form.nombre) }}</div>        
         <div>{{ form_errors(edit_form.descripcion) }}</div>
-        <div>{{ form_errors(edit_form.responsable) }}</div>
+        <div>{{ form_errors(edit_form.fechainicio) }}</div>
     </div>
     {% endif %}
     
-    
-    <form novalidate action="{{ path('proyecto_update',{'id':entity.id}) }}" method="post" {{ form_enctype(edit_form) }}>
+    <form novalidate action="{{ path('tarea_update',{'id':entity.id}) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
 
         <div class="formShow">
@@ -40,23 +40,22 @@
                 <div class="labelform">Descripción:</div>
                 <div class="widgetform">{{ form_widget(edit_form.descripcion) }}</div>
             </div>
-            
             <div class="contenedorform">
-                <div class="labelform">Responsable:</div>
-                <div class="widgetform">{{ form_widget(edit_form.responsable) }}</div>
+                <div class="labelform">Fecha de inicio:</div>
+                <div class="widgetform">{{ form_widget(edit_form.fechainicio) }}</div>
             </div>
         </div>
-        <a class="btn btn-default" href="{{ path('proyecto') }}">
+        <a class="btn btn-default" href="{{ path('tarea',{'idproyecto':proyecto.id}) }}">
             VOLVER A LA LISTA
         </a> | 
-        <input type="submit" class="btn btn-primary" value="EDITAR PROYECTO">
+        <input type="submit" class="btn btn-primary" value="EDITAR TAREA">
         <br><br>
        
     </form>
         
     <script>
     $(function() {
-      $( "#frontend_proyectobundle_proyecto_fechainicio" ).datepicker({
+      $( "#frontend_proyectobundle_tarea_fechainicio" ).datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat: "dd-mm-yy",
