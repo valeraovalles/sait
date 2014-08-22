@@ -76,13 +76,14 @@ class ActividadController extends Controller
         //actividades
         $em = $this->getDoctrine()->getManager();
         
-        //cuento las tareas cerradas
-        $dql = "select count(x) from ProyectoBundle:Tarea x where x.proyecto= :idproyecto and x.estatus=3";
+        //cuento las actividades cerradas
+        $dql = "select count(x) from ProyectoBundle:Actividad x join x.tarea t where t.proyecto = :idproyecto and (x.ubicacion=4 or x.ubicacion=3)";
         $query = $em->createQuery($dql);
         $query->setParameter('idproyecto',$idproyecto);
         $totalcerrado = $query->getSingleResult();
         
-        $dql = "select count(x) from ProyectoBundle:Tarea x where x.proyecto= :idproyecto and x.estatus!=3";
+        //cuento actividades abiertas
+        $dql = "select count(x) from ProyectoBundle:Actividad x join x.tarea t where t.proyecto = :idproyecto and x.ubicacion!=4 and x.ubicacion!=3";
         $query = $em->createQuery($dql);
         $query->setParameter('idproyecto',$idproyecto);
         $totalabierto = $query->getSingleResult();
@@ -340,7 +341,23 @@ class ActividadController extends Controller
         else if($direccion=='der' and $num!=4)$num=$num+1;
         else if($direccion=='izq' and $num!=1) $num=$num-1;
         
-        //actualizo campos en ticket
+
+        
+        
+        if($num==2){
+            //busco si solo hay en proceso, revicion o dependencia
+            $dql = "select x from ProyectoBundle:Actividad x where x.responsable= :idresponsable and x.ubicacion=2";
+            $query = $em->createQuery($dql);
+            $query->setParameter('idresponsable',$act->getResponsable()->getId());
+            $actx = $query->getResult();
+
+            if(!empty($actx)){
+             // $this->get('session')->getFlashBag()->add('alert', 'Debe culminar la actividad en curso y si esta depende de algún otro proceso debe colocarla como dependiente.');
+             // return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId())));
+           }
+        }
+
+        //actualizo campos en actividades
         $query = $em->createQuery('update ProyectoBundle:Actividad x set x.ubicacion= :ubicacion WHERE x.id = :idactividad');
         $query->setParameter('ubicacion', $num);
         $query->setParameter('idactividad', $id);
