@@ -27,19 +27,56 @@ class Actividad
     /**
      * @var string
      *
-     * @ORM\Column(name="diasestimados", type="integer", nullable=false)
-     * @Assert\NotBlank(message="Los días estimados no deben estar en blanco.")
-     * @Assert\Type(type="digit", message="Los días deben ser con números.").
-     * @Assert\NotEqualTo(value = "0", message="Los días no pueden ser igual a 0.")
+     * @ORM\Column(name="tiempoestimado", type="integer", nullable=false)
+     * @Assert\NotBlank(message="El tiempo estimado no deben estar en blanco.")
+     * @Assert\Type(type="digit", message="El tiempo debe ser numérico").
+     * @Assert\NotEqualTo(value = "0", message="El tiempo no puede ser igual a 0.")
      */
-    private $diasestimados;
+    private $tiempoestimado;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="diasreales", type="integer", nullable=true)
+     * @ORM\Column(name="comienzo", type="datetime", nullable=true)
      */
-    private $diasreales;
+    private $comienzo;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fin", type="datetime", nullable=true)
+     */
+    private $fin;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="estatuscomienzo", type="boolean", nullable=true)
+     */
+private $estatuscomienzo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="estatusfin", type="boolean", nullable=true)
+     */
+    private $estatusfin;
+    
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tiemporeal", type="string", nullable=true)
+     */
+    private $tiemporeal;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tipotiempo", type="integer", nullable=true)
+     */
+    //1 dias, 2 horas y 3 minutos
+    private $tipotiempo;
     
     /**
      * @var string
@@ -101,51 +138,166 @@ class Actividad
     {
         return $this->ubicacion;
     }
-
+    
     /**
-     * Set diasestimados
+     * Set estatuscomienzo
      *
-     * @param integer $diasestimados
+     * @param integer $estatuscomienzo
      * @return Actividad
      */
-    public function setDiasestimados($diasestimados)
+    public function setEstatuscomienzo($estatuscomienzo)
     {
-        $this->diasestimados = $diasestimados;
+        $this->estatuscomienzo = $estatuscomienzo;
 
         return $this;
     }
 
     /**
-     * Get diasestimados
+     * Get estatuscomienzo
      *
      * @return integer 
      */
-    public function getDiasestimados()
+    public function getEstatuscomienzo()
     {
-        return $this->diasestimados;
+        return $this->estatuscomienzo;
     }
     
     /**
-     * Set diasreales
+     * Set estatusfin
      *
-     * @param integer $diasreales
+     * @param integer $estatusfin
      * @return Actividad
      */
-    public function setDiasreales($diasreales)
+    public function setEstatusfin($estatusfin)
     {
-        $this->diasreales = $diasreales;
+        $this->estatusfin = $estatusfin;
 
         return $this;
     }
 
     /**
-     * Get diasreales
+     * Get estatusfin
      *
      * @return integer 
      */
-    public function getDiasreales()
+    public function getEstatusfin()
     {
-        return $this->diasreales;
+        return $this->estatusfin;
+    }
+    
+    /**
+     * Set comienzo
+     *
+     * @param integer $comienzo
+     * @return Actividad
+     */
+    public function setComienzo($comienzo)
+    {
+        $this->comienzo = $comienzo;
+
+        return $this;
+    }
+
+    /**
+     * Get comienzo
+     *
+     * @return integer 
+     */
+    public function getComienzo()
+    {
+        return $this->comienzo;
+    }
+    
+    /**
+     * Set fin
+     *
+     * @param integer $fin
+     * @return Actividad
+     */
+    public function setFin($fin)
+    {
+        $this->fin = $fin;
+
+        return $this;
+    }
+
+    /**
+     * Get fin
+     *
+     * @return integer 
+     */
+    public function getFin()
+    {
+        return $this->fin;
+    }
+
+    /**
+     * Set tiempoestimado
+     *
+     * @param integer $tiempoestimado
+     * @return Actividad
+     */
+    public function setTiempoestimado($tiempoestimado)
+    {
+        $this->tiempoestimado = $tiempoestimado;
+
+        return $this;
+    }
+
+    /**
+     * Get tiempoestimado
+     *
+     * @return integer 
+     */
+    public function getTiempoestimado()
+    {
+        return $this->tiempoestimado;
+    }
+    
+    /**
+     * Set tiemporeal
+     *
+     * @param integer $tiemporeal
+     * @return Actividad
+     */
+    public function setTiemporeal($tiemporeal)
+    {
+        $this->tiemporeal = $tiemporeal;
+
+        return $this;
+    }
+
+    /**
+     * Get tiemporeal
+     *
+     * @return integer 
+     */
+    public function getTiemporeal()
+    {
+        return $this->tiemporeal;
+    }
+    
+    /**
+     * Set tipotiempo
+     *
+     * @param integer $tipotiempo
+     * @return Actividad
+     */
+    public function setTipotiempo($tipotiempo)
+    {
+        $this->tipotiempo = $tipotiempo;
+
+        return $this;
+    }
+
+    /**
+     * Get tipotiempo
+     *
+     * @return integer 
+     */
+    public function getTipotiempo()
+    {
+        return $this->tipotiempo;
     }
     
     /**
