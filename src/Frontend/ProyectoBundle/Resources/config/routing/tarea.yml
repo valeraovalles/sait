@@ -1,10 +1,18 @@
 tarea:
     path:     /lista/{idproyecto}
     defaults: { _controller: "ProyectoBundle:Tarea:index" }
+    
+tarea_general:
+    path:     /general/lista/{idproyecto}
+    defaults: { _controller: "ProyectoBundle:Tarea:general" }
 
 tarea_show:
     path:     /{id}/show
     defaults: { _controller: "ProyectoBundle:Tarea:show" }
+    
+tarea_show_general:
+    path:     /general/{id}/show
+    defaults: { _controller: "ProyectoBundle:Tarea:showgeneral" }
 
 tarea_new:
     path:     /new/{idproyecto}

@@ -78,6 +78,20 @@ class TareaController extends Controller
             'totalact'=>$this->totalactividad()
         ));
     }
+    
+    public function generalAction($idproyecto)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($idproyecto);       
+        $entities = $em->getRepository('ProyectoBundle:Tarea')->findByProyecto($idproyecto);
+        
+        return $this->render('ProyectoBundle:Tarea:general.html.twig', array(
+            'entities' => $entities,
+            'proyecto' => $proyecto,
+            'totalact'=>$this->totalactividad()
+        ));
+    }
     /**
      * Creates a new Tarea entity.
      *
@@ -183,6 +197,21 @@ class TareaController extends Controller
             'entity'      => $entity,
             'proyecto'      => $proyecto,
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+    
+    public function showgeneralAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('ProyectoBundle:Tarea')->find($id);
+        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($entity->getProyecto()->getId());
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Tarea entity.');
+        }
+        return $this->render('ProyectoBundle:Tarea:showgeneral.html.twig', array(
+            'entity'      => $entity,
+            'proyecto'      => $proyecto,
         ));
     }
 

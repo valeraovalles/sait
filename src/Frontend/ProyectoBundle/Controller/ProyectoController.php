@@ -42,6 +42,26 @@ class ProyectoController extends Controller
         return $totaltarea;
         
     }
+    
+    public function generalAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+        
+        
+        $dql = "select x from ProyectoBundle:Proyecto x join x.nivelorganizacional no where no.codigo like :no";
+        $query = $em->createQuery($dql);
+        $query->setParameter('no',"%".$perfil->getNivelorganizacional()->getCodigo()."%");
+        $entities = $query->getResult();
+        
+        return $this->render('ProyectoBundle:Proyecto:general.html.twig', array(
+            'entities' => $entities,
+            'perfil'=>$perfil,
+            'totaltarea'=>$this->totaltarea()
+        ));  
+    }
   
     public function indexAction()
     {
@@ -177,6 +197,25 @@ class ProyectoController extends Controller
         return $this->render('ProyectoBundle:Proyecto:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+    
+    public function showgeneralAction($id)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        
+        $entity = $em->getRepository('ProyectoBundle:Proyecto')->find($id);
+
+        
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Proyecto entity.');
+        }
+
+        return $this->render('ProyectoBundle:Proyecto:showgeneral.html.twig', array(
+            'entity'      => $entity,
         ));
     }
 

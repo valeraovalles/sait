@@ -28,3 +28,16 @@ comentarioactividad_delete:
     path:     /{id}/delete
     defaults: { _controller: "ProyectoBundle:Comentarioactividad:delete" }
     requirements: { _method: post|delete }
+
+comentarioactividad_general:
+    path:     /general/lista/{idactividad}
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:general" }
+    
+comentarioactividad_new_general:
+    path:     /general/new/{idactividad}
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:newgeneral" }
+    
+comentarioactividad_create_general:
+    path:     /general/create/{idactividad}
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:creategeneral" }
+    requirements: { _method: post }

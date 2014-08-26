@@ -254,6 +254,23 @@ class ActividadController extends Controller
             'tarea'=>$tarea,
         ));
     }
+    
+    /**
+     * Lists all Actividad entities.
+     *
+     */
+    public function generalAction($idtarea)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tarea = $em->getRepository('ProyectoBundle:Tarea')->find($idtarea);
+        $entities = $em->getRepository('ProyectoBundle:Actividad')->findBy(array('tarea'=>$tarea), array('id' => 'ASC'));
+        
+        return $this->render('ProyectoBundle:Actividad:general.html.twig', array(
+            'entities' => $entities,
+            'tarea'=>$tarea,
+        ));
+    }
     /**
      * Creates a new Actividad entity.
      *
@@ -361,6 +378,22 @@ class ActividadController extends Controller
         ));
     }
 
+        public function showgeneralAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ProyectoBundle:Actividad')->find($id);
+
+        $this->actualiza($entity->getTarea()->getId());
+        
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Actividad entity.');
+        }
+
+        return $this->render('ProyectoBundle:Actividad:showgeneral.html.twig', array(
+            'entity'      => $entity,
+        ));
+    }
     public function ubicacionAction($id,$direccion)
     {
         $em = $this->getDoctrine()->getManager();

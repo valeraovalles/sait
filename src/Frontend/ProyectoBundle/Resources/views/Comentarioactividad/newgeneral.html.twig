@@ -1,0 +1,43 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Nuevo Comentario{% endblock %}
+
+{% block titulo %}
+    NUEVO COMENTARIO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li class="active">NUEVO COMENTARIO</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent()}}
+
+    {% if form_errors(form.comentario) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.comentario) }}</div>        
+    </div>
+    {% endif %}   
+    
+    <form novalidate action="{{ path('comentarioactividad_create_general',{'idactividad':act.id}) }}" method="post" {{ form_enctype(form) }}>
+       {{ form_widget(form._token) }}
+
+       <div class="formShow">
+           <div class="contenedorform">
+               <div class="labelform">Comentario:</div>
+               <div class="widgetform">{{ form_widget(form.comentario) }}</div>
+           </div>
+       </div>
+        <a class="btn btn-default" href="{{ path('comentarioactividad_general',{'idactividad':act.id}) }}">
+            IR A LA LISTA DE COMENTARIOS
+        </a> | 
+        <input type="submit" class="btn btn-primary" value="CREAR ACTIVIDAD">
+        <br><br>
+    </form>
+
+{% endblock %}
+{# empty Twig template #}
