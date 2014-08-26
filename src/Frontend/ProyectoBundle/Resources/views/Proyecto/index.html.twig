@@ -85,10 +85,11 @@
         </tbody>
     </table>
 
-    
-        
-    <br><br><a class="btn btn-default" href="{{ path('proyecto_new') }}">NUEVO PROYECTO</a><br><br>
-
+    <br><br>
+    {% if is_granted('ROLE_PROYECTO_ADMIN') %}
+    <a class="btn btn-default" href="{{ path('proyecto_new') }}">NUEVO PROYECTO</a>
+    {% endif %}
+    <br><br>
 
 
                 

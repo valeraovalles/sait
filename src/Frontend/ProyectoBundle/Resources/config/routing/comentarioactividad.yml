@@ -16,7 +16,7 @@ comentarioactividad_create:
     requirements: { _method: post }
 
 comentarioactividad_edit:
-    path:     /{id}/edit
+    path:     /edit/{id}
     defaults: { _controller: "ProyectoBundle:Comentarioactividad:edit" }
 
 comentarioactividad_update:

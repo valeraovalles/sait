@@ -16,7 +16,7 @@ actividad_create:
     requirements: { _method: post }
 
 actividad_edit:
-    path:     /{id}/edit
+    path:     /edit/{id}
     defaults: { _controller: "ProyectoBundle:Actividad:edit" }
 
 actividad_update:

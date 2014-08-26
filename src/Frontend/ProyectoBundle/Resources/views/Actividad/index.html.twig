@@ -37,7 +37,7 @@
                         <div class="responsableact bg-primary">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
                         <div class="accionact">
                             <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
-                            <a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            {% if is_granted('ROLE_PROYECTO_ADMIN') %}<a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %}
                             <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
                             <a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion', { 'id': act.id,'direccion':'dep' }) }}"><span class="glyphicon glyphicon-fire"></span></a>
                         </div>
@@ -65,14 +65,14 @@
                         <div class="responsableact bg-warning">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
                         <div class="accionact">
                             <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
-                            <a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            {% if is_granted('ROLE_PROYECTO_ADMIN') %}<a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %}
                             <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
                         </div>
                         
                         <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
                         
                         <div class="row">
-                          <div class="col-md-3"><a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+                          <div class="col-md-3">{% if is_granted('ROLE_PROYECTO_ADMIN') %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a>{% endif %}</div>
                           <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
                           <div class="col-md-3"><a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'der'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
                         </div>
@@ -132,7 +132,7 @@
                         <div class="responsableact bg-danger">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
                         <div class="accionact">
                             <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
-                            <a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            {% if is_granted('ROLE_PROYECTO_ADMIN') %}<a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %}
                             <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
                             <a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion', { 'id': act.id,'direccion':'enpro' }) }}"><span class="glyphicon glyphicon-ok"></span></a>
                         </div>

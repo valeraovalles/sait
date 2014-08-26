@@ -36,7 +36,7 @@
 
         <a class="btn btn-default" href="{{ path('actividad',{'idtarea':entity.tarea.id}) }}">
             IR A LA LISTA
-        </a> |
+        </a>{% if is_granted('ROLE_PROYECTO_ADMIN') %} |
         <a class="btn btn-default" href="{{ path('actividad_edit', { 'id': entity.id }) }}">
             IR A EDITAR
         </a>
@@ -45,5 +45,5 @@
         {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
             {{ form_errors(delete_form) }}
             {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
-        {{ form_end(delete_form) }}
+        {{ form_end(delete_form) }}{% else %}<br><br>{% endif %}
 {% endblock %}

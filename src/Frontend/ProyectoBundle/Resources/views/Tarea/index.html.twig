@@ -82,7 +82,7 @@
         </tbody>
     </table>
 
-    <br><br><a class="btn btn-default" href="{{ path('proyecto') }}">LISTA DE PROYECTOS</a> | <a class="btn btn-primary" href="{{ path('tarea_new', { 'idproyecto':proyecto.id  }) }}">NUEVA TAREA</a><br><br>
+    <br><br><a class="btn btn-default" href="{{ path('proyecto') }}">LISTA DE PROYECTOS</a>{% if is_granted('ROLE_PROYECTO_ADMIN') %} | <a class="btn btn-primary" href="{{ path('tarea_new', { 'idproyecto':proyecto.id  }) }}">NUEVA TAREA</a>{% endif %}<br><br>
                 
     <script type="text/javascript">
         $(document).ready(function(){

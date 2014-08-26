@@ -289,7 +289,8 @@ class ActividadController extends Controller
         return $this->render('ProyectoBundle:Actividad:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'tarea'=>$tarea
+            'tarea'=>$tarea,
+            'idusuario'=>$idusuario
         ));
     }
 
@@ -331,7 +332,8 @@ class ActividadController extends Controller
         return $this->render('ProyectoBundle:Actividad:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'tarea'=>$tarea
+            'tarea'=>$tarea,
+            'idusuario'=>$idusuario
         ));
     }
 
