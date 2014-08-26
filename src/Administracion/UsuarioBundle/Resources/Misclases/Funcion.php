@@ -8,7 +8,7 @@ class Funcion
     public function usuariounidad($em,$idusuario){
         //obtengo usuario actual y los que pertenecen a su unidad
         $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-        $dql = "select x from UsuarioBundle:Perfil x join x.nivelorganizacional n where n.codigo= :codniv";
+        $dql = "select x from UsuarioBundle:Perfil x join x.nivelorganizacional n join x.user u where n.codigo= :codniv and u.isActive=true";
         $query = $em->createQuery($dql);
         $query->setParameter('codniv',$perfil->getNivelorganizacional()->getCodigo());
         $usuariounidad = $query->getResult();

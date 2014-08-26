@@ -95,6 +95,7 @@ class Perfil
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="nivelorganizacional_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank()
      */
     private $nivelorganizacional;
 
