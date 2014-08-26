@@ -16,7 +16,9 @@
             </ul>
           </li>
           </li>
+          {% if is_granted('ROLE_PROYECTO_GENERAL') %}
           <li><a href="{{ path('proyecto_general') }}">GENERAL</a></li>
+          {% endif %}
         </ul>
             
         <ul class="nav navbar-nav navbar-right">
