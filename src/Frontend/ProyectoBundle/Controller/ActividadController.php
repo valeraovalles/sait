@@ -160,7 +160,7 @@ class ActividadController extends Controller
         $query->setParameter('idtarea',$idtarea);
         $actividad = $query->getResult();
         
-        if(empty($actividad[1])) $nuevafecha=null;
+        if(empty($actividad)){ $nuevafecha=null;die;}
         else{       
             //calculo tiempo de dias horas y minutos
             $dias=0;$horas=0;$minutos=0;
@@ -191,6 +191,7 @@ class ActividadController extends Controller
         $query->setParameter('ffe', $nuevafecha);
         $query->setParameter('idtarea', $idtarea);
         $query->execute(); 
+        
     }
     
     //se llama al crear o borrar una actividad
@@ -384,8 +385,6 @@ class ActividadController extends Controller
 
         $entity = $em->getRepository('ProyectoBundle:Actividad')->find($id);
 
-        $this->actualiza($entity->getTarea()->getId());
-        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Actividad entity.');
         }
