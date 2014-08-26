@@ -133,7 +133,6 @@
                         <div class="responsableact bg-danger">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
                         <div class="accionact">
                             <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
-                            {% if is_granted('ROLE_PROYECTO_ADMIN') %}<a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %}
                             <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
                             <a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion', { 'id': act.id,'direccion':'enpro' }) }}"><span class="glyphicon glyphicon-ok"></span></a>
                         </div>
