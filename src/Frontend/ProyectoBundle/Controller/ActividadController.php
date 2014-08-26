@@ -440,7 +440,6 @@ class ActividadController extends Controller
             //comienzo el conteo y pongo null en caso de que se haya guardado el fin
             $fa=new \DateTime(\date("d-m-Y G:i:s"));
             $query = $em->createQuery('update ProyectoBundle:Actividad x set x.fin=null,x.estatusfin=false,x.tiemporeal=null WHERE x.id = :idactividad');
-            $query->setParameter('comienzo',$fa);
             $query->setParameter('idactividad', $id);
             $query->execute();  
         }
@@ -496,7 +495,6 @@ class ActividadController extends Controller
             //comienzo el conteo y pongo null en caso de que se haya guardado el fin
             $fa=new \DateTime(\date("d-m-Y G:i:s"));
             $query = $em->createQuery('update ProyectoBundle:Actividad x set x.fin=null,x.estatusfin=false,x.tiemporeal=null WHERE x.id = :idactividad');
-            $query->setParameter('comienzo',$fa);
             $query->setParameter('idactividad', $id);
             $query->execute();  
         }
