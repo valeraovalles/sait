@@ -398,6 +398,15 @@ class ActividadController extends Controller
         $em = $this->getDoctrine()->getManager();
         $act = $em->getRepository('ProyectoBundle:Actividad')->find($id);
         $num=$act->getUbicacion();
+     
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        
+        //valido que el que mueva la tarjeta sea unicamente el responsable
+        if($act->getResponsable()->getId()!=$idusuario){
+              $this->get('session')->getFlashBag()->add('alert', 'Usted no es el responsable de esta actividad, por lo tanto no puede moverla.');
+             return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId()))); 
+        }
+        
         
         //va directo a dependencia
         if($direccion=='dep')$num=5;
@@ -437,7 +446,6 @@ class ActividadController extends Controller
         
         if($num==3){
           
-            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             
             $message = \Swift_Message::newInstance()   
