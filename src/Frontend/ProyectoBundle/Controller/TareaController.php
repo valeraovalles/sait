@@ -70,7 +70,7 @@ class TareaController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($idproyecto);       
-        $entities = $em->getRepository('ProyectoBundle:Tarea')->findAll();
+        $entities = $em->getRepository('ProyectoBundle:Tarea')->findByProyecto($idproyecto);
         
         return $this->render('ProyectoBundle:Tarea:index.html.twig', array(
             'entities' => $entities,

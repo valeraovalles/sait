@@ -20,26 +20,37 @@ class ActividadController extends Controller
 
     //se llama desde el index de la actividad
     public function estatustarea($idtarea){
-        
+        $estatus=1;
         
         $em = $this->getDoctrine()->getManager();
         
-        //busco si hay otros que no esten cerrados
-        $act = $em->getRepository('ProyectoBundle:Actividad')->findBy(array('tarea'=>$idtarea,'ubicacion'=>array(2,3,5)));
+        //busco si hay en proceso
+        $dql = "select x from ProyectoBundle:Actividad x where x.tarea= :idtarea";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idtarea',$idtarea);
+        $act = $query->getResult();
         
-        if(!empty($act))$estatus=2;
-        else{
-            //busco si hay cerrados
-            $act = $em->getRepository('ProyectoBundle:Actividad')->findBy(array('tarea'=>$idtarea,'ubicacion'=>array(4)));
-            if(!empty($act))$estatus=3;
-            else $estatus=1;
+        $nuevo=false;$proceso=false;$revision=false;$culminado=false;$dependencia=false;
+        foreach ($act as $a) {
+            if($a->getUbicacion()==1)$nuevo=true;  
+            if($a->getUbicacion()==2)$proceso=true;
+            if($a->getUbicacion()==3)$revision=true;
+            if($a->getUbicacion()==4)$culminado=true;
+            if($a->getUbicacion()==5)$dependencia=true;
         }
+        
+        //si hay en proceso
+        if($proceso==true or $revision==true or $dependencia==true)$estatus=2;
+        //si estan nuevos pero hay cerrados
+        else if($proceso==false and $revision==false and $dependencia==false and $nuevo==true and $culminado==true)$estatus=2;
+        //si solo hay cerrados
+        else if($culminado=true and $nuevo==false and $proceso==false and $revision==false and $dependencia==false)$estatus=3;
 
-            //actualizo campos en ticket
-            $query = $em->createQuery('update ProyectoBundle:Tarea x set x.estatus= :estatus WHERE x.id = :idtarea');
-            $query->setParameter('estatus', $estatus);
-            $query->setParameter('idtarea', $idtarea);
-            $query->execute();  
+        //actualizo campos en ticket
+        $query = $em->createQuery('update ProyectoBundle:Tarea x set x.estatus= :estatus WHERE x.id = :idtarea');
+        $query->setParameter('estatus', $estatus);
+        $query->setParameter('idtarea', $idtarea);
+        $query->execute();  
     }
     
 
@@ -76,13 +87,14 @@ class ActividadController extends Controller
         //actividades
         $em = $this->getDoctrine()->getManager();
         
-        //cuento las tareas cerradas
-        $dql = "select count(x) from ProyectoBundle:Tarea x where x.proyecto= :idproyecto and x.estatus=3";
+        //cuento las actividades cerradas
+        $dql = "select count(x) from ProyectoBundle:Actividad x join x.tarea t where t.proyecto = :idproyecto and (x.ubicacion=4 or x.ubicacion=3)";
         $query = $em->createQuery($dql);
         $query->setParameter('idproyecto',$idproyecto);
         $totalcerrado = $query->getSingleResult();
         
-        $dql = "select count(x) from ProyectoBundle:Tarea x where x.proyecto= :idproyecto and x.estatus!=3";
+        //cuento actividades abiertas
+        $dql = "select count(x) from ProyectoBundle:Actividad x join x.tarea t where t.proyecto = :idproyecto and x.ubicacion!=4 and x.ubicacion!=3";
         $query = $em->createQuery($dql);
         $query->setParameter('idproyecto',$idproyecto);
         $totalabierto = $query->getSingleResult();
@@ -142,18 +154,38 @@ class ActividadController extends Controller
         $tarea = $em->getRepository('ProyectoBundle:Tarea')->find($idtarea);
         $fechainicio = $tarea->getFechainicio()->format("Y-m-d");
         
-        //sumo dias de las actividades
-        $dql = "select sum(x.diasestimados) from ProyectoBundle:Actividad x where x.tarea= :idtarea";
+        //sumo tiempo de las actividades
+        $dql = "select x from ProyectoBundle:Actividad x where x.tarea= :idtarea";
         $query = $em->createQuery($dql);
         $query->setParameter('idtarea',$idtarea);
-        $totaldiaactividad = $query->getSingleResult();
+        $actividad = $query->getResult();
         
-        if(empty($totaldiaactividad[1])) $nuevafecha=null;
-        else{        
-            $nuevafecha = strtotime ( '+'.$totaldiaactividad[1].' day' , strtotime ( $fechainicio ) ) ;
+        if(empty($actividad[1])) $nuevafecha=null;
+        else{       
+            //calculo tiempo de dias horas y minutos
+            $dias=0;$horas=0;$minutos=0;
+            foreach ($actividad as $t) {
+                if($t->getTipotiempo()==1){
+                    $dias=$dias+$t->getTiempoestimado();
+                }
+                else if($t->getTipotiempo()==2){
+                    $horas=$horas+$t->getTiempoestimado();
+                }
+                else if($t->getTipotiempo()==3){
+                    $minutos=$minutos+$t->getTiempoestimado();
+                }
+            }
+
+            $diashoras=$horas/24;
+            $minutosdias=$minutos/1440;
+
+            //redondeo hacia arriba
+            $totaldias=ceil($dias+$diashoras+$minutosdias);
+        
+            $nuevafecha = strtotime ( '+'.$totaldias.' day' , strtotime ( $fechainicio ) ) ;
             $nuevafecha = date ( 'Y-m-d' , $nuevafecha );
         }
-        
+
         //actualizo nuevafecha
         $query = $em->createQuery('update ProyectoBundle:Tarea x set x.fechafinestimada= :ffe WHERE x.id = :idtarea');
         $query->setParameter('ffe', $nuevafecha);
@@ -171,7 +203,6 @@ class ActividadController extends Controller
         $query = $em->createQuery($dql);
         $query->setParameter('idproyecto',$idproyecto);
         $tarea = $query->getResult();
-        
         
         if(!empty($tarea))
             $fechafin=$tarea[0][1];
@@ -230,7 +261,7 @@ class ActividadController extends Controller
     public function createAction(Request $request,$idtarea)
     {
         $em = $this->getDoctrine()->getManager();
-        
+
         //genero formulario con los integrantes de la unidad
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $f=new Funcion; 
@@ -246,6 +277,8 @@ class ActividadController extends Controller
             $em = $this->getDoctrine()->getManager();
             $entity->setUbicacion(1);
             $entity->setTarea($tarea);
+            $entity->setEstatuscomienzo(false);
+            $entity->setEstatusfin(false);
             $em->persist($entity);
             $em->flush();
 
@@ -256,7 +289,8 @@ class ActividadController extends Controller
         return $this->render('ProyectoBundle:Actividad:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'tarea'=>$tarea
+            'tarea'=>$tarea,
+            'idusuario'=>$idusuario
         ));
     }
 
@@ -298,7 +332,8 @@ class ActividadController extends Controller
         return $this->render('ProyectoBundle:Actividad:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'tarea'=>$tarea
+            'tarea'=>$tarea,
+            'idusuario'=>$idusuario
         ));
     }
 
@@ -340,13 +375,36 @@ class ActividadController extends Controller
         else if($direccion=='der' and $num!=4)$num=$num+1;
         else if($direccion=='izq' and $num!=1) $num=$num-1;
         
-        //actualizo campos en ticket
+        //wn proceso
+        if($num==2){
+            //busco si solo hay en proceso, revision o dependencia
+            $dql = "select x from ProyectoBundle:Actividad x where x.responsable= :idresponsable and x.tarea= :idtarea and x.ubicacion=2";
+            $query = $em->createQuery($dql);
+            $query->setParameter('idresponsable',$act->getResponsable()->getId());
+            $query->setParameter('idtarea',$act->getTarea()->getId());
+            $actx = $query->getResult();
+
+            if(!empty($actx)){
+              $this->get('session')->getFlashBag()->add('alert', 'Debe culminar la actividad en curso y si esta depende de algún otro proceso debe colocarla como dependiente.');
+             return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId())));
+           }   
+           
+            //comienzo el conteo
+            $fa=new \DateTime(\date("d-m-Y G:i:s"));
+            $query = $em->createQuery('update ProyectoBundle:Actividad x set x.comienzo= :comienzo, x.estatuscomienzo=true WHERE x.estatuscomienzo=false and x.id = :idactividad');
+            $query->setParameter('comienzo',$fa);
+            $query->setParameter('idactividad', $id);
+            $query->execute();  
+        }
+
+        //actualizo campos en actividades
         $query = $em->createQuery('update ProyectoBundle:Actividad x set x.ubicacion= :ubicacion WHERE x.id = :idactividad');
         $query->setParameter('ubicacion', $num);
         $query->setParameter('idactividad', $id);
         $query->execute(); 
         
         if($num==3){
+          
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             
@@ -359,8 +417,27 @@ class ActividadController extends Controller
                     array('actividad' => $act)
                 ), 'text/html');
 
-            $this->get('mailer')->send($message);   
+            $this->get('mailer')->send($message);  
+            
+            //fecha fin y tiempo real
+            $comienzo=new \DateTime($act->getComienzo()->format("d-m-Y G:i:s"));
+            $fa=new \DateTime(\date("d-m-Y G:i:s"));
+            $intervalo=$comienzo->diff($fa);
+            //comienzo el conteo
+            $fa=new \DateTime(\date("d-m-Y G:i:s"));
+            $query = $em->createQuery('update ProyectoBundle:Actividad x set x.fin= :fin, x.estatusfin=true, x.tiemporeal= :tr WHERE x.estatusfin!=true and x.id = :idactividad');
+            $query->setParameter('fin',$fa);
+            $query->setParameter('tr',$intervalo->d.'-'.$intervalo->h.'-'.$intervalo->i.'-'.$intervalo->s);
+            $query->setParameter('idactividad', $id);
+            $query->execute();  
         }
+        
+        else if($num==1){
+            $query = $em->createQuery('update ProyectoBundle:Actividad x set x.comienzo=null, x.estatuscomienzo=false, x.tiemporeal= null WHERE x.id = :idactividad');
+            $query->setParameter('idactividad', $id);
+            $query->execute();              
+        }
+        
         
         
         return $this->redirect($this->generateUrl('actividad', array('idtarea' => $act->getTarea()->getId())));
