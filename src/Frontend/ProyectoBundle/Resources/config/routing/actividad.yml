@@ -1,10 +1,18 @@
 actividad:
     path:     /lista/{idtarea}
     defaults: { _controller: "ProyectoBundle:Actividad:index" }
+    
+actividad_general:
+    path:     /general/lista/{idtarea}
+    defaults: { _controller: "ProyectoBundle:Actividad:general" }
 
 actividad_show:
     path:     /{id}/show
     defaults: { _controller: "ProyectoBundle:Actividad:show" }
+    
+actividad_show_general:
+    path:     /general/{id}/show
+    defaults: { _controller: "ProyectoBundle:Actividad:showgeneral" }
 
 actividad_new:
     path:     /new/{idtarea}

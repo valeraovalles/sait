@@ -1,0 +1,97 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Tarea{% endblock %}
+
+{% block titulo %}
+    <h1>LISTA DE TAREAS GENERAL</h1>
+    PROYECTO ({{ proyecto.nombre|upper }})<br>
+    {{ proyecto.nivelorganizacional.descripcion|upper }}
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto_general") }}">LISTA DE PROYECTOS</a></li>
+  <li class="active">LISTA DE TAREAS</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <table id="tabladatatable" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Fecha inicio</th>
+                <th>Fecha fin (e)</th>
+                <th>Estatus</th>
+                <th>Completado</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('tarea_show', { 'id': entity.id,'idproyecto':proyecto.id }) }}">{{ entity.nombre }}</a></td>
+                <td>{{ entity.descripcion }}</td>
+                <td align="center">{% if entity.fechainicio %}{{ entity.fechainicio|date('d-m-Y') }}{% endif %}</td>
+                <td align="center">
+                    {% if entity.fechafinestimada %}
+                        {{ entity.fechafinestimada|date('d-m-Y') }}
+                    {% else %}
+                        <span class="label label-info">POR DEFINIR</span>
+                    {% endif %}
+                </td>
+                <td align="center">
+                    {% if entity.estatus==1 %}
+                        <span class="label label-danger">SIN INICIAR</span>
+                    {% elseif entity.estatus==2 %}
+                        <span class="label label-warning">EN PROGRESO</span>
+                    {% elseif entity.estatus==3 %}
+                        <span class="label label-success">CULMINADO</span>
+                    {% endif %}
+                </td>
+                <td align="center">
+                    {% if entity.porcentaje==0 and entity.estatus==1 %}
+                        <span class="label label-info">N/A</span>
+                    {% elseif entity.porcentaje==0 %}
+                        <span class="label label-info">SIN AVANCE</span>
+                    {% else %}
+                        <br><div class="progress">
+                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ entity.porcentaje }}%;color:black;font-weight:bold;">
+                            {{ entity.porcentaje }}%
+                          </div>
+                        </div>
+                    {% endif %}
+                </td>
+                <td align="center">
+                        <a href="{{ path('tarea_show_general', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
+                        <a href="{{ path('actividad_general', { 'idtarea': entity.id }) }}">
+                            <span class="label label-primary">{% if totalact[entity.id][1] is defined %}{{ totalact[entity.id][1] }}{% else %}0{% endif %}</span>
+                            <span class="label label-warning">{% if totalact[entity.id][2] is defined %}{{ totalact[entity.id][2] }}{% else %}0{% endif %}</span>
+                            <span class="label label-info">{% if totalact[entity.id][3] is defined %}{{ totalact[entity.id][3] }}{% else %}0{% endif %}</span>
+                            <span class="label label-success">{% if totalact[entity.id][4] is defined %}{{ totalact[entity.id][4] }}{% else %}0{% endif %}</span>
+                            <span class="label label-warning">{% if totalact[entity.id][5] is defined %}{{ totalact[entity.id][5] }}{% else %}0{% endif %}</span>
+                        </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br><br><a class="btn btn-default" href="{{ path('proyecto_general') }}">LISTA DE PROYECTOS</a><br><br>
+                
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'desc']],
+            } );
+            $('#xx').tooltip()
+        })
+    </script>
+    
+    {% endblock %}
+{# empty Twig template #}

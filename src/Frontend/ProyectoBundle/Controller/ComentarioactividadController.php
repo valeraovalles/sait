@@ -31,6 +31,19 @@ class ComentarioactividadController extends Controller
             'act'=>$act
         ));
     }
+    
+    public function generalAction($idactividad)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $act = $em->getRepository('ProyectoBundle:Actividad')->find($idactividad);
+        $entities = $em->getRepository('ProyectoBundle:Comentarioactividad')->findByActividad($idactividad);
+
+        return $this->render('ProyectoBundle:Comentarioactividad:general.html.twig', array(
+            'entities' => $entities,
+            'act'=>$act
+        ));
+    }
     /**
      * Creates a new Comentarioactividad entity.
      *
@@ -60,6 +73,37 @@ class ComentarioactividadController extends Controller
         }
 
         return $this->render('ProyectoBundle:Comentarioactividad:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'act'=>$act
+        ));
+    }
+    
+    public function creategeneralAction(Request $request,$idactividad)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $act = $em->getRepository('ProyectoBundle:Actividad')->find($idactividad);
+        
+        $entity = new Comentarioactividad();
+        $form = $this->createCreateForm($entity,$idactividad);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+            $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            
+            $entity->setResponsable($perfil);
+            $entity->setActividad($act);
+            $entity->setFechahora(new \DateTime(\date("d-m-Y G:i:s")));
+            
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('comentarioactividad_general', array('idactividad' => $idactividad)));
+        }
+
+        return $this->render('ProyectoBundle:Comentarioactividad:newgeneral.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
             'act'=>$act
@@ -98,6 +142,21 @@ class ComentarioactividadController extends Controller
         $form   = $this->createCreateForm($entity,$idactividad);
 
         return $this->render('ProyectoBundle:Comentarioactividad:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'act'=>$act
+        ));
+    }
+    
+    public function newgeneralAction($idactividad)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $act = $em->getRepository('ProyectoBundle:Actividad')->find($idactividad);
+        $entity = new Comentarioactividad();
+        
+        $form   = $this->createCreateForm($entity,$idactividad);
+
+        return $this->render('ProyectoBundle:Comentarioactividad:newgeneral.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
             'act'=>$act

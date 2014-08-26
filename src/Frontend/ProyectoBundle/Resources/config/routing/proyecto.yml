@@ -1,10 +1,18 @@
 proyecto:
     path:     /lista
     defaults: { _controller: "ProyectoBundle:Proyecto:index" }
+    
+proyecto_general:
+    path:     /general/lista
+    defaults: { _controller: "ProyectoBundle:Proyecto:general" }
 
 proyecto_show:
     path:     /{id}/show
     defaults: { _controller: "ProyectoBundle:Proyecto:show" }
+    
+proyecto_show_general:
+    path:     /general/{id}/show
+    defaults: { _controller: "ProyectoBundle:Proyecto:showgeneral" }
 
 proyecto_new:
     path:     /new
