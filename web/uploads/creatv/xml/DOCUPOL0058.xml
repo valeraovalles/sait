@@ -4,7 +4,7 @@
             <Clip>
                 <ClipName>DOCUPOL0058</ClipName>
                 <TipoContenido>DOCUMENTALES</TipoContenido>
-                <Contenido><![CDATA[ MUMIA 23AGO14]]></Contenido>
+                <Contenido><![CDATA[ LEGADO DE TORTURA 23AGO14]]></Contenido>
                 <OriginalTitle></OriginalTitle>
                 <Description> </Description>
                 <Notes>a</Notes>
@@ -16,18 +16,18 @@
                 <Segments>
             
                 <Segment>
-                    <SegTitle>1-2 POLITICOS - MUMIA 23AGO14</SegTitle>
+                    <SegTitle>1-2 POLITICOS - LEGADO DE TORTURA 23AGO14</SegTitle>
                     <MediaID>DOCUPOL005801</MediaID>
-                    <Duration>00:22:30.00</Duration>
+                    <Duration>00:14:38.00</Duration>
                     <SegNumber>1</SegNumber>
                     <ClipGroup>PROGRAMA</ClipGroup>
                     <Description> </Description>
                 </Segment>
             
                 <Segment>
-                    <SegTitle>2-2 POLITICOS - MUMIA 23AGO14</SegTitle>
+                    <SegTitle>2-2 POLITICOS - LEGADO DE TORTURA 23AGO14</SegTitle>
                     <MediaID>DOCUPOL005802</MediaID>
-                    <Duration>00:22:30.00</Duration>
+                    <Duration>00:13:19.00</Duration>
                     <SegNumber>2</SegNumber>
                     <ClipGroup>PROGRAMA</ClipGroup>
                     <Description> </Description>
