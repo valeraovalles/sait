@@ -67,7 +67,6 @@
                         <div class="responsableact bg-warning">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
                         <div class="accionact">
                             <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
-                            {% if is_granted('ROLE_PROYECTO_ADMIN') %}<a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %}
                             <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
                         </div>
                         
