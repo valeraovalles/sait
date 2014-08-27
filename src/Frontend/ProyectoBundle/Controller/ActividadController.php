@@ -398,8 +398,21 @@ class ActividadController extends Controller
         $em = $this->getDoctrine()->getManager();
         $act = $em->getRepository('ProyectoBundle:Actividad')->find($id);
         $num=$act->getUbicacion();
-     
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+     
+        
+        $fitarea= $act->getTarea()->getFechainicio()->format("d-m-Y");
+        if(strtotime($fitarea)>strtotime("now")){
+            $this->get('session')->getFlashBag()->add('alert', 'La fecha de inicio de la tarea es mayor a la fecha actual.');
+            return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId()))); 
+        }
+
+        //valido que no mueva tarjetas si la fecha actual es menor a la de inicio de la tarea
+        if($act->getResponsable()->getId()!=$idusuario){
+              $this->get('session')->getFlashBag()->add('alert', 'Usted no es el responsable de esta actividad, por lo tanto no puede moverla.');
+             return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId()))); 
+        }
+        
         
         //valido que el que mueva la tarjeta sea unicamente el responsable
         if($act->getResponsable()->getId()!=$idusuario){
