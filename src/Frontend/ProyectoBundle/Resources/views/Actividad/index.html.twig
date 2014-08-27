@@ -5,7 +5,7 @@
 {% block titulo %}
     <h1>LISTA DE ACTIVIDADES</h1>
     <h4>PROYECTO: {{ tarea.proyecto.nombre|upper }}</h4>
-    <h4>TAREA: {{ tarea.descripcion|upper }}</h4>
+    <h4>TAREA: {{ tarea.nombre|upper }}</h4>
 {% endblock %}
 
 {% block ubicacion %}
@@ -95,9 +95,9 @@
                         <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
                         
                         <div class="row">
-                          <div class="col-md-3">{% if act.ubicacion!=1 %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a>{% endif %}</div>
+                          <div class="col-md-3"><a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
                           <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
-                          <div class="col-md-3">{% if act.ubicacion!=4 %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'der'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a>{% endif %}</div>
+                          <div class="col-md-3">{% if is_granted('ROLE_PROYECTO_ADMIN') %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'der'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a>{% endif %}</div>
                         </div>
                     </div>      
                 {% endfor %}             
