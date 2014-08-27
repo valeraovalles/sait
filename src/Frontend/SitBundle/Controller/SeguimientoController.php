@@ -39,10 +39,13 @@ class SeguimientoController extends Controller
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
 
+        /*
         if($ticket->getEstatus()!='5' and $ticket->getUnidad()->getId()!=$usuariounidad[0]->getId() or $ticket->getEstatus()=='5' and $ticket->getUnidad()->getId()!=$usuariounidad[0]->getId()){
             $this->get('session')->getFlashBag()->add('alert', 'DEJA DE ESTAR INVENTANDO VAINAS');
             return $this->redirect($this->generateUrl('sit_homepage'));
         }
+         *
+         */
 
         $seguimiento =  $em->getRepository('SitBundle:Seguimiento')->findByTicket($idticket);
         
