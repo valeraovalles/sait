@@ -27,6 +27,7 @@
                 <th>Fecha fin (e)</th>
                 <th>Estatus</th>
                 <th>Completado</th>
+                <th>Unidad</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -35,7 +36,7 @@
             <tr>
                 <td style="display:none;">{{ entity.id }}</td>
                 <td><a style="font-size: 20px;color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
-                <td width="15%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,10) }}...</span></td>
+                <td width="10%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,10) }}...</span></td>
                 <td align="center">
                     {% if entity.fechainicio %}
                         {{ entity.fechainicio|date('d-m-Y') }}
@@ -72,6 +73,7 @@
                         </div>
                     {% endif %}
                 </td>
+                <td width="13%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.nivelorganizacional.descripcion|capitalize}}">{{ entity.nivelorganizacional.descripcion|capitalize|slice(0,15) }}...</span></td>
                 <td>
                     
                     <a style="color:black;" href="{{ path('proyecto_show_general', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
