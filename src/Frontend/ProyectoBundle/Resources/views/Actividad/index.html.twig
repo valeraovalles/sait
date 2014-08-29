@@ -20,6 +20,32 @@
 {% block body -%}
     {{ parent() }}
 
+    <script src="{{ asset('libs/jquery-countdown/js/jquery.countdown.js') }}" type="text/javascript" charset="utf-8"></script>
+
+    <style type="text/css">
+      br { clear: both; }
+      .cntSeparator {
+        font-size: 5px;
+        margin: 5px 2px;
+        color: #000;
+      }
+      .desc div {
+        float: left;
+        font-family: Arial;
+        width: 10px;
+        margin-right: 20px;
+        
+        font-size: 5px;
+        font-weight: bold;
+        color: #000;
+      }
+      .desc{
+          padding-left: 5px;
+      }
+    </style>
+
+
+  
     
     <table class="table tablaactividad">
         <tr>
@@ -45,7 +71,7 @@
                         </div>
                         
                         <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
-                        
+
                         <div class="row">
                           <div class="col-md-3"></div>
                           <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
@@ -53,7 +79,6 @@
                         </div>
 
                     </div>                   
-                    
                 {% endfor %}
                 </div>
             </td>
@@ -76,6 +101,27 @@
                           <div class="col-md-3">{% if is_granted('ROLE_PROYECTO_ADMIN') %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a>{% endif %}</div>
                           <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
                           <div class="col-md-3"><a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'der'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                        </div>
+                        
+
+                        <script type="text/javascript">
+                          $(function(){
+                            $('#counter').countdown({
+                              image: '{{ asset('libs/jquery-countdown/img/digits.png')}}',
+                              startTime: '{{ cuentaregresiva[act.id] }}'
+                            });
+                          });
+                        </script>
+                        
+
+                        <div style="padding-left: 25px;padding-top: 10px;margin-bottom: 10px;">
+                            <div id="counter"></div>
+                            <div class="desc">
+                                <div>Días</div>
+                                <div>Horas</div>
+                                <div>Minutos</div>
+                                <div>Segundos</div>
+                            </div>
                         </div>
                     </div>                                       
                 {% endfor %}
