@@ -218,11 +218,37 @@ class ActividadController extends Controller
         $this->estatusproyecto($tarea->getProyecto()->getId());
         $this->porcentajetarea($idtarea);
         $this->porcentajeproyecto($tarea->getProyecto()->getId());
-        
+              
+        //cuenta regresiva
+        $cuentaregresiva=array();
+        foreach ($entities as $e) {
+            if($e->getUbicacion()==2){
+                //fecha fin y tiempo real
+                $comienzo=new \DateTime($e->getComienzo()->format("d-m-Y G:i:s"));
+                $fa=new \DateTime(\date("d-m-Y G:i:s"));
+            
+                //sumo el tiempo de la actividad 
+                if($e->getTipotiempo()==1)$tt='day';
+                else if($e->getTipotiempo()==2)$tt='hour';
+                else if($e->getTipotiempo()==3)$tt='minute';
+                $nuevafecha = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $comienzo->format("d-m-Y G:i:s") ) ) ;
+                $nuevafecha = date ( 'Y-m-d G:i:s' , $nuevafecha );
+                $totalfecha=new \DateTime($nuevafecha);
+                
+                
+                if(strtotime($totalfecha->format("dd/mm/YYYY")) > strtotime($fa->format("dd/mm/YYYY")))$cuentaregresiva[$e->getId()]=0;
+                else{
+
+                    $intervalo=$totalfecha->diff($fa);
+                    $cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
+                }
+            }
+        }
 
         return $this->render('ProyectoBundle:Actividad:index.html.twig', array(
             'entities' => $entities,
             'tarea'=>$tarea,
+            'cuentaregresiva'=>$cuentaregresiva
         ));
     }
     
@@ -423,6 +449,8 @@ class ActividadController extends Controller
             $query = $em->createQuery('update ProyectoBundle:Actividad x set x.fin=null,x.estatusfin=false,x.tiemporeal=null WHERE x.id = :idactividad');
             $query->setParameter('idactividad', $id);
             $query->execute();  
+            
+        
         }
 
         //actualizo campos en actividades
