@@ -195,42 +195,12 @@ class ActividadController extends Controller
     }
     
     //se llama al crear o borrar una actividad
-    public function fechafinproyecto($idproyecto){
-
-        $em = $this->getDoctrine()->getManager();
-        
-        //busco la fecha mas baja de las tareas para que sea la fecha de inicio del proyecto
-        $dql = "select max(x.fechafinestimada) from ProyectoBundle:Tarea x where x.proyecto= :idproyecto";
-        $query = $em->createQuery($dql);
-        $query->setParameter('idproyecto',$idproyecto);
-        $tarea = $query->getResult();
-        
-        if(!empty($tarea))
-            $fechafin=$tarea[0][1];
-        else $fechafin=null;
-
-        //actualizo campos en proyecto
-        $query = $em->createQuery('update ProyectoBundle:Proyecto x set x.fechafinestimada= :ffe WHERE x.id = :idproyecto');
-        $query->setParameter('ffe', $fechafin);
-        $query->setParameter('idproyecto', $idproyecto);
-        $query->execute();
-
-    }
-    
-    //se llama al crear o borrar una actividad
     public function actualiza($idtarea){
-        
         $em = $this->getDoctrine()->getManager();
         $tarea = $em->getRepository('ProyectoBundle:Tarea')->find($idtarea);
-        
         $idtarea=$tarea->getId();
-        $idproyecto=$tarea->getProyecto()->getId();
-        $this->fechafintarea($idtarea);
-        $this->fechafinproyecto($idproyecto); 
-        
+        //$this->fechafintarea($idtarea);
     }
-
-
 
     /**
      * Lists all Actividad entities.
@@ -364,8 +334,6 @@ class ActividadController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('ProyectoBundle:Actividad')->find($id);
-
-        $this->actualiza($entity->getTarea()->getId());
         
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Actividad entity.');
@@ -620,8 +588,6 @@ class ActividadController extends Controller
 
             $em->remove($entity);
             $em->flush();
-            
-            $this->actualiza($idtarea);
         }
 
         return $this->redirect($this->generateUrl('actividad',array('idtarea'=>$idtarea)));
