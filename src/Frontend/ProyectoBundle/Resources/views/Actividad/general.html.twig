@@ -11,8 +11,9 @@
 {% block ubicacion %}
 <ol class="breadcrumb">
   <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
-  <li><a href="{{ path("proyecto_general") }}">LISTA DE PROYECTOS</a></li>
-  <li><a href="{{ path("tarea_general",{'idproyecto':tarea.proyecto.id}) }}">LISTA DE TAREAS</a></li>
+  <li><a href="{{ path("proyecto") }}">MIS PROYECTOS</a></li>
+  <li><a href="{{ path("proyecto_general") }}">LISTA DE PROYECTOS GENERAL</a></li>
+  <li><a href="{{ path("tarea_general",{'idproyecto':tarea.proyecto.id}) }}">LISTA DE TAREAS GENERAL</a></li>
   <li class="active">LISTA DE ACTIVIDADES</li>
 </ol>
 {% endblock %}

@@ -20,6 +20,9 @@ class TareaType extends AbstractType
             ->add('fechainicio','date',array(
                     'widget' => 'single_text',
                     'format'   => 'dd-MM-y',  ))
+            ->add('fechafinestimada','date',array(
+                    'widget' => 'single_text',
+                    'format'   => 'dd-MM-y',  ))
         ;
     }
     
