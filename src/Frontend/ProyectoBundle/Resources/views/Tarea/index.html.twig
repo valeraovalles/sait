@@ -35,7 +35,7 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('tarea_show', { 'id': entity.id,'idproyecto':proyecto.id }) }}">{{ entity.nombre }}</a></td>
-                <td width="15%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,10) }}...</span></td>
+                <td width="10%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,10) }}...</span></td>
                 <td align="center">{% if entity.fechainicio %}{{ entity.fechainicio|date('d-m-Y') }}{% endif %}</td>
                 <td align="center">
                     {% if entity.fechafinestimada %}
@@ -92,7 +92,6 @@
                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
                 "aaSorting": [[0,'desc']],
             } );
-            $('#xx').tooltip()
         })
     </script>
     
