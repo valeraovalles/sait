@@ -236,7 +236,7 @@ class ActividadController extends Controller
                 $totalfecha=new \DateTime($nuevafecha);
                 
                 
-                if(strtotime($totalfecha->format("dd/mm/YYYY")) > strtotime($fa->format("dd/mm/YYYY")))$cuentaregresiva[$e->getId()]=0;
+                if(strtotime($totalfecha->format("d-m-Y G:i:s")) < strtotime($fa->format("d-m-Y G:i:s")))$cuentaregresiva[$e->getId()]=0;
                 else{
 
                     $intervalo=$totalfecha->diff($fa);
