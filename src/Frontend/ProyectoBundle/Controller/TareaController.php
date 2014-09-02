@@ -75,7 +75,7 @@ class TareaController extends Controller
         else $fechafin=null;
 
         //actualizo campos en proyecto
-        $query = $em->createQuery('update ProyectoBundle:Proyecto x set x.fechafinestimada= :ffe WHERE x.id = :idproyecto');
+        $query = $em->createQuery('update ProyectoBundle:Proyecto x set x.fechafin= :ffe WHERE x.id = :idproyecto');
         $query->setParameter('ffe', $fechafin);
         $query->setParameter('idproyecto', $idproyecto);
         $query->execute();

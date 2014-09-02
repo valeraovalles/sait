@@ -24,7 +24,7 @@
                 <th style="width: 25%">Nombre</th>
                 <th style="width: 15%">Descripcion</th>
                 <th>Fecha inicio</th>
-                <th>Fecha fin (e)</th>
+                <th>Fecha fin</th>
                 <th>Estatus</th>
                 <th>Completado</th>
                 <th>Acciones</th>
@@ -44,8 +44,8 @@
                     {% endif %}
                 </td>
                 <td align="center">
-                    {% if entity.fechafinestimada %}
-                        {{ entity.fechafinestimada|date('d-m-Y') }}
+                    {% if entity.fechafin %}
+                        {{ entity.fechafin|date('d-m-Y') }}
                     {% else %}
                         <span class="label label-info">POR DEFINIR</span>
                     {% endif %}
