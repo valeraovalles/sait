@@ -1,0 +1,28 @@
+<div align="center">
+    <div style=" font-size: 20px;font-weight: bold;width: 600px;border: 1px solid gray;padding: 5px;background-color: blue;color:white;">NUEVO COMENTARIO</div>
+    <table style="width: 612px;border: 1px solid gray;" cellpadding="5px" class="tablacorreo">
+        <tr>
+            <th align="right">Proyecto: </th>
+            <td>{{ comentario.actividad.tarea.proyecto.nombre|capitalize }}</td>
+        </tr>
+        <tr>
+            <th align="right">Tarea: </th>
+            <td>{{ comentario.actividad.tarea.nombre|capitalize }}</td>
+        </tr>
+        <tr>
+            <th align="right">Actividad: </th>
+            <td>{{ comentario.actividad.descripcion|capitalize }}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">Comentario: </th>
+            <td>
+                {{ comentario.responsable.primerNombre|title}} {{ comentario.responsable.primerApellido|title}} ({{ comentario.fechahora|date('d-m-Y G:i:s')}}) comento:<br>
+                
+                {{ comentario.comentario|capitalize }}
+                
+            </td>
+        </tr>
+
+    </table>
+</div>
