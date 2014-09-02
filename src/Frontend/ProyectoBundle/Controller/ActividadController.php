@@ -202,6 +202,25 @@ class ActividadController extends Controller
         //$this->fechafintarea($idtarea);
     }
 
+    public function retardoactividad($idactividad){
+        $em = $this->getDoctrine()->getManager();
+        $e = $em->getRepository('ProyectoBundle:Actividad')->find($idactividad);
+        
+        $comienzo=new \DateTime($e->getComienzo()->format("d-m-Y G:i:s"));
+        $fin=new \DateTime($e->getFin()->format("d-m-Y G:i:s"));
+
+        //sumo el tiempo de la actividad 
+        if($e->getTipotiempo()==1)$tt='day';
+        else if($e->getTipotiempo()==2)$tt='hour';
+        else if($e->getTipotiempo()==3)$tt='minute';
+        $duracionestimada = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $comienzo->format("d-m-Y G:i:s") ) ) ;
+        $duracionestimada = date ( 'Y-m-d G:i:s' , $duracionestimada );
+        $duracionestimada=new \DateTime($duracionestimada);
+        
+        if(strtotime($duracionestimada->format("d-m-Y G:i:s"))>= strtotime($fin->format("d-m-Y G:i:s"))) return 'false'; else return 'true';
+                
+    }
+    
     /**
      * Lists all Actividad entities.
      *
@@ -221,6 +240,8 @@ class ActividadController extends Controller
               
         //cuenta regresiva
         $cuentaregresiva=array();
+        //verifico los tiempos de culminacion
+        $duracionactividad=array();
         foreach ($entities as $e) {
             if($e->getUbicacion()==2){
                 //fecha fin y tiempo real
@@ -243,12 +264,27 @@ class ActividadController extends Controller
                     $cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
                 }
             }
+
+            if($e->getUbicacion()==3 or $e->getUbicacion()==4){
+                
+                $r=$this->retardoactividad($e->getId());
+                $tiemporeal=explode("-",$e->getTiemporeal());
+                if($r=='false'){
+                    $duracionactividad[$e->getId()]['tiemposobrante']="D:".$tiemporeal[0]." | H:".$tiemporeal[1]." | M:".$tiemporeal[2]." | S:".$tiemporeal[3];
+                }
+                else{
+                    $duracionactividad[$e->getId()]['tiemporetardo']="D:".$tiemporeal[0]." | H:".$tiemporeal[1]." | M:".$tiemporeal[2]." | S:".$tiemporeal[3];
+                }
+            }
         }
+
+        
 
         return $this->render('ProyectoBundle:Actividad:index.html.twig', array(
             'entities' => $entities,
             'tarea'=>$tarea,
-            'cuentaregresiva'=>$cuentaregresiva
+            'cuentaregresiva'=>$cuentaregresiva,
+            'duracionactividad'=>$duracionactividad
         ));
     }
     
@@ -401,39 +437,38 @@ class ActividadController extends Controller
             return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId()))); 
         }
 
-        //valido que no mueva tarjetas si la fecha actual es menor a la de inicio de la tarea
-        if($act->getResponsable()->getId()!=$idusuario){
-              $this->get('session')->getFlashBag()->add('alert', 'Usted no es el responsable de esta actividad, por lo tanto no puede moverla.');
-             return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId()))); 
-        }
-        
-        
-        //valido que el que mueva la tarjeta sea unicamente el responsable
-        if($act->getResponsable()->getId()!=$idusuario){
-              $this->get('session')->getFlashBag()->add('alert', 'Usted no es el responsable de esta actividad, por lo tanto no puede moverla.');
-             return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId()))); 
-        }
-        
         
         //va directo a dependencia
         if($direccion=='dep')$num=5;
         //sale de dependencia
         else if($direccion=='enpro')$num=2;
+        //salculmina
+        else if($direccion=='cul')$num=4;
         
         else if($direccion=='der' and $num!=4)$num=$num+1;
         else if($direccion=='izq' and $num!=1) $num=$num-1;
+                
+        
+        if($num!=4 and $num!=3){
+            //valido que el que mueva la tarjeta sea unicamente el responsable
+            if($act->getResponsable()->getId()!=$idusuario){
+                  $this->get('session')->getFlashBag()->add('alert', 'Usted no es el responsable de esta actividad, por lo tanto no puede moverla.');
+                 return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId()))); 
+            }
+        }
+        
+
         
         //wn proceso
         if($num==2){
             //busco si solo hay en proceso, revision o dependencia
-            $dql = "select x from ProyectoBundle:Actividad x where x.responsable= :idresponsable and x.tarea= :idtarea and x.ubicacion=2";
+            $dql = "select x from ProyectoBundle:Actividad x where x.responsable= :idresponsable and x.ubicacion=2";
             $query = $em->createQuery($dql);
             $query->setParameter('idresponsable',$act->getResponsable()->getId());
-            $query->setParameter('idtarea',$act->getTarea()->getId());
             $actx = $query->getResult();
-
+    
             if(!empty($actx)){
-              $this->get('session')->getFlashBag()->add('alert', 'Debe culminar la actividad en curso y si esta depende de algún otro proceso debe colocarla como dependiente.');
+              $this->get('session')->getFlashBag()->add('alert', 'Tiene una actividad en curso en la tarea "'.  strtoupper($act->getTarea()->getNombre()).'" del proyecto "'.strtoupper($act->getTarea()->getProyecto()->getNombre()).'", ¡debe terminarla!.');
              return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId())));
            }   
            
@@ -460,7 +495,6 @@ class ActividadController extends Controller
         $query->execute(); 
         
         if($num==3){
-          
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             
             $message = \Swift_Message::newInstance()   
@@ -474,15 +508,24 @@ class ActividadController extends Controller
 
             $this->get('mailer')->send($message);  
             
-            //fecha fin y tiempo real
+            //calculo fecha fin y tiempo real
             $comienzo=new \DateTime($act->getComienzo()->format("d-m-Y G:i:s"));
             $fa=new \DateTime(\date("d-m-Y G:i:s"));
             $intervalo=$comienzo->diff($fa);
-            //comienzo el conteo
+            
+            //guardo fecha fin y tiempo real
             $fa=new \DateTime(\date("d-m-Y G:i:s"));
             $query = $em->createQuery('update ProyectoBundle:Actividad x set x.fin= :fin, x.estatusfin=true, x.tiemporeal= :tr WHERE x.estatusfin!=true and x.id = :idactividad');
             $query->setParameter('fin',$fa);
             $query->setParameter('tr',$intervalo->d.'-'.$intervalo->h.'-'.$intervalo->i.'-'.$intervalo->s);
+            $query->setParameter('idactividad', $id);
+            $query->execute();  
+        }
+        
+        else if($num==4){
+            $r=$this->retardoactividad($id);
+            $query = $em->createQuery('update ProyectoBundle:Actividad x set x.retardo= :retardo WHERE x.id = :idactividad');
+            $query->setParameter('retardo',$r);
             $query->setParameter('idactividad', $id);
             $query->execute();  
         }

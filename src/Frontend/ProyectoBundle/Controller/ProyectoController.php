@@ -8,6 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\ProyectoBundle\Entity\Proyecto;
 use Frontend\ProyectoBundle\Form\ProyectoType;
 
+use Frontend\ProyectoBundle\Entity\Proyectogeneral;
+use Frontend\ProyectoBundle\Form\ProyectogeneralType;
+
 use Administracion\UsuarioBundle\Resources\Misclases\Funcion;
 
 /**
@@ -46,20 +49,33 @@ class ProyectoController extends Controller
     public function generalAction()
     {
         $em = $this->getDoctrine()->getManager();
-        
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
         
-        
-        $dql = "select x from ProyectoBundle:Proyecto x join x.nivelorganizacional no where no.codigo like :no";
+        //PARA MOSTRAR EN TABLAS
+        $dql = "select x from ProyectoBundle:Proyecto x join x.nivelorganizacional no where no.codigo like :no order by x.estatus ASC";
         $query = $em->createQuery($dql);
-        $query->setParameter('no',"%".$perfil->getNivelorganizacional()->getCodigo()."%");
+        $query->setParameter('no',"%".$perfil->getNivelorganizacional()->getCodigo()."___");
         $entities = $query->getResult();
+        
+        //PARA MOSTRAR EN TARJETAS
+        //obtengo los niveles
+        $dql = "select x from UsuarioBundle:Nivelorganizacional x where x.codigo like :codigo order by x.codigo ASC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('codigo',"%".$perfil->getNivelorganizacional()->getCodigo()."___");
+        $niveles = $query->getResult();
+
+        $dql = "select x from ProyectoBundle:Proyecto x join x.nivelorganizacional no where no.codigo like :no order by x.nombre ASC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('no',"%".$perfil->getNivelorganizacional()->getCodigo()."___");
+        $proyectos = $query->getResult();
         
         return $this->render('ProyectoBundle:Proyecto:general.html.twig', array(
             'entities' => $entities,
             'perfil'=>$perfil,
-            'totaltarea'=>$this->totaltarea()
+            'totaltarea'=>$this->totaltarea(),
+            'niveles'=>$niveles,
+            'proyectos'=>$proyectos
         ));  
     }
   
@@ -133,6 +149,59 @@ class ProyectoController extends Controller
             'form'   => $form->createView(),
         ));
     }
+    
+public function creategeneralAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        
+        //genero formulario con los integrantes de la unidad
+        $f=new Funcion; 
+        $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
+        $entity = new Proyectogeneral();
+        $form = $this->createCreateFormGeneral($entity,$usuariounidad);
+        $form->handleRequest($request);
+        
+        if ($form->isValid()) {
+            $nombre=$entity->getNombre();
+            $desc=$entity->getDescripcion();
+            $idnivel=$entity->getNivelorganizacional()->getId();
+            $nivel = $em->getRepository('UsuarioBundle:Nivelorganizacional')->find($idnivel);
+        
+            $entity = new Proyecto();
+            //guardo valores por defecto
+            $entity->setNombre($nombre);
+            $entity->setDescripcion($desc);
+            $entity->setNivelorganizacional($nivel);
+            $entity->setEstatus(1);
+            $entity->setPorcentaje(0);
+            $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            
+            $em->persist($entity);
+            $em->flush();
+
+            $message = \Swift_Message::newInstance()   
+            ->setSubject('Proyectos')  
+            ->setFrom($perfil->getUser()->getUsername()."@telesurtv.net")     // we configure the sender
+            ->setTo($nivel->getCorreo())   
+            ->setBody( $this->renderView(
+                    'ProyectoBundle:Correo:proyecto.html.twig',
+                    array('proyecto' => $entity)
+                ), 'text/html');
+
+            $this->get('mailer')->send($message);   
+            
+            
+            $this->get('session')->getFlashBag()->add('notice', 'Proyecto creado exitosamente.');
+            return $this->redirect($this->generateUrl('proyecto_general', array('id' => $entity->getId())));
+        }
+
+        return $this->render('ProyectoBundle:Proyecto:newgeneral.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
 
     /**
      * Creates a form to create a Proyecto entity.
@@ -145,6 +214,18 @@ class ProyectoController extends Controller
     {
         $form = $this->createForm(new ProyectoType($usuariounidad), $entity, array(
             'action' => $this->generateUrl('proyecto_create'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+    
+    private function createCreateFormGeneral(Proyectogeneral $entity,$usuariounidad)
+    {
+        $form = $this->createForm(new ProyectogeneralType($usuariounidad), $entity, array(
+            'action' => $this->generateUrl('proyecto_creategeneral'),
             'method' => 'POST',
         ));
 
@@ -169,6 +250,26 @@ class ProyectoController extends Controller
         $form   = $this->createCreateForm($entity,$usuariounidad);
 
         return $this->render('ProyectoBundle:Proyecto:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+    
+    /**
+     * Displays a form to create a new Proyecto entity.
+     *
+     */
+    public function newgeneralAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $f=new Funcion; 
+        $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
+        
+        $entity = new Proyectogeneral();
+        $form = $this->createCreateFormGeneral($entity,$usuariounidad);
+        
+        return $this->render('ProyectoBundle:Proyecto:newgeneral.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));

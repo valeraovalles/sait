@@ -61,12 +61,18 @@
         <div class="contenedorform">
             <div class="labelform">Responsable(s):</div>
             <div class="widgetform">
-                    {% set cont = 0 %}
-                    {% set largo = entity.responsable | length %}
-                    {% for es in entity.responsable %} 
-                        {% set cont=cont+1 %}
-                            {{ es.primerNombre|title }} {{ es.primerApellido|title }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
-                    {% endfor %}
+                    {% if entity.responsable is null %}
+                
+                        {% set cont = 0 %}
+                        {% set largo = entity.responsable | length %}
+                        {% for es in entity.responsable %} 
+                            {% set cont=cont+1 %}
+                                {{ es.primerNombre|title }} {{ es.primerApellido|title }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
+                        {% endfor %}
+                            
+                    {% else %}
+                        Debe agregar un responsable
+                    {% endif %}
             
             </div>
         </div>
