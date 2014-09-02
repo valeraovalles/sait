@@ -1,0 +1,73 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Nuevo Proyecto{% endblock %}
+
+{% block titulo %}
+    NUEVO PROYECTO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
+  <li class="active">NUEVO PROYECTO</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent()}}
+    
+    {% if form_errors(form.nombre) or form_errors(form.descripcion) or form_errors(form.nivelorganizacional) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.nombre) }}</div>        
+        <div>{{ form_errors(form.descripcion) }}</div>
+        <div>{{ form_errors(form.nivelorganizacional) }}</div>
+    </div>
+    {% endif %}
+    
+    
+     <form novalidate action="{{ path('proyecto_creategeneral') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform">Nombre:</div>
+                <div class="widgetform">{{ form_widget(form.nombre) }}</div>
+            </div>
+            
+            <div class="contenedorform">
+                <div class="labelform">Descripción:</div>
+                <div class="widgetform">{{ form_widget(form.descripcion) }}</div>
+            </div>
+            
+            <div class="contenedorform">
+                <div class="labelform">Nivel organizacional:</div>
+                <div class="widgetform">{{ form_widget(form.nivelorganizacional) }}</div>
+            </div>
+            
+            {#
+            <div class="contenedorform">
+                <div class="labelform">Responsable:</div>
+                <div class="widgetform">{{ form_widget(form.responsable) }}</div>
+            </div>
+            #}
+        </div>
+        <a class="btn btn-default" href="{{ path('proyecto_general') }}">
+            VOLVER A LA LISTA
+        </a> | 
+        <input type="submit" class="btn btn-primary" value="CREAR PROYECTO">
+        <br><br>
+     </form>
+        
+    <script>
+    $(function() {
+      $( "#frontend_proyectobundle_proyecto_fechainicio" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+      });
+    });
+    </script>
+{% endblock %}
+{# empty Twig template #}

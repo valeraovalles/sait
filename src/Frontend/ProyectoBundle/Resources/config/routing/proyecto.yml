@@ -17,10 +17,19 @@ proyecto_show_general:
 proyecto_new:
     path:     /new
     defaults: { _controller: "ProyectoBundle:Proyecto:new" }
+    
+proyecto_newgeneral:
+    path:     /new/general
+    defaults: { _controller: "ProyectoBundle:Proyecto:newgeneral" }
 
 proyecto_create:
     path:     /create
     defaults: { _controller: "ProyectoBundle:Proyecto:create" }
+    requirements: { _method: post }
+    
+proyecto_creategeneral:
+    path:     /create/general
+    defaults: { _controller: "ProyectoBundle:Proyecto:creategeneral" }
     requirements: { _method: post }
 
 proyecto_edit:

@@ -34,8 +34,8 @@
         {% for entity in entities %}
             <tr>
                 <td style="display:none;">{{ entity.id }}</td>
-                <td><a style="font-size: 20px;color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
-                <td width="15%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,10) }}...</span></td>
+                <td><a style="font-size: 14px;color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
+                <td width="15%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,15) }}...</span></td>
                 <td align="center">
                     {% if entity.fechainicio %}
                         {{ entity.fechainicio|date('d-m-Y') }}

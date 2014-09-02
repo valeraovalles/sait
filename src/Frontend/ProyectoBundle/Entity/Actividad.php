@@ -58,6 +58,13 @@ private $estatuscomienzo;
     /**
      * @var string
      *
+     * @ORM\Column(name="retardo", type="boolean", nullable=true)
+     */
+    private $retardo;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="estatusfin", type="boolean", nullable=true)
      */
     private $estatusfin;
@@ -206,6 +213,29 @@ private $estatuscomienzo;
     public function getComienzo()
     {
         return $this->comienzo;
+    }
+    
+    /**
+     * Set retardo
+     *
+     * @param integer $retardo
+     * @return Actividad
+     */
+    public function setRetardo($retardo)
+    {
+        $this->retardo = $retardo;
+
+        return $this;
+    }
+
+    /**
+     * Get retardo
+     *
+     * @return integer 
+     */
+    public function getRetardo()
+    {
+        return $this->retardo;
     }
     
     /**
