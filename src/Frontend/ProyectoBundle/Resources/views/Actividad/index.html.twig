@@ -103,10 +103,11 @@
                           <div class="col-md-3"><a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'der'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
                         </div>
                         
-
+                            
+                        {% if  cuentaregresiva[act.id]!="0" %}
                         <script type="text/javascript">
                           $(function(){
-                            $('#counter').countdown({
+                            $('#counter{{act.id}}').countdown({
                               image: '{{ asset('libs/jquery-countdown/img/digits.png')}}',
                               startTime: '{{ cuentaregresiva[act.id] }}'
                             });
@@ -115,7 +116,7 @@
                         
 
                         <div style="padding-left: 25px;padding-top: 10px;margin-bottom: 10px;">
-                            <div id="counter"></div>
+                            <div id="counter{{act.id}}"></div>
                             <div class="desc">
                                 <div>Días</div>
                                 <div>Horas</div>
@@ -123,6 +124,9 @@
                                 <div>Segundos</div>
                             </div>
                         </div>
+                        {% else %}
+                            <div style="margin-top: 10px;margin-bottom: 10px;"><span style="color:black;" class="label label-danger">ACTIVIDAD RETRADASA</span></div>
+                        {% endif %}
                     </div>                                       
                 {% endfor %}
                 </div>
@@ -141,10 +145,21 @@
                         <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
                         
                         <div class="row">
-                          <div class="col-md-3"><a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+                          <div class="col-md-3">{#<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a>#}</div>
                           <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
-                          <div class="col-md-3">{% if is_granted('ROLE_PROYECTO_ADMIN') %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'der'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a>{% endif %}</div>
+                          <div class="col-md-3">{% if is_granted('ROLE_PROYECTO_ADMIN') %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'cul'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a>{% endif %}</div>
                         </div>
+                        
+                        
+                        {% if duracionactividad[act.id]['tiemposobrante'] is defined %}
+                            <div style="margin-top: 10px;margin-bottom: 10px;"><span style="color:black;" class="label label-success">{{ duracionactividad[act.id]['tiemposobrante'] }}<br></span></div>
+                        {% elseif duracionactividad[act.id]['tiemporetardo'] is defined %}
+                            <div style="margin-top: 10px;margin-bottom: 10px;"><span style="color:black;" class="label label-danger">{{ duracionactividad[act.id]['tiemporetardo'] }}</span></div>
+                            
+                        {% endif %}
+                        
+                        
+                        
                     </div>      
                 {% endfor %}             
                 </div>

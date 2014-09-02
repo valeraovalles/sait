@@ -10,7 +10,7 @@
 {% block ubicacion %}
 <ol class="breadcrumb">
   <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
-  <li><a href="{{ path("proyecto") }}">MIS PROYECTOS</a></li>
+  {#<li><a href="{{ path("proyecto") }}">MIS PROYECTOS</a></li>#}
   <li class="active">LISTA DE PROYECTOS GENERAL</li>
 </ol>
 {% endblock %}
@@ -18,12 +18,77 @@
 {% block body -%}
     {{ parent() }}
     
+    
+    <table class="table tablaactividad">
+        <tr>
+            {% for n in niveles %}
+                    <th style="text-align: center;" width="25%">{{ n.descripcion }}</th>
+            {% endfor %}
+        </tr>
+        
+        <tr>
+            {% for n in niveles %}
+                <td style="text-align: center;">
+                    <div class="scrollact">
+                    {% for p in proyectos if p.nivelorganizacional.id==n.id %}
+                        <a style="text-decoration: none;color:black;" href="{{ path('tarea_general',{'idproyecto':p.id}) }}">
+                        <div class="tarjetaact img-rounded">
+                            <div class="responsableact bg-primary">{{ p.nombre|upper }}</div>
+                            
+                            {% if p.fechainicio!=null or p.fechafinestimada!=null %}
+                            <div class="bf-info" style="font-size:10px;font-weight: bold; ">
+                                {% if p.fechainicio %}
+                                    I: {{ p.fechainicio|date('d-m-Y') }}
+                                {% endif %}
+                                {% if p.fechafinestimada %}
+                                    | F: {{ p.fechafinestimada|date('d-m-Y') }}
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            
+                            <div class="descripcionact">{{p.descripcion}}</div>
+                            
+                            {# ESTATUS #}
+                            <div align="center" style="margin-top:5px;">
+                                {% if p.estatus==1 %}
+                                    <div class="label label-danger">SIN INICIAR</div>
+                                {% elseif p.estatus==2 %}
+                                    <div class="label label-warning">EN PROGRESO</div>
+                                {% elseif p.estatus==3 %}
+                                    <div class="label label-success">CULMINADO</div>
+                                {% endif %}
+                            </div>
+                            
+                            {# porcentaje #}
+                            <div align="center">
+                                {% if p.porcentaje!=0 %}
+                                    <div class="progress" style="height:5px;margin:0;margin-top:5px;">
+                                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ p.porcentaje }}%;color:black;font-weight:bold;"></div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        </a>
+                    {% endfor %}
+                    </div>
+                </td>
+            {% endfor %}
+        </tr>
+        
+    </table>
+    
+    
+    <a class="btn btn-primary" href="{{ path('proyecto_newgeneral')}}">CREAR NUEVO PROYECTO</a> |     
+    <a class="btn btn-info" href="{{ path('sit_homepage')}}">SOLICITAR REQUERIMIENTOS (SIT)</a><br><br>
+    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo">BUSCAR PROYECTOS</button>
+    <br>
+
+<div id="demo" class="collapse out">
     <table id="tabladatatable" class="table table-hover">
         <thead>
             <tr>
                 <th style="display:none;">Id</th>
-                <th style="width: 25%">Nombre</th>
-                <th style="width: 15%">Descripcion</th>
+                <th style="width: 15%">Nombre</th>
                 <th>Fecha inicio</th>
                 <th>Fec. fin (e)</th>
                 <th>Estatus</th>
@@ -36,8 +101,7 @@
         {% for entity in entities %}
             <tr>
                 <td style="display:none;">{{ entity.id }}</td>
-                <td><a style="font-size: 20px;color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
-                <td width="10%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,10) }}...</span></td>
+                <td><a style="color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
                 <td align="center">
                     {% if entity.fechainicio %}
                         {{ entity.fechainicio|date('d-m-Y') }}
@@ -74,7 +138,7 @@
                         </div>
                     {% endif %}
                 </td>
-                <td width="13%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.nivelorganizacional.descripcion|capitalize}}">{{ entity.nivelorganizacional.descripcion|capitalize|slice(0,15) }}...</span></td>
+                <td width="13%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.nivelorganizacional.descripcion|capitalize}}">{{ entity.nivelorganizacional.descripcion|capitalize }}</span></td>
                 <td>
                     
                     <a style="color:black;" href="{{ path('proyecto_show_general', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
@@ -86,11 +150,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <br><br>
-    <br><br>
-
-
+</div>
                 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -102,6 +162,6 @@
             } );
         })
     </script>
-
+    <br><br><br>
     {% endblock %}
 {# empty Twig template #}
