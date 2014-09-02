@@ -39,17 +39,24 @@ class Proyectogeneral
     private $id;
     
     /**
-     * @var \"user"
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\Nivelorganizacional")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="nivelorganizacional_id", referencedColumnName="id")
-     * })
-     * @Assert\NotBlank(message="Debe seleccionar un nivel.")
+     * @ORM\ManyToMany(targetEntity="Administracion\UsuarioBundle\Entity\Nivelorganizacional", inversedBy="proyecto")
+     * @ORM\JoinTable(name="proyecto.nivelproyecto",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="proyecto_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="nivelorganizacional_id", referencedColumnName="id")
+     *   }
+     * )
+     * @Assert\Count(
+     *      min = "1",
+     *      minMessage = "Debe seleccionar al menos 1 nivel organizacional.",
+     * )
      */
+   
     private $nivelorganizacional;
-
-    
 
     /**
      * Set nombre
@@ -108,29 +115,38 @@ class Proyectogeneral
     {
         return $this->id;
     }
-    
-    /**
-     * Set nivelorganizacional
+  /**
+     * Add nivelorganizacional
      *
-     * @param \Administracion\UsuarioBundle\Entity\nivelorganizacional $nivelorganizacional
-     * @return Perfil
+     * @param \Administracion\UsuarioBundle\Entity\Nivelorganizacional $nivelorganizacional
+     * @return Usuario
      */
-    public function setNivelorganizacional(\Administracion\UsuarioBundle\Entity\nivelorganizacional $nivelorganizacional = null)
+    public function addNivelorganizacional(\Administracion\UsuarioBundle\Entity\Nivelorganizacional $nivelorganizacional)
     {
-        $this->nivelorganizacional = $nivelorganizacional;
-    
+        $this->nivelorganizacional[] = $nivelorganizacional;
         return $this;
+    }
+
+    /**
+     * Remove nivelorganizacional
+     *
+     * @param \Administracion\UsuarioBundle\Entity\Nivelorganizacional $nivelorganizacional
+     */
+    public function removeNivelorganizacional(\Administracion\UsuarioBundle\Entity\Nivelorganizacional $nivelorganizacional)
+    {
+        $this->nivelorganizacional->removeElement($nivelorganizacional);
     }
 
     /**
      * Get nivelorganizacional
      *
-     * @return \Administracion\UsuarioBundle\Entity\nivelorganizacional 
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getNivelorganizacional()
     {
         return $this->nivelorganizacional;
     }
+
     
     
 }

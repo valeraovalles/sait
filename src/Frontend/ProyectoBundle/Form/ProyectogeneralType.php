@@ -30,8 +30,8 @@ class ProyectogeneralType extends AbstractType
             ->add('nivelorganizacional','entity',array(
                 'class' => 'UsuarioBundle:Nivelorganizacional',
                 'empty_value'=>'Seleccione...',
-                'multiple'=>false,
-                'expanded'=>false,
+                'multiple'=>true,
+                'expanded'=>true,
                 'property' => 'descripcion',
                 'query_builder' => function(EntityRepository $x){
                 return $x->createQueryBuilder('x')

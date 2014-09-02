@@ -4,8 +4,16 @@
 
 {% block titulo %}
     <h1>LISTA DE TAREAS</h1>
+    <h4>
+    {% set cont = 0 %}
+    {% set largo = proyecto.nivelorganizacional | length %}
+    {% for es in proyecto.nivelorganizacional %} 
+        {% set cont=cont+1 %}
+            {{ es.descripcion|capitalize }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
+    {% endfor %}
+    </h4>
+    
     PROYECTO ({{ proyecto.nombre|upper }})<br>
-    {{ proyecto.nivelorganizacional.descripcion|upper }}
 {% endblock %}
 
 {% block ubicacion %}
