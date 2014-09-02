@@ -69,6 +69,18 @@ class ComentarioactividadController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $message = \Swift_Message::newInstance()   
+            ->setSubject('Proyectos-Comentario')  
+            ->setFrom($perfil->getNivelorganizacional()->getCorreo())     // we configure the sender
+            ->setTo($act->getResponsable()->getUser()->getUsername()."@telesurtv.net")   
+            ->setBody( $this->renderView(
+                    'ProyectoBundle:Correo:comentario.html.twig',
+                    array('comentario'=>$entity)
+                ), 'text/html');
+
+            $this->get('mailer')->send($message);   
+            
+            
             return $this->redirect($this->generateUrl('comentarioactividad', array('idactividad' => $idactividad)));
         }
 
