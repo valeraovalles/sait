@@ -69,7 +69,6 @@ class ProyectoController extends Controller
         $query = $em->createQuery($dql);
         $query->setParameter('no',"%".$perfil->getNivelorganizacional()->getCodigo()."___");
         $proyectos = $query->getResult();
-        
         return $this->render('ProyectoBundle:Proyecto:general.html.twig', array(
             'entities' => $entities,
             'perfil'=>$perfil,
@@ -86,8 +85,14 @@ class ProyectoController extends Controller
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
         
-        $entities = $em->getRepository('ProyectoBundle:Proyecto')->findByNivelorganizacional($perfil->getNivelorganizacional()->getId());
-
+        $dql = "select x from ProyectoBundle:Proyecto x join x.nivelorganizacional no where no.codigo = :codigo";
+        $query = $em->createQuery($dql);
+        $query->setParameter('codigo',$perfil->getNivelorganizacional()->getCodigo());
+        $entities = $query->getResult();
+        
+        //$entities = $em->getRepository('ProyectoBundle:Proyecto')->findByNivelorganizacional($perfil->getNivelorganizacional()->getId());
+        
+        
         return $this->render('ProyectoBundle:Proyecto:index.html.twig', array(
             'entities' => $entities,
             'perfil'=>$perfil,
@@ -115,13 +120,12 @@ class ProyectoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             
             //guardo valores por defecto
             $entity->setEstatus(1);
             $entity->setPorcentaje(0);
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-            $entity->setNivelorganizacional($perfil->getNivelorganizacional());
+            $entity->addNivelorganizacional($perfil->getNivelorganizacional());
             
             $em->persist($entity);
             $em->flush();
@@ -166,14 +170,16 @@ public function creategeneralAction(Request $request)
         if ($form->isValid()) {
             $nombre=$entity->getNombre();
             $desc=$entity->getDescripcion();
-            $idnivel=$entity->getNivelorganizacional()->getId();
-            $nivel = $em->getRepository('UsuarioBundle:Nivelorganizacional')->find($idnivel);
-        
+
+            $nivel=$entity->getNivelorganizacional();
+
             $entity = new Proyecto();
             //guardo valores por defecto
             $entity->setNombre($nombre);
             $entity->setDescripcion($desc);
-            $entity->setNivelorganizacional($nivel);
+            foreach ($nivel as $v) {
+                $entity->addNivelorganizacional($v);
+            }
             $entity->setEstatus(1);
             $entity->setPorcentaje(0);
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
@@ -181,16 +187,18 @@ public function creategeneralAction(Request $request)
             $em->persist($entity);
             $em->flush();
 
-            $message = \Swift_Message::newInstance()   
-            ->setSubject('Proyectos')  
-            ->setFrom($perfil->getUser()->getUsername()."@telesurtv.net")     // we configure the sender
-            ->setTo($nivel->getCorreo())   
-            ->setBody( $this->renderView(
-                    'ProyectoBundle:Correo:proyecto.html.twig',
-                    array('proyecto' => $entity)
-                ), 'text/html');
+            foreach ($nivel as $v) {
+                $message = \Swift_Message::newInstance()   
+                ->setSubject('Proyectos')  
+                ->setFrom($perfil->getUser()->getUsername()."@telesurtv.net")     // we configure the sender
+                ->setTo($v->getCorreo())   
+                ->setBody( $this->renderView(
+                        'ProyectoBundle:Correo:proyecto.html.twig',
+                        array('proyecto' => $entity)
+                    ), 'text/html');
 
-            $this->get('mailer')->send($message);   
+                $this->get('mailer')->send($message);   
+            }
             
             
             $this->get('session')->getFlashBag()->add('notice', 'Proyecto creado exitosamente.');
