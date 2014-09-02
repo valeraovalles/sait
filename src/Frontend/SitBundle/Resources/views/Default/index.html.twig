@@ -55,7 +55,8 @@
                 </div>
 		</div>
 
-            <button class="btn btn-large btn-primary" type="submit">SOLICITAR</button>
+            <button class="btn btn-large btn-primary" type="submit">SOLICITAR</button>{% if is_granted('ROLE_PROYECTO_GENERAL') %} | 
+            <a class="btn btn-default" href="{{ path('proyecto_general') }}">VOLVER A PROYECTOS</a>{% endif %}
 	    </form>
   	</div>
   </div>
