@@ -92,8 +92,21 @@ class TareaController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($idproyecto);       
+        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($idproyecto);  
+        $responsable=$proyecto->getResponsable();
+        if(!isset($responsable[0])){
+            $this->get('session')->getFlashBag()->add('alert', 'Debe agregar un responsable al proyecto.');
+            return $this->redirect($this->generateUrl('proyecto_edit', array('id' => $idproyecto)));
+        }
+        
+        
+        
+        
         $entities = $em->getRepository('ProyectoBundle:Tarea')->findByProyecto($idproyecto);
+        
+        
+        
+        
         
         return $this->render('ProyectoBundle:Tarea:index.html.twig', array(
             'entities' => $entities,
@@ -139,10 +152,16 @@ class TareaController extends Controller
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             
+            
+            $responsable=$entity->getProyecto()->getResponsable();
+            foreach ($responsable as $v) {
+                $arrayresponsable[]=$v->getUser()->getUsername()."@telesurtv.net";
+            }
+            
             $message = \Swift_Message::newInstance()   
             ->setSubject('Proyectos-Tareas')  
             ->setFrom($perfil->getNivelorganizacional()->getCorreo())     // we configure the sender
-            ->setTo($perfil->getNivelorganizacional()->getCorreo())   
+            ->setTo($arrayresponsable)   
             ->setBody( $this->renderView(
                     'ProyectoBundle:Correo:tarea.html.twig',
                     array('tarea' => $entity)

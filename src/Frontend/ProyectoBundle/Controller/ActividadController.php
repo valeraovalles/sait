@@ -56,29 +56,37 @@ class ActividadController extends Controller
 
     //se llama desde el index de la actividad
     public function estatusproyecto($idproyecto){
+        $estatus=5;
+        
         $em = $this->getDoctrine()->getManager();
         
-            //busco si solo hay en proceso, revicion o dependencia
-            $dql = "select x from ProyectoBundle:Tarea x where x.proyecto= :idproyecto and x.estatus!=1 and x.estatus!=3";
-            $query = $em->createQuery($dql);
-            $query->setParameter('idproyecto',$idproyecto);
-            $act = $query->getResult();
-        if(!empty($act))$estatus=2;
-        else{
-            //busco solo hay cerrados
-            $dql = "select x from ProyectoBundle:Tarea x where x.proyecto= :idproyecto and x.estatus=3 and x.estatus!=1 and x.estatus!=2";
-            $query = $em->createQuery($dql);
-            $query->setParameter('idproyecto',$idproyecto);
-            $act = $query->getResult();
-            if(!empty($act))$estatus=3;
-            else $estatus=1;
+        //busco si hay en proceso
+        $dql = "select x from ProyectoBundle:Tarea x where x.proyecto= :idproyecto";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idproyecto',$idproyecto);
+        $pro = $query->getResult();
+        
+        $nuevo=false;$proceso=false;$culminado=false;
+        foreach ($pro as $a) {
+            if($a->getEstatus()==1)$nuevo=true;  
+            if($a->getEstatus()==2)$proceso=true;
+            if($a->getEstatus()==3)$culminado=true;
         }
         
-            //actualizo campos en ticket
-            $query = $em->createQuery('update ProyectoBundle:Proyecto x set x.estatus= :estatus WHERE x.id = :idproyecto');
-            $query->setParameter('estatus', $estatus);
-            $query->setParameter('idproyecto', $idproyecto);
-            $query->execute();  
+        //si hay en proceso
+        if($proceso==true or $nuevo==true and $culminado==true)$estatus=2;
+        //si estan nuevos pero hay cerrados
+        else if($nuevo==true and $proceso==false and $culminado==false)$estatus=1;
+        //si solo hay cerrados
+        else if($culminado=true and $proceso==false and $nuevo==false)$estatus=3;
+
+        
+        //actualizo campos en ticket
+        $query = $em->createQuery('update ProyectoBundle:Proyecto x set x.estatus= :estatus WHERE x.id = :idproyecto');
+        $query->setParameter('estatus', $estatus);
+        $query->setParameter('idproyecto', $idproyecto);
+        $query->execute();  
+        
     }
     
     //se llama desde el index de la actividad
@@ -497,10 +505,14 @@ class ActividadController extends Controller
         if($num==3){
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             
+            $responsable=$act->getTarea()->getProyecto()->getResponsable();
+            foreach ($responsable as $v) {
+                $arrayresponsable[]=$v->getUser()->getUsername()."@telesurtv.net";
+            }
             $message = \Swift_Message::newInstance()   
             ->setSubject('Proyectos-Revisión de Actividad')  
             ->setFrom($perfil->getNivelorganizacional()->getCorreo())     // we configure the sender
-            ->setTo($perfil->getNivelorganizacional()->getCorreo())   
+            ->setTo($arrayresponsable)   
             ->setBody( $this->renderView(
                     'ProyectoBundle:Correo:revisionactividad.html.twig',
                     array('actividad' => $act)

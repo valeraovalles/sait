@@ -130,10 +130,16 @@ class ProyectoController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            
+            $responsable=$entity->getResponsable();
+            foreach ($responsable as $v) {
+                $arrayresponsable[]=$v->getUser()->getUsername()."@telesurtv.net";
+            }
+
             $message = \Swift_Message::newInstance()   
             ->setSubject('Proyectos')  
             ->setFrom($perfil->getNivelorganizacional()->getCorreo())     // we configure the sender
-            ->setTo($perfil->getNivelorganizacional()->getCorreo())   
+            ->setTo($arrayresponsable)   
             ->setBody( $this->renderView(
                     'ProyectoBundle:Correo:proyecto.html.twig',
                     array('proyecto' => $entity)
