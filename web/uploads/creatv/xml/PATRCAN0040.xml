@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>        
+        <XML>
+            <Content>UPDATE</Content>
+            <Clip>
+                <ClipName>PATRCAN0040</ClipName>
+                <TipoContenido>PATROCINIOS</TipoContenido>
+                <Contenido><![CDATA[ CANTV 08 Y 10 MEGAS]]></Contenido>
+                <OriginalTitle></OriginalTitle>
+                <Description> </Description>
+                <Notes>a</Notes>
+                <DurPrev></DurPrev>
+                <Chapter></Chapter>
+                <EndDate></EndDate>
+                <EPG></EPG>
+                <EPG_Content> </EPG_Content>
+                <Segments>
+            
+                <Segment>
+                    <SegTitle>1-1 CANTV - CANTV 08 Y 10 MEGAS</SegTitle>
+                    <MediaID>PATRCAN0040</MediaID>
+                    <Duration>00:00:40.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PATROCINIO</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            </Segments></Clip></XML>
