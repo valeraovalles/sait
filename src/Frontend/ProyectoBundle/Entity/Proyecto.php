@@ -277,6 +277,12 @@ class Proyecto
         return $this->responsable;
     }
     
+    public function setNivelorganizacional(\Administracion\UsuarioBundle\Entity\Nivelorganizacional $nivelorganizacional = null)
+    {
+        $this->nivelorganizacional = $nivelorganizacional;
+
+        return $this;
+    }
      /**
      * Add nivelorganizacional
      *
