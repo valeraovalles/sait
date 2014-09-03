@@ -414,8 +414,6 @@ public function creategeneralAction(Request $request)
             $entity->setPorcentaje($porcentaje);
             $entity->setFechainicio($fechainicio);
             $entity->setFechafin($fechafin);
-            $entity->setNivelorganizacional($nivelorg);
-            
             $em->flush();
             
             $this->get('session')->getFlashBag()->add('notice', 'Proyecto editado exitosamente.');
