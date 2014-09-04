@@ -103,6 +103,11 @@ class ProyectoController extends Controller
         $query->setParameter('responsable',$responsable);
         $actividades = $query->getResult();
         
+        $dql = "select x from ProyectoBundle:Actividad x where x.ubicacion=3 and x.responsable in (:responsable)";
+        $query = $em->createQuery($dql);
+        $query->setParameter('responsable',$responsable);
+        $revision = $query->getResult();
+        
         $pf=new Proyectofunciones;
         foreach ($actividades as $a) {
             if($a->getCorreoretardoproceso()==false){
@@ -137,7 +142,8 @@ class ProyectoController extends Controller
             'perfil'=>$perfil,
             'totaltarea'=>$this->totaltarea(),
             'integrantes'=>$integrantes,
-            'actividades'=>$actividades
+            'actividades'=>$actividades,
+            'revision'=>$revision,
         ));
         
         

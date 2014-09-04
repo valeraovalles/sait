@@ -17,39 +17,99 @@
 {% block body -%}
     {{ parent() }}
     
-    <table class="table table-bordered">
-        <tr>
-            <th style="text-align: center" colspan="4">ACTIVIDADES ACTUALMENTE EN PROCESO</th>
-        </tr>
-        <tr>
-            <th width="20%">RESPONSABLE</th>
-            <th width="20%">PROYECTO</th>
-            <th width="20%">TAREA</th>
-            <th width="40%">ACTIVIDAD</th>
-        </tr>
-    {% for int in integrantes %}
-        {% set x=0 %}
-        {% for act in actividades if act.responsable.id==int.id %}
-            {% set x=1%}
+
+    
+
+    <div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          ACTIVIDADES ACTUALMENTE EN PROCESO
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        {# ACTIVIDADES EN PROCESO #}
+        <table class="table table-bordered">
             <tr>
-                <td>{{ int.primerNombre|title }} {{ int.primerApellido|title }}</td>
-                <td>{{ act.tarea.proyecto.nombre|capitalize }}</td>
-                <td>{{ act.tarea.nombre|capitalize }}</td>
-                <td><a href="{{ path('actividad',{'idtarea':act.tarea.id})}}">{{ act.descripcion|capitalize }}</a></td>
+                <th width="20%">RESPONSABLE</th>
+                <th width="20%">PROYECTO</th>
+                <th width="20%">TAREA</th>
+                <th width="40%">ACTIVIDAD</th>
             </tr>
+        {% for int in integrantes %}
+            {% set x=0 %}
+            {% for act in actividades if act.responsable.id==int.id %}
+                {% set x=1%}
+                <tr>
+                    <td>{{ int.primerNombre|title }} {{ int.primerApellido|title }}</td>
+                    <td>{{ act.tarea.proyecto.nombre|capitalize }}</td>
+                    <td>{{ act.tarea.nombre|capitalize }}</td>
+                    <td><a href="{{ path('actividad',{'idtarea':act.tarea.id})}}">{{ act.descripcion|capitalize }}</a></td>
+                </tr>
+            {% endfor %}
+
+            {% if x==0 %}
+                <tr>
+                    <td>{{ int.primerNombre|title }} {{ int.primerApellido|title }}</td>
+                    <td colspan="3">Sin actividades en proceso</td>
+                </tr>
+            {% endif %}
+
         {% endfor %}
-        
-        {% if x==0 %}
-            <tr>
-                <td>{{ int.primerNombre|title }} {{ int.primerApellido|title }}</td>
-                <td colspan="3">Sin actividades en proceso</td>
-            </tr>
-        {% endif %}
-            
-    {% endfor %}
-    </table>
-    
-    
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          ACTIVIDADES POR REVISAR
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        {# ACTIVIDADES EN REVISION #}
+          <table class="table table-bordered">
+              <tr>
+                  <th style="text-align: center" colspan="4">ACTIVIDADES POR REVISAR</th>
+              </tr>
+              <tr>
+                  <th width="20%">RESPONSABLE</th>
+                  <th width="20%">PROYECTO</th>
+                  <th width="20%">TAREA</th>
+                  <th width="40%">ACTIVIDAD</th>
+              </tr>
+          {% for int in integrantes %}
+              {% set x=0 %}
+              {% for act in revision if act.responsable.id==int.id %}
+                  {% set x=1%}
+                  <tr>
+                      <td>{{ int.primerNombre|title }} {{ int.primerApellido|title }}</td>
+                      <td>{{ act.tarea.proyecto.nombre|capitalize }}</td>
+                      <td>{{ act.tarea.nombre|capitalize }}</td>
+                      <td><a href="{{ path('actividad',{'idtarea':act.tarea.id})}}">{{ act.descripcion|capitalize }}</a></td>
+                  </tr>
+              {% endfor %}
+
+              {% if x==0 %}
+                  <tr>
+                      <td>{{ int.primerNombre|title }} {{ int.primerApellido|title }}</td>
+                      <td colspan="3">Sin actividades en proceso</td>
+                  </tr>
+              {% endif %}
+
+          {% endfor %}
+          </table>
+      </div>
+    </div>
+  </div>
+
+          <br><br>
     <table id="tabladatatable" class="table table-hover">
         <thead>
             <tr>
