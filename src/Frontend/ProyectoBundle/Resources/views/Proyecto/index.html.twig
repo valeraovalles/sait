@@ -17,6 +17,29 @@
 {% block body -%}
     {{ parent() }}
     
+    <table class="table table-bordered">
+        <tr>
+            <th style="text-align: center" colspan="4">ACTIVIDADES ACTUALES</th>
+        </tr>
+        <tr>
+            <th>RESPONSABLE</th>
+            <th>PROYECTO</th>
+            <th>TAREA</th>
+            <th>ACTIVIDAD</th>
+        </tr>
+    {% for int in integrantes %}
+        {% for act in actividades if act.responsable.id==int.id %}
+            <tr>
+                <td>{{ int.primerNombre }} {{ int.primerApellido }}</td>
+                <td>{{ act.tarea.proyecto.nombre }}</td>
+                <td>{{ act.tarea.nombre }}</td>
+                <td><a href="{{ path('actividad',{'idtarea':act.tarea.id})}}">{{ act.descripcion }}</a></td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+    </table>
+    
+    
     <table id="tabladatatable" class="table table-hover">
         <thead>
             <tr>
