@@ -21,13 +21,6 @@ use Frontend\SitBundle\Form\extras\CorreoseguimientoType;
 class SeguimientoController extends Controller
 {
 
-    public function inicioAction($idticket)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $ticket =  $em->getRepository('SitBundle:Ticket')->find($idticket);
-        return $this->render('SitBundle:Seguimiento:inicio.html.twig',array('ticket'=>$ticket));
-    }
-    
     public function seguimientoprincipalAction($idticket)
     {
         $errorc=null;
@@ -211,52 +204,4 @@ class SeguimientoController extends Controller
         return $this->redirect($this->generateUrl('sit_seguimientoprincipal', array('idticket' => $idticket)));
     }
     
-    public function cerrarseguimientoAction($idticket)
-    {
-        $error=null;
-        $em = $this->getDoctrine()->getManager();
-        $ticket =  $em->getRepository('SitBundle:Ticket')->find($idticket);
-
-        return $this->render('SitBundle:Seguimiento:cerrarseguimiento.html.twig',array('ticket'=>$ticket,'error'=>$error));
-        die;
-    }
-    
-    public function guardacerrarseguimientoAction(Request $request,$idticket)
-    {
-        $error=null;
-        $em = $this->getDoctrine()->getManager();
-        $ticket =  $em->getRepository('SitBundle:Ticket')->find($idticket);
-        
-        $datos=$request->request->all();
-        if(isset($datos['solucion']) and $datos['solucion']!='')
-            $solucion=$datos['solucion'];
-        else{
-            $error[]="El comentario no debe estar en blanco.";
-            return $this->render('SitBundle:Seguimiento:cerrarseguimiento.html.twig',array('ticket'=>$ticket,'error'=>$error));
- 
-        }
-        
-        $fechactual = date_create_from_format('Y-m-d', \date("Y-m-d"));
-        $horaactual=new \DateTime(\date("G:i:s"));
-
-
-        //actualizo campos en ticket
-        $query = $em->createQuery('update SitBundle:Ticket t set t.solucion= :solucion, t.fechasolucion= :fechasolucion, t.horasolucion= :horasolucion, t.estatus=6 WHERE t.id = :idticket');
-        $query->setParameter('fechasolucion', $fechactual);
-        $query->setParameter('horasolucion', $horaactual);
-        $query->setParameter('solucion', $solucion);
-        $query->setParameter('idticket', $idticket);
-        $query->execute();
-        
-        //asigno para saber quien cerro
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $user =  $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-        $ticket->addUser($user);
-        $em->flush();
-        
-        
-        $this->get('session')->getFlashBag()->add('notice', 'El seguimiento se ha cerrado exitosamente');
-        return $this->redirect($this->generateUrl('ticket_show',array('id'=>$idticket)));
-        die;
-    }
 }
