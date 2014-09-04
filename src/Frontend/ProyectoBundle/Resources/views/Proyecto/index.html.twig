@@ -22,10 +22,10 @@
             <th style="text-align: center" colspan="4">ACTIVIDADES ACTUALES</th>
         </tr>
         <tr>
-            <th>RESPONSABLE</th>
-            <th>PROYECTO</th>
-            <th>TAREA</th>
-            <th>ACTIVIDAD</th>
+            <th width="20%">RESPONSABLE</th>
+            <th width="20%">PROYECTO</th>
+            <th width="20%"TAREA</th>
+            <th width="40%">ACTIVIDAD</th>
         </tr>
     {% for int in integrantes %}
         {% for act in actividades if act.responsable.id==int.id %}
