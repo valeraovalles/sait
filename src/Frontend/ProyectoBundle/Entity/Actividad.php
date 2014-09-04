@@ -65,7 +65,7 @@ private $estatuscomienzo;
     /**
      * @var string
      *
-     * @ORM\Column(name="correoretardoproceso", type="boolean", nullable=true)
+     * @ORM\Column(name="correoretardoproceso", type="boolean", nullable=false)
      */
     private $correoretardoproceso;
 
