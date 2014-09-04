@@ -63,6 +63,7 @@
       </div>
     </div>
   </div>
+  {% if is_granted('ROLE_PROYECTO_ADMIN') %}
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -107,6 +108,7 @@
           </table>
       </div>
     </div>
+    {% endif %}
   </div>
 
           <br><br>
