@@ -12,7 +12,7 @@ use Frontend\ProyectoBundle\Entity\Proyectogeneral;
 use Frontend\ProyectoBundle\Form\ProyectogeneralType;
 
 use Administracion\UsuarioBundle\Resources\Misclases\Funcion;
-
+use Frontend\ProyectoBundle\Resources\Misclases\Proyectofunciones;
 /**
  * Proyecto controller.
  *
@@ -102,6 +102,34 @@ class ProyectoController extends Controller
         $query = $em->createQuery($dql);
         $query->setParameter('responsable',$responsable);
         $actividades = $query->getResult();
+        
+        $pf=new Proyectofunciones;
+        foreach ($actividades as $a) {
+            if($a->getCorreoretardoproceso()==false){
+                $st=$pf->vertieactpro($em, $a);
+                if($st==true){
+                    $message = \Swift_Message::newInstance()   
+                    ->setSubject('Proyectos-ActividadRetrasada')  
+                    ->setFrom($perfil->getNivelorganizacional()->getCorreo())     // we configure the sender
+                    ->setTo($a->getResponsable()->getUser()->getUsername()."@telesurtv.net")   
+                    ->setBody( $this->renderView(
+                            'ProyectoBundle:Correo:actividadretraso.html.twig',
+                            array('actividad' => $a)
+                        ), 'text/html');
+
+                    $this->get('mailer')->send($message);    
+                }
+                
+                //comienzo el conteo
+                $query = $em->createQuery('update ProyectoBundle:Actividad x set x.correoretardoproceso=true WHERE x.id = :idactividad');             
+                $query->setParameter('idactividad', $a->getId());
+                $query->execute();  
+
+            }
+        }
+        
+        
+        
         
                 
         return $this->render('ProyectoBundle:Proyecto:index.html.twig', array(

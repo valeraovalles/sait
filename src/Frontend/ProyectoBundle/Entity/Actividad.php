@@ -61,6 +61,13 @@ private $estatuscomienzo;
      * @ORM\Column(name="retardo", type="boolean", nullable=true)
      */
     private $retardo;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="correoretardoproceso", type="boolean", nullable=true)
+     */
+    private $correoretardoproceso;
 
     /**
      * @var string
@@ -236,6 +243,29 @@ private $estatuscomienzo;
     public function getRetardo()
     {
         return $this->retardo;
+    }
+    
+    /**
+     * Set correoretardoproceso
+     *
+     * @param integer $correoretardoproceso
+     * @return Actividad
+     */
+    public function setCorreoretardoproceso($correoretardoproceso)
+    {
+        $this->correoretardoproceso = $correoretardoproceso;
+
+        return $this;
+    }
+
+    /**
+     * Get correoretardoproceso
+     *
+     * @return integer 
+     */
+    public function getCorreoretardoproceso()
+    {
+        return $this->correoretardoproceso;
     }
     
     /**

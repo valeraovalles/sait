@@ -337,6 +337,7 @@ class ActividadController extends Controller
             $entity->setTarea($tarea);
             $entity->setEstatuscomienzo(false);
             $entity->setEstatusfin(false);
+            $entity->setCorreoretardoproceso(false);
             $em->persist($entity);
             $em->flush();
 
