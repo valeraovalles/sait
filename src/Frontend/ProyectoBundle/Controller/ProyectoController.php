@@ -90,13 +90,26 @@ class ProyectoController extends Controller
         $query->setParameter('codigo',$perfil->getNivelorganizacional()->getCodigo());
         $entities = $query->getResult();
         
-        //$entities = $em->getRepository('ProyectoBundle:Proyecto')->findByNivelorganizacional($perfil->getNivelorganizacional()->getId());
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $f=new Funcion; 
+        $integrantes=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
+        $responsable=null;
+        foreach ($integrantes as $v) {
+            $responsable[]=$v->getId();
+        }
         
+        $dql = "select x from ProyectoBundle:Actividad x where x.ubicacion=2 and x.responsable in (:responsable)";
+        $query = $em->createQuery($dql);
+        $query->setParameter('responsable',$responsable);
+        $actividades = $query->getResult();
         
+                
         return $this->render('ProyectoBundle:Proyecto:index.html.twig', array(
             'entities' => $entities,
             'perfil'=>$perfil,
-            'totaltarea'=>$this->totaltarea()
+            'totaltarea'=>$this->totaltarea(),
+            'integrantes'=>$integrantes,
+            'actividades'=>$actividades
         ));
         
         
