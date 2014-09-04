@@ -17,7 +17,7 @@
         }
     </style>
     
-    <div class="titulo">SEGUIMIENTO DE INCIDENCIAS</div>
+    <div class="titulo">TICKET ASIGNADO A<br>{{ ticket.user[0].primerNombre }} {{ ticket.user[0].primerApellido }}</div>
   
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="alert alert-success">
@@ -71,19 +71,17 @@
 
     <br><br><br><br>
     {% if is_granted('ROLE_SIT_ADMINISTRADOR')%}
-      <a href="{{ path('ticket') }}" class="btn btn-default">IR AL LISTADO</a> 
+      <a href="{{ path('ticket') }}" class="btn btn-default">IR AL LISTADO</a> |
+      <a href="{{ path('ticket_show',{'id':ticket.id}) }}" class="btn btn-default">IR A GESTION</a>  
     {% endif %}
 
-    {% if ticket.estatus!=6 %}
-      {% if is_granted('ROLE_SIT_ADMINISTRADOR')%}| 
+    {% if ticket.estatus!=4 %}
+      {% if is_granted('ROLE_SIT_ADMINISTRADOR') and ticket.user[0].id==app.user.id %}| 
         <a href="#" class="btn btn-info" data-toggle="modal" data-target="#correo">ENVIAR CORREO</a> | 
       {% endif %}
 
-      <a href="#" class="btn btn-info" data-toggle="modal" data-target="#comentario">REALIZAR UN COMENTARIO</a> 
+      | <a href="#" class="btn btn-info" data-toggle="modal" data-target="#comentario">REALIZAR UN COMENTARIO</a>
 
-      {% if is_granted('ROLE_SIT_ADMINISTRADOR')%}| 
-        <a href="{{ path('sit_cerrarseguimiento',{'idticket':ticket.id}) }}" class="btn btn-danger">CERRAR SEGUIMIENTO</a>
-      {% endif %}
     {% endif %}
     <br>
     

@@ -55,6 +55,7 @@
             </script>
             {% endif %}
             
+            <div style="width: 100%;"  class="alert alert-info">ENVÍA UN CORREO SOLO SI DESEAS INFORMAR A OTRA PERSONA QUE NO SEA EL SOLICITANTE O EL RESPONSABLE DEL TICKET.</div>
             <form novalidate method="post" action="{{ path('sit_guardacorreo',{'idticket':ticket.id}) }}"  {{ form_enctype(formcs) }}>
                 {{ form_widget(formcs._token) }}
                 <div class="row">
