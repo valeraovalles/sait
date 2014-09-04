@@ -449,23 +449,21 @@ class ActividadController extends Controller
         //va directo a dependencia
         if($direccion=='dep')$num=5;
         //sale de dependencia
-        else if($direccion=='enpro')$num=2;
+        else if($direccion=='nuev')$num=1;
         //salculmina
         else if($direccion=='cul')$num=4;
         
         else if($direccion=='der' and $num!=4)$num=$num+1;
         else if($direccion=='izq' and $num!=1) $num=$num-1;
-                
+            
         
-        if($num!=4 and $num!=3){
+        if($direccion=='der' and ($num==2 or $num==3 )){
             //valido que el que mueva la tarjeta sea unicamente el responsable
             if($act->getResponsable()->getId()!=$idusuario){
-                  $this->get('session')->getFlashBag()->add('alert', 'Usted no es el responsable de esta actividad, por lo tanto no puede moverla.');
-                 return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId()))); 
+                $this->get('session')->getFlashBag()->add('alert', 'Usted no es el responsable de esta actividad, por lo tanto no puede moverla.');
+                return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId()))); 
             }
         }
-        
-
         
         //wn proceso
         if($num==2){
@@ -548,7 +546,7 @@ class ActividadController extends Controller
             $query->execute();              
         }
         
-        else if ($num==5){
+        /*else if ($num==5){
             //comienzo el conteo y pongo null en caso de que se haya guardado el fin
             $fa=new \DateTime(\date("d-m-Y G:i:s"));
             $query = $em->createQuery('update ProyectoBundle:Actividad x set x.comienzo= :comienzo, x.estatuscomienzo=true WHERE x.estatuscomienzo=false and x.id = :idactividad');
@@ -561,7 +559,7 @@ class ActividadController extends Controller
             $query = $em->createQuery('update ProyectoBundle:Actividad x set x.fin=null,x.estatusfin=false,x.tiemporeal=null WHERE x.id = :idactividad');
             $query->setParameter('idactividad', $id);
             $query->execute();  
-        }
+        }*/
         
         
         
