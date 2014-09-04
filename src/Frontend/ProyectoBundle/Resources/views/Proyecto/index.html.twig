@@ -19,23 +19,33 @@
     
     <table class="table table-bordered">
         <tr>
-            <th style="text-align: center" colspan="4">ACTIVIDADES ACTUALES</th>
+            <th style="text-align: center" colspan="4">ACTIVIDADES ACTUALMENTE EN PROCESO</th>
         </tr>
         <tr>
             <th width="20%">RESPONSABLE</th>
             <th width="20%">PROYECTO</th>
-            <th width="20%"TAREA</th>
+            <th width="20%">TAREA</th>
             <th width="40%">ACTIVIDAD</th>
         </tr>
     {% for int in integrantes %}
+        {% set x=0 %}
         {% for act in actividades if act.responsable.id==int.id %}
+            {% set x=1%}
             <tr>
-                <td>{{ int.primerNombre }} {{ int.primerApellido }}</td>
-                <td>{{ act.tarea.proyecto.nombre }}</td>
-                <td>{{ act.tarea.nombre }}</td>
-                <td><a href="{{ path('actividad',{'idtarea':act.tarea.id})}}">{{ act.descripcion }}</a></td>
+                <td>{{ int.primerNombre|title }} {{ int.primerApellido|title }}</td>
+                <td>{{ act.tarea.proyecto.nombre|capitalize }}</td>
+                <td>{{ act.tarea.nombre|capitalize }}</td>
+                <td><a href="{{ path('actividad',{'idtarea':act.tarea.id})}}">{{ act.descripcion|capitalize }}</a></td>
             </tr>
         {% endfor %}
+        
+        {% if x==0 %}
+            <tr>
+                <td>{{ int.primerNombre|title }} {{ int.primerApellido|title }}</td>
+                <td colspan="3">Sin actividades en proceso</td>
+            </tr>
+        {% endif %}
+            
     {% endfor %}
     </table>
     
