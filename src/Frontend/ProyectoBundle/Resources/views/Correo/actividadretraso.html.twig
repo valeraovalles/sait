@@ -1,0 +1,22 @@
+<div align="center">
+    <div style=" font-size: 20px;font-weight: bold;width: 600px;border: 1px solid gray;padding: 5px;background-color: red;color:white;">TIENE UNA ACTIVIDAD RETRASADA</div>
+    <table style="width: 612px;border: 1px solid gray;" cellpadding="5px" class="tablacorreo">
+        <tr>
+            <th align="right" style="width: 40%">Proyecto: </th>
+            <td>{{ actividad.tarea.proyecto.nombre|capitalize }}</td>
+        </tr>
+        <tr>
+            <th align="right">Tarea: </th>
+            <td>{{ actividad.tarea.nombre|capitalize }}</td>
+        </tr>
+        <tr>
+            <th align="right">Descripción actividad: </th>
+            <td>{{ actividad.descripcion|capitalize }}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">Responsable de actividad: </th>
+            <td>{{ actividad.responsable.primerNombre|capitalize }} {{ actividad.responsable.primerApellido|capitalize }}</td>
+        </tr>
+    </table>
+</div>
