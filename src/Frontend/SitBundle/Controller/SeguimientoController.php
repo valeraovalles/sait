@@ -34,27 +34,18 @@ class SeguimientoController extends Controller
         $errore=null;
         $em = $this->getDoctrine()->getManager();
         $ticket =  $em->getRepository('SitBundle:Ticket')->find($idticket);
-
-
+        $asig=$ticket->getUser();
+        if(!isset($asig[0])){
+            $this->get('session')->getFlashBag()->add('alert', 'Debe asignar el ticket!!');
+            return $this->redirect($this->generateUrl('ticket_show', array('id' => $idticket)));
+        }
+        
+        
+        
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
 
-        /*
-        if($ticket->getEstatus()!='5' and $ticket->getUnidad()->getId()!=$usuariounidad[0]->getId() or $ticket->getEstatus()=='5' and $ticket->getUnidad()->getId()!=$usuariounidad[0]->getId()){
-            $this->get('session')->getFlashBag()->add('alert', 'DEJA DE ESTAR INVENTANDO VAINAS');
-            return $this->redirect($this->generateUrl('sit_homepage'));
-        }
-         *
-         */
-
         $seguimiento =  $em->getRepository('SitBundle:Seguimiento')->findByTicket($idticket);
-        
-        if($ticket->getEstatus()!=6){
-            $consulta = $em->createQuery('update SitBundle:Ticket t set t.estatus= 5 WHERE t.id = :id');
-            $consulta->setParameter('id', $idticket);
-            $consulta->execute();
-        }
-
         
         $cs = new Correoseguimiento();
         $formcs   = $this->createForm(new CorreoseguimientoType(), $cs);
@@ -136,7 +127,10 @@ class SeguimientoController extends Controller
             foreach ($a as $p) {
                 $email[]=$p;
             }
-            $email[]=$ticket->getUnidad()->getCorreo();
+
+            $usuarioasig=$ticket->getUser();
+            $email[]=$ticket->getSolicitante()->getUser()->getUsername()."@telesurtv.net";
+            $email[]=$usuarioasig[0]->getUser()->getUsername()."@telesurtv.net";
             
             //CORREO
             $message = \Swift_Message::newInstance()  
@@ -197,13 +191,16 @@ class SeguimientoController extends Controller
         $em->persist($entity);
         $em->flush();  
         
-
+        $email=null;
+        $usuarioasig=$ticket->getUser();
+        $email[]=$ticket->getSolicitante()->getUser()->getUsername()."@telesurtv.net";
+        $email[]=$usuarioasig[0]->getUser()->getUsername()."@telesurtv.net";
         
         //CORREO
         $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
         ->setSubject('Sit-Comentario')     // we configure the title
         ->setFrom($perfil->getUser()->getUsername().'@telesurtv.net')     // we configure the sender
-        ->setTo($ticket->getUnidad()->getCorreo())    // we configure the recipient
+        ->setTo($email)    // we configure the recipient
         ->setBody($datos.'<br><b>Comentario de la solicitud:</b> '.$ticket->getSolicitud().'<br><br><b>ID:</b> '.$ticket->getId(), 'text/html');
 
         $this->get('mailer')->send($message);    // then we send the message.
