@@ -19,7 +19,7 @@ class AjaxController extends Controller
 {
 	public function ajax_solicitudesmuestrapersonalAction($valores)
 	{
-		$agrega = new 
+		//$agrega = new; 
 
 
 		echo "holaa";
