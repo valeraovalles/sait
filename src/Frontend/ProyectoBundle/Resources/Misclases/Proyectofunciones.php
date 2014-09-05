@@ -17,7 +17,8 @@ class Proyectofunciones
         $duracionestimada = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $comienzo->format("d-m-Y G:i:s") ) ) ;
         $duracionestimada = date ( 'Y-m-d G:i:s' , $duracionestimada );
         $duracionestimada=new \DateTime($duracionestimada);
-        if(strtotime($duracionestimada->format("d-m-Y G:i:s"))>= strtotime($fa->format("d-m-Y G:i:s"))) return 'false'; else return 'true';
-                
+        
+        if(strtotime($duracionestimada->format("d-m-Y G:i:s"))< strtotime($fa->format("d-m-Y G:i:s"))) return 'false'; else return 'true';
+        
     }
 }
