@@ -112,7 +112,7 @@ class ProyectoController extends Controller
         foreach ($actividades as $a) {
             if($a->getCorreoretardoproceso()==false){
                 $st=$pf->vertieactpro($em, $a);
-                if($st==true){
+                if($st==='true'){
                     $message = \Swift_Message::newInstance()   
                     ->setSubject('Proyectos-ActividadRetrasada')  
                     ->setFrom($perfil->getNivelorganizacional()->getCorreo())     // we configure the sender
@@ -123,12 +123,14 @@ class ProyectoController extends Controller
                         ), 'text/html');
 
                     $this->get('mailer')->send($message);    
+                    
+                    //comienzo el conteo
+                    $query = $em->createQuery('update ProyectoBundle:Actividad x set x.correoretardoproceso=true WHERE x.id = :idactividad');             
+                    $query->setParameter('idactividad', $a->getId());
+                    $query->execute();  
                 }
                 
-                //comienzo el conteo
-                $query = $em->createQuery('update ProyectoBundle:Actividad x set x.correoretardoproceso=true WHERE x.id = :idactividad');             
-                $query->setParameter('idactividad', $a->getId());
-                $query->execute();  
+
 
             }
         }
