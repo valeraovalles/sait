@@ -18,11 +18,11 @@
 {% block body -%}
     {{ parent() }}
     
-    {% if form_errors(edit_form.descripcion) or form_errors(edit_form.diasestimados) or form_errors(edit_form.responsable) %}
+    {% if form_errors(edit_form.descripcion) or form_errors(edit_form.tiempoestimado) or form_errors(edit_form.responsable) %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>{{ form_errors(edit_form.descripcion) }}</div>        
-        <div>{{ form_errors(edit_form.diasestimados) }}</div>
+        <div>{{ form_errors(edit_form.tiempoestimado) }}</div>
         <div>{{ form_errors(edit_form.responsable) }}</div>
     </div>
     {% endif %}
@@ -36,8 +36,12 @@
                 <div class="widgetform">{{ form_widget(edit_form.descripcion) }}</div>
             </div>
             <div class="contenedorform">
-                <div class="labelform">Días estimados:</div>
-                <div class="widgetform">{{ form_widget(edit_form.diasestimados) }}</div>
+                <div class="labelform">Tipo tiempo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.tipotiempo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Tiempo estimado:</div>
+                <div class="widgetform">{{ form_widget(edit_form.tiempoestimado) }}</div>
             </div>
             <div class="contenedorform">
                 <div class="labelform">Responsable:</div>

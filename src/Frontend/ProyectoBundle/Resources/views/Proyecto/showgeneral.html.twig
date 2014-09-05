@@ -1,0 +1,92 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Consultar Proyecto{% endblock %}
+
+{% block titulo %}
+    CONSULTAR DE PROYECTO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
+  <li class="active">CONSULTAR DE PROYECTO</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    <div class="formShow" >
+        <div class="contenedorform">
+            <div class="labelform">Nombre:</div>
+            <div class="widgetform">{{ entity.nombre|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Descripcion:</div>
+            <div class="widgetform">{{ entity.descripcion|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha inicio:</div>
+            <div class="widgetform">
+                {% if entity.fechainicio %}
+                    {{ entity.fechainicio|date('d-m-Y') }}
+                {% else %}
+                    <span class="label label-info">POR DEFINIR</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha fin:</div>
+            <div class="widgetform">
+                {% if entity.fechafin %}
+                    {{ entity.fechafin|date('d-m-Y') }}
+                {% else %}
+                    <span class="label label-info">POR DEFINIR</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Estatus:</div>
+            <div class="widgetform">
+                {% if entity.estatus==1 %}
+                    <span class="label label-danger">SIN INICIAR</span>
+                {% elseif entity.estatus==2 %}
+                    <span class="label label-warning">EN PROGRESO</span>
+                {% elseif entity.estatus==3 %}
+                    <span class="label label-success">CULMINADO</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Responsable(s):</div>
+            <div class="widgetform">
+                    {% set cont = 0 %}
+                    {% set largo = entity.responsable | length %}
+                    {% for es in entity.responsable %} 
+                        {% set cont=cont+1 %}
+                            {{ es.primerNombre|title }} {{ es.primerApellido|title }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
+                    {% endfor %}
+            
+            </div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">% Completado:</div>
+            <div class="widgetform">
+                {% if entity.porcentaje==0 %}
+                    <span class="label label-info">SIN AVANCE</span>
+                {% else %}
+                    <div class="progress" style="width:50%;">
+                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ entity.porcentaje }}%;color:black;font-weight:bold;">
+                        {{ entity.porcentaje }}%
+                      </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+        <a class="btn btn-default" href="{{ path('proyecto_general') }}">
+            IR A LA LISTA
+        </a> <br><br>
+{% endblock %}
+{# empty Twig template #}

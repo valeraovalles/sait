@@ -1,0 +1,43 @@
+comentarioactividad:
+    path:     /lista/{idactividad}
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:index" }
+
+comentarioactividad_show:
+    path:     /{id}/show
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:show" }
+
+comentarioactividad_new:
+    path:     /new/{idactividad}
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:new" }
+
+comentarioactividad_create:
+    path:     /create/{idactividad}
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:create" }
+    requirements: { _method: post }
+
+comentarioactividad_edit:
+    path:     /edit/{id}
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:edit" }
+
+comentarioactividad_update:
+    path:     /{id}/update
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:update" }
+    requirements: { _method: post|put }
+
+comentarioactividad_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:delete" }
+    requirements: { _method: post|delete }
+
+comentarioactividad_general:
+    path:     /general/lista/{idactividad}
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:general" }
+    
+comentarioactividad_new_general:
+    path:     /general/new/{idactividad}
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:newgeneral" }
+    
+comentarioactividad_create_general:
+    path:     /general/create/{idactividad}
+    defaults: { _controller: "ProyectoBundle:Comentarioactividad:creategeneral" }
+    requirements: { _method: post }

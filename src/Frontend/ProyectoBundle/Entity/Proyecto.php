@@ -39,17 +39,10 @@ class Proyecto
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechafinestimada", type="date", nullable=true)
+     * @ORM\Column(name="fechafin", type="date", nullable=true)
      */
-    private $fechafinestimada;
+    private $fechafin;
     
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fechafinreal", type="date", nullable=true)
-     */
-    private $fechafinreal;
-
     /**
      * @var integer
      * @ORM\Column(name="estatus", type="integer", nullable=false)
@@ -96,14 +89,21 @@ class Proyecto
 
     private $id;
     
+   
     /**
-     * @var \"user"
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="Administracion\UsuarioBundle\Entity\Nivelorganizacional")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="nivelorganizacional_id", referencedColumnName="id")
-     * })
+     * @ORM\ManyToMany(targetEntity="Administracion\UsuarioBundle\Entity\Nivelorganizacional", inversedBy="proyecto")
+     * @ORM\JoinTable(name="proyecto.nivelproyecto",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="proyecto_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="nivelorganizacional_id", referencedColumnName="id")
+     *   }
+     * )
      */
+   
     private $nivelorganizacional;
 
     
@@ -111,6 +111,7 @@ class Proyecto
     public function __construct()
     {
         $this->responsable = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->nivelorganizacional = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -275,6 +276,45 @@ class Proyecto
     {
         return $this->responsable;
     }
+    
+    public function setNivelorganizacional(\Administracion\UsuarioBundle\Entity\Nivelorganizacional $nivelorganizacional = null)
+    {
+        $this->nivelorganizacional = $nivelorganizacional;
+
+        return $this;
+    }
+     /**
+     * Add nivelorganizacional
+     *
+     * @param \Administracion\UsuarioBundle\Entity\Nivelorganizacional $nivelorganizacional
+     * @return Usuario
+     */
+    public function addNivelorganizacional(\Administracion\UsuarioBundle\Entity\Nivelorganizacional $nivelorganizacional)
+    {
+        $this->nivelorganizacional[] = $nivelorganizacional;
+        return $this;
+    }
+
+    /**
+     * Remove nivelorganizacional
+     *
+     * @param \Administracion\UsuarioBundle\Entity\Nivelorganizacional $nivelorganizacional
+     */
+    public function removeNivelorganizacional(\Administracion\UsuarioBundle\Entity\Nivelorganizacional $nivelorganizacional)
+    {
+        $this->nivelorganizacional->removeElement($nivelorganizacional);
+    }
+
+    /**
+     * Get nivelorganizacional
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNivelorganizacional()
+    {
+        return $this->nivelorganizacional;
+    }
+
 
     /**
      * Get id
@@ -286,73 +326,5 @@ class Proyecto
         return $this->id;
     }
     
-    /**
-     * Set nivelorganizacional
-     *
-     * @param \Administracion\UsuarioBundle\Entity\nivelorganizacional $nivelorganizacional
-     * @return Perfil
-     */
-    public function setNivelorganizacional(\Administracion\UsuarioBundle\Entity\nivelorganizacional $nivelorganizacional = null)
-    {
-        $this->nivelorganizacional = $nivelorganizacional;
-    
-        return $this;
-    }
-
-    /**
-     * Get nivelorganizacional
-     *
-     * @return \Administracion\UsuarioBundle\Entity\nivelorganizacional 
-     */
-    public function getNivelorganizacional()
-    {
-        return $this->nivelorganizacional;
-    }
-    
-    /**
-     * Set fechafinreal
-     *
-     * @param \DateTime $fechafinreal
-     * @return Tarea
-     */
-    public function setFechafinreal($fechafinreal)
-    {
-        $this->fechafinreal = $fechafinreal;
-
-        return $this;
-    }
-
-    /**
-     * Get fechafinreal
-     *
-     * @return \DateTime 
-     */
-    public function getFechafinreal()
-    {
-        return $this->fechafinreal;
-    }
-    
-    /**
-     * Set fechafinestimada
-     *
-     * @param \DateTime $fechafinestimada
-     * @return Tarea
-     */
-    public function setFechafinestimada($fechafinestimada)
-    {
-        $this->fechafinestimada = $fechafinestimada;
-
-        return $this;
-    }
-
-    /**
-     * Get fechafinestimada
-     *
-     * @return \DateTime 
-     */
-    public function getFechafinestimada()
-    {
-        return $this->fechafinestimada;
-    }
-    
+      
 }

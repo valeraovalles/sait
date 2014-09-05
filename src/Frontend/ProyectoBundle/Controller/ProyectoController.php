@@ -8,8 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\ProyectoBundle\Entity\Proyecto;
 use Frontend\ProyectoBundle\Form\ProyectoType;
 
-use Administracion\UsuarioBundle\Resources\Misclases\Funcion;
+use Frontend\ProyectoBundle\Entity\Proyectogeneral;
+use Frontend\ProyectoBundle\Form\ProyectogeneralType;
 
+use Administracion\UsuarioBundle\Resources\Misclases\Funcion;
+use Frontend\ProyectoBundle\Resources\Misclases\Proyectofunciones;
 /**
  * Proyecto controller.
  *
@@ -42,6 +45,38 @@ class ProyectoController extends Controller
         return $totaltarea;
         
     }
+    
+    public function generalAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+        
+        //PARA MOSTRAR EN TABLAS
+        $dql = "select x from ProyectoBundle:Proyecto x join x.nivelorganizacional no where no.codigo like :no order by x.estatus ASC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('no',"%".$perfil->getNivelorganizacional()->getCodigo()."___");
+        $entities = $query->getResult();
+        
+        //PARA MOSTRAR EN TARJETAS
+        //obtengo los niveles
+        $dql = "select x from UsuarioBundle:Nivelorganizacional x where x.codigo like :codigo order by x.codigo ASC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('codigo',"%".$perfil->getNivelorganizacional()->getCodigo()."___");
+        $niveles = $query->getResult();
+
+        $dql = "select x from ProyectoBundle:Proyecto x join x.nivelorganizacional no where no.codigo like :no order by x.nombre ASC";
+        $query = $em->createQuery($dql);
+        $query->setParameter('no',"%".$perfil->getNivelorganizacional()->getCodigo()."___");
+        $proyectos = $query->getResult();
+        return $this->render('ProyectoBundle:Proyecto:general.html.twig', array(
+            'entities' => $entities,
+            'perfil'=>$perfil,
+            'totaltarea'=>$this->totaltarea(),
+            'niveles'=>$niveles,
+            'proyectos'=>$proyectos
+        ));  
+    }
   
     public function indexAction()
     {
@@ -50,12 +85,67 @@ class ProyectoController extends Controller
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
         
-        $entities = $em->getRepository('ProyectoBundle:Proyecto')->findByNivelorganizacional($perfil->getNivelorganizacional()->getId());
+        $dql = "select x from ProyectoBundle:Proyecto x join x.nivelorganizacional no where no.codigo = :codigo";
+        $query = $em->createQuery($dql);
+        $query->setParameter('codigo',$perfil->getNivelorganizacional()->getCodigo());
+        $entities = $query->getResult();
+        
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $f=new Funcion; 
+        $integrantes=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
+        $responsable=null;
+        foreach ($integrantes as $v) {
+            $responsable[]=$v->getId();
+        }
+        
+        $dql = "select x from ProyectoBundle:Actividad x where x.ubicacion=2 and x.responsable in (:responsable)";
+        $query = $em->createQuery($dql);
+        $query->setParameter('responsable',$responsable);
+        $actividades = $query->getResult();
+        
+        $dql = "select x from ProyectoBundle:Actividad x where x.ubicacion=3 and x.responsable in (:responsable)";
+        $query = $em->createQuery($dql);
+        $query->setParameter('responsable',$responsable);
+        $revision = $query->getResult();
+        
+        $pf=new Proyectofunciones;
+        foreach ($actividades as $a) {
+            if($a->getCorreoretardoproceso()==false){
+                $st=$pf->vertieactpro($em, $a);
+                if($st==='true'){
+                    $message = \Swift_Message::newInstance()   
+                    ->setSubject('Proyectos-ActividadRetrasada')  
+                    ->setFrom($perfil->getNivelorganizacional()->getCorreo())     // we configure the sender
+                    ->setTo($a->getResponsable()->getUser()->getUsername()."@telesurtv.net")   
+                    ->setBody( $this->renderView(
+                            'ProyectoBundle:Correo:actividadretraso.html.twig',
+                            array('actividad' => $a)
+                        ), 'text/html');
 
+                    $this->get('mailer')->send($message);    
+                    
+                    //comienzo el conteo
+                    $query = $em->createQuery('update ProyectoBundle:Actividad x set x.correoretardoproceso=true WHERE x.id = :idactividad');             
+                    $query->setParameter('idactividad', $a->getId());
+                    $query->execute();  
+                }
+                
+
+
+            }
+        }
+        
+        
+        
+        
+                
         return $this->render('ProyectoBundle:Proyecto:index.html.twig', array(
             'entities' => $entities,
             'perfil'=>$perfil,
-            'totaltarea'=>$this->totaltarea()
+            'totaltarea'=>$this->totaltarea(),
+            'integrantes'=>$integrantes,
+            'actividades'=>$actividades,
+            'revision'=>$revision,
         ));
         
         
@@ -79,21 +169,26 @@ class ProyectoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             
             //guardo valores por defecto
             $entity->setEstatus(1);
             $entity->setPorcentaje(0);
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-            $entity->setNivelorganizacional($perfil->getNivelorganizacional());
+            $entity->addNivelorganizacional($perfil->getNivelorganizacional());
             
             $em->persist($entity);
             $em->flush();
 
+            
+            $responsable=$entity->getResponsable();
+            foreach ($responsable as $v) {
+                $arrayresponsable[]=$v->getUser()->getUsername()."@telesurtv.net";
+            }
+
             $message = \Swift_Message::newInstance()   
             ->setSubject('Proyectos')  
             ->setFrom($perfil->getNivelorganizacional()->getCorreo())     // we configure the sender
-            ->setTo($perfil->getNivelorganizacional()->getCorreo())   
+            ->setTo($arrayresponsable)   
             ->setBody( $this->renderView(
                     'ProyectoBundle:Correo:proyecto.html.twig',
                     array('proyecto' => $entity)
@@ -113,6 +208,63 @@ class ProyectoController extends Controller
             'form'   => $form->createView(),
         ));
     }
+    
+public function creategeneralAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        
+        //genero formulario con los integrantes de la unidad
+        $f=new Funcion; 
+        $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
+        $entity = new Proyectogeneral();
+        $form = $this->createCreateFormGeneral($entity,$usuariounidad);
+        $form->handleRequest($request);
+        
+        if ($form->isValid()) {
+            $nombre=$entity->getNombre();
+            $desc=$entity->getDescripcion();
+
+            $nivel=$entity->getNivelorganizacional();
+
+            $entity = new Proyecto();
+            //guardo valores por defecto
+            $entity->setNombre($nombre);
+            $entity->setDescripcion($desc);
+            foreach ($nivel as $v) {
+                $entity->addNivelorganizacional($v);
+            }
+            $entity->setEstatus(1);
+            $entity->setPorcentaje(0);
+            $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+            
+            $em->persist($entity);
+            $em->flush();
+
+            foreach ($nivel as $v) {
+                $message = \Swift_Message::newInstance()   
+                ->setSubject('Proyectos')  
+                ->setFrom($perfil->getUser()->getUsername()."@telesurtv.net")     // we configure the sender
+                ->setTo($v->getCorreo())   
+                ->setBody( $this->renderView(
+                        'ProyectoBundle:Correo:proyecto.html.twig',
+                        array('proyecto' => $entity)
+                    ), 'text/html');
+
+                $this->get('mailer')->send($message);   
+            }
+            
+            
+            $this->get('session')->getFlashBag()->add('notice', 'Proyecto creado exitosamente.');
+            return $this->redirect($this->generateUrl('proyecto_general', array('id' => $entity->getId())));
+        }
+
+        return $this->render('ProyectoBundle:Proyecto:newgeneral.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
 
     /**
      * Creates a form to create a Proyecto entity.
@@ -125,6 +277,18 @@ class ProyectoController extends Controller
     {
         $form = $this->createForm(new ProyectoType($usuariounidad), $entity, array(
             'action' => $this->generateUrl('proyecto_create'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+    
+    private function createCreateFormGeneral(Proyectogeneral $entity,$usuariounidad)
+    {
+        $form = $this->createForm(new ProyectogeneralType($usuariounidad), $entity, array(
+            'action' => $this->generateUrl('proyecto_creategeneral'),
             'method' => 'POST',
         ));
 
@@ -153,6 +317,26 @@ class ProyectoController extends Controller
             'form'   => $form->createView(),
         ));
     }
+    
+    /**
+     * Displays a form to create a new Proyecto entity.
+     *
+     */
+    public function newgeneralAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $f=new Funcion; 
+        $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
+        
+        $entity = new Proyectogeneral();
+        $form = $this->createCreateFormGeneral($entity,$usuariounidad);
+        
+        return $this->render('ProyectoBundle:Proyecto:newgeneral.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
 
     /**
      * Finds and displays a Proyecto entity.
@@ -177,6 +361,25 @@ class ProyectoController extends Controller
         return $this->render('ProyectoBundle:Proyecto:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+    
+    public function showgeneralAction($id)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        
+        $entity = $em->getRepository('ProyectoBundle:Proyecto')->find($id);
+
+        
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Proyecto entity.');
+        }
+
+        return $this->render('ProyectoBundle:Proyecto:showgeneral.html.twig', array(
+            'entity'      => $entity,
         ));
     }
 
@@ -260,8 +463,6 @@ class ProyectoController extends Controller
             $entity->setPorcentaje($porcentaje);
             $entity->setFechainicio($fechainicio);
             $entity->setFechafin($fechafin);
-            $entity->setNivelorganizacional($nivelorg);
-            
             $em->flush();
             
             $this->get('session')->getFlashBag()->add('notice', 'Proyecto editado exitosamente.');

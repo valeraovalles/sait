@@ -1,0 +1,64 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Comentario{% endblock %}
+
+{% block titulo %}
+    <h1>LISTA DE COMENTARIOS</h1>
+    <h4>Proyecto: {{ act.tarea.proyecto.nombre|capitalize}}</h4>
+    <h4>Tarea: {{ act.tarea.descripcion|capitalize}}</h4>
+    <h4>Actividad: {{ act.descripcion|capitalize}}</h4>
+    
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto_general") }}">LISTA DE PROYECTOS</a></li>
+  <li><a href="{{ path("tarea_general",{'idproyecto':act.tarea.proyecto.id}) }}">LISTA DE TAREAS</a></li>
+  <li class="active">COMENTARIO DE ACTIVIDAD</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <table class="table table-striped" style="width:60%;">
+        <thead>
+            <tr class="bg-primary">
+                <th>ID</th>
+                <th>Comentario</th>
+                <th>De</th>
+                <th>Fecha/Hora</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.comentario }}</td>
+                <td>{{ entity.responsable.primerNombre|capitalize }} {{ entity.responsable.primerApellido|capitalize }}</td>
+                <td>{{ entity.fechahora|date('d-m-Y G:i:s')}}</td>
+                {#<td>
+                <ul>
+                    <li>
+                        <a href="{{ path('comentarioactividad_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('comentarioactividad_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>#}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-default" href="{{ path('actividad_general',{'idtarea':act.tarea.id}) }}">
+        IR AL LISTADO DE ACTIVIDADES
+    </a> | 
+        
+    <a class="btn btn-primary" href="{{ path('comentarioactividad_new_general',{'idactividad':act.id}) }}">
+        CREAR COMENTARIO
+    </a><br><br>
+
+    {% endblock %}

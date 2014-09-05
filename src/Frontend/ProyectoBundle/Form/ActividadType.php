@@ -27,10 +27,10 @@ class ActividadType extends AbstractType
         }
 
         $builder
-            ->add('diasestimados','text')
-            ->add('diasreales')
+            ->add('tiempoestimado','text')
+            ->add('tipotiempo','choice',array('choices'=>array(1=>'Días',2=>'Horas',3=>'Minutos')))
             ->add('ubicacion')
-            ->add('descripcion')
+            ->add('descripcion','textarea')
             ->add('responsable','entity',array(
                 'class' => 'UsuarioBundle:Perfil',
                 'empty_value'=>'Seleccione...',

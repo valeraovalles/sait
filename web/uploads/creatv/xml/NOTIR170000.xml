@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>        
+        <XML>
+            <Content>UPDATE</Content>
+            <Clip>
+                <ClipName>NOTIR170000</ClipName>
+                <TipoContenido>NOTICIEROS</TipoContenido>
+                <Contenido><![CDATA[ RONDA 16 (1930 HR CCS) DE LUNES A VIERNES]]></Contenido>
+                <OriginalTitle></OriginalTitle>
+                <Description> </Description>
+                <Notes>a</Notes>
+                <DurPrev></DurPrev>
+                <Chapter></Chapter>
+                <EndDate></EndDate>
+                <EPG></EPG>
+                <EPG_Content> </EPG_Content>
+                <Segments>
+            
+                <Segment>
+                    <SegTitle>1-1 RONDA 17 1930 HR CCS - RONDA 16 (1930 HR CCS) DE LUNES A VIERNES</SegTitle>
+                    <MediaID>NOTIR17000001</MediaID>
+                    <Duration>00:24:00.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            </Segments></Clip></XML>

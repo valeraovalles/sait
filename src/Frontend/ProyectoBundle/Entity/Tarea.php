@@ -58,6 +58,7 @@ class Tarea
      * @var \DateTime
      *
      * @ORM\Column(name="fechafinestimada", type="date", nullable=true)
+     * @Assert\NotBlank(message="La fecha de fin estimada puede estar en blanco.")
      */
     private $fechafinestimada;
     

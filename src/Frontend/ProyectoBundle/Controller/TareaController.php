@@ -59,6 +59,29 @@ class TareaController extends Controller
         $query->execute();
     }
     
+    //se llama al crear o borrar una actividad
+    public function fechafinproyecto($idproyecto){
+
+        $em = $this->getDoctrine()->getManager();
+        
+        //busco la fecha mas baja de las tareas para que sea la fecha de inicio del proyecto
+        $dql = "select max(x.fechafinestimada) from ProyectoBundle:Tarea x where x.proyecto= :idproyecto";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idproyecto',$idproyecto);
+        $tarea = $query->getResult();
+        
+        if(!empty($tarea))
+            $fechafin=$tarea[0][1];
+        else $fechafin=null;
+
+        //actualizo campos en proyecto
+        $query = $em->createQuery('update ProyectoBundle:Proyecto x set x.fechafin= :ffe WHERE x.id = :idproyecto');
+        $query->setParameter('ffe', $fechafin);
+        $query->setParameter('idproyecto', $idproyecto);
+        $query->execute();
+
+    }
+    
     
 
     /**
@@ -69,10 +92,37 @@ class TareaController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($idproyecto);       
-        $entities = $em->getRepository('ProyectoBundle:Tarea')->findAll();
+        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($idproyecto);  
+        $responsable=$proyecto->getResponsable();
+        if(!isset($responsable[0])){
+            $this->get('session')->getFlashBag()->add('alert', 'Debe agregar un responsable al proyecto.');
+            return $this->redirect($this->generateUrl('proyecto_edit', array('id' => $idproyecto)));
+        }
+        
+        
+        
+        
+        $entities = $em->getRepository('ProyectoBundle:Tarea')->findByProyecto($idproyecto);
+        
+        
+        
+        
         
         return $this->render('ProyectoBundle:Tarea:index.html.twig', array(
+            'entities' => $entities,
+            'proyecto' => $proyecto,
+            'totalact'=>$this->totalactividad()
+        ));
+    }
+    
+    public function generalAction($idproyecto)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($idproyecto);       
+        $entities = $em->getRepository('ProyectoBundle:Tarea')->findByProyecto($idproyecto);
+        
+        return $this->render('ProyectoBundle:Tarea:general.html.twig', array(
             'entities' => $entities,
             'proyecto' => $proyecto,
             'totalact'=>$this->totalactividad()
@@ -102,10 +152,16 @@ class TareaController extends Controller
             $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             
+            
+            $responsable=$entity->getProyecto()->getResponsable();
+            foreach ($responsable as $v) {
+                $arrayresponsable[]=$v->getUser()->getUsername()."@telesurtv.net";
+            }
+            
             $message = \Swift_Message::newInstance()   
             ->setSubject('Proyectos-Tareas')  
             ->setFrom($perfil->getNivelorganizacional()->getCorreo())     // we configure the sender
-            ->setTo($perfil->getNivelorganizacional()->getCorreo())   
+            ->setTo($arrayresponsable)   
             ->setBody( $this->renderView(
                     'ProyectoBundle:Correo:tarea.html.twig',
                     array('tarea' => $entity)
@@ -113,7 +169,9 @@ class TareaController extends Controller
 
             $this->get('mailer')->send($message);   
             
+            //actualizo fecha al crear o editar
             $this->fechainicioproyecto($idproyecto);
+            $this->fechafinproyecto($idproyecto); 
             
             return $this->redirect($this->generateUrl('tarea_show', array('id' => $entity->getId())));
         }
@@ -174,6 +232,8 @@ class TareaController extends Controller
         $entity = $em->getRepository('ProyectoBundle:Tarea')->find($id);
         $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($entity->getProyecto()->getId());
 
+
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tarea entity.');
         }
@@ -183,6 +243,21 @@ class TareaController extends Controller
             'entity'      => $entity,
             'proyecto'      => $proyecto,
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+    
+    public function showgeneralAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('ProyectoBundle:Tarea')->find($id);
+        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($entity->getProyecto()->getId());
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Tarea entity.');
+        }
+        return $this->render('ProyectoBundle:Tarea:showgeneral.html.twig', array(
+            'entity'      => $entity,
+            'proyecto'      => $proyecto,
         ));
     }
 
@@ -252,6 +327,7 @@ class TareaController extends Controller
             $em->flush();
 
             $this->fechainicioproyecto($entity->getProyecto()->getId());
+            $this->fechafinproyecto($entity->getProyecto()->getId()); 
             return $this->redirect($this->generateUrl('tarea_show', array('id' => $id)));
         }
 
@@ -285,6 +361,8 @@ class TareaController extends Controller
             $em->flush();
             
             $this->fechainicioproyecto($entity->getProyecto()->getId());
+            $this->fechafinproyecto($entity->getProyecto()->getId());
+            
         }
 
         return $this->redirect($this->generateUrl('tarea',array('idproyecto' => $entity->getProyecto()->getId())));

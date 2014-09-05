@@ -23,7 +23,6 @@
     	return str_replace($a, $b, $str);
     }
 
-
     // establecer una conexión básica
     $conn_id = ConectarFTPA();
     //me ubico en un directorio
@@ -32,13 +31,12 @@
     $contents = ftp_nlist($conn_id, ".");
     // output $contents
     
-    //conecto a la bd de mysqlserver
-    $link = mssql_connect('192.168.70.7', 'sa', '') or die("Could not connect !");
-    $selected = mssql_select_db("creatv_data", $link);
-
-
     foreach ($contents as $c) {
         if($c!=".DS_Store" and $c!="._.DS_Store"){
+            //conecto a la bd de mysqlserver
+            $link = mssql_connect('192.168.70.7', 'sa', '') or die("Could not connect !");
+            $selected = mssql_select_db("creatv_data", $link);
+
             $dato=explode(".", $c);
             $idcoriginal=$dato[0];
             $idrecortado=substr($dato[0],0,-2);

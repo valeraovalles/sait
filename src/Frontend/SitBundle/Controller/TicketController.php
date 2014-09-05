@@ -287,7 +287,7 @@ class TicketController extends Controller
             $this->get('mailer')->send($message);     // then we send the message.
             //FIN CORREO
 
-            $this->get('session')->getFlashBag()->add('notice', 'El ticket fie asignado exitosamente a '.ucfirst($user->getPrimerNombre().' '.$user->getPrimerapellido()).'.');
+            $this->get('session')->getFlashBag()->add('notice', 'El ticket fue asignado exitosamente a '.ucfirst($user->getPrimerNombre().' '.$user->getPrimerapellido()).'.');
             return $this->redirect($this->generateUrl('ticket_show', array('id' => $id)));
         }
 

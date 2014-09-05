@@ -37,10 +37,10 @@
             </div>
         </div>
         <div class="contenedorform">
-            <div class="labelform">Fecha fin estimada:</div>
+            <div class="labelform">Fecha fin:</div>
             <div class="widgetform">
-                {% if entity.fechafinestimada %}
-                    {{ entity.fechafinestimada|date('d-m-Y') }}
+                {% if entity.fechafin %}
+                    {{ entity.fechafin|date('d-m-Y') }}
                 {% else %}
                     <span class="label label-info">POR DEFINIR</span>
                 {% endif %}
@@ -53,18 +53,26 @@
                     <span class="label label-danger">SIN INICIAR</span>
                 {% elseif entity.estatus==2 %}
                     <span class="label label-warning">EN PROGRESO</span>
+                {% elseif entity.estatus==3 %}
+                    <span class="label label-success">CULMINADO</span>
                 {% endif %}
             </div>
         </div>
         <div class="contenedorform">
             <div class="labelform">Responsable(s):</div>
             <div class="widgetform">
-                    {% set cont = 0 %}
-                    {% set largo = entity.responsable | length %}
-                    {% for es in entity.responsable %} 
-                        {% set cont=cont+1 %}
-                            {{ es.primerNombre|title }} {{ es.primerApellido|title }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
-                    {% endfor %}
+                    {% if entity.responsable is null %}
+                
+                        {% set cont = 0 %}
+                        {% set largo = entity.responsable | length %}
+                        {% for es in entity.responsable %} 
+                            {% set cont=cont+1 %}
+                                {{ es.primerNombre|title }} {{ es.primerApellido|title }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
+                        {% endfor %}
+                            
+                    {% else %}
+                        Debe agregar un responsable
+                    {% endif %}
             
             </div>
         </div>

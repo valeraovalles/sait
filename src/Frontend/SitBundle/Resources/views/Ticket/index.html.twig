@@ -63,7 +63,7 @@
 
                 </td>
                 <td>
-                    {% if entity.estatus!=5 %}
+                    {% if entity.estatus==1 or entity.estatus==4 %}
                         <a href="{{ path('ticket_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
                     {% else %}
                         <a href="{{ path('sit_seguimientoprincipal', { 'idticket': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>

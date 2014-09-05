@@ -74,6 +74,11 @@
             <div class="widgetform">{{ form_widget(edit_form_perfil.extension) }}</div>
         </div>
         <div class="contenedorform">
+            <div class="text-danger">{{ form_errors(edit_form_perfil.nivelorganizacional) }}</div>
+            <div class="labelform">Dependencia:</div>
+            <div class="widgetform">{{ form_widget(edit_form_perfil.nivelorganizacional) }}</div>
+        </div>
+        <div class="contenedorform">
             <div class="text-danger">{{ form_errors(edit_form.rol) }}</div>
             <div class="labelform">Rol:</div>
             <div class="widgetform">{{ form_widget(edit_form.rol) }}</div>

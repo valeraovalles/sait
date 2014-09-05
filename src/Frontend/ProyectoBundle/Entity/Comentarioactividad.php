@@ -3,6 +3,7 @@
 namespace Frontend\ProyectoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Comentarioactividad
@@ -15,9 +16,17 @@ class Comentarioactividad
     /**
      * @var string
      *
-     * @ORM\Column(name="comentario", type="string", length=500, nullable=false)
+     * @ORM\Column(name="comentario", type="string", length=2000, nullable=false)
+     * @Assert\NotBlank(message="El comentario no puede estar en blanco.")
      */
     private $comentario;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fechahora", type="datetime", nullable=false)
+     */
+    private $fechahora;
 
     
      /**
@@ -75,6 +84,29 @@ class Comentarioactividad
     public function getComentario()
     {
         return $this->comentario;
+    }
+    
+    /**
+     * Set fechahora
+     *
+     * @param string $fechahora
+     * @return Fechahoraactividad
+     */
+    public function setFechahora($fechahora)
+    {
+        $this->fechahora = $fechahora;
+
+        return $this;
+    }
+
+    /**
+     * Get fechahora
+     *
+     * @return string 
+     */
+    public function getFechahora()
+    {
+        return $this->fechahora;
     }
 
     /**

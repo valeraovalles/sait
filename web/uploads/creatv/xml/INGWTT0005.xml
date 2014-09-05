@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>        
+        <XML>
+            <Content>UPDATE</Content>
+            <Clip>
+                <ClipName>INGWTT0005</ClipName>
+                <TipoContenido>INGLES</TipoContenido>
+                <Contenido><![CDATA[ T  W T  TALKING LL  22AGO15 ]]></Contenido>
+                <OriginalTitle></OriginalTitle>
+                <Description> </Description>
+                <Notes>a</Notes>
+                <DurPrev></DurPrev>
+                <Chapter></Chapter>
+                <EndDate></EndDate>
+                <EPG></EPG>
+                <EPG_Content> </EPG_Content>
+                <Segments>
+            
+                <Segment>
+                    <SegTitle>1-1 THE WORLD TODAY TALKING LLAMAS   - T  W T  TALKING LL  22AGO15 </SegTitle>
+                    <MediaID>INGWTT000501</MediaID>
+                    <Duration>00:05:00.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            </Segments></Clip></XML>

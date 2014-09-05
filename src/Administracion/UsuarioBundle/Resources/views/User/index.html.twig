@@ -25,6 +25,7 @@
                 <th>Nombres</th>
                 <th>Apellidos</th>
                 <th>Cedula</th>
+                <th>Dependencia</th>
                 <th>Estatus</th>
                 <th>Acciones</th>
             </tr>
@@ -37,6 +38,11 @@
                 <td>{{ entity.primernombre }} {{ entity.segundonombre }}</td>
                 <td>{{ entity.primerapellido }} {{ entity.segundoapellido }}</td>
                 <td>{{ entity.cedula }}</td>
+                {% if entity.nivelorganizacional.descripcion is defined %}
+                <td>{{ entity.nivelorganizacional.descripcion }}</td>
+                {% else %}
+                    <td>N/A</td>
+                {% endif %}
                 <td>
                     {% if entity.user.isActive == 1 %}
                         Activo

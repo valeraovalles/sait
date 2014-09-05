@@ -17,6 +17,7 @@ class PerfilType extends AbstractType
             ->add('segundoApellido')
             ->add('cedula')
             ->add('extension','text')
+            ->add('nivelorganizacional',null,array('empty_value'=>'Seleccione...'))
             #->add('user')
         ;
     }

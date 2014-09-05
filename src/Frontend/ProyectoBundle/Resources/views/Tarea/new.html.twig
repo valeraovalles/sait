@@ -17,12 +17,13 @@
 {% block body -%}
     {{ parent()}}
     
-    {% if form_errors(form.nombre) or form_errors(form.descripcion) or form_errors(form.fechainicio) %}
+    {% if form_errors(form.nombre) or form_errors(form.descripcion) or form_errors(form.fechainicio) or form_errors(form.fechafinestimada) %}
     <div class="alert alert-danger errores" style="width:70%;">
         <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
         <div>{{ form_errors(form.nombre) }}</div>        
         <div>{{ form_errors(form.descripcion) }}</div>
         <div>{{ form_errors(form.fechainicio) }}</div>
+        <div>{{ form_errors(form.fechafinestimada) }}</div>
     </div>
     {% endif %}
     
@@ -44,6 +45,10 @@
                 <div class="labelform">Fecha inicio:</div>
                 <div class="widgetform">{{ form_widget(form.fechainicio) }}</div>
             </div>
+            <div class="contenedorform">
+                <div class="labelform">Fecha fin (e):</div>
+                <div class="widgetform">{{ form_widget(form.fechafinestimada) }}</div>
+            </div>
         </div>
         <a class="btn btn-default" href="{{ path('tarea',{'idproyecto':proyecto.id}) }}">
             VOLVER A LA LISTA
@@ -55,6 +60,11 @@
     <script>
     $(function() {
       $( "#frontend_proyectobundle_tarea_fechainicio" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+      });
+      $( "#frontend_proyectobundle_tarea_fechafinestimada" ).datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat: "dd-mm-yy",
