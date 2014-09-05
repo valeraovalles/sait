@@ -63,88 +63,7 @@
         <div class="text-error">{{ form_errors(form.asistentes) }}</div>   
         <div class="labelform">Personal a Trasladar:</div>    
         <div class="widgetform" id="lista">                                                
-          <input type="text" id="buscar" placeholder="Coloque aqui la cédula o nombre a buscar" title="Escriba los nombres para listar. Recuerde diferenciar  minúsculas de mayúsculas" style="width:80%;height:50px;" autocomplete=off>                                                               
-            <script type="text/javascript">
-              //ajax para buscar usuarios
-              $('#form_solicitud_asistentes').val('');
-              $(document).ready(function () 
-              {
-                $('#buscar').keyup(function()
-                {
-                  $('#form_solicitud_direccionDesde').val('abvcv')
-                  if($('#buscar').val()=='')
-                  {
-                      $('#ajaxlistado').html('');
-                  }else
-                  {
-                    if ($('#tipop').val()=="I")
-                    {
-                      var ruta= "{{ path('solicitudes_ajaxusuarios',{'val':'val'}) }}";
-                      ruta = ruta.replace("val",  $('#buscar').val());
-                    }else
-                    {
-                      var ruta= "{{ path('solicitudes_ajaxexternos',{'val':'val'}) }}";
-                      ruta = ruta.replace("val",  $('#buscar').val());
-                    }                  
-                    $.ajax(
-                    {
-                      url: ruta,
-                      type : 'POST',
-                      beforeSend: function()
-                      {
-                        $("#loading").show();
-                      },
-                      complete: function()
-                      {
-                        $("#loading").hide();
-                      },
-                      success: function(data)
-                      {
-                        $('#ajaxlistado').html(data);
-                      }
-                    });    
-                  }
-                });
-              });
-              
-              //armar lista de usuarios seleccionados
-              function armarlista(valor)
-              {
-                var existe=false;                    
-                var sel = document.getElementById("form_solicitud_asistentes");                         
-                var tip = document.getElementById("tipop").value;                         
-                //Buscamos si ya existe el valor seleccionado
-                for (var i = 0; i < sel.length; i++) 
-                {                        
-                  if (sel[i].value==valor+'-'+tip)
-                  existe=true;                      
-                }
-                if (existe)
-                {
-                      alert("Ya este usuario fue seleccionado: "+valor);
-                }else
-                {
-                      $('#form_solicitud_asistentes').append('<option value="2">' + valor +'-'+tip+'&nbsp;(Eliminar)</option>'); 
-                  actAsistentes();
-                  //$('#lista select option').attr('selected','selected');
-                  $('#ajaxlistausuario').hide()
-                  $('#buscar').val('')
-                }
-              }
-              
-              //Si hacemos click sobre el select que se esta cargando, Borramos la opción seleccionada
-              $('#form_solicitud_asistentes').click(function()
-              {
-                if($('#form_solicitud_asistentes').val()!=null)
-                {
-                  if (confirm("Quitar este usuario seleccionado?"))
-                  {
-                    $("#form_solicitud_asistentes option:selected").remove();    
-                      actAsistentes();
-                  }
-                }else alert('Listado vacío.')
-              });
-            </script>
+          <input type="text" id="buscar" placeholder="Coloque aqui la cédula o nombre a buscar" title="Escriba los nombres para listar. Recuerde diferenciar  minúsculas de mayúsculas" style="width:80%;height:50px;" autocomplete=off id="cpi" onkeyup="ajax('/sait/web/transporte.php/ajax/muestrapersonal','contenido',document.getElementById('cpi').value)">
         </div>
         <div class="contenedorform">
           <div class="labelform"></div>    
@@ -182,42 +101,19 @@
 
 
 <script>
-  $(function() {
-    $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
-      _renderItem: function( ul, item ) {
-        var li = $( "<li>", { text: item.label } );
- 
-        if ( item.disabled ) {
-          li.addClass( "ui-state-disabled" );
-        }
- 
-        $( "<span>", {
-          style: item.element.attr( "data-style" ),
-          "class": "ui-icon " + item.element.attr( "data-class" )
-        })
-          .appendTo( li );
- 
-        return li.appendTo( ul );
-      }
-    });
- 
-    $( "#people" )
-      .iconselectmenu()
-      .iconselectmenu( "menuWidget")
-        .addClass( "ui-menu-icons avatar" );
-  });
-
-    $(function() {
+  $(
+    function(){
       $( ".fecha" ).datepicker({
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: "yy-mm-dd",
-      });
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "yy-mm-dd",
+        });
     });
 
-    $(".hora select").css({
-                    'width':'50px',
-                });
+  $(".hora select").css(
+    {
+      'width':'40px',
+    });
   </script>
   
 
