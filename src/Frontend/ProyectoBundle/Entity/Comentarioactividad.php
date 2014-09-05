@@ -16,7 +16,7 @@ class Comentarioactividad
     /**
      * @var string
      *
-     * @ORM\Column(name="comentario", type="string", length=500, nullable=false)
+     * @ORM\Column(name="comentario", type="string", length=2000, nullable=false)
      * @Assert\NotBlank(message="El comentario no puede estar en blanco.")
      */
     private $comentario;
