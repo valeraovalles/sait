@@ -10,7 +10,7 @@
 {# PERSONAL EXTERNO #}
 {% if tipo=="E" %}
     {% for usu in usuarios %}
-        <div id="ajaxusuarios" onclick="armarlista('{{ usu.Nombre}}')">
+        <div id="ajaxusuarios" style="cursor:pointer;" onclick="armarlista('{{ usu.Nombre}}')">
         	{{ usu.Nombre}}
         </div>
     {% endfor %}

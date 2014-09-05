@@ -16,7 +16,9 @@ class SolicitudesType extends AbstractType
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd',
                 ))                                               
-            ->add('asistentes','hidden')  
+            ->add('asistentes','choice',array(
+                    'multiple' => true,
+                    ))  
             ->add('fechaSalida', 'date',array(
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd',

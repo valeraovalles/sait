@@ -56,6 +56,13 @@ class SolicitudesController extends Controller
      */
     public function createAction(Request $request)
     {
+
+
+               $datos=$request->request->all();
+        $datos=$datos['form_solicitud'];
+print_r($datos);
+
+die;
         //public $listaAsi=""; 
         $entity  = new Solicitudes();
         $form = $this->createForm(new SolicitudesType(), $entity);
@@ -80,7 +87,7 @@ class SolicitudesController extends Controller
             
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Solicitud de transporte')       // we configure the title
-            ->setTo(array($usuario->getUsername().'@telesurtv.net', 'lpadilla@telesurtv.net'))
+            ->setTo(array($usuario->getUsername().'@telesurtv.net', 'aplicaciones@telesurtv.net'))
             ->setFrom('app_transporte@telesurtv.net')    // we configure the recipient
             ->setBody( $this->renderView(
                         'TransporteBundle:Correo:solicitud_transporte.html.twig',
@@ -117,14 +124,20 @@ class SolicitudesController extends Controller
      *
      */
     public function newAction()
-    {
+    {       
         $entity = new Solicitudes();
         $form   = $this->createForm(new SolicitudesType(), $entity);
-   
+        
+        $form1 = $this->createFormBuilder()
+                ->add('buscar', 'text')
+                ->getForm();
+
+
+
         return $this->render('TransporteBundle:Solicitudes:new.html.twig', array(
             'entity' => $entity,
-          //  'usuarios' => $usuarios,
             'form'   => $form->createView(),
+            'form1'   => $form1->createView(),
         ));
     }
 
