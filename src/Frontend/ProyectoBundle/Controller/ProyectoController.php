@@ -122,7 +122,7 @@ class ProyectoController extends Controller
                             array('actividad' => $a)
                         ), 'text/html');
 
-                    $this->get('mailer')->send($message);    
+                    //$this->get('mailer')->send($message);    
                 }
                 
                 //comienzo el conteo
