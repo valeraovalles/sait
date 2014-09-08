@@ -126,7 +126,8 @@
               <tr>
                   <th width="20%">PROYECTO</th>
                   <th width="20%">TAREA</th>
-                  <th width="60%">ACTIVIDAD</th>
+                  <th width="10%">FIN TAREA</th>
+                  <th width="50%">ACTIVIDAD</th>
               </tr>
               </thead>
               <tbody>
@@ -135,6 +136,7 @@
                   <tr>
                       <td>{{ act.tarea.proyecto.nombre|capitalize }}</td>
                       <td>{{ act.tarea.nombre|capitalize }}</td>
+                      <td>{{ act.tarea.fechafinestimada|date("d-m-Y") }}</td>
                       <td><a href="{{ path('actividad',{'idtarea':act.tarea.id})}}">{{ act.descripcion|capitalize }}</a></td>
                   </tr>
               {% endfor %}
