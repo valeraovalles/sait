@@ -61,7 +61,7 @@
         <div class="contenedorform">
             <div class="labelform">Responsable(s):</div>
             <div class="widgetform">
-                    {% if entity.responsable is null %}
+                    {% if entity.responsable is not empty %}
                 
                         {% set cont = 0 %}
                         {% set largo = entity.responsable | length %}
