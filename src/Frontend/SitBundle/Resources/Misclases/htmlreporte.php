@@ -4,7 +4,7 @@ namespace Frontend\SitBundle\Resources\Misclases;
 
 class htmlreporte
 {
-    public function informe($em,$datos)
+    public function informe($em,$datos,$tarea)
     {
 
         $unidad = $em->getRepository('SitBundle:Unidad')->findAll();
@@ -37,28 +37,12 @@ class htmlreporte
         $query->setParameter(2, $fechahasta);
         $ticket = $query->getResult();
 
-        //$query para los tickets en seguimiento y cerrados con seguimiento
-        $dql1 = "select t from SitBundle:Ticket t, SitBundle:categoria c, SitBundle:subcategoria s 
-        where 
-        t.categoria = c.id and 
-        t.subcategoria = s.id and
-        t.unidad= :idunidad and (t.estatus=6 or t.estatus = 5) 
-        and t.fechasolicitud BETWEEN ?1 AND ?2 
-        order by t.categoria,t.subcategoria,t.fechasolicitud, t.horasolicitud ASC";
-       
-        $query1 = $em->createQuery($dql1);
-        $query1->setParameter('idunidad',$datos['unidad']);
-        $query1->setParameter(1, $fechadesde);
-        $query1->setParameter(2, $fechahasta);
-        $ticket1 = $query1->getResult();
-
-        if(empty($ticket) and empty($ticket1))return null;
+        if(empty($ticket))return null;
         $ultimacategoria=null;$ultimasubcategoria=null;$info=null;$cont=1;$conta = 1;$contador = 0;
         
         //ciclo para ticket cerrados sin seguimiento
         if(!empty($ticket))
         {
-            $info .= "<div align='justify' style='font-weight:bold;color:blue;'>TICKETS SIN SEGUIMIENTO</div>";
             foreach ($ticket as $value) {                
                 if($ultimacategoria!=$value->getCategoria())
                 $info .="<div class='cat'>".strtoupper($value->getCategoria())."</div>";
@@ -77,64 +61,23 @@ class htmlreporte
                 $ultimasubcategoria=$value->getSubcategoria()->getSubcategoria();
                 $cont++;
             }
-        }
-
-        if(!empty($ticket1))
-        {            
-            $info .= "<div align='justify' style='font-weight:bold;color:blue;'>TICKETS CON SEGUIMIENTO</div>";
-        
-            //ciclo para tickets con seguimiento
-            foreach ($ticket1 as $value1) {
-                $conta1 = 1;
-                if($ultimacategoria!=$value1->getCategoria())
-                $info .="<div class='cat'>".strtoupper($value1->getCategoria())."</div>";
+            
+            
+            //consulto proyectos
+            $proyectos=null;$existe=null;
+            foreach ($tarea as $t) {
                 
-                if($ultimasubcategoria!=$value1->getSubcategoria()->getSubcategoria())
-                $info .="<div class='subcat'>".ucfirst($value1->getSubcategoria()->getSubcategoria())."</div>";
-                $info .="<div style='margin-bottom:5px;text-align:justify;' class='solicitud'>".$conta.".- <b>Solicitud (".$value1->getFechasolicitud()->format("d-m-Y")." ".$value1->getHorasolicitud()->format("h:i:s")."):</b> ".ucfirst($value1->getSolicitud())."</div>";
-               
-                $idticket = $value1->getId();     
-                //$query para los tickets en seguimiento y cerrados con seguimiento
-                $dql2 = "select s from SitBundle:Seguimiento s where s.ticket = ?1 order by s.fecha ASC";
-                $query2 = $em->createQuery($dql2);
-                $query2->setParameter(1, $idticket);
-                $seguimiento = $query2->getResult();
-
-                if(!empty($seguimiento))
-                {
-                    foreach ($seguimiento as $value2) {
-                        if($value2->getTipo() == 'c'){$tipo = "comentario";}else{$tipo = "correo";}
-                        
-                        $info .="
-                        <div style='margin-bottom:15px; margin-left:25px;class='solucion'>".$conta1.")
-                        <div style='margin-bottom:15px; margin-left:35px;class='solucion'></b>
-                        <b>Fecha: </b>".$value2->getFecha()->format("d-m-Y h:i:s")."<br> 
-                        <b>Responsable: </b>".$value2->getresponsable()."<br>
-                        <b>Tipo: </b>".$tipo."<br>
-                        <b>Descripcion: </b>".ucfirst($value2->getEvento())."
-                            </div></div><br>";
-                        $conta1++ ;
-                    }
-                }else
-                {
-                   $info .="<div style='margin-bottom:5px;margin-left:35px;text-align:justify;' class='solicitud'>No existen comentarios ni correos de seguimiento</div>"; 
+                if($existe!=$t->getProyecto()->getId()){
+                    $proyectos .="<div><b>PROYECTO: ".strtoupper($t->getProyecto()->getNombre())." (".$t->getProyecto()->getPorcentaje()."% de avance)</b></div>";
+                    $proyectos .="<div>&nbsp;&nbsp;&nbsp;".ucfirst($t->getProyecto()->getDescripcion())."</div>";
+                    $proyectos .="<b><br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TAREAS</b></div>";
                 }
-
-                //$usuariocierraticket=$value1->getUser();
-                if ($value1->getEstatus() == 6)
-                {                
-                    $info .="<div style='margin-bottom:15px;text-align:justify;' class='solucion'><b>Solución (".$value1->getFechasolucion()->format("d-m-Y")." ".$value1->getHorasolucion()->format("G:i:s")."):</b> ".ucfirst($value1->getSolucion())."</div>";
-                    $contador++;
-                }              
-
-                $ultimacategoria=$value1->getCategoria();
-                $ultimasubcategoria=$value1->getSubcategoria()->getSubcategoria();
-                $cont++;
-                $conta ++;
+                $proyectos .="<br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* ".ucfirst($t->getNombre())." (".$t->getPorcentaje()."% de avance)</div>";
+                $proyectos .="<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".ucfirst($t->getDescripcion())."</div><br>";
+                
+                $existe=$t->getProyecto()->getId();
             }
         }
-
-
         $html="
         <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 
@@ -195,6 +138,7 @@ class htmlreporte
         <br><br>
         ";
 
+        $html .= $proyectos;
         $html .=$info;
 
 
@@ -205,8 +149,6 @@ class htmlreporte
 
 
         $html .="
-            <div align='center'><h4>TICKETS DE SEGUIMIENTO: ".$seg_totales." (Pendientes:".$seg." | Cerrados:".$seg_cerrado.") </h4></div>
-
             <div align='center'><h4>TICKETS ATENDIDOS: ".$total."</h4></div>
             <div align='center' style='color:red;'>IMAGEN GRÁFICO AQUÍ</div>
         ";
