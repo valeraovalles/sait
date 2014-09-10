@@ -171,5 +171,5 @@ transporte_delete:
     requirements: { _method: post|delete }
 
 ajaxapruebarechaza:
-    pattern: /solicitudes/ajax/{datos}
+    pattern: /solicitudes/aa/ajax/{datos}
     defaults: { _controller: "TransporteBundle:Solicitudes:ajaxapruebarechaza"}
