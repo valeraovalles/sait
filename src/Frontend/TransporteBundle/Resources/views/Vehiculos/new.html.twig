@@ -17,7 +17,7 @@
 {% block body -%}
     {{ parent() }}
 
-    <form action="{{ path('personalexterno_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
+    <form action="{{ path('transporte_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
 
         <div class="formShow">
             <br>

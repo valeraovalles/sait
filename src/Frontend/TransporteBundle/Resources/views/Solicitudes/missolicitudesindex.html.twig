@@ -48,9 +48,6 @@
                 {% endif %}
                 <td>
                     <a href="{{ path('showmissolicitudes', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
-                    {% if entity.estatus=="N" %}
-                        <a href="{{ path('solicitudes_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></a>
-                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
