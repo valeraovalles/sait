@@ -1,0 +1,73 @@
+{% extends '::transporte.html.twig' %}
+ 
+{% block title %}Detalle de Mis Solicitudes{% endblock %}
+
+{% block titulo %}
+    DETALLE DE MIS SOLICITUDES
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("missolicitudes") }}">LISTADO DE MIS SOLICITUDES</a></li>
+  <li class="active">DETALLE DE MIS SOLICITUDES</li>
+</ol>
+{% endblock %}
+{% block body -%}
+    {{ parent() }}
+    <div class="formShow"> 
+        <div class="contenedorform">
+            <div class="labelform">Asistentes</div>
+            <div class="widgetform">
+                {% for asistente in campo %}
+                    {{ asistente }},
+                {% endfor %}
+            </div>          
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha de Solicitud</div>
+            <div class="widgetform">{{ entity.fechaSolicitud|date('d-m-Y') }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha de Salida</div>
+            <div class="widgetform">{{ entity.fechaSalida|date('d-m-Y') }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Hora de Salida</div>
+            <div class="widgetform">{{ entity.horaSalida|date('G:i:s') }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Direccion Desde</div>
+            <div class="widgetform">{{ entity.direccionDesde }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Direccion Hasta</div>
+            <div class="widgetform">{{ entity.direccionHasta }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Equipos/Implementos</div>
+            <div class="widgetform">{{ entity.descripcionEquipos }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Motivo de la Solicitud</div>
+            <div class="widgetform">{{ entity.datosInteresRazon }}</div>
+        </div>
+        {% if  entity.justificacion %}
+        <div class="contenedorform">
+            <div class="labelform">Justificación</div>
+            <div class="widgetform">{{ entity.justificacion }}</div>
+        </div>
+        {% endif %}
+        <div class="contenedorform">
+            <div class="labelform">Estatus</div>
+            <div class="widgetform">
+                {% if entity.estatus=="N" %} <a class="label label-info" href="#">Nueva</a> {% endif %}
+                {% if entity.estatus=="AP" %} <a class="label label-success" href="#">Aprobada</a> {% endif %}
+                {% if entity.estatus=="R" %} <a class="label label-danger" href="#">Rechazada</a>{% endif %}
+            </div>
+        </div>
+    </div> 
+    <br>
+    <a class="btn btn-default" href="{{ path('missolicitudes') }}">IR A LA LISTA</a>
+    <br><br>
+{% endblock %}

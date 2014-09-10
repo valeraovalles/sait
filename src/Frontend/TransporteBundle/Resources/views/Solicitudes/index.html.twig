@@ -1,45 +1,33 @@
 {% extends '::transporte.html.twig' %}
+ 
+{% block title %}Lista de Solicitudes{% endblock %}
 
-{% block title %}Transporte{% endblock %}
+{% block titulo %}
+    LISTA DE SOLICITUDES
+{% endblock %}
 
-{% block titulobanner %}
-    TRANSPORTE
+{% block ubicacion %}
+<ol class="breadcrumb">
+    <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+    <li class="active">LISTA DE SOLICITUDES </li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">
-        TRANSPORTE -  SOLICITUDES 
-        {% if accion=="Apro" %} POR APROBAR {% endif %}
-        {% if accion=="Culm" %} POR CERRAR/CULMINAR {% endif %}
-        {% if accion=="none" %} PENDIENTES {% endif %}
-    </div>
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    <table class="records_list" id="tablalistax">
+    <table id="tabladatatable">
         <div align="center" id="leyenda"></div>
         <thead>
             <tr>
                 <th>Id</th>                
-                <th>Fecha/Solicitud</th>
-                <th>Fecha/Salida</th>
-                <th>Hora/Salida</th>
-                <th>Direccion/Desde</th>        
-                <th>Direccion/Hasta</th>        
+                <th>Fecha de Solicitud</th>
+                <th>Fecha de Salida</th>
+                <th>Hora de Salida</th>
+                <th>Direccion - Desde</th>        
+                <th>Direccion - Hasta</th>        
                 <th>Estatus</th>
-                <th>Acción</th>
+                <th>Acci&oacute;n</th>
             </tr>
         </thead>
         <tbody>
@@ -51,100 +39,25 @@
                 <td>{{ entity.horaSalida|date('G:i:s') }}</td>
                 <td>{{ entity.direccionDesde }}</td>
                 <td>{{ entity.direccionHasta }}</td>     
-                <td>                    
-                    {% if entity.estatus=="N" %} Nueva {% endif %}
-                    {% if entity.estatus=="A" %} Asignada {% endif %}
-                    {% if entity.estatus=="AP" %} Aprobada {% endif %}
-                    {% if entity.estatus=="C" %} Culminada {% endif %}
-                    {% if entity.estatus=="R" %} Rechazada {% endif %}
-                </td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('solicitudes_show', { 'id': entity.id }) }}" title="Mostrar">
-                            <i class="icon-search"></i>
-                        </a>
-                        {% if is_granted('ROLE_TRANSPORTE') %}
-                        {% if entity.estatus=="N" %} 
-                        {# SI ESTA APROBADA/CULMINADA/RECAHZADA NO PUEDE SER EDITADA #}   
-                        <a href="{{ path('solicitudes_edit', { 'id': entity.id }) }}" title="Editar">
-                            <i class="icon-edit"></i>
-                        </a>
-                        {% endif %}
-                        {% endif %}
-                        {% if entity.estatus!="C" and entity.estatus!="R" %} 
-                        {# SI ESTA CULMINADA NO PUEDE SER RECHAZADA #}        
-                        <a href="{{ path('solicitudes_rechazar',{'id':entity.id}) }}" title="Rechazar/Cancelar">
-                            <img src="{{asset('images/rechazo.png')}}" width=16px>
-                        </a>
-                        {% endif %}
-                        {% if accion=="Apro" %}
-                            {#
-
-                            <a href="{{ path('solicitudes_status',{'id':entity.id,'accion':'AP'}) }}" onclick="return confirm('Seguro que desea APROBAR la solicitud Nro: '+{{entity.id}})" title="Aprobar">
-                            #}
-                            <a data-toggle="modal" data-target="#myModal" class="abrirModal" data-idsolicitud="{{entity.id}}">
-                            <img src="{{asset('images/aprobar.png')}}" width=16px>
-                            </a>
-                            <script>
-                             $('#leyenda').html('Para APROBAR una solicitud haga click en el icono <img src="{{asset('images/aprobar.png')}}" width=16px>');                       
-                            </script>
-                        {% endif %}
-                        {% if accion=="Culm" %}
-                            <a href="{{ path('solicitudes_status',{'id':entity.id,'accion':'C'}) }}" 
-                            onclick="return confirm('Seguro que desea CERRAR/CULMINAR la solicitud Nro: '+{{entity.id}})" title="Cerrar/Culminar">
-                            <img src="{{asset('images/finalizar.png')}}" width=16px>
-                            </a>
-                            <script>
-                             $('#leyenda').html('Para CERRAR/CULMINAR una solicitud haga click en el icono <img src="{{asset('images/finalizar.png')}}" width=16px>');                       
-                            </script>
-                        {% endif %}                        
-                    </li>                    
-                </ul>
-                </td>
+                {% if entity.estatus=="N" %}
+                    <td><a class="label label-info" href="#">Nueva</a></td>
+                {% elseif entity.estatus=="AP" %}
+                    <td><a class="label label-success" href="#">Aprobada</a></td>
+                {% elseif entity.estatus=="R" %}
+                    <td><a class="label label-danger" href="#">Rechazada</a></td>
+                {% endif %}
+                <td><a href="{{ path('solicitudes_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open"></a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <br><br>
-    <div align="center">
-            <a href="{{ path('solicitudes_new') }}">               
-                <button class="btn btn-primary" type="button">Nueva Solicitud</button>
-            </a>
-    </div>
-    
-    <br>
-  
-  <div id="myModel" class="modal hide fade">      
-    <form action="{{ path('asignaciones_create') }}" method="post" novalidate>
-        <fieldset>
-        <label for="vehiculo"><b>Debe Asignar un Vehiculo para Aprobar la Solicitud:</b></label>
-        {{ form_widget(form_asig) }}
-        <input type="hidden" name="id_solicitud" id="id_solicitud">
-        </fieldset>
-          <a href="{{ path('asignaciones_create') }}">               
-                <button class="btn btn-primary" type="submit">Aprobar Solicitud</button>
-          </a>
-
-          <button class="btn btn-danger" type="button" onclick="$('#myModel, .window').hide()">Cerrar Ventana</button>
-          
-
-    </form>
-  </div> 
+    <br><br><br>
     <script type="text/javascript">
     $(document).ready(function(){
-       $('#tablalistax').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+       $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
             "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-            "aaSorting": [[5,'asc'],[3,'desc'],[4,'desc']],
-        } );    
+            "aaSorting": [[0,'asc'],[1,'asc']],
+        } );
     })
-    $('.abrirModal').click(function(){         
-        $("#frontend_transportebundle_asignacionestype_idSolicitud").val($(this).data('idsolicitud'));
-        $("#id_solicitud").val($(this).data('idsolicitud'));
-        $('#myModel').modal() 
-
-    }); 
-    </script>
-
-    </div>
-    {% endblock %}
+</script>
+{% endblock %}

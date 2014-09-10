@@ -6,26 +6,26 @@ creatv:
     resource: "@CreatvBundle/Resources/config/routing.yml"
     prefix:   /creatv
 
-transporte_index:
+transporte:
     resource: "@TransporteBundle/Resources/config/routing.yml"
     prefix:   /transporte
 
-vehiculos_index:
-    resource: "@TransporteBundle/Resources/config/routing/vehiculos.yml"
-    prefix:   /transporte/vehiculos
+#vehiculos_index:
+#    resource: "@TransporteBundle/Resources/config/routing/vehiculos.yml"
+#    prefix:   /transporte/vehiculos
 
-solicitudes_index:
-    resource: "@TransporteBundle/Resources/config/routing/solicitudes.yml"
-    prefix:   /transporte/solicitudes   
+#solicitudes_index:
+#    resource: "@TransporteBundle/Resources/config/routing/solicitudes.yml"
+#    prefix:   /transporte/solicitudes   
 
-personalexterno_index:
-        resource: "@TransporteBundle/Resources/config/routing/personalexterno.yml"
-        prefix:   /transporte/personalexterno
+#personalexterno_index:
+#        resource: "@TransporteBundle/Resources/config/routing/personalexterno.yml"
+#        prefix:   /transporte/personalexterno
 
-TransporteBundle_asignaciones:
-        resource: "@TransporteBundle/Resources/config/routing/asignaciones.yml"
-        prefix:   /transporte/asignaciones
-        
+#TransporteBundle_asignaciones:
+#        resource: "@TransporteBundle/Resources/config/routing/asignaciones.yml"
+#        prefix:   /transporte/asignaciones
+
 
 cumpleanios:
     resource: "@CumpleaniosBundle/Resources/config/routing.yml"

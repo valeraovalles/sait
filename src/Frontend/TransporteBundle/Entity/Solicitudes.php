@@ -41,14 +41,12 @@ class Solicitudes
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="asistentes", type="string", length=255)
      */
     private $asistentes;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="fecha_solicitud", type="date")
      */
     private $fechaSolicitud;
@@ -98,9 +96,9 @@ class Solicitudes
     /**
      * @var string
      *
-     * @ORM\Column(name="justificacion_rechazo", type="string", length=255, nullable=true)
+     * @ORM\Column(name="justificacion", type="string", length=255, nullable=true)
      */
-    private $justificacionRechazo;
+    private $justificacion;
 
     /**
      * @var string
@@ -331,50 +329,29 @@ class Solicitudes
         return $this->datosInteresRazon;
     }
 
+    
+
     /**
-     * Set tipoSolicitud
+     * Set justificacion
      *
-     * @param string $tipoSolicitud
+     * @param string $justificacion
      * @return Solicitudes
      */
-    public function setTipoSolicitud($tipoSolicitud)
+    public function setJustificacion($justificacion)
     {
-        $this->tipoSolicitud = $tipoSolicitud;
+        $this->justificacion = $justificacion;
     
         return $this;
     }
 
     /**
-     * Get tipoSolicitud
+     * Get justificacion
      *
      * @return string 
      */
-    public function getTipoSolicitud()
+    public function getJustificacion()
     {
-        return $this->tipoSolicitud;
-    }
-
-    /**
-     * Set justificacionRechazo
-     *
-     * @param string $justificacionRechazo
-     * @return Solicitudes
-     */
-    public function setJustificacionRechazo($justificacionRechazo)
-    {
-        $this->justificacionRechazo = $justificacionRechazo;
-    
-        return $this;
-    }
-
-    /**
-     * Get justificacionRechazo
-     *
-     * @return string 
-     */
-    public function getJustificacionRechazo()
-    {
-        return $this->justificacionRechazo;
+        return $this->justificacion;
     }
 
     /**

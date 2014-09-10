@@ -9,6 +9,7 @@ use Administracion\UsuarioBundle\Entity\Perfil;
 
 class SolicitudesType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -16,7 +17,7 @@ class SolicitudesType extends AbstractType
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd',
                 ))                                               
-            ->add('asistentes','hidden')  
+            ->add('asistentes','textarea')  
             ->add('fechaSalida', 'date',array(
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd',
@@ -26,7 +27,7 @@ class SolicitudesType extends AbstractType
             ->add('direccionHasta','textarea')
             ->add('descripcionEquipos','textarea')
             ->add('datosInteresRazon','textarea')             
-            ->add('justificacionRechazo','textarea',array('required'  => false));
+            ->add('justificacion','textarea',array('required'  => false));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

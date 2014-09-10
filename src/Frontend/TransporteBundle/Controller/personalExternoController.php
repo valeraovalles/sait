@@ -5,8 +5,8 @@ namespace Frontend\TransporteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     
-use Frontend\TransporteBundle\Entity\personalExterno;
 use Frontend\TransporteBundle\Form\personalExternoType;
+use Frontend\TransporteBundle\Entity\personalExterno;
 
 /**
  * personalExterno controller.
@@ -22,7 +22,6 @@ class personalExternoController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $entities = $em->getRepository('TransporteBundle:personalExterno')->findAll();
 
         return $this->render('TransporteBundle:personalExterno:index.html.twig', array(

@@ -1,34 +1,29 @@
 {% extends '::transporte.html.twig' %}
+ 
+{% block title %}Lista de Personal Externo{% endblock %}
 
-{% block title %}Transporte{% endblock %}
+{% block titulo %}
+    LISTA DE PERSONAL EXTERNO
+{% endblock %}
 
-{% block titulobanner %}
-    TRANSPORTE
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">LISTA DE PERSONAL EXTERNO</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
     
-    <div class="titulo">TRANSPORTE -  PERSONAL EXTERNO</div>
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-    <table class="records_list" id="tablalistax">
+    <table id="tabladatatable">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Cedula</th>
-                <th>Nombre/Apellido</th>
-                <th>Telefono</th>
-                <th>Acción</th>
+                <th>Nombre y Apellido</th>
+                <th>Tel&eacute;fono</th>
+                <th>Acci&oacute;n</th>
             </tr>
         </thead>
         <tbody>
@@ -39,34 +34,23 @@
                 <td>{{ entity.nombre|upper }}</td>
                 <td>{{ entity.telefono }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('personalexterno_show', { 'id': entity.id }) }}" title="Mostrar">
-                            <i class="icon-search"></i>
-                        </a>
-                        <a href="{{ path('personalexterno_edit', { 'id': entity.id }) }}" title="Editar">
-                            <i class="icon-edit"></i>
-                        </a>
-                    </li>
-                </ul>    
-           
+                    <a href="{{ path('personalexterno_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
+                    <a href="{{ path('personalexterno_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></a>
+                                     
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <br><br><br>
+    <a class="btn btn-default" href="{{ path('personalexterno_new') }}">Nuevo Personal</a>
     <br><br>
-    <div align="center">
-        <a href="{{ path('personalexterno_new') }}">               
-            <button class="btn btn-primary" type="button">Nuevo Personal</button>
-        </a>
-    <br>
     <script type="text/javascript">
     $(document).ready(function(){
-       $('#tablalistax').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+       $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
             "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-            "aaSorting": [[5,'asc'],[3,'desc'],[4,'desc']],
+            "aaSorting": [[0,'asc'],[1,'asc']],
         } );
     })
-    </script>
+</script>
     {% endblock %}
