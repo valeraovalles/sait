@@ -13,21 +13,7 @@
   <li class="active">CREAR SOLICITUD</li>
 </ol>
 {% endblock %}
-{% block stylesheets %}
- {{ parent() }} 
- <style type="text/css">
-     /* select with CSS avatar icons */
-    option.avatar {
-      background-repeat: no-repeat !important;
-      padding-left: 20px;
-    }
-    .avatar .ui-icon-closethick {
-      background-position: left top;
-      background: url("{{ asset("images/images/ui-icons_2e83ff_256x240.png") }}");
-    }
- </style>
-   
-{% endblock %}
+
 {% block body -%}
   {{ parent() }}
 
@@ -42,7 +28,7 @@
         <div class="text-error">{{ form_errors(form.fechaSalida) }}</div>
         <div class="labelform">Fecha Salida:</div>
         <div class="widgetform">                
-          {{ form_widget(form.fechaSalida, {'attr':{'class':'fecha'}})}}
+          {{ form_widget(form.fechaSalida, { 'attr': { 'class': 'fecha', 'readOnly': 0 } }) }}
         </div>
       </div>        
       <div class="contenedorform">
@@ -59,17 +45,22 @@
               </select>
           </div>            
       </div>    
-      <div class="contenedorform">
-        <div class="text-error">{{ form_errors(form.asistentes) }}</div>   
-        <div class="labelform">Personal a Trasladar:</div>    
-        <div class="widgetform" id="lista">                                                
-          <input type="text" id="buscar" placeholder="Coloque aqui la cédula o nombre a buscar" title="Escriba los nombres para listar. Recuerde diferenciar  minúsculas de mayúsculas" style="width:80%;height:50px;" autocomplete=off id="cpi" onkeyup="ajax('/sait/web/transporte.php/ajax/muestrapersonal','contenido',document.getElementById('cpi').value)">
+      <div class="contenedorform">                       
+        <div class="labelform">Personal a Trasladar:</div>
+        <div class="widgetform" id="lista">
+          <input type="text" id="buscar" placeholder="Coloque aqui la cédula o nombre a buscar" title="Escriba los nombres para listar. Recuerde diferenciar  minúsculas de mayúsculas" style="width:400px;height:50px;" autocomplete=off>
         </div>
-        <div class="contenedorform">
-          <div class="labelform"></div>    
-          <div class="widgetform">                                                
-            {{ form_widget(form.asistentes, {'attr':{'style':'width:80%;height:200px;'}}) }}
-          </div>
+      </div>
+      <div class="contenedorform">                       
+        <div class="labelform"></div>
+        <div class="widgetform"> 
+                    
+                  <div class="widgetform" id="ajaxlistado" 'attr': {'style': 'width:350%;height:200px;' title="Haga click para eliminar de la lista"  >
+                  </div>
+
+                  {{ form_widget(form.asistentes,{'attr':{'style':'display:none'}}) }}  
+                  <div id="tags"></div>
+            </div>
         </div>           
         <div class="contenedorform">
             <div class="text-error">{{ form_errors(form.direccionDesde) }}</div>
@@ -92,7 +83,6 @@
             <div class="widgetform">{{ form_widget(form.datosInteresRazon, {'attr':{'style':'width:80%;height:100px;'}}) }}</div>
         </div>  
       </div>
-    </div>
         <br>
             <button class="btn btn-primary" type="submit">CREAR</button> |
         <a class="btn btn-default" href="{{ path('missolicitudes') }}">IR AL LISTADO</a>
@@ -100,7 +90,7 @@
     </form>
 
 
-<script>
+<script type="text/javascript">
   $(
     function(){
       $( ".fecha" ).datepicker({
@@ -114,8 +104,105 @@
     {
       'width':'40px',
     });
-  </script>
-  
 
-  
+   //ajax para buscar usuarios
+    $(document).ready(function () 
+    {
+      $('#buscar').keyup(function()
+      {
+        if($('#buscar').val()=='')
+        {
+          $('#ajaxlistado').html('');
+        }else
+        {
+          if ($('#tipop').val()=="I")
+          {
+            var ruta= "{{ path('solicitudes_ajaxusuarios',{'val':'val'}) }}";
+            ruta = ruta.replace("val",  $('#buscar').val());
+          }else
+          {
+            var ruta= "{{ path('solicitudes_ajaxexternos',{'val':'val'}) }}";
+            ruta = ruta.replace("val",  $('#buscar').val());
+          }
+          $.ajax
+          (
+            {
+              url: ruta,
+              type : 'POST',
+              beforeSend: function()
+              {
+                $("#loading").show();
+              },
+              complete: function()
+              {
+                $("#loading").hide();
+              },
+              success: function(data)
+              {
+                $('#ajaxlistado').html(data);
+              }
+            }
+          );    
+        }
+      });
+    });
+
+    
+
+    //armar lista de usuarios seleccionados
+    function armarlista(valor){
+
+        listaoculta = $('#form_solicitud_asistentes').val()
+
+        //valido que no se agregue dos veces el mismo usuario
+        listaarray=listaoculta.split(",");
+        if(jQuery.inArray(valor, listaarray)!=-1){return;}
+
+        if(listaoculta=='')
+            listaoculta=valor
+        else
+            listaoculta=listaoculta+','+valor
+
+        $('#form_solicitud_asistentes').val(listaoculta)
+        $('#ajaxlistausuario').hide()
+        $('#buscar').val('')
+
+        tags()
+    }
+
+    //agrego las etiquetas
+    function tags(){
+
+        $('#tags').html('');
+        listaoculta = $('#form_solicitud_asistentes').val()
+
+        //transformo la lista en un array
+        listaarray=listaoculta.split(",");tag="";
+        //alert(listaarray);
+        for(var i=0;i<listaarray.length;i++){
+            datos=listaarray[i]
+            tag='<div style="cursor:pointer;" class="tags" id="'+i+'" onclick="eliminartag(\''+i+'\',\''+datos+'\')">'+datos+'</div>';
+            $('#tags').append(tag)
+        }
+    }
+
+    //eliminar usuarios
+    function eliminartag(iddiv,datos){
+        $('#'+iddiv).remove()
+        $('#'+iddiv).remove()
+
+        listaoculta = $('#form_solicitud_asistentes').val()
+        listaoculta=listaoculta.replace(","+datos,"")
+        listaoculta=listaoculta.replace(datos+",","")
+        listaoculta=listaoculta.replace(datos,"")
+        $('#form_solicitud_asistentes').val(listaoculta)
+    }
+
+    //
+    if($('#form_solicitud_asistentes').val()!=''){
+        tags()
+    }
+
+
+</script> 
 {% endblock %}

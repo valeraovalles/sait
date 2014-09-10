@@ -56,38 +56,60 @@ class SolicitudesController extends Controller
      */
     public function createAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
 
-
-               $datos=$request->request->all();
-        $datos=$datos['form_solicitud'];
-print_r($datos);
-
-die;
-        //public $listaAsi=""; 
         $entity  = new Solicitudes();
         $form = $this->createForm(new SolicitudesType(), $entity);
-        $form->bind($request);
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-            $usuario = $em->getRepository('UsuarioBundle:User')->find($idusuario);
-            $entity->setIdSolicitante($usuario);
-            $str = \date("Y-m-d");
-            $fechaactual = \DateTime::createFromFormat('Y-m-d', $str);                        
-            $entity->setFechaSolicitud($fechaactual);
-            $entity->setEstatus("N");        
-            $em->persist($entity);
-            $em->flush();
-            $this->get('session')->getFlashBag()->add('notice', 'EL REGISTRO FUE CREADO CON EXITO');
-            
+        $form->bind($request);     
 
+        if ($form->isValid()) {
+
+        // OBTENGO LOS DATOS DEL FORMULARIO AJAX
+        $datos=$request->request->all();
+        $datos=$datos['form_solicitud'];
+
+        $datos=explode("@", $datos['asistentes']);
+        
+        $codigos = NULL;
+        foreach ($datos as $key) {
+            if ( stripos($key,'-') !== FALSE ) 
+            {   
+                if($codigos == NULL)
+                {
+                    $codigos = $key;
+                    echo $codigos."<br>";
+                }else
+                {
+                    $codigos = $codigos.",".$key;
+                    echo $codigos."<br>";
+                }
+            }            
+        }
+
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuario = $em->getRepository('UsuarioBundle:User')->find($idusuario);
+        $entity->setIdSolicitante($usuario);
+
+        $str = \date("Y-m-d");
+        $fechaactual = \DateTime::createFromFormat('Y-m-d', $str);                        
+        $entity->setFechaSolicitud($fechaactual);
+
+        $entity->setEstatus("N"); 
+
+        $entity->setAsistentes($codigos);
+
+        $em->persist($entity);
+        $em->flush();
+        $this->get('session')->getFlashBag()->add('notice', 'EL REGISTRO FUE CREADO CON EXITO');
+            
            //CORREO
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
 
             
             $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
             ->setSubject('Solicitud de transporte')       // we configure the title
-            ->setTo(array($usuario->getUsername().'@telesurtv.net', 'aplicaciones@telesurtv.net'))
+            ->setTo(array('lpadilla@telesurtv.net'))
+            //->setTo(array($usuario->getUsername().'@telesurtv.net', 'aplicaciones@telesurtv.net'))
             ->setFrom('app_transporte@telesurtv.net')    // we configure the recipient
             ->setBody( $this->renderView(
                         'TransporteBundle:Correo:solicitud_transporte.html.twig',
@@ -98,20 +120,9 @@ die;
                     ), 
             'text/html');
 
-
-             /*//PARA VER LA VISTA EN LA PAG
-             return $this->render('TransporteBundle:Correo:solicitud_transporte.html.twig', array(
-                            'solicitud' => $entity,
-                            'perfil' => $perfil, 
-                            'status' => 'N',                           
-                        ));
-            */
-             $this->get('mailer')->send($message); 
-            //FIN CORREO
-
             return $this->redirect($this->generateUrl('showmissolicitudes', array('id' => $entity->getId())));
         }else{            
-            $this->get('session')->getFlashBag()->add('alert', 'ERROR EN EL FORMULARIO PARA CREAR LA SOLICITUD');
+            $this->get('session')->getFlashBag()->add('alert', 'ERROR EN EL FORMULARIO AL CREAR SOLICITUD');
         }
         return $this->render('TransporteBundle:Solicitudes:new.html.twig', array(
             'entity' => $entity,
@@ -155,6 +166,23 @@ die;
             throw $this->createNotFoundException('La solicitud no existe.');
         }
 
+        $asistentes=explode(",", $entity->getAsistentes());
+        $i = 0;
+        foreach ($asistentes as $key) {
+            $usuarios[$i] = explode("-", $key);
+            if($usuarios[$i][1] == 'I')
+            {
+                $user = $em->getRepository('UsuarioBundle:Perfil')->findByUser($usuarios[$i][0]);
+                $users[$i] = $user[0];
+                $campo[$i]= $users[$i]->getPrimerNombre()." ".$users[$i]->getPrimerApellido()." C.I: ".$users[$i]->getCedula();
+            }else
+            {
+                $user = $em->getRepository('TransporteBundle:PersonalExterno')->find($usuarios[$i][0]);
+                $campo[$i]= $users[$i]->getNombre()." C.I: ".$users[$i]->getCedula();
+            }
+            $i++;
+        }
+
         $form = $this->createFormBuilder()
             ->add('estatus','choice',array( 'choices'   =>array( 'S' => 'Seleccione..', 'AP'=>'Aprobar', 'R'=>'Rechazar' ) ) )
             ->getForm();
@@ -163,7 +191,8 @@ die;
 
         return $this->render('TransporteBundle:Solicitudes:show.html.twig', array(
             'entity'      => $entity,   
-            'form'        =>$form->createView(),     
+            'form'        => $form->createView(),  
+            'campo'       => $campo,   
             'delete_form' => $deleteForm->createView(),        ));
     }
 
@@ -194,10 +223,29 @@ die;
             throw $this->createNotFoundException('Unable to find Solicitudes entity.');
         }
 
+        $asistentes=explode(",", $entity->getAsistentes());
+        $i = 0;
+        foreach ($asistentes as $key) {
+            $usuarios[$i] = explode("-", $key);
+            if($usuarios[$i][1] == 'I')
+            {
+                $user = $em->getRepository('UsuarioBundle:Perfil')->findByUser($usuarios[$i][0]);
+                $users[$i] = $user[0];
+                $campo[$i]= $users[$i]->getPrimerNombre()." ".$users[$i]->getPrimerApellido()." C.I: ".$users[$i]->getCedula();
+            }else
+            {
+                $user = $em->getRepository('TransporteBundle:PersonalExterno')->find($usuarios[$i][0]);
+                $campo[$i]= $users[$i]->getNombre()." C.I: ".$users[$i]->getCedula();
+            }
+            $i++;
+        }
+
+
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('TransporteBundle:Solicitudes:missolicitudesshow.html.twig', array(
-            'entity'      => $entity,            
+            'entity'      => $entity,    
+            'campo'       => $campo,        
             'delete_form' => $deleteForm->createView(),        ));
     }
 
@@ -207,7 +255,6 @@ die;
      */
     public function editAction($id)
     {
-
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TransporteBundle:Solicitudes')->find($id);
@@ -217,7 +264,9 @@ die;
         }
 
         $editForm = $this->createForm(new SolicitudesType(), $entity);
+        die;
         $deleteForm = $this->createDeleteForm($id);
+
         if($this->get('security.context')->isGranted('ROLE_TRANSPORTE'))
         {
             return $this->render('TransporteBundle:Solicitudes:missolicitudesedit.html.twig', array(
@@ -400,17 +449,24 @@ die;
     }
 
     public function ajaxListaUsuariosAction($val)
-    {
+    {                
         $val=strtoupper($val);
+
+        //echo $val;
+
         $em = $this->getDoctrine()->getManager();
-        $dql = "select u from UsuarioBundle:Perfil u where u.primerNombre like :nombre or u.primerApellido like :ape or u.cedula like :ced ";
+        $dql = "select u from UsuarioBundle:Perfil u where u.primerNombre like :nombre or u.primerApellido like :ape or u.cedula like :ced";  
         $query = $em->createQuery($dql);
         $query->setParameter('nombre','%'.$val.'%');
         $query->setParameter('ape','%'.$val.'%');
         $query->setParameter('ced','%'.$val.'%');
         $query->setMaxResults(10);
-        $usuarios = $query->getResult();             
-        return $this->render('TransporteBundle:Solicitudes:ajaxlistausuarios.html.twig',array('usuarios'=>$usuarios, 'tipo'=>'I'));
+        $usuarios = $query->getResult(); 
+        $cont = 0;
+        foreach ($usuarios as $usu) {
+            $id = $usu->getId()."<br>";
+        }
+        return $this->render('TransporteBundle:Solicitudes:ajaxlistausuarios.html.twig',array('usuarios'=>$usuarios, 'tipo'=>'I', 'id'=>$id));
 
     }
     public function ajaxListaExternosAction($val)

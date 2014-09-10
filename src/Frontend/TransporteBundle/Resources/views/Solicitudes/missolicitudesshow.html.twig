@@ -18,7 +18,11 @@
     <div class="formShow"> 
         <div class="contenedorform">
             <div class="labelform">Asistentes</div>
-            <div class="widgetform">{{ entity.asistentes }}</div>
+            <div class="widgetform">
+                {% for asistente in campo %}
+                    {{ asistente }},
+                {% endfor %}
+            </div>          
         </div>
         <div class="contenedorform">
             <div class="labelform">Fecha de Solicitud</div>
@@ -65,7 +69,5 @@
     </div> 
     <br>
     <a class="btn btn-default" href="{{ path('missolicitudes') }}">IR A LA LISTA</a>
-    {% if entity.estatus=="N" %}
-    	<a class="btn btn-default" href="{{ path('solicitudes_edit', { 'id': entity.id }) }}">IR A EDITAR</a><br><br>
-    {% endif %}<br><br>
+    <br><br>
 {% endblock %}

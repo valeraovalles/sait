@@ -41,14 +41,12 @@ class Solicitudes
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="asistentes", type="string", length=255)
      */
     private $asistentes;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="fecha_solicitud", type="date")
      */
     private $fechaSolicitud;
@@ -331,28 +329,7 @@ class Solicitudes
         return $this->datosInteresRazon;
     }
 
-    /**
-     * Set tipoSolicitud
-     *
-     * @param string $tipoSolicitud
-     * @return Solicitudes
-     */
-    public function setTipoSolicitud($tipoSolicitud)
-    {
-        $this->tipoSolicitud = $tipoSolicitud;
     
-        return $this;
-    }
-
-    /**
-     * Get tipoSolicitud
-     *
-     * @return string 
-     */
-    public function getTipoSolicitud()
-    {
-        return $this->tipoSolicitud;
-    }
 
     /**
      * Set justificacion

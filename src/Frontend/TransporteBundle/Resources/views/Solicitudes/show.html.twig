@@ -20,7 +20,11 @@
     <div class="formShow"> 
         <div class="contenedorform">
             <div class="labelform">Asistentes</div>
-            <div class="widgetform">{{ entity.asistentes }}</div>
+            <div class="widgetform">
+                {% for asistente in campo %}
+                    {{ asistente }},
+                {% endfor %}
+            </div>          
         </div>
         <div class="contenedorform">
             <div class="labelform">Fecha de Solicitud</div>
