@@ -1,17 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
+    {{ parent() }}
     <link href="{{ asset('bundles/proyecto/css/proyecto.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('bundles/proyecto/css/tablaactividad.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('bundles/proyecto/css/general.css') }}" rel="stylesheet" type="text/css" />
-    
-    
-    <link href="{{ asset('libs/menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/datatable.css') }}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('libs/bootstrap3/css/bootstrap-theme.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('libs/bootstrap3/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('libs/datepiker/css/redmond/jquery-ui-1.10.4.custom.css') }}">
-    <link rel="stylesheet" href="{{ asset('libs/datepiker/css/redmond/jquery-ui-1.10.4.custom.min.css') }}">
 {% endblock %}
 
 
