@@ -30,7 +30,7 @@
     <body>
         <div align='center'>
             <div class="contenedorprincipal">
-            <div id='banner'><img width="100%" src="{{ asset('images/banner_original.jpg') }}"></div>
+            {% block banner %}<div id='banner'><img width="100%" src="{{ asset('images/banner_original.jpg') }}"></div>{% endblock %}
                 {% block menu %}{% endblock %}
 
                 {% block body %}
