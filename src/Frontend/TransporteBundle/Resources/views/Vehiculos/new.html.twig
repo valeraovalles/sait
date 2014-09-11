@@ -17,32 +17,39 @@
 {% block body -%}
     {{ parent() }}
 
-    <form action="{{ path('transporte_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
+   {% if form_errors(form.tipo) or form_errors(form.placa) or form_errors(form.modelo) or form_errors(form.ano) or form_errors(form.color) or form_errors(form.estatus) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario</b><br><br></div>
+    </div>
+    {% endif %}
+
+
+    <form novalidate action="{{ path('transporte_create') }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}
 
         <div class="formShow">
             <br>
             <div class="contenedorform">
-                <div class="text-error">{{ form_errors(form.tipo) }}</div>
+            <div class="text-error">{{ form_errors(form.tipo) }}</div>
                 <div class="labelform">Tipo:</div>
                 <div class="widgetform">{{ form_widget(form.tipo) }}</div>
             </div>
             <div class="contenedorform">
-                <div class="text-error">{{ form_errors(form.placa) }}</div>
+            <div class="text-error">{{ form_errors(form.placa) }}</div>
                 <div class="labelform">Placa:</div>
                 <div class="widgetform">{{ form_widget(form.placa) }}</div>
             </div>        
             <div class="contenedorform">
-                <div class="text-error">{{ form_errors(form.modelo) }}</div>
+            <div class="text-error">{{ form_errors(form.modelo) }}</div>
                 <div class="labelform">Modelo:</div>
                 <div class="widgetform">{{ form_widget(form.modelo) }}</div>
             </div>        
             <div class="contenedorform">
-                <div class="text-error">{{ form_errors(form.ano) }}</div>
+            <div class="text-error">{{ form_errors(form.ano) }}</div>
                 <div class="labelform">Año:</div>
                 <div class="widgetform">{{ form_widget(form.ano) }}</div>
             </div>        
             <div class="contenedorform">
-                <div class="text-error">{{ form_errors(form.color) }}</div>
+            <div class="text-error">{{ form_errors(form.color) }}</div>
                 <div class="labelform">Color:</div>
                 <div class="widgetform">{{ form_widget(form.color) }}</div>
             </div>        
