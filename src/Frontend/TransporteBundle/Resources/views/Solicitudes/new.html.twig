@@ -181,21 +181,24 @@
         //alert(listaarray);
         for(var i=0;i<listaarray.length;i++){
             datos=listaarray[i]
-            tag='<div style="cursor:pointer;" class="tags" id="'+i+'" onclick="eliminartag(\''+i+'\',\''+datos+'\')">'+datos+'</div>';
+            tag='<div style="cursor:pointer;" class="tags" id="'+i+'" onclick="eliminartag(\''+i+'\',\''+datos+'\')">'+datos+ '<img src="{{ asset("images/mal.jpeg" ) }}" height="15px"></div>';
             $('#tags').append(tag)
         }
     }
 
     //eliminar usuarios
     function eliminartag(iddiv,datos){
-        $('#'+iddiv).remove()
-        $('#'+iddiv).remove()
+        var r = confirm("Desea eliminar?");
+        if (r == true) {
+            $('#'+iddiv).remove()
+            $('#'+iddiv).remove()
 
-        listaoculta = $('#form_solicitud_asistentes').val()
-        listaoculta=listaoculta.replace(","+datos,"")
-        listaoculta=listaoculta.replace(datos+",","")
-        listaoculta=listaoculta.replace(datos,"")
-        $('#form_solicitud_asistentes').val(listaoculta)
+          listaoculta = $('#form_solicitud_asistentes').val()
+          listaoculta=listaoculta.replace(","+datos,"")
+          listaoculta=listaoculta.replace(datos+",","")
+          listaoculta=listaoculta.replace(datos,"")
+          $('#form_solicitud_asistentes').val(listaoculta)
+        }        
     }
 
     //
