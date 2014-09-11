@@ -1,0 +1,249 @@
+/* 
+Document               : general
+Created on             : 18/01/2013, 04:39:14 PM
+Author                 : jhoan
+Description            :
+Purpose of the stylesheet follows.
+*/
+
+*{
+        font-size:14px;
+        font-family: verdana;
+}
+
+body{
+        background-color       :#1B0418;
+        margin             :0;
+        font-size              :12px;
+        color                  :black;
+}
+
+.contenedorprincipal{
+    background-color       :white;
+    width:                  90%;
+    max-width: 1280px;
+    -webkit-box-shadow: 0px 0px 105px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 105px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 105px 0px rgba(0,0,0,0.75);
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.pie{
+        background-color       :#1A2042;
+        /*background-color: maroon;*/
+        font-size              :12px;
+        padding                :3px;
+        color                  :white;
+        font-weight            :bold;
+        box-shadow			   : 0px 2px 0px 2px #999;
+}
+
+.ubicacion{
+        text-align: left;
+        font-weight: bold;
+        font-size: 10px;
+        margin-top: -15px;
+}
+
+.titulo{
+        padding-bottom: 15px;
+        font-weight: bold;
+        font-size: 18px;
+}
+
+.menubootstrap{
+        margin-top: -5px;
+}
+
+.menubootstrap li a{
+        font-size: 13px;
+}
+
+#tabladatatable{
+        width: 97%;
+}
+
+#tabladatatable td{
+        padding: 8px;
+        vertical-align: middle;
+}
+
+
+input[type='text']{
+        width                  :180px;
+}
+
+input[type='password']{
+        width                  :180px;
+}
+
+a{
+        color                  :#010341;
+        text-decoration        :none;
+}
+
+a                      :hover{
+        color                  :blue;
+        text-decoration        :underline;
+}
+
+/* LISTADO DE APLICACIONES */
+
+.col-img-apliinicio .row .col-md-4{
+        margin-bottom: 20px;
+}
+.col-img-apliinicio .row img{
+        height               :75px;
+}
+
+.infousuario div{
+        margin-bottom: 10px;
+}
+
+.infousuario *{
+                font-size: 12px;
+}
+/* FIN LISTADO DE APLICACIONES */
+
+/* FORMULARIOS */
+
+        .formShow{
+                border:1px solid gray ;
+                width: 70%;
+                padding: 20px;
+                margin-bottom: 10px;
+                border:5px outset;
+                background-color: #fafcfe;
+                border-bottom-color: lightskyblue;
+                border-right-color: lightskyblue;
+        }
+
+        .formShow select{
+                width: 200px;
+        }
+
+        .formShow .contenedorform input[type="text"]{
+                width: 200px;
+        }
+
+        .formShow .contenedorform input[type="url"]{
+                width: 200px;
+        }
+
+        .formShow .contenedorform input[type="email"]{
+                width: 200px;
+        }
+
+        .formShow textarea{
+                width: 200px;
+        }
+
+        .formShow .contenedorform{
+                margin-bottom:5px;
+                padding: 5px;
+                height: auto;
+                overflow: visible;
+
+        }
+
+        .formShow .labelform {
+                float                  :left;
+                width                  :40%;
+                text-align             :right;
+                font-weight            :bold;
+                padding: 4px;
+                padding-right: 10px;
+
+
+        }
+
+        .formShow .widgetform {
+                text-align: left;
+                overflow: auto;
+                text-align: justify;
+                padding: 4px;
+
+        }
+
+/* FIN FORMULARIOS */
+
+li{
+list-style             :none;
+}
+
+
+img{
+
+border                 :0;
+}
+
+input[type="text"]
+{
+width                  :220px;
+/* Sólo afecto a los campos de texto */
+}
+
+select
+{
+width                  :220px;
+/* Sólo afecto a los campos de texto */
+}
+
+textarea
+{
+width                  :220px;
+/* Sólo afecto a los campos de texto */
+}
+
+input[type="number"]
+{
+        width                  :150px;
+        padding-top: 100px;
+/* Sólo afecto a los campos de texto */
+}
+
+input[type="date"]
+{
+width                  :220px;
+/* Sólo afecto a los campos de texto */
+}
+
+input[type="email"]
+{
+width                  :220px;
+/* Sólo afecto a los campos de texto */
+}
+
+select option[selected ="selected"]
+{
+background-color       : #0fa1e0;
+/* Sólo afecto a los campos de texto */
+}
+
+select[multiple]
+{
+height                 :120px;
+/* Sólo afecto a los campos de texto */
+}
+
+#administracion_usuariobundle_usertype_rol label{
+        display: block;
+}
+
+#administracion_usuariobundle_usertype_rol input{
+        float: left;
+        text-align: left;
+        padding: 0px;
+        margin: 0px;
+}
+
+.errores{
+    text-align: left;
+    width: 800px;
+}
+
+
+

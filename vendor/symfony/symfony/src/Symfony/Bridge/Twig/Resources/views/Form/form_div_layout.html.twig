@@ -52,9 +52,9 @@
 {%- endblock choice_widget_expanded %}
 
 {% block choice_widget_collapsed -%}
-    {% if required and empty_value is none and not empty_value_in_choices and not multiple %}
+    {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
         {% set required = false %}
-    {% endif %}
+    {%- endif -%}
     <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
         {% if empty_value is not none -%}
             <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
@@ -299,7 +299,7 @@
 
 {% block widget_attributes -%}
     id="{{ id }}" name="{{ full_name }}"{% if read_only %} readonly="readonly"{% endif %}{% if disabled %} disabled="disabled"{% endif %}{% if required %} required="required"{% endif %}{% if max_length %} maxlength="{{ max_length }}"{% endif %}{% if pattern %} pattern="{{ pattern }}"{% endif %}
-    {% for attrname, attrvalue in attr %}{% if attrname in ['placeholder', 'title'] %}{{ attrname }}="{{ attrvalue|trans({}, translation_domain) }}" {% else %}{{ attrname }}="{{ attrvalue }}" {% endif %}{% endfor %}
+    {%- for attrname, attrvalue in attr %} {% if attrname in ['placeholder', 'title'] %}{{ attrname }}="{{ attrvalue|trans({}, translation_domain) }}"{% else %}{{ attrname }}="{{ attrvalue }}"{% endif %}{% endfor %}
 {%- endblock widget_attributes %}
 
 {% block widget_container_attributes -%}
