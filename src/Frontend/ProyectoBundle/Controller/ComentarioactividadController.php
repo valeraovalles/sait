@@ -24,7 +24,7 @@ class ComentarioactividadController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $act = $em->getRepository('ProyectoBundle:Actividad')->find($idactividad);
-        $entities = $em->getRepository('ProyectoBundle:Comentarioactividad')->findByActividad($idactividad);
+        $entities = $em->getRepository('ProyectoBundle:Comentarioactividad')->findByActividad($idactividad,array('id'=>'DESC'));
 
         return $this->render('ProyectoBundle:Comentarioactividad:index.html.twig', array(
             'entities' => $entities,
