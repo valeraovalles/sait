@@ -69,61 +69,65 @@ class SolicitudesController extends Controller
             $datos=$request->request->all();
             $datos=$datos['form_solicitud'];
 
-            $datos=explode("@", $datos['asistentes']);
-            
-            $codigos = NULL;
-            foreach ($datos as $key) 
+            if(!empty($datos['asistentes']))
             {
-                if ( stripos($key,'-') !== FALSE ) 
-                {   
-                    if($codigos == NULL)
-                    {
-                        $codigos = $key;
-                        echo $codigos."<br>";
-                    }else
-                    {
-                        $codigos = $codigos.",".$key;
-                        echo $codigos."<br>";
-                    }
-                }            
-            }
+                $datos=explode("@", $datos['asistentes']);
+                $codigos = NULL;
+                foreach ($datos as $key) 
+                {
+                    if ( stripos($key,'-') !== FALSE ) 
+                    {   
+                        if($codigos == NULL)
+                        {
+                            $codigos = $key;
+                        }else
+                        {
+                            $codigos = $codigos.",".$key;
+                        }
+                    }            
+                }
 
-            $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-            $usuario = $em->getRepository('UsuarioBundle:User')->find($idusuario);
-            $entity->setIdSolicitante($usuario);
+                $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+                $usuario = $em->getRepository('UsuarioBundle:User')->find($idusuario);
+                $entity->setIdSolicitante($usuario);
 
-            $str = \date("Y-m-d");
-            $fechaactual = \DateTime::createFromFormat('Y-m-d', $str);                        
-            $entity->setFechaSolicitud($fechaactual);
+                $str = \date("Y-m-d");
+                $fechaactual = \DateTime::createFromFormat('Y-m-d', $str);                        
+                $entity->setFechaSolicitud($fechaactual);
 
-            $entity->setEstatus("N"); 
+                $entity->setEstatus("N"); 
 
-            $entity->setAsistentes($codigos);
+                $entity->setAsistentes($codigos);
 
-            $em->persist($entity);
-            $em->flush();
-            $this->get('session')->getFlashBag()->add('notice', 'EL REGISTRO FUE CREADO CON EXITO');
-        
-            //CORREO
-            $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-            $usuario = $em->getRepository('UsuarioBundle:User')->find($idusuario);
-        
-            $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
-            ->setSubject('Solicitud de transporte')
-            ->setTo(array($usuario->getUsername().'@telesurtv.net', 'transporte@telesurtv.net'))
-            ->setFrom('app_transporte@telesurtv.net')    // we configure the recipient
-            ->setBody( $this->renderView(
-                    'TransporteBundle:Correo:solicitud_transporte.html.twig',
-                    array('perfil' => $perfil,
-                        'solicitud' => $entity,
-                        'status' => $estatus,
-                    )
-                ), 
-            'text/html');
-             $this->get('mailer')->send($message); 
-            //FIN CORREO
+                $em->persist($entity);
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('notice', 'EL REGISTRO FUE CREADO CON EXITO');
+                
+                //CORREO
+                $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+                $usuario = $em->getRepository('UsuarioBundle:User')->find($idusuario);
             
-            return $this->redirect($this->generateUrl('showmissolicitudes', array('id' => $entity->getId())));
+                $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
+                ->setSubject('Solicitud de transporte')
+                ->setTo(array($usuario->getUsername().'@telesurtv.net', 'transporte@telesurtv.net'))
+                ->setFrom('app_transporte@telesurtv.net')    // we configure the recipient
+                ->setBody( $this->renderView(
+                        'TransporteBundle:Correo:solicitud_transporte.html.twig',
+                        array('perfil' => $perfil,
+                            'solicitud' => $entity,
+                            'status' => $estatus,
+                        )
+                    ), 
+                'text/html');
+                 $this->get('mailer')->send($message); 
+                //FIN CORREO
+                
+                return $this->redirect($this->generateUrl('showmissolicitudes', array('id' => $entity->getId())));
+            }else
+            {
+                $this->get('session')->getFlashBag()->add('alert', 'DEBE SELECCIONAR COMO MÍNIMO UN ASISTENTE');
+ 
+            }                
         }else
         {            
             $this->get('session')->getFlashBag()->add('alert', 'ERROR EN EL FORMULARIO AL CREAR SOLICITUD');
