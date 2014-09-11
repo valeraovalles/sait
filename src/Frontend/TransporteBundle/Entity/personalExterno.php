@@ -26,18 +26,21 @@ class personalExterno
     /**
      * @var string
      * @ORM\Column(name="cedula", type="string", length=20, nullable=false)
+     * @Assert\NotBlank()
      */
     private $cedula;
 
     /**
      * @var string
      * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
      */
     private $nombre;
 
     /**
      * @var string
      * @ORM\Column(name="telefono", type="string", length=50, nullable=true)
+     * @Assert\NotBlank()
      */
     private $telefono;
 
