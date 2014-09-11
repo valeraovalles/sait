@@ -16,8 +16,6 @@ use Administracion\UsuarioBundle\Resources\Misclases\Funcion;
  */
 class ActividadController extends Controller
 {
-
-
     //se llama desde el index de la actividad
     public function estatustarea($idtarea){
         $estatus=1;
@@ -32,11 +30,12 @@ class ActividadController extends Controller
         
         $nuevo=false;$proceso=false;$revision=false;$culminado=false;$dependencia=false;
         foreach ($act as $a) {
-            if($a->getUbicacion()==1)$nuevo=true;  
-            if($a->getUbicacion()==2)$proceso=true;
-            if($a->getUbicacion()==3)$revision=true;
-            if($a->getUbicacion()==4)$culminado=true;
-            if($a->getUbicacion()==5)$dependencia=true;
+            
+        if($a->getUbicacion()==1)$nuevo=true;  
+            else if($a->getUbicacion()==2)$proceso=true;
+            else if($a->getUbicacion()==3)$revision=true;
+            else if($a->getUbicacion()==4)$culminado=true;
+            else if($a->getUbicacion()==5)$dependencia=true;
         }
         
         //si hay en proceso
@@ -44,8 +43,8 @@ class ActividadController extends Controller
         //si estan nuevos pero hay cerrados
         else if($proceso==false and $revision==false and $dependencia==false and $nuevo==true and $culminado==true)$estatus=2;
         //si solo hay cerrados
-        else if($culminado=true and $nuevo==false and $proceso==false and $revision==false and $dependencia==false)$estatus=3;
-
+        else if($culminado==true and $nuevo==false and $proceso==false and $revision==false and $dependencia==false)$estatus=3;
+        
         //actualizo campos en ticket
         $query = $em->createQuery('update ProyectoBundle:Tarea x set x.estatus= :estatus WHERE x.id = :idtarea');
         $query->setParameter('estatus', $estatus);
