@@ -1,0 +1,75 @@
+*{
+	font-size: 9px;
+}
+
+body{
+		background: url("/sait/web/images/fondoneto.jpg");
+		background-repeat:no-repeat;
+}
+
+
+.tablaprincipal{
+	width: 100%;
+	vertical-align: top;
+	border: 1px solid gray;
+	font-size: 9px;
+
+}
+
+.tablaprincipal td{
+	margin: 0;
+}
+
+.tablaprincipal th{
+
+}
+
+.imagen{
+	width: 15%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.titulo{
+	text-align: left;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.tableencabezado{
+	width: 100%;
+	font-size: 9px;
+
+}
+
+
+.tableencabezado td{
+	padding: 5px;
+}
+
+.tablaprincipal th{
+	font-weight: bold;
+	text-align: right;
+	padding: 5px;
+}
+
+
+.tablasecundaria{
+	width: 100%;
+	vertical-align: top;
+	margin-top: 10px;
+	border: 1px solid gray;
+	font-size: 9px;
+}
+
+.tablasecundaria th{
+	font-weight: bold;
+	text-align: center;
+	padding: 5px;
+	border: 1px solid gray;
+}
+
+.tablasecundaria td{
+	padding: 5px;
+	border: 1px solid gray;
+}

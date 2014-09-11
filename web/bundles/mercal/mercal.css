@@ -1,0 +1,18 @@
+#numeracion .numero{
+	padding-top: 10px;
+	font-size: 180px;
+}
+
+#numeracion .nombre {
+	font-size: 40px;
+}
+
+#numeracion .cedula {
+	font-size: 30px;
+	padding-bottom: 20px;
+}
+
+.titulojornada{
+	font-size: 50px;
+
+}

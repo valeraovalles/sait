@@ -1,0 +1,33 @@
+#frontend_proyectobundle_proyecto_responsable label{
+	display: block;
+}
+
+#frontend_proyectobundle_proyecto_responsable input{
+	float: left;
+	text-align: left;
+	padding: 0px;
+	margin: 0px;
+}
+
+#frontend_proyectobundle_actividad_responsable label{
+	display: block;
+}
+
+#frontend_proyectobundle_actividad_responsable input{
+	float: left;
+	text-align: left;
+	padding: 0px;
+	margin: 0px;
+}
+
+#frontend_proyectobundle_proyecto_nivelorganizacional label{
+	display: block;
+}
+
+#frontend_proyectobundle_proyecto_nivelorganizacional input{
+	float: left;
+	text-align: left;
+	padding: 0px;
+	margin: 0px;
+}
+
