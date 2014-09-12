@@ -67,8 +67,7 @@
                 <tr>
                     <th>Hasta:</th>
                     <td>{{ solicitud.direccionHasta }}</td>
-                </tr>
-                
+                </tr>                
                 <tr>
                     <th>Estatus:</th>
                     {% if status == 'N' %}
@@ -79,12 +78,16 @@
                         <td>Rechazada</td>
                     {% endif %}
                 </tr>
+                {% if justificacion != NULL %}
+                    <tr>
+                        <th>Justificaci&oacute;n:</th>
+                        <td>{{ justificacion }}</td>
+                    </tr>
+                {% endif %}
 			</table>
 		</div>
         <p align="center">
             <i><b>NOTA:</b> Para una mayor información consulte el módulo de Transporte del Sistema de Aplicaciones Internas.</i>
         </p>
-
-
 	</body>
 </html>

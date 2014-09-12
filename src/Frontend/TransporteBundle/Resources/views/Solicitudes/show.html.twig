@@ -73,7 +73,7 @@
             </div>
         {% endif %}        
         {% if entity.estatus=="N" %}
-            <form action="{{ path('solicitudes_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}<br>
+            <form novalidate action="{{ path('solicitudes_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }}>{{ form_widget(form._token) }}<br>
                 <div class="contenedorform">
                     <div class="labelform" style="width:35%;">Administrar:</div>
                     <div class="widgetform">{{ form_widget(form.estatus) }}</div>
