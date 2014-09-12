@@ -479,8 +479,6 @@ class Request
      */
     public function overrideGlobals()
     {
-        $this->server->set('QUERY_STRING', static::normalizeQueryString(http_build_query($this->query->all(), null, '&')));
-
         $_GET = $this->query->all();
         $_POST = $this->request->all();
         $_SERVER = $this->server->all();
@@ -1149,8 +1147,7 @@ class Request
 
         // as the host can come from the user (HTTP_HOST and depending on the configuration, SERVER_NAME too can come from the user)
         // check that it does not contain forbidden characters (see RFC 952 and RFC 2181)
-        // use preg_replace() instead of preg_match() to prevent DoS attacks with long host names
-        if ($host && '' !== preg_replace('/(?:^\[)?[a-zA-Z0-9-:\]_]+\.?/', '', $host)) {
+        if ($host && !preg_match('/^\[?(?:[a-zA-Z0-9-:\]_]+\.?)+$/', $host)) {
             throw new \UnexpectedValueException('Invalid Host "'.$host.'"');
         }
 
@@ -1357,16 +1354,6 @@ class Request
         if (null === $this->locale) {
             $this->setPhpDefaultLocale($locale);
         }
-    }
-
-    /**
-     * Get the default locale.
-     *
-     * @return string
-     */
-    public function getDefaultLocale()
-    {
-        return $this->defaultLocale;
     }
 
     /**

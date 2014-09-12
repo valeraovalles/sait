@@ -69,14 +69,14 @@ abstract class WebTestCase extends \PHPUnit_Framework_TestCase
         }
 
         $dir = static::getPhpUnitCliConfigArgument();
-        if (null === $dir &&
+        if ($dir === null &&
             (is_file(getcwd().DIRECTORY_SEPARATOR.'phpunit.xml') ||
             is_file(getcwd().DIRECTORY_SEPARATOR.'phpunit.xml.dist'))) {
             $dir = getcwd();
         }
 
         // Can't continue
-        if (null === $dir) {
+        if ($dir === null) {
             throw new \RuntimeException('Unable to guess the Kernel directory.');
         }
 

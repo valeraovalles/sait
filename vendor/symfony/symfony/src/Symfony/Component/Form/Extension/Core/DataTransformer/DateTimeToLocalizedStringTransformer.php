@@ -152,8 +152,6 @@ class DateTimeToLocalizedStringTransformer extends BaseDateTimeTransformer
      * Returns a preconfigured IntlDateFormatter instance
      *
      * @return \IntlDateFormatter
-     *
-     * @throws TransformationFailedException in case the date formatter can not be constructed.
      */
     protected function getIntlDateFormatter()
     {
@@ -164,12 +162,6 @@ class DateTimeToLocalizedStringTransformer extends BaseDateTimeTransformer
         $pattern = $this->pattern;
 
         $intlDateFormatter = new \IntlDateFormatter(\Locale::getDefault(), $dateFormat, $timeFormat, $timezone, $calendar, $pattern);
-
-        // new \intlDateFormatter may return null instead of false in case of failure, see https://bugs.php.net/bug.php?id=66323
-        if (!$intlDateFormatter) {
-            throw new TransformationFailedException(intl_get_error_message(), intl_get_error_code());
-        }
-
         $intlDateFormatter->setLenient(false);
 
         return $intlDateFormatter;

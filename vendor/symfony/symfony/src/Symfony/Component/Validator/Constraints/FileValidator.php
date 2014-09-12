@@ -96,17 +96,13 @@ class FileValidator extends ConstraintValidator
         $path = $value instanceof FileObject ? $value->getPathname() : (string) $value;
 
         if (!is_file($path)) {
-            $this->context->addViolation($constraint->notFoundMessage, array(
-                '{{ file }}' => $this->formatValue($path)
-            ));
+            $this->context->addViolation($constraint->notFoundMessage, array('{{ file }}' => $path));
 
             return;
         }
 
         if (!is_readable($path)) {
-            $this->context->addViolation($constraint->notReadableMessage, array(
-                '{{ file }}' => $this->formatValue($path)
-            ));
+            $this->context->addViolation($constraint->notReadableMessage, array('{{ file }}' => $path));
 
             return;
         }
@@ -130,10 +126,10 @@ class FileValidator extends ConstraintValidator
 
             if ($size > $limit) {
                 $this->context->addViolation($constraint->maxSizeMessage, array(
-                    '{{ size }}' => $size,
-                    '{{ limit }}' => $limit,
-                    '{{ suffix }}' => $suffix,
-                    '{{ file }}' => $this->formatValue($path),
+                    '{{ size }}'    => $size,
+                    '{{ limit }}'   => $limit,
+                    '{{ suffix }}'  => $suffix,
+                    '{{ file }}'    => $path,
                 ));
 
                 return;
@@ -165,9 +161,9 @@ class FileValidator extends ConstraintValidator
 
             if (false === $valid) {
                 $this->context->addViolation($constraint->mimeTypesMessage, array(
-                    '{{ type }}' => $this->formatValue($mime),
-                    '{{ types }}' => $this->formatValues($mimeTypes),
-                    '{{ file }}' => $this->formatValue($path),
+                    '{{ type }}'    => '"'.$mime.'"',
+                    '{{ types }}'   => '"'.implode('", "', $mimeTypes) .'"',
+                    '{{ file }}'    => $path,
                 ));
             }
         }

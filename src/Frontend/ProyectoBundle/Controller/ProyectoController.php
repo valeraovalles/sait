@@ -98,11 +98,6 @@ class ProyectoController extends Controller
             $responsable[]=$v->getId();
         }
         
-        $dql = "select x from ProyectoBundle:Actividad x join x.tarea t where x.ubicacion=1 and x.responsable in (:responsable) order by t.fechafinestimada ASC";
-        $query = $em->createQuery($dql);
-        $query->setParameter('responsable',$responsable);
-        $actpendiente = $query->getResult();
-        
         $dql = "select x from ProyectoBundle:Actividad x where x.ubicacion=2 and x.responsable in (:responsable)";
         $query = $em->createQuery($dql);
         $query->setParameter('responsable',$responsable);
@@ -151,7 +146,6 @@ class ProyectoController extends Controller
             'integrantes'=>$integrantes,
             'actividades'=>$actividades,
             'revision'=>$revision,
-            'actpendiente'=>$actpendiente
         ));
         
         

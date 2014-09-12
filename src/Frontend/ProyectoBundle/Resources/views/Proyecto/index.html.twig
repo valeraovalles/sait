@@ -3,7 +3,7 @@
 {% block title %}Proyecto{% endblock %}
 
 {% block titulo %}
-    <h3>LISTA DE PROYECTOS</h3>
+    <h1>LISTA DE PROYECTOS</h1>
     {{ perfil.nivelorganizacional.descripcion|upper }}
 {% endblock %}
 
@@ -20,7 +20,7 @@
 
     
 
-    <div class="panel-group" id="accordion" style="width: 80%;">
+    <div class="panel-group" id="accordion">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -108,58 +108,21 @@
           </table>
       </div>
     </div>
+    {% endif %}
   </div>
-  {% endif %}
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-          MIS ACTIVIDADES PENDIENTES
-        </a>
-      </h4>
-    </div>
-    <div id="collapse3" class="panel-collapse collapse">
-      <div class="panel-body">
-        {# ACTIVIDADES EN REVISION #}
-          <table class="table table-bordered">
-              <thead>
-              <tr>
-                  <th width="20%">PROYECTO</th>
-                  <th width="20%">TAREA</th>
-                  <th width="10%">FIN TAREA</th>
-                  <th width="50%">ACTIVIDAD</th>
-              </tr>
-              </thead>
-              <tbody>
-              {% for act in actpendiente if act.responsable.id==app.user.id %}
-                  {% set x=1%}
-                  <tr>
-                      <td>{{ act.tarea.proyecto.nombre|capitalize }}</td>
-                      <td>{{ act.tarea.nombre|capitalize }}</td>
-                      <td>{{ act.tarea.fechafinestimada|date("d-m-Y") }}</td>
-                      <td><a href="{{ path('actividad',{'idtarea':act.tarea.id})}}">{{ act.descripcion|capitalize }}</a></td>
-                  </tr>
-              {% endfor %}
-              </tbody>
-          </table>
-      </div>
-    </div>
-  </div>
-</div>
 
           <br><br>
     <table id="tabladatatable" class="table table-hover">
         <thead>
             <tr>
                 <th style="display:none;">Id</th>
-                <th style="width: 20%">Nombre</th>
-                <th style="width: 20%">Descripcion</th>
+                <th style="width: 25%">Nombre</th>
+                <th style="width: 15%">Descripcion</th>
                 <th>Fecha inicio</th>
                 <th>Fecha fin</th>
                 <th>Estatus</th>
                 <th>Completado</th>
-                <th>Responsables</th>
-                <th style="width: 17%">Acciones</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -167,7 +130,7 @@
             <tr>
                 <td style="display:none;">{{ entity.id }}</td>
                 <td><a style="font-size: 14px;color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
-                <td width="15%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,30) }}...</span></td>
+                <td width="15%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,15) }}...</span></td>
                 <td align="center">
                     {% if entity.fechainicio %}
                         {{ entity.fechainicio|date('d-m-Y') }}
@@ -202,19 +165,6 @@
                             {{ entity.porcentaje }}%
                           </div>
                         </div>
-                    {% endif %}
-                </td>
-                <td>
-                    {% if entity.responsable is not empty %}
-                        {% set cont = 0 %}
-                        {% set largo = entity.responsable | length %}
-                        {% for es in entity.responsable %} 
-                            {% set cont=cont+1 %}
-                                {{ es.primerNombre|title }} {{ es.primerApellido|title }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
-                        {% endfor %}
-                            
-                    {% else %}
-                        Debe agregar un responsable
                     {% endif %}
                 </td>
                 <td>

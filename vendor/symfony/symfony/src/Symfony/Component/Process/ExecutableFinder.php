@@ -59,7 +59,8 @@ class ExecutableFinder
                 if (is_dir($path)) {
                     $dirs[] = $path;
                 } else {
-                    if (basename($path) == $name && is_executable($path)) {
+                    $file = str_replace(dirname($path), '', $path);
+                    if ($file == $name && is_executable($path)) {
                         return $path;
                     }
                 }

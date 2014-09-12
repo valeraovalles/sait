@@ -13,20 +13,25 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\RangeValidator;
-use Symfony\Component\Validator\Validation;
 
-class RangeValidatorTest extends AbstractConstraintValidatorTest
+class RangeValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    protected function createValidator()
+    protected $context;
+    protected $validator;
+
+    protected function setUp()
     {
-        return new RangeValidator();
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new RangeValidator();
+        $this->validator->initialize($this->context);
     }
 
     public function testNullIsValid()
     {
-        $this->validator->validate(null, new Range(array('min' => 10, 'max' => 20)));
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(null, new Range(array('min' => 10, 'max' => 20)));
     }
 
     public function getTenToTwenty()
@@ -68,10 +73,11 @@ class RangeValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidValuesMin($value)
     {
+        $this->context->expects($this->never())
+            ->method('addViolation');
+
         $constraint = new Range(array('min' => 10));
         $this->validator->validate($value, $constraint);
-
-        $this->assertNoViolation();
     }
 
     /**
@@ -79,10 +85,11 @@ class RangeValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidValuesMax($value)
     {
+        $this->context->expects($this->never())
+            ->method('addViolation');
+
         $constraint = new Range(array('max' => 20));
         $this->validator->validate($value, $constraint);
-
-        $this->assertNoViolation();
     }
 
     /**
@@ -90,10 +97,11 @@ class RangeValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidValuesMinMax($value)
     {
+        $this->context->expects($this->never())
+            ->method('addViolation');
+
         $constraint = new Range(array('min' => 10, 'max' => 20));
         $this->validator->validate($value, $constraint);
-
-        $this->assertNoViolation();
     }
 
     /**
@@ -106,12 +114,14 @@ class RangeValidatorTest extends AbstractConstraintValidatorTest
             'minMessage' => 'myMessage',
         ));
 
-        $this->validator->validate($value, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', $this->identicalTo(array(
+                '{{ value }}' => $value,
+                '{{ limit }}' => 10,
+        )));
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => $value,
-            '{{ limit }}' => 10,
-        ));
+        $this->validator->validate($value, $constraint);
     }
 
     /**
@@ -124,12 +134,14 @@ class RangeValidatorTest extends AbstractConstraintValidatorTest
             'maxMessage' => 'myMessage',
         ));
 
-        $this->validator->validate($value, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', $this->identicalTo(array(
+                '{{ value }}' => $value,
+                '{{ limit }}' => 20,
+            )));
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => $value,
-            '{{ limit }}' => 20,
-        ));
+        $this->validator->validate($value, $constraint);
     }
 
     /**
@@ -144,12 +156,14 @@ class RangeValidatorTest extends AbstractConstraintValidatorTest
             'maxMessage' => 'myMaxMessage',
         ));
 
-        $this->validator->validate($value, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMaxMessage', $this->identicalTo(array(
+                '{{ value }}' => $value,
+                '{{ limit }}' => 20,
+            )));
 
-        $this->assertViolation('myMaxMessage', array(
-            '{{ value }}' => $value,
-            '{{ limit }}' => 20,
-        ));
+        $this->validator->validate($value, $constraint);
     }
 
     /**
@@ -164,12 +178,14 @@ class RangeValidatorTest extends AbstractConstraintValidatorTest
             'maxMessage' => 'myMaxMessage',
         ));
 
-        $this->validator->validate($value, $constraint);
-
-        $this->assertViolation('myMinMessage', array(
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMinMessage', $this->identicalTo(array(
             '{{ value }}' => $value,
             '{{ limit }}' => 10,
-        ));
+        )));
+
+        $this->validator->validate($value, $constraint);
     }
 
     public function getInvalidValues()
@@ -191,12 +207,14 @@ class RangeValidatorTest extends AbstractConstraintValidatorTest
             'minMessage' => 'myMessage',
         ));
 
-        $this->validator->validate(9, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ value }}' => 9,
+                '{{ limit }}' => 10,
+            ));
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => 9,
-            '{{ limit }}' => 10,
-        ));
+        $this->validator->validate(9, $constraint);
     }
 
     public function testMaxMessageIsSet()
@@ -207,24 +225,13 @@ class RangeValidatorTest extends AbstractConstraintValidatorTest
             'maxMessage' => 'myMessage',
         ));
 
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ value }}' => 21,
+                '{{ limit }}' => 20,
+            ));
+
         $this->validator->validate(21, $constraint);
-
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => 21,
-            '{{ limit }}' => 20,
-        ));
-    }
-
-    public function testNonNumeric()
-    {
-        $this->validator->validate('abcd', new Range(array(
-            'min' => 10,
-            'max' => 20,
-            'invalidMessage' => 'myMessage',
-        )));
-
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '"abcd"',
-        ));
     }
 }

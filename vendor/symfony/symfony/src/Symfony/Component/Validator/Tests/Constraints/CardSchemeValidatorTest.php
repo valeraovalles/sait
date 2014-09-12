@@ -14,25 +14,38 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 use Symfony\Component\Validator\Constraints\CardScheme;
 use Symfony\Component\Validator\Constraints\CardSchemeValidator;
 
-class CardSchemeValidatorTest extends AbstractConstraintValidatorTest
+class CardSchemeValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    protected function createValidator()
+    protected $context;
+    protected $validator;
+
+    protected function setUp()
     {
-        return new CardSchemeValidator();
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new CardSchemeValidator();
+        $this->validator->initialize($this->context);
+    }
+
+    protected function tearDown()
+    {
+        $this->context = null;
+        $this->validator = null;
     }
 
     public function testNullIsValid()
     {
-        $this->validator->validate(null, new CardScheme(array('schemes' => array())));
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(null, new CardScheme(array('schemes' => array())));
     }
 
     public function testEmptyStringIsValid()
     {
-        $this->validator->validate('', new CardScheme(array('schemes' => array())));
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate('', new CardScheme(array('schemes' => array())));
     }
 
     /**
@@ -40,9 +53,10 @@ class CardSchemeValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidNumbers($scheme, $number)
     {
-        $this->validator->validate($number, new CardScheme(array('schemes' => $scheme)));
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate($number, new CardScheme(array('schemes' => $scheme)));
     }
 
     /**
@@ -50,16 +64,10 @@ class CardSchemeValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testInvalidNumbers($scheme, $number)
     {
-        $constraint = new CardScheme(array(
-            'schemes' => $scheme,
-            'message' => 'myMessage',
-        ));
+        $this->context->expects($this->once())
+            ->method('addViolation');
 
-        $this->validator->validate($number, $constraint);
-
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => is_string($number) ? '"'.$number.'"' : $number,
-        ));
+        $this->validator->validate($number, new CardScheme(array('schemes' => $scheme)));
     }
 
     public function getValidNumbers()

@@ -96,7 +96,7 @@ class SerializerPassTest extends \PHPUnit_Framework_TestCase
           'Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\SerializerPass',
           'findAndSortTaggedServices'
         );
-        $method->setAccessible(true);
+        $method->setAccessible(TRUE);
 
         $actual = $method->invoke($serializerPass, 'tag', $container);
 

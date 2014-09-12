@@ -284,8 +284,6 @@ class ProcessPipes
     private function readStreams($blocking, $close = false)
     {
         if (empty($this->pipes)) {
-            usleep(Process::TIMEOUT_PRECISION * 1E4);
-
             return array();
         }
 
@@ -315,11 +313,11 @@ class ProcessPipes
             $type = array_search($pipe, $this->pipes);
 
             $data = '';
-            while ('' !== $dataread = (string) fread($pipe, self::CHUNK_SIZE)) {
+            while ($dataread = fread($pipe, self::CHUNK_SIZE)) {
                 $data .= $dataread;
             }
 
-            if ('' !== $data) {
+            if ($data) {
                 $read[$type] = $data;
             }
 

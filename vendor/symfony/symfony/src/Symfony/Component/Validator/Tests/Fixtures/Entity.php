@@ -35,7 +35,6 @@ class Entity extends EntityParent implements EntityInterface
     public $reference;
     private $internal;
     public $data = 'Overridden data';
-    public $initialized = false;
 
     public function __construct($internal = null)
     {

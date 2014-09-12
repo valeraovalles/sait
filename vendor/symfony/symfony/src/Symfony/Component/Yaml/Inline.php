@@ -32,13 +32,12 @@ class Inline
      * @param string  $value                  A YAML string
      * @param bool    $exceptionOnInvalidType true if an exception must be thrown on invalid types (a PHP resource or object), false otherwise
      * @param bool    $objectSupport          true if object support is enabled, false otherwise
-     * @param array   $references             Mapping of variable names to values
      *
      * @return array A PHP array representing the YAML string
      *
      * @throws ParseException
      */
-    public static function parse($value, $exceptionOnInvalidType = false, $objectSupport = false, $references = array())
+    public static function parse($value, $exceptionOnInvalidType = false, $objectSupport = false)
     {
         self::$exceptionOnInvalidType = $exceptionOnInvalidType;
         self::$objectSupport = $objectSupport;
@@ -57,15 +56,15 @@ class Inline
         $i = 0;
         switch ($value[0]) {
             case '[':
-                $result = self::parseSequence($value, $i, $references);
+                $result = self::parseSequence($value, $i);
                 ++$i;
                 break;
             case '{':
-                $result = self::parseMapping($value, $i, $references);
+                $result = self::parseMapping($value, $i);
                 ++$i;
                 break;
             default:
-                $result = self::parseScalar($value, null, array('"', "'"), $i, true, $references);
+                $result = self::parseScalar($value, null, array('"', "'"), $i);
         }
 
         // some comments are allowed at the end
@@ -185,15 +184,14 @@ class Inline
      * @param scalar $scalar
      * @param string $delimiters
      * @param array  $stringDelimiters
-     * @param int    &$i
-     * @param bool   $evaluate
-     * @param array  $references
+     * @param int     &$i
+     * @param bool    $evaluate
      *
      * @return string A YAML string
      *
      * @throws ParseException When malformed inline YAML string is parsed
      */
-    public static function parseScalar($scalar, $delimiters = null, $stringDelimiters = array('"', "'"), &$i = 0, $evaluate = true, $references = array())
+    public static function parseScalar($scalar, $delimiters = null, $stringDelimiters = array('"', "'"), &$i = 0, $evaluate = true)
     {
         if (in_array($scalar[$i], $stringDelimiters)) {
             // quoted scalar
@@ -223,7 +221,7 @@ class Inline
             }
 
             if ($evaluate) {
-                $output = self::evaluateScalar($output, $references);
+                $output = self::evaluateScalar($output);
             }
         }
 
@@ -264,14 +262,13 @@ class Inline
      * Parses a sequence to a YAML string.
      *
      * @param string $sequence
-     * @param int    &$i
-     * @param array  $references
+     * @param int     &$i
      *
      * @return string A YAML string
      *
      * @throws ParseException When malformed inline YAML string is parsed
      */
-    private static function parseSequence($sequence, &$i = 0, $references = array())
+    private static function parseSequence($sequence, &$i = 0)
     {
         $output = array();
         $len = strlen($sequence);
@@ -282,11 +279,11 @@ class Inline
             switch ($sequence[$i]) {
                 case '[':
                     // nested sequence
-                    $output[] = self::parseSequence($sequence, $i, $references);
+                    $output[] = self::parseSequence($sequence, $i);
                     break;
                 case '{':
                     // nested mapping
-                    $output[] = self::parseMapping($sequence, $i, $references);
+                    $output[] = self::parseMapping($sequence, $i);
                     break;
                 case ']':
                     return $output;
@@ -295,14 +292,12 @@ class Inline
                     break;
                 default:
                     $isQuoted = in_array($sequence[$i], array('"', "'"));
-                    $value = self::parseScalar($sequence, array(',', ']'), array('"', "'"), $i, true, $references);
+                    $value = self::parseScalar($sequence, array(',', ']'), array('"', "'"), $i);
 
-                    // the value can be an array if a reference has been resolved to an array var
-                    if (!is_array($value) && !$isQuoted && false !== strpos($value, ': ')) {
+                    if (!$isQuoted && false !== strpos($value, ': ')) {
                         // embedded mapping?
                         try {
-                            $pos = 0;
-                            $value = self::parseMapping('{'.$value.'}', $pos, $references);
+                            $value = self::parseMapping('{'.$value.'}');
                         } catch (\InvalidArgumentException $e) {
                             // no, it's not
                         }
@@ -323,14 +318,13 @@ class Inline
      * Parses a mapping to a YAML string.
      *
      * @param string $mapping
-     * @param int    &$i
-     * @param array  $references
+     * @param int     &$i
      *
      * @return string A YAML string
      *
      * @throws ParseException When malformed inline YAML string is parsed
      */
-    private static function parseMapping($mapping, &$i = 0, $references = array())
+    private static function parseMapping($mapping, &$i = 0)
     {
         $output = array();
         $len = strlen($mapping);
@@ -356,19 +350,19 @@ class Inline
                 switch ($mapping[$i]) {
                     case '[':
                         // nested sequence
-                        $output[$key] = self::parseSequence($mapping, $i, $references);
+                        $output[$key] = self::parseSequence($mapping, $i);
                         $done = true;
                         break;
                     case '{':
                         // nested mapping
-                        $output[$key] = self::parseMapping($mapping, $i, $references);
+                        $output[$key] = self::parseMapping($mapping, $i);
                         $done = true;
                         break;
                     case ':':
                     case ' ':
                         break;
                     default:
-                        $output[$key] = self::parseScalar($mapping, array(',', '}'), array('"', "'"), $i, true, $references);
+                        $output[$key] = self::parseScalar($mapping, array(',', '}'), array('"', "'"), $i);
                         $done = true;
                         --$i;
                 }
@@ -388,31 +382,13 @@ class Inline
      * Evaluates scalars and replaces magic values.
      *
      * @param string $scalar
-     * @param array  $references
      *
      * @return string A YAML string
-     *
-     * @throws ParseException when object parsing support was disabled and the parser detected a PHP object
      */
-    private static function evaluateScalar($scalar, $references = array())
+    private static function evaluateScalar($scalar)
     {
         $scalar = trim($scalar);
         $scalarLower = strtolower($scalar);
-
-        if (0 === strpos($scalar, '*')) {
-            if (false !== $pos = strpos($scalar, '#')) {
-                $value = substr($scalar, 1, $pos - 2);
-            } else {
-                $value = substr($scalar, 1);
-            }
-
-            if (!array_key_exists($value, $references)) {
-                throw new ParseException(sprintf('Reference "%s" does not exist.', $value));
-            }
-
-            return $references[$value];
-        }
-
         switch (true) {
             case 'null' === $scalarLower:
             case '' === $scalar:

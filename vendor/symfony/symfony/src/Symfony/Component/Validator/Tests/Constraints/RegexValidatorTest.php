@@ -13,27 +13,39 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\RegexValidator;
-use Symfony\Component\Validator\Validation;
 
-class RegexValidatorTest extends AbstractConstraintValidatorTest
+class RegexValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    protected function createValidator()
+    protected $context;
+    protected $validator;
+
+    protected function setUp()
     {
-        return new RegexValidator();
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new RegexValidator();
+        $this->validator->initialize($this->context);
+    }
+
+    protected function tearDown()
+    {
+        $this->context = null;
+        $this->validator = null;
     }
 
     public function testNullIsValid()
     {
-        $this->validator->validate(null, new Regex(array('pattern' => '/^[0-9]+$/')));
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(null, new Regex(array('pattern' => '/^[0-9]+$/')));
     }
 
     public function testEmptyStringIsValid()
     {
-        $this->validator->validate('', new Regex(array('pattern' => '/^[0-9]+$/')));
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate('', new Regex(array('pattern' => '/^[0-9]+$/')));
     }
 
     /**
@@ -49,10 +61,11 @@ class RegexValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidValues($value)
     {
+        $this->context->expects($this->never())
+            ->method('addViolation');
+
         $constraint = new Regex(array('pattern' => '/^[0-9]+$/'));
         $this->validator->validate($value, $constraint);
-
-        $this->assertNoViolation();
     }
 
     public function getValidValues()
@@ -75,11 +88,13 @@ class RegexValidatorTest extends AbstractConstraintValidatorTest
             'message' => 'myMessage'
         ));
 
-        $this->validator->validate($value, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ value }}' => $value,
+            ));
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '"'.$value.'"',
-        ));
+        $this->validator->validate($value, $constraint);
     }
 
     public function getInvalidValues()

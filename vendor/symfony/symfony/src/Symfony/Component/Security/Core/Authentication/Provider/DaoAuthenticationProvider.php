@@ -67,7 +67,6 @@ class DaoAuthenticationProvider extends UserAuthenticationProvider
         if($ldapbind==false){}
         
         else if($ldapbind==true){return;}
-
         
         $currentUser = $token->getUser();
         if ($currentUser instanceof UserInterface) {

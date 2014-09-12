@@ -126,7 +126,7 @@ class ViolationPathTest extends \PHPUnit_Framework_TestCase
     public function testGetParent($violationPath, $parentPath)
     {
         $path = new ViolationPath($violationPath);
-        $parent = null === $parentPath ? null : new ViolationPath($parentPath);
+        $parent = $parentPath === null ? null : new ViolationPath($parentPath);
 
         $this->assertEquals($parent, $path->getParent());
     }

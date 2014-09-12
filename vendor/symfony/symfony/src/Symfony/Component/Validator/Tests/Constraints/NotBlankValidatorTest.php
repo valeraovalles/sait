@@ -13,13 +13,23 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotBlankValidator;
-use Symfony\Component\Validator\Validation;
 
-class NotBlankValidatorTest extends AbstractConstraintValidatorTest
+class NotBlankValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    protected function createValidator()
+    protected $context;
+    protected $validator;
+
+    protected function setUp()
     {
-        return new NotBlankValidator();
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new NotBlankValidator();
+        $this->validator->initialize($this->context);
+    }
+
+    protected function tearDown()
+    {
+        $this->context = null;
+        $this->validator = null;
     }
 
     /**
@@ -27,9 +37,10 @@ class NotBlankValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidValues($value)
     {
-        $this->validator->validate($value, new NotBlank());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate($value, new NotBlank());
     }
 
     public function getValidValues()
@@ -49,11 +60,11 @@ class NotBlankValidatorTest extends AbstractConstraintValidatorTest
             'message' => 'myMessage'
         ));
 
-        $this->validator->validate(null, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage');
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => 'null',
-        ));
+        $this->validator->validate(null, $constraint);
     }
 
     public function testBlankIsInvalid()
@@ -62,11 +73,11 @@ class NotBlankValidatorTest extends AbstractConstraintValidatorTest
             'message' => 'myMessage'
         ));
 
-        $this->validator->validate('', $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage');
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '""',
-        ));
+        $this->validator->validate('', $constraint);
     }
 
     public function testFalseIsInvalid()
@@ -75,11 +86,11 @@ class NotBlankValidatorTest extends AbstractConstraintValidatorTest
             'message' => 'myMessage'
         ));
 
-        $this->validator->validate(false, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage');
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => 'false',
-        ));
+        $this->validator->validate(false, $constraint);
     }
 
     public function testEmptyArrayIsInvalid()
@@ -88,10 +99,10 @@ class NotBlankValidatorTest extends AbstractConstraintValidatorTest
             'message' => 'myMessage'
         ));
 
-        $this->validator->validate(array(), $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage');
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => 'array',
-        ));
+        $this->validator->validate(array(), $constraint);
     }
 }

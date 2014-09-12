@@ -13,16 +13,20 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 
 use Symfony\Component\Validator\Constraints\Isbn;
 use Symfony\Component\Validator\Constraints\IsbnValidator;
-use Symfony\Component\Validator\Validation;
 
 /**
  * @see https://en.wikipedia.org/wiki/Isbn
  */
-class IsbnValidatorTest extends AbstractConstraintValidatorTest
+class IsbnValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    protected function createValidator()
+    protected $context;
+    protected $validator;
+
+    public function setUp()
     {
-        return new IsbnValidator();
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new IsbnValidator();
+        $this->validator->initialize($this->context);
     }
 
     public function getValidIsbn10()
@@ -40,7 +44,6 @@ class IsbnValidatorTest extends AbstractConstraintValidatorTest
             array('0321812700'),
             array('0-45122-5244'),
             array('0-4712-92311'),
-            array('0-9752298-0-X')
         );
     }
 
@@ -55,11 +58,6 @@ class IsbnValidatorTest extends AbstractConstraintValidatorTest
             array('0-4X19-92611'),
             array('0_45122_5244'),
             array('2870#971#648'),
-            //array('0-9752298-0-x'),
-            array('1A34567890'),
-            // chr(1) evaluates to 0
-            // 2070546810 is valid
-            array('2'.chr(1).'70546810'),
         );
     }
 
@@ -94,10 +92,6 @@ class IsbnValidatorTest extends AbstractConstraintValidatorTest
             array('980-0474292319'),
             array('978_0451225245'),
             array('978#0471292319'),
-            array('978-272C442282'),
-            // chr(1) evaluates to 0
-            // 978-2070546817 is valid
-            array('978-2'.chr(1).'70546817'),
         );
     }
 
@@ -120,19 +114,21 @@ class IsbnValidatorTest extends AbstractConstraintValidatorTest
     public function testNullIsValid()
     {
         $constraint = new Isbn(true);
+        $this->context
+            ->expects($this->never())
+            ->method('addViolation');
 
         $this->validator->validate(null, $constraint);
-
-        $this->assertNoViolation();
     }
 
     public function testEmptyStringIsValid()
     {
         $constraint = new Isbn(true);
+        $this->context
+            ->expects($this->never())
+            ->method('addViolation');
 
         $this->validator->validate('', $constraint);
-
-        $this->assertNoViolation();
     }
 
     /**
@@ -141,7 +137,6 @@ class IsbnValidatorTest extends AbstractConstraintValidatorTest
     public function testExpectsStringCompatibleType()
     {
         $constraint = new Isbn(true);
-
         $this->validator->validate(new \stdClass(), $constraint);
     }
 
@@ -150,13 +145,12 @@ class IsbnValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidIsbn10($isbn)
     {
-        $constraint = new Isbn(array(
-            'isbn10' => true,
-        ));
+        $constraint = new Isbn(array('isbn10' => true));
+        $this->context
+            ->expects($this->never())
+            ->method('addViolation');
 
         $this->validator->validate($isbn, $constraint);
-
-        $this->assertNoViolation();
     }
 
     /**
@@ -164,16 +158,13 @@ class IsbnValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testInvalidIsbn10($isbn)
     {
-        $constraint = new Isbn(array(
-            'isbn10' => true,
-            'isbn10Message' => 'myMessage',
-        ));
+        $constraint = new Isbn(array('isbn10' => true));
+        $this->context
+            ->expects($this->once())
+            ->method('addViolation')
+            ->with($constraint->isbn10Message);
 
         $this->validator->validate($isbn, $constraint);
-
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '"'.$isbn.'"',
-        ));
     }
 
     /**
@@ -181,11 +172,12 @@ class IsbnValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidIsbn13($isbn)
     {
-        $constraint = new Isbn(array('isbn13' => true,));
+        $constraint = new Isbn(array('isbn13' => true));
+        $this->context
+            ->expects($this->never())
+            ->method('addViolation');
 
         $this->validator->validate($isbn, $constraint);
-
-        $this->assertNoViolation();
     }
 
     /**
@@ -193,16 +185,13 @@ class IsbnValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testInvalidIsbn13($isbn)
     {
-        $constraint = new Isbn(array(
-            'isbn13' => true,
-            'isbn13Message' => 'myMessage',
-        ));
+        $constraint = new Isbn(array('isbn13' => true));
+        $this->context
+            ->expects($this->once())
+            ->method('addViolation')
+            ->with($constraint->isbn13Message);
 
         $this->validator->validate($isbn, $constraint);
-
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '"'.$isbn.'"',
-        ));
     }
 
     /**
@@ -210,14 +199,12 @@ class IsbnValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidIsbn($isbn)
     {
-        $constraint = new Isbn(array(
-            'isbn10' => true,
-            'isbn13' => true,
-        ));
+        $constraint = new Isbn(array('isbn10' => true, 'isbn13' => true));
+        $this->context
+            ->expects($this->never())
+            ->method('addViolation');
 
         $this->validator->validate($isbn, $constraint);
-
-        $this->assertNoViolation();
     }
 
     /**
@@ -225,16 +212,12 @@ class IsbnValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testInvalidIsbn($isbn)
     {
-        $constraint = new Isbn(array(
-            'isbn10' => true,
-            'isbn13' => true,
-            'bothIsbnMessage' => 'myMessage',
-        ));
+        $constraint = new Isbn(array('isbn10' => true, 'isbn13' => true));
+        $this->context
+            ->expects($this->once())
+            ->method('addViolation')
+            ->with($constraint->bothIsbnMessage);
 
         $this->validator->validate($isbn, $constraint);
-
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '"'.$isbn.'"',
-        ));
     }
 }

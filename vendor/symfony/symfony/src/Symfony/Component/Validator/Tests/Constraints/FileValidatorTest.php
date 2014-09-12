@@ -11,63 +11,54 @@
 
 namespace Symfony\Component\Validator\Tests\Constraints;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\FileValidator;
-use Symfony\Component\Validator\Validation;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-abstract class FileValidatorTest extends AbstractConstraintValidatorTest
+abstract class FileValidatorTest extends \PHPUnit_Framework_TestCase
 {
+    protected $context;
+    protected $validator;
     protected $path;
-
     protected $file;
-
-    protected function getApiVersion()
-    {
-        return Validation::API_VERSION_2_5;
-    }
-
-    protected function createValidator()
-    {
-        return new FileValidator();
-    }
 
     protected function setUp()
     {
-        parent::setUp();
+        if (!class_exists('Symfony\Component\HttpFoundation\File\UploadedFile')) {
+            $this->markTestSkipped('The "HttpFoundation" component is not available');
+        }
 
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new FileValidator();
+        $this->validator->initialize($this->context);
         $this->path = sys_get_temp_dir().DIRECTORY_SEPARATOR.'FileValidatorTest';
         $this->file = fopen($this->path, 'w');
     }
 
     protected function tearDown()
     {
-        parent::tearDown();
+        fclose($this->file);
 
-        if (is_resource($this->file)) {
-            fclose($this->file);
-        }
-
-        if (file_exists($this->path)) {
-            unlink($this->path);
-        }
-
+        $this->context = null;
+        $this->validator = null;
         $this->path = null;
         $this->file = null;
     }
 
     public function testNullIsValid()
     {
-        $this->validator->validate(null, new File());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(null, new File());
     }
 
     public function testEmptyStringIsValid()
     {
-        $this->validator->validate('', new File());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate('', new File());
     }
 
     /**
@@ -80,138 +71,82 @@ abstract class FileValidatorTest extends AbstractConstraintValidatorTest
 
     public function testValidFile()
     {
-        $this->validator->validate($this->path, new File());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate($this->path, new File());
     }
 
     public function testValidUploadedfile()
     {
+        $this->context->expects($this->never())
+            ->method('addViolation');
+
         $file = new UploadedFile($this->path, 'originalName', null, null, null, true);
         $this->validator->validate($file, new File());
-
-        $this->assertNoViolation();
     }
 
-    public function provideMaxSizeExceededTests()
+    public function testTooLargeBytes()
     {
-        // We have various interesting limit - size combinations to test.
-        // Assume a limit of 1000 bytes (1 kB). Then the following table
-        // lists the violation messages for different file sizes:
-
-        // -----------+--------------------------------------------------------
-        // Size       | Violation Message
-        // -----------+--------------------------------------------------------
-        // 1000 bytes | No violation
-        // 1001 bytes | "Size of 1001 bytes exceeded limit of 1000 bytes"
-        // 1004 bytes | "Size of 1004 bytes exceeded limit of 1000 bytes"
-        //            | NOT: "Size of 1 kB exceeded limit of 1 kB"
-        // 1005 bytes | "Size of 1.01 kB exceeded limit of 1 kB"
-        // -----------+--------------------------------------------------------
-
-        // As you see, we have two interesting borders:
-
-        // 1000/1001 - The border as of which a violation occurs
-        // 1004/1005 - The border as of which the message can be rounded to kB
-
-        // Analogous for kB/MB.
-
-        // Prior to Symfony 2.5, violation messages are always displayed in the
-        // same unit used to specify the limit.
-
-        // As of Symfony 2.5, the above logic is implemented.
-        return array(
-            // limit in bytes
-            array(1001, 1000, '1001', '1000', 'bytes'),
-            array(1004, 1000, '1004', '1000', 'bytes'),
-            array(1005, 1000, '1005', '1000', 'bytes'),
-
-            array(1000001, 1000000, '1000001', '1000000', 'bytes'),
-            array(1004999, 1000000, '1004999', '1000000', 'bytes'),
-            array(1005000, 1000000, '1005000', '1000000', 'bytes'),
-
-            // limit in kB
-            //array(1001, '1k') OK in 2.4, not in 2.5
-            //array(1004, '1k') OK in 2.4, not in 2.5
-            array(1005, '1k', '1.01', '1', 'kB'),
-
-            //array(1000001, '1000k') OK in 2.4, not in 2.5
-            array(1004999, '1000k', '1005', '1000', 'kB'),
-            array(1005000, '1000k', '1005', '1000', 'kB'),
-
-            // limit in MB
-            //array(1000001, '1M') OK in 2.4, not in 2.5
-            //array(1004999, '1M') OK in 2.4, not in 2.5
-            array(1005000, '1M', '1.01', '1', 'MB'),
-        );
-    }
-
-    /**
-     * @dataProvider provideMaxSizeExceededTests
-     */
-    public function testMaxSizeExceeded($bytesWritten, $limit, $sizeAsString, $limitAsString, $suffix)
-    {
-        fseek($this->file, $bytesWritten-1, SEEK_SET);
-        fwrite($this->file, '0');
-        fclose($this->file);
+        fwrite($this->file, str_repeat('0', 11));
 
         $constraint = new File(array(
-            'maxSize'           => $limit,
+            'maxSize'           => 10,
             'maxSizeMessage'    => 'myMessage',
         ));
 
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ limit }}'   => '10',
+                '{{ size }}'    => '11',
+                '{{ suffix }}'  => 'bytes',
+                '{{ file }}'    => $this->path,
+            ));
+
         $this->validator->validate($this->getFile($this->path), $constraint);
-
-        $this->assertViolation('myMessage', array(
-            '{{ limit }}'   => $limitAsString,
-            '{{ size }}'    => $sizeAsString,
-            '{{ suffix }}'  => $suffix,
-            '{{ file }}'    => '"'.$this->path.'"',
-        ));
     }
 
-    public function provideMaxSizeNotExceededTests()
+    public function testTooLargeKiloBytes()
     {
-        return array(
-            // limit in bytes
-            array(1000, 1000),
-            array(1000000, 1000000),
-
-            // limit in kB
-            array(1000, '1k'),
-            array(1000000, '1000k'),
-
-            // as of Symfony 2.5, the following are not accepted anymore
-            array(1001, '1k'),
-            array(1004, '1k'),
-            array(1000001, '1000k'),
-
-            // limit in MB
-            array(1000000, '1M'),
-
-            // as of Symfony 2.5, the following are not accepted anymore
-            array(1000001, '1M'),
-            array(1004999, '1M'),
-        );
-    }
-
-    /**
-     * @dataProvider provideMaxSizeNotExceededTests
-     */
-    public function testMaxSizeNotExceeded($bytesWritten, $limit)
-    {
-        fseek($this->file, $bytesWritten-1, SEEK_SET);
-        fwrite($this->file, '0');
-        fclose($this->file);
+        fwrite($this->file, str_repeat('0', 1400));
 
         $constraint = new File(array(
-            'maxSize'           => $limit,
+            'maxSize'           => '1k',
             'maxSizeMessage'    => 'myMessage',
         ));
 
-        $this->validator->validate($this->getFile($this->path), $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ limit }}'   => '1',
+                '{{ size }}'    => '1.4',
+                '{{ suffix }}'  => 'kB',
+                '{{ file }}'    => $this->path,
+            ));
 
-        $this->assertNoViolation();
+        $this->validator->validate($this->getFile($this->path), $constraint);
+    }
+
+    public function testTooLargeMegaBytes()
+    {
+        fwrite($this->file, str_repeat('0', 1400000));
+
+        $constraint = new File(array(
+            'maxSize'           => '1M',
+            'maxSizeMessage'    => 'myMessage',
+        ));
+
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ limit }}'   => '1',
+                '{{ size }}'    => '1.4',
+                '{{ suffix }}'  => 'MB',
+                '{{ file }}'    => $this->path,
+            ));
+
+        $this->validator->validate($this->getFile($this->path), $constraint);
     }
 
     /**
@@ -244,13 +179,14 @@ abstract class FileValidatorTest extends AbstractConstraintValidatorTest
             ->will($this->returnValue('image/jpg'))
         ;
 
+        $this->context->expects($this->never())
+            ->method('addViolation');
+
         $constraint = new File(array(
             'mimeTypes' => array('image/png', 'image/jpg'),
         ));
 
         $this->validator->validate($file, $constraint);
-
-        $this->assertNoViolation();
     }
 
     public function testValidWildcardMimeType()
@@ -271,13 +207,14 @@ abstract class FileValidatorTest extends AbstractConstraintValidatorTest
             ->will($this->returnValue('image/jpg'))
         ;
 
+        $this->context->expects($this->never())
+            ->method('addViolation');
+
         $constraint = new File(array(
             'mimeTypes' => array('image/*'),
         ));
 
         $this->validator->validate($file, $constraint);
-
-        $this->assertNoViolation();
     }
 
     public function testInvalidMimeType()
@@ -303,13 +240,15 @@ abstract class FileValidatorTest extends AbstractConstraintValidatorTest
             'mimeTypesMessage' => 'myMessage',
         ));
 
-        $this->validator->validate($file, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ type }}'    => '"application/pdf"',
+                '{{ types }}'   => '"image/png", "image/jpg"',
+                '{{ file }}'    => $this->path,
+            ));
 
-        $this->assertViolation('myMessage', array(
-            '{{ type }}'    => '"application/pdf"',
-            '{{ types }}'   => '"image/png", "image/jpg"',
-            '{{ file }}'    => '"'.$this->path.'"',
-        ));
+        $this->validator->validate($file, $constraint);
     }
 
     public function testInvalidWildcardMimeType()
@@ -335,13 +274,15 @@ abstract class FileValidatorTest extends AbstractConstraintValidatorTest
             'mimeTypesMessage' => 'myMessage',
         ));
 
-        $this->validator->validate($file, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ type }}'    => '"application/pdf"',
+                '{{ types }}'   => '"image/*", "image/jpg"',
+                '{{ file }}'    => $this->path,
+            ));
 
-        $this->assertViolation('myMessage', array(
-            '{{ type }}'    => '"application/pdf"',
-            '{{ types }}'   => '"image/*", "image/jpg"',
-            '{{ file }}'    => '"'.$this->path.'"',
-        ));
+        $this->validator->validate($file, $constraint);
     }
 
     /**
@@ -356,9 +297,11 @@ abstract class FileValidatorTest extends AbstractConstraintValidatorTest
             'maxSize' => $maxSize
         ));
 
-        $this->validator->validate($file, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', $params);
 
-        $this->assertViolation('myMessage', $params);
+        $this->validator->validate($file, $constraint);
 
     }
 

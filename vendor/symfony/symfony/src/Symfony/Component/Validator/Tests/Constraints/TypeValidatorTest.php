@@ -13,48 +13,49 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\TypeValidator;
-use Symfony\Component\Validator\Validation;
 
-class TypeValidatorTest extends AbstractConstraintValidatorTest
+class TypeValidatorTest extends \PHPUnit_Framework_TestCase
 {
     protected static $file;
 
-    protected function createValidator()
+    protected $context;
+    protected $validator;
+
+    protected function setUp()
     {
-        return new TypeValidator();
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new TypeValidator();
+        $this->validator->initialize($this->context);
+    }
+
+    protected function tearDown()
+    {
+        $this->context = null;
+        $this->validator = null;
     }
 
     public function testNullIsValid()
     {
-        $constraint = new Type(array('type' => 'integer'));
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->validator->validate(null, $constraint);
-
-        $this->assertNoViolation();
+        $this->validator->validate(null, new Type(array('type' => 'integer')));
     }
 
     public function testEmptyIsValidIfString()
     {
-        $constraint = new Type(array('type' => 'string'));
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->validator->validate('', $constraint);
-
-        $this->assertNoViolation();
+        $this->validator->validate('', new Type(array('type' => 'string')));
     }
 
     public function testEmptyIsInvalidIfNoString()
     {
-        $constraint = new Type(array(
-            'type' => 'integer',
-            'message' => 'myMessage',
-        ));
+        $this->context->expects($this->once())
+            ->method('addViolation');
 
-        $this->validator->validate('', $constraint);
-
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '""',
-            '{{ type }}' => 'integer',
-        ));
+        $this->validator->validate('', new Type(array('type' => 'integer')));
     }
 
     /**
@@ -62,11 +63,12 @@ class TypeValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidValues($value, $type)
     {
+        $this->context->expects($this->never())
+            ->method('addViolation');
+
         $constraint = new Type(array('type' => $type));
 
         $this->validator->validate($value, $constraint);
-
-        $this->assertNoViolation();
     }
 
     public function getValidValues()
@@ -116,12 +118,14 @@ class TypeValidatorTest extends AbstractConstraintValidatorTest
             'message' => 'myMessage'
         ));
 
-        $this->validator->validate($value, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ value }}' => $valueAsString,
+                '{{ type }}' => $type,
+            ));
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => $valueAsString,
-            '{{ type }}' => $type,
-        ));
+        $this->validator->validate($value, $constraint);
     }
 
     public function getInvalidValues()
@@ -130,51 +134,50 @@ class TypeValidatorTest extends AbstractConstraintValidatorTest
         $file = $this->createFile();
 
         return array(
-            array('foobar', 'numeric', '"foobar"'),
-            array('foobar', 'boolean', '"foobar"'),
-            array('0', 'integer', '"0"'),
-            array('1.5', 'float', '"1.5"'),
+            array('foobar', 'numeric', 'foobar'),
+            array('foobar', 'boolean', 'foobar'),
+            array('0', 'integer', '0'),
+            array('1.5', 'float', '1.5'),
             array(12345, 'string', '12345'),
-            array($object, 'boolean', 'object'),
-            array($object, 'numeric', 'object'),
-            array($object, 'integer', 'object'),
-            array($object, 'float', 'object'),
-            array($object, 'string', 'object'),
-            array($object, 'resource', 'object'),
-            array($file, 'boolean', 'resource'),
-            array($file, 'numeric', 'resource'),
-            array($file, 'integer', 'resource'),
-            array($file, 'float', 'resource'),
-            array($file, 'string', 'resource'),
-            array($file, 'object', 'resource'),
-            array('12a34', 'digit', '"12a34"'),
-            array('1a#23', 'alnum', '"1a#23"'),
-            array('abcd1', 'alpha', '"abcd1"'),
-            array("\nabc", 'cntrl', "\"\nabc\""),
-            array("abc\n", 'graph', "\"abc\n\""),
-            array('abCDE', 'lower', '"abCDE"'),
-            array('ABcde', 'upper', '"ABcde"'),
-            array("\nabc", 'print', "\"\nabc\""),
-            array('abc&$!', 'punct', '"abc&$!"'),
-            array("\nabc", 'space', "\"\nabc\""),
-            array('AR1012', 'xdigit', '"AR1012"'),
+            array($object, 'boolean', 'stdClass'),
+            array($object, 'numeric', 'stdClass'),
+            array($object, 'integer', 'stdClass'),
+            array($object, 'float', 'stdClass'),
+            array($object, 'string', 'stdClass'),
+            array($object, 'resource', 'stdClass'),
+            array($file, 'boolean', (string) $file),
+            array($file, 'numeric', (string) $file),
+            array($file, 'integer', (string) $file),
+            array($file, 'float', (string) $file),
+            array($file, 'string', (string) $file),
+            array($file, 'object', (string) $file),
+            array('12a34', 'digit', '12a34'),
+            array('1a#23', 'alnum', '1a#23'),
+            array('abcd1', 'alpha', 'abcd1'),
+            array("\nabc", 'cntrl', "\nabc"),
+            array("abc\n", 'graph', "abc\n"),
+            array('abCDE', 'lower', 'abCDE'),
+            array('ABcde', 'upper', 'ABcde'),
+            array("\nabc", 'print', "\nabc"),
+            array('abc&$!', 'punct', 'abc&$!'),
+            array("\nabc", 'space', "\nabc"),
+            array('AR1012', 'xdigit', 'AR1012'),
         );
     }
 
     protected function createFile()
     {
-        if (!static::$file) {
-            static::$file = fopen(__FILE__, 'r');
+        if (!self::$file) {
+            self::$file = fopen(__FILE__, 'r');
         }
 
-        return static::$file;
+        return self::$file;
     }
 
     public static function tearDownAfterClass()
     {
-        if (static::$file) {
-            fclose(static::$file);
-            static::$file = null;
+        if (self::$file) {
+            fclose(self::$file);
         }
     }
 }

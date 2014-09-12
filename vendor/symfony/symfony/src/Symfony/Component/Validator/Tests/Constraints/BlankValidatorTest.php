@@ -14,51 +14,65 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 use Symfony\Component\Validator\Constraints\Blank;
 use Symfony\Component\Validator\Constraints\BlankValidator;
 
-class BlankValidatorTest extends AbstractConstraintValidatorTest
+class BlankValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    protected function createValidator()
+    protected $context;
+    protected $validator;
+
+    protected function setUp()
     {
-        return new BlankValidator();
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new BlankValidator();
+        $this->validator->initialize($this->context);
+    }
+
+    protected function tearDown()
+    {
+        $this->context = null;
+        $this->validator = null;
     }
 
     public function testNullIsValid()
     {
-        $this->validator->validate(null, new Blank());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(null, new Blank());
     }
 
     public function testBlankIsValid()
     {
-        $this->validator->validate('', new Blank());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate('', new Blank());
     }
 
     /**
      * @dataProvider getInvalidValues
      */
-    public function testInvalidValues($value, $valueAsString)
+    public function testInvalidValues($value)
     {
         $constraint = new Blank(array(
             'message' => 'myMessage'
         ));
 
-        $this->validator->validate($value, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ value }}' => $value,
+            ));
 
-        $this->assertViolation(
-            'myMessage',
-            array('{{ value }}' => $valueAsString)
-        );
+        $this->validator->validate($value, $constraint);
     }
 
     public function getInvalidValues()
     {
         return array(
-            array('foobar', '"foobar"'),
-            array(0, '0'),
-            array(false, 'false'),
-            array(1234, '1234'),
+            array('foobar'),
+            array(0),
+            array(false),
+            array(1234),
         );
     }
 }

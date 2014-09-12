@@ -81,14 +81,6 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $documentRoot = $input->getOption('docroot');
-
-        if (!is_dir($documentRoot)) {
-            $output->writeln(sprintf('<error>The given document root directory "%s" does not exist</error>', $documentRoot));
-
-            return 1;
-        }
-
         $env = $this->getContainer()->getParameter('kernel.environment');
 
         if ('prod' === $env) {
@@ -104,7 +96,7 @@ EOF
         $output->writeln(sprintf("Server running on <info>http://%s</info>\n", $input->getArgument('address')));
 
         $builder = new ProcessBuilder(array(PHP_BINARY, '-S', $input->getArgument('address'), $router));
-        $builder->setWorkingDirectory($documentRoot);
+        $builder->setWorkingDirectory($input->getOption('docroot'));
         $builder->setTimeout(null);
         $builder->getProcess()->run(function ($type, $buffer) use ($output) {
             if (OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {

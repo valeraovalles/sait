@@ -13,27 +13,39 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 
 use Symfony\Component\Validator\Constraints\Url;
 use Symfony\Component\Validator\Constraints\UrlValidator;
-use Symfony\Component\Validator\Validation;
 
-class UrlValidatorTest extends AbstractConstraintValidatorTest
+class UrlValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    protected function createValidator()
+    protected $context;
+    protected $validator;
+
+    protected function setUp()
     {
-        return new UrlValidator();
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new UrlValidator();
+        $this->validator->initialize($this->context);
+    }
+
+    protected function tearDown()
+    {
+        $this->context = null;
+        $this->validator = null;
     }
 
     public function testNullIsValid()
     {
-        $this->validator->validate(null, new Url());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(null, new Url());
     }
 
     public function testEmptyStringIsValid()
     {
-        $this->validator->validate('', new Url());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate('', new Url());
     }
 
     /**
@@ -49,9 +61,10 @@ class UrlValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidUrls($url)
     {
-        $this->validator->validate($url, new Url());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate($url, new Url());
     }
 
     public function getValidUrls()
@@ -59,7 +72,7 @@ class UrlValidatorTest extends AbstractConstraintValidatorTest
         return array(
             array('http://a.pl'),
             array('http://www.google.com'),
-            //array('http://www.google.com.') OK as of 2.5
+            array('http://www.google.com.'),
             array('http://www.google.museum'),
             array('https://google.com/'),
             array('https://google.com:80/'),
@@ -73,7 +86,7 @@ class UrlValidatorTest extends AbstractConstraintValidatorTest
             array('http://symfony.com/#?'),
             array('http://www.symfony.com/doc/current/book/validation.html#supported-constraints'),
             array('http://very.long.domain.name.com/'),
-            //array('http://localhost/') OK as of 2.5
+            array('http://localhost/'),
             array('http://127.0.0.1/'),
             array('http://127.0.0.1:80/'),
             array('http://[::1]/'),
@@ -103,8 +116,6 @@ class UrlValidatorTest extends AbstractConstraintValidatorTest
             array('http://xn--espaa-rta.xn--ca-ol-fsay5a/'),
             array('http://xn--d1abbgf6aiiy.xn--p1ai/'),
             array('http://☎.com/'),
-            array('http://username:password@symfony.com'),
-            array('http://user-name@symfony.com'),
         );
     }
 
@@ -117,11 +128,13 @@ class UrlValidatorTest extends AbstractConstraintValidatorTest
             'message' => 'myMessage'
         ));
 
-        $this->validator->validate($url, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ value }}' => $url,
+            ));
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '"'.$url.'"',
-        ));
+        $this->validator->validate($url, $constraint);
     }
 
     public function getInvalidUrls()
@@ -142,10 +155,6 @@ class UrlValidatorTest extends AbstractConstraintValidatorTest
             array('ftp://[::1]/'),
             array('http://[::1'),
             array('http://hello.☎/'),
-            array('http://:password@symfony.com'),
-            array('http://:password@@symfony.com'),
-            array('http://username:passwordsymfony.com'),
-            array('http://usern@me:password@symfony.com'),
         );
     }
 
@@ -154,13 +163,14 @@ class UrlValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testCustomProtocolIsValid($url)
     {
+        $this->context->expects($this->never())
+            ->method('addViolation');
+
         $constraint = new Url(array(
             'protocols' => array('ftp', 'file', 'git')
         ));
 
         $this->validator->validate($url, $constraint);
-
-        $this->assertNoViolation();
     }
 
     public function getValidCustomUrls()

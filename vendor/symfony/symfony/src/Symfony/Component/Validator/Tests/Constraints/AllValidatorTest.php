@@ -11,23 +11,40 @@
 
 namespace Symfony\Component\Validator\Tests\Constraints;
 
+use Symfony\Component\Validator\ExecutionContext;
+use Symfony\Component\Validator\Constraints\Range;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\AllValidator;
-use Symfony\Component\Validator\Constraints\NotNull;
-use Symfony\Component\Validator\Constraints\Range;
 
-class AllValidatorTest extends AbstractConstraintValidatorTest
+class AllValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    protected function createValidator()
+    protected $context;
+    protected $validator;
+
+    protected function setUp()
     {
-        return new AllValidator();
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new AllValidator();
+        $this->validator->initialize($this->context);
+
+        $this->context->expects($this->any())
+            ->method('getGroup')
+            ->will($this->returnValue('MyGroup'));
+    }
+
+    protected function tearDown()
+    {
+        $this->validator = null;
+        $this->context = null;
     }
 
     public function testNullIsValid()
     {
-        $this->validator->validate(null, new All(new Range(array('min' => 4))));
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(null, new All(new Range(array('min' => 4))));
     }
 
     /**
@@ -45,15 +62,18 @@ class AllValidatorTest extends AbstractConstraintValidatorTest
     {
         $constraint = new Range(array('min' => 4));
 
-        $i = 0;
+        $i = 1;
 
         foreach ($array as $key => $value) {
-            $this->expectValidateValueAt($i++, '['.$key.']', $value, array($constraint), 'MyGroup');
+            $this->context->expects($this->at($i++))
+                ->method('validateValue')
+                ->with($value, $constraint, '['.$key.']', 'MyGroup');
         }
 
-        $this->validator->validate($array, new All($constraint));
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate($array, new All($constraint));
     }
 
     /**
@@ -65,16 +85,21 @@ class AllValidatorTest extends AbstractConstraintValidatorTest
         $constraint2 = new NotNull();
 
         $constraints = array($constraint1, $constraint2);
-
-        $i = 0;
+        $i = 1;
 
         foreach ($array as $key => $value) {
-            $this->expectValidateValueAt($i++, '['.$key.']', $value, array($constraint1, $constraint2), 'MyGroup');
+            $this->context->expects($this->at($i++))
+                ->method('validateValue')
+                ->with($value, $constraint1, '['.$key.']', 'MyGroup');
+            $this->context->expects($this->at($i++))
+                ->method('validateValue')
+                ->with($value, $constraint2, '['.$key.']', 'MyGroup');
         }
 
-        $this->validator->validate($array, new All($constraints));
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate($array, new All($constraints));
     }
 
     public function getValidArguments()

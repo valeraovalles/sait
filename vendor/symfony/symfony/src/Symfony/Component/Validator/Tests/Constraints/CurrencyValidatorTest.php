@@ -15,32 +15,40 @@ use Symfony\Component\Intl\Util\IntlTestHelper;
 use Symfony\Component\Validator\Constraints\Currency;
 use Symfony\Component\Validator\Constraints\CurrencyValidator;
 
-class CurrencyValidatorTest extends AbstractConstraintValidatorTest
+class CurrencyValidatorTest extends \PHPUnit_Framework_TestCase
 {
+    protected $context;
+    protected $validator;
+
     protected function setUp()
     {
-        IntlTestHelper::requireFullIntl($this);
+        IntlTestHelper::requireIntl($this);
 
-        parent::setUp();
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new CurrencyValidator();
+        $this->validator->initialize($this->context);
     }
 
-    protected function createValidator()
+    protected function tearDown()
     {
-        return new CurrencyValidator();
+        $this->context = null;
+        $this->validator = null;
     }
 
     public function testNullIsValid()
     {
-        $this->validator->validate(null, new Currency());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(null, new Currency());
     }
 
     public function testEmptyStringIsValid()
     {
-        $this->validator->validate('', new Currency());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate('', new Currency());
     }
 
     /**
@@ -56,9 +64,10 @@ class CurrencyValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidCurrencies($currency)
     {
-        $this->validator->validate($currency, new Currency());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate($currency, new Currency());
     }
 
     /**
@@ -67,10 +76,10 @@ class CurrencyValidatorTest extends AbstractConstraintValidatorTest
     public function testValidCurrenciesWithCountrySpecificLocale($currency)
     {
         \Locale::setDefault('en_GB');
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
         $this->validator->validate($currency, new Currency());
-
-        $this->assertNoViolation();
     }
 
     public function getValidCurrencies()
@@ -93,11 +102,13 @@ class CurrencyValidatorTest extends AbstractConstraintValidatorTest
             'message' => 'myMessage'
         ));
 
-        $this->validator->validate($currency, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ value }}' => $currency,
+            ));
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '"'.$currency.'"',
-        ));
+        $this->validator->validate($currency, $constraint);
     }
 
     public function getInvalidCurrencies()

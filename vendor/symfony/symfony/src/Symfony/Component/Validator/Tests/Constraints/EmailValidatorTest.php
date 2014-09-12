@@ -14,25 +14,38 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\EmailValidator;
 
-class EmailValidatorTest extends AbstractConstraintValidatorTest
+class EmailValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    protected function createValidator()
+    protected $context;
+    protected $validator;
+
+    protected function setUp()
     {
-        return new EmailValidator(false);
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new EmailValidator();
+        $this->validator->initialize($this->context);
+    }
+
+    protected function tearDown()
+    {
+        $this->context = null;
+        $this->validator = null;
     }
 
     public function testNullIsValid()
     {
-        $this->validator->validate(null, new Email());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(null, new Email());
     }
 
     public function testEmptyStringIsValid()
     {
-        $this->validator->validate('', new Email());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate('', new Email());
     }
 
     /**
@@ -48,9 +61,10 @@ class EmailValidatorTest extends AbstractConstraintValidatorTest
      */
     public function testValidEmails($email)
     {
-        $this->validator->validate($email, new Email());
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate($email, new Email());
     }
 
     public function getValidEmails()
@@ -71,11 +85,13 @@ class EmailValidatorTest extends AbstractConstraintValidatorTest
             'message' => 'myMessage'
         ));
 
-        $this->validator->validate($email, $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ value }}' => $email,
+            ));
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '"'.$email.'"',
-        ));
+        $this->validator->validate($email, $constraint);
     }
 
     public function getInvalidEmails()
@@ -84,6 +100,7 @@ class EmailValidatorTest extends AbstractConstraintValidatorTest
             array('example'),
             array('example@'),
             array('example@localhost'),
+            array('example@example.com@example.com'),
         );
     }
 }

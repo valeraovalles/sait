@@ -19,16 +19,31 @@ function choice_callback()
     return array('foo', 'bar');
 }
 
-class ChoiceValidatorTest extends AbstractConstraintValidatorTest
+class ChoiceValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    protected function createValidator()
-    {
-        return new ChoiceValidator();
-    }
+    protected $context;
+    protected $validator;
 
     public static function staticCallback()
     {
         return array('foo', 'bar');
+    }
+
+    protected function setUp()
+    {
+        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
+        $this->validator = new ChoiceValidator();
+        $this->validator->initialize($this->context);
+
+        $this->context->expects($this->any())
+            ->method('getClassName')
+            ->will($this->returnValue(__CLASS__));
+    }
+
+    protected function tearDown()
+    {
+        $this->context = null;
+        $this->validator = null;
     }
 
     /**
@@ -46,9 +61,10 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
 
     public function testNullIsValid()
     {
-        $this->validator->validate(null, new Choice(array('choices' => array('foo', 'bar'))));
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(null, new Choice(array('choices' => array('foo', 'bar'))));
     }
 
     /**
@@ -71,18 +87,20 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
     {
         $constraint = new Choice(array('choices' => array('foo', 'bar')));
 
-        $this->validator->validate('bar', $constraint);
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate('bar', $constraint);
     }
 
     public function testValidChoiceCallbackFunction()
     {
         $constraint = new Choice(array('callback' => __NAMESPACE__.'\choice_callback'));
 
-        $this->validator->validate('bar', $constraint);
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate('bar', $constraint);
     }
 
     public function testValidChoiceCallbackClosure()
@@ -91,30 +109,30 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
             return array('foo', 'bar');
         }));
 
-        $this->validator->validate('bar', $constraint);
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate('bar', $constraint);
     }
 
     public function testValidChoiceCallbackStaticMethod()
     {
         $constraint = new Choice(array('callback' => array(__CLASS__, 'staticCallback')));
 
-        $this->validator->validate('bar', $constraint);
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate('bar', $constraint);
     }
 
     public function testValidChoiceCallbackContextMethod()
     {
-        // search $this for "staticCallback"
-        $this->setObject($this);
-
         $constraint = new Choice(array('callback' => 'staticCallback'));
 
-        $this->validator->validate('bar', $constraint);
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate('bar', $constraint);
     }
 
     public function testMultipleChoices()
@@ -124,9 +142,10 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
             'multiple' => true,
         ));
 
-        $this->validator->validate(array('baz', 'bar'), $constraint);
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(array('baz', 'bar'), $constraint);
     }
 
     public function testInvalidChoice()
@@ -136,11 +155,13 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
             'message' => 'myMessage',
         ));
 
-        $this->validator->validate('baz', $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ value }}' => 'baz',
+            ), null, null);
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '"baz"',
-        ));
+        $this->validator->validate('baz', $constraint);
     }
 
     public function testInvalidChoiceMultiple()
@@ -151,11 +172,13 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
             'multiple' => true,
         ));
 
-        $this->validator->validate(array('foo', 'baz'), $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ value }}' => 'baz',
+            ));
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '"baz"',
-        ));
+        $this->validator->validate(array('foo', 'baz'), $constraint);
     }
 
     public function testTooFewChoices()
@@ -167,15 +190,13 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
             'minMessage' => 'myMessage',
         ));
 
-        $value = array('foo');
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ limit }}' => 2,
+            ), null, 2);
 
-        $this->setValue($value);
-
-        $this->validator->validate($value, $constraint);
-
-        $this->assertViolation('myMessage', array(
-            '{{ limit }}' => 2,
-        ), 'property.path', $value, 2);
+        $this->validator->validate(array('foo'), $constraint);
     }
 
     public function testTooManyChoices()
@@ -187,15 +208,13 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
             'maxMessage' => 'myMessage',
         ));
 
-        $value = array('foo', 'bar', 'moo');
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ limit }}' => 2,
+            ), null, 2);
 
-        $this->setValue($value);
-
-        $this->validator->validate($value, $constraint);
-
-        $this->assertViolation('myMessage', array(
-            '{{ limit }}' => 2,
-        ), 'property.path', $value, 2);
+        $this->validator->validate(array('foo', 'bar', 'moo'), $constraint);
     }
 
     public function testNonStrict()
@@ -205,10 +224,11 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
             'strict' => false,
         ));
 
+        $this->context->expects($this->never())
+            ->method('addViolation');
+
         $this->validator->validate('2', $constraint);
         $this->validator->validate(2, $constraint);
-
-        $this->assertNoViolation();
     }
 
     public function testStrictAllowsExactValue()
@@ -218,9 +238,10 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
             'strict' => true,
         ));
 
-        $this->validator->validate(2, $constraint);
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(2, $constraint);
     }
 
     public function testStrictDisallowsDifferentType()
@@ -231,11 +252,13 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
             'message' => 'myMessage'
         ));
 
-        $this->validator->validate('2', $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ value }}' => '2',
+            ));
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '"2"',
-        ));
+        $this->validator->validate('2', $constraint);
     }
 
     public function testNonStrictWithMultipleChoices()
@@ -246,9 +269,10 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
             'strict' => false
         ));
 
-        $this->validator->validate(array('2', 3), $constraint);
+        $this->context->expects($this->never())
+            ->method('addViolation');
 
-        $this->assertNoViolation();
+        $this->validator->validate(array('2', 3), $constraint);
     }
 
     public function testStrictWithMultipleChoices()
@@ -260,10 +284,12 @@ class ChoiceValidatorTest extends AbstractConstraintValidatorTest
             'multipleMessage' => 'myMessage',
         ));
 
-        $this->validator->validate(array(2, '3'), $constraint);
+        $this->context->expects($this->once())
+            ->method('addViolation')
+            ->with('myMessage', array(
+                '{{ value }}' => '3',
+            ));
 
-        $this->assertViolation('myMessage', array(
-            '{{ value }}' => '"3"',
-        ));
+        $this->validator->validate(array(2, '3'), $constraint);
     }
 }
