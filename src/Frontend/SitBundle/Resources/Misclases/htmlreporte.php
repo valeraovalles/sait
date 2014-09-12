@@ -68,7 +68,8 @@ class htmlreporte
             foreach ($tarea as $t) {
                 
                 if($existe!=$t->getProyecto()->getId()){
-                    $proyectos .="<div><b>PROYECTO: ".strtoupper($t->getProyecto()->getNombre())." (".$t->getProyecto()->getPorcentaje()."% de avance)</b></div>";
+                    if($t->getPorcentaje()==100)$estatus="(En revisión)"; else $estatus=null;
+                    $proyectos .="<div><b>PROYECTO: ".strtoupper($t->getProyecto()->getNombre())." (".$t->getProyecto()->getPorcentaje()."% de avance) ".$estatus."</b></div>";
                     $proyectos .="<div>&nbsp;&nbsp;&nbsp;".ucfirst($t->getProyecto()->getDescripcion())."</div>";
                     $proyectos .="<b><br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TAREAS</b></div>";
                 }
