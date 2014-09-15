@@ -115,7 +115,7 @@ class SolicitudesController extends Controller
                         'TransporteBundle:Correo:solicitud_transporte.html.twig',
                         array('perfil' => $perfil,
                             'solicitud' => $entity,
-                            'status' => $estatus,
+                            'status' => $entity->getEstatus(),
                         )
                     ), 
                 'text/html');

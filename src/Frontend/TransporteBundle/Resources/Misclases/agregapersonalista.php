@@ -11,7 +11,7 @@ class agregarpersonalista
     
         if(!empty($datos))
         {
-            $html="<table class="tablaajaxlist">
+            $html="<table class='tablaajaxlist'>
                     <tr>
                         <th>NOMBRES</th>
                         <th>APELLIDOS</th>
@@ -71,4 +71,4 @@ class agregarpersonalista
                     </tr>
 
                 </table>
-   <?php } else echo "No hay personas agregadas"?>
+   <?php } else echo "No hay personas agregadas"; ?>
