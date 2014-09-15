@@ -341,7 +341,7 @@ class ActividadController extends Controller
                 }
             }
 
-            if($e->getUbicacion()==3 or $e->getUbicacion()==4){
+            if($e->getUbicacion()==3 or $e->getUbicacion()==4 or ($e->getUbicacion()==1 and $e->getTiemporeal()!=null)){
                 
                 $r=$this->retardoactividad($e->getId());
                 $tiemporeal=explode("-",$e->getTiemporeal());
