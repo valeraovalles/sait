@@ -282,20 +282,19 @@ class ActividadController extends Controller
         $tiemporeal=$act->getTiemporeal();
         $tiempo=array();
         if($tiemporeal==null){
-            $tiempo[]=$intervalo->d;
-            $tiempo[]=$intervalo->h;
-            $tiempo[]=$intervalo->i;
-            $tiempo[]=$intervalo->s;
+            $tiempo=$intervalo->d.'-'.$intervalo->h.'-'.$intervalo->i.'-'.$intervalo->s;
         }else{
 
             $tiempo=$this->sumartiempo($tiemporeal, $intervalo->d.'-'.$intervalo->h.'-'.$intervalo->i.'-'.$intervalo->s);
         }
+        
+
         //guardo fecha fin y tiempo real
         $query = $em->createQuery('update ProyectoBundle:Actividad x set x.fin= :fin, x.tiemporeal= :tr WHERE x.id = :idactividad');
         $query->setParameter('fin',$fa);
         $query->setParameter('tr',$tiempo);
         $query->setParameter('idactividad', $act->getId());
-        $query->execute();    
+        $query->execute();  
     }
     
     /**
@@ -569,7 +568,6 @@ class ActividadController extends Controller
         
         //en revision
         if($num==3){
-
             //envio correo de revision
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
             $responsable=$act->getTarea()->getProyecto()->getResponsable();
@@ -587,10 +585,7 @@ class ActividadController extends Controller
 
             $this->get('mailer')->send($message);  
             //fin correo revision
-            
             $this->guardasumatiempo($act);
-            
-
         }
 
         else if($num==4){
