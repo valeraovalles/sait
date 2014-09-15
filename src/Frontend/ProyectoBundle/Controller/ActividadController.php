@@ -211,21 +211,91 @@ class ActividadController extends Controller
 
     public function retardoactividad($idactividad){
         $em = $this->getDoctrine()->getManager();
-        $e = $em->getRepository('ProyectoBundle:Actividad')->find($idactividad);
-        
-        $comienzo=new \DateTime($e->getComienzo()->format("d-m-Y G:i:s"));
-        $fin=new \DateTime($e->getFin()->format("d-m-Y G:i:s"));
+        $act = $em->getRepository('ProyectoBundle:Actividad')->find($idactividad);
+        $fa=new \DateTime(\date("d-m-Y G:i:s"));
 
-        //sumo el tiempo de la actividad 
-        if($e->getTipotiempo()==1)$tt='day';
-        else if($e->getTipotiempo()==2)$tt='hour';
-        else if($e->getTipotiempo()==3)$tt='minute';
-        $duracionestimada = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $comienzo->format("d-m-Y G:i:s") ) ) ;
+        //calculo el tiempo estimado de la actividad 
+        if($act->getTipotiempo()==1)$tt='day';
+        else if($act->getTipotiempo()==2)$tt='hour';
+        else if($act->getTipotiempo()==3)$tt='minute';
+        $duracionestimada = strtotime ( '+'.$act->getTiempoestimado().' '.$tt , strtotime ( $fa->format("d-m-Y G:i:s") ) ) ;
         $duracionestimada = date ( 'Y-m-d G:i:s' , $duracionestimada );
         $duracionestimada=new \DateTime($duracionestimada);
         
-        if(strtotime($duracionestimada->format("d-m-Y G:i:s"))>= strtotime($fin->format("d-m-Y G:i:s"))) return 'false'; else return 'true';
+        //convierto los datos de tiempo real
+        $tiemporeal=$act->getTiemporeal();
+        $tiemporeal=  explode("-", $tiemporeal);
+        
+        //dia a segundo
+        $diasegundo=$tiemporeal[0]*86400;
+        
+        //hora a segundo
+        $horasegundo=$tiemporeal[1]*3600;
+
+        //minuto a segundo
+        $minutosegundo=$tiemporeal[2]*60;
+        
+        $segundototal=$diasegundo+$horasegundo+$minutosegundo+$tiemporeal[3];
+
+        $duracionreal = strtotime ( '+'.$segundototal.' second', strtotime ( $fa->format("d-m-Y G:i:s") ) ) ;
+        $duracionreal = date ( 'Y-m-d G:i:s' , $duracionreal );
+        $duracionreal=new \DateTime($duracionreal);
+        
+        if(strtotime($duracionreal->format("d-m-Y G:i:s")) >= strtotime($duracionestimada->format("d-m-Y G:i:s"))) return 'true'; else return 'false';
                 
+    }
+    
+    //suma el tiempo si la actividad estuvo en pausa o devualta de rendicion
+    public function sumartiempo($tanterior,$tnuevo) {
+        $fa1=new \DateTime(\date("d-m-Y G:i:s"));
+        $fa2=$fa1;
+        
+          //convierto los datos de tiempo real
+        $tanterior=  explode("-", $tanterior);
+        $tnuevo=  explode("-", $tnuevo);
+        //dia a segundo
+        $diasegundo=($tanterior[0]+$tnuevo[0])*86400;
+        //hora a segundo
+        $horasegundo=($tanterior[1]+$tnuevo[1])*3600;
+        //minuto a segundo
+        $minutosegundo=($tanterior[2]+$tnuevo[2])*60;
+        $segundototal=$diasegundo+$horasegundo+$minutosegundo+$tanterior[3]+$tnuevo[3];
+        
+        $duracion = strtotime ( '+'.$segundototal.' second', strtotime ( $fa1->format("d-m-Y G:i:s") ) ) ;
+        $duracion = date ( 'Y-m-d G:i:s' , $duracion );
+        $duracion=new \DateTime($duracion);      
+        
+        $intervalo=$duracion->diff($fa2);
+        
+        return $intervalo->d.'-'.$intervalo->h.'-'.$intervalo->i.'-'.$intervalo->s;
+    }
+    
+    public function guardasumatiempo($act) {
+        $em = $this->getDoctrine()->getManager();
+        
+        //calculo fecha fin y tiempo real
+        $comienzo=new \DateTime($act->getComienzo()->format("d-m-Y G:i:s"));
+        $fa=new \DateTime(\date("d-m-Y G:i:s"));
+        $intervalo=$comienzo->diff($fa);
+
+        //verifico si ya hay nun tiempo real guardado y lo sumo
+        $tiemporeal=$act->getTiemporeal();
+        $tiempo=array();
+        if($tiemporeal==null){
+            $tiempo[]=$intervalo->d;
+            $tiempo[]=$intervalo->h;
+            $tiempo[]=$intervalo->i;
+            $tiempo[]=$intervalo->s;
+        }else{
+
+            $tiempo=$this->sumartiempo($tiemporeal, $intervalo->d.'-'.$intervalo->h.'-'.$intervalo->i.'-'.$intervalo->s);
+        }
+        //guardo fecha fin y tiempo real
+        $query = $em->createQuery('update ProyectoBundle:Actividad x set x.fin= :fin, x.tiemporeal= :tr WHERE x.id = :idactividad');
+        $query->setParameter('fin',$fa);
+        $query->setParameter('tr',$tiempo);
+        $query->setParameter('idactividad', $act->getId());
+        $query->execute();    
     }
     
     /**
@@ -334,8 +404,6 @@ class ActividadController extends Controller
             $em = $this->getDoctrine()->getManager();
             $entity->setUbicacion(1);
             $entity->setTarea($tarea);
-            $entity->setEstatuscomienzo(false);
-            $entity->setEstatusfin(false);
             $entity->setCorreoretardoproceso(false);
             $em->persist($entity);
             $em->flush();
@@ -455,7 +523,6 @@ class ActividadController extends Controller
         
         else if($direccion=='der' and $num!=4)$num=$num+1;
         else if($direccion=='izq' and $num!=1) $num=$num-1;
-            
         
         if($direccion=='der' and ($num==2 or $num==3 )){
             //valido que el que mueva la tarjeta sea unicamente el responsable
@@ -480,18 +547,18 @@ class ActividadController extends Controller
            
             //comienzo el conteo
             $fa=new \DateTime(\date("d-m-Y G:i:s"));
-            $query = $em->createQuery('update ProyectoBundle:Actividad x set x.comienzo= :comienzo, x.estatuscomienzo=true WHERE x.estatuscomienzo=false and x.id = :idactividad');
+            $query = $em->createQuery('update ProyectoBundle:Actividad x set x.comienzo= :comienzo WHERE x.id = :idactividad');
             $query->setParameter('comienzo',$fa);
             $query->setParameter('idactividad', $id);
             $query->execute();  
             
             //comienzo el conteo y pongo null en caso de que se haya guardado el fin
             $fa=new \DateTime(\date("d-m-Y G:i:s"));
-            $query = $em->createQuery('update ProyectoBundle:Actividad x set x.fin=null,x.estatusfin=false,x.tiemporeal=null WHERE x.id = :idactividad');
+            $query = $em->createQuery('update ProyectoBundle:Actividad x set x.fin=null WHERE x.id = :idactividad');
             $query->setParameter('idactividad', $id);
-            $query->execute();  
+            $query->execute();   
             
-        
+
         }
 
         //actualizo campos en actividades
@@ -500,9 +567,11 @@ class ActividadController extends Controller
         $query->setParameter('idactividad', $id);
         $query->execute(); 
         
+        //en revision
         if($num==3){
+
+            //envio correo de revision
             $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-            
             $responsable=$act->getTarea()->getProyecto()->getResponsable();
             foreach ($responsable as $v) {
                 $arrayresponsable[]=$v->getUser()->getUsername()."@telesurtv.net";
@@ -517,31 +586,25 @@ class ActividadController extends Controller
                 ), 'text/html');
 
             $this->get('mailer')->send($message);  
+            //fin correo revision
             
-            //calculo fecha fin y tiempo real
-            $comienzo=new \DateTime($act->getComienzo()->format("d-m-Y G:i:s"));
-            $fa=new \DateTime(\date("d-m-Y G:i:s"));
-            $intervalo=$comienzo->diff($fa);
+            $this->guardasumatiempo($act);
             
-            //guardo fecha fin y tiempo real
-            $fa=new \DateTime(\date("d-m-Y G:i:s"));
-            $query = $em->createQuery('update ProyectoBundle:Actividad x set x.fin= :fin, x.estatusfin=true, x.tiemporeal= :tr WHERE x.estatusfin!=true and x.id = :idactividad');
-            $query->setParameter('fin',$fa);
-            $query->setParameter('tr',$intervalo->d.'-'.$intervalo->h.'-'.$intervalo->i.'-'.$intervalo->s);
-            $query->setParameter('idactividad', $id);
-            $query->execute();  
+
         }
-        
+
         else if($num==4){
-            $r=$this->retardoactividad($id);
+            //$r=$this->retardoactividad($id);
             $query = $em->createQuery('update ProyectoBundle:Actividad x set x.retardo= :retardo WHERE x.id = :idactividad');
             $query->setParameter('retardo',$r);
             $query->setParameter('idactividad', $id);
             $query->execute();  
         }
         
-        else if($num==1){
-            $query = $em->createQuery('update ProyectoBundle:Actividad x set x.comienzo=null, x.estatuscomienzo=false, x.tiemporeal= null,x.fin=null,x.estatusfin=false WHERE x.id = :idactividad');
+       else if($num==1){
+            $this->guardasumatiempo($act);
+           
+            $query = $em->createQuery('update ProyectoBundle:Actividad x set x.comienzo=null,x.fin=null WHERE x.id = :idactividad');
             $query->setParameter('idactividad', $id);
             $query->execute();              
         }
