@@ -523,7 +523,7 @@ class ActividadController extends Controller
         else if($direccion=='der' and $num!=4)$num=$num+1;
         else if($direccion=='izq' and $num!=1) $num=$num-1;
         
-        if($direccion=='der' and ($num==2 or $num==3 )){
+        if($direccion=='der' and ($num==2 or $num==3 ) or $direccion=='izq' and $num==1){
             //valido que el que mueva la tarjeta sea unicamente el responsable
             if($act->getResponsable()->getId()!=$idusuario){
                 $this->get('session')->getFlashBag()->add('alert', 'Usted no es el responsable de esta actividad, por lo tanto no puede moverla.');
