@@ -341,6 +341,7 @@ class ActividadController extends Controller
                 }
             }
 
+            //valido que la tarjeta no sea movida por otras personas
             if($e->getUbicacion()==3 or $e->getUbicacion()==4 or ($e->getUbicacion()==1 and $e->getTiemporeal()!=null)){
                 
                 $r=$this->retardoactividad($e->getId());
