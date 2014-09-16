@@ -24,7 +24,8 @@
                   {% if is_granted('ROLE_TRANSPORTE') %} 
                     <li><a href="{{ path('solicitudes_new') }}">CREAR</a></li>
                     <li><a href="{{ path('missolicitudes') }}"><span>MIS SOLICITUDES</span></a></li>
-                  {% elseif is_granted('ROLE_TRANSPORTE_ADMINISTRADOR') %} 
+                  {% endif %}
+                  {% if is_granted('ROLE_TRANSPORTE_ADMINISTRADOR') %} 
                     <li><a href="{{ path('solicitudes') }}">ADMINISTRAR</a></li>
                   {% endif %}                  
                </ul>

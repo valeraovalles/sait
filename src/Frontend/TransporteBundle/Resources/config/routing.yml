@@ -31,7 +31,7 @@ solicitudes_show:
     defaults: { _controller: "TransporteBundle:Solicitudes:show" }
 
 showmissolicitudes:
-    pattern:  /solicitudes/mis_solicitudes/{id}/show
+    pattern:  /mis_solicitudes/{id}/show
     defaults: { _controller: "TransporteBundle:Solicitudes:showmissolicitudes" }
 
 

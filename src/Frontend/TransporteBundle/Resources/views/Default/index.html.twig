@@ -15,7 +15,7 @@
 
 {% block body -%}
     {{ parent() }}
-    {% if is_granted('ROLE_TRANSPORTE') %}
+    {% if is_granted('ROLE_TRANSPORTE') or (is_granted('ROLE_TRANSPORTE') and is_granted('ROLE_TRANSPORTE_ADMINISTRADOR'))%}
         <table align=center width="30%"> 
             <tr>
                 <th>
