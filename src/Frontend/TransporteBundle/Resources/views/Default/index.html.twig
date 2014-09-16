@@ -15,16 +15,37 @@
 
 {% block body -%}
     {{ parent() }}
-    <table align=center width="30%"> 
-        <tr>
-            <th>
-                Nueva Solicitud<br>
-                <a href="{{ path('solicitudes_new') }}"><img src="{{asset('images/transporte/transporte.jpg')}}" width=100px></a>
-            </th>
-            <th>
-                Mis Solicitudes<br>
-                <a href="{{ path('missolicitudes') }}"><img src="{{asset('images/transporte/lupa.png')}}" width=80px></a> 
-            </th>
-        </tr>      
-    </table>
+    {% if is_granted('ROLE_TRANSPORTE') %}
+        <table align=center width="30%"> 
+            <tr>
+                <th>
+                    Nueva Solicitud<br>
+                    <a href="{{ path('solicitudes_new') }}"><img src="{{asset('images/transporte/transporte.jpg')}}" width=100px></a>
+                </th>
+                <th>
+                    Mis Solicitudes<br>
+                    <a href="{{ path('missolicitudes') }}"><img src="{{asset('images/transporte/lupa.png')}}" width=80px></a> 
+                </th>
+            </tr>      
+        </table>
+    {% elseif is_granted('ROLE_TRANSPORTE_ADMINISTRADOR') %}
+        <table align=center width="30%"> 
+            <tr>
+                <th>
+                    Solicitudes<br>
+                    <a href="{{ path('solicitudes') }}"><img src="{{asset('images/transporte/transporte.jpg')}}" width=100px></a>
+                </th>
+                <th>
+                    Personal Externo<br>
+                    <a href="{{ path('personalexterno_list') }}"><img src="{{ asset("images/User_male.png") }}" width=80px></a> 
+                </th>
+                <th>
+                    Vehiculos<br>
+                    <a href="{{ path('vehiculos_list') }}"><img src="{{asset('images/transporte/transporte.jpg')}}" width=100px></a> 
+                </th>                
+            </tr>      
+        </table>
+    {% endif %}
+
+
 {% endblock %}

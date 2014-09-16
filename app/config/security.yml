@@ -128,3 +128,10 @@ security:
         - { path: ^/proyecto/tarea, roles: ROLE_USER}
         - { path: ^/proyecto/actividad, roles: ROLE_USER}
         - { path: ^/proyecto/comentarioactividad, roles: ROLE_USER}
+    
+    #TRANSPORTE
+        - { path: ^/transporte/vehiculos, roles: ROLE_TRANSPORTE_ADMINISTRADOR}
+        - { path: ^/transporte/personalexterno, roles: ROLE_TRANSPORTE_ADMINISTRADOR}
+        - { path: ^/transporte/solicitudes/new, roles: ROLE_TRANSPORTE}
+        - { path: ^/transporte/mis_solicitudes, roles: ROLE_TRANSPORTE}
+        - { path: ^/transporte/solicitudes, roles: ROLE_TRANSPORTE_ADMINISTRADOR}

@@ -21,11 +21,12 @@
             <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">SOLICITUDES<b class="caret"></b></a>
                <ul class="dropdown-menu">
-                 <li><a href="{{ path('solicitudes_new') }}">CREAR</a></li>
-                 {% if is_granted('ROLE_TRANSPORTE_ADMINISTRADOR') %} 
+                  {% if is_granted('ROLE_TRANSPORTE') %} 
+                    <li><a href="{{ path('solicitudes_new') }}">CREAR</a></li>
+                    <li><a href="{{ path('missolicitudes') }}"><span>MIS SOLICITUDES</span></a></li>
+                  {% elseif is_granted('ROLE_TRANSPORTE_ADMINISTRADOR') %} 
                     <li><a href="{{ path('solicitudes') }}">ADMINISTRAR</a></li>
-                  {% endif %} 
-                  <li><a href="{{ path('missolicitudes') }}"><span>MIS SOLICITUDES</span></a></li>
+                  {% endif %}                  
                </ul>
             </li>
         </ul>
