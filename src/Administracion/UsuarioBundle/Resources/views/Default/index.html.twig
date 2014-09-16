@@ -116,17 +116,18 @@
                 </div>
             {% endif %}
 
-
+            {#
             <div class="col-sm-6 col-md-4">
                 <a href="javascript:void(0)" id="tr">TRANSPORTE<br><img src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
-{#
-            {% if is_granted('ROLE_TRANSPORTE') %}
+            #}
+
+            {% if is_granted('ROLE_TRANSPORTE') or is_granted('ROLE_TRANSPORTE_ADMINISTRADOR') %}
                 <div class="col-sm-6 col-md-4">
                     <a href="{{ path('transporte')}}" id="tr">TRANSPORTE<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
                 </div>
             {% endif %}
-#}
+
             {# UNA SOLA JORNADA#}
             <div class="col-sm-6 col-md-4">
               <a href="{{ path('mercal_homepagenum',{'idjornada':9})}}">JORNADAS<br><img id="licencias" src="{{ asset("images/jornada.png") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
