@@ -297,10 +297,70 @@ class ActividadController extends Controller
         $query->execute();  
     }
     
+    public function calculacuentaregresiva($e) {
+        $cuentaregresiva=array();
+        //fecha fin y tiempo real
+        $fa1=new \DateTime(\date("d-m-Y G:i:s"));
+        $fa2=$fa1;
+
+        //sumo el tiempo de la actividad 
+        if($e->getTipotiempo()==1)$tt='day';
+        else if($e->getTipotiempo()==2)$tt='hour';
+        else if($e->getTipotiempo()==3)$tt='minute';
+        $tiempoestimado = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $fa1->format("d-m-Y G:i:s") ) ) ;
+
+
+        //sumo tiempo usado
+        $tiemporeal=$e->getTiemporeal();
+        
+        if($tiemporeal!=null){
+        
+            $tiemporeal=  explode("-", $tiemporeal);
+            //dia a segundo
+            $diasegundo=$tiemporeal[0]*86400;
+            //hora a segundo
+            $horasegundo=$tiemporeal[1]*3600;
+            //minuto a segundo
+            $minutosegundo=$tiemporeal[2]*60;
+            $segundototal=$diasegundo+$horasegundo+$minutosegundo+$tiemporeal[3];
+
+            $tiempoconsumido = strtotime ( '+'.$segundototal.' second' , strtotime ( $fa2->format("d-m-Y G:i:s") ) ) ;
+
+
+            if($tiempoconsumido>$tiempoestimado)
+                $cuentaregresiva[$e->getId()]=0;
+            else{
+
+                //convierto ambas fechas en datetime
+                $tiempoestimado = date ( 'Y-m-d G:i:s' , $tiempoestimado );
+                $tiempoestimado=new \DateTime($tiempoestimado);
+                $tiempoconsumido = date ( 'Y-m-d G:i:s' , $tiempoconsumido );
+                $tiempoconsumido=new \DateTime($tiempoconsumido);
+                $intervalo=$tiempoestimado->diff($tiempoconsumido);
+
+                $cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
+            }
+        } else{
+                //convierto ambas fechas en datetime
+                $tiempoestimado = date ( 'Y-m-d G:i:s' , $tiempoestimado );
+                $tiempoestimado=new \DateTime($tiempoestimado);
+                $intervalo=$tiempoestimado->diff($fa2);
+                $cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
+  
+        }
+        
+        return $cuentaregresiva;
+        
+        
+  
+        
+    }
+    
     /**
      * Lists all Actividad entities.
      *
      */
+    
     public function indexAction($idtarea)
     {
         $em = $this->getDoctrine()->getManager();
@@ -320,28 +380,13 @@ class ActividadController extends Controller
         $duracionactividad=array();
         foreach ($entities as $e) {
             if($e->getUbicacion()==2){
-                //fecha fin y tiempo real
-                $comienzo=new \DateTime($e->getComienzo()->format("d-m-Y G:i:s"));
-                $fa=new \DateTime(\date("d-m-Y G:i:s"));
-            
-                //sumo el tiempo de la actividad 
-                if($e->getTipotiempo()==1)$tt='day';
-                else if($e->getTipotiempo()==2)$tt='hour';
-                else if($e->getTipotiempo()==3)$tt='minute';
-                $nuevafecha = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $comienzo->format("d-m-Y G:i:s") ) ) ;
-                $nuevafecha = date ( 'Y-m-d G:i:s' , $nuevafecha );
-                $totalfecha=new \DateTime($nuevafecha);
-                
-                
-                if(strtotime($totalfecha->format("d-m-Y G:i:s")) < strtotime($fa->format("d-m-Y G:i:s")))$cuentaregresiva[$e->getId()]=0;
-                else{
 
-                    $intervalo=$totalfecha->diff($fa);
-                    $cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
-                }
+                $cuentaregresiva=$this->calculacuentaregresiva($e);
             }
 
-            //valido que la tarjeta no sea movida por otras personas
+            
+            
+            //muestro el tiempo que lleva consumido
             if($e->getUbicacion()==3 or $e->getUbicacion()==4 or ($e->getUbicacion()==1 and $e->getTiemporeal()!=null)){
                 
                 $r=$this->retardoactividad($e->getId());
