@@ -544,6 +544,7 @@ class ActividadController extends Controller
             'entity'      => $entity,
         ));
     }
+    
     public function ubicacionAction($id,$direccion)
     {
         $em = $this->getDoctrine()->getManager();
@@ -585,8 +586,9 @@ class ActividadController extends Controller
             $query->setParameter('idresponsable',$act->getResponsable()->getId());
             $actx = $query->getResult();
     
+            
             if(!empty($actx)){
-              $this->get('session')->getFlashBag()->add('alert', 'Tiene una actividad en curso en la tarea "'.  strtoupper($act->getTarea()->getNombre()).'" del proyecto "'.strtoupper($act->getTarea()->getProyecto()->getNombre()).'", ¡debe terminarla!.');
+              $this->get('session')->getFlashBag()->add('alert', 'Tiene una actividad en curso en la tarea "'.  strtoupper($actx[0]->getTarea()->getNombre()).'" del proyecto "'.strtoupper($actx[0]->getTarea()->getProyecto()->getNombre()).'", ¡debe terminarla!.');
              return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId())));
            }   
            
