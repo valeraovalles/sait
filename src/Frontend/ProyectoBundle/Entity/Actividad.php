@@ -51,13 +51,6 @@ class Actividad
     /**
      * @var string
      *
-     * @ORM\Column(name="estatuscomienzo", type="boolean", nullable=true)
-     */
-private $estatuscomienzo;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="retardo", type="boolean", nullable=true)
      */
     private $retardo;
@@ -69,14 +62,7 @@ private $estatuscomienzo;
      */
     private $correoretardoproceso;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="estatusfin", type="boolean", nullable=true)
-     */
-    private $estatusfin;
-    
-    
+   
     /**
      * @var string
      *
@@ -151,52 +137,6 @@ private $estatuscomienzo;
     public function getUbicacion()
     {
         return $this->ubicacion;
-    }
-    
-    /**
-     * Set estatuscomienzo
-     *
-     * @param integer $estatuscomienzo
-     * @return Actividad
-     */
-    public function setEstatuscomienzo($estatuscomienzo)
-    {
-        $this->estatuscomienzo = $estatuscomienzo;
-
-        return $this;
-    }
-
-    /**
-     * Get estatuscomienzo
-     *
-     * @return integer 
-     */
-    public function getEstatuscomienzo()
-    {
-        return $this->estatuscomienzo;
-    }
-    
-    /**
-     * Set estatusfin
-     *
-     * @param integer $estatusfin
-     * @return Actividad
-     */
-    public function setEstatusfin($estatusfin)
-    {
-        $this->estatusfin = $estatusfin;
-
-        return $this;
-    }
-
-    /**
-     * Get estatusfin
-     *
-     * @return integer 
-     */
-    public function getEstatusfin()
-    {
-        return $this->estatusfin;
     }
     
     /**

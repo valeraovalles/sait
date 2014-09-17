@@ -24,6 +24,7 @@ class Solicitudes
 
      /**
      * @ORM\OneToMany(targetEntity="Asignaciones", mappedBy="Solicitudes")
+     * @Assert\NotBlank()
      */
     private $asignaciones;
  
