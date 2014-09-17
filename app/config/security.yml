@@ -126,6 +126,7 @@ security:
         - { path: ^/proyecto/comentarioactividad/edit, roles: ROLE_PROYECTO_ADMIN}    
         - { path: ^/proyecto/proyecto, roles: ROLE_USER, roles:  ROLE_PROYECTO}
         - { path: ^/proyecto/tarea, roles: ROLE_USER}
+        - { path: ^/proyecto/index, roles: ROLE_USER}
         - { path: ^/proyecto/actividad, roles: ROLE_USER}
         - { path: ^/proyecto/comentarioactividad, roles: ROLE_USER}
     

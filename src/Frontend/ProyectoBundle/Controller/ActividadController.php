@@ -664,7 +664,7 @@ class ActividadController extends Controller
         }
 
         else if($num==4){
-            //$r=$this->retardoactividad($id);
+            $r=$this->retardoactividad($id);
             $query = $em->createQuery('update ProyectoBundle:Actividad x set x.retardo= :retardo WHERE x.id = :idactividad');
             $query->setParameter('retardo',$r);
             $query->setParameter('idactividad', $id);
