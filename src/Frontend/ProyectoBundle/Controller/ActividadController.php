@@ -303,49 +303,76 @@ class ActividadController extends Controller
         $fa1=new \DateTime(\date("d-m-Y G:i:s"));
         $fa2=$fa1;
 
-        //sumo el tiempo de la actividad 
-        if($e->getTipotiempo()==1)$tt='day';
-        else if($e->getTipotiempo()==2)$tt='hour';
-        else if($e->getTipotiempo()==3)$tt='minute';
-        $tiempoestimado = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $fa1->format("d-m-Y G:i:s") ) ) ;
+
 
 
         //sumo tiempo usado
         $tiemporeal=$e->getTiemporeal();
-        
+
+        //si hay un tiempo guardado porque la actividad ya fue movida
         if($tiemporeal!=null){
+            
+            //sumo el tiempo de la actividad a la fecha actual y obtengo el estimado
+                if($e->getTipotiempo()==1)$tt='day';
+                else if($e->getTipotiempo()==2)$tt='hour';
+                else if($e->getTipotiempo()==3)$tt='minute';
+                $tiempoestimado = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $fa1->format("d-m-Y G:i:s") ) ) ;
         
-            $tiemporeal=  explode("-", $tiemporeal);
-            //dia a segundo
-            $diasegundo=$tiemporeal[0]*86400;
-            //hora a segundo
-            $horasegundo=$tiemporeal[1]*3600;
-            //minuto a segundo
-            $minutosegundo=$tiemporeal[2]*60;
-            $segundototal=$diasegundo+$horasegundo+$minutosegundo+$tiemporeal[3];
+            //sumo el tiempo utilizado a la fecha actual y obtengo el utilizado
+                $tiemporeal=  explode("-", $tiemporeal);
+                //dia a segundo
+                $diasegundo=$tiemporeal[0]*86400;
+                //hora a segundo
+                $horasegundo=$tiemporeal[1]*3600;
+                //minuto a segundo
+                $minutosegundo=$tiemporeal[2]*60;
+                $segundototal=$diasegundo+$horasegundo+$minutosegundo+$tiemporeal[3];
 
-            $tiempoconsumido = strtotime ( '+'.$segundototal.' second' , strtotime ( $fa2->format("d-m-Y G:i:s") ) ) ;
+                $tiempoconsumido = strtotime ( '+'.$segundototal.' second' , strtotime ( $fa2->format("d-m-Y G:i:s") ) ) ;
 
 
+            //si la actividad ya se ha retrasado coloco 0 en la cuenta regresiva
             if($tiempoconsumido>$tiempoestimado)
                 $cuentaregresiva[$e->getId()]=0;
             else{
 
-                //convierto ambas fechas en datetime
+                //si no se ha retrasado convierto ambas fecha para poder hacer un diff
                 $tiempoestimado = date ( 'Y-m-d G:i:s' , $tiempoestimado );
                 $tiempoestimado=new \DateTime($tiempoestimado);
+
                 $tiempoconsumido = date ( 'Y-m-d G:i:s' , $tiempoconsumido );
                 $tiempoconsumido=new \DateTime($tiempoconsumido);
+                
                 $intervalo=$tiempoestimado->diff($tiempoconsumido);
 
                 $cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
             }
         } else{
-                //convierto ambas fechas en datetime
-                $tiempoestimado = date ( 'Y-m-d G:i:s' , $tiempoestimado );
-                $tiempoestimado=new \DateTime($tiempoestimado);
-                $intervalo=$tiempoestimado->diff($fa2);
-                $cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
+            
+                //aca calculo el tiempo transcurrido cuando la actividad no ha sido pausada
+                //calculo el tiempo estimado sumando el tiempo de la actividad a la fecha de comienzo
+                //luego hago un dif entre el tiempo estimado y la fecha actual
+            
+                $comienzo=$tiemporeal=$e->getComienzo();
+            
+                if($e->getTipotiempo()==1)$tt='day';
+                else if($e->getTipotiempo()==2)$tt='hour';
+                else if($e->getTipotiempo()==3)$tt='minute';
+                $tiempoestimado = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $comienzo->format("d-m-Y G:i:s") ) ) ;
+                
+                $tiempoactual=strtotime ( $fa1->format("d-m-Y G:i:s") );
+                
+                if($tiempoactual>$tiempoestimado)
+                    $cuentaregresiva[$e->getId()]=0;
+                else{
+                
+                    $tiempoestimado = date ( 'Y-m-d G:i:s' , $tiempoestimado );
+                    $tiempoestimado=new \DateTime($tiempoestimado);
+
+                    $intervalo=$tiempoestimado->diff($fa1);
+
+                    $cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
+                }
   
         }
         
@@ -645,7 +672,9 @@ class ActividadController extends Controller
         }
         
        else if($num==1){
-            $this->guardasumatiempo($act);
+           
+            if($direccion!='nuev')
+                $this->guardasumatiempo($act);
            
             $query = $em->createQuery('update ProyectoBundle:Actividad x set x.comienzo=null,x.fin=null WHERE x.id = :idactividad');
             $query->setParameter('idactividad', $id);

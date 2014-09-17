@@ -83,6 +83,12 @@
                           <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
                           <div class="col-md-3">{% if act.ubicacion!=4 %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'der'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a>{% endif %}</div>
                         </div>
+                        
+                        {% if duracionactividad[act.id]['tiemposobrante'] is defined %}
+                            <div style="margin-top: 10px;margin-bottom: 10px;"><span data-toggle="tooltip" data-placement="top" title="Tiempo utilizado para la actividad en días|horas|minutos|segundos, verde indica que se culmino antes del tiempo estimado." style="color:black; cursor:pointer;" class="label label-success">{{ duracionactividad[act.id]['tiemposobrante'] }}<br></span></div>
+                        {% elseif duracionactividad[act.id]['tiemporetardo'] is defined %}
+                            <div style="margin-top: 10px;margin-bottom: 10px;"><span data-toggle="tooltip" data-placement="top" title="Tiempo utilizado para la actividad en días|horas|minutos|segundos, rojo indica que no se culmino en el tiempo estimado." style="color:black; cursor:pointer;" class="label label-danger">{{ duracionactividad[act.id]['tiemporetardo'] }}</span></div>
+                        {% endif %}
 
                     </div>                   
                 {% endfor %}
@@ -132,6 +138,8 @@
                         {% else %}
                             <div style="margin-top: 10px;margin-bottom: 10px;"><span style="color:black;" class="label label-danger">ACTIVIDAD RETRADASA</span></div>
                         {% endif %}
+                        
+                        
                     </div>                                       
                 {% endfor %}
                 </div>
@@ -159,7 +167,6 @@
                             <div style="margin-top: 10px;margin-bottom: 10px;"><span data-toggle="tooltip" data-placement="top" title="Tiempo utilizado para la actividad en días|horas|minutos|segundos, verde indica que se culmino antes del tiempo estimado." style="color:black; cursor:pointer;" class="label label-success">{{ duracionactividad[act.id]['tiemposobrante'] }}<br></span></div>
                         {% elseif duracionactividad[act.id]['tiemporetardo'] is defined %}
                             <div style="margin-top: 10px;margin-bottom: 10px;"><span data-toggle="tooltip" data-placement="top" title="Tiempo utilizado para la actividad en días|horas|minutos|segundos, rojo indica que no se culmino en el tiempo estimado." style="color:black; cursor:pointer;" class="label label-danger">{{ duracionactividad[act.id]['tiemporetardo'] }}</span></div>
-                            
                         {% endif %}
                         
                         
@@ -183,6 +190,12 @@
                           <div class="col-md-3"><a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
                           <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
                         </div>
+                        
+                        {% if duracionactividad[act.id]['tiemposobrante'] is defined %}
+                            <div style="margin-top: 10px;margin-bottom: 10px;"><span data-toggle="tooltip" data-placement="top" title="Tiempo utilizado para la actividad en días|horas|minutos|segundos, verde indica que se culmino antes del tiempo estimado." style="color:black; cursor:pointer;" class="label label-success">{{ duracionactividad[act.id]['tiemposobrante'] }}<br></span></div>
+                        {% elseif duracionactividad[act.id]['tiemporetardo'] is defined %}
+                            <div style="margin-top: 10px;margin-bottom: 10px;"><span data-toggle="tooltip" data-placement="top" title="Tiempo utilizado para la actividad en días|horas|minutos|segundos, rojo indica que no se culmino en el tiempo estimado." style="color:black; cursor:pointer;" class="label label-danger">{{ duracionactividad[act.id]['tiemporetardo'] }}</span></div>
+                        {% endif %}
                     </div>                   
                     
                 {% endfor %}
