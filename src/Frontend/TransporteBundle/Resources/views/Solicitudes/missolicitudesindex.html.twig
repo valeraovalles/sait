@@ -1,0 +1,67 @@
+{% extends '::transporte.html.twig' %}
+ 
+{% block title %}Mis Solicitudes{% endblock %}
+
+{% block titulo %}
+    MIS SOLICITUDES
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+    <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+    <li class="active">MIS SOLICITUDES </li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    <table id="tabladatatable">
+        <div align="center" id="leyenda"></div>
+        <thead>
+            <tr>
+                <th>Id</th>                
+                <th>Fecha de Solicitud</th>
+                <th>Fecha de Salida</th>
+                <th>Hora de Salida</th>
+                <th>Direccion - Desde</th>        
+                <th>Direccion - Hasta</th>        
+                <th>Estatus</th>
+                <th>Acci&oacute;n</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('showmissolicitudes', { 'id': entity.id }) }}">{{ entity.id }}</a></td>            
+                <td>{% if entity.fechaSolicitud %}{{ entity.fechaSolicitud|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if entity.fechaSalida %}{{ entity.fechaSalida|date('d-m-Y') }}{% endif %}</td>
+                <td>{{ entity.horaSalida|date('G:i:s') }}</td>
+                <td>{{ entity.direccionDesde }}</td>
+                <td>{{ entity.direccionHasta }}</td>     
+                {% if entity.estatus=="N" %}
+                    <td><a class="label label-info" href="#">Nueva</a></td>
+                {% elseif entity.estatus=="AP" %}
+                    <td><a class="label label-success" href="#">Aprobada</a></td>
+                {% elseif entity.estatus=="R" %}
+                    <td><a class="label label-danger" href="#">Rechazada</a></td>
+                {% endif %}
+                <td>
+                    <a href="{{ path('showmissolicitudes', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open"></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br><br><br>
+    <a class="btn btn-default" href="{{ path('solicitudes_new') }}">Nueva Solicitud</a>
+    <br><br>
+    <script type="text/javascript">
+    $(document).ready(function(){
+       $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+            "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+            "aaSorting": [[0,'asc'],[1,'asc']],
+        } );
+    })
+</script>
+{% endblock %}

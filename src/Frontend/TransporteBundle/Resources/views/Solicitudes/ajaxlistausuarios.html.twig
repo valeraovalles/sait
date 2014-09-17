@@ -2,7 +2,7 @@
 {# PERSONAL INTERNO #}
 {% if tipo=="I" %}
     {% for usu in usuarios %}
-        <div id="ajaxusuarios" onclick="armarlista('{{ usu.primerNombre}} {{ usu.primerApellido}}, C.I: {{ usu.cedula}}')" style="cursor:pointer;">
+        <div id="ajaxusuarios" onclick="armarlista('{{ usu.primerNombre }} {{ usu.primerApellido}} C.I: {{ usu.cedula}} <span style=display:none>@{{ usu.id }}-I@</span>')" style="cursor:pointer;">
         	{{ usu.primerNombre}} {{ usu.primerApellido}},  C.I: {{ usu.cedula}}
         </div>
     {% endfor %}
@@ -10,8 +10,8 @@
 {# PERSONAL EXTERNO #}
 {% if tipo=="E" %}
     {% for usu in usuarios %}
-        <div id="ajaxusuarios" onclick="armarlista('{{ usu.Nombre}}')">
-        	{{ usu.Nombre}}
+        <div id="ajaxusuarios" onclick="armarlista('{{ usu.Nombre }} C.I: {{ usu.cedula}} {{ usu.id }}-E')" style="cursor:pointer;">
+        	{{ usu.Nombre}}, C.I: {{ usu.cedula }}'
         </div>
     {% endfor %}
 {% endif %}

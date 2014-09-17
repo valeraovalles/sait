@@ -1,0 +1,183 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Proyecto{% endblock %}
+
+{% block titulo %}
+    <h1>LISTA DE PROYECTOS GENERAL</h1>
+    {{ perfil.nivelorganizacional.descripcion|upper }}
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  {#<li><a href="{{ path("proyecto") }}">MIS PROYECTOS</a></li>#}
+  <li class="active">LISTA DE PROYECTOS GENERAL</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+    <meta content="120" http-equiv="REFRESH"> </meta>
+    
+    <table class="table tablaactividad">
+        <tr>
+            {% for n in niveles %}
+                    <th style="text-align: center;" width="25%">{{ n.descripcion }}</th>
+            {% endfor %}
+        </tr>
+        
+        <tr>
+            {% for n in niveles %}
+                <td style="text-align: center;">
+                    <div class="scrollact">
+                    {% for p in proyectos %}
+                    {% for  no in p.nivelorganizacional if no.id==n.id %}
+                        <a style="text-decoration: none;color:black;" href="{{ path('tarea_general',{'idproyecto':p.id}) }}">
+                        <div class="tarjetaact img-rounded">
+                            <div class="responsableact bg-primary">{{ p.nombre|upper }}</div>
+                            
+                            {% if p.fechainicio!=null or p.fechafin!=null %}
+                            <div class="bf-info" style="font-size:10px;font-weight: bold; ">
+                                {% if p.fechainicio %}
+                                    I: {{ p.fechainicio|date('d-m-Y') }}
+                                {% endif %}
+                                {% if p.fechafin %}
+                                    | F: {{ p.fechafin|date('d-m-Y') }}
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            
+                            <div class="descripcionact">{{p.descripcion}}</div>
+                            
+                            {# ESTATUS #}
+                            <div align="center" style="margin-top:5px;">
+                                {% if p.estatus==1 %}
+                                    <div class="label label-danger">SIN INICIAR</div>
+                                {% elseif p.estatus==2 %}
+                                    <div class="label label-warning">EN PROGRESO</div>
+                                {% elseif p.estatus==3 %}
+                                    <div class="label label-success">CULMINADO</div>
+                                {% endif %}
+                            </div>
+                            
+                            {# porcentaje #}
+                            <div align="center">
+                                {% if p.porcentaje!=0 %}
+                                    <div class="progress" style="height:5px;margin:0;margin-top:5px;">
+                                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ p.porcentaje }}%;color:black;font-weight:bold;"></div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        </a>
+                    {% endfor %}        
+                    {% endfor %}
+                    </div>
+                </td>
+            {% endfor %}
+        </tr>
+        
+    </table>
+    
+    
+    <a class="btn btn-primary" href="{{ path('proyecto_newgeneral')}}">CREAR NUEVO PROYECTO</a> |     
+    <a class="btn btn-info" href="{{ path('sit_homepage')}}">SOLICITAR REQUERIMIENTOS (SIT)</a><br><br>
+    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo">BUSCAR PROYECTOS</button>
+    <br>
+
+<div id="demo" class="collapse out">
+    <table id="tabladatatable" class="table table-hover">
+        <thead>
+            <tr>
+                <th style="display:none;">Id</th>
+                <th style="width: 15%">Nombre</th>
+                <th>Fecha inicio</th>
+                <th>Fec. fin</th>
+                <th>Estatus</th>
+                <th>Completado</th>
+                <th>Unidad</th>
+                <th style="width: 15%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td style="display:none;">{{ entity.id }}</td>
+                <td><a style="color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
+                <td align="center">
+                    {% if entity.fechainicio %}
+                        {{ entity.fechainicio|date('d-m-Y') }}
+                    {% else %}
+                        <span class="label label-info">POR DEFINIR</span>
+                    {% endif %}
+                </td>
+                <td align="center">
+                    {% if entity.fechafin %}
+                        {{ entity.fechafin|date('d-m-Y') }}
+                    {% else %}
+                        <span class="label label-info">POR DEFINIR</span>
+                    {% endif %}
+                </td>
+                <td align="center">
+                    {% if entity.estatus==1 %}
+                        <span class="label label-danger">SIN INICIAR</span>
+                    {% elseif entity.estatus==2 %}
+                        <span class="label label-warning">EN PROGRESO</span>
+                    {% elseif entity.estatus==3 %}
+                        <span class="label label-success">CULMINADO</span>
+                    {% endif %}
+                </td>
+                <td align="center">
+                    {% if entity.porcentaje==0 and entity.estatus==1 %}
+                        <span class="label label-info">N/A</span>
+                    {% elseif entity.porcentaje==0 %}
+                        <span class="label label-info">SIN AVANCE</span>
+                    {% else %}
+                        <br><div class="progress">
+                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ entity.porcentaje }}%;color:black;font-weight:bold;">
+                            {{ entity.porcentaje }}%
+                          </div>
+                        </div>
+                    {% endif %}
+                </td>
+                
+                <td>
+                    {% if entity.nivelorganizacional[0] is defined %}
+                        {% set cont = 0 %}
+                        {% set largo = entity.nivelorganizacional | length %}
+                        {% for es in entity.nivelorganizacional %} 
+                            {% set cont=cont+1 %}
+                                {{ es.descripcion|capitalize }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
+                        {% endfor %}
+                            
+                    {% else %}
+                        Debe agregar un responsable
+                    {% endif %}
+                    
+                </td>
+                <td>
+                    
+                    <a style="color:black;" href="{{ path('proyecto_show_general', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
+                    <a style="color:black;" href="{{ path('tarea_general', { 'idproyecto': entity.id }) }}">TAREAS  <span class="badge">{% if totaltarea[entity.id] is defined %}{{ totaltarea[entity.id] }}{% else %}0{% endif %}</span></a> 
+                    
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+                
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('span').tooltip()
+            
+           $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                "aaSorting": [[0,'desc']],
+            } );
+        })
+    </script>
+    <br><br><br>
+    {% endblock %}
+{# empty Twig template #}

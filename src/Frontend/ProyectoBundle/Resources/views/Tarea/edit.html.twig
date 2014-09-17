@@ -1,0 +1,81 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Editar Tarea{% endblock %}
+
+{% block titulo %}
+    EDITAR TAREA
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
+  <li><a href="{{ path("tarea",{'idproyecto':proyecto.id}) }}">LISTA DE TAREAS</a></li>
+  <li class="active">EDITAR TAREA</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+    
+    {% if form_errors(edit_form.nombre) or form_errors(edit_form.descripcion) or form_errors(edit_form.fechainicio) or form_errors(edit_form.fechafinestimada) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(edit_form.nombre) }}</div>        
+        <div>{{ form_errors(edit_form.descripcion) }}</div>
+        <div>{{ form_errors(edit_form.fechainicio) }}</div>
+        <div>{{ form_errors(edit_form.fechafinestimada) }}</div>
+    </div>
+    {% endif %}
+    
+    <form novalidate action="{{ path('tarea_update',{'id':entity.id}) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
+
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform">Nombre:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nombre) }}</div>
+            </div>
+            
+            <div class="contenedorform">
+                <div class="labelform">Descripción:</div>
+                <div class="widgetform">{{ form_widget(edit_form.descripcion) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Fecha de inicio:</div>
+                <div class="widgetform">{{ form_widget(edit_form.fechainicio) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Fecha de fin (e):</div>
+                <div class="widgetform">{{ form_widget(edit_form.fechafinestimada) }}</div>
+            </div>
+        </div>
+        <a class="btn btn-default" href="{{ path('tarea',{'idproyecto':proyecto.id}) }}">
+            VOLVER A LA LISTA
+        </a> | 
+        <input type="submit" class="btn btn-primary" value="EDITAR TAREA">
+        <br><br>
+       
+    </form>
+        
+    <script>
+    $(function() {
+      $( "#frontend_proyectobundle_tarea_fechainicio" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+      });
+      $( "#frontend_proyectobundle_tarea_fechafinestimada" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+      });
+    });
+    </script>    
+    
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+    <br>
+{% endblock %}

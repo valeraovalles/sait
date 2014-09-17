@@ -1,0 +1,28 @@
+<div align="center">
+    <div style=" font-size: 20px;font-weight: bold;width: 600px;border: 1px solid gray;padding: 5px;background-color: blue;color:white;">NUEVA TAREA CREADA</div>
+    <table style="width: 612px;border: 1px solid gray;" cellpadding="5px" class="tablacorreo">
+        <tr>
+            <th align="right">Proyecto: </th>
+            <td>{{ tarea.proyecto.nombre|capitalize }}</td>
+        </tr>
+        <tr>
+            <th align="right">Nombre: </th>
+            <td>{{ tarea.nombre|capitalize }}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">Descripción: </th>
+            <td>{{ tarea.descripcion|capitalize }}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">Fecha de inicio: </th>
+            <td>{{ tarea.fechainicio|date('d-m-Y') }}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">Fecha fin: </th>
+            <td>{{ tarea.fechafinestimada|date('d-m-Y') }}</td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,227 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Actividad{% endblock %}
+
+{% block titulo %}
+    <h1>LISTA DE ACTIVIDADES</h1>
+    <h4>PROYECTO: {{ tarea.proyecto.nombre|upper }}</h4>
+    <h4>TAREA: {{ tarea.nombre|upper }}</h4>
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
+  <li><a href="{{ path("tarea",{'idproyecto':tarea.proyecto.id}) }}">LISTA DE TAREAS</a></li>
+  <li class="active">LISTA DE ACTIVIDADES</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    <script src="{{ asset('libs/jquery-countdown/js/jquery.countdown.js') }}" type="text/javascript" charset="utf-8"></script>
+
+    <style type="text/css">
+      br { clear: both; }
+      .cntSeparator {
+        font-size: 5px;
+        margin: 5px 2px;
+        color: #000;
+      }
+      .desc div {
+        float: left;
+        font-family: Arial;
+        width: 10px;
+        margin-right: 20px;
+        
+        font-size: 5px;
+        font-weight: bold;
+        color: #000;
+      }
+      .desc{
+          padding-left: 5px;
+      }
+    </style>
+
+
+  
+    
+    <table class="table tablaactividad">
+        <tr>
+            <th class="bg-primary">NUEVA</th>
+            <th class="bg-warning">EN PROCESO</th>
+            <th class="bg-info">EN REVISIÓN</th>
+            <th class="bg-success">CULMINADO</th>
+            <th class="bg-danger">DEPENDENCIA</th>
+        </tr>
+        <tr>
+            {# NUEVA #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==1 %}
+                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-primary">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        <div class="accionact">
+                            <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            {% if is_granted('ROLE_PROYECTO_ADMIN') or act.responsable.id==app.user.id %}<a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %}
+                            <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
+                            <a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion', { 'id': act.id,'direccion':'dep' }) }}"><span class="glyphicon glyphicon-fire"></span></a>
+                        </div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+
+                        <div class="row">
+                          <div class="col-md-3"></div>
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
+                          <div class="col-md-3">{% if act.ubicacion!=4 %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'der'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a>{% endif %}</div>
+                        </div>
+
+                    </div>                   
+                {% endfor %}
+                </div>
+            </td>
+            
+            {# EN PROCESO #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==2 %}
+                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-warning">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        <div class="accionact">
+                            <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
+                        </div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-3">{% if is_granted('ROLE_PROYECTO_ADMIN') %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a>{% endif %}</div>
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
+                          <div class="col-md-3"><a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'der'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                        </div>
+                        
+                            
+                        {% if  cuentaregresiva[act.id]!="0" %}
+                        <script type="text/javascript">
+                          $(function(){
+                            $('#counter{{act.id}}').countdown({
+                              image: '{{ asset('libs/jquery-countdown/img/digits.png')}}',
+                              startTime: '{{ cuentaregresiva[act.id] }}'
+                            });
+                          });
+                        </script>
+                        
+
+                        <div style="padding-left: 25px;padding-top: 10px;margin-bottom: 10px;">
+                            <div id="counter{{act.id}}"></div>
+                            <div class="desc">
+                                <div>Días</div>
+                                <div>Horas</div>
+                                <div>Minutos</div>
+                                <div>Segundos</div>
+                            </div>
+                        </div>
+                        {% else %}
+                            <div style="margin-top: 10px;margin-bottom: 10px;"><span style="color:black;" class="label label-danger">ACTIVIDAD RETRADASA</span></div>
+                        {% endif %}
+                    </div>                                       
+                {% endfor %}
+                </div>
+            </td>
+            
+            {# EN REVISION #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==3 %}                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-info">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        <div class="accionact">
+                            <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
+                        </div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-3">{#<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a>#}</div>
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
+                          <div class="col-md-3">{% if is_granted('ROLE_PROYECTO_ADMIN') %}<a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'cul'}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a>{% endif %}</div>
+                        </div>
+                        
+                        {% if duracionactividad[act.id]['tiemposobrante'] is defined %}
+                            <div style="margin-top: 10px;margin-bottom: 10px;"><span data-toggle="tooltip" data-placement="top" title="Tiempo utilizado para la actividad en días|horas|minutos|segundos, verde indica que se culmino antes del tiempo estimado." style="color:black; cursor:pointer;" class="label label-success">{{ duracionactividad[act.id]['tiemposobrante'] }}<br></span></div>
+                        {% elseif duracionactividad[act.id]['tiemporetardo'] is defined %}
+                            <div style="margin-top: 10px;margin-bottom: 10px;"><span data-toggle="tooltip" data-placement="top" title="Tiempo utilizado para la actividad en días|horas|minutos|segundos, rojo indica que no se culmino en el tiempo estimado." style="color:black; cursor:pointer;" class="label label-danger">{{ duracionactividad[act.id]['tiemporetardo'] }}</span></div>
+                            
+                        {% endif %}
+                        
+                        
+                        
+                    </div>      
+                {% endfor %}             
+                </div>
+            </td>
+            
+            {# CULMINADO #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==4 %}
+                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-success">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-3"><a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion',{'id':act.id,'direccion':'izq'}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
+                        </div>
+                    </div>                   
+                    
+                {% endfor %}
+                </div>
+            </td>
+            
+            {# DEPENDENCIA #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==5 %}
+                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-danger">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        <div class="accionact">
+                            <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            <a href="{{ path('comentarioactividad', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
+                            <a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion', { 'id': act.id,'direccion':'nuev' }) }}"><span class="glyphicon glyphicon-ok"></span></a>
+                        </div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
+                        </div>
+                    </div>                   
+                    
+                {% endfor %}
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <a class="btn btn-default" href="{{ path('tarea',{'idproyecto':tarea.proyecto.id}) }}">
+        IR A LA LISTA DE TAREAS
+    </a> | 
+    
+    <a class="btn btn-primary" href="{{ path('actividad_new',{'idtarea':tarea.id}) }}">
+        CREAR NUEVA ACTIVIDAD
+    </a><br><br>
+ 
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('span').tooltip()
+        })
+    </script>
+    
+    {% endblock %}

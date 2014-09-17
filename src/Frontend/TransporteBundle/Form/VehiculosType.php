@@ -14,7 +14,7 @@ class VehiculosType extends AbstractType
             ->add('tipo','choice',array('choices'=>array('Carro'=>'Carro','Moto'=>'Moto','Camioneta'=>'Camioneta')))
             ->add('placa')
             ->add('modelo')
-            ->add('ano')
+            ->add('ano', 'text')
             ->add('color')
             ->add('estatus','choice',array('choices'=>array('1'=>'Activo','0'=>'Inactivo')))
         ;

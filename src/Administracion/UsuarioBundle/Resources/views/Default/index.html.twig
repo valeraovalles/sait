@@ -27,7 +27,7 @@
             {% if usuario.user.fueradenomina==false %}
                 <div><b>UNIDAD:</b> {% if usuario.nivelorganizacional!=null%} {{ usuario.nivelorganizacional.descripcion | upper }} {% else %} N/A {% endif %}</div>
                 <div><b>DEPENDENCIA:</b> {{ datos.nombre }}</div>
-                <div><b>SUELDO BASICO:</b> {{ datos.sueldo_basico | number_format(2, ',', '.') }}</div>
+                {#<div><b>SUELDO BASICO:</b> {{ datos.sueldo_basico | number_format(2, ',', '.') }}</div>#}
                 <div><b>FECHA INGRESO:</b> {{ datos.fecha_ingreso | upper | date('d-m-Y') }}</div>
                 <div><b>FECHA NACIMIENTO:</b> {{ datos.fecha_nacimiento| upper | date('d-m-Y') }}</div>
                 <div><b>CARGO:</b> {{ datos.descripcion_cargo }}</div>
@@ -35,7 +35,7 @@
         </div>
         {% endif %}
     </div>
-    <div class="col-md-7" style="padding-right:60px;">
+    <div class="col-img-apliinicio col-md-7" style="padding-right:60px;">
         <div class="row">
             {% if usuario.user.password!=null %}
               <div class="col-sm-6 col-md-4">
@@ -104,20 +104,27 @@
                 <a href="javascript:void(0)" id="pe">ESTUDIOS<br><img src="{{ asset("images/estudio.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
 
+            {#
             <div class="col-sm-6 col-md-4">
                 <a href="javascript:void(0)" id="mm">MAPAMUNDI<br><img  src="{{ asset("images/mapamundi.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
             </div>
-
+            #}
+            
             {% if is_granted('ROLE_CREATV') %}
                 <div class="col-sm-6 col-md-4">
                     <a href="{{ path('creatv_homepage')}}">CREATV<br><img src="{{ asset("images/creatv.jpg") }}" data-placement="bottom" title="CREATV" data-trigger="hover"></a>        
                 </div>
             {% endif %}
 
+            {#
+            <div class="col-sm-6 col-md-4">
+                <a href="javascript:void(0)" id="tr">TRANSPORTE<br><img src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+            </div>
+            #}
 
-            {% if is_granted('ROLE_TRANSPORTE') %}
+            {% if is_granted('ROLE_TRANSPORTE') or is_granted('ROLE_TRANSPORTE_ADMINISTRADOR') %}
                 <div class="col-sm-6 col-md-4">
-                    <a href="javascript:void(0)" id="tr">TRANSPORTE<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
+                    <a href="{{ path('transporte')}}" id="tr">TRANSPORTE<br><img  src="{{ asset("images/transporte.jpg") }}" data-placement="bottom" title="SOLICITUDES" data-trigger="hover"></a>
                 </div>
             {% endif %}
 
@@ -156,6 +163,12 @@
             {% if is_granted('ROLE_CUMPLEANIOS') %}
                 <div class="col-sm-6 col-md-4">
                     <a href="{{ path('cumpleanios_personal')}}">CUMPLEAÑOS<br><img src="{{ asset("images/cumpleanios.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
+                </div>
+            {% endif %}
+            
+            {% if is_granted('ROLE_PROYECTO') %}
+                <div class="col-sm-6 col-md-4">
+                    <a href="{{ path('proyecto_homepage')}}">PROYECTO<br><img src="{{ asset("images/proyecto.jpg") }}" data-placement="bottom"  data-trigger="hover"></a>
                 </div>
             {% endif %}
 

@@ -1,8 +1,4 @@
 ################################################################################
-sit_seguimiento:
-    pattern:  /seguimiento/{idticket}
-    defaults: { _controller: SitBundle:Seguimiento:inicio }
-    
 sit_seguimientoprincipal:
     pattern:  /seguimientoprincipal/{idticket}
     defaults: { _controller: SitBundle:Seguimiento:seguimientoprincipal }
@@ -14,15 +10,7 @@ sit_guardacorreo:
 sit_guardacomentario:
     pattern:  /guardacomentario/{idticket}
     defaults: { _controller: SitBundle:Seguimiento:guardacomentario }
-    
-sit_cerrarseguimiento:
-    pattern:  /cerrarseguimiento/{idticket}
-    defaults: { _controller: SitBundle:Seguimiento:cerrarseguimiento }
-    
-sit_guardacerrarseguimiento:
-    pattern:  /guardacerrarseguimiento/{idticket}
-    defaults: { _controller: SitBundle:Seguimiento:guardacerrarseguimiento }
-
+   
 ajax_listadocorreo:
     pattern:  /ajax/listadocorreo/{letra}
     defaults: { _controller: SitBundle:Ajax:listadocorreo }

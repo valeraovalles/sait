@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>        
+        <XML>
+            <Content>UPDATE</Content>
+            <Clip>
+                <ClipName>NOTIR190261</ClipName>
+                <TipoContenido>NOTICIEROS</TipoContenido>
+                <Contenido><![CDATA[ R19 26AGO14]]></Contenido>
+                <OriginalTitle></OriginalTitle>
+                <Description> </Description>
+                <Notes>a</Notes>
+                <DurPrev></DurPrev>
+                <Chapter></Chapter>
+                <EndDate></EndDate>
+                <EPG></EPG>
+                <EPG_Content> </EPG_Content>
+                <Segments>
+            
+                <Segment>
+                    <SegTitle>1-3 RONDA 19  2230 HR CCS - R19 26AGO14</SegTitle>
+                    <MediaID>NOTIR19026101</MediaID>
+                    <Duration>00:08:00.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>2-3 RONDA 19  2230 HR CCS - R19 26AGO14</SegTitle>
+                    <MediaID>NOTIR19026102</MediaID>
+                    <Duration>00:08:00.00</Duration>
+                    <SegNumber>2</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>3-3 RONDA 19  2230 HR CCS - R19 26AGO14</SegTitle>
+                    <MediaID>NOTIR19026103</MediaID>
+                    <Duration>00:08:00.00</Duration>
+                    <SegNumber>3</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            </Segments></Clip></XML>

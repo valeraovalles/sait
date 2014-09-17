@@ -1,0 +1,26 @@
+<div align="center">
+    <div style=" font-size: 20px;font-weight: bold;width: 600px;border: 1px solid gray;padding: 5px;background-color: blue;color:white;">NUEVO PROYECTO CREADO</div>
+    <table style="width: 612px;border: 1px solid gray;" cellpadding="5px" class="tablacorreo">
+        <tr>
+            <th align="right">Nombre: </th>
+            <td>{{ proyecto.nombre|capitalize }}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">Descripción: </th>
+            <td>{{ proyecto.descripcion|capitalize }}</td>
+        </tr>
+        
+        <tr>
+            <th align="right">Responsable(s): </th>
+            <td>
+                {% set cont = 0 %}
+                {% set largo = proyecto.responsable | length %}
+                {% for es in proyecto.responsable %} 
+                    {% set cont=cont+1 %}
+                        {{ es.primerNombre|title }} {{ es.primerApellido|title }}{% if cont == largo-1 %} y{% elseif largo > 1 and cont < largo-1  %},{% else %}.{% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+</div>

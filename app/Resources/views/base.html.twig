@@ -8,7 +8,9 @@
             <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css" />
             <link href="{{ asset('libs/menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
             <link href="{{ asset('css/datatable.css') }}" rel="stylesheet" type="text/css"/>
+            <link rel="stylesheet" href="{{ asset('libs/bootstrap3/css/bootstrap-theme.min.css') }}">
             <link rel="stylesheet" href="{{ asset('libs/bootstrap3/css/bootstrap.min.css') }}">
+
             <link rel="stylesheet" href="{{ asset('libs/datepiker/css/redmond/jquery-ui-1.10.4.custom.css') }}">
             <link rel="stylesheet" href="{{ asset('libs/datepiker/css/redmond/jquery-ui-1.10.4.custom.min.css') }}">
         {% endblock %}
@@ -16,10 +18,7 @@
         {% block javascripts %}
             <script src="{{ asset('js/jquery.js') }}"></script>
             <script src="{{ asset('js/datatable.js') }}"></script>
-            <script src="{{ asset('js/general.js') }}"></script>
             <script src="{{ asset('libs/bootstrap3/js/bootstrap.min.js') }}"></script>
-
-
             <script src="{{ asset('libs/datepiker/js/jquery-ui-1.10.4.custom.min.js') }}"></script>
             <script src="{{ asset('libs/datepiker/js/jquery-ui-datepicker-es.js') }}"></script>
 
@@ -32,11 +31,10 @@
         <div align='center'>
             <div class="contenedorprincipal">
             <div id='banner'><img width="100%" src="{{ asset('images/banner_original.jpg') }}"></div>
-            
-            <div class="menu">{% block menu %}{% endblock %}</div>
+                {% block menu %}{% endblock %}
+
                 {% block body %}
                     <div class="ubicacion">{% block ubicacion %} {% endblock %}</div>
-
                     <div class="titulo">{% block titulo %}{% endblock %}</div>
 
                     {% for flashMessage in app.session.flashbag.get('notice') %}

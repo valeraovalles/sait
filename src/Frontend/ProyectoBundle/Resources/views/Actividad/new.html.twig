@@ -1,0 +1,64 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Nueva Actividad{% endblock %}
+
+{% block titulo %}
+    NUEVA ACTIVIDAD
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li class="active">NUEVA ACTIVIDAD</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent()}}
+
+    {% if form_errors(form.descripcion) or form_errors(form.tiempoestimado) or form_errors(form.responsable) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.descripcion) }}</div>        
+        <div>{{ form_errors(form.tiempoestimado) }}</div>
+        <div>{{ form_errors(form.responsable) }}</div>
+    </div>
+    {% endif %}    
+    
+     <form novalidate action="{{ path('actividad_create',{'idtarea':tarea.id}) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform">Descripcion:</div>
+                <div class="widgetform">{{ form_widget(form.descripcion) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Tipo tiempo:</div>
+                <div class="widgetform">{{ form_widget(form.tipotiempo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Tiempo estimado:</div>
+                <div class="widgetform">{{ form_widget(form.tiempoestimado) }}</div>
+            </div>
+            
+            <div class="contenedorform" {% if not is_granted('ROLE_PROYECTO_ADMIN') %} style="display:none;"{% endif %}>
+                <div class="labelform">Responsable:</div>
+                <div class="widgetform">{{ form_widget(form.responsable) }}</div>
+            </div>
+            
+        </div>
+        <a class="btn btn-default" href="{{ path('actividad',{'idtarea':tarea.id}) }}">
+            VOLVER A LA LISTA
+        </a> | 
+        <input type="submit" class="btn btn-primary" value="CREAR ACTIVIDAD">
+        <br><br>
+     </form>
+     
+     <script type="text/javascript">
+        $(document).ready(function(){
+            $('#frontend_proyectobundle_actividad_responsable > option[value="{{ idusuario }}"]').attr('selected', 'selected');
+        });
+     </script>
+
+{% endblock %}

@@ -51,6 +51,7 @@
             </script>
             {% endif %}
             
+            <div style="width: 80%;"  class="alert alert-info">AL REALIZAR UN COMENTARIO, SERÁ ENVIADO UN CORREO AL SOLICITANTE Y AL RESPONSABLE DEL TICKET</div>
             <form method="post" action="{{ path('sit_guardacomentario',{'idticket':ticket.id}) }}">
                 <textarea id="elm2" name="elm2" rows="15" cols="80" style="width: 80%; height: 300px;">
                 </textarea><br>

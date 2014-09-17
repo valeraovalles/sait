@@ -1,42 +1,51 @@
 {% extends '::transporte.html.twig' %}
  
-{% block title %}Transporte{% endblock %}
+{% block title %}Transporte Inicio{% endblock %}
 
-{% block titulobanner %}
-    TRANSPORTE
+{% block titulo %}
+    TRANSPORTE INICIO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li class="active">TRANSPORTE INICIO</li>
+</ol>
 {% endblock %}
 
 {% block body -%}
     {{ parent() }}
-    
-    <div class="titulo">TRANSPORTE</div>
+    {% if is_granted('ROLE_TRANSPORTE') or (is_granted('ROLE_TRANSPORTE') and is_granted('ROLE_TRANSPORTE_ADMINISTRADOR'))%}
+        <table align=center width="30%"> 
+            <tr>
+                <th>
+                    Nueva Solicitud<br>
+                    <a href="{{ path('solicitudes_new') }}"><img src="{{asset('images/transporte/transporte.jpg')}}" width=100px></a>
+                </th>
+                <th>
+                    Mis Solicitudes<br>
+                    <a href="{{ path('missolicitudes') }}"><img src="{{asset('images/transporte/lupa.png')}}" width=80px></a> 
+                </th>
+            </tr>      
+        </table>
+    {% elseif is_granted('ROLE_TRANSPORTE_ADMINISTRADOR') %}
+        <table align=center width="30%"> 
+            <tr>
+                <th>
+                    Solicitudes<br>
+                    <a href="{{ path('solicitudes') }}"><img src="{{asset('images/transporte/transporte.jpg')}}" width=100px></a>
+                </th>
+                <th>
+                    Personal Externo<br>
+                    <a href="{{ path('personalexterno_list') }}"><img src="{{ asset("images/User_male.png") }}" width=80px></a> 
+                </th>
+                <th>
+                    Vehiculos<br>
+                    <a href="{{ path('vehiculos_list') }}"><img src="{{asset('images/transporte/transporte.jpg')}}" width=100px></a> 
+                </th>                
+            </tr>      
+        </table>
+    {% endif %}
 
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% for flashMessage in app.session.flashbag.get('alert') %}
-        <div class="alert alert-danger">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    <table align=center width="100%"> 
-        <tr>
-            <th>
-                Solicitar<br>
-                <a href="{{ path('solicitudes_new') }}"><img src="{{asset('images/transporte/transporte.jpg')}}" width=100px></a>
-            </th>
-            <th>
-                Ver Solicitudes<br>
-                <a href="{{ path('solicitudes') }}"><img src="{{asset('images/transporte/lupa.png')}}" width=100px></a> 
-            </th>
-        </tr>      
-    </table>
-    
-    
-    
 
 {% endblock %}

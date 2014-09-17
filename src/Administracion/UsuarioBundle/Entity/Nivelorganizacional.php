@@ -35,6 +35,13 @@ class Nivelorganizacional
      * @ORM\Column(name="descripcion", type="string", length=255)
      */
     private $descripcion;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="correo", type="string", length=255, nullable=true)
+     */
+    private $correo;
 
 
     /**
@@ -70,6 +77,30 @@ class Nivelorganizacional
         return $this->codigo;
     }
 
+    
+        /**
+     * Set correo
+     *
+     * @param string $correo
+     * @return Nivelorganizacional
+     */
+    public function setCorreo($correo)
+    {
+        $this->correo = $correo;
+    
+        return $this;
+    }
+
+    /**
+     * Get correo
+     *
+     * @return string 
+     */
+    public function getCorreo()
+    {
+        return $this->correo;
+    }
+    
     /**
      * Set descripcion
      *
@@ -91,5 +122,9 @@ class Nivelorganizacional
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+    
+    public function __toString() {
+        return $this->getDescripcion();
     }
 }

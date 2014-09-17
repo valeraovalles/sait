@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/proyecto/css/proyecto.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('bundles/proyecto/css/tablaactividad.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+
+{% block menu %}
+    {% include 'ProyectoBundle:Default:includes/menu.html.twig' %}
+{% endblock %}

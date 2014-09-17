@@ -1,0 +1,94 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Consultar Tarea{% endblock %}
+
+{% block titulo %}
+    CONSULTA DE TAREA
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
+  <li><a href="{{ path("tarea",{'idproyecto':proyecto.id}) }}">LISTA DE TAREAS</a></li>
+  <li class="active">CONSULTA DE TAREA</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    <div class="formShow">
+        <div class="contenedorform">
+            <div class="labelform">Nombre:</div>
+            <div class="widgetform">{{ entity.nombre|capitalize }}</div>
+        </div>
+        {% if entity.descripcion %}
+        <div class="contenedorform">
+            <div class="labelform">Descripcion:</div>
+            <div class="widgetform">{{ entity.descripcion|capitalize }}</div>
+        </div>
+        {% endif %}
+        <div class="contenedorform">
+            <div class="labelform">Fecha inicio:</div>
+            <div class="widgetform">
+                {% if entity.fechainicio %}
+                    {{ entity.fechainicio|date('d-m-Y') }}
+                {% else %}
+                    <span class="label label-info">POR DEFINIR</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Fecha fin estimada:</div>
+            <div class="widgetform">
+                {% if entity.fechafinestimada %}
+                    {{ entity.fechafinestimada|date('d-m-Y') }}
+                {% else %}
+                    <span class="label label-info">POR DEFINIR</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Estatus:</div>
+            <div class="widgetform">
+                {% if entity.estatus==1 %}
+                    <span class="label label-danger">SIN INICIAR</span>
+                {% elseif entity.estatus==2 %}
+                    <span class="label label-warning">EN PROGRESO</span>
+                {% elseif entity.estatus==3 %}
+                    <span class="label label-success">CULMINADO</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">% Completado:</div>
+            <div class="widgetform">
+                    {% if entity.porcentaje==0 and entity.estatus==1 %}
+                        <span class="label label-info">N/A</span>
+                    {% elseif entity.porcentaje==0 %}
+                        <span class="label label-info">SIN AVANCE</span>
+                    {% else %}
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ entity.porcentaje }}%;color:black;font-weight:bold;">
+                            {{ entity.porcentaje }}%
+                          </div>
+                        </div>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+        <a class="btn btn-default" href="{{ path('tarea',{'idproyecto':proyecto.id}) }}">
+            IR A LA LISTA
+        </a> |
+        <a class="btn btn-default" href="{{ path('tarea_edit', { 'id': entity.id }) }}">
+            IR A EDITAR
+        </a>
+
+        <BR><BR>
+        {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+            {{ form_errors(delete_form) }}
+            {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+        {{ form_end(delete_form) }}
+        
+{% endblock %}

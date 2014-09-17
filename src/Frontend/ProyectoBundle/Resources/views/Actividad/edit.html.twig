@@ -1,0 +1,64 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Editar Actividad{% endblock %}
+
+{% block titulo %}
+    EDITAR ACTIVIDAD
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
+  <li><a href="{{ path("tarea",{'idproyecto':entity.id}) }}">LISTA DE TAREAS</a></li>
+  <li class="active">EDITAR ACTIVIDAD</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+    
+    {% if form_errors(edit_form.descripcion) or form_errors(edit_form.tiempoestimado) or form_errors(edit_form.responsable) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(edit_form.descripcion) }}</div>        
+        <div>{{ form_errors(edit_form.tiempoestimado) }}</div>
+        <div>{{ form_errors(edit_form.responsable) }}</div>
+    </div>
+    {% endif %}
+    
+    <form novalidate action="{{ path('actividad_update',{'id':entity.id}) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
+
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform">Descripción:</div>
+                <div class="widgetform">{{ form_widget(edit_form.descripcion) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Tipo tiempo:</div>
+                <div class="widgetform">{{ form_widget(edit_form.tipotiempo) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Tiempo estimado:</div>
+                <div class="widgetform">{{ form_widget(edit_form.tiempoestimado) }}</div>
+            </div>
+            <div class="contenedorform">
+                <div class="labelform">Responsable:</div>
+                <div class="widgetform">{{ form_widget(edit_form.responsable) }}</div>
+            </div>
+        </div>
+        <a class="btn btn-default" href="{{ path('actividad',{'idtarea':entity.tarea.id}) }}">
+            VOLVER A LA LISTA
+        </a> | 
+        <input type="submit" class="btn btn-primary" value="EDITAR ACTIVIDAD">
+        <br><br>
+       
+    </form>
+
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+    <br>
+{% endblock %}

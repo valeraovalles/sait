@@ -1,0 +1,40 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Consultar Actividad{% endblock %}
+
+{% block titulo %}
+    CONSULTA ACTIVIDAD
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
+  <li><a href="{{ path("tarea",{'idproyecto':entity.tarea.proyecto.id}) }}">LISTA DE TAREAS</a></li>
+  <li class="active">CONSULTA DE ACTIVIDAD</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+
+    <div class="formShow" >
+        <div class="contenedorform">
+            <div class="labelform">Descripcion:</div>
+            <div class="widgetform">{{ entity.descripcion|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Días estimados:</div>
+            <div class="widgetform">{{ entity.tiempoestimado|capitalize }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">responsables:</div>
+            <div class="widgetform">{{ entity.responsable.primerNombre|capitalize }} {{ entity.Responsable.primerApellido|capitalize }}</div>
+        </div>
+    </div>
+
+        <a class="btn btn-default" href="{{ path('actividad_general',{'idtarea':entity.tarea.id}) }}">
+            IR A LA LISTA
+        </a><br><br>
+{% endblock %}

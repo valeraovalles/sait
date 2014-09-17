@@ -89,35 +89,12 @@ class htmlreporte
                 if($ultimacategoria!=$value1->getCategoria())
                 $info .="<div class='cat'>".strtoupper($value1->getCategoria())."</div>";
                 
-                if($ultimasubcategoria!=$value1->getSubcategoria()->getSubcategoria())
-                $info .="<div class='subcat'>".ucfirst($value1->getSubcategoria()->getSubcategoria())."</div>";
-                $info .="<div style='margin-bottom:5px;text-align:justify;' class='solicitud'>".$conta.".- <b>Solicitud (".$value1->getFechasolicitud()->format("d-m-Y")." ".$value1->getHorasolicitud()->format("h:i:s")."):</b> ".ucfirst($value1->getSolicitud())."</div>";
-               
-                $idticket = $value1->getId();     
-                //$query para los tickets en seguimiento y cerrados con seguimiento
-                $dql2 = "select s from SitBundle:Seguimiento s where s.ticket = ?1 order by s.fecha ASC";
-                $query2 = $em->createQuery($dql2);
-                $query2->setParameter(1, $idticket);
-                $seguimiento = $query2->getResult();
+                if($existe!=$t->getProyecto()->getId()){
+                    if($t->getPorcentaje()==100)$estatus="(En revisión)"; else $estatus=null;
+                    $proyectos .="<div><b>PROYECTO: ".strtoupper($t->getProyecto()->getNombre())." (".$t->getProyecto()->getPorcentaje()."% de avance) ".$estatus."</b></div>";
+                    $proyectos .="<div>&nbsp;&nbsp;&nbsp;".ucfirst($t->getProyecto()->getDescripcion())."</div>";
+                    $proyectos .="<b><br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TAREAS</b></div>";
 
-                if(!empty($seguimiento))
-                {
-                    foreach ($seguimiento as $value2) {
-                        if($value2->getTipo() == 'c'){$tipo = "comentario";}else{$tipo = "correo";}
-                        
-                        $info .="
-                        <div style='margin-bottom:15px; margin-left:25px;class='solucion'>".$conta1.")
-                        <div style='margin-bottom:15px; margin-left:35px;class='solucion'></b>
-                        <b>Fecha: </b>".$value2->getFecha()->format("d-m-Y h:i:s")."<br> 
-                        <b>Responsable: </b>".$value2->getresponsable()."<br>
-                        <b>Tipo: </b>".$tipo."<br>
-                        <b>Descripcion: </b>".ucfirst($value2->getEvento())."
-                            </div></div><br>";
-                        $conta1++ ;
-                    }
-                }else
-                {
-                   $info .="<div style='margin-bottom:5px;margin-left:35px;text-align:justify;' class='solicitud'>No existen comentarios ni correos de seguimiento</div>"; 
                 }
 
                 //$usuariocierraticket=$value1->getUser();

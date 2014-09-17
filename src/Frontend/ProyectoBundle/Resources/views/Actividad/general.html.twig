@@ -1,0 +1,158 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Actividad{% endblock %}
+
+{% block titulo %}
+    <h1>LISTA DE ACTIVIDADES GENERAL</h1>
+    <h4>PROYECTO: {{ tarea.proyecto.nombre|upper }}</h4>
+    <h4>TAREA: {{ tarea.nombre|upper }}</h4>
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  {#<li><a href="{{ path("proyecto") }}">MIS PROYECTOS</a></li>#}
+  <li><a href="{{ path("proyecto_general") }}">LISTA DE PROYECTOS GENERAL</a></li>
+  <li><a href="{{ path("tarea_general",{'idproyecto':tarea.proyecto.id}) }}">LISTA DE TAREAS GENERAL</a></li>
+  <li class="active">LISTA DE ACTIVIDADES</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+   
+    <table class="table tablaactividad">
+        <tr>
+            <th class="bg-primary">NUEVA</th>
+            <th class="bg-warning">EN PROCESO</th>
+            <th class="bg-info">EN REVISIÓN</th>
+            <th class="bg-success">CULMINADO</th>
+            <th class="bg-danger">DEPENDENCIA</th>
+        </tr>
+        <tr>
+            {# NUEVA #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==1 %}
+                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-primary">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        <div class="accionact">
+                            <a href="{{ path('actividad_show_general', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            <a href="{{ path('comentarioactividad_general', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
+                        </div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-3"></div>
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
+                          <div class="col-md-3"></div>
+                        </div>
+
+                    </div>                   
+                    
+                {% endfor %}
+                </div>
+            </td>
+            
+            {# EN PROCESO #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==2 %}
+                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-warning">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        <div class="accionact">
+                            <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            <a href="{{ path('comentarioactividad_general', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
+                        </div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-3"></div>
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
+                          <div class="col-md-3"></div>
+                        </div>
+                    </div>                                       
+                {% endfor %}
+                </div>
+            </td>
+            
+            {# EN REVISION #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==3 %}                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-info">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        <div class="accionact">
+                            <a href="{{ path('comentarioactividad_general', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
+                        </div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-3"></div>
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
+                          <div class="col-md-3"></div>
+                        </div>
+                    </div>      
+                {% endfor %}             
+                </div>
+            </td>
+            
+            {# CULMINADO #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==4 %}
+                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-success">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-3"></div>
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
+                        </div>
+                    </div>                   
+                    
+                {% endfor %}
+                </div>
+            </td>
+            
+            {# DEPENDENCIA #}
+            <td>
+                <div class="scrollact">
+                {% for act in entities if act.ubicacion==5 %}
+                    
+                    <div class="tarjetaact img-rounded">
+                        <div class="responsableact bg-danger">{{ act.responsable.primerNombre|upper }} {{ act.responsable.primerApellido|upper }}</div>
+                        <div class="accionact">
+                            <a href="{{ path('actividad_show', { 'id': act.id }) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            {% if is_granted('ROLE_PROYECTO_ADMIN') %}<a href="{{ path('actividad_edit', { 'id': act.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %}
+                            <a href="{{ path('comentarioactividad_general', { 'idactividad': act.id }) }}"><span class="glyphicon glyphicon-list"></span></a>
+                            <a onclick="return confirm('¿Seguro que desea mover la actividad?')" href="{{ path('actividad_ubicacion', { 'id': act.id,'direccion':'enpro' }) }}"><span class="glyphicon glyphicon-ok"></span></a>
+                        </div>
+                        
+                        <div class="descripcionact">{{ act.descripcion|capitalize }}</div>
+                        
+                        <div class="row">
+                          <div class="col-md-6"><span class="bg-info diasact">{{ act.tiempoestimado }} {% if act.tipotiempo==1 %}DÍA(S){% elseif act.tipotiempo==2 %}HORA(S){% else %}MINUTO(S){% endif %}</span></div>
+                        </div>
+                    </div>                   
+                    
+                {% endfor %}
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <a class="btn btn-default" href="{{ path('tarea_general',{'idproyecto':tarea.proyecto.id}) }}">
+        IR A LA LISTA DE TAREAS
+    </a>  
+    <br><br>
+ 
+    {% endblock %}
+{# empty Twig template #}

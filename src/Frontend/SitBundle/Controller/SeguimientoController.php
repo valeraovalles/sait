@@ -21,37 +21,24 @@ use Frontend\SitBundle\Form\extras\CorreoseguimientoType;
 class SeguimientoController extends Controller
 {
 
-    public function inicioAction($idticket)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $ticket =  $em->getRepository('SitBundle:Ticket')->find($idticket);
-        return $this->render('SitBundle:Seguimiento:inicio.html.twig',array('ticket'=>$ticket));
-    }
-    
     public function seguimientoprincipalAction($idticket)
     {
         $errorc=null;
         $errore=null;
         $em = $this->getDoctrine()->getManager();
         $ticket =  $em->getRepository('SitBundle:Ticket')->find($idticket);
-
-
+        $asig=$ticket->getUser();
+        if(!isset($asig[0])){
+            $this->get('session')->getFlashBag()->add('alert', 'Debe asignar el ticket!!');
+            return $this->redirect($this->generateUrl('ticket_show', array('id' => $idticket)));
+        }
+        
+        
+        
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
 
-        if($ticket->getEstatus()!='5' and $ticket->getUnidad()->getId()!=$usuariounidad[0]->getId() or $ticket->getEstatus()=='5' and $ticket->getUnidad()->getId()!=$usuariounidad[0]->getId()){
-            $this->get('session')->getFlashBag()->add('alert', 'DEJA DE ESTAR INVENTANDO VAINAS');
-            return $this->redirect($this->generateUrl('sit_homepage'));
-        }
-
         $seguimiento =  $em->getRepository('SitBundle:Seguimiento')->findByTicket($idticket);
-        
-        if($ticket->getEstatus()!=6){
-            $consulta = $em->createQuery('update SitBundle:Ticket t set t.estatus= 5 WHERE t.id = :id');
-            $consulta->setParameter('id', $idticket);
-            $consulta->execute();
-        }
-
         
         $cs = new Correoseguimiento();
         $formcs   = $this->createForm(new CorreoseguimientoType(), $cs);
@@ -133,7 +120,10 @@ class SeguimientoController extends Controller
             foreach ($a as $p) {
                 $email[]=$p;
             }
-            $email[]='aplicaciones@telesurtv.net';
+
+            $usuarioasig=$ticket->getUser();
+            $email[]=$ticket->getSolicitante()->getUser()->getUsername()."@telesurtv.net";
+            $email[]=$usuarioasig[0]->getUser()->getUsername()."@telesurtv.net";
             
             //CORREO
             $message = \Swift_Message::newInstance()  
@@ -194,12 +184,16 @@ class SeguimientoController extends Controller
         $em->persist($entity);
         $em->flush();  
         
-
+        $email=null;
+        $usuarioasig=$ticket->getUser();
+        $email[]=$ticket->getSolicitante()->getUser()->getUsername()."@telesurtv.net";
+        $email[]=$usuarioasig[0]->getUser()->getUsername()."@telesurtv.net";
+        
         //CORREO
         $message = \Swift_Message::newInstance()     // we create a new instance of the Swift_Message class
         ->setSubject('Sit-Comentario')     // we configure the title
         ->setFrom($perfil->getUser()->getUsername().'@telesurtv.net')     // we configure the sender
-        ->setTo('aplicaciones@telesurtv.net')    // we configure the recipient
+        ->setTo($email)    // we configure the recipient
         ->setBody($datos.'<br><b>Comentario de la solicitud:</b> '.$ticket->getSolicitud().'<br><br><b>ID:</b> '.$ticket->getId(), 'text/html');
 
         $this->get('mailer')->send($message);    // then we send the message.
@@ -210,52 +204,4 @@ class SeguimientoController extends Controller
         return $this->redirect($this->generateUrl('sit_seguimientoprincipal', array('idticket' => $idticket)));
     }
     
-    public function cerrarseguimientoAction($idticket)
-    {
-        $error=null;
-        $em = $this->getDoctrine()->getManager();
-        $ticket =  $em->getRepository('SitBundle:Ticket')->find($idticket);
-
-        return $this->render('SitBundle:Seguimiento:cerrarseguimiento.html.twig',array('ticket'=>$ticket,'error'=>$error));
-        die;
-    }
-    
-    public function guardacerrarseguimientoAction(Request $request,$idticket)
-    {
-        $error=null;
-        $em = $this->getDoctrine()->getManager();
-        $ticket =  $em->getRepository('SitBundle:Ticket')->find($idticket);
-        
-        $datos=$request->request->all();
-        if(isset($datos['solucion']) and $datos['solucion']!='')
-            $solucion=$datos['solucion'];
-        else{
-            $error[]="El comentario no debe estar en blanco.";
-            return $this->render('SitBundle:Seguimiento:cerrarseguimiento.html.twig',array('ticket'=>$ticket,'error'=>$error));
- 
-        }
-        
-        $fechactual = date_create_from_format('Y-m-d', \date("Y-m-d"));
-        $horaactual=new \DateTime(\date("G:i:s"));
-
-
-        //actualizo campos en ticket
-        $query = $em->createQuery('update SitBundle:Ticket t set t.solucion= :solucion, t.fechasolucion= :fechasolucion, t.horasolucion= :horasolucion, t.estatus=6 WHERE t.id = :idticket');
-        $query->setParameter('fechasolucion', $fechactual);
-        $query->setParameter('horasolucion', $horaactual);
-        $query->setParameter('solucion', $solucion);
-        $query->setParameter('idticket', $idticket);
-        $query->execute();
-        
-        //asigno para saber quien cerro
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        $user =  $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
-        $ticket->addUser($user);
-        $em->flush();
-        
-        
-        $this->get('session')->getFlashBag()->add('notice', 'El seguimiento se ha cerrado exitosamente');
-        return $this->redirect($this->generateUrl('ticket_show',array('id'=>$idticket)));
-        die;
-    }
 }

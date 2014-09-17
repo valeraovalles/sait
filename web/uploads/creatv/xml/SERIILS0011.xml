@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>        
+        <XML>
+            <Content>UPDATE</Content>
+            <Clip>
+                <ClipName>SERIILS0011</ClipName>
+                <TipoContenido>SERIES</TipoContenido>
+                <Contenido><![CDATA[  ]]></Contenido>
+                <OriginalTitle></OriginalTitle>
+                <Description> </Description>
+                <Notes>a</Notes>
+                <DurPrev></DurPrev>
+                <Chapter></Chapter>
+                <EndDate></EndDate>
+                <EPG></EPG>
+                <EPG_Content> </EPG_Content>
+                <Segments>
+            
+                <Segment>
+                    <SegTitle>1-2 INJERENCIA LA INVASION SILENCIOSA -  </SegTitle>
+                    <MediaID>SERIILS001101</MediaID>
+                    <Duration>00:08:27.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>1-2 INJERENCIA LA INVASION SILENCIOSA -  </SegTitle>
+                    <MediaID>SERIILS001102</MediaID>
+                    <Duration>00:09:53.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>2-2 INJERENCIA LA INVASION SILENCIOSA -  </SegTitle>
+                    <MediaID>SERIILS001103</MediaID>
+                    <Duration>00:07:47.00</Duration>
+                    <SegNumber>2</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            </Segments></Clip></XML>

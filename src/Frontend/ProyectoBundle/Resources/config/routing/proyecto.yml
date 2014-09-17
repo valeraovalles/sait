@@ -1,0 +1,47 @@
+proyecto:
+    path:     /lista
+    defaults: { _controller: "ProyectoBundle:Proyecto:index" }
+    
+proyecto_general:
+    path:     /general/lista
+    defaults: { _controller: "ProyectoBundle:Proyecto:general" }
+
+proyecto_show:
+    path:     /{id}/show
+    defaults: { _controller: "ProyectoBundle:Proyecto:show" }
+    
+proyecto_show_general:
+    path:     /general/{id}/show
+    defaults: { _controller: "ProyectoBundle:Proyecto:showgeneral" }
+
+proyecto_new:
+    path:     /new
+    defaults: { _controller: "ProyectoBundle:Proyecto:new" }
+    
+proyecto_newgeneral:
+    path:     /new/general
+    defaults: { _controller: "ProyectoBundle:Proyecto:newgeneral" }
+
+proyecto_create:
+    path:     /create
+    defaults: { _controller: "ProyectoBundle:Proyecto:create" }
+    requirements: { _method: post }
+    
+proyecto_creategeneral:
+    path:     /create/general
+    defaults: { _controller: "ProyectoBundle:Proyecto:creategeneral" }
+    requirements: { _method: post }
+
+proyecto_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ProyectoBundle:Proyecto:edit" }
+
+proyecto_update:
+    path:     /{id}/update
+    defaults: { _controller: "ProyectoBundle:Proyecto:update" }
+    requirements: { _method: post|put }
+
+proyecto_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ProyectoBundle:Proyecto:delete" }
+    requirements: { _method: post|delete }

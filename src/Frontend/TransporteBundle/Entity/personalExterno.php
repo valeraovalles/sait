@@ -1,46 +1,46 @@
 <?php
-
 namespace Frontend\TransporteBundle\Entity;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * personalExterno
  *
- * @ORM\Table("transporte.personalExterno")
- * @ORM\Entity(repositoryClass="Frontend\TransporteBundle\Entity\personalExternoRepository")
- * @UniqueEntity(fields={"cedula"},message="Esta cedula ya está registrada.")
+ * @ORM\Table("transporte.personalexterno")
+ * @ORM\Entity
  */
 class personalExterno
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="transporte.personalexterno_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
     /**
      * @var string
+     * @ORM\Column(name="cedula", type="string", length=20, nullable=false)
      * @Assert\NotBlank()
-     * @ORM\Column(name="cedula", type="string", unique=true, length=20)
      */
     private $cedula;
 
     /**
      * @var string
+     * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
      * @Assert\NotBlank()
-     * @ORM\Column(name="nombre", type="string", length=255)
      */
     private $nombre;
 
     /**
      * @var string
-     * 
      * @ORM\Column(name="telefono", type="string", length=50, nullable=true)
+     * @Assert\NotBlank()
      */
     private $telefono;
 

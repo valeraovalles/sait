@@ -5,7 +5,17 @@ use Administracion\UsuarioBundle\Resources\Misclases\Conexion;
 
 class Funcion
 {
-    public function datosUsuarioInfocent($cedula)
+    public function usuariounidad($em,$idusuario){
+        //obtengo usuario actual y los que pertenecen a su unidad
+        $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
+        $dql = "select x from UsuarioBundle:Perfil x join x.nivelorganizacional n join x.user u where n.codigo like :codniv and u.isActive=true";
+        $query = $em->createQuery($dql);
+        $query->setParameter('codniv',"%".$perfil->getNivelorganizacional()->getCodigo()."%");
+        $usuariounidad = $query->getResult();
+        return $usuariounidad;
+    }
+
+        public function datosUsuarioInfocent($cedula)
     {
         $a=new Conexion();
         $db=$a->oracle();

@@ -1,0 +1,40 @@
+tarea:
+    path:     /lista/{idproyecto}
+    defaults: { _controller: "ProyectoBundle:Tarea:index" }
+    
+tarea_general:
+    path:     /general/lista/{idproyecto}
+    defaults: { _controller: "ProyectoBundle:Tarea:general" }
+
+tarea_show:
+    path:     /{id}/show
+    defaults: { _controller: "ProyectoBundle:Tarea:show" }
+    
+tarea_show_general:
+    path:     /general/{id}/show
+    defaults: { _controller: "ProyectoBundle:Tarea:showgeneral" }
+
+tarea_new:
+    path:     /new/{idproyecto}
+    defaults: { _controller: "ProyectoBundle:Tarea:new" }
+
+tarea_create:
+    path:     /create/{idproyecto}
+    defaults: { _controller: "ProyectoBundle:Tarea:create" }
+    requirements: { _method: post }
+
+tarea_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ProyectoBundle:Tarea:edit" }
+
+tarea_update:
+    path:     /{id}/update
+    defaults: { _controller: "ProyectoBundle:Tarea:update" }
+    requirements: { _method: post|put }
+
+tarea_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ProyectoBundle:Tarea:delete" }
+    requirements: { _method: post|delete }
+
+

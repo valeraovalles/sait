@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>        
+        <XML>
+            <Content>UPDATE</Content>
+            <Clip>
+                <ClipName>INGWES0005</ClipName>
+                <TipoContenido>INGLES</TipoContenido>
+                <Contenido><![CDATA[ GASTRONOMY IN LATIN AMERICAN 25AGO14]]></Contenido>
+                <OriginalTitle></OriginalTitle>
+                <Description> </Description>
+                <Notes>a</Notes>
+                <DurPrev></DurPrev>
+                <Chapter></Chapter>
+                <EndDate></EndDate>
+                <EPG></EPG>
+                <EPG_Content> </EPG_Content>
+                <Segments>
+            
+                <Segment>
+                    <SegTitle>1-1 WEB SERIAL - GASTRONOMY IN LATIN AMERICAN 25AGO14</SegTitle>
+                    <MediaID>INGWES000501</MediaID>
+                    <Duration>00:07:00.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            </Segments></Clip></XML>

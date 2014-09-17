@@ -1,0 +1,88 @@
+{% extends '::transporte.html.twig' %}
+ 
+{% block title %}Editar Solicitud{% endblock %}
+
+{% block titulo %}
+    EDITAR SOLICITUD
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO</a></li>
+  <li><a href="{{ path("missolicitudes") }}">LISTADO DE MIS SOLICITUDES</a></li>
+  <li class="active">EDITAR SOLICITUD</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    
+    {% if estatus == 'N' %}
+       
+        <form action="{{ path('solicitudes_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>{{ form_widget(edit_form._token) }}
+            <input type="hidden" name="_method" value="PUT" />
+            <div class="formShow">  
+                <div class="contenedorform">
+                    <div class="labelform">Fecha de Solicitud</div>
+                    <div class="widgetform">{{ form_widget(edit_form.fechaSolicitud, {'attr':{'class':'fecha'}})}}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Fecha de Salida</div>
+                    <div class="widgetform">{{ form_widget(edit_form.fechaSalida, {'attr':{'class':'fecha'}})}}</div>
+                       <script>
+                      $(function() {
+                        $( ".fecha" ).datepicker({
+                          changeMonth: true,
+                          changeYear: true,
+                          dateFormat: "yy-mm-dd",
+                        });
+                      });
+                    </script>
+                </div>
+                <div class="contenedorform">                
+                    <div class="widgetform">{{ form_widget(edit_form.asistentes)}}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Hora de Salida</div>
+                    <div class="widgetform">{{ form_widget(edit_form.horaSalida, {'attr':{'class':'hora'}})}}</div>
+                       <script>
+                        $(".hora select").css({
+                            'width':'50px',
+                        });
+                        </script>    
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Direccion Desde</div>
+                    <div class="widgetform">{{ form_widget(edit_form.direccionDesde) }}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Direccion Hasta</div>
+                    <div class="widgetform">{{ form_widget(edit_form.direccionHasta) }}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Equipos/Implementos</div>
+                    <div class="widgetform">{{ form_widget(edit_form.descripcionEquipos) }}</div>
+                </div>
+                <div class="contenedorform">
+                    <div class="labelform">Motivo de la Solicitud</div>
+                    <div class="widgetform">{{ form_widget(edit_form.datosInteresRazon) }}</div>
+                </div>
+            </div><br>
+        <BR><button class="btn btn-primary" type="submit">EDITAR</button> | 
+                <a class="btn btn-default" href="{{ path('missolicitudes') }}">IR A LA LISTA</a> | 
+                <a class="btn btn-default" href="{{ path('showmissolicitudes', { 'id': entity.id }) }}">IR A CONSULTAR</a>
+        </form>
+    {% elseif estatus == 'AP' %}
+    <div class="formShow">  
+        <div class="contenedorform">
+            LA SOLICITUD ESTÁ APROBADA, NO SE PUEDE MODIFICAR
+        </div>
+    </div>
+    {% elseif estatus == 'R' %}
+    <div class="formShow">  
+        <div class="contenedorform">
+            LA SOLICITUD ESTÁ RECHAZADA, NO SE PUEDE MODIFICAR
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

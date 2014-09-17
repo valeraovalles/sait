@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>        
+        <XML>
+            <Content>UPDATE</Content>
+            <Clip>
+                <ClipName>INGSBT0009</ClipName>
+                <TipoContenido>INGLES</TipoContenido>
+                <Contenido><![CDATA[ 22SEP14 THE STORIES BEHIND T T ]]></Contenido>
+                <OriginalTitle></OriginalTitle>
+                <Description> </Description>
+                <Notes>a</Notes>
+                <DurPrev></DurPrev>
+                <Chapter></Chapter>
+                <EndDate></EndDate>
+                <EPG></EPG>
+                <EPG_Content> </EPG_Content>
+                <Segments>
+            
+                <Segment>
+                    <SegTitle>1-1 THE STORIES BEHIND THE TWEETS        - 22SEP14 THE STORIES BEHIND T T </SegTitle>
+                    <MediaID>INGSBT000901</MediaID>
+                    <Duration>00:24:00.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            </Segments></Clip></XML>
