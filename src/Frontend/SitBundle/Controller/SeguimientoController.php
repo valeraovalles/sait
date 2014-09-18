@@ -31,19 +31,30 @@ class SeguimientoController extends Controller
         if(!isset($asig[0])){
             $this->get('session')->getFlashBag()->add('alert', 'Debe asignar el ticket!!');
             return $this->redirect($this->generateUrl('ticket_show', array('id' => $idticket)));
-        }
-        
-        
+        }      
         
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $usuariounidad =  $em->getRepository('SitBundle:Unidad')->unidadusuario($idusuario);
+
+        $unidadc=NULL;
+
+        if(!empty($usuariounidad[0]))
+        {
+            if($usuariounidad[0]->getId()==$ticket->getUnidad()->getId())
+            {
+                $unidadc=1;
+            }else
+            {
+                $unidadc=0;
+            }
+        }
 
         $seguimiento =  $em->getRepository('SitBundle:Seguimiento')->findByTicket($idticket);
         
         $cs = new Correoseguimiento();
         $formcs   = $this->createForm(new CorreoseguimientoType(), $cs);
 
-        return $this->render('SitBundle:Seguimiento:principal.html.twig',array('ticket'=>$ticket,'seguimiento'=>$seguimiento,'formcs'=>$formcs->createView(),'errore'=>$errore,'errorc'=>$errorc));
+        return $this->render('SitBundle:Seguimiento:principal.html.twig',array('unidadc'=>$unidadc,'ticket'=>$ticket,'seguimiento'=>$seguimiento,'formcs'=>$formcs->createView(),'errore'=>$errore,'errorc'=>$errorc));
         
     }
     

@@ -7,6 +7,13 @@
     SEGUIMIENTO DE INCIDENCIAS
 {% endblock %}
 
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">INICIO APLICACIONES</a></li>
+  <li><a href="{{ path("sit_homepage") }}">SIT INICIO</a></li>
+  <li class="active">SEGUIMIENTO DE TICKET</li>
+</ol>
+{% endblock %}
 
 {% block body -%}
     {{ parent() }}
@@ -70,17 +77,17 @@
           </table>
 
     <br><br><br><br>
-    {% if is_granted('ROLE_SIT_ADMINISTRADOR')%}
+    {% if is_granted('ROLE_SIT_ADMINISTRADOR') and unidadc == 1 %}
       <a href="{{ path('ticket') }}" class="btn btn-default">IR AL LISTADO</a> |
       <a href="{{ path('ticket_show',{'id':ticket.id}) }}" class="btn btn-default">IR A GESTION</a>  
     {% endif %}
 
-    {% if ticket.estatus!=4 %}
+    {% if ticket.estatus == 2 %}
       {% if is_granted('ROLE_SIT_ADMINISTRADOR') and ticket.user[0].id==app.user.id %}| 
         <a href="#" class="btn btn-info" data-toggle="modal" data-target="#correo">ENVIAR CORREO</a> | 
       {% endif %}
 
-      | <a href="#" class="btn btn-info" data-toggle="modal" data-target="#comentario">REALIZAR UN COMENTARIO</a>
+      <a href="#" class="btn btn-info" data-toggle="modal" data-target="#comentario">REALIZAR UN COMENTARIO</a>
 
     {% endif %}
     <br>
