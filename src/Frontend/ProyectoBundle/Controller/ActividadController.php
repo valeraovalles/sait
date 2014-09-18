@@ -298,13 +298,10 @@ class ActividadController extends Controller
     }
     
     public function calculacuentaregresiva($e) {
-        $cuentaregresiva=array();
+       
         //fecha fin y tiempo real
         $fa1=new \DateTime(\date("d-m-Y G:i:s"));
         $fa2=$fa1;
-
-
-
 
         //sumo tiempo usado
         $tiemporeal=$e->getTiemporeal();
@@ -333,7 +330,7 @@ class ActividadController extends Controller
 
             //si la actividad ya se ha retrasado coloco 0 en la cuenta regresiva
             if($tiempoconsumido>$tiempoestimado)
-                $cuentaregresiva[$e->getId()]=0;
+                $this->cuentaregresiva[$e->getId()]=0;
             else{
 
                 //si no se ha retrasado convierto ambas fecha para poder hacer un diff
@@ -345,7 +342,7 @@ class ActividadController extends Controller
                 
                 $intervalo=$tiempoestimado->diff($tiempoconsumido);
 
-                $cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
+                $this->cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
             }
         } else{
             
@@ -363,7 +360,7 @@ class ActividadController extends Controller
                 $tiempoactual=strtotime ( $fa1->format("d-m-Y G:i:s") );
                 
                 if($tiempoactual>$tiempoestimado)
-                    $cuentaregresiva[$e->getId()]=0;
+                    $this->cuentaregresiva[$e->getId()]=0;
                 else{
                 
                     $tiempoestimado = date ( 'Y-m-d G:i:s' , $tiempoestimado );
@@ -371,15 +368,11 @@ class ActividadController extends Controller
 
                     $intervalo=$tiempoestimado->diff($fa1);
 
-                    $cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
+                    $this->cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
                 }
   
         }
-        
-        return $cuentaregresiva;
-        
-        
-  
+        return $this->cuentaregresiva;
         
     }
     
@@ -402,17 +395,14 @@ class ActividadController extends Controller
         $this->porcentajeproyecto($tarea->getProyecto()->getId());
               
         //cuenta regresiva
-        $cuentaregresiva=array();
+        
+        $this->cuentaregresiva=null;
         //verifico los tiempos de culminacion
         $duracionactividad=array();
         foreach ($entities as $e) {
             if($e->getUbicacion()==2){
-
-                $cuentaregresiva=$this->calculacuentaregresiva($e);
+                $this->calculacuentaregresiva($e);
             }
-
-            
-            
             //muestro el tiempo que lleva consumido
             if($e->getUbicacion()==3 or $e->getUbicacion()==4 or ($e->getUbicacion()==1 and $e->getTiemporeal()!=null)){
                 
@@ -425,14 +415,13 @@ class ActividadController extends Controller
                     $duracionactividad[$e->getId()]['tiemporetardo']="D:".$tiemporeal[0]." | H:".$tiemporeal[1]." | M:".$tiemporeal[2]." | S:".$tiemporeal[3];
                 }
             }
+    
         }
-
-        
 
         return $this->render('ProyectoBundle:Actividad:index.html.twig', array(
             'entities' => $entities,
             'tarea'=>$tarea,
-            'cuentaregresiva'=>$cuentaregresiva,
+            'cuentaregresiva'=>$this->cuentaregresiva,
             'duracionactividad'=>$duracionactividad
         ));
     }

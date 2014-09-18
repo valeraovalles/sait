@@ -106,6 +106,7 @@ class SeguimientoController extends Controller
                 $nombre=$nombre[0];
 
                 $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf','zip','rar');
+                
                 //valido las extensiones
                 if (!array_search($extension,$extensiones)) {
                     $errore[]="El formato de archivo que intenta subir no está permitido.";
