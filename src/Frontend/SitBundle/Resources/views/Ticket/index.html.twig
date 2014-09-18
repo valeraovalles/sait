@@ -57,10 +57,7 @@
                     {% elseif entity.estatus==2 %}<span class="label label-info"><span style="display:none;">3-</span>Asignado</span>
                     {% elseif entity.estatus==3 %}<span class="label label-warning"><span style="display:none;">4-</span>Re-Asignado</span>
                     {% elseif entity.estatus==4 %}<span class="label label-success"><span style="display:none;">5-</span>Culminado</span>
-                    {% elseif entity.estatus==5 %}<span class="label label-warning"><span style="display:none;">2-</span>Seguimiento</span>
-                    {% elseif entity.estatus==6 %}<span class="label label-success"><span style="display:none;">6-</span>Culminado Seguimiento</span>
                     {% endif %}
-
                 </td>
                 <td>
                     {% if entity.estatus==1 or entity.estatus==4 %}
@@ -76,7 +73,7 @@
     </table>
 
     <br><br><br>
-    <div><span class="label label-danger">Nuevos:</span> <b>{{ contador[entities[0].unidad.id].nuevo }}</b> | <span class="label label-info">Asignados:</span> <b>{{ contador[entities[0].unidad.id].asignado }}</b> | <span class="label label-success">Cerrados total:</span>  <b>{{ contador[entities[0].unidad.id].cerrado }} | <span class="label label-warning">Seguimiento:</span>  <b>{{ contador[entities[0].unidad.id].seguimiento }}</b></div>
+    <div><span class="label label-danger">Nuevos:</span> <b>{{ contador[entities[0].unidad.id].nuevo }}</b> | <span class="label label-info">Asignados:</span> <b>{{ contador[entities[0].unidad.id].asignado }}</b> | <span class="label label-warning">Re-asignados:</span> <b>{{ contador[entities[0].unidad.id].reasignado }}</b> | <span class="label label-success">Cerrados total:</span>  <b>{{ contador[entities[0].unidad.id].cerrado }}  </div>
 
     <script type="text/javascript">
         $(document).ready(function(){
