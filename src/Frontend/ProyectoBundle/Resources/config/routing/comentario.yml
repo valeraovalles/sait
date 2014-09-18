@@ -1,0 +1,30 @@
+comentario:
+    path:     /
+    defaults: { _controller: "ProyectoBundle:Comentario:index" }
+
+comentario_show:
+    path:     /{id}/show
+    defaults: { _controller: "ProyectoBundle:Comentario:show" }
+
+comentario_new:
+    path:     /new
+    defaults: { _controller: "ProyectoBundle:Comentario:new" }
+
+comentario_create:
+    path:     /create
+    defaults: { _controller: "ProyectoBundle:Comentario:create" }
+    requirements: { _method: post }
+
+comentario_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ProyectoBundle:Comentario:edit" }
+
+comentario_update:
+    path:     /{id}/update
+    defaults: { _controller: "ProyectoBundle:Comentario:update" }
+    requirements: { _method: post|put }
+
+comentario_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ProyectoBundle:Comentario:delete" }
+    requirements: { _method: post|delete }
