@@ -6,7 +6,7 @@
     GESTIONAR TICKET  {% if usuarioticket %}
         <br>
 
-        <h5>{% if entity.estatus!=4 and entity.estatus!=6 %}ASIGNADO A{% else %}CERRADO POR{% endif %} {{ usuarioticket.primernombre|upper }} {{ usuarioticket.primerapellido|upper }}</h5>
+        <h5>{% if entity.estatus!=4 %}ASIGNADO A{% else %}CERRADO POR{% endif %} {{ usuarioticket.primernombre|upper }} {{ usuarioticket.primerapellido|upper }}</h5>
         {% else %}
             <div class="bg-info">TICKET SIN ASIGNAR</div>
         {% endif %}
@@ -23,7 +23,7 @@
 {% block body -%}
     {{ parent() }}
 
-{% if entity.estatus!=4 and entity.estatus!=6 %}
+{% if entity.estatus!=4 %}
 <form action="{{ path('ticket_asigreasig',{'id':entity.id}) }}" method="post">
 <div class="row">
   <div class="col-md-7">
@@ -105,7 +105,7 @@
         </div>
         {% endif %}
     </div>
-{% if entity.estatus!=4 and entity.estatus!=6 %}
+{% if entity.estatus!=4 %}
   </div>
   <div class="col-md-5">
         <div class="contenedorcatsub">
