@@ -55,11 +55,7 @@
                               {{ s.evento|raw }}
                               {% if s.archivo!='' %}
                                   {% set ext=s.archivo|split('.') %}
-                                  {% if ext[1]=='pdf' %}
-                                      <a href="{{ asset('uploads/sit/') }}{{ s.archivo }}">Descarga</a>
-                                  {% else %}
-                                      <a href="/sait/web/libs/scripts/forzardescarga.php?archivo={{ s.archivo }}&ruta=../../uploads/sit/"><img width="80px" class="img-rounded" src="{{ asset('uploads/sit/') }}/{{ s.archivo }}"></a>
-                                  {% endif%}
+                                      <a href="/sait/web/libs/scripts/forzardescarga.php?archivo={{ s.archivo }}&ruta=../../uploads/sit/"><img width="80px" class="img-rounded" src="{{ asset('images/descarga.png') }}"></a>
                               {% endif %}
                         </td>
                         <td>{% if s.tipo=='e' %}<span class="label label-info">Email</span>{% elseif s.tipo=='c' %}<span class="label label-success">Comentario</span>{% endif %}</td>
