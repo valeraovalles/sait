@@ -15,9 +15,10 @@ class DocumentoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('descripcion')
+            ->add('file','file')
             ->add('archivo')
             ->add('proyectoId')
+            ->add('descripcion', 'textarea')
         ;
     }
     
