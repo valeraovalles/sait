@@ -703,6 +703,12 @@ class ActividadController extends Controller
         $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
         
         $entity = $em->getRepository('ProyectoBundle:Actividad')->find($id);
+        
+        if($entity->getTiemporeal()!=null){
+            $this->get('session')->getFlashBag()->add('alert', 'Estas pillado(a), no le vas a modificar el tiempo a la actividad!!');
+            return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$entity->getTarea()->getId()))); 
+        }
+        
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Actividad entity.');
