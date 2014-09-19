@@ -25,6 +25,6 @@ comentarioproyecto_update:
     requirements: { _method: post|put }
 
 comentarioproyecto_delete:
-    path:     eliminar/{id}
+    path:     /eliminar/{id}
     defaults: { _controller: "ProyectoBundle:Comentario:delete" }
     requirements: { _method: post|delete }

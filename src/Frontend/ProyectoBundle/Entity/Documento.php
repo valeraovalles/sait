@@ -38,13 +38,14 @@ class Documento
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", nullable=false)
-     * @Assert\NotBlank(message="El campo descripcion no puede estar en blanco.").
+     * @Assert\NotBlank(message="El campo Descripción de Documento no puede estar en blanco.").
      */
     private $descripcion;
 
 
     /**
      * @Assert\File(maxSize="5000000", maxSizeMessage="El archivo que intenta subir es demasiado grande.")
+     * @Assert\NotBlank(message="Debe adjuntar un Archivo").
      *  
      */
     private $file;
