@@ -4,8 +4,8 @@
 	# FUNCIONES
 	function ConectarFTPA(){
 		//Permite conectarse al Servidor FTP
-		$id_ftp=ftp_connect("192.168.40.3",21); //Obtiene un manejador del Servidor FTP
-		ftp_login($id_ftp,"fork","fork"); //Se loguea al Servidor FTP
+		$id_ftp=ftp_connect("192.168.40.50",21); //Obtiene un manejador del Servidor FTP
+		ftp_login($id_ftp,"telesur","telesur"); //Se loguea al Servidor FTP
 		return $id_ftp; //Devuelve el manejador a la función
 	}
 
@@ -26,13 +26,11 @@
     // establecer una conexión básica
     $conn_id = ConectarFTPA();
     //me ubico en un directorio
-    ftp_chdir($conn_id, "Rename");
+    ftp_chdir($conn_id, "Vantage/Rename");
     // Obtener los archivos contenidos en el directorio actual
     $contents = ftp_nlist($conn_id, ".");
     // output $contents
     
-    print_r($contents);
-    die;
     foreach ($contents as $c) {
         if($c!=".DS_Store" and $c!="._.DS_Store"){
             //conecto a la bd de mysqlserver

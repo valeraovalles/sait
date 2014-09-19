@@ -299,9 +299,10 @@ class ActividadController extends Controller
     
     public function calculacuentaregresiva($e) {
        
+        $comienzo=$tiemporeal=$e->getComienzo();
+        
         //fecha fin y tiempo real
         $fa1=new \DateTime(\date("d-m-Y G:i:s"));
-        $fa2=$fa1;
 
         //sumo tiempo usado
         $tiemporeal=$e->getTiemporeal();
@@ -313,7 +314,7 @@ class ActividadController extends Controller
                 if($e->getTipotiempo()==1)$tt='day';
                 else if($e->getTipotiempo()==2)$tt='hour';
                 else if($e->getTipotiempo()==3)$tt='minute';
-                $tiempoestimado = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $fa1->format("d-m-Y G:i:s") ) ) ;
+                $tiempoestimado = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $comienzo->format("d-m-Y G:i:s") ) ) ;
         
             //sumo el tiempo utilizado a la fecha actual y obtengo el utilizado
                 $tiemporeal=  explode("-", $tiemporeal);
@@ -325,7 +326,7 @@ class ActividadController extends Controller
                 $minutosegundo=$tiemporeal[2]*60;
                 $segundototal=$diasegundo+$horasegundo+$minutosegundo+$tiemporeal[3];
 
-                $tiempoconsumido = strtotime ( '+'.$segundototal.' second' , strtotime ( $fa2->format("d-m-Y G:i:s") ) ) ;
+                $tiempoconsumido = strtotime ( '+'.$segundototal.' second' , strtotime ( $fa1->format("d-m-Y G:i:s") ) ) ;
 
 
             //si la actividad ya se ha retrasado coloco 0 en la cuenta regresiva
@@ -350,7 +351,7 @@ class ActividadController extends Controller
                 //calculo el tiempo estimado sumando el tiempo de la actividad a la fecha de comienzo
                 //luego hago un dif entre el tiempo estimado y la fecha actual
             
-                $comienzo=$tiemporeal=$e->getComienzo();
+                
             
                 if($e->getTipotiempo()==1)$tt='day';
                 else if($e->getTipotiempo()==2)$tt='hour';
