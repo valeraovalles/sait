@@ -270,7 +270,8 @@
 <br>
 
 
-<a class="btn btn-default" href="{{ path('operador') }}">IR A LA LISTA</a>{% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %} |
+<a class="btn btn-default" href="{{ path('operador') }}">LISTA DE OPERADORES</a> | 
+<a class="btn btn-default" href="{{ path('operador_list', { 'idpais': entity.pais.id,'idtipooperador': entity.tipooperador.id }) }}">LISTA DE TIPO OPERADOR POR PAÍS</a>{% if is_granted('ROLE_DISTRIBUCION_ADMINISTRADOR') %} |
 <a class="btn btn-default" href="{{ path('operador_edit', { 'id': entity.id }) }}">IR A EDITAR</a> |
 <a class="btn btn-default" href="{{ path('operador_new', { 'id': entity.id }) }}">IR A NUEVO</a>
 {% endif %}
