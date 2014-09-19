@@ -1,30 +1,30 @@
-comentario:
-    path:     /
+comentarioproyecto:
+    path:     /lista/{proyecto}
     defaults: { _controller: "ProyectoBundle:Comentario:index" }
 
-comentario_show:
-    path:     /{id}/show
+comentarioproyecto_show:
+    path:     /detalles/{id}
     defaults: { _controller: "ProyectoBundle:Comentario:show" }
 
-comentario_new:
-    path:     /new
+comentarioproyecto_new:
+    path:     /nuevo/{proyecto}
     defaults: { _controller: "ProyectoBundle:Comentario:new" }
 
-comentario_create:
-    path:     /create
-    defaults: { _controller: "ProyectoBundle:Comentario:create" }
+comentarioproyecto_create:
+    path:     /create/{proyecto}
+    defaults: { _controller: "ProyectoBundle:Comentario:create", proyecto: 1 }
     requirements: { _method: post }
 
-comentario_edit:
-    path:     /{id}/edit
+comentarioproyecto_edit:
+    path:     editar/{id}
     defaults: { _controller: "ProyectoBundle:Comentario:edit" }
 
-comentario_update:
+comentarioproyecto_update:
     path:     /{id}/update
     defaults: { _controller: "ProyectoBundle:Comentario:update" }
     requirements: { _method: post|put }
 
-comentario_delete:
-    path:     /{id}/delete
+comentarioproyecto_delete:
+    path:     eliminar/{id}
     defaults: { _controller: "ProyectoBundle:Comentario:delete" }
     requirements: { _method: post|delete }

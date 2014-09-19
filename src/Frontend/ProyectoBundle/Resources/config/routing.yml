@@ -17,4 +17,8 @@ ProyectoBundle_actividad:
 ProyectoBundle_comentarioactividad:
     resource: "@ProyectoBundle/Resources/config/routing/comentarioactividad.yml"
     prefix:   /comentarioactividad
+Proyecto_comentarios:
+    resource: "@ProyectoBundle/Resources/config/routing/comentario.yml"
+    prefix: /comentario
+
 

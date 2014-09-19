@@ -15,8 +15,10 @@ class ComentarioType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('comentario')
-            ->add('fechaRegistro')
+            ->add('comentario', 'textarea')
+            ->add('fechaRegistro','date',array(
+                    'widget' => 'single_text',
+                    'format'   => 'dd-MM-y',  ))
             ->add('proyectoId')
         ;
     }

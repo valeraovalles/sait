@@ -220,9 +220,9 @@
                     
                     <a style="color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
                     <a style="color:black;" href="{{ path('proyecto_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
-                    <a style="color:black;" href="{{ path('tarea', { 'idproyecto': entity.id }) }}">TAREAS  <span class="badge">{% if totaltarea[entity.id] is defined %}{{ totaltarea[entity.id] }}{% else %}0{% endif %}</span></a> 
-                    
-                    
+                    <a style="color:black;" href="{{ path('comentarioproyecto', { 'proyecto': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Comentarios del Proyecto"><b class="glyphicon glyphicon-align-justify"></b></a>
+                    <a style="color:black;" href="#" data-toggle="tooltip" data-placement="top" title="Documentos del proyecto"><b class="glyphicon glyphicon-cloud-upload"></b></a> 
+                    <a style="color:black;" href="{{ path('tarea', { 'idproyecto': entity.id }) }}">TAREAS  <span class="badge">{% if totaltarea[entity.id] is defined %}{{ totaltarea[entity.id] }}{% else %}0{% endif %}</span></a>                   
                 </td>
             </tr>
         {% endfor %}

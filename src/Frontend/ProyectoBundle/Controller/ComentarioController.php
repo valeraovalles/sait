@@ -14,41 +14,71 @@ use Frontend\ProyectoBundle\Form\ComentarioType;
  */
 class ComentarioController extends Controller
 {
-
     /**
      * Lists all Comentario entities.
      *
      */
-    public function indexAction()
+    public function indexAction($proyecto)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ProyectoBundle:Comentario')->findAll();
+        $entity = $em->getRepository('ProyectoBundle:Comentario')->findByProyectoId($proyecto);
+
+        $cont = 0;
+        $entities= array();
+        $i = 0;
+        foreach ($entity as $key) 
+        {
+            $id[$key->getId()]=$key->getId();
+            $entities[$i]['id'] = $id[$key->getId()];
+
+            $fecha[$key->getId()]=$key->getFechaRegistro();
+            $entities[$i]['fechaRegistro'] = $fecha[$key->getId()];
+
+            $proyect[$key->getId()]=$key->getProyectoId();
+            $entities[$i]['proyecto'] = $proyect[$key->getId()];
+
+            $comn[$key->getId()]=$key->getComentario();
+            $entities[$i]['comentario'] = $comn[$key->getId()];
+
+            $cont ++;
+            $i++;
+        }
 
         return $this->render('ProyectoBundle:Comentario:index.html.twig', array(
-            'entities' => $entities,
+            'entities'  => $entities,    
+            'proyecto'  => $proyecto,
+            'cont'      => $cont,
         ));
     }
     /**
      * Creates a new Comentario entity.
      *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $proyecto)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $entity = new Comentario();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $proyectoId = $em->getRepository('ProyectoBundle:Proyecto')->find($proyecto);
+            $hoy = date_create_from_format('Y-m-d H:m:i', \date("Y-m-d H:m:i"));
+
+            $entity->setProyectoId($proyectoId);
+            $entity->setFechaRegistro($hoy);
+
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('comentario_show', array('id' => $entity->getId())));
+            $this->get('session')->getFlashBag()->add('notice', 'Se Creó el comentario satisfactoriamente');
+            return $this->redirect($this->generateUrl('comentarioproyecto_show', array('id' => $entity->getId())));
         }
 
         return $this->render('ProyectoBundle:Comentario:new.html.twig', array(
             'entity' => $entity,
+            'proyecto'  => $proyecto,
             'form'   => $form->createView(),
         ));
     }
@@ -63,7 +93,7 @@ class ComentarioController extends Controller
     private function createCreateForm(Comentario $entity)
     {
         $form = $this->createForm(new ComentarioType(), $entity, array(
-            'action' => $this->generateUrl('comentario_create'),
+            'action' => $this->generateUrl('comentarioproyecto_create'),
             'method' => 'POST',
         ));
 
@@ -76,13 +106,14 @@ class ComentarioController extends Controller
      * Displays a form to create a new Comentario entity.
      *
      */
-    public function newAction()
-    {
+    public function newAction($proyecto)
+    {        
         $entity = new Comentario();
         $form   = $this->createCreateForm($entity);
 
         return $this->render('ProyectoBundle:Comentario:new.html.twig', array(
             'entity' => $entity,
+            'proyecto'=> $proyecto,
             'form'   => $form->createView(),
         ));
     }
@@ -100,11 +131,13 @@ class ComentarioController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Comentario entity.');
         }
-
+        $proyecto = $entity->getProyectoId()->getId();
+       
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ProyectoBundle:Comentario:show.html.twig', array(
             'entity'      => $entity,
+            'proyecto'    => $proyecto,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -118,6 +151,7 @@ class ComentarioController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('ProyectoBundle:Comentario')->find($id);
+        $proyecto = $entity->getProyectoId()->getId();
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Comentario entity.');
@@ -128,6 +162,7 @@ class ComentarioController extends Controller
 
         return $this->render('ProyectoBundle:Comentario:edit.html.twig', array(
             'entity'      => $entity,
+            'proyecto'    => $proyecto,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -143,7 +178,7 @@ class ComentarioController extends Controller
     private function createEditForm(Comentario $entity)
     {
         $form = $this->createForm(new ComentarioType(), $entity, array(
-            'action' => $this->generateUrl('comentario_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('comentarioproyecto_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -165,18 +200,34 @@ class ComentarioController extends Controller
             throw $this->createNotFoundException('Unable to find Comentario entity.');
         }
 
+        $proyect = $entity->getProyectoId()->getId();
+        $proyectId = $em->getRepository('ProyectoBundle:Proyecto')->find($proyect);
+        $fechaRegistro = $entity->getFechaRegistro();
+
+
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+            $entity->setFechaRegistro($fechaRegistro);
+            $entity->setProyectoId($proyectId);
+
+            $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('comentario_edit', array('id' => $id)));
+            $this->get('session')->getFlashBag()->add('notice', 'Se modificó el comentario satisfactoriamente');
+            return $this->render('ProyectoBundle:Comentario:show.html.twig', array(
+            'entity'      => $entity,
+            'proyecto'    => $proyect,
+            'delete_form' => $deleteForm->createView(),
+        ));
         }
 
         return $this->render('ProyectoBundle:Comentario:edit.html.twig', array(
             'entity'      => $entity,
+            'proyecto'    => $proyect,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -198,11 +249,13 @@ class ComentarioController extends Controller
                 throw $this->createNotFoundException('Unable to find Comentario entity.');
             }
 
+            $proyecto = $entity->getProyectoId()->getId();
+
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('comentario'));
+        return $this->redirect($this->generateUrl('comentarioproyecto', array('proyecto' => $proyecto)));
     }
 
     /**
@@ -215,7 +268,7 @@ class ComentarioController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('comentario_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('comentarioproyecto_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
