@@ -68,7 +68,7 @@ class DocumentoController extends Controller
 
         if ($form->isValid()) {
 
-            if(!empty($form['file']->getData()))
+            if(!empty($form['file']))
             {
                 $file=$form['file']->getData();
 
