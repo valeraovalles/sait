@@ -1,0 +1,30 @@
+documentoproyecto:
+    path:     /lista/{proyecto}
+    defaults: { _controller: "ProyectoBundle:Documento:index" }
+
+documentoproyecto_show:
+    path:     /{id}/show
+    defaults: { _controller: "ProyectoBundle:Documento:show" }
+
+documentoproyecto_new:
+    path:     /nuevo/{proyecto}
+    defaults: { _controller: "ProyectoBundle:Documento:new" }
+
+documentoproyecto_create:
+    path:     /create/{proyecto}
+    defaults: { _controller: "ProyectoBundle:Documento:create", proyecto: 1 }
+    requirements: { _method: post }
+
+documentoproyecto_edit:
+    path:     editar/{id}
+    defaults: { _controller: "ProyectoBundle:Documento:edit" }
+
+documentoproyecto_update:
+    path:     /{id}/update
+    defaults: { _controller: "ProyectoBundle:Documento:update" }
+    requirements: { _method: post|put }
+
+documentoproyecto_delete:
+    path:     /eliminar/{id}
+    defaults: { _controller: "ProyectoBundle:Documento:delete" }
+    requirements: { _method: post|delete }

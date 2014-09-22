@@ -1,0 +1,53 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Proyecto - Comentarios{% endblock %}
+
+{% block titulobanner %}
+    COMENTARIOS
+{% endblock %}
+
+{% block titulo %}
+    <h1>EDITAR COMENTARIO</h1>
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto_homepage") }}">LISTA DE PROYECTOS</a></li>
+  <li><a href="{{ path('comentarioproyecto',{'proyecto':proyecto}) }}">LISTA DE COMENTARIOS</a></li>
+  <li class="active">EDITAR COMENTARIO</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    {% if form_errors(edit_form.comentario) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(edit_form.comentario) }}</div>    
+    </div>
+    {% endif %}
+
+    <form novalidate action="{{ path('comentarioproyecto_update',{'id':entity.id}) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
+
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform">Comentario:</div>
+                <div class="widgetform">{{ form_widget(edit_form.comentario, { 'attr': {'style': 'width:100%;height:200px;'} }) }}</div>
+            </div>
+        </div>
+        <a class="btn btn-default" href="{{ path('comentarioproyecto',{'proyecto':proyecto}) }}">
+            VOLVER A LA LISTA
+        </a> | 
+        <input type="submit" class="btn btn-primary" value="EDITAR COMENTARIO">
+        <br><br>       
+    </form>
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar el comentario?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+    <br>
+
+{% endblock %}

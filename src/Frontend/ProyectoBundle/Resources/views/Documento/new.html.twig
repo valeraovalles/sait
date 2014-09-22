@@ -1,0 +1,50 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Nuevo Documento{% endblock %}
+
+{% block titulo %}
+    NUEVO DOCUMENTO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto_homepage") }}">LISTA DE PROYECTOS</a></li>
+  <li><a href="{{ path('documentoproyecto',{'proyecto':proyecto}) }}">LISTA DE DOCUMENTO</a></li>
+  <li class="active">NUEVO DOCUMENTO</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent()}}
+    {% if form_errors(form.descripcion) or form_errors(form.file) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.descripcion) }}</div>
+        <div>{{ form_errors(form.file) }}</div>
+    </div>
+    {% endif %} 
+
+    <form novalidate action="{{ path('documentoproyecto_create',{'proyecto':proyecto}) }}" method="post" {{ form_enctype(form) }}>
+	{{ form_widget(form._token) }}
+
+		<div class="formShow" style="width:85%;">
+			<div class="contenedorform">
+				<div class="labelform">Proyecto:</div>
+                <div class="widgetform">{{ proyect.nombre }}</div>
+			</div>
+		    <div class="contenedorform">
+                <div class="labelform">Archivo:</div>
+                <div class="widgetform">{{ form_widget(form.file) }}</div>
+            </div>
+		    <div class="contenedorform">
+		        <div class="labelform">Descripci&oacute;n del Documento:</div>
+		        <div class="widgetform">{{ form_widget(form.descripcion, { 'attr': {'style': 'width:100%;height:100px;'} }) }}</div>
+		    </div>
+		</div>
+		<input type="submit" value="SUBIR DOCUMENTO" class="btn btn-primary"> | 
+		<a class="btn btn-default" href="{{ path('documentoproyecto',{'proyecto':proyecto}) }}">VOLVER A LA LISTA</a>
+
+	</form>
+        <br><br>
+{% endblock %}

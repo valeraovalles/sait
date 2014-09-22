@@ -1,0 +1,42 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Nuevo Comentario{% endblock %}
+
+{% block titulo %}
+    NUEVO COMENTARIO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto_homepage") }}">LISTA DE PROYECTOS</a></li>
+  <li><a href="{{ path('comentarioproyecto',{'proyecto':proyecto}) }}">LISTA DE COMENTARIOS</a></li>
+  <li class="active">NUEVO COMENTARIO</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent()}}
+
+    {% if form_errors(form.comentario) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(form.comentario) }}</div>
+    </div>
+    {% endif %}  
+    <form novalidate action="{{ path('comentarioproyecto_create',{'proyecto':proyecto}) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form._token) }}
+
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform">Comentario:</div>
+                <div class="widgetform">{{ form_widget(form.comentario, { 'attr': {'style': 'width:100%;height:200px;'} }) }}</div>
+            </div>
+        </div>
+        <a class="btn btn-default" href="{{ path('comentarioproyecto',{'proyecto':proyecto}) }}">
+            VOLVER A LA LISTA
+        </a> | 
+        <input type="submit" class="btn btn-primary" value="CREAR COMENTARIO">
+        <br><br>
+     </form>
+{% endblock %}
