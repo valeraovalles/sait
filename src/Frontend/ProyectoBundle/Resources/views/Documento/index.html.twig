@@ -33,8 +33,8 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('documentoproyecto_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Documento">{{ entity.id }}</a></td>
-                <td style="width:550px;">{{ entity.descripcion }}</td>
-                <td>{{ entity.file }}</td>
+                <td style="width:550px;">{{ entity.file }}</td>
+                <td>{{ entity.descripcion }}</td>
                 <td>
                     <a href="{{ path('documentoproyecto_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Documento"><b class="glyphicon glyphicon-eye-open"></b></a>
                 </td>
