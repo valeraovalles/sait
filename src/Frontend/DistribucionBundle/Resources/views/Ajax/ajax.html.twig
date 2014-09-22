@@ -1,3 +1,11 @@
+{% if mostrar=='pais' %}
+    <div class="contenedorform">
+        <div class="labelform" style="width:30%">Pais:</div>
+        <div class="widgetform">{{ form_widget(form.pais,{'attr':{'style':'width:70%;height:200px;'}}) }}</div>
+    </div>
+    <div id="tipooperador"></div>
+{% endif %}
+
 {% if mostrar=='tipooperador' %}
     <div class="contenedorform">
         <div class="labelform" style="width:30%">Tipo Operador:</div>
@@ -13,6 +21,8 @@
     </div>
     <div id="fechadesde"></div>
 {% endif %}
+
+
 
 {% if mostrar=='fechadesde' %}
     <div class="contenedorform">
@@ -69,6 +79,13 @@
             var ruta = "{{ path('ajax', {'datos': 'variable','mostrar': 'fechadesde'}) }}";
             ruta = ruta.replace("variable", dato);
             $('#fechadesde').load(ruta);
+        });
+        
+        $('#form_pais').click(function(){
+            var dato = $("#form_pais").val();
+            var ruta = "{{ path('ajax', {'datos': 'variable','mostrar': 'tipooperador'}) }}";
+            ruta = ruta.replace("variable", dato);
+            $('#tipooperador').load(ruta);
         });
 
         $('#form_fechadesde').change(function(){

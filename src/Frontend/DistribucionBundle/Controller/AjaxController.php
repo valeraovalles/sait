@@ -229,7 +229,46 @@ class AjaxController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        if($mostrar=='operador'){
+        if($mostrar=='pais'){
+            
+            $idzona=$datos;
+
+            //SI SELECCIONO TODOS QUITO DEL WHERE EL TIPO DE OPERADOR
+            if($idzona!='t'){
+                $dql = "select p.id ,p.pais from DistribucionBundle:Operador o join o.pais p join o.zona z where z.id in (:idzona) order by p.pais ASC";
+                $consulta = $em->createQuery($dql);
+                $consulta->setParameter('idzona', $idzona);
+            }else{
+                $dql = "select p.id,p.pais from DistribucionBundle:Pais p order by p.pais ASC";
+                $consulta = $em->createQuery($dql);
+            }
+            $pais = $consulta->getResult();
+
+            
+            
+            if(!empty($pais)){
+                $array['t']="Todos";
+                foreach ($pais as $p) {
+                    $array[$p['id']]=$p['pais'];
+                }
+            } else $array=array(''=>'vacio');
+            
+            // create a task and give it some dummy data for this example
+            $form = $this->createFormBuilder()
+                    ->add('pais', 'choice', array(
+                        'choices'   => $array,
+                        'expanded'=>false, 
+                        'multiple'=>true,
+                        'empty_value' => 'Seleccione...',
+
+
+                    ))
+                ->getForm();
+
+        }
+        
+        
+        else if($mostrar=='operador'){
 
             $datos=explode("-", $datos);
             $idpais=explode(",",$datos[0]);
@@ -266,42 +305,7 @@ class AjaxController extends Controller
 
         }
         
-        else if($mostrar=='zona'){
-
-            $datos=explode("-", $datos);
-            $idpais=explode(",",$datos[0]);
-            $idtipooperador=explode(",",$datos[1]);
-
-
-            //SI SELECCIONO TODOS QUITO DEL WHERE EL TIPO DE OPERADOR
-            $dql = "select o.id, o.nombre from DistribucionBundle:Operador o where o.pais in (:idpais) and o.tipooperador in (:idtipooperador) order by o.nombre ASC";
-            
-            $consulta = $em->createQuery($dql);
-            $consulta->setParameter('idpais', $idpais);
-            $consulta->setParameter('idtipooperador', $idtipooperador);
-            $operador = $consulta->getResult();
-
-            $array['t']="Todos";
-            if(!empty($operador)){
-                foreach ($operador as $o) {
-                    $array[$o['id']]=$o['nombre'];
-                }
-            } else $array=array(''=>'vacio');
-
-
-            // create a task and give it some dummy data for this example
-            $form = $this->createFormBuilder()
-                    ->add('operador', 'choice', array(
-                        'choices'   => $array,
-                        'expanded'=>false, 
-                        'multiple'=>false,
-                        'empty_value' => 'Seleccione...',
-
-
-                    ))
-                ->getForm();
-
-        }
+       
 
         else if($mostrar=='tipooperador'){
 

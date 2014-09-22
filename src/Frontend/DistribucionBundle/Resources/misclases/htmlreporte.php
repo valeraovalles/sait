@@ -7,9 +7,9 @@ class htmlreporte
 {
     public function informativo($em,$datos)
     {
-
-
-    	if($datos=='todo'){
+        
+        
+      	    if($datos=='todo'){
 	  		$dql = "
 			SELECT r FROM DistribucionBundle:Representante r JOIN r.operador o JOIN o.tipooperador t JOIN o.pais p JOIN o.comodato c
 	        order by o.pais ASC";
