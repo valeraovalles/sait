@@ -142,13 +142,13 @@
                     <div class="contenedorform">
                         <div class="text-danger">{{ form_errors(form.comodato.fechainicioacuerdo) }}</div>
                         <div class="labelform">Fecha Inicio Transmisión:</div>
-                        <div class="widgetform">{{ form_widget(form.comodato.fechainicioacuerdo) }}</div>
+                        <div class="widgetform">{{ form_widget(form.comodato.fechainicioacuerdo,{'attr':{'readonly':'readonly'}}) }}</div>
                     </div>
 
                     <div class="contenedorform">
                         <div>{{ form_errors(form.comodato.fechafinacuerdo) }}</div>
                         <div class="labelform">Fecha Fin Transmisión:</div>
-                        <div class="widgetform">{{ form_widget(form.comodato.fechafinacuerdo) }}</div>
+                        <div class="widgetform">{{ form_widget(form.comodato.fechafinacuerdo,{'attr':{'readonly':'readonly'}}) }}</div>
                     </div>
 
                     <div class="contenedorform">
@@ -160,7 +160,7 @@
                     <div class="contenedorform">
                         <div>{{ form_errors(form.comodato.fecharecepcion) }}</div>
                         <div class="labelform">Fecha recepción:</div>
-                        <div class="widgetform">{{ form_widget(form.comodato.fecharecepcion) }}</div>
+                        <div class="widgetform">{{ form_widget(form.comodato.fecharecepcion,{'attr':{'readonly':'readonly'}}) }}</div>
                     </div>
 
                     <div class="contenedorform">

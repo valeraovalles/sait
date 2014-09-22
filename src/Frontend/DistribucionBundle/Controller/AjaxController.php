@@ -265,6 +265,43 @@ class AjaxController extends Controller
                 ->getForm();
 
         }
+        
+        else if($mostrar=='zona'){
+
+            $datos=explode("-", $datos);
+            $idpais=explode(",",$datos[0]);
+            $idtipooperador=explode(",",$datos[1]);
+
+
+            //SI SELECCIONO TODOS QUITO DEL WHERE EL TIPO DE OPERADOR
+            $dql = "select o.id, o.nombre from DistribucionBundle:Operador o where o.pais in (:idpais) and o.tipooperador in (:idtipooperador) order by o.nombre ASC";
+            
+            $consulta = $em->createQuery($dql);
+            $consulta->setParameter('idpais', $idpais);
+            $consulta->setParameter('idtipooperador', $idtipooperador);
+            $operador = $consulta->getResult();
+
+            $array['t']="Todos";
+            if(!empty($operador)){
+                foreach ($operador as $o) {
+                    $array[$o['id']]=$o['nombre'];
+                }
+            } else $array=array(''=>'vacio');
+
+
+            // create a task and give it some dummy data for this example
+            $form = $this->createFormBuilder()
+                    ->add('operador', 'choice', array(
+                        'choices'   => $array,
+                        'expanded'=>false, 
+                        'multiple'=>false,
+                        'empty_value' => 'Seleccione...',
+
+
+                    ))
+                ->getForm();
+
+        }
 
         else if($mostrar=='tipooperador'){
 
