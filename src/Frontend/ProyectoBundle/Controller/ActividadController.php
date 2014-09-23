@@ -19,10 +19,8 @@ class ActividadController extends Controller
     //se llama desde el index de la actividad
     public function estatustarea($idtarea){
         $estatus=1;
-        
         $em = $this->getDoctrine()->getManager();
         
-        //busco si hay en proceso
         $dql = "select x from ProyectoBundle:Actividad x where x.tarea= :idtarea";
         $query = $em->createQuery($dql);
         $query->setParameter('idtarea',$idtarea);
@@ -42,8 +40,20 @@ class ActividadController extends Controller
         if($proceso==true or $revision==true or $dependencia==true)$estatus=2;
         //si estan nuevos pero hay cerrados
         else if($proceso==false and $revision==false and $dependencia==false and $nuevo==true and $culminado==true)$estatus=2;
-        //si solo hay cerrados
-        else if($culminado==true and $nuevo==false and $proceso==false and $revision==false and $dependencia==false)$estatus=3;
+        //si solo hay cerrados culmino la tarea y guardo la fecha real
+        else if($culminado==true and $nuevo==false and $proceso==false and $revision==false and $dependencia==false){
+            
+            $ffr=new \DateTime(\date("d-m-Y G:i:s"));
+
+            //actualizo campos en ticket
+            $query = $em->createQuery('update ProyectoBundle:Tarea x set x.fechafinreal= :ffr WHERE x.id = :idtarea and x.fechafinreal is null');
+            $query->setParameter('ffr', $ffr);
+            $query->setParameter('idtarea', $idtarea);
+            $query->execute();  
+            
+            $estatus=3;
+            
+        }
         
         //actualizo campos en ticket
         $query = $em->createQuery('update ProyectoBundle:Tarea x set x.estatus= :estatus WHERE x.id = :idtarea');
@@ -470,6 +480,10 @@ class ActividadController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            //si creo una nueva actividad la fecha de fin real la coloco en blanco
+            $query = $em->createQuery('update ProyectoBundle:Tarea x set x.fechafinreal=null WHERE x.id = :idtarea');
+            $query->setParameter('idtarea', $idtarea);
+            $query->execute();  
             
             return $this->redirect($this->generateUrl('actividad_show', array('id' => $entity->getId())));
         }
