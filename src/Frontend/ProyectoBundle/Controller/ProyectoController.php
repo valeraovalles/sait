@@ -82,6 +82,9 @@ class ProyectoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         
+        //$servicio = $this->get('Servicio');
+        //$mensaje = $servicio->holamundo();
+        
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
         
