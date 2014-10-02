@@ -30,6 +30,10 @@ twig:
     globals:
         directorio_imagenes: '/uploads/images/'
         
+    form:
+        resources:
+            - 'ProyectoBundle:Form:fields.html.twig'
+        
 
 # Assetic Configuration
 assetic:

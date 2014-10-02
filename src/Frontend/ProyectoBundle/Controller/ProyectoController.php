@@ -208,7 +208,7 @@ class ProyectoController extends Controller
             
             $this->get('session')->getFlashBag()->add('notice', 'Proyecto creado exitosamente.');
             return $this->redirect($this->generateUrl('proyecto_show', array('id' => $entity->getId())));
-        }
+        }else $this->get('session')->getFlashBag()->add('alert', 'Ha ocurrido un error en el formulario.');
 
 
         
