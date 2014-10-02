@@ -49,7 +49,6 @@ class DefaultController extends Controller
             $quincena=$datos['periodo'];
 
             $query="
-
                 SELECT max(g.periodicidad) as periodicidad, a.semana_quincena,
                 max(d.nombre) as tipopersonal, 
                 max(tr.fecha_ingreso) as ingresoorganismo, 
@@ -78,8 +77,6 @@ class DefaultController extends Controller
                 a.id_historico_quincena, a.unidades, a.monto_asigna, a.monto_deduce,a.documento_soporte, 
                 k.grado, fp.cod_frecuencia_pago,a.semana_quincena order by d.cod_tipo_personal, j.cod_dependencia,
                 b.codigo_nomina, e.cedula, c.cod_concepto,a.semana_quincena
-
-
             ";
         } //fin if tipnom es n
 
