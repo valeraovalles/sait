@@ -17,17 +17,20 @@
 {% block body -%}
     {{ parent()}}
     
-
     {# % form_theme form 'ProyectoBundle:Form:fields.html.twig' % #}
     {{ form_start(form, { 'attr': {'novalidate':null} }) }}
         <div class="formShow">
-            {{ form(form) }}
+            {{ form_widget(form) }}
         </div>
+
+    <input type="submit" class="btn btn-primary" value="CREAR PROYECTO"> | 
+    <a class="btn btn-default" href="{{ path('proyecto') }}">VOLVER A LA LISTA</a>
     {{ form_end(form) }}
 
-    <a class="btn btn-default" href="{{ path('proyecto') }}">VOLVER A LA LISTA</a>
     <br><br>
-{#
+
+    
+    {#
     
     
     {% if form_errors(form.nombre) or form_errors(form.descripcion) or form_errors(form.responsable) %}
