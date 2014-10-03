@@ -32,30 +32,25 @@ class TicketController extends Controller
 
         $tickets = $em->getRepository('SitBundle:Ticket')->tickets();
 
-        $dql = "select t from SitBundle:Ticket t where t.estatus!=6 and t.estatus!=4 and t.estatus!=3 order by  t.estatus ASC, t.fechasolicitud DESC, t.horasolicitud DESC";
+        $dql = "select t from SitBundle:Ticket t where t.estatus!=4 and t.estatus!=3 order by  t.estatus ASC, t.fechasolicitud DESC, t.horasolicitud DESC";
         $query = $em->createQuery($dql);
         $tickets = $query->getResult();
 
         //cuento la cantidad de tickets por unidad
-        $nuevos=0;$asignados=0;$seguimiento=0;
-
+        $nuevos=0;$asignados=0;
 
         foreach ($tickets as $t){ 
                 if($t->getEstatus()=='1')
                     $nuevos=$nuevos+1;
                 else if($t->getEstatus()=='2')
-                    $asignados=$asignados+1;
-                else if ($t->getEstatus() == '5')
-                    $seguimiento=$seguimiento+1;
-            
+                    $asignados=$asignados+1; 
         }
         //FIN
 
         return $this->render('SitBundle:Ticket:general.html.twig', array(
             'entities' => $tickets,
             'nuevos'=> $nuevos,
-            'asignados'=> $asignados,
-            'seguimiento' => $seguimiento
+            'asignados'=> $asignados
         ));
     }
 
@@ -64,7 +59,7 @@ class TicketController extends Controller
         $eliminar=array(
             "hola","muchas gracias","buenos dias,","buenos dias","buenos días,","buenos días","buen día","buenas tardes,","buenas tardes","saludos","chicos:",
             "buenos días","gracias","la presente es para","la presente es","por medio de la presente se","Buenas noches,",
-            "Buenas noches","el presente es para","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
+            "Buenas noches","el presente es para","Por favor","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
             "urgente","esto con caracter de urgencia","con caracter de urgencia","Se agradece su valiosa colaboracion","carmen",
             "buenas tardes el motivo es para","el motivo es para","el motivo es para","por su colaboracion","por su colaboración","buen dia","Buenos tardes","camaradas","los molesto para",
             "por el presente","estimados","....","Buenas tardes:","Hola Johan", "Mil Gracias por tu colaboración", "Mil Gracias por tu colaboración."
@@ -451,25 +446,22 @@ class TicketController extends Controller
 
         //cuento la cantidad de tickets por unidad
         $tickets = $em->getRepository('SitBundle:Ticket')->findAll();
-        $contador[1]['nuevo']=0;$contador[1]['asignado']=0;$contador[1]['cerrado']=0;$contador[1]['seguimiento']=0;
-        $contador[2]['nuevo']=0;$contador[2]['asignado']=0;$contador[2]['cerrado']=0;$contador[2]['seguimiento']=0;
-        $contador[3]['nuevo']=0;$contador[3]['asignado']=0;$contador[3]['cerrado']=0;$contador[3]['seguimiento']=0;
-        $contador[4]['nuevo']=0;$contador[4]['asignado']=0;$contador[4]['cerrado']=0;$contador[4]['seguimiento']=0;
+        $contador[1]['nuevo']=0;$contador[1]['asignado']=0;$contador[1]['cerrado']=0;$contador[1]['reasignado']=0;
+        $contador[2]['nuevo']=0;$contador[2]['asignado']=0;$contador[2]['cerrado']=0;$contador[2]['reasignado']=0;
+        $contador[3]['nuevo']=0;$contador[3]['asignado']=0;$contador[3]['cerrado']=0;$contador[3]['reasignado']=0;
+        $contador[4]['nuevo']=0;$contador[4]['asignado']=0;$contador[4]['cerrado']=0;$contador[4]['reasignado']=0;
         
 
         foreach ($tickets as $t){ 
-            if($t->getEstatus()!='3'){
                 if($t->getEstatus()=='1')
                     $contador[$t->getUnidad()->getId()]['nuevo']=$contador[$t->getUnidad()->getId()]['nuevo']+1;
                 else if($t->getEstatus()=='2')
                     $contador[$t->getUnidad()->getId()]['asignado']=$contador[$t->getUnidad()->getId()]['asignado']+1;
-                else if($t->getEstatus()=='4' or $t->getEstatus()=='6')
+                else if($t->getEstatus()=='4')
                     $contador[$t->getUnidad()->getId()]['cerrado']=$contador[$t->getUnidad()->getId()]['cerrado']+1;
-                else if($t->getEstatus()=='5')
-                    $contador[$t->getUnidad()->getId()]['seguimiento']=$contador[$t->getUnidad()->getId()]['seguimiento']+1;
+                else if($t->getEstatus()=='3')
+                    $contador[$t->getUnidad()->getId()]['reasignado']=$contador[$t->getUnidad()->getId()]['reasignado']+1;   
             }
-            
-        }
         //FIN
 
 

@@ -27,12 +27,14 @@ class ProyectoType extends AbstractType
         
         $builder
             ->add('nombre')
-            ->add('descripcion','textarea')
-            ->add('fechainicio','date',array(
+            
+            ->add('descripcion','textarea',array('label'=>'Descripción'))
+            /*->add('fechainicio','date',array(
                     'widget' => 'single_text',
-                    'format'   => 'dd-MM-y',  ))
-            ->add('estatus','choice',array('choices'=>array(''=>'Seleccione...',1=>'Sin Iniciar',2=>'En progresop',3=>'Culminado')))
-            ->add('porcentaje','text')
+                    'format'   => 'dd-MM-y',
+                    'label'=>'Fecha de inicio'))*/
+            //->add('estatus','choice',array('choices'=>array(''=>'Seleccione...',1=>'Sin Iniciar',2=>'En progresop',3=>'Culminado')))
+            //->add('porcentaje','text')
             ->add('responsable','entity',array(
                 'class' => 'UsuarioBundle:Perfil',
                 'empty_value'=>'Seleccione...',
@@ -44,6 +46,7 @@ class ProyectoType extends AbstractType
                 ->setParameter('id', $datos)
                 ;}
             ));
+                
     }
     
     /**

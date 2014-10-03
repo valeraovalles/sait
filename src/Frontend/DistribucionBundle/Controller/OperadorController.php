@@ -148,8 +148,7 @@ class OperadorController extends Controller
      */
     public function createAction(Request $request)
     {
-
-
+        
         $datos=$request->request->all();
         $datos=$datos['frontend_distribucionbundle_operadortype'];
 
@@ -203,7 +202,7 @@ class OperadorController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('operador_show', array('id' => $entity->getId())));
-        }
+        } else $this->get('session')->getFlashBag()->add('alert', 'Alerta!! Hay errores en el formulario, por favor revise.');;
 
         return $this->render('DistribucionBundle:Operador:new.html.twig', array(
             'entity' => $entity,

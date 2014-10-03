@@ -4,6 +4,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\SitBundle\Resources\Misclases\htmlreporte;
 
+use Frontend\ProyectoBundle\Entity\Tarea;
 
 /**
  * Categoria controller.
@@ -85,16 +86,31 @@ class ReporteController extends Controller
     }
     public function generarinformeAction(Request $request)
     {
-        header('Content-type: application/vnd.ms-word');
+       header('Content-type: application/vnd.ms-word');
         header("Content-Disposition: attachment; filename=informe.doc");
         header("Pragma: no-cache");
         header("Expires: 0");
 
         $datos=$request->request->all();
         $datos=$datos['form'];
+        
+        //equivalencia con el nivel organizacional
+        $idunidad=$datos['unidad'];
+        if($idunidad==1)$idunidad=53;
+        else if($idunidad==2)$idunidad=50;
+        else if($idunidad==3)$idunidad=52;
+        else if($idunidad==4)$idunidad=51;
+
+        $em = $this->getDoctrine()->getManager();
+        //cuento las tareas del proyecto
+        $dql = "select x from ProyectoBundle:Tarea x join x.proyecto p join p.nivelorganizacional n where n.id= :idnivel and p.estatus!=3 order by p.id asc";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idnivel',$idunidad);
+        $tarea = $query->getResult();
+
         $em = $this->getDoctrine()->getManager();
         $a=new htmlreporte;
-        $html=$a->informe($em,$datos);
+        $html=$a->informe($em,$datos,$tarea);
         if($html==null){
             $this->get('session')->getFlashBag()->add('alert', 'No existen datos para la fecha seleccionada');
             return $this->redirect($this->generateUrl('reporte'));
@@ -105,4 +121,3 @@ class ReporteController extends Controller
 
     }
 }
-

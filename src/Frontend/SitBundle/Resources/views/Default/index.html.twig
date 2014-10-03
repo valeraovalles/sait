@@ -65,22 +65,22 @@
   	<div class="tickettitulo alert alert-info"><h5>ESTATUS DE TICKETS</h5></div>
 	<div class="ticketespera">
 		
-		{% set nuevo=0 %} {% set asignado=0 %} {% set culminado=0 %} {% set seguimiento=0 %}
+		{% set nuevo=0 %} {% set asignado=0 %} {% set culminado=0 %} {% set reasignado=0 %}
 		{% for tu in ticketusuario %}
 			{% if tu.estatus==1 %}
 				{% set nuevo=nuevo+1 %}
 			{% elseif tu.estatus==2 %}
 				{% set asignado=asignado+1 %}
-			{% elseif tu.estatus==5 %}
-				{% set seguimiento=seguimiento+1 %}
-			{% elseif tu.estatus==4 or tu.estatus==6 %}
+				{% elseif tu.estatus==3 %}
+				{% set reasignado=reasignado+1 %}
+			{% elseif tu.estatus==4 %}
 				{% set culminado=culminado+1 %}
 			{% endif %}
 		{% endfor %}
 
 		Nuevos: <a style="cursor:pointer;" title="Tickets solicitados que aún no se han atendido"><span class="badge" style="background-color:#b94a48;">{{ nuevo }}</span></a>
 		Asignados: <a style="cursor:pointer;" title="Tickets asignados para su resolución"><span class="badge" style="background-color:#468eb2;">{{ asignado }}</span></a>
-		Seguimiento: <a style="cursor:pointer;" title="Tickets asignados para su resolución"><span class="badge" style="background-color:orange;">{{ seguimiento }}</span></a>
+		Reasignados: <a style="cursor:pointer;" title="Tickets reasignados a otra unidad"><span class="badge" style="background-color:orange;">{{ reasignado }}</span></a>
 		Culminados: <a style="cursor:pointer;" title="Tickets resueltos"><span class="badge" style="background-color:#468847;">{{ culminado }}</span></a>
 
 		<div id="muestra">
@@ -88,59 +88,44 @@
 			<div><b>HISTORIAL</b></div>
 			<div class="listadoticketsolicitante">
 			<table class="ticketsolicitante table table-striped" cellpadding=0 cellspacing=0>
-				<tr><th>Solicitud</th><th>Fecha/Hora</th><th>Accion</th></tr>
+				<tr><th>Solicitud</th><th>Fecha/Hora</th><th>Acciones</th></tr>
 
-
-				{% for tu in ticketusuario  if tu.estatus==5 %}				
-					<tr  style="color:orange;">
+				{% for tu in ticketusuario %}				
+					<tr {% if tu.estatus==1 %}style="color:red;"{% elseif tu.estatus==2%} style="color:steelblue;"{% elseif tu.estatus==3%}  style="color:orange;" {% elseif tu.estatus==4 %}style="color:green;"{% endif %}>
 						<td>{{ tu.solicitud|slice(0,20) }}</td>
 						<td>{{ tu.fechasolicitud|date("d-m-Y") }} {{ tu.horasolicitud|date("G:i:s") }}</td>
-						<td><a href="{{ path('sit_seguimientoprincipal',{idticket:tu.id })}}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-					</tr>
-                                        
-				{% endfor %}
-
-
-				{% for tu in ticketusuario  if tu.estatus!=5 %}				
-					<tr {% if tu.estatus==1 %}style="color:red;"{% elseif tu.estatus==2%} style="color:steelblue;"{% elseif tu.estatus==4 or tu.estatus==6 %}style="color:green;"{% endif %}>
-						<td>{{ tu.solicitud|slice(0,20) }}</td>
-						<td>{{ tu.fechasolicitud|date("d-m-Y") }} {{ tu.horasolicitud|date("G:i:s") }}</td>
-
-						{% if tu.estatus==6 %}
-							<td><a href="{{ path('sit_seguimientoprincipal',{idticket:tu.id })}}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-						{% else %}
-							<td><a data-toggle="modal" href="#myModal{{ tu.id }}"><span class="glyphicon glyphicon-search"></span></a></td>
-						{% endif %}
-
-						
-					</tr>
-                                        
-                                        <div class="modal fade" id="myModal{{ tu.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog">
-                                            <div class="modal-content">
-                                              <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title" id="myModalLabel">ESTATUS DE TICKET</h4>
-                                              </div>
-                                              <div class="modal-body">
-                                                        <b>Solicitud:</b> {{ tu.solicitud }} <br> <br>
-
-                                                        {% if tu.estatus==1 %}
-                                                                <p class="text-error">El ticket aún no se ha asignado a un técnico.</p>
-                                                        {% elseif tu.estatus==2%}
-                                                                <p class="text-info">El ticket fue asignado a un técnico de la unidad de {{ tu.unidad.descripcion }}.</p>
-                                                        {% elseif tu.estatus==3 %}
-                                                                <p class="text-error">Haz envíado el ticket a la unidad equivocada por lo que fue reasignado a la unidad de {{ tu.unidad.descripcion }}.</p>
-                                                        {% elseif tu.estatus==4 or tu.estatus==6 %}
-                                                                <p class="text-success">Tu ticket fue cerrado el {{ tu.fechasolucion|date('d-m-Y') }} a las {{ tu.horasolucion|date('G:i:s') }} y la solucion fue la siguiente: "<b>{{ tu.solucion }}</b>".</p>
-                                                        {% endif %}
-                                              </div>
-                                              <div class="modal-footer">
-                                                  <button class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
+						<td>
+							<a data-toggle="modal" href="#myModal{{ tu.id }}" title="Detalles del Ticket"><span class="glyphicon glyphicon-search"></span></a>
+							{% if tu.estatus==2 %}
+							 <a href="{{ path('sit_seguimientoprincipal', { 'idticket': tu.id }) }}" title="Seguimiento del Ticket"><span class="glyphicon glyphicon-share-alt"></span></a>
+							{% endif %}
+						</td>		
+					</tr>                                        
+                    <div class="modal fade" id="myModal{{ tu.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      	<div class="modal-dialog">
+	                        <div class="modal-content">
+		                        <div class="modal-header">
+		                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                        	<h4 class="modal-title" id="myModalLabel">ESTATUS DE TICKET</h4>
+		                        </div>
+	                          	<div class="modal-body">
+	                                <b>Solicitud:</b> {{ tu.solicitud }} <br> <br>
+	                                {% if tu.estatus==1 %}
+	                                        <p class="text-error">El ticket aún no se ha asignado a un técnico.</p>
+	                                {% elseif tu.estatus==2%}
+	                                        <p class="text-info">El ticket fue asignado a un técnico de la unidad de {{ tu.unidad.descripcion }}.</p>
+	                                {% elseif tu.estatus==3 %}
+	                                        <p class="text-error">Haz envíado el ticket a la unidad equivocada por lo que fue reasignado a la unidad de {{ tu.unidad.descripcion }}.</p>
+	                                {% elseif tu.estatus==4 %}
+	                                        <p class="text-success">Tu ticket fue cerrado el {{ tu.fechasolucion|date('d-m-Y') }} a las {{ tu.horasolucion|date('G:i:s') }} y la solucion fue la siguiente: "<b>{{ tu.solucion }}</b>".</p>
+	                                {% endif %}
+	                      		</div>
+	                          	<div class="modal-footer">
+	                              	<button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	                          	</div>
+	                        </div>
+                        </div>
+                    </div>
 				{% endfor %}
 			</table>
 			</div>

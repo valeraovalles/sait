@@ -8,6 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Frontend\DistribucionBundle\Entity\Operador;
 use Frontend\DistribucionBundle\Form\OperadorType;
 
+use Frontend\DistribucionBundle\Entity\Zona;
+
+
 use Doctrine\ORM\EntityRepository;
 
 use Frontend\DistribucionBundle\Resources\misclases\htmlreporte;
@@ -41,24 +44,30 @@ class ReporteController extends Controller
     public function reporteinformativoAction(Request $request)
     {
 
-    	$entity = new Operador();
-        $form   = $this->createForm(new OperadorType(0), $entity);
 
+        $em = $this->getDoctrine()->getManager();
+        $dql = "select z.id,z.zona from DistribucionBundle:Zona z order by z.zona ASC";
+        $consulta = $em->createQuery($dql);
+        $zonas = $consulta->getResult();
 
+        $array['t']="Todas";
+        if(!empty($zonas)){
+            foreach ($zonas as $z) {
+                $array[$z['id']]=$z['zona'];
+            }
+        } else $array=array(''=>'vacio');
         // create a task and give it some dummy data for this example
         $form = $this->createFormBuilder()
-            ->add('pais', 'entity', array(
-                    'class' => 'DistribucionBundle:Pais',
-                    'property' => 'pais',
+                ->add('zona', 'choice', array(
+                    'choices'   => $array,
                     'expanded'=>false, 
-                    'multiple'=>true,
-                    'query_builder' => function(EntityRepository $er) {
-                            return $er->createQueryBuilder('u')
-                            ->orderBy('u.pais', 'ASC')
-                            ;
-                    },
+                    'multiple'=>false,
+                    'empty_value' => 'Seleccione...',
+
+
                 ))
-        ->getForm();
+            ->getForm();
+
 
         return $this->render('DistribucionBundle:Reportes:informativo.html.twig', array('form'   => $form->createView()));
 

@@ -229,7 +229,46 @@ class AjaxController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        if($mostrar=='operador'){
+        if($mostrar=='pais'){
+            
+            $idzona=$datos;
+
+            //SI SELECCIONO TODOS QUITO DEL WHERE EL TIPO DE OPERADOR
+            if($idzona!='t'){
+                $dql = "select p.id ,p.pais from DistribucionBundle:Operador o join o.pais p join o.zona z where z.id in (:idzona) order by p.pais ASC";
+                $consulta = $em->createQuery($dql);
+                $consulta->setParameter('idzona', $idzona);
+            }else{
+                $dql = "select p.id,p.pais from DistribucionBundle:Pais p order by p.pais ASC";
+                $consulta = $em->createQuery($dql);
+            }
+            $pais = $consulta->getResult();
+
+            
+            
+            if(!empty($pais)){
+                $array['t']="Todos";
+                foreach ($pais as $p) {
+                    $array[$p['id']]=$p['pais'];
+                }
+            } else $array=array(''=>'vacio');
+            
+            // create a task and give it some dummy data for this example
+            $form = $this->createFormBuilder()
+                    ->add('pais', 'choice', array(
+                        'choices'   => $array,
+                        'expanded'=>false, 
+                        'multiple'=>true,
+                        'empty_value' => 'Seleccione...',
+
+
+                    ))
+                ->getForm();
+
+        }
+        
+        
+        else if($mostrar=='operador'){
 
             $datos=explode("-", $datos);
             $idpais=explode(",",$datos[0]);
@@ -265,6 +304,8 @@ class AjaxController extends Controller
                 ->getForm();
 
         }
+        
+       
 
         else if($mostrar=='tipooperador'){
 

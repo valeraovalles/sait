@@ -1,0 +1,56 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Proyecto - documento{% endblock %}
+
+{% block titulobanner %}
+    DOCUMENTOS
+{% endblock %}
+
+{% block titulo %}
+    <h1>DOCUMENTO</h1>
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto_homepage") }}">LISTA DE PROYECTOS</a></li>
+  <li><a href="{{ path('comentarioproyecto',{'proyecto':proyecto}) }}">LISTA DE DOCUMENTOS</a></li>
+  <li class="active">DOCUMENTO</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    <div class="formShow" style="width:80%;">
+        <div class="contenedorform">
+            <div class="labelform">Descripci&oacute;n:</div>
+            <div class="widgetform" style:"width:100%;height:300px;">{{ entity.descripcion }}</div>
+        </div>
+        
+        <div class="contenedorform">
+            <div class="labelform">Archivo:</div>
+            <div class="widgetform">
+                {% set extension =  entity.archivo|split(".") %}
+
+                {% if extension[1]=='jpg' or extension[1]=='jpeg' or extension[1]=='png' or extension[1]=='gif'  %}
+                    <a data-toggle="modal" href="#myModal">
+                        <img class="img-rounded" src="{{ asset('uploads/documentosproyectos/') }}{{ entity.archivo }}" width="150px">
+                    </a>
+                {% else %}
+                    <a href="{{ asset('uploads/documentosproyectos/') }}/{{ entity.archivo }}">DESCARGA ARCHIVO {{ extension[1]|upper }}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div> 
+    <a class="btn btn-default" href="{{ path('documentoproyecto',{'proyecto':proyecto}) }}">
+        IR A LA LISTA
+    </a> 
+
+    <BR><BR>    
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar el documento?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+
+{% endblock %}

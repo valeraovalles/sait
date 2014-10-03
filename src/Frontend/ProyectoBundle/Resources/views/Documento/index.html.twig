@@ -1,0 +1,56 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Proyecto - Documentos{% endblock %}
+
+{% block titulobanner %}
+    DOCUMENTOS
+{% endblock %}
+
+{% block titulo %}
+    <h1>HISTORIAL DE DOCUMENTOS</h1>
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto_homepage") }}">LISTA DE PROYECTOS</a></li>
+  <li class="active">DOCUMENTOS</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+    <table id="tablalista" style="width: 97%;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre del Documento</th>
+                <th>Descripci&oacute;n</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('documentoproyecto_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Documento">{{ entity.id }}</a></td>
+                <td style="width:550px;">{{ entity.file }}</td>
+                <td>{{ entity.descripcion }}</td>
+                <td>
+                    <a href="{{ path('documentoproyecto_show', { 'id': entity.id }) }}" data-toggle="tooltip" data-placement="top" title="Detalle de Documento"><b class="glyphicon glyphicon-eye-open"></b></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br><br><br>
+    <a class="btn btn-default" href="{{ path('documentoproyecto_new', {'proyecto': proyecto}) }}">NUEVO DOCUMENTO</a> ||| <a class="btn btn-default" href="{{ path('proyecto_homepage') }}">LISTA DE PROYECTOS</a><br><br>
+
+    <script>
+        $(document).ready(function(){
+            $('#tablalista').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
+                 "aaSorting": [[0,'desc']],
+             } );
+         })
+    </script>
+    {% endblock %}

@@ -19,10 +19,8 @@ class ActividadController extends Controller
     //se llama desde el index de la actividad
     public function estatustarea($idtarea){
         $estatus=1;
-        
         $em = $this->getDoctrine()->getManager();
         
-        //busco si hay en proceso
         $dql = "select x from ProyectoBundle:Actividad x where x.tarea= :idtarea";
         $query = $em->createQuery($dql);
         $query->setParameter('idtarea',$idtarea);
@@ -42,8 +40,20 @@ class ActividadController extends Controller
         if($proceso==true or $revision==true or $dependencia==true)$estatus=2;
         //si estan nuevos pero hay cerrados
         else if($proceso==false and $revision==false and $dependencia==false and $nuevo==true and $culminado==true)$estatus=2;
-        //si solo hay cerrados
-        else if($culminado==true and $nuevo==false and $proceso==false and $revision==false and $dependencia==false)$estatus=3;
+        //si solo hay cerrados culmino la tarea y guardo la fecha real
+        else if($culminado==true and $nuevo==false and $proceso==false and $revision==false and $dependencia==false){
+            
+            $ffr=new \DateTime(\date("d-m-Y G:i:s"));
+
+            //actualizo campos en ticket
+            $query = $em->createQuery('update ProyectoBundle:Tarea x set x.fechafinreal= :ffr WHERE x.id = :idtarea and x.fechafinreal is null');
+            $query->setParameter('ffr', $ffr);
+            $query->setParameter('idtarea', $idtarea);
+            $query->execute();  
+            
+            $estatus=3;
+            
+        }
         
         //actualizo campos en ticket
         $query = $em->createQuery('update ProyectoBundle:Tarea x set x.estatus= :estatus WHERE x.id = :idtarea');
@@ -298,13 +308,11 @@ class ActividadController extends Controller
     }
     
     public function calculacuentaregresiva($e) {
-        $cuentaregresiva=array();
+       
+        $comienzo=$tiemporeal=$e->getComienzo();
+        
         //fecha fin y tiempo real
         $fa1=new \DateTime(\date("d-m-Y G:i:s"));
-        $fa2=$fa1;
-
-
-
 
         //sumo tiempo usado
         $tiemporeal=$e->getTiemporeal();
@@ -316,7 +324,7 @@ class ActividadController extends Controller
                 if($e->getTipotiempo()==1)$tt='day';
                 else if($e->getTipotiempo()==2)$tt='hour';
                 else if($e->getTipotiempo()==3)$tt='minute';
-                $tiempoestimado = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $fa1->format("d-m-Y G:i:s") ) ) ;
+                $tiempoestimado = strtotime ( '+'.$e->getTiempoestimado().' '.$tt , strtotime ( $comienzo->format("d-m-Y G:i:s") ) ) ;
         
             //sumo el tiempo utilizado a la fecha actual y obtengo el utilizado
                 $tiemporeal=  explode("-", $tiemporeal);
@@ -328,12 +336,12 @@ class ActividadController extends Controller
                 $minutosegundo=$tiemporeal[2]*60;
                 $segundototal=$diasegundo+$horasegundo+$minutosegundo+$tiemporeal[3];
 
-                $tiempoconsumido = strtotime ( '+'.$segundototal.' second' , strtotime ( $fa2->format("d-m-Y G:i:s") ) ) ;
+                $tiempoconsumido = strtotime ( '+'.$segundototal.' second' , strtotime ( $fa1->format("d-m-Y G:i:s") ) ) ;
 
 
             //si la actividad ya se ha retrasado coloco 0 en la cuenta regresiva
             if($tiempoconsumido>$tiempoestimado)
-                $cuentaregresiva[$e->getId()]=0;
+                $this->cuentaregresiva[$e->getId()]=0;
             else{
 
                 //si no se ha retrasado convierto ambas fecha para poder hacer un diff
@@ -345,7 +353,7 @@ class ActividadController extends Controller
                 
                 $intervalo=$tiempoestimado->diff($tiempoconsumido);
 
-                $cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
+                $this->cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
             }
         } else{
             
@@ -353,7 +361,7 @@ class ActividadController extends Controller
                 //calculo el tiempo estimado sumando el tiempo de la actividad a la fecha de comienzo
                 //luego hago un dif entre el tiempo estimado y la fecha actual
             
-                $comienzo=$tiemporeal=$e->getComienzo();
+                
             
                 if($e->getTipotiempo()==1)$tt='day';
                 else if($e->getTipotiempo()==2)$tt='hour';
@@ -363,7 +371,7 @@ class ActividadController extends Controller
                 $tiempoactual=strtotime ( $fa1->format("d-m-Y G:i:s") );
                 
                 if($tiempoactual>$tiempoestimado)
-                    $cuentaregresiva[$e->getId()]=0;
+                    $this->cuentaregresiva[$e->getId()]=0;
                 else{
                 
                     $tiempoestimado = date ( 'Y-m-d G:i:s' , $tiempoestimado );
@@ -371,15 +379,11 @@ class ActividadController extends Controller
 
                     $intervalo=$tiempoestimado->diff($fa1);
 
-                    $cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
+                    $this->cuentaregresiva[$e->getId()]=str_pad($intervalo->d,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->h,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->i,2,"0",STR_PAD_LEFT).'-'.str_pad($intervalo->s,2,"0",STR_PAD_LEFT);
                 }
   
         }
-        
-        return $cuentaregresiva;
-        
-        
-  
+        return $this->cuentaregresiva;
         
     }
     
@@ -402,17 +406,14 @@ class ActividadController extends Controller
         $this->porcentajeproyecto($tarea->getProyecto()->getId());
               
         //cuenta regresiva
-        $cuentaregresiva=array();
+        
+        $this->cuentaregresiva=null;
         //verifico los tiempos de culminacion
         $duracionactividad=array();
         foreach ($entities as $e) {
             if($e->getUbicacion()==2){
-
-                $cuentaregresiva=$this->calculacuentaregresiva($e);
+                $this->calculacuentaregresiva($e);
             }
-
-            
-            
             //muestro el tiempo que lleva consumido
             if($e->getUbicacion()==3 or $e->getUbicacion()==4 or ($e->getUbicacion()==1 and $e->getTiemporeal()!=null)){
                 
@@ -425,14 +426,13 @@ class ActividadController extends Controller
                     $duracionactividad[$e->getId()]['tiemporetardo']="D:".$tiemporeal[0]." | H:".$tiemporeal[1]." | M:".$tiemporeal[2]." | S:".$tiemporeal[3];
                 }
             }
+    
         }
-
-        
 
         return $this->render('ProyectoBundle:Actividad:index.html.twig', array(
             'entities' => $entities,
             'tarea'=>$tarea,
-            'cuentaregresiva'=>$cuentaregresiva,
+            'cuentaregresiva'=>$this->cuentaregresiva,
             'duracionactividad'=>$duracionactividad
         ));
     }
@@ -480,6 +480,10 @@ class ActividadController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            //si creo una nueva actividad la fecha de fin real la coloco en blanco
+            $query = $em->createQuery('update ProyectoBundle:Tarea x set x.fechafinreal=null WHERE x.id = :idtarea');
+            $query->setParameter('idtarea', $idtarea);
+            $query->execute();  
             
             return $this->redirect($this->generateUrl('actividad_show', array('id' => $entity->getId())));
         }
@@ -713,6 +717,12 @@ class ActividadController extends Controller
         $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
         
         $entity = $em->getRepository('ProyectoBundle:Actividad')->find($id);
+        
+        if($entity->getTiemporeal()!=null){
+            $this->get('session')->getFlashBag()->add('alert', 'Estas pillado(a), no le vas a modificar el tiempo a la actividad!!');
+            return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$entity->getTarea()->getId()))); 
+        }
+        
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Actividad entity.');

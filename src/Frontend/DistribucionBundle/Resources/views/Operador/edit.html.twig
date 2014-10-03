@@ -252,7 +252,8 @@
         <input class="btn" type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
         <button class="btn btn-danger" type="submit">DESACTIVAR</button> | 
-        <a class="btn btn-default" href="{{ path('operador') }}">IR A LA LISTA</a> | 
+        <a class="btn btn-default" href="{{ path('operador') }}">LISTA DE OPERADORES</a> | 
+        <a class="btn btn-default" href="{{ path('operador_list', { 'idpais': entity.pais.id,'idtipooperador': entity.tipooperador.id }) }}">LISTA DE TIPO OPERADOR POR PAÍS</a> | 
         <a class="btn btn-default" href="{{ path('operador_show', { 'id': entity.id }) }}">IR A CONSULTAR</a>
     </form>
 

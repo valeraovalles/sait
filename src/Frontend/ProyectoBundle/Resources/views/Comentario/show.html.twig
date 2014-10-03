@@ -1,0 +1,50 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Proyecto - Comentarios{% endblock %}
+
+{% block titulobanner %}
+    COMENTARIOS
+{% endblock %}
+
+{% block titulo %}
+    <h1>COMENTARIO</h1>
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto_homepage") }}">LISTA DE PROYECTOS</a></li>
+  <li><a href="{{ path('comentarioproyecto',{'proyecto':proyecto}) }}">LISTA DE COMENTARIOS</a></li>
+  <li class="active">COMENTARIO</li>
+</ol>
+{% endblock %}
+
+{% block body -%}
+    {{ parent() }}
+
+    <div class="formShow" >
+        <div class="contenedorform">
+            <div class="labelform">Fecha de Registro:</div>
+            <div class="widgetform">{{ entity.fechaRegistro|date('Y-m-d') }}</div>
+        </div>
+        <div class="contenedorform">
+            <div class="labelform">Comentario:</div>
+            <div class="widgetform">{{ entity.comentario }}</div>
+        </div>
+    </div>
+    <a class="btn btn-default" href="{{ path('comentarioproyecto',{'proyecto':proyecto}) }}">
+        IR A LA LISTA
+    </a> |
+    <a class="btn btn-default" href="{{ path('comentarioproyecto_edit', { 'id': entity.id }) }}">
+        IR A EDITAR
+    </a>
+
+    <BR><BR>    
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar el comentario?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+
+
+     
+{% endblock %}

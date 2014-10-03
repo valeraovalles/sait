@@ -82,6 +82,9 @@ class ProyectoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         
+        //$servicio = $this->get('Servicio');
+        //$mensaje = $servicio->holamundo();
+        
         $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
         $perfil = $em->getRepository('UsuarioBundle:Perfil')->find($idusuario);
         
@@ -205,7 +208,7 @@ class ProyectoController extends Controller
             
             $this->get('session')->getFlashBag()->add('notice', 'Proyecto creado exitosamente.');
             return $this->redirect($this->generateUrl('proyecto_show', array('id' => $entity->getId())));
-        }
+        }else $this->get('session')->getFlashBag()->add('alert', 'Ha ocurrido un error en el formulario.');
 
 
         

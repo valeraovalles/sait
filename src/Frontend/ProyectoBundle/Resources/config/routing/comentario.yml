@@ -1,0 +1,30 @@
+comentarioproyecto:
+    path:     /lista/{proyecto}
+    defaults: { _controller: "ProyectoBundle:Comentario:index" }
+
+comentarioproyecto_show:
+    path:     /detalles/{id}
+    defaults: { _controller: "ProyectoBundle:Comentario:show" }
+
+comentarioproyecto_new:
+    path:     /nuevo/{proyecto}
+    defaults: { _controller: "ProyectoBundle:Comentario:new" }
+
+comentarioproyecto_create:
+    path:     /create/{proyecto}
+    defaults: { _controller: "ProyectoBundle:Comentario:create", proyecto: 1 }
+    requirements: { _method: post }
+
+comentarioproyecto_edit:
+    path:     editar/{id}
+    defaults: { _controller: "ProyectoBundle:Comentario:edit" }
+
+comentarioproyecto_update:
+    path:     /{id}/update
+    defaults: { _controller: "ProyectoBundle:Comentario:update" }
+    requirements: { _method: post|put }
+
+comentarioproyecto_delete:
+    path:     /eliminar/{id}
+    defaults: { _controller: "ProyectoBundle:Comentario:delete" }
+    requirements: { _method: post|delete }
