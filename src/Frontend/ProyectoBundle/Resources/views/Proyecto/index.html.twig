@@ -150,23 +150,22 @@
     <table id="tabladatatable" class="table table-hover">
         <thead>
             <tr>
-                <th style="display:none;">Id</th>
-                <th style="width: 20%">Nombre</th>
-                <th style="width: 20%">Descripcion</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
                 <th>Fecha inicio</th>
                 <th>Fecha fin</th>
                 <th>Estatus</th>
                 <th>Completado</th>
                 <th>Responsables</th>
-                <th style="width: 17%">Acciones</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
                 <td style="display:none;">{{ entity.id }}</td>
-                <td><a style="font-size: 14px;color:black;" href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre|upper }}</a></td>
-                <td width="15%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,30) }}...</span></td>
+                <td style="text-align: justify;width: 20%;"><b>{{ entity.nombre|upper }}</b></td>
+                <td style="text-align: justify;width: 12%;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,50) }}...</span></td>
                 <td align="center">
                     {% if entity.fechainicio %}
                         {{ entity.fechainicio|date('d-m-Y') }}
