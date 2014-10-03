@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>        
+        <XML>
+            <Content>UPDATE</Content>
+            <Clip>
+                <ClipName>ESPEPRO0216</ClipName>
+                <TipoContenido>ESPECIALES</TipoContenido>
+                <Contenido><![CDATA[ DECIDE BRASIL 05OCT14 ]]></Contenido>
+                <OriginalTitle></OriginalTitle>
+                <Description> </Description>
+                <Notes>a</Notes>
+                <DurPrev></DurPrev>
+                <Chapter></Chapter>
+                <EndDate></EndDate>
+                <EPG></EPG>
+                <EPG_Content> </EPG_Content>
+                <Segments>
+            
+                <Segment>
+                    <SegTitle>1-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021601</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>2-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021602</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>2</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>3-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021603</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>3</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>4-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021604</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>4</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>5-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021605</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>5</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>6-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021606</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>6</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>7-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021607</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>7</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>8-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021608</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>8</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>9-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021609</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>9</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>10-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021610</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>10</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>11-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021611</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>11</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>12-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021612</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>12</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>13-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021613</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>13</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>14-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021614</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>14</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>15-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021615</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>15</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>16-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021616</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>16</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>17-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021617</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>17</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>18-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021618</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>18</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>19-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021619</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>19</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>20-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021620</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>20</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>21-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021621</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>21</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>22-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021622</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>22</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>23-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021623</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>23</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>24-24 PROGRAMA - DECIDE BRASIL 05OCT14 </SegTitle>
+                    <MediaID>ESPEPRO021624</MediaID>
+                    <Duration>00:14:35.00</Duration>
+                    <SegNumber>24</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            </Segments></Clip></XML>
