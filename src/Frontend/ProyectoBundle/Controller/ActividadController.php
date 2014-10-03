@@ -87,7 +87,7 @@ class ActividadController extends Controller
         //si estan nuevos pero hay cerrados
         else if($nuevo==true and $proceso==false and $culminado==false)$estatus=1;
         //si solo hay cerrados
-        else if($culminado=true and $proceso==false and $nuevo==false)$estatus=3;
+        else if($culminado==true and $proceso==false and $nuevo==false)$estatus=3;
 
         
         //actualizo campos en ticket

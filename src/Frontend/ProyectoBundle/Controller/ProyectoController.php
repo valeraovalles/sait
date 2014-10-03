@@ -289,8 +289,6 @@ public function creategeneralAction(Request $request)
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
         return $form;
     }
     

@@ -57,7 +57,7 @@ class TicketController extends Controller
     public function filtrarsolicitud($solicitud){
 
         $eliminar=array(
-            "hola","muchas gracias","buenos dias,","buenos dias","buenos días,","buenos días","buen día","buenas tardes,","buenas tardes","saludos","chicos:",
+            "hola","muchas gracias","Joan","Urgente,","Buenos días","buenos dias,","buenos dias","buenos días,","buenos días","buen día","buenas tardes,","buenas tardes","saludos","chicos:",
             "buenos días","gracias","la presente es para","la presente es","por medio de la presente se","Buenas noches,",
             "Buenas noches","el presente es para","Por favor","por favor","favor","porfavor","chicos", "por su valiosa colaboracion", "jhoan",
             "urgente","esto con caracter de urgencia","con caracter de urgencia","Se agradece su valiosa colaboracion","carmen",
