@@ -4,4 +4,6 @@ app/cache/*
 app/logs/*
 app/config/parameters.yml
 nbproject/private/
+web/uploads
+web/uploads/*
 
