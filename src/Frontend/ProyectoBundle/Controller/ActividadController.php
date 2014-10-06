@@ -87,7 +87,7 @@ class ActividadController extends Controller
         //si estan nuevos pero hay cerrados
         else if($nuevo==true and $proceso==false and $culminado==false)$estatus=1;
         //si solo hay cerrados
-        else if($culminado=true and $proceso==false and $nuevo==false)$estatus=3;
+        else if($culminado==true and $proceso==false and $nuevo==false)$estatus=3;
 
         
         //actualizo campos en ticket
@@ -105,21 +105,34 @@ class ActividadController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         //cuento las actividades cerradas
-        $dql = "select count(x) from ProyectoBundle:Actividad x join x.tarea t where t.proyecto = :idproyecto and (x.ubicacion=4 or x.ubicacion=3)";
+        $dql = "select count(x) from ProyectoBundle:Actividad x join x.tarea t where t.proyecto = :idproyecto and x.ubicacion=4";
         $query = $em->createQuery($dql);
         $query->setParameter('idproyecto',$idproyecto);
         $totalcerrado = $query->getSingleResult();
         
+        //cuento las actividades cerradas
+        $dql = "select count(x) from ProyectoBundle:Actividad x join x.tarea t where t.proyecto = :idproyecto and x.ubicacion=3";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idproyecto',$idproyecto);
+        $totalrevision = $query->getSingleResult();
+        
         //cuento actividades abiertas
-        $dql = "select count(x) from ProyectoBundle:Actividad x join x.tarea t where t.proyecto = :idproyecto and x.ubicacion!=4 and x.ubicacion!=3";
+        $dql = "select count(x) from ProyectoBundle:Actividad x join x.tarea t where t.proyecto = :idproyecto and (x.ubicacion<>4 and x.ubicacion<>3)";
         $query = $em->createQuery($dql);
         $query->setParameter('idproyecto',$idproyecto);
         $totalabierto = $query->getSingleResult();
 
-        $total=$totalcerrado[1]+$totalabierto[1];
+        $total=$totalcerrado[1]+$totalabierto[1]+$totalrevision[1];
         
-        if($total!=0)
-        $porcentaje=($totalcerrado[1]*100)/$total;
+        if($total!=0){
+            $porcentajecerrado=($totalcerrado[1]*100)/$total;
+
+            //le doy la mitad del porcentaje por estar en revision
+            $porcentajerevision=($totalrevision[1]*50)/$total;
+            
+            $porcentaje=$porcentajecerrado+$porcentajerevision;
+            
+        }
         else $porcentaje=0;
         
         //actualizo campos en ticket
@@ -136,23 +149,36 @@ class ActividadController extends Controller
         //
         $em = $this->getDoctrine()->getManager();
         
-        //busco la fecha mas baja de las tareas para que sea la fecha de inicio del proyecto
-        $dql = "select count(x) from ProyectoBundle:Actividad x where x.tarea= :idtarea and (x.ubicacion=4 or x.ubicacion=3)";
+        $dql = "select count(x) from ProyectoBundle:Actividad x where x.tarea= :idtarea and x.ubicacion=4";
         $query = $em->createQuery($dql);
         $query->setParameter('idtarea',$idtarea);
         $totalcerrado = $query->getSingleResult();
         
-        $dql = "select count(x) from ProyectoBundle:Actividad x where x.tarea= :idtarea and x.ubicacion<>4 and x.ubicacion<>3";
+        $dql = "select count(x) from ProyectoBundle:Actividad x where x.tarea= :idtarea and x.ubicacion=3";
+        $query = $em->createQuery($dql);
+        $query->setParameter('idtarea',$idtarea);
+        $totalrevision = $query->getSingleResult();
+        
+        $dql = "select count(x) from ProyectoBundle:Actividad x where x.tarea= :idtarea and (x.ubicacion<>4 and x.ubicacion<>3)";
         $query = $em->createQuery($dql);
         $query->setParameter('idtarea',$idtarea);
         $totalabierto = $query->getSingleResult();
 
-        $total=$totalcerrado[1]+$totalabierto[1];
+        $total=$totalcerrado[1]+$totalabierto[1]+$totalrevision[1];
         
-        if($total!=0)
-        $porcentaje=($totalcerrado[1]*100)/$total;
+        if($total!=0){
+            $porcentajecerrado=($totalcerrado[1]*100)/$total;
+
+            //le doy la mitad del porcentaje por estar en revision
+            $porcentajerevision=($totalrevision[1]*50)/$total;
+            
+            $porcentaje=$porcentajecerrado+$porcentajerevision;
+            
+        }
         else $porcentaje=0;
         
+        
+
         //actualizo campos en ticket
         $query = $em->createQuery('update ProyectoBundle:Tarea x set x.porcentaje= :porcentaje WHERE x.id = :idtarea');
         $query->setParameter('porcentaje', number_format($porcentaje,0));
