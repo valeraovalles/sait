@@ -4,3 +4,6 @@ app/cache/*
 app/logs/*
 app/config/parameters.yml
 nbproject
+web/uploads/
+web/uploads/*
+
