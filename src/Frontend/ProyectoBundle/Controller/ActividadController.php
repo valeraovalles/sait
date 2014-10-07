@@ -82,6 +82,12 @@ class ActividadController extends Controller
             if($a->getEstatus()==3)$culminado=true;
         }
         
+        //si el proyecto tiene 100% quiere decir que hay tareas sin actividades pero el proyecto en realidad ya estaria culminado porque todo los calculos se sacan en base a las actividades
+        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($idproyecto);
+        if($proyecto->getPorcentaje()==100)$nuevo=false;
+        
+        
+        
         //si hay en proceso
         if($proceso==true or $nuevo==true and $culminado==true)$estatus=2;
         //si estan nuevos pero hay cerrados
