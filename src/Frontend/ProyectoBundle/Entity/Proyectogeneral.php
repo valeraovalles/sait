@@ -29,11 +29,6 @@ class Proyectogeneral
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="proyecto.proyecto_id_seq", allocationSize=1, initialValue=1)
      */
 
     private $id;
@@ -58,6 +53,11 @@ class Proyectogeneral
    
     private $nivelorganizacional;
 
+        public function __construct()
+    {
+        $this->nivelorganizacional = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Set nombre
      *
@@ -112,6 +112,11 @@ class Proyectogeneral
      * @return integer 
      */
     public function getId()
+    {
+        return $this->id;
+    }
+    
+    public function setId()
     {
         return $this->id;
     }

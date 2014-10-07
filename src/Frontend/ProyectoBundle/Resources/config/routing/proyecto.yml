@@ -10,10 +10,6 @@ proyecto_show:
     path:     /{id}/show
     defaults: { _controller: "ProyectoBundle:Proyecto:show" }
     
-proyecto_show_general:
-    path:     /general/{id}/show
-    defaults: { _controller: "ProyectoBundle:Proyecto:showgeneral" }
-
 proyecto_new:
     path:     /new
     defaults: { _controller: "ProyectoBundle:Proyecto:new" }
@@ -35,11 +31,21 @@ proyecto_creategeneral:
 proyecto_edit:
     path:     /{id}/edit
     defaults: { _controller: "ProyectoBundle:Proyecto:edit" }
+    
+proyecto_editgeneral:
+    path:     /{id}/editgeneral
+    defaults: { _controller: "ProyectoBundle:Proyecto:editgeneral" }    
 
 proyecto_update:
     path:     /{id}/update
     defaults: { _controller: "ProyectoBundle:Proyecto:update" }
     requirements: { _method: post|put }
+    
+proyecto_updategeneral:
+    path:     /{id}/updategeneral
+    defaults: { _controller: "ProyectoBundle:Proyecto:updategeneral" }
+    requirements: { _method: post|put }
+
 
 proyecto_delete:
     path:     /{id}/delete

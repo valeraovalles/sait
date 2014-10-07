@@ -32,21 +32,26 @@
                     <div class="scrollact">
                     {% for p in proyectos %}
                     {% for  no in p.nivelorganizacional if no.id==n.id %}
-                        <a style="text-decoration: none;color:black;" href="{{ path('tarea_general',{'idproyecto':p.id}) }}">
                         <div class="tarjetaact img-rounded">
                             <div class="responsableact bg-primary">{{ p.nombre|upper }}</div>
-                            
-                            {% if p.fechainicio!=null or p.fechafin!=null %}
                             <div class="bf-info" style="font-size:10px;font-weight: bold; ">
-                                {% if p.fechainicio %}
-                                    I: {{ p.fechainicio|date('d-m-Y') }}
+                                {% if p.fechainicio!=null or p.fechafin!=null %}
+                                    {% if p.fechainicio %}
+                                        I: {{ p.fechainicio|date('d-m-Y') }}
+                                    {% endif %}
+                                    {% if p.fechafin %}
+                                        | F: {{ p.fechafin|date('d-m-Y') }}
+                                    {% endif %}
                                 {% endif %}
-                                {% if p.fechafin %}
-                                    | F: {{ p.fechafin|date('d-m-Y') }}
+                                
+                                {% if p.estatus!=3 %}
+                                &nbsp;&nbsp;&nbsp;
+                                <a href="{{ path('proyecto_editgeneral', { 'id': p.id }) }}"><span style="color:red;" class="glyphicon glyphicon-edit"></span></a>
                                 {% endif %}
                             </div>
-                            {% endif %}
                             
+
+                            <a style="text-decoration: none;color:black;" href="{{ path('tarea_general',{'idproyecto':p.id}) }}">
                             <div class="descripcionact">{{p.descripcion}}</div>
                             
                             {# ESTATUS #}
@@ -68,8 +73,9 @@
                                     </div>
                                 {% endif %}
                             </div>
+                            </a>
                         </div>
-                        </a>
+                        
                     {% endfor %}        
                     {% endfor %}
                     </div>
@@ -157,7 +163,6 @@
                 </td>
                 <td>
                     
-                    <a style="color:black;" href="{{ path('proyecto_show_general', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-search"></span></a>
                     <a style="color:black;" href="{{ path('tarea_general', { 'idproyecto': entity.id }) }}">TAREAS  <span class="badge">{% if totaltarea[entity.id] is defined %}{{ totaltarea[entity.id] }}{% else %}0{% endif %}</span></a> 
                     
                     
