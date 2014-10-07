@@ -43,6 +43,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
+                <td style="display:none;">{{ entity.porcentaje }}</td>
                 <td style="width: 20%;text-align: justify;"><b>{{ entity.nombre }}</b></td>
                 <td style="width: 10%" style="text-align: justify;"><span style="cursor:pointer;" data-toggle="tooltip" data-placement="top" title="{{ entity.descripcion}}">{{ entity.descripcion|capitalize|slice(0,12) }}...</span></td>
                 <td align="center">{% if entity.fechainicio %}{{ entity.fechainicio|date('d-m-Y') }}{% endif %}</td>
@@ -113,7 +114,7 @@
             
            $('#tabladatatable').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-                "aaSorting": [[0,'desc']],
+                "aaSorting": [[0,'asc']],
             } );
         })
     </script>
