@@ -103,7 +103,7 @@ class ReporteController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         //cuento las tareas del proyecto
-        $dql = "select x from ProyectoBundle:Tarea x join x.proyecto p join p.nivelorganizacional n where n.id= :idnivel and p.estatus!=3";
+        $dql = "select x from ProyectoBundle:Tarea x join x.proyecto p join p.nivelorganizacional n where n.id= :idnivel and p.estatus!=3 order by p.id asc";
         $query = $em->createQuery($dql);
         $query->setParameter('idnivel',$idunidad);
         $tarea = $query->getResult();
