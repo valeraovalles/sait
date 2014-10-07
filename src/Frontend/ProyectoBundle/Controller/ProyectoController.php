@@ -528,6 +528,7 @@ public function creategeneralAction(Request $request)
         $entityx->setDescripcion($entity->getDescripcion());
         foreach ($entity->getNivelorganizacional() as $v) {
             $entityx->addNivelorganizacional($v);
+            $entity->removeNivelorganizacional($v);
         }
         
         $deleteForm = $this->createDeleteForm($id);
@@ -543,7 +544,6 @@ public function creategeneralAction(Request $request)
             $entity->setFechainicio($fechainicio);
             $entity->setFechafin($fechafin);
             foreach ($editForm->getData()->getNivelorganizacional() as $v) {
-                $entity->removeNivelorganizacional($v);
                 $entity->addNivelorganizacional($v);
             }
             $em->flush();
