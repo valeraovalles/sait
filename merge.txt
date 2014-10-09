@@ -1,8 +1,1 @@
-Merge made by the 'recursive' strategy.
- 2                                                                 | 0
- errores.txt                                                       | 0
- src/Frontend/MercalBundle/Resources/views/Default/index.html.twig | 6 ++++++
- web/uploads/jornada/MERCAL30062014.json                           | 2 +-
- 4 files changed, 7 insertions(+), 1 deletion(-)
- mode change 100755 => 100644 2
- create mode 100644 errores.txt
+Already up-to-date.
