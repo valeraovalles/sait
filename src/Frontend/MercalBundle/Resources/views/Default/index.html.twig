@@ -38,9 +38,15 @@
             <a class="btn btn-success" href="{{ path('ajaxmercal_siguiente', {'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'true'}) }}">COMPRO</a> | 
             <a class="btn btn-danger" href="{{ path('ajaxmercal_siguiente', {'idjornada':jornada.id,'usernumeroid':datos.usernumeroid,'compro':'false'}) }}">NO COMPRO</a><br><br>
         {% elseif datos.compro=="verificar" %}
+<<<<<<< HEAD
+            <b class="alert alert-info">LA COLA DE USUARIOS HA CULMINADO, VERIFIQUE MÁS TARDE SI NUEVOS USUARIOS FUERON AGREGADOS</b><br><br>
+            <a id="comprobar" style="padding:10px;" class="label label-warning" href="{{ path('ajaxmercal_siguientecomprobar', {'idjornada': jornada.id }) }}">VERIFICAR COLA</a> | 
+            <a onclick="return confirm('¿Está seguro que desea culminar la jornada?')" id="" style="padding:10px;" class="label label-danger" href="{{ path('mercal_cerrarjornada',{'idjornada':jornada.id}) }}">CULMINAR JORNADA</a><br><br>
+=======
             <b class="alert alert-info">LA COLA DE USUARIOS HA CULMINADO, VERIFIQUE MÁS TARDE SI NUEVOS USUARIOS FUERON AGREGADOS</b><br><br><br>
             <a id="comprobar" style="padding:10px;" class="btn btn-warning" href="{{ path('ajaxmercal_siguientecomprobar', {'idjornada': jornada.id }) }}">VERIFICAR COLA</a> | 
             <a onclick="return confirm('¿Está seguro que desea culminar la jornada?')" id="" style="padding:10px;" class="btn btn-danger" href="{{ path('mercal_cerrarjornada',{'idjornada':jornada.id}) }}">CULMINAR JORNADA</a><br><br>
+>>>>>>> master
         {% endif %}
         
     {% endif %}
