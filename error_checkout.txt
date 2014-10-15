@@ -1,0 +1,4 @@
+error: The following untracked working tree files would be overwritten by checkout:
+	autenticacion.txt
+Please move or remove them before you can switch branches.
+Aborting
