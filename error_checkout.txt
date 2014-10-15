@@ -1,5 +1,4 @@
 error: Your local changes to the following files would be overwritten by checkout:
-	autenticacion.txt
 	error_checkout.txt
 Please, commit your changes or stash them before you can switch branches.
 Aborting
