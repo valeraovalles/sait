@@ -1,4 +1,0 @@
-error: Your local changes to the following files would be overwritten by checkout:
-	error_checkout.txt
-Please, commit your changes or stash them before you can switch branches.
-Aborting
