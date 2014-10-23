@@ -82,6 +82,12 @@ class ActividadController extends Controller
             if($a->getEstatus()==3)$culminado=true;
         }
         
+        //si el proyecto tiene 100% quiere decir que hay tareas sin actividades pero el proyecto en realidad ya estaria culminado porque todo los calculos se sacan en base a las actividades
+        $proyecto = $em->getRepository('ProyectoBundle:Proyecto')->find($idproyecto);
+        if($proyecto->getPorcentaje()==100)$nuevo=false;
+        
+        
+        
         //si hay en proceso
         if($proceso==true or $nuevo==true and $culminado==true)$estatus=2;
         //si estan nuevos pero hay cerrados
@@ -627,11 +633,13 @@ class ActividadController extends Controller
         else if($direccion=='der' and $num!=4)$num=$num+1;
         else if($direccion=='izq' and $num!=1) $num=$num-1;
         
-        if($direccion=='der' and ($num==2 or $num==3 ) or $direccion=='izq' and $num==1){
-            //valido que el que mueva la tarjeta sea unicamente el responsable
-            if($act->getResponsable()->getId()!=$idusuario){
-                $this->get('session')->getFlashBag()->add('alert', 'Usted no es el responsable de esta actividad, por lo tanto no puede moverla.');
-                return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId()))); 
+        if (!$this->get('security.context')->isGranted('ROLE_PROYECTO_ADMIN')) {
+            if($direccion=='der' and ($num==2 or $num==3 ) or $direccion=='izq' and $num==1){
+                //valido que el que mueva la tarjeta sea unicamente el responsable
+                if($act->getResponsable()->getId()!=$idusuario){
+                    $this->get('session')->getFlashBag()->add('alert', 'Usted no es el responsable de esta actividad, por lo tanto no puede moverla.');
+                    return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId()))); 
+                }
             }
         }
         
@@ -647,7 +655,7 @@ class ActividadController extends Controller
             if(!empty($actx)){
               $this->get('session')->getFlashBag()->add('alert', 'Tiene una actividad en curso en la tarea "'.  strtoupper($actx[0]->getTarea()->getNombre()).'" del proyecto "'.strtoupper($actx[0]->getTarea()->getProyecto()->getNombre()).'", ¡debe terminarla!.');
              return $this->redirect($this->generateUrl('actividad', array('idtarea'=>$act->getTarea()->getId())));
-           }   
+            }   
            
             //comienzo el conteo
             $fa=new \DateTime(\date("d-m-Y G:i:s"));

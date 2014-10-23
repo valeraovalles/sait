@@ -87,7 +87,7 @@ class DocumentoController extends Controller
                     $this->get('session')->getFlashBag()->add('alert', 'El archivo no puede ser mayor a 2MB.');
 
                 }
-                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf');
+                $extensiones=array('jpg','jpeg','png','gif','doc','odt','xls','xlsx','docx','pdf','ppt','pptx');
                 //valido las extensiones
                 if (!array_search($extension,$extensiones)) {
                     $alert = 1;

@@ -1,0 +1,72 @@
+{% extends '::proyecto.html.twig' %}
+
+{% block title %}Editar Proyecto{% endblock %}
+
+{% block titulo %}
+    EDITAR PROYECTO
+{% endblock %}
+
+{% block ubicacion %}
+<ol class="breadcrumb">
+  <li><a href="{{ path("usuario_homepage") }}">PRINCIPAL TELESUR</a></li>
+  <li><a href="{{ path("proyecto") }}">LISTA DE PROYECTOS</a></li>
+  <li class="active">EDITAR PROYECTO</li>
+</ol>
+{% endblock %}
+    
+{% block body -%}
+    {{ parent() }}
+
+    {% if form_errors(edit_form.nombre) or form_errors(edit_form.descripcion) or form_errors(edit_form.nivelorganizacional) %}
+    <div class="alert alert-danger errores" style="width:70%;">
+        <div><b>Alerta! Ha ocurrido un error en el formulario:</b><br><br></div>
+        <div>{{ form_errors(edit_form.nombre) }}</div>        
+        <div>{{ form_errors(edit_form.descripcion) }}</div>
+        <div>{{ form_errors(edit_form.nivelorganizacional) }}</div>
+    </div>
+    {% endif %}
+    
+    
+    <form novalidate action="{{ path('proyecto_updategeneral',{'id':entity.id}) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT"> {{ form_widget(edit_form._token) }}
+
+        <div class="formShow">
+            <div class="contenedorform">
+                <div class="labelform">Nombre:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nombre) }}</div>
+            </div>
+            
+            <div class="contenedorform">
+                <div class="labelform">Descripción:</div>
+                <div class="widgetform">{{ form_widget(edit_form.descripcion) }}</div>
+            </div>
+            
+            <div class="contenedorform">
+                <div class="labelform">Responsable:</div>
+                <div class="widgetform">{{ form_widget(edit_form.nivelorganizacional) }}</div>
+            </div>
+        </div>
+        <a class="btn btn-default" href="{{ path('proyecto_general') }}">
+            VOLVER A LA LISTA
+        </a> | 
+        <input type="submit" class="btn btn-primary" value="EDITAR PROYECTO">
+        <br><br>
+       
+    </form>
+        
+    <script>
+    $(function() {
+      $( "#frontend_proyectobundle_proyecto_fechainicio" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd-mm-yy",
+      });
+    });
+    </script>    
+    
+    {{ form_start(delete_form, { 'attr': {'onsubmit': 'return confirm("¿Seguro que deseas eliminar?")'} }) }}
+        {{ form_errors(delete_form) }}
+        {{ form_row(delete_form.submit, { 'attr': {'class': 'btn btn-danger'} }) }}
+    {{ form_end(delete_form) }}
+    <br>
+{% endblock %}

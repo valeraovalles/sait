@@ -65,7 +65,7 @@ class ProyectoController extends Controller
         $query->setParameter('codigo',"%".$perfil->getNivelorganizacional()->getCodigo()."___");
         $niveles = $query->getResult();
 
-        $dql = "select x from ProyectoBundle:Proyecto x join x.nivelorganizacional no where no.codigo like :no order by x.nombre ASC";
+        $dql = "select x from ProyectoBundle:Proyecto x join x.nivelorganizacional no where no.codigo like :no order by x.porcentaje ASC";
         $query = $em->createQuery($dql);
         $query->setParameter('no',"%".$perfil->getNivelorganizacional()->getCodigo()."___");
         $proyectos = $query->getResult();
@@ -370,25 +370,6 @@ public function creategeneralAction(Request $request)
             'delete_form' => $deleteForm->createView(),
         ));
     }
-    
-    public function showgeneralAction($id)
-    {
-        
-        $em = $this->getDoctrine()->getManager();
-
-        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
-        
-        $entity = $em->getRepository('ProyectoBundle:Proyecto')->find($id);
-
-        
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Proyecto entity.');
-        }
-
-        return $this->render('ProyectoBundle:Proyecto:showgeneral.html.twig', array(
-            'entity'      => $entity,
-        ));
-    }
 
     /**
      * Displays a form to edit an existing Proyecto entity.
@@ -416,6 +397,37 @@ public function creategeneralAction(Request $request)
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    
+    /**
+     * Displays a form to edit an existing Proyecto entity.
+     *
+     */
+    public function editgeneralAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $f=new Funcion; 
+        $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
+
+        $entity = $em->getRepository('ProyectoBundle:Proyecto')->find($id);
+       
+        $entityx = new Proyectogeneral($entity);
+        $entityx->setNombre($entity->getNombre());
+        $entityx->setDescripcion($entity->getDescripcion());
+        foreach ($entity->getNivelorganizacional() as $v) {
+            $entityx->addNivelorganizacional($v);
+        }
+                
+        $editForm = $this->createEditFormGeneral($entityx,$id,$usuariounidad);
+        $deleteForm = $this->createDeleteForm($id);
+
+        return $this->render('ProyectoBundle:Proyecto:editgeneral.html.twig', array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
 
     /**
     * Creates a form to edit a Proyecto entity.
@@ -428,6 +440,18 @@ public function creategeneralAction(Request $request)
     {
         $form = $this->createForm(new ProyectoType($usuariounidad), $entity, array(
             'action' => $this->generateUrl('proyecto_update', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Update'));
+
+        return $form;
+    }
+    
+    private function createEditFormGeneral(Proyectogeneral $entity,$id,$usuariounidad)
+    {
+        $form = $this->createForm(new ProyectogeneralType($usuariounidad), $entity, array(
+            'action' => $this->generateUrl('proyecto_update', array('id' => $id)),
             'method' => 'PUT',
         ));
 
@@ -482,6 +506,58 @@ public function creategeneralAction(Request $request)
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    
+    public function updategeneralAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $idusuario = $this->get('security.context')->getToken()->getUser()->getId();
+        $f=new Funcion; 
+        $usuariounidad=$this->usuariounidad= $f->Usuariounidad($em,$idusuario);
+
+        $entity = $em->getRepository('ProyectoBundle:Proyecto')->find($id);
+
+        //guardo el valor de las variables ya que no se envian por formulario
+        $estatus=$entity->getEstatus();
+        $porcentaje=$entity->getPorcentaje();
+        $fechainicio=$entity->getFechainicio();
+        $fechafin=$entity->getFechafin();
+
+        //envio los dato de la entidad asi porque proyecto general no es una entity de la bd
+        $entityx = new Proyectogeneral();
+        $entityx->setNombre($entity->getNombre());
+        $entityx->setDescripcion($entity->getDescripcion());
+        foreach ($entity->getNivelorganizacional() as $v) {
+            $entityx->addNivelorganizacional($v);
+            $entity->removeNivelorganizacional($v);
+        }
+        
+        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditFormGeneral($entityx,$id,$usuariounidad);
+        $editForm->handleRequest($request);
+        
+        if ($editForm->isValid()) {
+
+            $entity->setNombre($editForm->getData()->getNombre());
+            $entity->setDescripcion($editForm->getData()->getDescripcion());
+            $entity->setEstatus($estatus);
+            $entity->setPorcentaje($porcentaje);
+            $entity->setFechainicio($fechainicio);
+            $entity->setFechafin($fechafin);
+            foreach ($editForm->getData()->getNivelorganizacional() as $v) {
+                $entity->addNivelorganizacional($v);
+            }
+            $em->flush();
+            
+            $this->get('session')->getFlashBag()->add('notice', 'Proyecto editado exitosamente.');
+            return $this->redirect($this->generateUrl('proyecto_editgeneral', array('id' => $id)));
+        }
+
+        return $this->render('ProyectoBundle:Proyecto:editgeneral.html.twig', array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
     /**
      * Deletes a Proyecto entity.
      *
@@ -494,16 +570,26 @@ public function creategeneralAction(Request $request)
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('ProyectoBundle:Proyecto')->find($id);
+            $tareas=$em->getRepository('ProyectoBundle:Tarea')->findByProyecto($entity->getId());
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Proyecto entity.');
+            if(!empty($tareas)){
+                $this->get('session')->getFlashBag()->add('alert', 'No puede borrar el proyecto porque tiene tareas asignadas.');
+            }else{
+
+                if (!$entity) {
+                    throw $this->createNotFoundException('Unable to find Proyecto entity.');
+                }
+
+                $em->remove($entity);
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('notice', 'Borrado exitoso.');
             }
-
-            $em->remove($entity);
-            $em->flush();
         }
-
-        return $this->redirect($this->generateUrl('proyecto'));
+        
+        
+        if ($this->get('security.context')->isGranted('ROLE_PROYECTO_GENERAL')) {
+            return $this->redirect($this->generateUrl('proyecto_general'));
+        }else return $this->redirect($this->generateUrl('proyecto'));
     }
 
     /**

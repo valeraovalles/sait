@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>        
+        <XML>
+            <Content>UPDATE</Content>
+            <Clip>
+                <ClipName>DOCUPOL0032</ClipName>
+                <TipoContenido>DOCUMENTALES</TipoContenido>
+                <Contenido><![CDATA[ GUERRA CONTRA LA DEMOCRACIA]]></Contenido>
+                <OriginalTitle></OriginalTitle>
+                <Description> </Description>
+                <Notes>a</Notes>
+                <DurPrev></DurPrev>
+                <Chapter></Chapter>
+                <EndDate></EndDate>
+                <EPG></EPG>
+                <EPG_Content> </EPG_Content>
+                <Segments>
+            
+                <Segment>
+                    <SegTitle>1-5 POLITICOS - GUERRA CONTRA LA DEMOCRACIA</SegTitle>
+                    <MediaID>DOCUPOL003201</MediaID>
+                    <Duration>00:20:00.00</Duration>
+                    <SegNumber>1</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>2-5 POLITICOS - GUERRA CONTRA LA DEMOCRACIA</SegTitle>
+                    <MediaID>DOCUPOL003202</MediaID>
+                    <Duration>00:20:00.00</Duration>
+                    <SegNumber>2</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>3-5 POLITICOS - GUERRA CONTRA LA DEMOCRACIA</SegTitle>
+                    <MediaID>DOCUPOL003203</MediaID>
+                    <Duration>00:20:00.00</Duration>
+                    <SegNumber>3</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>4-5 POLITICOS - GUERRA CONTRA LA DEMOCRACIA</SegTitle>
+                    <MediaID>DOCUPOL003204</MediaID>
+                    <Duration>00:20:00.00</Duration>
+                    <SegNumber>4</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            
+                <Segment>
+                    <SegTitle>5-5 POLITICOS - GUERRA CONTRA LA DEMOCRACIA</SegTitle>
+                    <MediaID>DOCUPOL003205</MediaID>
+                    <Duration>00:20:00.00</Duration>
+                    <SegNumber>5</SegNumber>
+                    <ClipGroup>PROGRAMA</ClipGroup>
+                    <Description> </Description>
+                </Segment>
+            </Segments></Clip></XML>
